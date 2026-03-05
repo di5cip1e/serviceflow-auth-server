@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Frontend Agent - Blue - Idle State -->
+  <!-- Body -->
+  <rect x="22" y="20" width="20" height="28" fill="#4A90D9"/>
+  <rect x="24" y="22" width="16" height="24" fill="#7CB9E8"/>
+  <!-- Head -->
+  <rect x="24" y="8" width="16" height="14" fill="#4A90D9"/>
+  <rect x="26" y="10" width="12" height="10" fill="#7CB9E8"/>
+  <!-- Eyes -->
+  <rect x="28" y="14" width="3" height="3" fill="#1E3A5F"/>
+  <rect x="33" y="14" width="3" height="3" fill="#1E3A5F"/>
+  <!-- CSS Blade (weapon) -->
+  <rect x="42" y="30" width="4" height="20" fill="#4A90D9"/>
+  <rect x="43" y="32" width="2" height="16" fill="#7CB9E8"/>
+  <rect x="38" y="28" width="12" height="4" fill="#1E3A5F"/>
+</svg>

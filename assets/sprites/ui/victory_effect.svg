@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Victory Effect - Sparkles - 64x64 -->
+  <!-- Central burst -->
+  <circle cx="32" cy="32" r="16" fill="#FFE066" opacity="0.4"/>
+  <circle cx="32" cy="32" r="10" fill="#FFE066" opacity="0.6"/>
+  <circle cx="32" cy="32" r="5" fill="#FFFFFF"/>
+  <!-- Sparkle stars -->
+  <!-- Top -->
+  <text x="32" y="12" font-family="monospace" font-size="10" fill="#FFD700">★</text>
+  <!-- Top-right -->
+  <text x="48" y="18" font-family="monospace" font-size="8" fill="#FFD700">★</text>
+  <!-- Right -->
+  <text x="54" y="34" font-family="monospace" font-size="10" fill="#FFD700">★</text>
+  <!-- Bottom-right -->
+  <text x="46" y="52" font-family="monospace" font-size="8" fill="#FFD700">★</text>
+  <!-- Bottom -->
+  <text x="32" y="58" font-family="monospace" font-size="10" fill="#FFD700">★</text>
+  <!-- Bottom-left -->
+  <text x="14" y="50" font-family="monospace" font-size="8" fill="#FFD700">★</text>
+  <!-- Left -->
+  <text x="6" y="32" font-family="monospace" font-size="10" fill="#FFD700">★</text>
+  <!-- Top-left -->
+  <text x="12" y="16" font-family="monospace" font-size="8" fill="#FFD700">★</text>
+  <!-- Floating particles -->
+  <circle cx="20" cy="24" r="2" fill="#FFFFFF"/>
+  <circle cx="44" cy="22" r="2" fill="#FFFFFF"/>
+  <circle cx="22" cy="44" r="2" fill="#FFFFFF"/>
+  <circle cx="42" cy="42" r="2" fill="#FFFFFF"/>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 16" width="120" height="16">
+  <!-- HP Bar - Low (Red <25%) - 120x16 -->
+  <!-- Background -->
+  <rect x="0" y="0" width="120" height="16" fill="#1a1a2e" rx="2"/>
+  <!-- Segments (only 1/4 full) -->
+  <rect x="2" y="2" width="14" height="12" fill="#D94A4A"/>
+  <!-- Empty segments -->
+  <rect x="18" y="2" width="14" height="12" fill="#2a2a3e"/>
+  <rect x="34" y="2" width="14" height="12" fill="#2a2a3e"/>
+  <rect x="50" y="2" width="14" height="12" fill="#2a2a3e"/>
+  <rect x="66" y="2" width="14" height="12" fill="#2a2a3e"/>
+  <rect x="82" y="2" width="14" height="12" fill="#2a2a3e"/>
+  <rect x="98" y="2" width="14" height="12" fill="#2a2a3e"/>
+  <!-- Border -->
+  <rect x="0" y="0" width="120" height="16" fill="none" stroke="#3a3a5e" stroke-width="1" rx="2"/>
+</svg>

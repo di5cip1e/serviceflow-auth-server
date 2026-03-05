@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- QA Agent - Green - Idle State -->
+  <!-- Body -->
+  <rect x="22" y="22" width="20" height="26" fill="#4AD97A"/>
+  <rect x="24" y="24" width="16" height="22" fill="#7CE8A3"/>
+  <!-- Head -->
+  <rect x="24" y="10" width="16" height="14" fill="#4AD97A"/>
+  <rect x="26" y="12" width="12" height="10" fill="#7CE8A3"/>
+  <!-- Eyes (magnifying glass look) -->
+  <rect x="27" y="15" width="4" height="4" fill="#1E5F35"/>
+  <rect x="33" y="15" width="4" height="4" fill="#1E5F35"/>
+  <!-- Bug Net (weapon) -->
+  <rect x="40" y="25" width="3" height="20" fill="#4AD97A"/>
+  <circle cx="46" cy="30" r="8" fill="none" stroke="#4AD97A" stroke-width="2"/>
+  <circle cx="46" cy="30" r="5" fill="none" stroke="#7CE8A3" stroke-width="1"/>
+</svg>

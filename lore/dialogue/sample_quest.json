@@ -1,0 +1,131 @@
+{
+  "quest_id": "kepler_surveillance",
+  "quest_name": "Kepler Outpost Surveillance",
+  "difficulty": 2,
+  "xp_reward": 25,
+  "nodes": [
+    {
+      "id": "briefing",
+      "text": "Commander, we've received a distress signal from the Kepler outpost. Their automated systems detected an unknown vessel approaching. We need eyes on the situation. Your mission: travel to Kepler and monitor the outpost for anomalies. Duration: 3 cycles. Do you accept?",
+      "choices": [
+        {
+          "text": "I accept this mission.",
+          "next_node": "briefing_accept"
+        },
+        {
+          "text": "I need more information first.",
+          "next_node": "briefing_details"
+        },
+        {
+          "text": "Not right now.",
+          "next_node": "briefing_decline"
+        }
+      ]
+    },
+    {
+      "id": "briefing_details",
+      "text": "The Kepler outpost is a minor monitoring station on the outer rim. They've been operational for 12 years without incident. The unknown vessel is registered as ' Vessel ID: UNKNOWN' — no transponder, no comms response. Could be pirates, could be drifters. You'll need to observe and report.",
+      "choices": [
+        {
+          "text": "Understood. I accept.",
+          "next_node": "briefing_accept"
+        },
+        {
+          "text": "What about武器?",
+          "next_node": "briefing_weapons"
+        },
+        {
+          "text": "I'll pass for now.",
+          "next_node": "briefing_decline"
+        }
+      ]
+    },
+    {
+      "id": "briefing_weapons",
+      "text": "Standard sidearm only. This is a surveillance mission, not combat. Engage only in self-defense. If the situation escalates, retreat and report. We can't risk a diplomatic incident out there.",
+      "choices": [
+        {
+          "text": "I understand. Accepting.",
+          "next_node": "briefing_accept"
+        },
+        {
+          "text": "Understood. I'll pass.",
+          "next_node": "briefing_decline"
+        }
+      ]
+    },
+    {
+      "id": "briefing_accept",
+      "text": "Excellent. Mission parameters uploaded to your terminal. Travel time: 2 cycles. You'll have 3 cycles at the outpost to complete surveillance. Remember: observe, record, report. Godspeed, Commander.",
+      "choices": [
+        {
+          "text": "Launching now.",
+          "next_node": "mission_start",
+          "action": {
+            "type": "start_mission",
+            "params": {
+              "quest_id": "kepler_surveillance",
+              "duration_cycles": 3,
+              "objectives": [
+                "Travel to Kepler Outpost",
+                "Observe the unknown vessel",
+                "Record all anomalies",
+                "Return to station"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "briefing_decline",
+      "text": "Very well. The mission will remain available. When you're ready, come back to the Command Center. The outpost's situation won't improve on its own...",
+      "choices": [
+        {
+          "text": "[Leave]",
+          "next_node": "exit",
+          "action": { "type": "close" }
+        }
+      ]
+    },
+    {
+      "id": "mission_start",
+      "text": "Mission Active: Kepler Surveillance\n\nObjective: Monitor the outpost and unknown vessel.\nReturn within 3 cycles to complete.",
+      "choices": [
+        {
+          "text": "[Begin]",
+          "next_node": "exit",
+          "action": { "type": "close" }
+        }
+      ]
+    }
+  ],
+  "completion": {
+    "id": "debrief",
+    "text": "Welcome back, Commander. Your surveillance data is... fascinating. The unknown vessel was indeed a pirate scout, but they fled when your patrol arrived. The outpost is safe, and thanks to your observations, we've updated our threat protocols. Well done.",
+    "choices": [
+      {
+        "text": "Thank you, Director.",
+        "next_node": "reward",
+        "action": {
+          "type": "give_reward",
+          "params": {
+            "xp": 25,
+            "items": ["Surveillance Data"]
+          }
+        }
+      }
+    ]
+  },
+  "failure": {
+    "id": "mission_failed",
+    "text": "Commander, you exceeded the mission duration. The Kepler outpost has gone silent. We've dispatched a recovery team, but... this is a significant setback. Don't worry about the debrief—rest up. We'll talk later.",
+    "choices": [
+      {
+        "text": "[Accept failure]",
+        "next_node": "exit",
+        "action": { "type": "close" }
+      }
+    ]
+  }
+}

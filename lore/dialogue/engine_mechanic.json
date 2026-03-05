@@ -1,0 +1,227 @@
+{
+  "npc_id": "engine_mechanic",
+  "npc_name": "Engine Mechanic",
+  "location": "Engineering Bay",
+  "nodes": [
+    {
+      "id": "greeting",
+      "text": "Hey there! The quantum drive is purring like a kitten at 98% efficiency. But I've been seeing some weird latency spikes in the backend... You need something?",
+      "choices": [
+        {
+          "text": "Check system status.",
+          "next_node": "system_status"
+        },
+        {
+          "text": "I need backend help.",
+          "next_node": "backend_help"
+        },
+        {
+          "text": "View server logs.",
+          "next_node": "server_logs"
+        },
+        {
+          "text": "Just passing through.",
+          "next_node": "farewell",
+          "action": { "type": "close" }
+        }
+      ]
+    },
+    {
+      "id": "system_status",
+      "text": "Let me pull up the diagnostics... Database cluster: healthy. API gateway: 99.8% uptime. Memory usage at 67%. The only thing acting up is that danged cache layer—keeps timing out every 47 minutes.",
+      "choices": [
+        {
+          "text": "Can you restart the cache?",
+          "next_node": "restart_cache"
+        },
+        {
+          "text": "What's causing the timeouts?",
+          "next_node": "cache_cause"
+        },
+        {
+          "text": "Keep monitoring it.",
+          "next_node": "greeting"
+        }
+      ]
+    },
+    {
+      "id": "backend_help",
+      "text": "Backend, huh? I've got three open tickets. The authentication service is throwing 500s under load. The payment pipeline is backed up. And someone's database query is eating 40% of our CPU.",
+      "choices": [
+        {
+          "text": "I'll investigate the auth service.",
+          "next_node": "auth_help"
+        },
+        {
+          "text": "Tell me about the payment issue.",
+          "next_node": "payment_help"
+        },
+        {
+          "text": "Which query is killing the CPU?",
+          "next_node": "query_help"
+        }
+      ]
+    },
+    {
+      "id": "server_logs",
+      "text": "Logs coming through... Latest entries show a bunch of connection timeouts from the outer rim clients. Also, someone's trying to brute force the admin panel again. Standard stuff.",
+      "choices": [
+        {
+          "text": "Block those IPs.",
+          "next_node": "block_ips"
+        },
+        {
+          "text": "Any critical errors?",
+          "next_node": "critical_errors"
+        },
+        {
+          "text": "Thanks, that's helpful.",
+          "next_node": "greeting"
+        }
+      ]
+    },
+    {
+      "id": "restart_cache",
+      "text": "Done. Bounced the cache layer. Give it 30 seconds to rebuild. Should be smooth sailing now. Marking that ticket as resolved—thanks for the heads up!",
+      "choices": [
+        {
+          "text": "Appreciated.",
+          "next_node": "farewell"
+        }
+      ]
+    },
+    {
+      "id": "cache_cause",
+      "text": "Best guess? Memory leak in the Redis instance. It fills up, hits the limit, then boom—everything times out. I've patched it twice but it keeps creeping back. Might need a full rewrite.",
+      "choices": [
+        {
+          "text": "Schedule a fix for the next cycle.",
+          "next_node": "schedule_fix"
+        },
+        {
+          "text": "For now, just restart on alert.",
+          "next_node": "restart_cache"
+        }
+      ]
+    },
+    {
+      "id": "auth_help",
+      "text": "Token expiration issue. Users get logged out after 5 minutes instead of 5 hours. Quick fix: bump the JWT expiry in the config. I'll patch it right now.",
+      "choices": [
+        {
+          "text": "Go ahead.",
+          "next_node": "auth_fix_done"
+        }
+      ]
+    },
+    {
+      "id": "auth_fix_done",
+      "text": "Fixed. Pushed to staging. Deploy when ready. The login flow should behave now.",
+      "choices": [
+        {
+          "text": "Thanks, Mechanic.",
+          "next_node": "farewell"
+        }
+      ]
+    },
+    {
+      "id": "payment_help",
+      "text": "The payment queue is backed up because the webhook handler died yesterday. Haven't restarted it yet—been busy with the cache mess. Want me to bring it back online?",
+      "choices": [
+        {
+          "text": "Yes, restart the webhook handler.",
+          "next_node": "webhook_restart"
+        },
+        {
+          "text": "Wait until I'm done with other tasks.",
+          "next_node": "greeting"
+        }
+      ]
+    },
+    {
+      "id": "webhook_restart",
+      "text": "And... we're back. Payments should process within the hour. The queue is draining fast.",
+      "choices": [
+        {
+          "text": "Solid work.",
+          "next_node": "farewell"
+        }
+      ]
+    },
+    {
+      "id": "query_help",
+      "text": "It's the user activity report. Someone wrote a nested JOIN across six tables without any indexes. Running for 12 seconds every time. I've killed it for now, but someone needs to optimize that query.",
+      "choices": [
+        {
+          "text": "I'll add the indexes.",
+          "next_node": "index_promise"
+        },
+        {
+          "text": "Just disable that report for now.",
+          "next_node": "disable_report"
+        }
+      ]
+    },
+    {
+      "id": "index_promise",
+      "text": "Appreciated! Drop me the migration and I'll review it. Thanks for taking this off my plate.",
+      "choices": [
+        {
+          "text": "Will do.",
+          "next_node": "farewell"
+        }
+      ]
+    },
+    {
+      "id": "disable_report",
+      "text": "Done. Marked as disabled in the admin panel. Someone will yell about it eventually, but the system stays healthy. Trade-offs, am I right?",
+      "choices": [
+        {
+          "text": "That's the job.",
+          "next_node": "farewell"
+        }
+      ]
+    },
+    {
+      "id": "block_ips",
+      "text": "Already on it. Added the top 20 offending IPs to the firewall blocklist. They won't be bothering us again anytime soon.",
+      "choices": [
+        {
+          "text": "Nice work.",
+          "next_node": "greeting"
+        }
+      ]
+    },
+    {
+      "id": "critical_errors",
+      "text": "Just the usual suspects. A few null pointer exceptions in the user service—non-critical. One memory warning in the analytics worker. Nothing that'll crash the station.",
+      "choices": [
+        {
+          "text": "Keep an eye on it.",
+          "next_node": "greeting"
+        }
+      ]
+    },
+    {
+      "id": "schedule_fix",
+      "text": "Added to the sprint backlog. It'll get done when it gets done. Such is the life of backend dev...",
+      "choices": [
+        {
+          "text": "I understand.",
+          "next_node": "greeting"
+        }
+      ]
+    },
+    {
+      "id": "farewell",
+      "text": "Catch you later! Keep the engine running.",
+      "choices": [
+        {
+          "text": "[End conversation]",
+          "next_node": "exit",
+          "action": { "type": "close" }
+        }
+      ]
+    }
+  ]
+}

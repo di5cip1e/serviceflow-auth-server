@@ -1,0 +1,328 @@
+{
+  "npc_id": "qa_interrogator",
+  "npc_name": "QA Interrogator",
+  "location": "Testing Arena",
+  "nodes": [
+    {
+      "id": "greeting",
+      "text": "Welcome to the Testing Arena. I've got 47 test suites running on loop. The bugs are multiplying like rabbits. What do you need?",
+      "choices": [
+        {
+          "text": "Show me the test reports.",
+          "next_node": "test_reports"
+        },
+        {
+          "text": "I found a bug.",
+          "next_node": "report_bug"
+        },
+        {
+          "text": "Check quality metrics.",
+          "next_node": "quality_metrics"
+        },
+        {
+          "text": "Not right now.",
+          "next_node": "farewell",
+          "action": { "type": "close" }
+        }
+      ]
+    },
+    {
+      "id": "test_reports",
+      "text": "Latest run: 89% pass rate. 12 failures, 3 skipped, 247 passing. The login flow is a disaster—3 new regressions. The cart checkout passed on the fifth try.",
+      "choices": [
+        {
+          "text": "What failures?",
+          "next_node": "show_failures"
+        },
+        {
+          "text": "Run the full suite again.",
+          "next_node": "run_full"
+        },
+        {
+          "text": "Thanks for the update.",
+          "next_node": "greeting"
+        }
+      ]
+    },
+    {
+      "id": "report_bug",
+      "text": "Alright, confess. What's the bug? Describe it in detail—or better yet, show me steps to reproduce. I need: expected behavior, actual behavior, and environment.",
+      "choices": [
+        {
+          "text": "UI glitch on the dashboard.",
+          "next_node": "ui_bug"
+        },
+        {
+          "text": "Data not saving correctly.",
+          "next_node": "data_bug"
+        },
+        {
+          "text": "Performance is terrible.",
+          "next_node": "perf_bug"
+        },
+        {
+          "text": "False alarm—never mind.",
+          "next_node": "greeting"
+        }
+      ]
+    },
+    {
+      "id": "quality_metrics",
+      "text": "Code coverage: 78%. Test coverage by module: Authentication 92%, Payments 85%, User Profile 71%, Reporting 44%. The reporting module is a ticking time bomb.",
+      "choices": [
+        {
+          "text": "Which module needs work?",
+          "next_node": "module_details"
+        },
+        {
+          "text": "Show the trend over time.",
+          "next_node": "trend_analysis"
+        },
+        {
+          "text": "That's concerning.",
+          "next_node": "greeting"
+        }
+      ]
+    },
+    {
+      "id": "show_failures",
+      "text": "Three login regressions: token not refreshing, redirect loop after logout, and the 'remember me' checkbox is ignored. Two checkout issues: discount codes broken, tax calculation off by 0.01. One display bug: user avatar not loading in the header.",
+      "choices": [
+        {
+          "text": "I'll check the login issues.",
+          "next_node": "accept_login"
+        },
+        {
+          "text": "Take the checkout bugs.",
+          "next_node": "accept_checkout"
+        },
+        {
+          "text": "I'll investigate the avatar bug.",
+          "next_node": "accept_avatar"
+        }
+      ]
+    },
+    {
+      "id": "run_full",
+      "text": "Running the full suite now... estimated 4 minutes. Want to wait here or come back later? I'll save the results.",
+      "choices": [
+        {
+          "text": "I'll wait.",
+          "next_node": "waiting"
+        },
+        {
+          "text": "Check back later.",
+          "next_node": "farewell"
+        }
+      ]
+    },
+    {
+      "id": "waiting",
+      "text": "Tests still running... 45% complete. So far, so good. Actually—wait. A test just failed. Adding it to the report now.",
+      "choices": [
+        {
+          "text": "Keep waiting.",
+          "next_node": "waiting_more"
+        }
+      ]
+    },
+    {
+      "id": "waiting_more",
+      "text": "Done. 88% pass rate this time. Slightly better. Full report saved to your terminal. 14 total failures.",
+      "choices": [
+        {
+          "text": "Good enough for now.",
+          "next_node": "greeting"
+        }
+      ]
+    },
+    {
+      "id": "ui_bug",
+      "text": "Classic. Screenshots? No? Alright, describe it. Buttons misaligned? Colors wrong? Elements overlapping? I've seen it all.",
+      "choices": [
+        {
+          "text": "Buttons are misaligned on mobile.",
+          "next_node": "bug_logged"
+        },
+        {
+          "text": "Colors look wrong in dark mode.",
+          "next_node": "bug_logged"
+        },
+        {
+          "text": "Let me check again first.",
+          "next_node": "greeting"
+        }
+      ]
+    },
+    {
+      "id": "data_bug",
+      "text": "Data not saving—is it not persisting after refresh? Not saving to the right field? Getting overwritten? I need specifics.",
+      "choices": [
+        {
+          "text": "Data vanishes after refresh.",
+          "next_node": "bug_logged"
+        },
+        {
+          "text": "Wrong field gets updated.",
+          "next_node": "bug_logged"
+        },
+        {
+          "text": "Never mind, I was wrong.",
+          "next_node": "greeting"
+        }
+      ]
+    },
+    {
+      "id": "perf_bug",
+      "text": "Performance—now we're talking. Slow page loads? High memory? Database queries taking forever? My specialty.",
+      "choices": [
+        {
+          "text": "Page loads take 10+ seconds.",
+          "next_node": "bug_logged"
+        },
+        {
+          "text": "Memory spikes to 100%.",
+          "next_node": "bug_logged"
+        },
+        {
+          "text": "Queries time out frequently.",
+          "next_node": "bug_logged"
+        }
+      ]
+    },
+    {
+      "id": "bug_logged",
+      "text": "Logged. Ticket #" + Math.floor(Math.random() * 9000 + 1000) + ". I'll add it to the regression suite so it doesn't sneak past us again. Good catch—15 XP for the report.",
+      "choices": [
+        {
+          "text": "Appreciated.",
+          "next_node": "farewell",
+          "action": { "type": "give_reward", "params": { "xp": 15 } }
+        }
+      ]
+    },
+    {
+      "id": "module_details",
+      "text": "The reporting module sits at 44%—it's a nightmare. No unit tests, integration tests are spotty, and every change breaks something. I'd recommend focusing there if you want to boost overall quality.",
+      "choices": [
+        {
+          "text": "I'll focus on reporting.",
+          "next_node": "accept_reporting"
+        },
+        {
+          "text": "What's the quickest win?",
+          "next_node": "quick_win"
+        }
+      ]
+    },
+    {
+      "id": "trend_analysis",
+      "text": "Last 30 days: coverage up from 71% to 78%. Failures down from 23 to 12. We're improving—but slowly. The new feature rollout last week spiked the failure count temporarily.",
+      "choices": [
+        {
+          "text": "That's encouraging.",
+          "next_node": "greeting"
+        }
+      ]
+    },
+    {
+      "id": "accept_login",
+      "text": "Taking the login regressions—bold choice. I've isolated 3 test cases that cover the main flows. Check the test files: auth_token_refresh, logout_redirect, remember_me. Good luck.",
+      "choices": [
+        {
+          "text": "I'm on it.",
+          "next_node": "farewell"
+        }
+      ]
+    },
+    {
+      "id": "accept_checkout",
+      "text": "Checkout bugs—the most satisfying to fix. The discount code issue is likely a validation regex. The tax calculation is probably a floating point rounding error. Two classics.",
+      "choices": [
+        {
+          "text": "I love classic bugs.",
+          "next_node": "farewell"
+        }
+      ]
+    },
+    {
+      "id": "accept_avatar",
+      "text": "The avatar bug—probably a failed image load with no fallback. Easy fix, probably. Check the image component's error handler.",
+      "choices": [
+        {
+          "text": "Simple enough.",
+          "next_node": "farewell"
+        }
+      ]
+    },
+    {
+      "id": "accept_reporting",
+      "text": "Smart move. I'll flag the reporting module as high priority. Every test you write there is a win. Need a test template?",
+      "choices": [
+        {
+          "text": "Yes, please.",
+          "next_node": "template_sent"
+        },
+        {
+          "text": "I'll figure it out.",
+          "next_node": "farewell"
+        }
+      ]
+    },
+    {
+      "id": "template_sent",
+      "text": "Template uploaded to your workspace. Follow the pattern in the other modules. And hey—QA thanks you. Coverage heroes are rare.",
+      "choices": [
+        {
+          "text": "I'll do my best.",
+          "next_node": "farewell"
+        }
+      ]
+    },
+    {
+      "id": "quick_win",
+      "text": "User profile module. It's at 71%—not terrible, not great. But the tests are simple and the code is clean. Could bump it to 85% in an afternoon if you focus.",
+      "choices": [
+        {
+          "text": "I'll target user profile.",
+          "next_node": "accept_profile"
+        }
+      ]
+    },
+    {
+      "id": "accept_profile",
+      "text": "Solid choice. I'll mark it as your focus area. Need the existing test cases?",
+      "choices": [
+        {
+          "text": "Yes, send them over.",
+          "next_node": "profile_sent"
+        },
+        {
+          "text": "I know the module well.",
+          "next_node": "farewell"
+        }
+      ]
+    },
+    {
+      "id": "profile_sent",
+      "text": "All user profile test cases sent to your terminal. 23 tests covering the main flows. Knock 'em dead.",
+      "choices": [
+        {
+          "text": "Thanks!",
+          "next_node": "farewell"
+        }
+      ]
+    },
+    {
+      "id": "farewell",
+      "text": "Back to the trenches. Remember: test everything, trust nothing.",
+      "choices": [
+        {
+          "text": "[End conversation]",
+          "next_node": "exit",
+          "action": { "type": "close" }
+        }
+      ]
+    }
+  ]
+}

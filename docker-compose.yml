@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: station-command-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=station
+      - POSTGRES_PASSWORD=station123
+      - POSTGRES_DB=station_command
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U station -d station_command"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Vector Database - Long-term semantic memory
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant-memory
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant-storage:/qdrant/storage
+    environment:
+      - QDRANT__SERVICE__HTTP_PORT=6333
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6333/collections"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Fast Buffer - Short-term memory accumulation
+  redis:
+    image: redis:7-alpine
+    container_name: redis-memory
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  postgres-data:
+    driver: local
+  qdrant-storage:
+    driver: local
+  redis-data:
+    driver: local
+
+networks:
+  default:
+    name: memory-system
+    driver: bridge

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <!-- Syntax Error - 48x48 -->
+  <!-- Blob of corrupted code -->
+  <ellipse cx="24" cy="26" rx="18" ry="14" fill="#8B4513"/>
+  <ellipse cx="24" cy="26" rx="14" ry="10" fill="#A0522D"/>
+  <!-- Floating brackets (corrupted) -->
+  <text x="8" y="22" font-family="monospace" font-size="14" fill="#FFD700">[</text>
+  <text x="34" y="22" font-family="monospace" font-size="14" fill="#FFD700">]</text>
+  <text x="10" y="38" font-family="monospace" font-size="12" fill="#FF6347">(</text>
+  <text x="32" y="38" font-family="monospace" font-size="12" fill="#FF6347">)</text>
+  <!-- Glitch eyes -->
+  <rect x="16" y="24" width="4" height="4" fill="#FF0000"/>
+  <rect x="28" y="24" width="4" height="4" fill="#FF0000"/>
+  <rect x="17" y="25" width="2" height="2" fill="#FFFFFF"/>
+  <rect x="29" y="25" width="2" height="2" fill="#FFFFFF"/>
+  <!-- Error lines -->
+  <rect x="14" y="16" width="6" height="2" fill="#FF6347"/>
+  <rect x="28" y="16" width="6" height="2" fill="#FF6347"/>
+</svg>

@@ -1,0 +1,255 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Station Command API",
+    "description": "API for 16-bit space station mission control game",
+    "version": "1.0.0"
+  },
+  "servers": [
+    { "url": "https://api.stationcommand.dev", "description": "Production" },
+    { "url": "http://localhost:3000/api", "description": "Development" }
+  ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "summary": "Register new user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email", "username", "password"],
+                "properties": {
+                  "email": { "type": "string", "format": "email" },
+                  "username": { "type": "string", "minLength": 3, "maxLength": 20 },
+                  "password": { "type": "string", "minLength": 8 }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "User created" },
+          "400": { "description": "Validation error" }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "Login user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email", "password"],
+                "properties": {
+                  "email": { "type": "string" },
+                  "password": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Login successful" },
+          "401": { "description": "Invalid credentials" }
+        }
+      }
+    },
+    "/users/me": {
+      "get": {
+        "summary": "Get current user",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "User profile" }
+        }
+      },
+      "patch": {
+        "summary": "Update current user",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": { "type": "string" },
+                  "bio": { "type": "string" },
+                  "avatar": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "User updated" }
+        }
+      }
+    },
+    "/missions": {
+      "get": {
+        "summary": "List missions",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Mission list" }
+        }
+      },
+      "post": {
+        "summary": "Create mission",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["title", "description", "type", "difficulty"],
+                "properties": {
+                  "title": { "type": "string" },
+                  "description": { "type": "string" },
+                  "type": { "type": "string", "enum": ["surveillance", "logistics", "repair", "exploration", "crisis"] },
+                  "difficulty": { "type": "integer", "minimum": 1, "maximum": 5 }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Mission created" }
+        }
+      }
+    },
+    "/missions/{id}": {
+      "get": {
+        "summary": "Get mission",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": { "description": "Mission details" }
+        }
+      },
+      "patch": {
+        "summary": "Update mission",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": { "description": "Mission updated" }
+        }
+      }
+    },
+    "/missions/{id}/start": {
+      "post": {
+        "summary": "Start mission",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": { "description": "Mission started" }
+        }
+      }
+    },
+    "/missions/{id}/complete": {
+      "post": {
+        "summary": "Complete mission",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": { "description": "Mission completed, rewards granted" }
+        }
+      }
+    },
+    "/npcs": {
+      "get": {
+        "summary": "List all NPCs",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "NPC list" }
+        }
+      }
+    },
+    "/npcs/{id}": {
+      "get": {
+        "summary": "Get NPC details",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": { "description": "NPC details with dialogue tree" }
+        }
+      }
+    },
+    "/npcs/{id}/dialogue": {
+      "post": {
+        "summary": "Advance dialogue",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["choiceIndex"],
+                "properties": {
+                  "choiceIndex": { "type": "integer" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Next dialogue node" }
+        }
+      }
+    },
+    "/assets": {
+      "get": {
+        "summary": "List assets",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Asset library" }
+        }
+      }
+    },
+    "/achievements": {
+      "get": {
+        "summary": "List all achievements",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Achievement list" }
+        }
+      }
+    },
+    "/achievements/user": {
+      "get": {
+        "summary": "Get user's achievements",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": { "description": "User's earned achievements" }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

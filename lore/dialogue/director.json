@@ -1,0 +1,135 @@
+{
+  "npc_id": "director",
+  "npc_name": "The Director",
+  "location": "Command Center",
+  "nodes": [
+    {
+      "id": "greeting",
+      "text": "Commander, welcome to the Command Center. The station is humming at 94% efficiency. How may I serve your objectives today?",
+      "choices": [
+        {
+          "text": "Give me a mission briefing.",
+          "next_node": "mission_briefing"
+        },
+        {
+          "text": "Show me station status.",
+          "next_node": "station_status"
+        },
+        {
+          "text": "View my character sheet.",
+          "next_node": "character_sheet"
+        },
+        {
+          "text": "I'll check in later.",
+          "next_node": "farewell",
+          "action": { "type": "close" }
+        }
+      ]
+    },
+    {
+      "id": "mission_briefing",
+      "text": "I have three active operations. The Kepler outpost needs surveillance. There's a logistics run to the Orion hub. And we've detected anomalies in the plasma core—repair mission, class 4 difficulty.",
+      "choices": [
+        {
+          "text": "I'll take the Kepler surveillance.",
+          "next_node": "accept_kepler",
+          "action": { "type": "start_mission", "params": { "mission_id": "kepler_surveillance" } }
+        },
+        {
+          "text": "The Orion logistics run sounds good.",
+          "next_node": "accept_logistics",
+          "action": { "type": "start_mission", "params": { "mission_id": "orion_logistics" } }
+        },
+        {
+          "text": "I'll handle the plasma core repair.",
+          "next_node": "accept_repair",
+          "action": { "type": "start_mission", "params": { "mission_id": "plasma_repair" } }
+        },
+        {
+          "text": "Not right now.",
+          "next_node": "farewell",
+          "action": { "type": "close" }
+        }
+      ]
+    },
+    {
+      "id": "station_status",
+      "text": "All systems nominal. Engineering reports 98% engine efficiency. Testing arena shows a 12% bug reduction this cycle. The quantum comm array is stable. Shall I pull up the detailed metrics?",
+      "choices": [
+        {
+          "text": "Yes, show details.",
+          "next_node": "show_metrics",
+          "action": { "type": "show_panel", "params": { "panel": "station_status" } }
+        },
+        {
+          "text": "That's enough for now.",
+          "next_node": "greeting"
+        }
+      ]
+    },
+    {
+      "id": "character_sheet",
+      "text": "Your record shows consistent performance. Current rank: Ensign. XP: 340. You've completed 8 missions and discovered 5 lore entries. Promotion to Lieutenant requires 160 more XP.",
+      "choices": [
+        {
+          "text": "Thanks for the update.",
+          "next_node": "greeting"
+        }
+      ]
+    },
+    {
+      "id": "accept_kepler",
+      "text": "Excellent choice. Launch sequence initiated. Monitor the outpost for 3 cycles. Report any anomalies immediately. Good hunting, Commander.",
+      "choices": [
+        {
+          "text": "Understood.",
+          "next_node": "farewell",
+          "action": { "type": "close" }
+        }
+      ]
+    },
+    {
+      "id": "accept_logistics",
+      "text": "Cargo manifest uploaded to your terminal. Deliver the quantum processors to Orion hub before the supply chain collapses. Time is of the essence.",
+      "choices": [
+        {
+          "text": "On my way.",
+          "next_node": "farewell",
+          "action": { "type": "close" }
+        }
+      ]
+    },
+    {
+      "id": "accept_repair",
+      "text": "Bold move, Commander. The plasma core is volatile. Engineering will brief you on containment protocols. Watch your oxygen levels in that sector.",
+      "choices": [
+        {
+          "text": "I'll be careful.",
+          "next_node": "farewell",
+          "action": { "type": "close" }
+        }
+      ]
+    },
+    {
+      "id": "show_metrics",
+      "text": "Pulling up the full dashboard... Here you go. Real-time station telemetry at your fingertips.",
+      "choices": [
+        {
+          "text": "Back to main menu.",
+          "next_node": "greeting"
+        }
+      ]
+    },
+    {
+      "id": "farewell",
+      "text": "Awaiting your return, Commander. The station endures.",
+      "choices": [
+        {
+          "text": "[End conversation]",
+          "next_node": "exit",
+          "action": { "type": "close" }
+        }
+      ]
+    }
+  ]
+}
