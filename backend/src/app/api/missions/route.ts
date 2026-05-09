@@ -3,12 +3,7 @@ import { getServerSession } from 'next-auth'
 import { z } from 'zod'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
-
-// Type guard for session user
-function getUserId(session: Awaited<ReturnType<typeof getServerSession>>): string | null {
-  if (!(session as any)?.user?.id) return null
-  return (session as any).user.id as string
-}
+import { getUserId } from '@/lib/auth-helper'
 
 const createMissionSchema = z.object({
   title: z.string().min(1).max(100),
@@ -18,15 +13,13 @@ const createMissionSchema = z.object({
   zoneId: z.string().optional()
 })
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
+    const userId = await getUserId(request)
     
-    if (!session?.user) {
+    if (!userId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
-
-    const userId = session?.user?.id ?? null
     const user = await prisma.user.findUnique({
       where: { id: userId },
       select: { rank: true }
@@ -50,17 +43,16 @@ export async function GET() {
   }
 }
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
+    const userId = await getUserId(request)
     
-    if (!session?.user) {
+    if (!userId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
     const body = await request.json()
     const data = createMissionSchema.parse(body)
-    const userId = session?.user?.id ?? null
 
     // Validate zoneId exists if provided
     if (data.zoneId) {

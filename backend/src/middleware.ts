@@ -11,7 +11,8 @@ const ALLOWED_HEADERS = [
   'Content-Type', 
   'Authorization', 
   'X-Requested-With',
-  'X-RateLimit-Remaining'
+  'X-RateLimit-Remaining',
+  'x-user-id'
 ]
 
 export function middleware(request: NextRequest) {

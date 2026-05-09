@@ -1,8 +1,28 @@
 // API client for Station Command - Connected to backend
-const API_BASE = '/api';
+import { getSession } from 'next-auth/react';
 
-// Token management
-const getToken = () => typeof window !== 'undefined' ? localStorage.getItem('auth_token') : null;
+const API_BASE = typeof window !== 'undefined' 
+  ? (process.env.NEXT_PUBLIC_API_URL || '/api')
+  : '/api';
+
+// Token management - use NextAuth session
+const getToken = async () => {
+  if (typeof window === 'undefined') return null;
+  
+  try {
+    const session = await getSession();
+    if (session) {
+      console.log('Session found:', session.user);
+      // Return user ID from session
+      return (session.user as any)?.id || null;
+    } else {
+      console.log('No session found');
+    }
+  } catch (e) {
+    console.error('Failed to get session:', e);
+  }
+  return null;
+};
 
 export class ApiError extends Error {
   constructor(public status: number, message: string) {
@@ -12,11 +32,12 @@ export class ApiError extends Error {
 }
 
 async function fetchApi<T>(endpoint: string, options?: RequestInit): Promise<T> {
-  const token = getToken();
+  const token = await getToken();
+  console.log('fetchApi called:', endpoint, 'token:', token);
   const response = await fetch(`${API_BASE}${endpoint}`, {
     headers: {
       'Content-Type': 'application/json',
-      ...(token && { 'Authorization': `Bearer ${token}` }),
+      ...(token && { 'x-user-id': token }),
       ...options?.headers,
     },
     ...options,
@@ -196,14 +217,17 @@ export const api = {
   },
 
   // Helper to compute station stats from missions
-  computeStats(missions: Mission[], agents: Agent[]): StationStats {
+  computeStats(missions?: Mission[], agents?: Agent[]): StationStats {
+    const missionList = missions ?? [];
+    const agentList = agents ?? [];
+    
     return {
-      totalMissions: missions.length,
-      activeMissions: missions.filter(m => m.status === 'IN_PROGRESS').length,
-      completedMissions: missions.filter(m => m.status === 'COMPLETED').length,
-      failedMissions: missions.filter(m => m.status === 'FAILED').length,
+      totalMissions: missionList.length,
+      activeMissions: missionList.filter(m => m?.status === 'IN_PROGRESS').length,
+      completedMissions: missionList.filter(m => m?.status === 'COMPLETED').length,
+      failedMissions: missionList.filter(m => m?.status === 'FAILED').length,
       stationHealth: 85 + Math.floor(Math.random() * 15), // Placeholder - could be from user data
-      crewOnline: agents.filter(a => a.status === 'IDLE' || a.status === 'WORKING').length,
+      crewOnline: agentList.filter(a => a?.status === 'IDLE' || a?.status === 'WORKING').length,
     };
   },
 };

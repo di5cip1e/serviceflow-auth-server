@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import StationDashboard from '@/components/ui/StationDashboard';
 import MissionPanel from '@/components/ui/MissionPanel';
 import MissionCreator, { MissionTemplate } from '@/components/ui/MissionCreator';
@@ -18,11 +20,20 @@ interface ApiMission {
 }
 
 export default function HomePage() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
   const [missions, setMissions] = useState<Mission[]>([]);
   const [stats, setStats] = useState<StationStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showMissionCreator, setShowMissionCreator] = useState(false);
+
+  // Redirect to login if not authenticated
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      router.push('/login');
+    }
+  }, [status, router]);
 
   useEffect(() => {
     async function fetchData() {
@@ -36,8 +47,12 @@ export default function HomePage() {
           api.fetchAgents(),
         ]);
         
+        // Defensive: ensure data is arrays to prevent crashes
+        const safeMissionsData = Array.isArray(missionsData) ? missionsData : [];
+        const safeAgentsData = Array.isArray(agentsData) ? agentsData : [];
+        
         // Transform API missions to UI format
-        const transformedMissions: Mission[] = missionsData.map((m: ApiMission) => ({
+        const transformedMissions: Mission[] = safeMissionsData.map((m: ApiMission) => ({
           id: m.id,
           title: m.title,
           description: m.description,
@@ -50,7 +65,7 @@ export default function HomePage() {
         setMissions(transformedMissions);
         
         // Compute stats from API data
-        const computedStats = api.computeStats(missionsData, agentsData);
+        const computedStats = api.computeStats(safeMissionsData, safeAgentsData);
         setStats(computedStats);
       } catch (err) {
         console.error('Failed to fetch data:', err);

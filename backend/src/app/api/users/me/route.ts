@@ -1,25 +1,19 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
-import { z } from 'zod'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { getUserId } from '@/lib/auth-helper'
 
-const updateSchema = z.object({
-  username: z.string().min(3).max(20).optional(),
-  bio: z.string().max(500).optional(),
-  avatar: z.string().url().optional()
-})
-
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
+    const userId = await getUserId(request)
     
-    if (!session?.user) {
+    if (!userId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
     const user = await prisma.user.findUnique({
-      where: { id: (session.user as any).id },
+      where: { id: userId },
       select: {
         id: true,
         email: true,
@@ -42,21 +36,19 @@ export async function GET() {
   }
 }
 
-export async function PATCH(request: Request) {
+export async function PATCH(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
+    const userId = await getUserId(request)
     
-    if (!session?.user) {
+    if (!userId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
     const body = await request.json()
-    const data = updateSchema.parse(body)
-    const userId = (session.user as any).id
-
-    if (data.username) {
+    
+    if (body.username) {
       const existing = await prisma.user.findFirst({
-        where: { username: data.username, NOT: { id: userId } }
+        where: { username: body.username, NOT: { id: userId } }
       })
       if (existing) {
         return NextResponse.json(
@@ -69,11 +61,11 @@ export async function PATCH(request: Request) {
     const user = await prisma.user.update({
       where: { id: userId },
       data: {
-        username: data.username,
-        profile: data.bio || data.avatar ? {
+        username: body.username,
+        profile: body.bio || body.avatar ? {
           update: {
-            bio: data.bio,
-            avatar: data.avatar
+            bio: body.bio,
+            avatar: body.avatar
           }
         } : undefined
       },
@@ -89,12 +81,6 @@ export async function PATCH(request: Request) {
 
     return NextResponse.json(user)
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { error: 'Validation error', details: error.errors },
-        { status: 400 }
-      )
-    }
     console.error('Update user error:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }

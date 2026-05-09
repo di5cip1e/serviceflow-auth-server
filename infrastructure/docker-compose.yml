@@ -5,45 +5,64 @@ services:
   postgres:
     image: postgres:15-alpine
     container_name: station-command-db
-    restart: unless-stopped
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER:-station_user}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-dev_password}
-      POSTGRES_DB: ${POSTGRES_DB:-station_command}
     ports:
-      - "${POSTGRES_PORT:-5432}:5432"
+      - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=station
+      - POSTGRES_PASSWORD=station123
+      - POSTGRES_DB=station_command
+    restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-station_user}"]
+      test: ["CMD-SHELL", "pg_isready -U station -d station_command"]
       interval: 10s
       timeout: 5s
       retries: 5
 
-  # Next.js Application
-  app:
-    build:
-      context: ..
-      dockerfile: infrastructure/Dockerfile
-    container_name: station-command-app
-    restart: unless-stopped
+  # Vector Database - Long-term semantic memory
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant-memory
     ports:
-      - "3000:3000"
-    environment:
-      NODE_ENV: development
-      DATABASE_URL: postgresql://${POSTGRES_USER:-station_user}:${POSTGRES_PASSWORD:-dev_password}@postgres:5432/${POSTGRES_DB:-station_command}
-      NEXTAUTH_URL: http://localhost:3000
-      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:-dev_secret_change_in_production}
-    depends_on:
-      postgres:
-        condition: service_healthy
+      - "6333:6333"
+      - "6334:6334"
     volumes:
-      - ../src:/app/src
-      - ../prisma:/app/prisma
+      - qdrant-storage:/qdrant/storage
+    environment:
+      - QDRANT__SERVICE__HTTP_PORT=6333
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:6333/collections"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Fast Buffer - Short-term memory accumulation
+  redis:
+    image: redis:7-alpine
+    container_name: redis-memory
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
 
 volumes:
-  postgres_data:
+  postgres-data:
+    driver: local
+  qdrant-storage:
+    driver: local
+  redis-data:
+    driver: local
 
 networks:
   default:
-    name: station-command-network
+    name: memory-system
+    driver: bridge

@@ -1,8 +1,8 @@
 // src/components/ui/HUD.tsx
 'use client';
 
-import React from 'react';
-import MiniMap from './MiniMap';
+import React, { useState } from 'react';
+import { Depth, getResponsiveStyle, Button, useKeyboardHandler, ProgressBar } from '@/lib/UIBase';
 
 interface PlayerStats {
   name: string;
@@ -26,6 +26,9 @@ interface HUDProps {
   onInteraction?: () => void;
 }
 
+// MiniMap is kept as separate component - could be refactored later
+import MiniMap from './MiniMap';
+
 export default function HUD({
   player = {
     name: 'Commander',
@@ -36,197 +39,141 @@ export default function HUD({
     health: 100,
     maxHealth: 100,
   },
-  playerPosition = { x: 100, y: 55 },
+  playerPosition = { x: 50, y: 50 }, // Changed to percentage for responsiveness
   interactionPrompt,
   onInteraction,
 }: HUDProps) {
-  const xpPercent = (player.currentXp / player.maxXp) * 100;
-  const healthPercent = (player.health / player.maxHealth) * 100;
+  const [isInteractionHovered, setIsInteractionHovered] = useState(false);
+
+  // Keyboard handler for ESC to close interaction prompts
+  useKeyboardHandler({
+    onEscape: () => {
+      // Could close any open interaction prompts here
+      if (interactionPrompt && onInteraction) {
+        onInteraction();
+      }
+    },
+  });
+
+  // Responsive positioning (percentage-based)
+  const statsPosition = getResponsiveStyle({ x: 0, y: 0, offsetX: 16, offsetY: 16 });
+  const minimapPosition = getResponsiveStyle({ x: 100, y: 0, offsetX: -16, offsetY: 16 });
+  const promptPosition = getResponsiveStyle({ x: 50, y: 100, offsetX: 0, offsetY: -32 });
 
   return (
-    <div className="hud">
+    <div 
+      className="hud"
+      style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        pointerEvents: 'none',
+        padding: '1rem',
+        zIndex: Depth.HUD.BACKGROUND,
+      }}
+    >
       {/* Top Left - Player Stats */}
-      <div className="player-stats">
-        <div className="player-name">{player.name}</div>
-        <div className="player-rank">
-          {player.rank} <span className="level">Lv.{player.level}</span>
+      <div 
+        className="player-stats"
+        style={{
+          ...statsPosition,
+          background: 'linear-gradient(135deg, rgba(13, 13, 26, 0.95) 0%, rgba(26, 26, 46, 0.95) 100%)',
+          border: '2px solid #3d3d5c',
+          padding: '1rem',
+          minWidth: '200px',
+          pointerEvents: 'auto',
+        }}
+      >
+        <div style={{
+          fontFamily: "'Courier New', monospace",
+          fontSize: '1.125rem',
+          color: '#7fdbca',
+          fontWeight: 'bold',
+          letterSpacing: '0.05em',
+        }}>
+          {player.name}
+        </div>
+        <div style={{
+          fontFamily: "'Courier New', monospace",
+          fontSize: '0.75rem',
+          color: '#95a5a6',
+          marginBottom: '0.75rem',
+        }}>
+          {player.rank} <span style={{ color: '#f39c12', marginLeft: '0.5rem' }}>Lv.{player.level}</span>
         </div>
         
-        {/* XP Bar */}
-        <div className="xp-bar-container">
-          <div className="xp-label">XP</div>
-          <div className="xp-bar">
-            <div 
-              className="xp-fill" 
-              style={{ width: `${xpPercent}%` }}
-            />
-          </div>
-          <div className="xp-values">
-            {player.currentXp} / {player.maxXp}
-          </div>
-        </div>
+        {/* XP Bar - using standardized ProgressBar */}
+        <ProgressBar
+          value={player.currentXp}
+          max={player.maxXp}
+          color="xp"
+          label="XP"
+        />
 
-        {/* Health Bar */}
-        <div className="health-bar-container">
-          <div className="health-label">HP</div>
-          <div className="health-bar">
-            <div 
-              className="health-fill" 
-              style={{ width: `${healthPercent}%` }}
-            />
-          </div>
-          <div className="health-values">
-            {player.health} / {player.maxHealth}
-          </div>
-        </div>
+        {/* Health Bar - using standardized ProgressBar */}
+        <ProgressBar
+          value={player.health}
+          max={player.maxHealth}
+          color="health"
+          label="HP"
+        />
       </div>
 
       {/* Top Right - Mini Map */}
-      <div className="minimap-container">
-        <MiniMap playerX={playerPosition?.x ?? 100} playerY={playerPosition?.y ?? 55} />
+      <div 
+        className="minimap-container"
+        style={{
+          ...minimapPosition,
+          width: '180px',
+          pointerEvents: 'auto',
+        }}
+      >
+        <MiniMap playerX={playerPosition?.x ?? 50} playerY={playerPosition?.y ?? 50} />
       </div>
 
-      {/* Bottom - Interaction Prompt */}
+      {/* Bottom Center - Interaction Prompt */}
       {interactionPrompt && (
-        <div className="interaction-prompt" onClick={onInteraction}>
-          <span className="prompt-key">[E]</span>
-          <span className="prompt-text">{interactionPrompt}</span>
+        <div
+          className="interaction-prompt"
+          style={{
+            ...promptPosition,
+            background: isInteractionHovered 
+              ? 'rgba(127, 219, 202, 0.15)' 
+              : 'rgba(13, 13, 26, 0.9)',
+            border: '2px solid #7fdbca',
+            padding: '0.75rem 1.5rem',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.75rem',
+            cursor: 'pointer',
+            transition: 'all 0.2s',
+            pointerEvents: 'auto',
+          }}
+          onClick={onInteraction}
+          onMouseEnter={() => setIsInteractionHovered(true)}
+          onMouseLeave={() => setIsInteractionHovered(false)}
+        >
+          <span style={{
+            fontFamily: "'Courier New', monospace",
+            fontSize: '0.875rem',
+            color: '#7fdbca',
+            background: '#1a1a2e',
+            padding: '0.25rem 0.5rem',
+            border: '1px solid #3d3d5c',
+          }}>
+            [E]
+          </span>
+          <span style={{
+            fontFamily: "'Courier New', monospace",
+            fontSize: '0.875rem',
+            color: '#ecf0f1',
+          }}>
+            {interactionPrompt}
+          </span>
         </div>
       )}
-
-      <style jsx>{`
-        .hud {
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          pointer-events: none;
-          padding: 1rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-        }
-
-        .hud > * {
-          pointer-events: auto;
-        }
-
-        .top-row {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-        }
-
-        .player-stats {
-          background: linear-gradient(135deg, rgba(13, 13, 26, 0.95) 0%, rgba(26, 26, 46, 0.95) 100%);
-          border: 2px solid #3d3d5c;
-          padding: 1rem;
-          min-width: 200px;
-        }
-
-        .player-name {
-          font-family: 'Courier New', monospace;
-          font-size: 1.125rem;
-          color: #7fdbca;
-          font-weight: bold;
-          letter-spacing: 0.05em;
-        }
-
-        .player-rank {
-          font-family: 'Courier New', monospace;
-          font-size: 0.75rem;
-          color: #95a5a6;
-          margin-bottom: 0.75rem;
-        }
-
-        .level {
-          color: #f39c12;
-          margin-left: 0.5rem;
-        }
-
-        .xp-bar-container,
-        .health-bar-container {
-          margin-bottom: 0.5rem;
-        }
-
-        .xp-label,
-        .health-label {
-          font-family: 'Courier New', monospace;
-          font-size: 0.625rem;
-          color: #636e72;
-          letter-spacing: 0.1em;
-          margin-bottom: 0.25rem;
-        }
-
-        .xp-bar,
-        .health-bar {
-          height: 8px;
-          background: #0f0f1a;
-          border: 1px solid #2d2d44;
-          position: relative;
-        }
-
-        .xp-fill {
-          height: 100%;
-          background: linear-gradient(90deg, #3498db 0%, #9b59b6 100%);
-          transition: width 0.3s ease;
-        }
-
-        .health-fill {
-          height: 100%;
-          background: linear-gradient(90deg, #27ae60 0%, #2ecc71 100%);
-          transition: width 0.3s ease;
-        }
-
-        .xp-values,
-        .health-values {
-          font-family: 'Courier New', monospace;
-          font-size: 0.625rem;
-          color: #7f8c8d;
-          text-align: right;
-          margin-top: 0.25rem;
-        }
-
-        .minimap-container {
-          position: absolute;
-          top: 1rem;
-          right: 1rem;
-          width: 180px;
-        }
-
-        .interaction-prompt {
-          align-self: center;
-          background: rgba(13, 13, 26, 0.9);
-          border: 2px solid #7fdbca;
-          padding: 0.75rem 1.5rem;
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          cursor: pointer;
-          transition: all 0.2s;
-        }
-
-        .interaction-prompt:hover {
-          background: rgba(127, 219, 202, 0.1);
-          border-color: #fff;
-        }
-
-        .prompt-key {
-          font-family: 'Courier New', monospace;
-          font-size: 0.875rem;
-          color: #7fdbca;
-          background: #1a1a2e;
-          padding: 0.25rem 0.5rem;
-          border: 1px solid #3d3d5c;
-        }
-
-        .prompt-text {
-          font-family: 'Courier New', monospace;
-          font-size: 0.875rem;
-          color: #ecf0f1;
-        }
-      `}</style>
     </div>
   );
 }

@@ -1,29 +1,22 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
-
-// Type guard for session user
-function getUserId(session: Awaited<ReturnType<typeof getServerSession>>): string | null {
-  if (!(session as any)?.user?.id) return null
-  return (session as any).user.id as string
-}
+import { getUserId } from '@/lib/auth-helper'
 
 const createAgentSchema = z.object({
   name: z.string().min(1).max(50),
   type: z.enum(['scout', 'miner', 'combat', 'diplomat', 'engineer', 'medic'])
 })
 
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
+    const userId = await getUserId(request)
     
-    if (!session?.user) {
+    if (!userId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
-
-    const userId = session?.user?.id ?? null
     
     const agents = await prisma.agent.findMany({
       where: { userId },
@@ -40,17 +33,16 @@ export async function GET() {
   }
 }
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
+    const userId = await getUserId(request)
     
-    if (!session?.user) {
+    if (!userId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
     const body = await request.json()
     const { name, type } = createAgentSchema.parse(body)
-    const userId = session?.user?.id ?? null
 
     // Base stats by type
     const baseStats: Record<string, { health: number; attack: number; defense: number; speed: number }> = {
