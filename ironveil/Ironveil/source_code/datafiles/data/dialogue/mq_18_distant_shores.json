@@ -1,0 +1,158 @@
+{
+  "_meta": {
+    "description": "Quest dialogue for MQ-18: Distant Shores. Year 2 Spring — opening trade routes.",
+    "version": "1.0",
+    "objective": "#42 Full 3+ Year Story Content"
+  },
+  "quest_id": "mq_18",
+  "scenes": [
+    {
+      "scene_id": "mq18_start",
+      "trigger": "quest_start",
+      "location": "rm_int_town_hall",
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Jack, now that we've weathered that first winter... I think it's time we stopped just surviving and started connecting.",
+          "portrait": "thoughtful"
+        },
+        {
+          "speaker": "npc_linden",
+          "text": "Ferris has been picking up faint radio signals from other settlements. Beacon Towns, they call themselves. But we can't reach them without proper navigation charts.",
+          "portrait": "serious"
+        },
+        {
+          "speaker": "npc_ferris",
+          "text": "There's an old navigation relay at the Shattered Coast. Pre-Sundering tech. If we can recover the charts, I can calibrate our transmitter to reach the nearest Beacon.",
+          "portrait": "neutral"
+        },
+        {
+          "speaker": "player",
+          "text": "The Coast is Tide Reaver territory. It won't be easy.",
+          "portrait": "neutral"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "Which is exactly why you're the one going. Take a squad of guard bots. I'll brief you on Reaver patrol routes.",
+          "portrait": "stern"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq18_harrow_briefing",
+      "trigger": "npc_interact",
+      "conditions": { "npc_id": "npc_harrow", "quest_active": "mq_18" },
+      "location": "rm_town_coppervale",
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Tide Reavers. They hit from the water — fast boats, diving units that bypass walls entirely. Don't underestimate them.",
+          "portrait": "serious"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "The relay station is on the eastern bluffs. Stay off the beach — that's their ground. Approach from the ridge.",
+          "portrait": "stern"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "And Jack? If you find any military intel on their numbers... bring it back. We'll need it.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq18_coast_arrival",
+      "trigger": "location_enter",
+      "conditions": { "room_id": "rm_explore_coastal_wreck" },
+      "lines": [
+        {
+          "speaker": "dejin",
+          "text": "Scanning... This coastline once served a major port city. Cargo infrastructure detected beneath the waterline. The relay station should be northeast of our position.",
+          "portrait": "analytical"
+        },
+        {
+          "speaker": "dejin",
+          "text": "I'm detecting movement patterns consistent with organized patrol routes. The Tide Reavers are disciplined. Interesting.",
+          "portrait": "curious"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq18_relay_discovery",
+      "trigger": "objective_complete",
+      "conditions": { "objective_id": "obj_find_relay" },
+      "lines": [
+        {
+          "speaker": "dejin",
+          "text": "Navigation relay located. The data banks are partially corroded but... yes. I can extract the charts. Give me a moment.",
+          "portrait": "focused"
+        },
+        {
+          "speaker": "dejin",
+          "text": "Fascinating. These charts map settlements across a 200-kilometer radius. At least seven Beacon signals are active. We are not as alone as we thought.",
+          "portrait": "surprised"
+        },
+        {
+          "speaker": "player",
+          "text": "Seven? That's more than I expected.",
+          "portrait": "surprised"
+        },
+        {
+          "speaker": "dejin",
+          "text": "The nearest is approximately 40 kilometers northeast. Signal designation: 'Thornwall.' They appear to be transmitting a repeating welcome beacon.",
+          "portrait": "analytical"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq18_return_ferris",
+      "trigger": "npc_interact",
+      "conditions": { "npc_id": "npc_ferris", "has_item": "item_nav_charts" },
+      "location": "rm_int_parts_dealer",
+      "lines": [
+        {
+          "speaker": "npc_ferris",
+          "text": "You got them! Let me see... oh, these are beautiful. Pre-war nav data, still intact. Give me a day to calibrate our transmitter.",
+          "portrait": "excited"
+        },
+        {
+          "speaker": "npc_ferris",
+          "text": "With this, we can reach Thornwall. Maybe even the settlements beyond. Coppervale won't be an island anymore.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq18_complete",
+      "trigger": "quest_complete",
+      "location": "rm_int_town_hall",
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Ferris confirmed it — we've made contact with Thornwall. They're sending a trade envoy within the week.",
+          "portrait": "happy"
+        },
+        {
+          "speaker": "npc_linden",
+          "text": "This changes everything, Jack. We're not just a town anymore. We're part of something bigger.",
+          "portrait": "proud"
+        },
+        {
+          "speaker": "npc_gus",
+          "text": "New trade partners means new goods! I'll need to clear space in the shop. This is wonderful news.",
+          "portrait": "excited"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "It also means new responsibilities. If the Iron Marauders learn about these trade routes, they'll want to control them. Stay sharp.",
+          "portrait": "stern"
+        }
+      ],
+      "effects": [
+        { "type": "set_flag", "flag": "flag_trade_routes_open" },
+        { "type": "set_flag", "flag": "flag_thornwall_contact" }
+      ]
+    }
+  ]
+}

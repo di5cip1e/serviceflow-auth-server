@@ -1,0 +1,78 @@
+{
+  "_meta": {
+    "description": "Heart event #3 for npc_kiery: The Flinch",
+    "version": "1.0",
+    "objective": "#33/#34"
+  },
+  "event_id": "heart_event_kiery_03",
+  "npc_id": "npc_kiery",
+  "heart_level_required": 5,
+  "location": "rm_int_npc_kiery",
+  "time_range": {
+    "start": 10,
+    "end": 17
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_kiery_event_3_complete",
+  "heart_bonus": 50,
+  "title": "The Flinch",
+  "lines": [
+    {
+      "speaker": "narrator",
+      "text": "[A loud crash outside. Kiery flinches violently]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "I \u2014 sorry. I'm sorry. It's not \u2014 I'm fine.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "Please don't... please don't raise your voice. I know you didn't\u2014",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "It's not about you. It's never about you.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "[Sit quietly. Don't move closer. Let her breathe.]",
+          "flag": "kiery_flinch_patient"
+        },
+        {
+          "text": "I'm here. Take your time.",
+          "flag": "kiery_flinch_gentle"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "...Thank you for not asking what's wrong.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "Thank you for just... being still.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "Most people want an explanation. You just gave me space.",
+      "portrait": "happy"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "I'll tell you someday. When I'm ready. Not today.",
+      "portrait": "neutral"
+    }
+  ]
+}

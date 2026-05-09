@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>M.ai.K.R - The AI Agent Builder</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/maikr.css">
+</head>
+<body>
+  <!-- Matrix Network Background -->
+  <canvas id="matrixCanvas"></canvas>
+  
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="logo">
+        <span class="logo-text">M.ai.K.R</span>
+        <span class="logo-subtitle">The AI Agent Builder</span>
+      </div>
+    </header>
+
+    <main>
+      <div class="hero-section">
+        <h1>Build Your Custom AI Agent</h1>
+        <p class="hero-subtitle">Zero-Prompting Required — Just tell us your business name and a few basic rules. We handle the rest.</p>
+        <p class="hero-tagline">Your AI assistant works 24/7 so you don't have to.</p>
+      </div>
+
+      <div class="content-grid">
+        <!-- Questionnaire Form -->
+        <div class="form-panel">
+          <form id="agentForm">
+            <div class="form-step active" data-step="1">
+              <h2>Let's Build Your Agent</h2>
+              <p class="subtitle">Start with the basics</p>
+              
+              <div class="form-group">
+                <label>Agent Name *</label>
+                <input type="text" id="agentName" placeholder="e.g., SalesBot, SupportPro" required>
+              </div>
+              
+              <div class="form-group">
+                <label>Business Name *</label>
+                <input type="text" id="businessName" placeholder="e.g., Acme Corp" required>
+              </div>
+              
+              <div class="form-group">
+                <label>Industry *</label>
+                <select id="industry" required>
+                  <option value="">Select Industry</option>
+                  <option value="healthcare">Healthcare</option>
+                  <option value="finance">Finance</option>
+                  <option value="legal">Legal</option>
+                  <option value="ecommerce">E-commerce</option>
+                  <option value="saas">SaaS</option>
+                  <option value="home_services">Home & Local Services</option>
+                  <option value="automotive">Automotive & Repair</option>
+                  <option value="real_estate">Real Estate</option>
+                  <option value="hospitality">Hospitality</option>
+                  <option value="retail">Retail & Consumer</option>
+                  <option value="education">Education</option>
+                  <option value="fitness">Fitness & Wellness</option>
+                  <option value="food">Food & Beverage</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-step" data-step="2">
+              <h2>Who Is This For?</h2>
+              <p class="subtitle">Define your audience</p>
+              
+              <div class="form-group">
+                <label>Target Audience *</label>
+                <input type="text" id="targetAudience" placeholder="e.g., Existing customers" required>
+              </div>
+              
+              <div class="form-group">
+                <label>Tone *</label>
+                <select id="tone" required>
+                  <option value="">Select Tone</option>
+                  <option value="professional">Professional</option>
+                  <option value="friendly">Friendly</option>
+                  <option value="casual">Casual</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-step" data-step="3">
+              <h2>What Should It Do?</h2>
+              <p class="subtitle">Select primary use cases</p>
+              
+              <div class="checkbox-group">
+                <label class="checkbox-item"><input type="checkbox" name="useCases" value="support"> Customer Support</label>
+                <label class="checkbox-item"><input type="checkbox" name="useCases" value="leads"> Lead Generation</label>
+                <label class="checkbox-item"><input type="checkbox" name="useCases" value="sales"> Sales Automation</label>
+                <label class="checkbox-item"><input type="checkbox" name="useCases" value="faq"> FAQ Responses</label>
+              </div>
+              
+              <!-- Lead Generation Scenario -->
+              <div class="scenario-box">
+                <h4>📊 Never Miss a Lead</h4>
+                <div class="scenario-comparison">
+                  <div class="scenario-column before">
+                    <div class="scenario-header">❌ Without M.ai.K.R</div>
+                    <div class="scenario-content">
+                      <p><strong>Standard Contact Form</strong></p>
+                      <p>Customer visits at 11pm</p>
+                      <p>Sees "Leave us a message"</p>
+                      <p>Leaves — never returns</p>
+                      <p class="result">💸 Missed Opportunity</p>
+                    </div>
+                  </div>
+                  <div class="scenario-column after">
+                    <div class="scenario-header">✅ With M.ai.K.R</div>
+                    <div class="scenario-content">
+                      <p><strong>AI Chat Assistant</strong></p>
+                      <p>Customer visits at 11pm</p>
+                      <p>"Hi! How can I help?"</p>
+                      <p>Captures lead info instantly</p>
+                      <p class="result">🎯 Qualified Lead Secured</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Customer Service Scenario -->
+              <div class="scenario-box">
+                <h4>📊 24/7 Customer Support</h4>
+                <div class="scenario-comparison">
+                  <div class="scenario-column before">
+                    <div class="scenario-header">❌ Without M.ai.K.R</div>
+                    <div class="scenario-content">
+                      <p><strong>Business Hours Only</strong></p>
+                      <p>Customer has a question at 7pm</p>
+                      <p>"We're closed — call back tomorrow"</p>
+                      <p>Frustrated customer leaves</p>
+                      <p class="result">😤 Lost Customer</p>
+                    </div>
+                  </div>
+                  <div class="scenario-column after">
+                    <div class="scenario-header">✅ With M.ai.K.R</div>
+                    <div class="scenario-content">
+                      <p><strong>AI Always On Duty</strong></p>
+                      <p>Customer has a question at 7pm</p>
+                      <p>Instant answers, any time</p>
+                      <p>Problem solved immediately</p>
+                      <p class="result">😊 Loyal Customer</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-step" data-step="4">
+              <h2>Choose Your Plan</h2>
+              <p class="subtitle">Invest in your business growth</p>
+              
+              <div class="pricing-grid">
+                <div class="pricing-card" data-tier="basic">
+                  <div class="plan-name">Basic</div>
+                  <div class="plan-price">$49<span>/mo</span></div>
+                  <div class="plan-roi">Replace an answering service</div>
+                  <div class="plan-desc">Never leave a common customer question unanswered.</div>
+                </div>
+                <div class="pricing-card selected" data-tier="intermediate">
+                  <div class="plan-name">Intermediate</div>
+                  <div class="plan-price">$99<span>/mo</span></div>
+                  <div class="plan-roi">Fraction of a human hire</div>
+                  <div class="plan-desc">Automate lead capture and complex inquiries 24/7.</div>
+                </div>
+                <div class="pricing-card" data-tier="advanced">
+                  <div class="plan-name">Advanced</div>
+                  <div class="plan-price">$199<span>/mo</span></div>
+                  <div class="plan-roi">Your 24/7 Sales Rep</div>
+                  <div class="plan-desc">Full sales automation and lead capture, working around the clock.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Intelligence Tier Selection -->
+            <div class="tier-section">
+              <h3 class="step-title" style="margin-bottom:12px">🤖 Intelligence Tier</h3>
+              <p style="color:#94a3b8;font-size:13px;margin-bottom:16px;text-align:center;">Choose how smart your agent is. Free tier included — upgrade anytime.</p>
+              <div class="tier-cards">
+                <div class="tier-card selected" data-tier="standard" onclick="selectTier('standard')">
+                  <div class="tier-badge">Standard</div>
+                  <div class="tier-price">Included</div>
+                  <div class="tier-models">gemini-flash-lite · qwen-3</div>
+                  <div class="tier-desc">Fast, capable, zero cost — great for most businesses</div>
+                </div>
+                <div class="tier-card" data-tier="premium" onclick="selectTier('premium')">
+                  <div class="tier-badge premium">Premium</div>
+                  <div class="tier-price">+$15/mo</div>
+                  <div class="tier-models">gpt-4o-mini · claude-haiku</div>
+                  <div class="tier-desc">Higher reasoning, better context — for complex use cases</div>
+                </div>
+                <div class="tier-card" data-tier="elite" onclick="selectTier('elite')">
+                  <div class="tier-badge elite">Elite</div>
+                  <div class="tier-price">+$30/mo</div>
+                  <div class="tier-models">gpt-4o · claude-sonnet</div>
+                  <div class="tier-desc">Maximum capability — for demanding enterprise workloads</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Terms & Data Usage -->
+            <div class="terms-section">
+              <label class="terms-checkbox">
+                <input type="checkbox" id="agreeTerms" required>
+                <span>I agree to the <a href="#" onclick="showTerms()" style="color:#60a5fa">Terms of Service</a> and <a href="#" onclick="showTerms()" style="color:#60a5fa">Data Usage Policy</a></span>
+              </label>
+              <div class="terms-summary">
+                📊 <strong>Data Collection:</strong> Your agent's usage data (message counts, activity metrics) helps us improve our service. No private conversation content is reviewed. You may opt out at any time in your dashboard.
+              </div>
+              <div id="termsModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:1000;align-items:center;justify-content:center;">
+                <div style="background:#1e293b;border:1px solid #334155;border-radius:12px;padding:32px;max-width:600px;max-height:80vh;overflow-y:auto;color:#e2e8f0;">
+                  <h3 style="margin-bottom:16px;color:#f97316;">Terms of Service & Data Usage Policy</h3>
+                  <h4 style="margin:16px 0 8px;color:#e2e8f0;">1. Terms of Service</h4>
+                  <p style="color:#94a3b8;font-size:13px;line-height:1.6;margin-bottom:16px;">By using M.ai.K.R, you agree to Avant Garde Institute LLC's terms of service. You are responsible for maintaining the confidentiality of your account credentials and for all activities under your account.</p>
+                  <h4 style="margin:16px 0 8px;color:#e2e8f0;">2. Data Usage & Analytics</h4>
+                  <p style="color:#94a3b8;font-size:13px;line-height:1.6;margin-bottom:16px;">By using M.ai.K.R, you agree that Avant Garde Institute LLC, its agents and employees may collect and use anonymized usage data (such as message counts, session timestamps, feature usage, and aggregate performance metrics) for the purpose of continuing development and improvement of the M.ai.K.R platform. <strong>Private conversation content is never reviewed, sold, or shared with third parties.</strong></p>
+                  <h4 style="margin:16px 0 8px;color:#e2e8f0;">3. Opt-Out</h4>
+                  <p style="color:#94a3b8;font-size:13px;line-height:1.6;margin-bottom:16px;">You may opt out of data collection at any time via the Advanced Settings in your agent dashboard. Opting out does not affect your agent's functionality.</p>
+                  <h4 style="margin:16px 0 8px;color:#e2e8f0;">4. Privacy</h4>
+                  <p style="color:#94a3b8;font-size:13px;line-height:1.6;margin-bottom:16px;">We take privacy seriously. Your agent's conversation data is stored securely and accessible only to you and authorized M.ai.K.R personnel for support purposes.</p>
+                  <button onclick="document.getElementById('termsModal').style.display='none'" style="background:#f97316;color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;margin-top:8px;">Close</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-nav">
+              <button type="button" class="btn-secondary" id="prevBtn" style="display:none;">Back</button>
+              <button type="button" class="btn-primary" id="nextBtn">Continue to Checkout</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Live AI Demo -->
+        <div class="demo-panel">
+          <div class="demo-header">
+            <span>🔗 maikr.pro/chat/your-agent</span>
+          </div>
+          <div class="chat-window">
+            <div class="chat-message ai">
+              👋 Hi! I'm your brand-trained AI assistant. How can I help you today?
+            </div>
+          </div>
+          <div class="chat-input">
+            <input type="text" placeholder="Type a message...">
+            <button>Send</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Business Value Workflow -->
+      <div class="value-workflow">
+        <h3>How M.ai.K.R Works for You</h3>
+        <p class="workflow-subtitle">Stop missing leads while you sleep</p>
+        
+        <div class="workflow-steps">
+          <div class="workflow-step">
+            <div class="step-icon">🌙</div>
+            <div class="step-title">Step 1: Customer Visits After Hours</div>
+            <div class="step-desc">A potential customer browses your website at 10pm, on a Sunday, or during your lunch break.</div>
+          </div>
+          
+          <div class="workflow-arrow">→</div>
+          
+          <div class="workflow-step">
+            <div class="step-icon">💬</div>
+            <div class="step-title">Step 2: AI Answers Immediately</div>
+            <div class="step-desc">Your M.ai.K.R agent responds instantly with answers tailored to your business.</div>
+          </div>
+          
+          <div class="workflow-arrow">→</div>
+          
+          <div class="workflow-step">
+            <div class="step-icon">📅</div>
+            <div class="step-title">Step 3: Captures the Lead</div>
+            <div class="step-desc">The agent gathers contact info and qualifies the lead. (Optional: book an appointment)</div>
+          </div>
+          
+          <div class="workflow-arrow">→</div>
+          
+          <div class="workflow-step result">
+            <div class="step-icon">🌟</div>
+            <div class="step-title">You Wake Up to a Lead</div>
+            <div class="step-desc">Instead of missed opportunities, you start your day with a qualified appointment booked.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Second Workflow: Internal Business Use -->
+      <div class="value-workflow">
+        <h3>Your AI Business Assistant</h3>
+        <p class="workflow-subtitle">Handle quotes, payroll, and calculations instantly</p>
+        
+        <div class="workflow-steps">
+          <div class="workflow-step">
+            <div class="step-icon">📐</div>
+            <div class="step-title">Step 1: Customer Needs a Quote</div>
+            <div class="step-desc">A homeowner asks: "How much to carpet my 1,500 sq ft basement?"</div>
+          </div>
+          
+          <div class="workflow-arrow">→</div>
+          
+          <div class="workflow-step">
+            <div class="step-icon">🧮</div>
+            <div class="step-title">Step 2: AI Calculates Fast</div>
+            <div class="step-desc">Your agent pulls your pricing rules, multiplies by square footage, adds materials.</div>
+          </div>
+          
+          <div class="workflow-arrow">→</div>
+          
+          <div class="workflow-step">
+            <div class="step-icon">💰</div>
+            <div class="step-title">Step 3: Sends Professional Quote</div>
+            <div class="step-desc">Customer receives a detailed quote via email or text — instantly.</div>
+          </div>
+          
+          <div class="workflow-arrow">→</div>
+          
+          <div class="workflow-step result">
+            <div class="step-icon">⚡</div>
+            <div class="step-title">Quote Sent While You Work</div>
+            <div class="step-desc">No math, no manual calculations. The quote is out before you even pick up the phone.</div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="trust-badge">
+        <div class="trust-badge-icon">✓</div>
+        <div class="trust-badge-text">Powered by <strong>Avant Garde Institute LLC</strong></div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

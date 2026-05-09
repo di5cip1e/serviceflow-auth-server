@@ -1,22 +1,21 @@
-# Social Topics - Morning Meeting Scan
+# Social Topics
 
-## 3 Interesting Topics from Hacker News
+## May 7, 2026 - SOCIAL_SCAN (18:19 UTC)
 
-### 1. AI Interviewing is Going Mainstream
-- **Link:** The Verge - "I was interviewed by an AI bot for a job"
-- **Why care:** Shows AI is automating hiring - opportunity for AI interview prep tools
-- **Trend:** Companies using AI agents for initial screening is accelerating
+### Notes
+- Reddit blocked by Cloudflare (403)
+- Discord AI communities require invitation
+- Using web_search (Perplexity) as alternative for trends
 
-### 2. Perplexity Personal Computer
-- **Link:** perplexity.ai/personal-computer-waitlist
-- **Why care:** Local AI compute is becoming accessible - could build offline AI tools
-- **Trend:** Edge AI is going consumer, lots of opportunity
+### Trends to Monitor
+- Agentic AI accelerating (70-80% automation by EOY 2026)
+- Edge AI (local models) growing
+- Vertical automation for SMBs surging
+- 98% of SMBs now use AI daily
 
-### 3. SWE-Bench Passing PRs Would Not Be Merged
-- **Link:** metr.org/notes/2026-03-10-many-swe-bench-passing-prs-would-not-be-merged-into-main/
-- **Why care:** AI coding agents still have gap between test performance and real code quality
-- **Trend:** Human oversight still critical, opportunities in AI-human collaboration
+### Action Items
+- Could set up Google Alerts for AI trends
+- Consider alternative social scanning methods
 
 ---
-*Scanned: 2026-03-12 07:09 UTC*
-*Source: Hacker News (news.ycombinator.com)*
+*Last updated: 2026-05-07 18:19 UTC*

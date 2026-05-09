@@ -1,0 +1,373 @@
+{
+  "_meta": {
+    "description": "Dialogue data for Hank (Blacksmith). Seasonal/daily pool + heart milestones.",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue"
+  },
+  "entries": [
+    {
+      "entry_id": "npc_hank_sd_001",
+      "npc_id": "npc_hank",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_hank",
+          "text": "...Good morning.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_hank_sd_002",
+      "npc_id": "npc_hank",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_hank",
+          "text": "Spring steel. Best tempering weather.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_hank_sd_003",
+      "npc_id": "npc_hank",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_hank",
+          "text": "Hot. Forge is hotter. Doesn't matter.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_hank_sd_004",
+      "npc_id": "npc_hank",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_hank",
+          "text": "...Made you something. Wall bracket. For the workshop. It's nothing.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_hank_sd_005",
+      "npc_id": "npc_hank",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_hank",
+          "text": "Autumn. Good for metalwork. Steady temperatures.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_hank_sd_006",
+      "npc_id": "npc_hank",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_hank",
+          "text": "Cold hands, hot forge. Balance.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_hank_sd_007",
+      "npc_id": "npc_hank",
+      "category": "seasonal_daily",
+      "conditions": {
+        "weather": "STORM",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_hank",
+          "text": "Storm. Forge stays lit.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_hank_sd_008",
+      "npc_id": "npc_hank",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_hank",
+          "text": "...",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_hank_sd_009",
+      "npc_id": "npc_hank",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_hank",
+          "text": "Steel doesn't lie. Heat it, shape it, cool it. Honest work.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_hank_sd_010",
+      "npc_id": "npc_hank",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_hank",
+          "text": "Pip asked to use the anvil. I let her tap it once. She was delighted.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_hank_sd_011",
+      "npc_id": "npc_hank",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_hank",
+          "text": "Your machine designs. Good joints. Solid welds. Respect.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_hank_sd_012",
+      "npc_id": "npc_hank",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_hank",
+          "text": "Nora brought bread. Warm. ...Best part of the day.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_hank_hm_02",
+      "npc_id": "npc_hank",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 2
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_hank_milestone_2",
+      "lines": [
+        {
+          "speaker": "npc_hank",
+          "text": "...Made you a tool. Wrench. Custom grip. ...Hope it fits.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_hank_hm_04",
+      "npc_id": "npc_hank",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 4
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_hank_milestone_4",
+      "lines": [
+        {
+          "speaker": "npc_hank",
+          "text": "Good metal. Good machines. ...Good man. That's you.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_hank_hm_06",
+      "npc_id": "npc_hank",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 6
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_hank_milestone_6",
+      "lines": [
+        {
+          "speaker": "npc_hank",
+          "text": "...Come to the forge sometime. I'll show you the old techniques. If you want.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_hank_hm_08",
+      "npc_id": "npc_hank",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 8
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_hank_milestone_8",
+      "lines": [
+        {
+          "speaker": "npc_hank",
+          "text": "...You're alright, Jack. ...Best compliment I give.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_hank_hm_10",
+      "npc_id": "npc_hank",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 10
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_hank_milestone_10",
+      "lines": [
+        {
+          "speaker": "npc_hank",
+          "text": "...Forged you something special. Master-grade. ...Don't tell anyone I smiled.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_hank_y2_summer_018",
+      "npc_id": "npc_hank",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_hank",
+          "text": "Forge is running hot. Good steel takes time. Don't rush me.",
+          "portrait": "gruff"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_hank_y2_autumn_019",
+      "npc_id": "npc_hank",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_hank",
+          "text": "I'll forge day and night if I have to. Every bolt, every plate, every blade.",
+          "portrait": "grim_determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_hank_y3_autumn_020",
+      "npc_id": "npc_hank",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_hank",
+          "text": "Apprentices coming from Thornwall and Ironridge. Coppervale steel has a reputation now.",
+          "portrait": "satisfied"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_hank_y4_spring_021",
+      "npc_id": "npc_hank",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 4,
+        "hearts_gte": 0,
+        "story_flag": "flag_main_story_complete"
+      },
+      "priority": 11,
+      "lines": [
+        {
+          "speaker": "npc_hank",
+          "text": "Three shifts now. Teaching the next generation. Not bad for a frontier forge.",
+          "portrait": "content"
+        }
+      ]
+    }
+  ]
+}

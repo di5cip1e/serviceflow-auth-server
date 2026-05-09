@@ -1,0 +1,228 @@
+{
+  "_meta": {
+    "description": "Quest dialogue for MQ-23: Alliance Forged. Year 2 Autumn — securing reinforcements from allied towns.",
+    "version": "1.0",
+    "objective": "#42 Full 3+ Year Story Content"
+  },
+  "quest_id": "mq_23",
+  "scenes": [
+    {
+      "scene_id": "mq23_start",
+      "trigger": "quest_start",
+      "location": "rm_int_town_hall",
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "The Council has responded to the Marshal's broadcast. Three Beacon Towns are willing to discuss sending reinforcements: Thornwall, Dusthaven, and Ironridge.",
+          "portrait": "businesslike"
+        },
+        {
+          "speaker": "npc_janis",
+          "text": "But 'willing to discuss' isn't the same as 'committed.' Each town has conditions. Jack, I need you to visit them and close the deal.",
+          "portrait": "serious"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "Diplomacy. Wonderful. Try not to start any wars on the way there.",
+          "portrait": "dry"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq23_thornwall",
+      "trigger": "location_enter",
+      "conditions": { "objective_id": "obj_visit_thornwall" },
+      "lines": [
+        {
+          "speaker": "thornwall_leader",
+          "text": "Coppervale's engineer. We've heard a great deal about you. Thornwall will send a militia company — 30 fighters — but we need something in return.",
+          "portrait": "neutral"
+        },
+        {
+          "speaker": "thornwall_leader",
+          "text": "Our northern wall is crumbling. Your turret designs would let us hold it with half the manpower. Share the blueprints, and our fighters are yours.",
+          "portrait": "negotiating"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Done. I'll have the blueprints sent by courier tomorrow.",
+          "effects": [
+            { "type": "add_alliance", "amount": 2 },
+            { "type": "set_flag", "flag": "flag_thornwall_reinforcements" }
+          ],
+          "next_scene": "mq23_thornwall_accept"
+        },
+        {
+          "text": "I'll share defensive turret specs only — not the advanced models. Fair?",
+          "effects": [
+            { "type": "add_alliance", "amount": 1 },
+            { "type": "set_flag", "flag": "flag_thornwall_reinforcements_partial" }
+          ],
+          "next_scene": "mq23_thornwall_partial"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq23_thornwall_accept",
+      "trigger": "choice_result",
+      "lines": [
+        {
+          "speaker": "thornwall_leader",
+          "text": "Generous. You'll have our best fighters. The Beacon alliance is stronger for this.",
+          "portrait": "pleased"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq23_thornwall_partial",
+      "trigger": "choice_result",
+      "lines": [
+        {
+          "speaker": "thornwall_leader",
+          "text": "Hmm. Acceptable, though I'd hoped for more. We'll send 15 fighters instead of 30. Proportional to the trust offered.",
+          "portrait": "reserved"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq23_dusthaven",
+      "trigger": "location_enter",
+      "conditions": { "objective_id": "obj_visit_dusthaven" },
+      "lines": [
+        {
+          "speaker": "dusthaven_leader",
+          "text": "We're a farming settlement, not warriors. But we can send food, medical supplies, and 10 volunteers who know how to handle a crossbow.",
+          "portrait": "humble"
+        },
+        {
+          "speaker": "dusthaven_leader",
+          "text": "What we need is protection after the siege. If the Marshal retaliates against us for helping you... we can't survive that alone.",
+          "portrait": "worried"
+        }
+      ],
+      "choices": [
+        {
+          "text": "You have my word. After we stop the Marshal, Coppervale will help defend Dusthaven. We'll station guard bots on your perimeter.",
+          "effects": [
+            { "type": "add_alliance", "amount": 2 },
+            { "type": "set_flag", "flag": "flag_dusthaven_reinforcements" }
+          ],
+          "next_scene": "mq23_dusthaven_accept"
+        },
+        {
+          "text": "I can't make promises about what comes after. But your supplies would save lives during the siege.",
+          "effects": [
+            { "type": "add_alliance", "amount": 1 },
+            { "type": "set_flag", "flag": "flag_dusthaven_supplies_only" }
+          ],
+          "next_scene": "mq23_dusthaven_supplies"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq23_dusthaven_accept",
+      "trigger": "choice_result",
+      "lines": [
+        {
+          "speaker": "dusthaven_leader",
+          "text": "That's all we needed to hear. Our people and supplies will be in Coppervale before the first frost.",
+          "portrait": "relieved"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq23_dusthaven_supplies",
+      "trigger": "choice_result",
+      "lines": [
+        {
+          "speaker": "dusthaven_leader",
+          "text": "Honest, at least. We'll send the supplies but our volunteers will stay home. We can't risk orphaning our children on a maybe.",
+          "portrait": "disappointed"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq23_ironridge",
+      "trigger": "location_enter",
+      "conditions": { "objective_id": "obj_visit_ironridge" },
+      "lines": [
+        {
+          "speaker": "ironridge_leader",
+          "text": "Ironridge has miners, not soldiers. But we know tunnels, explosives, and structural engineering. Give us a role in your defense plan, and we'll send a sapper team.",
+          "portrait": "gruff"
+        },
+        {
+          "speaker": "ironridge_leader",
+          "text": "Our condition: after the siege, we want access to the Mountain Bunker. The mineral deposits in that region would sustain Ironridge for decades.",
+          "portrait": "shrewd"
+        }
+      ],
+      "choices": [
+        {
+          "text": "The bunker's been cleared. It's yours to mine. Coppervale only needed the technology inside.",
+          "effects": [
+            { "type": "add_alliance", "amount": 2 },
+            { "type": "set_flag", "flag": "flag_ironridge_reinforcements" }
+          ],
+          "next_scene": "mq23_ironridge_accept"
+        },
+        {
+          "text": "Mining rights are a big ask. I'll grant access to the upper levels, but the research wing stays sealed.",
+          "effects": [
+            { "type": "add_alliance", "amount": 1 },
+            { "type": "set_flag", "flag": "flag_ironridge_reinforcements_partial" }
+          ],
+          "next_scene": "mq23_ironridge_partial"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq23_ironridge_accept",
+      "trigger": "choice_result",
+      "lines": [
+        {
+          "speaker": "ironridge_leader",
+          "text": "Ha! Fair deal. You'll have our best sappers — they can set traps that'd make a Rust Wolf think twice about breathing.",
+          "portrait": "grinning"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq23_ironridge_partial",
+      "trigger": "choice_result",
+      "lines": [
+        {
+          "speaker": "ironridge_leader",
+          "text": "Upper levels only? That's... something. We'll send a smaller team. Five sappers instead of twelve.",
+          "portrait": "calculating"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq23_complete",
+      "trigger": "quest_complete",
+      "location": "rm_int_town_hall",
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "Alliance status confirmed. I've tallied the commitments based on your negotiations.",
+          "portrait": "professional"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "Whatever we've got, we work with it. I'll integrate the allied forces into our defense plan. The siege won't catch us unprepared.",
+          "portrait": "determined"
+        },
+        {
+          "speaker": "dejin",
+          "text": "Jack, the alliance strength directly affects our defensive capability. Every fighter, every supply crate, every sapper counts. You've done well.",
+          "portrait": "encouraging"
+        }
+      ],
+      "effects": [
+        { "type": "set_flag", "flag": "flag_alliance_forged" }
+      ]
+    }
+  ]
+}

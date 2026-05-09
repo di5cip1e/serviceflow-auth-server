@@ -1,0 +1,78 @@
+{
+  "_meta": {
+    "description": "Heart event #4 for npc_kaydee: The Past",
+    "version": "1.0",
+    "objective": "#33/#34"
+  },
+  "event_id": "heart_event_kaydee_04",
+  "npc_id": "npc_kaydee",
+  "heart_level_required": 6,
+  "location": "rm_int_rusty_gear",
+  "time_range": {
+    "start": 22,
+    "end": 23
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_kaydee_event_4_complete",
+  "heart_bonus": 50,
+  "title": "The Past",
+  "lines": [
+    {
+      "speaker": "npc_kaydee",
+      "text": "Jack. Sit. I need to tell you something.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "I wasn't always this... put together. Shocking, I know.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "I came from a rougher town. East of here. Near the Scorchlands.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "I learned to be sharp because soft got you hurt.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "Someone I trusted... used my softness against me.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "So I stopped being soft. Built the Gear. Built the attitude.",
+      "portrait": "determined"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "I'm sorry that happened to you.",
+          "flag": "kaydee_past_empathy"
+        },
+        {
+          "text": "Their loss. Coppervale's gain.",
+          "flag": "kaydee_past_forward"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "Don't pity me. I don't do pity. I do strength.",
+      "portrait": "determined"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "But... thank you. For listening without trying to fix it.",
+      "portrait": "thoughtful"
+    }
+  ]
+}

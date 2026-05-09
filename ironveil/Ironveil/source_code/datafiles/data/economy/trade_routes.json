@@ -1,0 +1,82 @@
+{
+  "_meta": {
+    "description": "Trade route definitions. Unlocked via quests, enable new shop inventory and automaton trade runs.",
+    "version": "1.0",
+    "objective": "#37 Economy & Trade System"
+  },
+
+  "route_greenreach": {
+    "route_id": "route_greenreach",
+    "display_name": "Greenreach Trade Road",
+    "description": "Overland trade route to the agricultural town of Greenreach. Provides exotic food and fabrics.",
+    "destination": "Greenreach",
+    "unlock_quest": "MQ-08",
+    "round_trip_days": 2,
+    "base_profit": 50,
+    "danger_level": "LOW",
+    "vehicle_required": "CARGO_HAULER",
+    "possible_goods": [
+      { "item_id": "item_exotic_spice", "chance": 0.6, "quantity_min": 1, "quantity_max": 3 },
+      { "item_id": "item_fine_fabric", "chance": 0.5, "quantity_min": 1, "quantity_max": 2 },
+      { "item_id": "item_preserved_food", "chance": 0.8, "quantity_min": 3, "quantity_max": 8 },
+      { "item_id": "item_seed_rare", "chance": 0.2, "quantity_min": 1, "quantity_max": 1 }
+    ]
+  },
+
+  "route_beacon_north": {
+    "route_id": "route_beacon_north",
+    "display_name": "Northern Beacon Route",
+    "description": "Trade route to the northern Beacon Town. Provides precision components and advanced materials.",
+    "destination": "Beacon Town North",
+    "unlock_quest": "MQ-12",
+    "round_trip_days": 3,
+    "base_profit": 80,
+    "danger_level": "MODERATE",
+    "vehicle_required": "CARGO_HAULER",
+    "possible_goods": [
+      { "item_id": "item_precision_gears", "chance": 0.7, "quantity_min": 2, "quantity_max": 5 },
+      { "item_id": "item_reinforced_frame", "chance": 0.3, "quantity_min": 1, "quantity_max": 1 },
+      { "item_id": "item_aether_cell_small", "chance": 0.5, "quantity_min": 1, "quantity_max": 2 },
+      { "item_id": "item_ai_module_improved", "chance": 0.15, "quantity_min": 1, "quantity_max": 1 }
+    ]
+  },
+
+  "route_scorchlands": {
+    "route_id": "route_scorchlands",
+    "display_name": "Scorchlands Supply Run",
+    "description": "Dangerous route through the wastelands. High risk, high reward — rare metals and Aetheric materials.",
+    "destination": "Scorchlands Outpost",
+    "unlock_quest": "MQ-18",
+    "round_trip_days": 4,
+    "base_profit": 120,
+    "danger_level": "HIGH",
+    "vehicle_required": "CARGO_ZEPPELIN",
+    "possible_goods": [
+      { "item_id": "item_titanium_scrap", "chance": 0.7, "quantity_min": 2, "quantity_max": 4 },
+      { "item_id": "item_aetheric_ore", "chance": 0.6, "quantity_min": 2, "quantity_max": 5 },
+      { "item_id": "item_aether_cell_medium", "chance": 0.3, "quantity_min": 1, "quantity_max": 1 },
+      { "item_id": "item_armor_plating_advanced", "chance": 0.2, "quantity_min": 1, "quantity_max": 1 },
+      { "item_id": "item_weapon_mount_mk2", "chance": 0.25, "quantity_min": 1, "quantity_max": 1 }
+    ]
+  },
+
+  "route_spire_wastes": {
+    "route_id": "route_spire_wastes",
+    "display_name": "Spire Wastes Expedition Route",
+    "description": "The longest and most dangerous route. Accesses Old World salvage from the ruins of Solara.",
+    "destination": "Spire Wastes Base Camp",
+    "unlock_quest": "MQ-22",
+    "round_trip_days": 5,
+    "base_profit": 200,
+    "danger_level": "VERY_HIGH",
+    "vehicle_required": "CARGO_ZEPPELIN",
+    "possible_goods": [
+      { "item_id": "item_old_world_plating", "chance": 0.4, "quantity_min": 1, "quantity_max": 2 },
+      { "item_id": "item_old_world_frame", "chance": 0.2, "quantity_min": 1, "quantity_max": 1 },
+      { "item_id": "item_aether_cell_large", "chance": 0.3, "quantity_min": 1, "quantity_max": 1 },
+      { "item_id": "item_ai_module_advanced", "chance": 0.15, "quantity_min": 1, "quantity_max": 1 },
+      { "item_id": "item_titanium_frame", "chance": 0.1, "quantity_min": 1, "quantity_max": 1 },
+      { "item_id": "item_aetheric_ore", "chance": 0.7, "quantity_min": 3, "quantity_max": 6 }
+    ]
+  }
+}

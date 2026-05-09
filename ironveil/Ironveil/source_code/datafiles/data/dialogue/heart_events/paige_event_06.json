@@ -1,0 +1,123 @@
+{
+  "_meta": {
+    "description": "Heart event #6 for npc_paige: The Ring and the Box",
+    "version": "1.0",
+    "objective": "#33/#34"
+  },
+  "event_id": "heart_event_paige_06",
+  "npc_id": "npc_paige",
+  "heart_level_required": 8,
+  "location": "rm_int_archive",
+  "time_range": {
+    "start": 20,
+    "end": 23
+  },
+  "story_flag_required": "npc_paige_event_5_complete",
+  "requires_item": "item_promise_locket",
+  "story_flag_set": "npc_paige_event_6_complete",
+  "heart_bonus": 100,
+  "title": "The Ring and the Box",
+  "lines": [
+    {
+      "speaker": "narrator",
+      "text": "[The Archive at night. After Paige told Jack about Wren]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "I haven't spoken his name out loud in two years. It felt... strange.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "Like opening a door I'd sealed shut.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "I've spent five years preserving other people's memories.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "But somewhere along the way, I forgot that I'm not a museum.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "I'm a person. And a person is supposed to... live.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "Wren would be so angry with me. He'd say...",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "'Paige, you ridiculous woman, the books aren't going anywhere. Go LIVE.'",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "narrator",
+      "text": "[She reaches up and unclasps the chain. Holds the ring in her palm]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "I'm not discarding this. I'm honoring it. By doing what he'd want.",
+      "portrait": "determined"
+    },
+    {
+      "speaker": "narrator",
+      "text": "[She places the ring in a small archival box. Closes the lid gently]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "There. Safe. Preserved. Like everything in this Archive.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "Jack. I'm not good at this. I've read a thousand love stories.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "I still don't know how to write my own.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "But I'd like to try. With you.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "I wouldn't have you any other way.",
+          "flag": "paige_confess_accept"
+        },
+        {
+          "text": "I've been waiting for you to be ready.",
+          "flag": "paige_confess_patient"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "Well then. Shall we start a new chapter?",
+      "portrait": "happy"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "Wren, if you're listening \u2014 he's a good one.",
+      "portrait": "happy"
+    }
+  ]
+}

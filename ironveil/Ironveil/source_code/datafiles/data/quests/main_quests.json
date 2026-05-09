@@ -1,0 +1,1407 @@
+{
+  "_meta": {
+    "description": "Main quest chain (MQ-01 through MQ-27). 27 quests spanning Years 1-3.",
+    "version": "1.0",
+    "objective": "#41 Full Quest System"
+  },
+  "quests": [
+    {
+      "quest_id": "mq_01",
+      "name": "A New Beginning",
+      "type": "MAIN",
+      "giver": "npc_linden",
+      "description": "Follow Mayor Linden's tour of Coppervale. Visit the workshop. Meet the townsfolk.",
+      "trigger": {
+        "type": "game_start",
+        "prerequisite_quests": [],
+        "story_flags": [],
+        "year": 1,
+        "season": "SPRING",
+        "day": 1
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "visit",
+          "target": "rm_int_workshop",
+          "description": "Visit the workshop",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "talk",
+          "target": "npc_spark",
+          "description": "Meet Spark",
+          "target_count": 1
+        },
+        {
+          "id": "obj_3",
+          "type": "talk",
+          "target": "npc_maren",
+          "description": "Meet Old Maren",
+          "target_count": 1
+        },
+        {
+          "id": "obj_4",
+          "type": "talk",
+          "target": "npc_harrow",
+          "description": "Meet Captain Harrow",
+          "target_count": 1
+        },
+        {
+          "id": "obj_5",
+          "type": "craft",
+          "target": "station_workbench",
+          "description": "Repair the Workbench",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 100,
+        "items": [
+          {
+            "item_id": "item_basic_toolkit",
+            "quantity": 1
+          }
+        ],
+        "hearts": {
+          "all_npcs": 0
+        },
+        "reputation": 10,
+        "story_flags_set": [
+          "mq_01_complete"
+        ],
+        "unlocks": [
+          "workshop_access"
+        ]
+      }
+    },
+    {
+      "quest_id": "mq_02",
+      "name": "The Flickering",
+      "type": "MAIN",
+      "giver": "dejin",
+      "description": "Discover the damaged AI Core terminal. Gather materials and perform the initial repair.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_01"
+        ],
+        "story_flags": [],
+        "year": 1,
+        "season": "SPRING",
+        "day": 5
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "visit",
+          "target": "rm_int_workshop",
+          "description": "Explore the workshop basement",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "gather",
+          "target": "item_copper_wire",
+          "description": "Gather 5 Copper Wire",
+          "target_count": 5
+        },
+        {
+          "id": "obj_3",
+          "type": "gather",
+          "target": "item_scrap_iron",
+          "description": "Gather 3 Scrap Iron",
+          "target_count": 3
+        },
+        {
+          "id": "obj_4",
+          "type": "craft",
+          "target": "ai_core_repair_1",
+          "description": "Perform initial AI Core repair",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 150,
+        "items": [],
+        "hearts": {},
+        "reputation": 15,
+        "story_flags_set": [
+          "mq_02_complete",
+          "dejin_first_activation"
+        ],
+        "unlocks": [
+          "ai_core_access"
+        ]
+      }
+    },
+    {
+      "quest_id": "mq_03",
+      "name": "Proving Your Worth",
+      "type": "MAIN",
+      "giver": "npc_linden",
+      "description": "Build your first Worker Bot automaton and demonstrate it to the town.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_02"
+        ],
+        "story_flags": []
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "build",
+          "target": "bp_worker_bot",
+          "description": "Build a Worker Bot",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "visit",
+          "target": "rm_town_coppervale",
+          "description": "Demonstrate at town square",
+          "target_count": 1
+        },
+        {
+          "id": "obj_3",
+          "type": "talk",
+          "target": "npc_spark",
+          "description": "Talk to Spark about what she needs",
+          "target_count": 1
+        },
+        {
+          "id": "obj_4",
+          "type": "talk",
+          "target": "npc_harrow",
+          "description": "Talk to Harrow about defenses",
+          "target_count": 1
+        },
+        {
+          "id": "obj_5",
+          "type": "talk",
+          "target": "npc_linden",
+          "description": "Talk to Linden about the town",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 200,
+        "items": [],
+        "hearts": {
+          "all_npcs": 3
+        },
+        "reputation": 20,
+        "story_flags_set": [
+          "mq_03_complete"
+        ],
+        "blueprints": [
+          "bp_worker_bot"
+        ]
+      }
+    },
+    {
+      "quest_id": "mq_04",
+      "name": "Spark Festival Showcase",
+      "type": "MAIN",
+      "giver": "npc_linden",
+      "description": "Attend the Spark Festival and present your Worker Bot at the machine showcase.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_03"
+        ],
+        "story_flags": [],
+        "year": 1,
+        "season": "SPRING",
+        "day": 15
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "visit",
+          "target": "rm_town_coppervale",
+          "description": "Attend the Spark Festival",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "craft",
+          "target": "festival_showcase",
+          "description": "Present a machine at the showcase",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 300,
+        "items": [
+          {
+            "item_id": "item_spark_firework",
+            "quantity": 3
+          }
+        ],
+        "hearts": {
+          "all_npcs": 2
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "mq_04_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "mq_05",
+      "name": "First Watch",
+      "type": "MAIN",
+      "giver": "npc_harrow",
+      "description": "Build turrets and palisades to prepare Coppervale's eastern defenses.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_04"
+        ],
+        "story_flags": [],
+        "year": 1,
+        "season": "SPRING",
+        "day": 20
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "build",
+          "target": "bp_ballistic_turret",
+          "description": "Build 2 Ballistic Turrets",
+          "target_count": 2
+        },
+        {
+          "id": "obj_2",
+          "type": "build",
+          "target": "bp_wooden_palisade",
+          "description": "Build 4 Wooden Palisade sections",
+          "target_count": 4
+        },
+        {
+          "id": "obj_3",
+          "type": "talk",
+          "target": "npc_harrow",
+          "description": "Report to Captain Harrow",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 250,
+        "items": [],
+        "hearts": {
+          "npc_harrow": 3
+        },
+        "reputation": 20,
+        "story_flags_set": [
+          "mq_05_complete"
+        ],
+        "blueprints": [
+          "bp_ballistic_turret_mk1"
+        ]
+      }
+    },
+    {
+      "quest_id": "mq_06",
+      "name": "Baptism by Fire",
+      "type": "MAIN",
+      "giver": "npc_harrow",
+      "description": "Survive the first raid on Coppervale. Freelance Raiders attack from the east.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_05"
+        ],
+        "story_flags": [],
+        "year": 1,
+        "season": "SPRING",
+        "day": 27
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "survive_raid",
+          "target": "tutorial_raid",
+          "description": "Survive the tutorial raid",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 400,
+        "items": [
+          {
+            "item_id": "item_scrap_iron",
+            "quantity": 10
+          }
+        ],
+        "hearts": {
+          "npc_harrow": 3,
+          "all_npcs": 2
+        },
+        "reputation": 30,
+        "story_flags_set": [
+          "mq_06_complete",
+          "first_raid_survived"
+        ]
+      }
+    },
+    {
+      "quest_id": "mq_07",
+      "name": "Awakening",
+      "type": "MAIN",
+      "giver": "dejin",
+      "description": "Gather materials for DEJIN's second repair stage. Answer the AI's questions about the world.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_06"
+        ],
+        "story_flags": [],
+        "year": 1,
+        "season": "SUMMER"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "gather",
+          "target": "item_brass_gears",
+          "description": "Gather 3 Brass Gears",
+          "target_count": 3
+        },
+        {
+          "id": "obj_2",
+          "type": "gather",
+          "target": "item_copper_wire",
+          "description": "Gather 5 Copper Wire",
+          "target_count": 5
+        },
+        {
+          "id": "obj_3",
+          "type": "gather",
+          "target": "item_lens_array",
+          "description": "Gather 2 Lens Arrays",
+          "target_count": 2
+        },
+        {
+          "id": "obj_4",
+          "type": "craft",
+          "target": "ai_core_repair_2",
+          "description": "Complete second AI Core repair",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 300,
+        "items": [],
+        "hearts": {},
+        "reputation": 20,
+        "story_flags_set": [
+          "mq_07_complete",
+          "dejin_repaired_basic"
+        ],
+        "unlocks": [
+          "automaton_management"
+        ]
+      }
+    },
+    {
+      "quest_id": "mq_08",
+      "name": "Into the Hollow",
+      "type": "MAIN",
+      "giver": "dejin",
+      "description": "Explore The Hollow. Find the Aetheric Ore deposit and recover a data core.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_07"
+        ],
+        "story_flags": []
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "explore",
+          "target": "rm_explore_the_hollow",
+          "description": "Enter The Hollow",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "reach",
+          "target": "hollow_crater_floor",
+          "description": "Reach the crater floor",
+          "target_count": 1
+        },
+        {
+          "id": "obj_3",
+          "type": "gather",
+          "target": "item_aetheric_ore",
+          "description": "Discover Aetheric Ore deposit",
+          "target_count": 5
+        },
+        {
+          "id": "obj_4",
+          "type": "gather",
+          "target": "item_data_core_standard",
+          "description": "Recover the data core",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 500,
+        "items": [
+          {
+            "item_id": "item_aetheric_ore",
+            "quantity": 5
+          }
+        ],
+        "hearts": {},
+        "reputation": 25,
+        "story_flags_set": [
+          "mq_08_complete"
+        ],
+        "blueprints": [
+          "bp_aether_refinery"
+        ]
+      }
+    },
+    {
+      "quest_id": "mq_09",
+      "name": "Blue Fire",
+      "type": "MAIN",
+      "giver": "dejin",
+      "description": "Build the Aether Refinery and process your first Aetheric Ore into fuel cells.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_08"
+        ],
+        "story_flags": []
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "build",
+          "target": "bp_aether_refinery",
+          "description": "Build the Aether Refinery",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "craft",
+          "target": "item_aether_cell",
+          "description": "Process Aetheric Ore into cells",
+          "target_count": 3
+        }
+      ],
+      "rewards": {
+        "cogs": 400,
+        "items": [
+          {
+            "item_id": "item_aether_cell",
+            "quantity": 3
+          }
+        ],
+        "hearts": {},
+        "reputation": 20,
+        "story_flags_set": [
+          "mq_09_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "mq_10",
+      "name": "Old Bones, New Secrets",
+      "type": "MAIN",
+      "giver": "npc_maren",
+      "description": "Visit Old Maren and learn about her husband's search for data cores.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_09"
+        ],
+        "story_flags": [],
+        "year": 1,
+        "season": "SUMMER",
+        "day": 29
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "visit",
+          "target": "rm_int_npc_maren",
+          "description": "Visit Old Maren at home",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "talk",
+          "target": "npc_maren",
+          "description": "Listen to Maren's story",
+          "target_count": 1
+        },
+        {
+          "id": "obj_3",
+          "type": "have_item",
+          "target": "item_scanner",
+          "description": "Use Scanner to decode journal",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 200,
+        "items": [
+          {
+            "item_id": "item_marens_journal",
+            "quantity": 1
+          }
+        ],
+        "hearts": {
+          "npc_maren": 5
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "mq_10_complete",
+          "journal_acquired"
+        ]
+      }
+    },
+    {
+      "quest_id": "mq_11",
+      "name": "Iron in the Wind",
+      "type": "MAIN",
+      "giver": "npc_harrow",
+      "description": "Explore the Old Mill Ruins. Recover a military data core. Investigate Iron Marauder presence.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_10"
+        ],
+        "story_flags": [],
+        "year": 1,
+        "season": "AUTUMN"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "explore",
+          "target": "rm_explore_old_mill",
+          "description": "Explore Old Mill Ruins",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "gather",
+          "target": "item_data_core_military",
+          "description": "Recover military data core",
+          "target_count": 1
+        },
+        {
+          "id": "obj_3",
+          "type": "inspect",
+          "target": "marauder_insignia",
+          "description": "Investigate Iron Marauder insignia",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 600,
+        "items": [],
+        "hearts": {
+          "npc_harrow": 3
+        },
+        "reputation": 30,
+        "story_flags_set": [
+          "mq_11_complete",
+          "iron_marauders_discovered"
+        ],
+        "blueprints": [
+          "bp_combat_mech_mk1"
+        ]
+      }
+    },
+    {
+      "quest_id": "mq_12",
+      "name": "Steel Giant",
+      "type": "MAIN",
+      "giver": "dejin",
+      "description": "Build the Combat Mech Mk I. Test it and deploy at the Eastern Gate.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_11"
+        ],
+        "story_flags": [],
+        "engineering_level": 3
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "build",
+          "target": "bp_combat_mech_mk1",
+          "description": "Build Combat Mech Mk I",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "craft",
+          "target": "testing_platform_test",
+          "description": "Test on Testing Platform",
+          "target_count": 1
+        },
+        {
+          "id": "obj_3",
+          "type": "visit",
+          "target": "rm_town_coppervale",
+          "description": "Deploy at Eastern Gate",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 800,
+        "items": [],
+        "hearts": {
+          "all_npcs": 3
+        },
+        "reputation": 40,
+        "story_flags_set": [
+          "mq_12_complete",
+          "first_mech_deployed"
+        ]
+      }
+    },
+    {
+      "quest_id": "mq_13",
+      "name": "The Council's Eye",
+      "type": "MAIN",
+      "giver": "npc_linden",
+      "description": "Prepare Coppervale for Janis Beaumont's inspection.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_12"
+        ],
+        "story_flags": [],
+        "year": 1,
+        "season": "AUTUMN",
+        "day": 20
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "achieve_rating",
+          "target": "defense_rating",
+          "description": "Achieve defense rating 30+",
+          "target_count": 30
+        },
+        {
+          "id": "obj_2",
+          "type": "talk",
+          "target": "npc_janis",
+          "description": "Give Janis a tour",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 500,
+        "items": [],
+        "hearts": {
+          "npc_janis": 3
+        },
+        "reputation": 35,
+        "story_flags_set": [
+          "mq_13_complete",
+          "janis_arrived",
+          "council_recognition"
+        ]
+      }
+    },
+    {
+      "quest_id": "mq_14",
+      "name": "Autumn Storm",
+      "type": "MAIN",
+      "giver": "npc_harrow",
+      "description": "Survive a two-front coordinated raid: Rust Wolves and Iron Marauder scouts.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_13"
+        ],
+        "story_flags": [],
+        "year": 1,
+        "season": "AUTUMN",
+        "day": 27
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "survive_raid",
+          "target": "autumn_storm_raid",
+          "description": "Survive the coordinated assault",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 1000,
+        "items": [],
+        "hearts": {
+          "all_npcs": 5
+        },
+        "reputation": 50,
+        "story_flags_set": [
+          "mq_14_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "mq_15",
+      "name": "What's in a Name",
+      "type": "MAIN",
+      "giver": "dejin",
+      "description": "Present the data core containing DEJIN's designation. Witness DEJIN's first memory.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_14"
+        ],
+        "story_flags": [],
+        "year": 1,
+        "season": "WINTER",
+        "day": 7
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "have_item",
+          "target": "item_data_core_dejin_name",
+          "description": "Present DEJIN's designation core",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "talk",
+          "target": "dejin",
+          "description": "Witness DEJIN's memory",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 0,
+        "items": [],
+        "hearts": {},
+        "reputation": 20,
+        "story_flags_set": [
+          "mq_15_complete",
+          "dejin_name_discovered"
+        ],
+        "unlocks": [
+          "blueprint_research",
+          "full_automaton_control"
+        ]
+      }
+    },
+    {
+      "quest_id": "mq_16",
+      "name": "The Marshal's Offer",
+      "type": "MAIN",
+      "giver": "iron_marauder_lieutenant",
+      "description": "An Iron Marauder lieutenant delivers The Marshal's offer. Choose your response.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_15"
+        ],
+        "story_flags": [],
+        "year": 1,
+        "season": "WINTER",
+        "day": 20
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "talk",
+          "target": "marauder_lieutenant",
+          "description": "Listen to the Marshal's offer",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "choice",
+          "target": "marshal_offer_response",
+          "description": "Choose your response",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 0,
+        "items": [],
+        "hearts": {
+          "npc_harrow": 5
+        },
+        "reputation": 30,
+        "story_flags_set": [
+          "mq_16_complete",
+          "marshal_offer_refused"
+        ]
+      }
+    },
+    {
+      "quest_id": "mq_17",
+      "name": "Year's End",
+      "type": "MAIN",
+      "giver": "npc_linden",
+      "description": "Attend the Year-End assessment. Hear DEJIN's threat analysis.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_16"
+        ],
+        "story_flags": [],
+        "year": 1,
+        "season": "WINTER",
+        "day": 28
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "visit",
+          "target": "rm_int_town_hall",
+          "description": "Attend town assessment",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "talk",
+          "target": "dejin",
+          "description": "Hear DEJIN's analysis",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 500,
+        "items": [],
+        "hearts": {},
+        "reputation": 25,
+        "story_flags_set": [
+          "mq_17_complete",
+          "year_1_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "mq_18",
+      "name": "Distant Shores",
+      "type": "MAIN",
+      "giver": "npc_linden",
+      "description": "Lead an expedition to the Shattered Coast. Establish the first trade route.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_17"
+        ],
+        "story_flags": [],
+        "year": 2,
+        "season": "SPRING"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "explore",
+          "target": "rm_explore_coastal_wreck",
+          "description": "Explore the Coastal Wreck",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "gather",
+          "target": "item_navigation_tech",
+          "description": "Recover navigation technology",
+          "target_count": 1
+        },
+        {
+          "id": "obj_3",
+          "type": "craft",
+          "target": "trade_route_establish",
+          "description": "Establish first trade route",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 1000,
+        "items": [],
+        "hearts": {},
+        "reputation": 40,
+        "story_flags_set": [
+          "mq_18_complete",
+          "trade_system_unlocked"
+        ],
+        "blueprints": [
+          "bp_cargo_zeppelin"
+        ],
+        "unlocks": [
+          "trade_routes"
+        ]
+      }
+    },
+    {
+      "quest_id": "mq_19",
+      "name": "The Beacon Summit",
+      "type": "MAIN",
+      "giver": "npc_janis",
+      "description": "Host the Beacon Council summit. Present defense technology and forge alliances.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_18"
+        ],
+        "story_flags": [],
+        "year": 2,
+        "season": "SPRING",
+        "day": 18
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "visit",
+          "target": "rm_int_town_hall",
+          "description": "Attend the summit",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "talk",
+          "target": "npc_janis",
+          "description": "Present defense proposal",
+          "target_count": 1
+        },
+        {
+          "id": "obj_3",
+          "type": "choice",
+          "target": "alliance_negotiation",
+          "description": "Navigate political dialogue",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 800,
+        "items": [],
+        "hearts": {
+          "npc_janis": 4
+        },
+        "reputation": 50,
+        "story_flags_set": [
+          "mq_19_complete",
+          "alliance_system_unlocked"
+        ]
+      }
+    },
+    {
+      "quest_id": "mq_20",
+      "name": "The Bunker",
+      "type": "MAIN",
+      "giver": "dejin",
+      "description": "Breach the Mountain Bunker. Discover DEJIN's sibling AI and advanced blueprints.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_19"
+        ],
+        "story_flags": [],
+        "year": 2,
+        "season": "SUMMER"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "explore",
+          "target": "rm_explore_mountain_bunker",
+          "description": "Breach the Mountain Bunker",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "gather",
+          "target": "item_data_core_classified",
+          "description": "Recover classified data core",
+          "target_count": 1
+        },
+        {
+          "id": "obj_3",
+          "type": "talk",
+          "target": "dejin",
+          "description": "Witness DEJIN's reaction to sibling",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 1500,
+        "items": [],
+        "hearts": {},
+        "reputation": 40,
+        "story_flags_set": [
+          "mq_20_complete",
+          "dejin_sibling_discovered"
+        ],
+        "blueprints": [
+          "bp_combat_mech_mk2"
+        ]
+      }
+    },
+    {
+      "quest_id": "mq_21",
+      "name": "Broken Trust",
+      "type": "MAIN",
+      "giver": "npc_harrow",
+      "description": "Investigate a spy in Coppervale. Confront Wes. Choose forgiveness or banishment.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_20"
+        ],
+        "story_flags": [],
+        "year": 2,
+        "season": "SUMMER",
+        "day": 22
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "talk",
+          "target": "npc_harrow",
+          "description": "Receive Harrow's briefing",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "inspect",
+          "target": "spy_evidence",
+          "description": "Gather evidence",
+          "target_count": 3
+        },
+        {
+          "id": "obj_3",
+          "type": "talk",
+          "target": "npc_wes",
+          "description": "Confront Wes",
+          "target_count": 1
+        },
+        {
+          "id": "obj_4",
+          "type": "choice",
+          "target": "wes_judgment",
+          "description": "Choose: forgive or banish",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 600,
+        "items": [],
+        "hearts": {},
+        "reputation": 30,
+        "story_flags_set": [
+          "mq_21_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "mq_22",
+      "name": "The Marshal Speaks",
+      "type": "MAIN",
+      "giver": "dejin",
+      "description": "Listen to The Marshal's broadcast. Begin siege preparations.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_21"
+        ],
+        "story_flags": [],
+        "year": 2,
+        "season": "SUMMER",
+        "day": 29
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "talk",
+          "target": "dejin",
+          "description": "Listen to the broadcast",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "achieve_rating",
+          "target": "defense_rating",
+          "description": "Achieve defense rating 60+",
+          "target_count": 60
+        }
+      ],
+      "rewards": {
+        "cogs": 500,
+        "items": [
+          {
+            "item_id": "item_marshal_broadcast",
+            "quantity": 1
+          }
+        ],
+        "hearts": {},
+        "reputation": 20,
+        "story_flags_set": [
+          "mq_22_complete",
+          "siege_preparations"
+        ]
+      }
+    },
+    {
+      "quest_id": "mq_23",
+      "name": "Alliance Forged",
+      "type": "MAIN",
+      "giver": "npc_janis",
+      "description": "Travel to allied Beacon Towns. Complete quests to secure military commitments.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_22"
+        ],
+        "story_flags": [],
+        "year": 2,
+        "season": "AUTUMN"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "visit",
+          "target": "beacon_town_1",
+          "description": "Visit first allied town",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "build",
+          "target": "allied_defenses_1",
+          "description": "Build defenses for allies",
+          "target_count": 1
+        },
+        {
+          "id": "obj_3",
+          "type": "visit",
+          "target": "beacon_town_2",
+          "description": "Visit second allied town",
+          "target_count": 1
+        },
+        {
+          "id": "obj_4",
+          "type": "build",
+          "target": "allied_defenses_2",
+          "description": "Repair allied infrastructure",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 2000,
+        "items": [],
+        "hearts": {},
+        "reputation": 60,
+        "story_flags_set": [
+          "mq_23_complete",
+          "alliances_secured"
+        ],
+        "unlocks": [
+          "allied_reinforcements"
+        ]
+      }
+    },
+    {
+      "quest_id": "mq_24",
+      "name": "The Siege of Coppervale",
+      "type": "MAIN",
+      "giver": "npc_harrow",
+      "description": "Survive the Marshal's siege. Defend against waves. Confront the Marshal in mech combat.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_23"
+        ],
+        "story_flags": [],
+        "year": 2,
+        "season": "WINTER",
+        "day": 7
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "survive_raid",
+          "target": "siege_wave_1",
+          "description": "Survive eastern assault",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "survive_raid",
+          "target": "siege_wave_2",
+          "description": "Survive southern flanking",
+          "target_count": 1
+        },
+        {
+          "id": "obj_3",
+          "type": "survive_raid",
+          "target": "siege_wave_3",
+          "description": "Survive night assault",
+          "target_count": 1
+        },
+        {
+          "id": "obj_4",
+          "type": "kill",
+          "target": "the_marshal_mech",
+          "description": "Defeat the Marshal's mech",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 3000,
+        "items": [],
+        "hearts": {
+          "all_npcs": 10
+        },
+        "reputation": 100,
+        "story_flags_set": [
+          "mq_24_complete",
+          "siege_survived",
+          "marshal_retreated"
+        ]
+      }
+    },
+    {
+      "quest_id": "mq_25",
+      "name": "The Grand Expedition",
+      "type": "MAIN",
+      "giver": "dejin",
+      "description": "Lead a full expedition to the Spire Wastes. Ascend the Grand Spire.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_24"
+        ],
+        "story_flags": [],
+        "year": 3,
+        "season": "SPRING",
+        "day": 12
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "explore",
+          "target": "rm_explore_spire_wastes",
+          "description": "Explore the Spire Wastes",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "reach",
+          "target": "grand_spire_lower",
+          "description": "Enter the Grand Spire",
+          "target_count": 1
+        },
+        {
+          "id": "obj_3",
+          "type": "gather",
+          "target": "item_data_core_classified",
+          "description": "Recover classified cores",
+          "target_count": 3
+        }
+      ],
+      "rewards": {
+        "cogs": 5000,
+        "items": [],
+        "hearts": {},
+        "reputation": 80,
+        "story_flags_set": [
+          "mq_25_complete",
+          "dejin_full_restoration"
+        ],
+        "blueprints": [
+          "bp_battle_zeppelin",
+          "bp_siege_breaker"
+        ]
+      }
+    },
+    {
+      "quest_id": "mq_26",
+      "name": "The Apex",
+      "type": "MAIN",
+      "giver": "dejin",
+      "description": "Reach the Grand Spire's Apex. Confront the Marshal. Destroy the DEJIN network.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_25"
+        ],
+        "story_flags": [],
+        "year": 3,
+        "season": "AUTUMN"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "reach",
+          "target": "grand_spire_apex",
+          "description": "Reach the Apex",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "kill",
+          "target": "the_marshal_final",
+          "description": "Final confrontation with the Marshal",
+          "target_count": 1
+        },
+        {
+          "id": "obj_3",
+          "type": "choice",
+          "target": "network_fate",
+          "description": "Choose the network's fate",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 0,
+        "items": [],
+        "hearts": {},
+        "reputation": 100,
+        "story_flags_set": [
+          "mq_26_complete",
+          "marshal_defeated",
+          "network_destroyed"
+        ]
+      }
+    },
+    {
+      "quest_id": "mq_27",
+      "name": "Coming Home",
+      "type": "MAIN",
+      "giver": "npc_linden",
+      "description": "Return to Coppervale. Attend the hero's welcome. Witness DEJIN's public address.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_26"
+        ],
+        "story_flags": [],
+        "year": 3,
+        "season": "WINTER"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "visit",
+          "target": "rm_town_coppervale",
+          "description": "Return to Coppervale",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "talk",
+          "target": "npc_linden",
+          "description": "Attend the Grand Assessment",
+          "target_count": 1
+        },
+        {
+          "id": "obj_3",
+          "type": "talk",
+          "target": "dejin",
+          "description": "Witness DEJIN's public address",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 3000,
+        "items": [],
+        "hearts": {},
+        "reputation": 50,
+        "story_flags_set": [
+          "mq_27_complete",
+          "main_story_complete"
+        ],
+        "unlocks": [
+          "post_story_sandbox"
+        ]
+      }
+    }
+  ]
+}

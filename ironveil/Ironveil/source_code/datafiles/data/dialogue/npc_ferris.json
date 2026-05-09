@@ -1,0 +1,372 @@
+{
+  "_meta": {
+    "description": "Dialogue data for Ferris (Parts Dealer). Seasonal/daily pool + heart milestones.",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue"
+  },
+  "entries": [
+    {
+      "entry_id": "npc_ferris_sd_001",
+      "npc_id": "npc_ferris",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_ferris",
+          "text": "Jack! JACK! I found something extraordinary in the latest shipment!",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_ferris_sd_002",
+      "npc_id": "npc_ferris",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_ferris",
+          "text": "Spring cleaning? Never. Every component stays. You never know what you'll need.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_ferris_sd_003",
+      "npc_id": "npc_ferris",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_ferris",
+          "text": "The heat is warping my precision gauges. Or I'm imagining it. Both are concerning.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_ferris_sd_004",
+      "npc_id": "npc_ferris",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_ferris",
+          "text": "A trader brought in a pre-war actuator. MINT condition. I may have cried a little.",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_ferris_sd_005",
+      "npc_id": "npc_ferris",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_ferris",
+          "text": "Autumn means rust season. I've been oiling everything. EVERYTHING.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_ferris_sd_006",
+      "npc_id": "npc_ferris",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_ferris",
+          "text": "Cold metal contracts. My measurements are off by 0.002mm. Unacceptable.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_ferris_sd_007",
+      "npc_id": "npc_ferris",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_ferris",
+          "text": "This component predates the Sundering by at least thirty years. Feel the machining!",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_ferris_sd_008",
+      "npc_id": "npc_ferris",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_ferris",
+          "text": "People say I'm eccentric. I prefer 'detail-oriented to an extreme degree.'",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_ferris_sd_009",
+      "npc_id": "npc_ferris",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_ferris",
+          "text": "Spark keeps borrowing my micro-calipers. She NEVER recalibrates them.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_ferris_sd_010",
+      "npc_id": "npc_ferris",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_ferris",
+          "text": "I catalogued 847 unique components last month. A personal record.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_ferris_sd_011",
+      "npc_id": "npc_ferris",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_ferris",
+          "text": "Some call it junk. I call it the building blocks of civilization.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_ferris_sd_012",
+      "npc_id": "npc_ferris",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_ferris",
+          "text": "Your machines use MY components. That makes us partners, in a way.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_ferris_hm_02",
+      "npc_id": "npc_ferris",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 2
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_ferris_milestone_2",
+      "lines": [
+        {
+          "speaker": "npc_ferris",
+          "text": "I saved this component for you. Pre-war precision. You'll appreciate it.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_ferris_hm_04",
+      "npc_id": "npc_ferris",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 4
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_ferris_milestone_4",
+      "lines": [
+        {
+          "speaker": "npc_ferris",
+          "text": "Your understanding of mechanical systems is... acceptable. High praise from me.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_ferris_hm_06",
+      "npc_id": "npc_ferris",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 6
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_ferris_milestone_6",
+      "lines": [
+        {
+          "speaker": "npc_ferris",
+          "text": "I found something in my collection. I think it belongs in YOUR workshop.",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_ferris_hm_08",
+      "npc_id": "npc_ferris",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 8
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_ferris_milestone_8",
+      "lines": [
+        {
+          "speaker": "npc_ferris",
+          "text": "You and I, Jack — we speak the language of machines. That's a bond.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_ferris_hm_10",
+      "npc_id": "npc_ferris",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 10
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_ferris_milestone_10",
+      "lines": [
+        {
+          "speaker": "npc_ferris",
+          "text": "My finest piece. A micro-actuator from the Golden Age. It's yours. Build something worthy.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_ferris_y2_spring_018",
+      "npc_id": "npc_ferris",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_ferris",
+          "text": "Signal's strong to Thornwall. Crystal clear on the 40-meter band. We're connected.",
+          "portrait": "proud"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_ferris_y2_autumn_019",
+      "npc_id": "npc_ferris",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_ferris",
+          "text": "I can jam their comms during the siege. It'll burn out the transmitter, but it's worth it.",
+          "portrait": "intense"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_ferris_y3_autumn_020",
+      "npc_id": "npc_ferris",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_ferris",
+          "text": "Eleven settlements on the radio network now. The world is getting smaller. In the best way.",
+          "portrait": "satisfied"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_ferris_y4_spring_021",
+      "npc_id": "npc_ferris",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 4,
+        "hearts_gte": 0,
+        "story_flag": "flag_main_story_complete"
+      },
+      "priority": 11,
+      "lines": [
+        {
+          "speaker": "npc_ferris",
+          "text": "Working on a relay tower design. If we can boost the signal, we could reach settlements across the mountains.",
+          "portrait": "ambitious"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "_meta": {
+    "description": "Heart event #3 for npc_michelle: The Crisis",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue / #34 Romance System"
+  },
+  "event_id": "heart_event_michelle_03",
+  "npc_id": "npc_michelle",
+  "heart_level_required": 5,
+  "location": "rm_int_clinic",
+  "time_range": {
+    "start": 10,
+    "end": 18
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_michelle_event_3_complete",
+  "heart_bonus": 50,
+  "title": "The Crisis",
+  "lines": [
+    {
+      "speaker": "narrator",
+      "text": "[Raid aftermath. A badly wounded militia member is brought in]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "Step back. NOW. This wound needs pressure.",
+      "portrait": "determined"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "I need clean water. Bandages. And light. MORE light.",
+      "portrait": "determined"
+    },
+    {
+      "speaker": "narrator",
+      "text": "[Michelle works with calm, precise efficiency for an hour]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "...He's stable. He'll make it.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "narrator",
+      "text": "[Her hands are shaking. She hasn't noticed]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "That was incredible, Michelle.",
+          "flag": "michelle_crisis_praise"
+        },
+        {
+          "text": "You saved his life.",
+          "flag": "michelle_crisis_direct"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "I... did I? Anyone could have \u2014 no. I did. I did that.",
+      "portrait": "surprised"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "Why am I shaking? It's over. He's fine. Why can't I stop shaking?",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "...Can you stay? Just for a minute? I just need...",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "Thank you, Jack. For seeing me. Not just the helper. Me.",
+      "portrait": "thoughtful"
+    }
+  ]
+}

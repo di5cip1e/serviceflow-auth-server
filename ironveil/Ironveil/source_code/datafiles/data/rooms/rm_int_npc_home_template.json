@@ -1,0 +1,35 @@
+{
+  "room_id": "rm_int_npc_home_template",
+  "display_name": "NPC Home (Template)",
+  "width_tiles": 8,
+  "height_tiles": 6,
+  "tile_size": 16,
+  "parent_room": "rm_town_coppervale",
+  "note": "Template used for generic NPC homes. Copy and customize per NPC.",
+
+  "exits": [
+    { "id": "door_main", "tiles": { "x1": 3, "y1": 5, "x2": 4, "y2": 5 }, "target_room": "rm_town_coppervale", "target_pos": [0, 0], "collision_type": 3, "note": "target_pos set per NPC instance" }
+  ],
+
+  "stations": [],
+
+  "furniture": [
+    { "id": "bed",            "name": "Bed",            "pos": [2, 2], "size": [2, 1], "type": "DECORATIVE", "collision_type": 1 },
+    { "id": "table_chair",    "name": "Table & Chair",  "pos": [6, 2], "size": [1, 1], "type": "DECORATIVE", "collision_type": 1 },
+    { "id": "personal_area",  "name": "Personal Area",  "pos": [2, 4], "size": [2, 1], "type": "DECORATIVE", "collision_type": 1, "note": "Customized per NPC with personal items" }
+  ],
+
+  "npc_positions": [
+    { "npc_id": "TEMPLATE_NPC_ID", "pos": [4, 3], "note": "Default position, customized per NPC" }
+  ],
+
+  "customizations": {
+    "npc_spark":    { "personal_items": ["mechanical_parts", "blueprints_on_wall"], "interior_room": "rm_int_npc_spark" },
+    "npc_maren":    { "personal_items": ["old_photographs", "herb_collection"],     "interior_room": "rm_int_npc_maren" },
+    "npc_harrow":   { "personal_items": ["weapon_rack", "tactical_map"],            "interior_room": "rm_int_npc_harrow" },
+    "npc_linden":   { "personal_items": ["mayoral_desk", "town_records"],           "interior_room": "rm_int_npc_linden" },
+    "npc_michelle": { "personal_items": ["medical_supplies", "research_notes"],     "interior_room": "rm_int_npc_michelle" },
+    "npc_kiery":    { "personal_items": ["trade_ledger", "exotic_goods_display"],   "interior_room": "rm_int_npc_kiery" },
+    "npc_wes":      { "personal_items": ["mail_bags", "route_maps"],               "interior_room": "rm_int_npc_wes" }
+  }
+}

@@ -1,0 +1,992 @@
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <base href="https://cellcog.ai/app/69cc44ed13a5eb8fece9968f/">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelForge — Design System</title>
+    <link rel="icon" type="image/png" href="https://cellcog.ai/app/69cc44ed13a5eb8fece9968f/branding/logo/pixelforge_icon_transparent.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&amp;family=Cinzel+Decorative:wght@400;700;900&amp;family=Raleway:wght@300;400;500;600;700&amp;family=Fira+Code:wght@400;500&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cellcog.ai/app/69cc44ed13a5eb8fece9968f/css/styles.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-inner">
+            <a href="https://cellcog.ai/app/69cc44ed13a5eb8fece9968f/#" class="navbar-brand">
+                <img src="https://cellcog.ai/app/69cc44ed13a5eb8fece9968f/branding/logo/pixelforge_icon_transparent.png" alt="PixelForge">
+                <span>PixelForge</span>
+            </a>
+            <ul class="navbar-links" id="navLinks">
+                <li><a href="https://cellcog.ai/app/69cc44ed13a5eb8fece9968f/#brand" class="">Brand</a></li>
+                <li><a href="https://cellcog.ai/app/69cc44ed13a5eb8fece9968f/#colors" class="">Colors</a></li>
+                <li><a href="https://cellcog.ai/app/69cc44ed13a5eb8fece9968f/#typography" class="">Type</a></li>
+                <li><a href="https://cellcog.ai/app/69cc44ed13a5eb8fece9968f/#buttons" class="active">Buttons</a></li>
+                <li><a href="https://cellcog.ai/app/69cc44ed13a5eb8fece9968f/#cards">Cards</a></li>
+                <li><a href="https://cellcog.ai/app/69cc44ed13a5eb8fece9968f/#forms">Forms</a></li>
+                <li><a href="https://cellcog.ai/app/69cc44ed13a5eb8fece9968f/#components">Components</a></li>
+                <li><a href="https://cellcog.ai/app/69cc44ed13a5eb8fece9968f/#decorative">Decorative</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="brand">
+        <div class="hero-bg" style="background-image: url('branding/banners/hero_banner_bg.png');"></div>
+        <div class="hero-content">
+            <h1>PixelForge</h1>
+            <p class="hero-sub">The Definitive Design System — Forged in Ancient Fire, Built for the Future.<br>Every element, every pixel, every interaction — crafted with the precision of timeless machinery.</p>
+            <div class="hero-actions">
+                <a href="https://cellcog.ai/app/69cc44ed13a5eb8fece9968f/#buttons" class="btn btn-accent btn-lg">Explore Components</a>
+                <a href="https://cellcog.ai/app/69cc44ed13a5eb8fece9968f/#colors" class="btn btn-ghost btn-lg">View Palette</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Logo Showcase -->
+    <section class="section section-dark" id="logoShowcase">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Mark of the Forge</h2>
+                <div class="divider-simple"></div>
+                <p>A symbol of creation, power, and ancient machinery — the PixelForge identity.</p>
+            </div>
+            <div class="logo-showcase" id="logoShowcaseGrid">
+        <div class="logo-item">
+            <img src="https://cellcog.ai/app/69cc44ed13a5eb8fece9968f/branding/logo/pixelforge_logo_primary.png" alt="PixelForge Primary Logo" style="max-height: 280px;">
+            <div class="logo-label">Primary Logo</div>
+        </div>
+        <div class="logo-item">
+            <div style="background: var(--dark-800); border-radius: var(--radius-lg); padding: 32px; display: inline-block; border: 1px solid var(--dark-600);">
+                <img src="https://cellcog.ai/app/69cc44ed13a5eb8fece9968f/branding/logo/pixelforge_icon_transparent.png" alt="PixelForge Icon" style="max-height: 160px;">
+            </div>
+            <div class="logo-label" style="margin-top: 16px;">Icon Mark (Transparent)</div>
+        </div>
+    </div>
+        </div>
+    </section>
+
+    <!-- Color System -->
+    <section class="section" id="colors">
+        <div class="container">
+            <div class="section-header">
+                <h2>Color Palette</h2>
+                <div class="divider-simple"></div>
+                <p>Burnished copper, blood red, and teal — the three fires of the forge.</p>
+            </div>
+            <div id="colorPalettes">
+            <div class="mb-2xl">
+                <h3 style="margin-bottom: 4px;">Burnished Copper — Primary</h3>
+                <p class="text-muted" style="font-size: 0.9rem; margin-bottom: 16px;">The heart of the forge. Warm, rich, authoritative. Used for headings, primary actions, and brand identity.</p>
+                <div class="swatch-grid">
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #FDF5ED;"></div>
+                            <div class="swatch-info">
+                                <strong>50</strong>
+                                #FDF5ED
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #F5E0C8;"></div>
+                            <div class="swatch-info">
+                                <strong>100</strong>
+                                #F5E0C8
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #E8C49A;"></div>
+                            <div class="swatch-info">
+                                <strong>200</strong>
+                                #E8C49A
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #D4A06A;"></div>
+                            <div class="swatch-info">
+                                <strong>300</strong>
+                                #D4A06A
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #C4844A;"></div>
+                            <div class="swatch-info">
+                                <strong>400</strong>
+                                #C4844A
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #B87333;"></div>
+                            <div class="swatch-info">
+                                <strong>500 ★</strong>
+                                #B87333
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #A0612A;"></div>
+                            <div class="swatch-info">
+                                <strong>600</strong>
+                                #A0612A
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #7D4B21;"></div>
+                            <div class="swatch-info">
+                                <strong>700</strong>
+                                #7D4B21
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #5C3718;"></div>
+                            <div class="swatch-info">
+                                <strong>800</strong>
+                                #5C3718
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #3D240F;"></div>
+                            <div class="swatch-info">
+                                <strong>900</strong>
+                                #3D240F
+                            </div>
+                        </div>
+                    
+                </div>
+            </div>
+        
+            <div class="mb-2xl">
+                <h3 style="margin-bottom: 4px;">Blood Red — Secondary</h3>
+                <p class="text-muted" style="font-size: 0.9rem; margin-bottom: 16px;">The molten core. Power, intensity, danger. Used for destructive actions, warnings, and forge heat.</p>
+                <div class="swatch-grid">
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #FDE8E8;"></div>
+                            <div class="swatch-info">
+                                <strong>50</strong>
+                                #FDE8E8
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #F5B3B3;"></div>
+                            <div class="swatch-info">
+                                <strong>100</strong>
+                                #F5B3B3
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #E06666;"></div>
+                            <div class="swatch-info">
+                                <strong>200</strong>
+                                #E06666
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #C93C3C;"></div>
+                            <div class="swatch-info">
+                                <strong>300</strong>
+                                #C93C3C
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #A82020;"></div>
+                            <div class="swatch-info">
+                                <strong>400</strong>
+                                #A82020
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #8B0000;"></div>
+                            <div class="swatch-info">
+                                <strong>500 ★</strong>
+                                #8B0000
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #720000;"></div>
+                            <div class="swatch-info">
+                                <strong>600</strong>
+                                #720000
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #580000;"></div>
+                            <div class="swatch-info">
+                                <strong>700</strong>
+                                #580000
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #3E0000;"></div>
+                            <div class="swatch-info">
+                                <strong>800</strong>
+                                #3E0000
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #260000;"></div>
+                            <div class="swatch-info">
+                                <strong>900</strong>
+                                #260000
+                            </div>
+                        </div>
+                    
+                </div>
+            </div>
+        
+            <div class="mb-2xl">
+                <h3 style="margin-bottom: 4px;">Teal / Turquoise — Accent</h3>
+                <p class="text-muted" style="font-size: 0.9rem; margin-bottom: 16px;">The spark of creation. Used sparingly for maximum impact — CTAs, active states, key highlights.</p>
+                <div class="swatch-grid">
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #E6FFFE;"></div>
+                            <div class="swatch-info">
+                                <strong>50</strong>
+                                #E6FFFE
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #B3FFF9;"></div>
+                            <div class="swatch-info">
+                                <strong>100</strong>
+                                #B3FFF9
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #66F5EC;"></div>
+                            <div class="swatch-info">
+                                <strong>200</strong>
+                                #66F5EC
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #33E8DB;"></div>
+                            <div class="swatch-info">
+                                <strong>300</strong>
+                                #33E8DB
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #00DBC8;"></div>
+                            <div class="swatch-info">
+                                <strong>400</strong>
+                                #00DBC8
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #00CED1;"></div>
+                            <div class="swatch-info">
+                                <strong>500 ★</strong>
+                                #00CED1
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #00AEB0;"></div>
+                            <div class="swatch-info">
+                                <strong>600</strong>
+                                #00AEB0
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #008B8D;"></div>
+                            <div class="swatch-info">
+                                <strong>700</strong>
+                                #008B8D
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #006668;"></div>
+                            <div class="swatch-info">
+                                <strong>800</strong>
+                                #006668
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #004547;"></div>
+                            <div class="swatch-info">
+                                <strong>900</strong>
+                                #004547
+                            </div>
+                        </div>
+                    
+                </div>
+            </div>
+        
+            <div class="mb-2xl">
+                <h3 style="margin-bottom: 4px;">Forge Darks — Neutrals</h3>
+                <p class="text-muted" style="font-size: 0.9rem; margin-bottom: 16px;">The dark steel of the workshop. Backgrounds, text, and structural elements.</p>
+                <div class="swatch-grid">
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #0D0B0A;"></div>
+                            <div class="swatch-info">
+                                <strong>950</strong>
+                                #0D0B0A
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #1A1412;"></div>
+                            <div class="swatch-info">
+                                <strong>900</strong>
+                                #1A1412
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #252019;"></div>
+                            <div class="swatch-info">
+                                <strong>800</strong>
+                                #252019
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #342B22;"></div>
+                            <div class="swatch-info">
+                                <strong>700</strong>
+                                #342B22
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #44382C;"></div>
+                            <div class="swatch-info">
+                                <strong>600</strong>
+                                #44382C
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #5A4A3A;"></div>
+                            <div class="swatch-info">
+                                <strong>500</strong>
+                                #5A4A3A
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #756150;"></div>
+                            <div class="swatch-info">
+                                <strong>400</strong>
+                                #756150
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #9A8472;"></div>
+                            <div class="swatch-info">
+                                <strong>300</strong>
+                                #9A8472
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #BFA898;"></div>
+                            <div class="swatch-info">
+                                <strong>200</strong>
+                                #BFA898
+                            </div>
+                        </div>
+                    
+                        <div class="swatch">
+                            <div class="swatch-color" style="background: #DDD0C4;"></div>
+                            <div class="swatch-info">
+                                <strong>100</strong>
+                                #DDD0C4
+                            </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Typography -->
+    <section class="section section-dark" id="typography">
+        <div class="container">
+            <div class="section-header">
+                <h2>Typography</h2>
+                <div class="divider-simple"></div>
+                <p>Ancient inscriptions meet modern clarity — a type system forged for legibility and grandeur.</p>
+            </div>
+            <div id="typographyShowcase">
+        <div class="grid-2" style="gap: 48px;">
+            <div>
+                <h4 class="mb-lg" style="color: var(--teal-500);">Font Families</h4>
+
+                <div class="card mb-lg" style="padding: 24px;">
+                    <div class="badge badge-copper mb-sm">Display</div>
+                    <p style="font-family: 'Cinzel Decorative', serif; font-size: 1.8rem; color: var(--copper-500); margin: 8px 0 4px; letter-spacing: 0.06em;">Cinzel Decorative</p>
+                    <p class="text-muted" style="font-size: 0.85rem; margin: 0;">Used for hero headings, brand name, and display text. Ancient inscription feel.</p>
+                </div>
+
+                <div class="card mb-lg" style="padding: 24px;">
+                    <div class="badge badge-copper mb-sm">Headings</div>
+                    <p style="font-family: 'Cinzel', serif; font-size: 1.6rem; color: var(--copper-400); margin: 8px 0 4px; letter-spacing: 0.04em;">Cinzel — Elegant Authority</p>
+                    <p class="text-muted" style="font-size: 0.85rem; margin: 0;">Section headings, card titles, navigation links. Classical Roman proportions.</p>
+                </div>
+
+                <div class="card mb-lg" style="padding: 24px;">
+                    <div class="badge badge-dark mb-sm">Body</div>
+                    <p style="font-family: 'Raleway', sans-serif; font-size: 1.1rem; color: var(--text-primary); margin: 8px 0 4px;">Raleway — Clean Modern Clarity</p>
+                    <p class="text-muted" style="font-size: 0.85rem; margin: 0;">Body text, descriptions, and UI labels. Geometric sans-serif for readability.</p>
+                </div>
+
+                <div class="card" style="padding: 24px;">
+                    <div class="badge badge-teal mb-sm">Code</div>
+                    <p style="font-family: 'Fira Code', monospace; font-size: 1rem; color: var(--teal-300); margin: 8px 0 4px;">Fira Code — Technical Precision</p>
+                    <p class="text-muted" style="font-size: 0.85rem; margin: 0;">Code blocks, technical values, and mono-spaced content.</p>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="mb-lg" style="color: var(--teal-500);">Type Scale</h4>
+
+                <div class="mb-lg">
+                    <p class="display-heading" style="font-size: 2.5rem; margin-bottom: 8px;">Display Heading</p>
+                    <p class="text-muted" style="font-size: 0.8rem;">3.5rem / Cinzel Decorative / Copper Gradient / 0.06em tracking</p>
+                </div>
+
+                <div class="mb-lg">
+                    <h1 style="margin-bottom: 8px;">Heading Level 1</h1>
+                    <p class="text-muted" style="font-size: 0.8rem;">3rem / Cinzel / 700 / 0.04em tracking</p>
+                </div>
+
+                <div class="mb-lg">
+                    <h2 style="margin-bottom: 8px;">Heading Level 2</h2>
+                    <p class="text-muted" style="font-size: 0.8rem;">2.25rem / Cinzel / 600 / 0.03em tracking</p>
+                </div>
+
+                <div class="mb-lg">
+                    <h3 style="margin-bottom: 8px;">Heading Level 3</h3>
+                    <p class="text-muted" style="font-size: 0.8rem;">1.75rem / Cinzel / 600</p>
+                </div>
+
+                <div class="mb-lg">
+                    <h4 style="margin-bottom: 8px;">Heading Level 4</h4>
+                    <p class="text-muted" style="font-size: 0.8rem;">1.25rem / Cinzel / 600</p>
+                </div>
+
+                <div class="mb-lg">
+                    <p style="font-size: 1rem; color: var(--text-primary); margin-bottom: 8px;">Body Text — The ancient gears turn endlessly, each one a testament to the precision of forgotten engineers. In the heart of the forge, copper meets creation.</p>
+                    <p class="text-muted" style="font-size: 0.8rem;">1rem / Raleway / 400 / 1.6 line-height</p>
+                </div>
+
+                <div>
+                    <p style="font-family: 'Fira Code', monospace; font-size: 0.85rem; color: var(--teal-300); margin-bottom: 8px;">const forge = new PixelForge({ theme: 'ancient' });</p>
+                    <p class="text-muted" style="font-size: 0.8rem;">0.85rem / Fira Code / 400 / Teal-300</p>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </section>
+
+    <!-- Buttons -->
+    <section class="section" id="buttons">
+        <div class="container">
+            <div class="section-header">
+                <h2>Buttons</h2>
+                <div class="divider-simple"></div>
+                <p>Every button a lever in the great machine — copper for action, blood for power, teal for attention.</p>
+            </div>
+            <div id="buttonShowcase">
+        <!-- Primary Variants -->
+        <h3 class="mb-md">Primary Variants</h3>
+        <p class="text-muted mb-lg" style="font-size: 0.9rem;">Copper for standard actions, Blood for power/destructive, Teal for attention-grabbing CTAs.</p>
+
+        <div class="flex-row flex-wrap mb-2xl">
+            <button class="btn btn-primary"><i class="fas fa-hammer"></i> Forge Now</button>
+            <button class="btn btn-secondary"><i class="fas fa-fire"></i> Ignite</button>
+            <button class="btn btn-accent"><i class="fas fa-bolt"></i> Create</button>
+            <button class="btn btn-ghost"><i class="fas fa-cog"></i> Configure</button>
+            <button class="btn btn-ghost-teal"><i class="fas fa-eye"></i> Preview</button>
+        </div>
+
+        <!-- Sizes -->
+        <h3 class="mb-md">Size Variants</h3>
+        <div class="flex-row flex-wrap mb-2xl" style="align-items: flex-end;">
+            <button class="btn btn-primary btn-sm">Small</button>
+            <button class="btn btn-primary">Default</button>
+            <button class="btn btn-primary btn-lg">Large</button>
+            <button class="btn btn-primary btn-xl">Extra Large</button>
+        </div>
+
+        <!-- States -->
+        <h3 class="mb-md">States</h3>
+        <div class="flex-row flex-wrap mb-2xl">
+            <button class="btn btn-primary">Normal</button>
+            <button class="btn btn-primary" style="box-shadow: 0 0 30px rgba(184,115,51,0.5); transform: translateY(-2px);">Hover</button>
+            <button class="btn btn-primary disabled" disabled="">Disabled</button>
+        </div>
+
+        <div class="flex-row flex-wrap mb-2xl">
+            <button class="btn btn-accent">Normal</button>
+            <button class="btn btn-accent" style="box-shadow: 0 0 30px rgba(0,206,209,0.6); transform: translateY(-2px);">Hover</button>
+            <button class="btn btn-accent disabled" disabled="">Disabled</button>
+        </div>
+
+        <!-- Icon Buttons -->
+        <h3 class="mb-md">With Icons</h3>
+        <div class="flex-row flex-wrap mb-2xl">
+            <button class="btn btn-primary"><i class="fas fa-download"></i> Download</button>
+            <button class="btn btn-secondary"><i class="fas fa-trash-alt"></i> Delete</button>
+            <button class="btn btn-accent"><i class="fas fa-rocket"></i> Deploy</button>
+            <button class="btn btn-ghost"><i class="fas fa-share-alt"></i> Share</button>
+        </div>
+
+        <!-- Button Group -->
+        <h3 class="mb-md">Glowing Accent (Use Sparingly)</h3>
+        <div class="flex-row flex-wrap">
+            <button class="btn btn-accent btn-lg glow-teal"><i class="fas fa-magic"></i> Start Creating</button>
+            <button class="btn btn-primary btn-lg glow-copper"><i class="fas fa-hammer"></i> Open Forge</button>
+        </div>
+    </div>
+        </div>
+    </section>
+
+    <!-- Cards -->
+    <section class="section section-dark" id="cards">
+        <div class="container">
+            <div class="section-header">
+                <h2>Cards</h2>
+                <div class="divider-simple"></div>
+                <p>Panels of hammered steel — each one a window into the forge's creations.</p>
+            </div>
+            <div id="cardShowcase">
+        <!-- Standard Cards -->
+        <h3 class="mb-md">Standard Cards</h3>
+        <p class="text-muted mb-lg" style="font-size: 0.9rem;">Hover to see the forge glow — copper top-bar reveals on interaction.</p>
+        <div class="grid-3 mb-2xl">
+            <div class="card">
+                <div class="card-title"><i class="fas fa-gamepad" style="color: var(--teal-500); margin-right: 8px;"></i>Game Concept Generator</div>
+                <p class="card-text">Transform a simple idea into a complete game concept document with mechanics, narrative hooks, and market positioning.</p>
+                <div style="margin-top: 16px;">
+                    <span class="badge badge-copper">AI-Powered</span>
+                    <span class="badge badge-dark">Templates</span>
+                </div>
+            </div>
+            <div class="card card-teal">
+                <div class="card-title"><i class="fas fa-image" style="color: var(--teal-500); margin-right: 8px;"></i>Sprite Generator</div>
+                <p class="card-text">Create stunning 2D sprites and animated sprite sheets from text descriptions. Supports pixel art, hand-drawn, and vector styles.</p>
+                <div style="margin-top: 16px;">
+                    <span class="badge badge-teal">Popular</span>
+                    <span class="badge badge-dark">8-Frame Anim</span>
+                </div>
+            </div>
+            <div class="card card-blood">
+                <div class="card-title"><i class="fas fa-cube" style="color: var(--blood-300); margin-right: 8px;"></i>3D Model Generator</div>
+                <p class="card-text">Text or image to 3D models in GLB format. PBR materials, customizable polygon count, and rigging support.</p>
+                <div style="margin-top: 16px;">
+                    <span class="badge badge-blood">Pro</span>
+                    <span class="badge badge-dark">GLB Export</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feature Cards -->
+        <h3 class="mb-md">Feature Cards</h3>
+        <div class="grid-4 mb-2xl">
+            <div class="card card-feature">
+                <div class="card-icon"><i class="fas fa-bolt"></i></div>
+                <div class="card-title" style="font-size: 1rem;">Lightning Fast</div>
+                <p class="card-text" style="font-size: 0.85rem;">Generate assets in under 5 seconds. No waiting, just forging.</p>
+            </div>
+            <div class="card card-feature">
+                <div class="card-icon" style="color: var(--copper-500);"><i class="fas fa-shield-alt"></i></div>
+                <div class="card-title" style="font-size: 1rem;">Enterprise Ready</div>
+                <p class="card-text" style="font-size: 0.85rem;">SOC 2 compliant. Your creations are secure in the vault.</p>
+            </div>
+            <div class="card card-feature">
+                <div class="card-icon" style="color: var(--blood-300);"><i class="fas fa-users"></i></div>
+                <div class="card-title" style="font-size: 1rem;">Team Forge</div>
+                <p class="card-text" style="font-size: 0.85rem;">Real-time collaboration. Multiple smiths, one masterwork.</p>
+            </div>
+            <div class="card card-feature">
+                <div class="card-icon"><i class="fas fa-code"></i></div>
+                <div class="card-title" style="font-size: 1rem;">API Access</div>
+                <p class="card-text" style="font-size: 0.85rem;">Full REST API. Integrate the forge into your pipeline.</p>
+            </div>
+        </div>
+
+        <!-- Pricing Cards -->
+        <h3 class="mb-md">Pricing Cards</h3>
+        <div class="grid-3">
+            <div class="pricing-card">
+                <div class="plan-name">Indie</div>
+                <div class="price">$19<span>/mo</span></div>
+                <ul class="plan-features">
+                    <li>Generous daily credits</li>
+                    <li>All core tools</li>
+                    <li>No watermarks</li>
+                    <li>5 active projects</li>
+                    <li>Community support</li>
+                </ul>
+                <button class="btn btn-ghost" style="width: 100%;">Get Started</button>
+            </div>
+            <div class="pricing-card featured">
+                <div class="plan-name">Pro</div>
+                <div class="price">$49<span>/mo</span></div>
+                <ul class="plan-features">
+                    <li>Unlimited core generation</li>
+                    <li>Priority processing</li>
+                    <li>API access</li>
+                    <li>Advanced tools</li>
+                    <li>Priority support</li>
+                </ul>
+                <button class="btn btn-accent" style="width: 100%;">Start Forging</button>
+            </div>
+            <div class="pricing-card">
+                <div class="plan-name">Studio</div>
+                <div class="price">$299<span>/mo</span></div>
+                <ul class="plan-features">
+                    <li>Everything in Pro</li>
+                    <li>5 team seats</li>
+                    <li>Dedicated support</li>
+                    <li>Custom integrations</li>
+                    <li>SLA guarantee</li>
+                </ul>
+                <button class="btn btn-primary" style="width: 100%;">Contact Sales</button>
+            </div>
+        </div>
+    </div>
+        </div>
+    </section>
+
+    <!-- Forms -->
+    <section class="section" id="forms">
+        <div class="container">
+            <div class="section-header">
+                <h2>Form Elements</h2>
+                <div class="divider-simple"></div>
+                <p>Precision instruments — every input calibrated for the creator's intent.</p>
+            </div>
+            <div id="formShowcase">
+        <div class="grid-2" style="gap: 48px;">
+            <div>
+                <h3 class="mb-lg">Input Fields</h3>
+
+                <div class="form-group">
+                    <label class="form-label">Project Name</label>
+                    <input type="text" class="form-input" placeholder="Enter your project name...">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" placeholder="forge@pixelforge.ai">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Select Dashboard</label>
+                    <select class="form-select">
+                        <option>Game Development</option>
+                        <option>Application Development</option>
+                        <option>Both Dashboards</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Describe Your Creation</label>
+                    <textarea class="form-textarea" placeholder="A side-scrolling platformer set in an ancient mechanical world where gears and steam power everything..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Skill Level</label>
+                    <div class="flex-col" style="gap: 8px;">
+                        <label class="form-check">
+                            <input type="radio" name="skill" checked=""> Beginner — Guide me through everything
+                        </label>
+                        <label class="form-check">
+                            <input type="radio" name="skill"> Intermediate — I know the basics
+                        </label>
+                        <label class="form-check">
+                            <input type="radio" name="skill"> Advanced — Give me full control
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="mb-lg">Interactive Controls</h3>
+
+                <div class="card mb-lg" style="padding: 24px;">
+                    <h4 class="mb-md" style="font-size: 1rem;">Toggle Switches</h4>
+                    <div class="flex-col" style="gap: 16px;">
+                        <div class="flex-row">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked="">
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <span style="color: var(--text-secondary); font-size: 0.9rem;">Prompt Enhancement</span>
+                        </div>
+                        <div class="flex-row">
+                            <label class="toggle-switch">
+                                <input type="checkbox">
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <span style="color: var(--text-secondary); font-size: 0.9rem;">Show Enhanced Prompt</span>
+                        </div>
+                        <div class="flex-row">
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked="">
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <span style="color: var(--text-secondary); font-size: 0.9rem;">Auto-Save Projects</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-lg" style="padding: 24px;">
+                    <h4 class="mb-md" style="font-size: 1rem;">Checkboxes</h4>
+                    <div class="flex-col" style="gap: 8px;">
+                        <label class="form-check">
+                            <input type="checkbox" checked=""> Export as PNG
+                        </label>
+                        <label class="form-check">
+                            <input type="checkbox" checked=""> Export as SVG
+                        </label>
+                        <label class="form-check">
+                            <input type="checkbox"> Export as GLB (3D)
+                        </label>
+                        <label class="form-check">
+                            <input type="checkbox"> Include source files
+                        </label>
+                    </div>
+                </div>
+
+                <h4 class="mb-md" style="font-size: 1rem;">Example Form Action</h4>
+                <div class="flex-row flex-wrap">
+                    <button class="btn btn-accent"><i class="fas fa-bolt"></i> Generate</button>
+                    <button class="btn btn-ghost">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </section>
+
+    <!-- Components -->
+    <section class="section section-dark" id="components">
+        <div class="container">
+            <div class="section-header">
+                <h2>Components</h2>
+                <div class="divider-simple"></div>
+                <p>The gears and pistons of the interface — badges, alerts, tables, tabs, and more.</p>
+            </div>
+            <div id="componentShowcase">
+        <!-- Badges -->
+        <h3 class="mb-md">Badges</h3>
+        <div class="flex-row flex-wrap mb-2xl">
+            <span class="badge badge-copper"><i class="fas fa-cog"></i> Copper</span>
+            <span class="badge badge-blood"><i class="fas fa-fire"></i> Blood</span>
+            <span class="badge badge-teal"><i class="fas fa-bolt"></i> Teal</span>
+            <span class="badge badge-dark"><i class="fas fa-tag"></i> Dark</span>
+            <span class="badge badge-copper">AI-Powered</span>
+            <span class="badge badge-teal">New</span>
+            <span class="badge badge-blood">Pro Only</span>
+            <span class="badge badge-dark">Beta</span>
+        </div>
+
+        <!-- Alerts -->
+        <h3 class="mb-md">Alerts &amp; Notifications</h3>
+        <div class="mb-2xl">
+            <div class="alert alert-copper mb-md">
+                <strong><i class="fas fa-info-circle"></i> Forge Update:</strong> Your sprite sheet has been generated successfully. 8 animation frames ready for export.
+            </div>
+            <div class="alert alert-blood mb-md">
+                <strong><i class="fas fa-exclamation-triangle"></i> Warning:</strong> Credit balance low. Upgrade to Pro for unlimited core generation.
+            </div>
+            <div class="alert alert-teal">
+                <strong><i class="fas fa-check-circle"></i> Success:</strong> Project deployed! Your prototype is now live and ready for testing.
+            </div>
+        </div>
+
+        <!-- Progress Bars -->
+        <h3 class="mb-md">Progress Bars</h3>
+        <div class="mb-2xl" style="max-width: 500px;">
+            <p class="text-muted mb-sm" style="font-size: 0.85rem;">Generation Progress — Copper</p>
+            <div class="progress-bar progress-copper mb-lg">
+                <div class="progress-bar-fill" style="width: 75%;"></div>
+            </div>
+            <p class="text-muted mb-sm" style="font-size: 0.85rem;">Upload Progress — Teal</p>
+            <div class="progress-bar progress-teal mb-lg">
+                <div class="progress-bar-fill" style="width: 45%;"></div>
+            </div>
+            <p class="text-muted mb-sm" style="font-size: 0.85rem;">Credit Usage — Blood</p>
+            <div class="progress-bar progress-blood">
+                <div class="progress-bar-fill" style="width: 90%;"></div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <h3 class="mb-md">Tabs</h3>
+        <div class="mb-2xl">
+            <div class="tabs">
+                <button class="tab-item active">Game Dev</button>
+                <button class="tab-item">App Dev</button>
+                <button class="tab-item">Shared Tools</button>
+                <button class="tab-item">Settings</button>
+            </div>
+            <div class="card" style="border-top: none; border-radius: 0 0 6px 6px; padding: 24px;">
+                <p class="card-text">Tab content area — the active panel displays contextual tools and content for the selected dashboard.</p>
+            </div>
+        </div>
+
+        <!-- Tooltips -->
+        <h3 class="mb-md">Tooltips</h3>
+        <div class="flex-row flex-wrap mb-2xl" style="padding-top: 40px;">
+            <div class="tooltip-wrap">
+                <button class="btn btn-primary btn-sm">Hover Me</button>
+                <span class="tooltip-text">Forge a new creation</span>
+            </div>
+            <div class="tooltip-wrap">
+                <button class="btn btn-ghost btn-sm">Settings</button>
+                <span class="tooltip-text">Configure forge parameters</span>
+            </div>
+            <div class="tooltip-wrap">
+                <span class="badge badge-teal" style="cursor: help;">Credits: 450</span>
+                <span class="tooltip-text">Daily credits remaining</span>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <h3 class="mb-md">Statistics</h3>
+        <div class="grid-4 mb-2xl">
+            <div class="stat">
+                <div class="stat-value">50K+</div>
+                <div class="stat-label">Creators</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">2.4M</div>
+                <div class="stat-label">Assets Forged</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">99.9%</div>
+                <div class="stat-label">Uptime</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">&lt;5s</div>
+                <div class="stat-label">Generation</div>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <h3 class="mb-md">Data Table</h3>
+        <div class="mb-2xl" style="overflow-x: auto;">
+            <table class="table-forge">
+                <thead>
+                    <tr>
+                        <th>Tool</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                        <th>Speed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="color: var(--copper-400); font-weight: 600;">Sprite Generator</td>
+                        <td>Game Dev</td>
+                        <td><span class="badge badge-teal">Active</span></td>
+                        <td>&lt;5s</td>
+                    </tr>
+                    <tr>
+                        <td style="color: var(--copper-400); font-weight: 600;">3D Model Generator</td>
+                        <td>Shared</td>
+                        <td><span class="badge badge-teal">Active</span></td>
+                        <td>&lt;60s</td>
+                    </tr>
+                    <tr>
+                        <td style="color: var(--copper-400); font-weight: 600;">Full-Stack Builder</td>
+                        <td>App Dev</td>
+                        <td><span class="badge badge-copper">Beta</span></td>
+                        <td>&lt;120s</td>
+                    </tr>
+                    <tr>
+                        <td style="color: var(--copper-400); font-weight: 600;">Sound Studio</td>
+                        <td>Shared</td>
+                        <td><span class="badge badge-blood">Coming Soon</span></td>
+                        <td>—</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Code Block -->
+        <h3 class="mb-md">Code Block</h3>
+        <div class="code-block">
+            <span class="comment">// Initialize PixelForge SDK</span><br>
+            <span class="keyword">import</span> { PixelForge } <span class="keyword">from</span> <span class="string">'@pixelforge/sdk'</span>;<br><br>
+            <span class="keyword">const</span> forge = <span class="keyword">new</span> PixelForge({<br>
+            &nbsp;&nbsp;apiKey: <span class="string">'pf_live_xxxx'</span>,<br>
+            &nbsp;&nbsp;dashboard: <span class="string">'game-dev'</span>,<br>
+            &nbsp;&nbsp;tier: <span class="string">'pro'</span><br>
+            });<br><br>
+            <span class="comment">// Generate a sprite sheet</span><br>
+            <span class="keyword">const</span> sprites = <span class="keyword">await</span> forge.generate({<br>
+            &nbsp;&nbsp;tool: <span class="string">'sprite-generator'</span>,<br>
+            &nbsp;&nbsp;prompt: <span class="string">'A steampunk robot with copper plating'</span>,<br>
+            &nbsp;&nbsp;frames: <span class="string">8</span>,<br>
+            &nbsp;&nbsp;style: <span class="string">'pixel-art'</span><br>
+            });
+        </div>
+    </div>
+        </div>
+    </section>
+
+    <!-- Decorative Elements -->
+    <section class="section" id="decorative">
+        <div class="container">
+            <div class="section-header">
+                <h2>Decorative Elements</h2>
+                <div class="divider-simple"></div>
+                <p>Ornamental metalwork — dividers, frames, and banners forged with care.</p>
+            </div>
+            <div id="decorativeShowcase">
+        <!-- Hero Banner -->
+        <h3 class="mb-md">Hero Banner</h3>
+        <p class="text-muted mb-lg" style="font-size: 0.9rem;">The forge workshop — atmospheric backdrop for hero sections and headers.</p>
+        <div class="mb-2xl deco-showcase">
+            <img src="https://cellcog.ai/app/69cc44ed13a5eb8fece9968f/branding/banners/hero_banner_bg.png" alt="Hero Banner Background" style="width: 100%;">
+        </div>
+
+        <!-- Section Background -->
+        <h3 class="mb-md">Section Background Texture</h3>
+        <p class="text-muted mb-lg" style="font-size: 0.9rem;">Hammered dark steel with embossed gears — subtle background for content sections.</p>
+        <div class="mb-2xl deco-showcase">
+            <img src="https://cellcog.ai/app/69cc44ed13a5eb8fece9968f/branding/banners/section_bg_texture.png" alt="Section Background Texture" style="width: 100%;">
+        </div>
+
+        <!-- Decorative Elements -->
+        <h3 class="mb-md">Ornamental Elements</h3>
+        <p class="text-muted mb-lg" style="font-size: 0.9rem;">Copper metalwork — dividers, frames, corner pieces, and shields for decorative accents.</p>
+        <div class="mb-2xl deco-showcase">
+            <img src="https://cellcog.ai/app/69cc44ed13a5eb8fece9968f/branding/elements/decorative_elements_sheet.png" alt="Dec

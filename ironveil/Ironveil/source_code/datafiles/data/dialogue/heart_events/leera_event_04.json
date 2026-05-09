@@ -1,0 +1,83 @@
+{
+  "_meta": {
+    "description": "Heart event #4 for npc_leera: The Fear",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue / #34 Romance System"
+  },
+  "event_id": "heart_event_leera_04",
+  "npc_id": "npc_leera",
+  "heart_level_required": 6,
+  "location": "rm_town_coppervale",
+  "time_range": {
+    "start": 19,
+    "end": 23
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_leera_event_4_complete",
+  "heart_bonus": 50,
+  "title": "The Fear",
+  "lines": [
+    {
+      "speaker": "narrator",
+      "text": "[Leera sits at The Overlook, unusually quiet]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "Oh. Hey, Jack. ...Pull up some grass.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "Can I ask you something weird?",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "What happens when there's nothing left to explore?",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "When every ruin is mapped. Every zone charted.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "What am I then? Just some girl who used to go places?",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "There's always more to discover. The world is bigger than we know.",
+          "flag": "leera_fear_hopeful"
+        },
+        {
+          "text": "Maybe exploring isn't who you are. It's how you love the world.",
+          "flag": "leera_fear_deep"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "...Huh. That's actually... really good.",
+      "portrait": "surprised"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "You're annoyingly wise sometimes, you know that?",
+      "portrait": "happy"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "Thanks for sitting with me. I don't usually... sit.",
+      "portrait": "embarrassed"
+    }
+  ]
+}

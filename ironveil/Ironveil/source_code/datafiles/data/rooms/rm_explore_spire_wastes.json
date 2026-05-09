@@ -1,0 +1,36 @@
+{
+  "room_id": "rm_explore_spire_wastes", "display_name": "Spire Wastes", "width_tiles": 50, "height_tiles": 60, "tile_size": 16, "parent_room": null, "zone_type": "EXPLORATION",
+  "sub_zones": {
+    "expedition_camp": { "name": "Expedition Camp", "bounds": { "x1": 15, "y1": 0, "x2": 34, "y2": 7 }, "description": "Established base camp at the edge of the ruins. Full expedition support.", "threat_level": "SAFE" },
+    "city_ruins_west": { "name": "City Ruins — West District", "bounds": { "x1": 0, "y1": 8, "x2": 24, "y2": 25 }, "description": "Shattered residential district. Overgrown plazas, metro tunnel entrances.", "threat_level": "HIGH" },
+    "city_ruins_east": { "name": "City Ruins — East District", "bounds": { "x1": 25, "y1": 8, "x2": 49, "y2": 25 }, "description": "Government and university quarter. Libraries, offices, research labs.", "threat_level": "HIGH" },
+    "city_ruins_central": { "name": "City Ruins — Central", "bounds": { "x1": 10, "y1": 26, "x2": 39, "y2": 40 }, "description": "Main thoroughfare leading to the Grand Spire. Heaviest enemy presence.", "threat_level": "HIGH" },
+    "grand_spire_lobby": { "name": "Grand Spire — Lobby", "bounds": { "x1": 15, "y1": 41, "x2": 34, "y2": 47 }, "description": "Grand entrance hall of the Spire tower. Shattered crystal ceiling.", "threat_level": "HIGH" },
+    "grand_spire_data_center": { "name": "Grand Spire — Data Centers", "bounds": { "x1": 15, "y1": 48, "x2": 34, "y2": 51 }, "description": "Server rooms. DEJIN memory fragments intensify here.", "threat_level": "HIGH" },
+    "grand_spire_research": { "name": "Grand Spire — Research Labs", "bounds": { "x1": 15, "y1": 52, "x2": 34, "y2": 55 }, "description": "Where the DEJIN network was designed. Dr. Voss's office.", "threat_level": "HIGH" },
+    "grand_spire_chambers": { "name": "Grand Spire — Government Chambers", "bounds": { "x1": 15, "y1": 56, "x2": 34, "y2": 59 }, "description": "Council chambers. Final confrontation with The Marshal's advance team.", "threat_level": "HIGH" }
+  },
+  "exits": [ { "id": "exit_west_region", "name": "West (Coppervale Region)", "tiles": { "x1": 0, "y1": 3, "x2": 0, "y2": 5 }, "target_room": "rm_town_coppervale", "target_pos": [78, 20], "collision_type": 3 } ],
+  "terrain_features": [
+    { "id": "collapsed_buildings_west", "type": "BLOCKED", "bounds": { "x1": 0, "y1": 10, "x2": 3, "y2": 24 }, "description": "Collapsed skyscraper rubble — impassable." },
+    { "id": "collapsed_buildings_east", "type": "BLOCKED", "bounds": { "x1": 46, "y1": 10, "x2": 49, "y2": 24 }, "description": "Collapsed buildings — east boundary." },
+    { "id": "metro_entrance_1", "type": "INTERACTABLE", "positions": [[8,15],[9,15]], "description": "Metro tunnel entrance — optional underground shortcut." },
+    { "id": "spire_base_rubble", "type": "BLOCKED", "bounds": { "x1": 12, "y1": 38, "x2": 14, "y2": 47 }, "description": "Rubble at Spire base — left side." },
+    { "id": "spire_base_rubble_right", "type": "BLOCKED", "bounds": { "x1": 35, "y1": 38, "x2": 37, "y2": 47 }, "description": "Rubble at Spire base — right side." },
+    { "id": "spire_walls_left", "type": "BLOCKED", "bounds": { "x1": 14, "y1": 41, "x2": 14, "y2": 59 }, "description": "Spire tower interior walls — left." },
+    { "id": "spire_walls_right", "type": "BLOCKED", "bounds": { "x1": 35, "y1": 41, "x2": 35, "y2": 59 }, "description": "Spire tower interior walls — right." },
+    { "id": "structural_collapse_1", "type": "HAZARD", "positions": [[18,14],[19,14],[20,14]], "description": "Unstable building. May collapse." },
+    { "id": "structural_collapse_2", "type": "HAZARD", "positions": [[35,18],[36,18]], "description": "Another unstable structure." },
+    { "id": "structural_collapse_3", "type": "HAZARD", "positions": [[12,32],[13,32]], "description": "Crumbling overpass." }
+  ],
+  "ruins": [
+    { "id": "ruin_library", "name": "City Library", "pos": [28, 10], "size": [8, 6], "has_interior": false },
+    { "id": "ruin_hospital", "name": "Regional Hospital", "pos": [4, 12], "size": [8, 6], "has_interior": false },
+    { "id": "ruin_gov_office", "name": "Government Office", "pos": [35, 12], "size": [8, 5], "has_interior": false },
+    { "id": "ruin_university", "name": "University of Solara", "pos": [30, 18], "size": [10, 6], "has_interior": false },
+    { "id": "ruin_grand_spire", "name": "The Grand Spire", "pos": [15, 41], "size": [20, 19], "has_interior": true }
+  ],
+  "collision_rules": { "types": { "0": "WALKABLE", "1": "BLOCKED", "2": "INTERACTABLE", "3": "TRANSITION", "6": "HAZARD" }, "general": [ "Non-linear city exploration with multiple paths", "Structural collapse hazards — Scanner detects unstable areas", "Grand Spire interior is linear vertical progression", "Heaviest enemy presence in the game — bring full expedition team" ] },
+  "tile_layers": ["ground_base", "ground_detail", "shadows", "objects_low", "objects_mid", "objects_high", "fog_overlay", "ui_overlay"],
+  "notes": [ "Very Hard late-game zone. Largest exploration area.", "Requires full expedition team (Year 3 Spring).", "Contains the story climax and DEJIN's full restoration.", "Multiple legendary blueprints scattered across city ruins and Spire." ]
+}

@@ -1,0 +1,109 @@
+{
+  "_meta": {
+    "description": "Zone data for Old Mill Ruins: salvage, hazards, enemies, discoveries.",
+    "version": "1.0",
+    "objective": "#29 All Exploration Zones"
+  },
+
+  "zone_id": "old_mill",
+  "room_id": "rm_explore_old_mill",
+  "display_name": "Old Mill Ruins",
+  "recommended_level": 2,
+  "first_visit_dialogue": "dlg_old_mill_first_visit",
+
+  "salvage_nodes": [
+    { "id": "salvage_herb_patch_1", "type": "NATURAL_RESOURCE", "pos": [4, 3], "sub_zone": "exterior_grounds",
+      "loot_table": [
+        { "item_id": "item_medicinal_herb", "chance": 0.8, "quantity_min": 1, "quantity_max": 3 },
+        { "item_id": "item_wildflower", "chance": 0.5, "quantity_min": 1, "quantity_max": 2 }
+      ], "energy_cost": 3, "respawn_days": 2, "sprite": "spr_salvage_herb" },
+    { "id": "salvage_herb_patch_2", "type": "NATURAL_RESOURCE", "pos": [20, 2], "sub_zone": "exterior_grounds",
+      "loot_table": [
+        { "item_id": "item_medicinal_herb", "chance": 0.8, "quantity_min": 1, "quantity_max": 3 },
+        { "item_id": "item_wheat_wild", "chance": 0.6, "quantity_min": 2, "quantity_max": 4 }
+      ], "energy_cost": 3, "respawn_days": 2, "sprite": "spr_salvage_herb" },
+    { "id": "salvage_herb_patch_3", "type": "NATURAL_RESOURCE", "pos": [10, 8], "sub_zone": "exterior_grounds",
+      "loot_table": [
+        { "item_id": "item_medicinal_herb", "chance": 0.7, "quantity_min": 1, "quantity_max": 2 },
+        { "item_id": "item_rare_mushroom", "chance": 0.2, "quantity_min": 1, "quantity_max": 1 }
+      ], "energy_cost": 3, "respawn_days": 2, "sprite": "spr_salvage_herb" },
+    { "id": "salvage_barn_crate", "type": "COMPONENT_CACHE", "pos": [24, 6], "sub_zone": "exterior_grounds",
+      "loot_table": [
+        { "item_id": "item_plank", "chance": 0.9, "quantity_min": 2, "quantity_max": 5 },
+        { "item_id": "item_iron_nails", "chance": 0.7, "quantity_min": 2, "quantity_max": 6 },
+        { "item_id": "item_rope", "chance": 0.4, "quantity_min": 1, "quantity_max": 2 }
+      ], "energy_cost": 5, "respawn_days": 5, "sprite": "spr_salvage_crate" },
+    { "id": "salvage_mill_machinery", "type": "MACHINERY_REMAINS", "pos": [8, 15], "sub_zone": "mill_ground_floor",
+      "loot_table": [
+        { "item_id": "item_brass_gears", "chance": 0.7, "quantity_min": 2, "quantity_max": 4 },
+        { "item_id": "item_scrap_iron", "chance": 0.8, "quantity_min": 3, "quantity_max": 6 },
+        { "item_id": "item_copper_wire", "chance": 0.3, "quantity_min": 1, "quantity_max": 3 }
+      ], "energy_cost": 10, "respawn_days": 7, "sprite": "spr_salvage_machinery" },
+    { "id": "salvage_grain_vat", "type": "COMPONENT_CACHE", "pos": [15, 17], "sub_zone": "mill_ground_floor",
+      "loot_table": [
+        { "item_id": "item_brass_gears", "chance": 0.5, "quantity_min": 1, "quantity_max": 2 },
+        { "item_id": "item_steam_engine_tiny", "chance": 0.15, "quantity_min": 1, "quantity_max": 1 }
+      ], "energy_cost": 8, "respawn_days": 7, "sprite": "spr_salvage_component_cache" },
+    { "id": "salvage_underground_supplies_1", "type": "COMPONENT_CACHE", "pos": [10, 30], "sub_zone": "underground_storage",
+      "loot_table": [
+        { "item_id": "item_preserved_food", "chance": 0.9, "quantity_min": 2, "quantity_max": 4 },
+        { "item_id": "item_oil_canister", "chance": 0.5, "quantity_min": 1, "quantity_max": 2 }
+      ], "energy_cost": 5, "respawn_days": 10, "sprite": "spr_salvage_crate" },
+    { "id": "salvage_underground_supplies_2", "type": "COMPONENT_CACHE", "pos": [18, 33], "sub_zone": "underground_storage",
+      "loot_table": [
+        { "item_id": "item_preserved_food", "chance": 0.9, "quantity_min": 2, "quantity_max": 4 },
+        { "item_id": "item_copper_pipe", "chance": 0.4, "quantity_min": 1, "quantity_max": 2 }
+      ], "energy_cost": 5, "respawn_days": 10, "sprite": "spr_salvage_crate" }
+  ],
+
+  "hazards": [
+    {
+      "id": "hazard_security_turret",
+      "type": "DORMANT_SECURITY",
+      "tiles": [[12, 30], [13, 30]],
+      "effect": { "damage": 15, "alert_radius": 3, "can_deactivate_with_scanner": true },
+      "warning_sprite": "spr_hazard_security_turret",
+      "description": "Dormant Old World security turret. Activates if player enters without Scanner deactivation."
+    }
+  ],
+
+  "enemy_patrols": [],
+
+  "discoveries": [
+    {
+      "id": "discovery_bp_worker_bot",
+      "type": "BLUEPRINT_CHEST",
+      "pos": [14, 35],
+      "sub_zone": "underground_storage",
+      "interaction_sprite": "spr_interactable_blueprint_case",
+      "one_time": true,
+      "blueprint_id": "bp_worker_bot",
+      "description": "A sealed metal cabinet containing the blueprint for an automated Worker Bot.",
+      "reward_items": []
+    },
+    {
+      "id": "discovery_nora_family_records",
+      "type": "DATA_CORE",
+      "sub_type": "STANDARD",
+      "pos": [10, 33],
+      "sub_zone": "underground_storage",
+      "interaction_sprite": "spr_interactable_terminal",
+      "one_time": true,
+      "lore_id": "lore_nora_family_mill",
+      "lore_title": "Supply Manifest — Thornton Family",
+      "lore_summary": "Supply records bearing the Thornton name — Nora's maiden family. They managed this mill's food distribution before The Sundering. The last entry reads: 'Shipment delayed. Evacuation order received.'",
+      "dejin_reaction": "dlg_dejin_old_mill_lore",
+      "reward_items": [
+        { "item_id": "item_data_core_standard", "quantity": 1 }
+      ]
+    }
+  ],
+
+  "fog_of_war": {
+    "enabled": true,
+    "default_state": "HIDDEN",
+    "reveal_radius_tiles": 6,
+    "scanner_bonus_radius": 3,
+    "persistence": "SAVE_PER_ZONE"
+  }
+}

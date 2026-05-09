@@ -1,0 +1,1233 @@
+{
+  "_meta": {
+    "description": "Festival dialogue for all 18 NPCs across 4 seasonal festivals.",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue"
+  },
+  "entries": [
+    {
+      "entry_id": "npc_spark_spark_festival",
+      "npc_id": "npc_spark",
+      "festival_id": "spark_festival",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "spark_festival"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "THIS IS MY MOMENT! Did you SEE the Machine Showcase entries? Mine's the best. Obviously.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_sky_day",
+      "npc_id": "npc_spark",
+      "festival_id": "sky_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "sky_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "One day that'll be ME up there! My flyer WILL work! This time! Probably!",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_harvest_faire",
+      "npc_id": "npc_spark",
+      "festival_id": "harvest_faire",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "harvest_faire"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "I entered the cooking competition. My recipe involves a blowtorch. Is that allowed?",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_remembrance_day",
+      "npc_id": "npc_spark",
+      "festival_id": "remembrance_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "remembrance_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "I lit a lantern for all the engineers who came before us. They'd be proud of what we're building.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_spark_festival",
+      "npc_id": "npc_maren",
+      "festival_id": "spark_festival",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "spark_festival"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "The machines remind me of Oren's work. He'd have loved this, dear.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_sky_day",
+      "npc_id": "npc_maren",
+      "festival_id": "sky_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "sky_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "Zeppelins in the sky. I remember when they carried millions. Now they carry hope.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_harvest_faire",
+      "npc_id": "npc_maren",
+      "festival_id": "harvest_faire",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "harvest_faire"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "I brought my old recipe. Oren's favorite stew. It's not quite right without him.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_remembrance_day",
+      "npc_id": "npc_maren",
+      "festival_id": "remembrance_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "remembrance_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "So many names. So many lights on the river. We carry them all.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_spark_festival",
+      "npc_id": "npc_harrow",
+      "festival_id": "spark_festival",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "spark_festival"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "I'll inspect the machines. For defense applications. ...Fine, and because they're impressive.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_sky_day",
+      "npc_id": "npc_harrow",
+      "festival_id": "sky_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "sky_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Aerial reconnaissance potential. That flyer of Spark's could be useful. Don't tell her.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_harvest_faire",
+      "npc_id": "npc_harrow",
+      "festival_id": "harvest_faire",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "harvest_faire"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Community morale is important for defense readiness. That's why I'm here. That's the ONLY reason.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_remembrance_day",
+      "npc_id": "npc_harrow",
+      "festival_id": "remembrance_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "remembrance_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "I read the names of my fallen soldiers. Every year. Every name. They deserve that.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_spark_festival",
+      "npc_id": "npc_linden",
+      "festival_id": "spark_festival",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "spark_festival"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Look at this turnout! This is what community looks like! I'm so proud of everyone!",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_sky_day",
+      "npc_id": "npc_linden",
+      "festival_id": "sky_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "sky_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Isn't it magnificent? The sky reminds us there's always something higher to reach for!",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_harvest_faire",
+      "npc_id": "npc_linden",
+      "festival_id": "harvest_faire",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "harvest_faire"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "The feast table is full! Remember when we could barely fill a bowl? Look at us now!",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_remembrance_day",
+      "npc_id": "npc_linden",
+      "festival_id": "remembrance_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "remembrance_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "We remember so we can build better. Every lantern is a promise to the future.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_spark_festival",
+      "npc_id": "npc_pip",
+      "festival_id": "spark_festival",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "spark_festival"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "THE MACHINES ARE SO COOL! That one has SPINNING BITS! Can I touch it?! PLEASE?!",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_sky_day",
+      "npc_id": "npc_pip",
+      "festival_id": "sky_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "sky_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "The zeppelins are like GIANT WHALES in the SKY! I want to ride one SO BAD!",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_harvest_faire",
+      "npc_id": "npc_pip",
+      "festival_id": "harvest_faire",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "harvest_faire"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "I ate FOUR pies! Is that too many? I don't think that's too many. Maybe one more.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_remembrance_day",
+      "npc_id": "npc_pip",
+      "festival_id": "remembrance_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "remembrance_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "I made my lantern with Maren. She helped me write a name on it. Someone she loved.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_spark_festival",
+      "npc_id": "npc_leera",
+      "festival_id": "spark_festival",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "spark_festival"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Machines are cool but have you seen what's BEYOND the town walls? That's the real show.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_sky_day",
+      "npc_id": "npc_leera",
+      "festival_id": "sky_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "sky_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Spark and I are gonna race. Her flyer versus my legs. I'll win. Probably.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_harvest_faire",
+      "npc_id": "npc_leera",
+      "festival_id": "harvest_faire",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "harvest_faire"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Brought back rare spices from the Rustwood! Kaydee's using them tonight! You're welcome.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_remembrance_day",
+      "npc_id": "npc_leera",
+      "festival_id": "remembrance_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "remembrance_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "I light a lantern for everyone who explored and didn't come back. The ones who went too far.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_spark_festival",
+      "npc_id": "npc_michelle",
+      "festival_id": "spark_festival",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "spark_festival"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "Oh, the machines are wonderful! I-I made flower garlands for the display tables. It's nothing.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_sky_day",
+      "npc_id": "npc_michelle",
+      "festival_id": "sky_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "sky_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "The sky is so beautiful today. I wish every day could feel like this.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_harvest_faire",
+      "npc_id": "npc_michelle",
+      "festival_id": "harvest_faire",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "harvest_faire"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "I entered the herbal tea category! It's chamomile with lavender. ...Is that too boring?",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_remembrance_day",
+      "npc_id": "npc_michelle",
+      "festival_id": "remembrance_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "remembrance_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "I light lanterns for my parents. And for every patient I couldn't save. It's a lot of lanterns.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_spark_festival",
+      "npc_id": "npc_kaydee",
+      "festival_id": "spark_festival",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "spark_festival"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Free drinks for the Machine Showcase winner! ...What? It's called MARKETING.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_sky_day",
+      "npc_id": "npc_kaydee",
+      "festival_id": "sky_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "sky_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Sky Day means double business at the Gear. I love this town. Economically speaking.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_harvest_faire",
+      "npc_id": "npc_kaydee",
+      "festival_id": "harvest_faire",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "harvest_faire"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "My autumn ale won the tasting competition. Obviously. The competition was... adequate.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_remembrance_day",
+      "npc_id": "npc_kaydee",
+      "festival_id": "remembrance_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "remembrance_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "I keep the Gear open late tonight. People need a place to be together. That's what I do.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_spark_festival",
+      "npc_id": "npc_janis",
+      "festival_id": "spark_festival",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "spark_festival"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "The festival is... more charming than I expected. The Council should invest in local events.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_sky_day",
+      "npc_id": "npc_janis",
+      "festival_id": "sky_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "sky_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "Impressive aerial displays. I've noted the potential for inter-town air routes in my report.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_harvest_faire",
+      "npc_id": "npc_janis",
+      "festival_id": "harvest_faire",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "harvest_faire"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "The food is surprisingly sophisticated. I may have underestimated Coppervale's culinary talent.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_remembrance_day",
+      "npc_id": "npc_janis",
+      "festival_id": "remembrance_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "remembrance_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "I didn't grow up here. But I'm lighting a lantern anyway. For this town. For what it means.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_spark_festival",
+      "npc_id": "npc_kiery",
+      "festival_id": "spark_festival",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "spark_festival"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "I made banners for the festival! Each one is hand-dyed. Do you like the copper tones?",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_sky_day",
+      "npc_id": "npc_kiery",
+      "festival_id": "sky_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "sky_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "I brought a picnic blanket I wove myself. The clouds look like cotton from here.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_harvest_faire",
+      "npc_id": "npc_kiery",
+      "festival_id": "harvest_faire",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "harvest_faire"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "I entered the textile display! A tapestry of Coppervale. Every building, every person.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_remembrance_day",
+      "npc_id": "npc_kiery",
+      "festival_id": "remembrance_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "remembrance_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "I sewed a remembrance quilt. Each square is a different fabric from a different era. Memory in thread.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_spark_festival",
+      "npc_id": "npc_paige",
+      "festival_id": "spark_festival",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "spark_festival"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "I've documented every Machine Showcase since the festival's inception. For the Archive.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_sky_day",
+      "npc_id": "npc_paige",
+      "festival_id": "sky_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "sky_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "Wren loved Sky Day. He said the clouds looked like pages turning. I see it now.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_harvest_faire",
+      "npc_id": "npc_paige",
+      "festival_id": "harvest_faire",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "harvest_faire"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "I contributed a historical display. Pre-war harvest traditions. Context matters.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_remembrance_day",
+      "npc_id": "npc_paige",
+      "festival_id": "remembrance_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "remembrance_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "I read the names. Every year. My voice doesn't break anymore. My hands still do.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_gus_spark_festival",
+      "npc_id": "npc_gus",
+      "festival_id": "spark_festival",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "spark_festival"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_gus",
+          "text": "Festival special: 10% off all machine parts! Today only! Tell your friends!",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_gus_sky_day",
+      "npc_id": "npc_gus",
+      "festival_id": "sky_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "sky_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_gus",
+          "text": "I'm selling commemorative pins! Handmade! Well, Kiery made them. I'm selling them!",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_gus_harvest_faire",
+      "npc_id": "npc_gus",
+      "festival_id": "harvest_faire",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "harvest_faire"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_gus",
+          "text": "Biggest trading day of the year! My inventory is READY!",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_gus_remembrance_day",
+      "npc_id": "npc_gus",
+      "festival_id": "remembrance_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "remembrance_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_gus",
+          "text": "I keep the store open late with warm drinks. Free. Some things aren't about profit.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_ferris_spark_festival",
+      "npc_id": "npc_ferris",
+      "festival_id": "spark_festival",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "spark_festival"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_ferris",
+          "text": "Finally, people appreciate precision engineering! Look at these display tolerances!",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_ferris_sky_day",
+      "npc_id": "npc_ferris",
+      "festival_id": "sky_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "sky_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_ferris",
+          "text": "The aerodynamics of that flyer are... questionable. But the ambition? Magnificent.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_ferris_harvest_faire",
+      "npc_id": "npc_ferris",
+      "festival_id": "harvest_faire",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "harvest_faire"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_ferris",
+          "text": "I'm displaying my rarest component. Pre-war, mint condition. LOOK but don't TOUCH.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_ferris_remembrance_day",
+      "npc_id": "npc_ferris",
+      "festival_id": "remembrance_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "remembrance_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_ferris",
+          "text": "I light a lantern for the engineers who designed the things I now salvage. Their work endures.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_hank_spark_festival",
+      "npc_id": "npc_hank",
+      "festival_id": "spark_festival",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "spark_festival"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_hank",
+          "text": "...Good machines. Solid work.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_hank_sky_day",
+      "npc_id": "npc_hank",
+      "festival_id": "sky_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "sky_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_hank",
+          "text": "...Sky's big. ...Nice.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_hank_harvest_faire",
+      "npc_id": "npc_hank",
+      "festival_id": "harvest_faire",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "harvest_faire"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_hank",
+          "text": "...Brought bread. Nora's recipe. ...It's warm.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_hank_remembrance_day",
+      "npc_id": "npc_hank",
+      "festival_id": "remembrance_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "remembrance_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_hank",
+          "text": "...I ring the anvil. Once for each name. ...It takes a while.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_nora_spark_festival",
+      "npc_id": "npc_nora",
+      "festival_id": "spark_festival",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "spark_festival"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_nora",
+          "text": "Machines are fine. But who grew the food for the feast? That's right. You're welcome.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_nora_sky_day",
+      "npc_id": "npc_nora",
+      "festival_id": "sky_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "sky_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_nora",
+          "text": "Clear sky means good growing weather tomorrow. I'm thinking about it. Can't help it.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_nora_harvest_faire",
+      "npc_id": "npc_nora",
+      "festival_id": "harvest_faire",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "harvest_faire"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_nora",
+          "text": "THIS is my festival. Every dish on that table started in my fields. Every single one.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_nora_remembrance_day",
+      "npc_id": "npc_nora",
+      "festival_id": "remembrance_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "remembrance_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_nora",
+          "text": "I plant a seed for every name read. By spring, the memorial garden blooms for them.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_wes_spark_festival",
+      "npc_id": "npc_wes",
+      "festival_id": "spark_festival",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "spark_festival"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_wes",
+          "text": "I delivered the festival supplies in RECORD TIME! Three trips! One morning!",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_wes_sky_day",
+      "npc_id": "npc_wes",
+      "festival_id": "sky_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "sky_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_wes",
+          "text": "Imagine if I could FLY the mail instead of running it! Wait \u2014 that's GENIUS!",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_wes_harvest_faire",
+      "npc_id": "npc_wes",
+      "festival_id": "harvest_faire",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "harvest_faire"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_wes",
+          "text": "I ran the relay race! Won by a full ten seconds! ...Okay, five. Still won!",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_wes_remembrance_day",
+      "npc_id": "npc_wes",
+      "festival_id": "remembrance_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "remembrance_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_wes",
+          "text": "I carry letters between towns. Some of those letters are the last ones people wrote.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_elm_spark_festival",
+      "npc_id": "npc_elm",
+      "festival_id": "spark_festival",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "spark_festival"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_elm",
+          "text": "Creation is a form of prayer. Every machine here is an act of faith.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_elm_sky_day",
+      "npc_id": "npc_elm",
+      "festival_id": "sky_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "sky_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_elm",
+          "text": "The sky reminds us how small we are. And how big our dreams can be.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_elm_harvest_faire",
+      "npc_id": "npc_elm",
+      "festival_id": "harvest_faire",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "harvest_faire"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_elm",
+          "text": "Breaking bread together. The oldest tradition. The most important one.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_elm_remembrance_day",
+      "npc_id": "npc_elm",
+      "festival_id": "remembrance_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "remembrance_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_elm",
+          "text": "We gather not to mourn, but to remember. And to promise: never again.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_bramble_spark_festival",
+      "npc_id": "npc_bramble",
+      "festival_id": "spark_festival",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "spark_festival"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_bramble",
+          "text": "I'm on standby. Festivals mean injuries. Fireworks plus enthusiasm equals patients.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_bramble_sky_day",
+      "npc_id": "npc_bramble",
+      "festival_id": "sky_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "sky_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_bramble",
+          "text": "Beautiful day. I give it two hours before someone sprains something. Taking bets.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_bramble_harvest_faire",
+      "npc_id": "npc_bramble",
+      "festival_id": "harvest_faire",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "harvest_faire"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_bramble",
+          "text": "Overeating casualties incoming. I've prepared the stomach remedies.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_bramble_remembrance_day",
+      "npc_id": "npc_bramble",
+      "festival_id": "remembrance_day",
+      "category": "festival",
+      "conditions": {
+        "festival_active": "remembrance_day"
+      },
+      "priority": 8,
+      "lines": [
+        {
+          "speaker": "npc_bramble",
+          "text": "I've treated wounds for thirty years. Tonight I remember the ones I couldn't mend.",
+          "portrait": "thoughtful"
+        }
+      ]
+    }
+  ]
+}

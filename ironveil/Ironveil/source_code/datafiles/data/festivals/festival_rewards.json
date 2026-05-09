@@ -1,0 +1,115 @@
+{
+  "_meta": {
+    "description": "Festival mini-game reward tables by tier.",
+    "version": "1.0",
+    "objective": "#36"
+  },
+  "rewards": {
+    "machine_showcase_gold": {
+      "cogs": 500,
+      "items": [
+        {
+          "item_id": "item_showcase_trophy",
+          "quantity": 1
+        },
+        {
+          "item_id": "item_rare_gear",
+          "quantity": 2
+        }
+      ]
+    },
+    "machine_showcase_silver": {
+      "cogs": 300,
+      "items": [
+        {
+          "item_id": "item_rare_gear",
+          "quantity": 1
+        }
+      ]
+    },
+    "machine_showcase_bronze": {
+      "cogs": 150,
+      "items": [
+        {
+          "item_id": "item_brass_gears",
+          "quantity": 3
+        }
+      ]
+    },
+    "automaton_race_gold": {
+      "cogs": 400,
+      "items": [
+        {
+          "item_id": "item_race_trophy",
+          "quantity": 1
+        },
+        {
+          "item_id": "item_speed_component",
+          "quantity": 1
+        }
+      ]
+    },
+    "automaton_race_silver": {
+      "cogs": 200,
+      "items": [
+        {
+          "item_id": "item_brass_gears",
+          "quantity": 2
+        }
+      ]
+    },
+    "cooking_competition_gold": {
+      "cogs": 400,
+      "items": [
+        {
+          "item_id": "item_cooking_trophy",
+          "quantity": 1
+        },
+        {
+          "item_id": "item_rare_spice",
+          "quantity": 3
+        }
+      ]
+    },
+    "cooking_competition_silver": {
+      "cogs": 200,
+      "items": [
+        {
+          "item_id": "item_rare_spice",
+          "quantity": 1
+        }
+      ]
+    },
+    "cooking_competition_bronze": {
+      "cogs": 100,
+      "items": [
+        {
+          "item_id": "item_honey",
+          "quantity": 2
+        }
+      ]
+    },
+    "flyer_race_gold": {
+      "cogs": 500,
+      "items": [
+        {
+          "item_id": "item_flyer_trophy",
+          "quantity": 1
+        },
+        {
+          "item_id": "item_flight_component",
+          "quantity": 2
+        }
+      ]
+    },
+    "flyer_race_silver": {
+      "cogs": 250,
+      "items": [
+        {
+          "item_id": "item_flight_component",
+          "quantity": 1
+        }
+      ]
+    }
+  }
+}

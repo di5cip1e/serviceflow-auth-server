@@ -1,0 +1,648 @@
+{
+  "_meta": {
+    "description": "Dialogue data for Michelle (Clinic Assistant / Herbalist). Seasonal/daily pool + heart milestones.",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue"
+  },
+  "entries": [
+    {
+      "entry_id": "npc_michelle_sd_001",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "Oh, good morning. The clinic's quiet today. The herbs need tending.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_sd_002",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "Rain is good for the herbs. I should check the greenhouse.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_sd_003",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "The lavender is blooming early this year. It smells like... hope. Is that silly?",
+          "portrait": "embarrassed"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_sd_004",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "The garden is thriving! I mean, it's nothing special. Anyone could grow herbs.",
+          "portrait": "embarrassed"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_sd_005",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "I should organize the medicine cabinet. Again. It calms me.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_sd_006",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "A patient came in with heatstroke today. Cool compresses and rest. Simple things save lives.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_sd_007",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "Autumn herbs are the most potent. Something about the cooling air.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_sd_008",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "Quiet days at the clinic. I've been reading Old World medical texts.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_sd_009",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "I'm preparing extra medical supplies. Winter injuries are always worse.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_sd_010",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "Cold hands make delicate work harder. I've been practicing.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_sd_011",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "weather": "SNOW",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "The snow looks beautiful from the clinic window. Peaceful.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_sd_012",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "Remembrance Day... I think about my parents. The healers who raised me.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_sd_013",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "weather": "STORM",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "Storms bring injuries. I've prepped the clinic just in case.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_sd_014",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "weather": "FOG",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "The fog makes me feel... small. But the clinic's warm.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_sd_015",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "Oh! Jack! I didn't see you there. I was just organizing herbs. Again.",
+          "portrait": "embarrassed"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_sd_016",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "The patient from the raid is recovering. I'm glad. Anyone could have done it, though.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_sd_017",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "Doc Bramble says I have a gift. I think I just... pay attention.",
+          "portrait": "embarrassed"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_sd_018",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "I made a new salve from Rustwood bark. It has... unusual properties.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_sd_019",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "Pip scraped her knee. I put a bandage on and she said I have magic hands.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_sd_020",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "Do you need anything, Jack? Water? Bandages? I always have extra.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_sd_021",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "I-I read that engineers get hand injuries often. Here. Protective balm. It's nothing.",
+          "portrait": "embarrassed"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_sd_022",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "Maren's memory is getting worse. I visit her every evening. She likes the company.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_sd_023",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "Sometimes the clinic is very quiet and I just... sit. Is that okay?",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_sd_024",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "I made too many herb bundles again. Would you... like some? For the workshop?",
+          "portrait": "embarrassed"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_sd_025",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "You're always so busy building things. Don't forget to take care of yourself too.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_hm_02",
+      "npc_id": "npc_michelle",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 2
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_michelle_milestone_2",
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "I-I made you a healing salve. For your hands. Engineers get calluses. It's nothing.",
+          "portrait": "embarrassed"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_hm_04",
+      "npc_id": "npc_michelle",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 4
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_michelle_milestone_4",
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "You always ask how I am. Not what I can do for you. That's... different.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_hm_06",
+      "npc_id": "npc_michelle",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 6
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_michelle_milestone_6",
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "I need to tell you something. About why I push myself so hard. Can we talk?",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_hm_08",
+      "npc_id": "npc_michelle",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 8
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_michelle_milestone_8",
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "Jack, I've spent my whole life helping everyone else. But with you, I want to be selfish.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_hm_10",
+      "npc_id": "npc_michelle",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 10
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_michelle_milestone_10",
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "You built me a greenhouse. I'm going to build us a life. Together.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_y2_spring_031",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "The Thornwall medics shared their herb catalogs. Some plants I've never seen. This is incredible for the clinic.",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_y2_summer_032",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "More injuries from the expanded patrols. I need more supplies, Jack. And maybe an assistant.",
+          "portrait": "stressed"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_y2_autumn_033",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "I'm stockpiling medical supplies. Bandages, antiseptic, splints. If the siege comes, we'll be ready.",
+          "portrait": "focused"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_y2_winter_034",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "Three wounded today. Nothing critical. But the siege hasn't peaked yet.",
+          "portrait": "tense"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_y3_spring_035",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "Please come back in one piece. I can patch wounds but I'd rather prevent them.",
+          "portrait": "pleading"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_y3_autumn_036",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "The clinic's expanding. Two rooms now, proper supplies. For the first time, I'm actually healing people.",
+          "portrait": "grateful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_michelle_y4_spring_037",
+      "npc_id": "npc_michelle",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 4,
+        "hearts_gte": 0,
+        "story_flag": "flag_main_story_complete"
+      },
+      "priority": 11,
+      "lines": [
+        {
+          "speaker": "npc_michelle",
+          "text": "Doc Bramble and I are writing a medical guide. Everything we know, preserved for the future.",
+          "portrait": "purposeful"
+        }
+      ]
+    }
+  ]
+}

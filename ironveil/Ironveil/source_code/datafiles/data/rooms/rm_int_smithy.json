@@ -1,0 +1,25 @@
+{
+  "room_id": "rm_int_smithy",
+  "display_name": "Hank's Smithy",
+  "width_tiles": 10,
+  "height_tiles": 8,
+  "tile_size": 16,
+  "parent_room": "rm_town_coppervale",
+
+  "exits": [
+    { "id": "door_main", "tiles": { "x1": 4, "y1": 7, "x2": 5, "y2": 7 }, "target_room": "rm_town_coppervale", "target_pos": [47, 48], "collision_type": 3 }
+  ],
+
+  "stations": [],
+
+  "furniture": [
+    { "id": "forge",          "name": "Forge",            "pos": [2, 2], "size": [3, 2], "type": "DECORATIVE",  "collision_type": 1 },
+    { "id": "anvil_area",     "name": "Anvil Area",       "pos": [6, 3], "size": [2, 2], "type": "INTERACTABLE","collision_type": 2, "interaction": "upgrade_tools" },
+    { "id": "weapon_rack",    "name": "Weapon/Tool Rack", "pos": [2, 5], "size": [2, 2], "type": "DECORATIVE",  "collision_type": 1 },
+    { "id": "service_counter","name": "Service Counter",  "pos": [5, 6], "size": [2, 1], "type": "SHOP",        "collision_type": 2, "interaction": "shop_hank" }
+  ],
+
+  "npc_positions": [
+    { "npc_id": "npc_hank", "pos": [7, 3], "note": "Working at anvil" }
+  ]
+}

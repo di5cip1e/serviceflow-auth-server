@@ -1,0 +1,39 @@
+{
+  "_meta": {
+    "description": "Lore tips displayed during loading screens. Random selection each transition.",
+    "version": "1.0",
+    "objective": "#45 Polish Pass"
+  },
+  "tips": [
+    "Coppervale was founded by survivors who believed in building, not fighting.",
+    "The Sundering destroyed 90% of the Old World's infrastructure in a single day.",
+    "DEJIN stands for Distributed Electronic Joint Intelligence Network.",
+    "Aetheric Ore is the key to Pre-War technology — handle with care.",
+    "Captain Harrow served in three campaigns before finding peace in Coppervale.",
+    "The Rusty Gear Tavern has never closed, even during raids. Kaydee insists.",
+    "Machines need regular maintenance. A well-oiled turret fires twice as fast.",
+    "Every Remembrance Day, Coppervale lights lanterns for those who came before.",
+    "Old Maren's husband Oren was the first engineer of Coppervale.",
+    "The Iron Marauders unified under the Marshal in just two years.",
+    "Spark once tried to fit 17 gears on a single coupling. The maximum is 14.",
+    "Trade routes bring more than goods — they bring hope and connection.",
+    "The Grand Spire was once the tallest building on the continent.",
+    "Pip's scrap collection contains at least three items of genuine historical value.",
+    "A mech's legs are its most vulnerable component. Protect them in combat.",
+    "The Beacon Council connects settlements across a 200-kilometer radius.",
+    "Pre-War automatons were designed to assist, not to fight. War changed that.",
+    "Coppervale's walls have been rebuilt three times. Each time, stronger.",
+    "The Ashspine Mountains contain mineral deposits that could sustain industry for decades.",
+    "Fog reduces turret accuracy by 30%. Plan your defenses accordingly.",
+    "Night raids grant enemies a stealth bonus. Keep the spotlights burning.",
+    "The Tide Reavers attack from the water. Standard walls won't stop their divers.",
+    "A quality rating of 'Excellent' on a machine reduces maintenance frequency by half.",
+    "Festivals boost town morale and NPC productivity for the following season.",
+    "Data Cores come in four types: Blue (technical), Red (military), Gold (personal), Black (classified).",
+    "The Workshop's Assembly Crane can build machines that would take a team of engineers weeks.",
+    "Seasonal weather affects crop yields, patrol visibility, and raid difficulty.",
+    "Heart events trigger at specific locations during specific times. Pay attention to NPC schedules.",
+    "The Forge consumes fuel with every craft. Stock up before big projects.",
+    "Every settlement in the Beacon network has a unique specialty and trade goods."
+  ]
+}

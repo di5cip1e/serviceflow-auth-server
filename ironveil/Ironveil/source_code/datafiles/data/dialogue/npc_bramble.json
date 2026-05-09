@@ -1,0 +1,373 @@
+{
+  "_meta": {
+    "description": "Dialogue data for Doc Bramble (Town Doctor). Seasonal/daily pool + heart milestones.",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue"
+  },
+  "entries": [
+    {
+      "entry_id": "npc_bramble_sd_001",
+      "npc_id": "npc_bramble",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_bramble",
+          "text": "Allergies season. Stock up on antihistamines. Oh wait, we don't HAVE any.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_bramble_sd_002",
+      "npc_id": "npc_bramble",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_bramble",
+          "text": "Spring injuries: falls, sprains, overenthusiastic gardening. Every year.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_bramble_sd_003",
+      "npc_id": "npc_bramble",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_bramble",
+          "text": "Heatstroke cases incoming. Stay hydrated. That's an ORDER, not advice.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_bramble_sd_004",
+      "npc_id": "npc_bramble",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_bramble",
+          "text": "Michelle's herb remedies are... surprisingly effective. Don't tell her I said that.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_bramble_sd_005",
+      "npc_id": "npc_bramble",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_bramble",
+          "text": "Harvest injuries. Every year someone tries to lift something too heavy. Every. Year.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_bramble_sd_006",
+      "npc_id": "npc_bramble",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_bramble",
+          "text": "Cold weather, brittle bones, slippery paths. My busiest season.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_bramble_sd_007",
+      "npc_id": "npc_bramble",
+      "category": "seasonal_daily",
+      "conditions": {
+        "weather": "STORM",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_bramble",
+          "text": "Storm injuries: flying debris, lightning proximity, idiots going outside.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_bramble_sd_008",
+      "npc_id": "npc_bramble",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_bramble",
+          "text": "I've been a doctor for thirty years. Seen everything. Twice. Nothing surprises me.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_bramble_sd_009",
+      "npc_id": "npc_bramble",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_bramble",
+          "text": "Michelle's my best student. She'll be better than me someday. Soon, probably.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_bramble_sd_010",
+      "npc_id": "npc_bramble",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_bramble",
+          "text": "Harrow's shoulder is acting up again. Told him to rest. He won't.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_bramble_sd_011",
+      "npc_id": "npc_bramble",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_bramble",
+          "text": "Your machines are impressive. Build me a surgical laser and I'll be REALLY impressed.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_bramble_sd_012",
+      "npc_id": "npc_bramble",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_bramble",
+          "text": "Maren's memory... there's nothing I can do. Just be kind. Visit her.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_bramble_hm_02",
+      "npc_id": "npc_bramble",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 2
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_bramble_milestone_2",
+      "lines": [
+        {
+          "speaker": "npc_bramble",
+          "text": "Medical supplies. Take them. And stop getting hurt so often.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_bramble_hm_04",
+      "npc_id": "npc_bramble",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 4
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_bramble_milestone_4",
+      "lines": [
+        {
+          "speaker": "npc_bramble",
+          "text": "You keep this town alive mechanically. I do it medically. Professional respect.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_bramble_hm_06",
+      "npc_id": "npc_bramble",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 6
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_bramble_milestone_6",
+      "lines": [
+        {
+          "speaker": "npc_bramble",
+          "text": "Thirty years of medicine. You're the first engineer I've actually trusted.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_bramble_hm_08",
+      "npc_id": "npc_bramble",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 8
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_bramble_milestone_8",
+      "lines": [
+        {
+          "speaker": "npc_bramble",
+          "text": "Build me that surgical tool and we'll be even. Actually, we'll never be even. But close.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_bramble_hm_10",
+      "npc_id": "npc_bramble",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 10
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_bramble_milestone_10",
+      "lines": [
+        {
+          "speaker": "npc_bramble",
+          "text": "Best damn engineer I've ever met. Don't let it go to your head. Too late, probably.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_bramble_y2_summer_018",
+      "npc_id": "npc_bramble",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_bramble",
+          "text": "Seen worse injuries in my traveling days. But I'd rather not see them here.",
+          "portrait": "somber"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_bramble_y2_winter_019",
+      "npc_id": "npc_bramble",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_bramble",
+          "text": "Siege injuries are ugly. Burns, shrapnel, crush wounds. Michelle and I are ready.",
+          "portrait": "prepared"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_bramble_y3_autumn_020",
+      "npc_id": "npc_bramble",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_bramble",
+          "text": "Writing a medical guide. Everything I know from years on the road. Knowledge should outlive us.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_bramble_y4_spring_021",
+      "npc_id": "npc_bramble",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 4,
+        "hearts_gte": 0,
+        "story_flag": "flag_main_story_complete"
+      },
+      "priority": 11,
+      "lines": [
+        {
+          "speaker": "npc_bramble",
+          "text": "The guide's nearly done. If something happens to us, the knowledge survives. That matters.",
+          "portrait": "purposeful"
+        }
+      ]
+    }
+  ]
+}

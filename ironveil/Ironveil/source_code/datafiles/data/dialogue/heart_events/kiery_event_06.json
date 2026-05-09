@@ -1,0 +1,108 @@
+{
+  "_meta": {
+    "description": "Heart event #6 for npc_kiery: On Her Own Terms",
+    "version": "1.0",
+    "objective": "#33/#34"
+  },
+  "event_id": "heart_event_kiery_06",
+  "npc_id": "npc_kiery",
+  "heart_level_required": 8,
+  "location": "rm_int_npc_kiery",
+  "time_range": {
+    "start": 18,
+    "end": 22
+  },
+  "story_flag_required": "npc_kiery_event_5_complete",
+  "requires_item": "item_promise_locket",
+  "story_flag_set": "npc_kiery_event_6_complete",
+  "heart_bonus": 100,
+  "title": "On Her Own Terms",
+  "lines": [
+    {
+      "speaker": "narrator",
+      "text": "[Kiery's shop, warm lamplight. She's just given Jack the garment]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "I need to explain why I made this.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "If we're going to be what I think we are... you need to understand.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "I came here running. From someone who said they loved me.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "But what they loved was controlling me.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "I rebuilt myself here. Thread by thread.",
+      "portrait": "determined"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "So I need you to understand \u2014 if this happens, it's because I CHOOSE it.",
+      "portrait": "determined"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "Not because I need saving. Not because I'm lonely.",
+      "portrait": "determined"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "Because I looked at every option and I chose you.",
+      "portrait": "determined"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "I would never try to control you.",
+          "flag": "kiery_confess_safe"
+        },
+        {
+          "text": "I choose you too. On your terms.",
+          "flag": "kiery_confess_terms"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "I know. That's why I'm choosing.",
+      "portrait": "happy"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "You're the first person who never asked me to be anything other than what I am.",
+      "portrait": "happy"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "So. Here I am. Choosing. Being terrified. But choosing anyway.",
+      "portrait": "happy"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "Stay for tea? The kind I only share with people I...",
+      "portrait": "embarrassed"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "...with people I love. There. I said it.",
+      "portrait": "happy"
+    }
+  ]
+}

@@ -1,0 +1,666 @@
+{
+  "_meta": {
+    "description": "Dialogue data for Pip (Child / Relic Collector). Seasonal/daily pool + heart milestones.",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue"
+  },
+  "entries": [
+    {
+      "entry_id": "npc_pip_sd_001",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "Mister Jack! I found a SHINY thing by the river! Is it valuable?!",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_sd_002",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "Rain means puddles! Puddles mean TREASURE at the bottom!",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_sd_003",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "The flowers are so pretty! Do you think machines like flowers too?",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_sd_004",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "It's SO HOT! Can your machines make ice? CAN THEY?!",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_sd_005",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "I'm collecting rainwater in jars. For SCIENCE!",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_sd_006",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "Mister Jack, when I grow up, I'm gonna build a mech that touches the CLOUDS!",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_sd_007",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "The leaves are crunchy! CRUNCH CRUNCH CRUNCH! Best season!",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_sd_008",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "I found a worm! Named it Gears. Is that a good name for a worm?",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_sd_009",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "Is the Harvest Faire soon?! I've been practicing for the pie-eating contest!",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_sd_010",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "My nose is cold but my heart is warm! That's what Maren says.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_sd_011",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "weather": "SNOW",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "SNOW! Can we build a snow-automaton?! PLEASE?!",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_sd_012",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "I made a Remembrance Day lantern! It's a little crooked. But it WORKS!",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_sd_013",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "weather": "STORM",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "Storms are LOUD! I'm not scared though. Much.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_sd_014",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "weather": "FOG",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "The fog makes everything look like a ghost town! Spooky! I love it!",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_sd_015",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "Mister Jack! Look what I found! It's a... magneto-something! Is it valuable?!",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_sd_016",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "When I grow up, I'm gonna be an engineer AND an explorer AND a chef!",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_sd_017",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "Spark let me hold a REAL gear today! It was SO HEAVY!",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_sd_018",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "I drew a picture of your workshop! I added extra chimneys. For POWER!",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_sd_019",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "Captain Harrow taught me to salute! LOOK! Am I doing it right?!",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_sd_020",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "Maren told me a story about the Old World. It had LIBRARIES!",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_sd_021",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "I went too far into The Hollow once. I heard noises. It was scary.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_sd_022",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "Can DEJIN tell me a bedtime story? Does DEJIN know bedtime stories?",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_sd_023",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "I found a button today. It's my BEST relic yet. Don't touch it.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_sd_024",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "You'll help me build my cloud-mech, right, Mister Jack? Pinky promise?",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_sd_025",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "Michelle gave me a cookie! She's the NICEST!",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_hm_02",
+      "npc_id": "npc_pip",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 2
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_pip_milestone_2",
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "Mister Jack! I found you a REAL relic this time! I think it's a compass!",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_hm_04",
+      "npc_id": "npc_pip",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 4
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_pip_milestone_4",
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "You're the coolest grown-up in town. Don't tell Spark I said that.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_hm_06",
+      "npc_id": "npc_pip",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 6
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_pip_milestone_6",
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "When I'm scared at night, I think about your machines protecting us. It helps.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_hm_08",
+      "npc_id": "npc_pip",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 8
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_pip_milestone_8",
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "You're like a big brother, Mister Jack. The BEST big brother.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_hm_10",
+      "npc_id": "npc_pip",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 10
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_pip_milestone_10",
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "I'm gonna be an engineer just like you! I already started practicing! Look!",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_y2_spring_031",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "The trade people brought candy from Thornwall! CANDY, Mister Jack! I saved you one. Well, half of one.",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_y2_summer_032",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "I've been watching Captain Harrow drill the militia. He's scary but he said I have 'potential.' That's good, right?",
+          "portrait": "hopeful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_y2_autumn_033",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "Mister Jack? Are the bad men really coming? I... I can help! I've been practicing with the scanner!",
+          "portrait": "scared_brave"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_y2_winter_034",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "I'm not hiding in the shelter. I'm HELPING. I can carry ammo and bandages. I'm not useless!",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_y3_spring_035",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "I found a weird gear in the scrap pile. It's got letters on it I can't read. Want to see?",
+          "portrait": "curious"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_y3_autumn_036",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "YOU'RE BACK! I knew it! I told everyone you'd come back and they said 'we know, Pip' but I KNEW!",
+          "portrait": "overjoyed"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_y3_winter_037",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "I lit a lantern for my mom. She would've been scared. But she would've stayed. She always stayed.",
+          "portrait": "brave_sad"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_pip_y4_spring_038",
+      "npc_id": "npc_pip",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 4,
+        "hearts_gte": 0,
+        "story_flag": "flag_main_story_complete"
+      },
+      "priority": 11,
+      "lines": [
+        {
+          "speaker": "npc_pip",
+          "text": "Mister Jack, when I grow up, I want to be an engineer. Like you. Can you teach me? For real?",
+          "portrait": "hopeful"
+        }
+      ]
+    }
+  ]
+}

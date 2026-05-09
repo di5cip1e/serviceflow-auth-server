@@ -1,0 +1,83 @@
+{
+  "_meta": {
+    "description": "Heart event #5 for npc_kiery: The Protective Gift",
+    "version": "1.0",
+    "objective": "#33/#34"
+  },
+  "event_id": "heart_event_kiery_05",
+  "npc_id": "npc_kiery",
+  "heart_level_required": 7,
+  "location": "rm_int_npc_kiery",
+  "time_range": {
+    "start": 14,
+    "end": 20
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_kiery_event_5_complete",
+  "heart_bonus": 50,
+  "title": "The Protective Gift",
+  "lines": [
+    {
+      "speaker": "npc_kiery",
+      "text": "Jack. I made you something. It took three weeks.",
+      "portrait": "happy"
+    },
+    {
+      "speaker": "narrator",
+      "text": "[Kiery presents a hand-sewn garment with hidden protective panels]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "The outer layer is salvaged silk. The inner lining is reinforced.",
+      "portrait": "happy"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "It won't stop a blade. But it'll slow one.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "I made it because I need you to be safe.",
+      "portrait": "determined"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "Kiery, this is incredible.",
+          "flag": "kiery_gift_awe"
+        },
+        {
+          "text": "You put your heart into every stitch.",
+          "flag": "kiery_gift_heart"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "Every stitch. Literally. Three weeks of worrying about you.",
+      "portrait": "embarrassed"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "Is that too much? It's too much, isn't it?",
+      "portrait": "embarrassed"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "...No. It's exactly the right amount. For someone I...",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "...for someone I care about. Very much.",
+      "portrait": "happy"
+    }
+  ]
+}

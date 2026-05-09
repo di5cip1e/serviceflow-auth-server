@@ -1,0 +1,248 @@
+{
+  "_meta": {
+    "description": "Defense quests \u2014 build defense milestones.",
+    "version": "1.0",
+    "objective": "#41"
+  },
+  "quests": [
+    {
+      "quest_id": "dq_01",
+      "name": "Wall Builder",
+      "type": "DEFENSE",
+      "giver": "npc_harrow",
+      "description": "Build a complete palisade around one defense zone.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_05"
+        ]
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "build",
+          "target": "bp_wooden_palisade",
+          "description": "Build 8 palisade sections",
+          "target_count": 8
+        }
+      ],
+      "rewards": {
+        "cogs": 300,
+        "items": [],
+        "hearts": {
+          "npc_harrow": 2
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "dq_01_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "dq_02",
+      "name": "Turret Line",
+      "type": "DEFENSE",
+      "giver": "npc_harrow",
+      "description": "Build 4+ turrets at the Eastern Gate.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_06"
+        ]
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "build",
+          "target": "bp_ballistic_turret",
+          "description": "Build 4 turrets at Eastern Gate",
+          "target_count": 4
+        }
+      ],
+      "rewards": {
+        "cogs": 500,
+        "items": [],
+        "hearts": {
+          "npc_harrow": 3
+        },
+        "reputation": 20,
+        "story_flags_set": [
+          "dq_02_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "dq_03",
+      "name": "Night Watch",
+      "type": "DEFENSE",
+      "giver": "npc_harrow",
+      "description": "Build and deploy 2 Spotlights before a night raid.",
+      "trigger": {
+        "prerequisite_quests": [
+          "dq_02"
+        ],
+        "year": 1,
+        "season": "WINTER"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "build",
+          "target": "bp_spotlight",
+          "description": "Build 2 Spotlights",
+          "target_count": 2
+        }
+      ],
+      "rewards": {
+        "cogs": 400,
+        "items": [],
+        "hearts": {
+          "npc_harrow": 3
+        },
+        "reputation": 20,
+        "story_flags_set": [
+          "dq_03_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "dq_04",
+      "name": "The Gauntlet",
+      "type": "DEFENSE",
+      "giver": "npc_harrow",
+      "description": "Create a kill corridor with walls and turrets.",
+      "trigger": {
+        "prerequisite_quests": [
+          "dq_03"
+        ],
+        "year": 2,
+        "season": "SPRING"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "build",
+          "target": "bp_stone_wall",
+          "description": "Build stone walls for corridor",
+          "target_count": 6
+        },
+        {
+          "id": "obj_2",
+          "type": "build",
+          "target": "bp_ballistic_turret",
+          "description": "Position turrets in corridor",
+          "target_count": 4
+        }
+      ],
+      "rewards": {
+        "cogs": 600,
+        "items": [],
+        "hearts": {
+          "npc_harrow": 3
+        },
+        "reputation": 25,
+        "story_flags_set": [
+          "dq_04_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "dq_05",
+      "name": "Iron Wall",
+      "type": "DEFENSE",
+      "giver": "npc_harrow",
+      "description": "Upgrade all wooden palisades to stone walls.",
+      "trigger": {
+        "prerequisite_quests": [
+          "dq_04"
+        ],
+        "year": 2,
+        "season": "SUMMER"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "build",
+          "target": "bp_stone_wall",
+          "description": "Replace all palisades with stone",
+          "target_count": 12
+        }
+      ],
+      "rewards": {
+        "cogs": 800,
+        "items": [],
+        "hearts": {
+          "npc_harrow": 4
+        },
+        "reputation": 30,
+        "story_flags_set": [
+          "dq_05_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "dq_06",
+      "name": "Shield Day",
+      "type": "DEFENSE",
+      "giver": "npc_harrow",
+      "description": "Build an Energy Shield Generator before the siege.",
+      "trigger": {
+        "prerequisite_quests": [
+          "dq_05"
+        ],
+        "year": 2,
+        "season": "AUTUMN"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "build",
+          "target": "bp_energy_shield",
+          "description": "Build Energy Shield Generator",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 1000,
+        "items": [],
+        "hearts": {
+          "npc_harrow": 5
+        },
+        "reputation": 40,
+        "story_flags_set": [
+          "dq_06_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "dq_07",
+      "name": "Fortress Coppervale",
+      "type": "DEFENSE",
+      "giver": "npc_harrow",
+      "description": "Achieve defense rating 80+.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_27"
+        ]
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "achieve_rating",
+          "target": "defense_rating",
+          "description": "Achieve defense rating 80+",
+          "target_count": 80
+        }
+      ],
+      "rewards": {
+        "cogs": 2000,
+        "items": [],
+        "hearts": {
+          "all_npcs": 3
+        },
+        "reputation": 50,
+        "story_flags_set": [
+          "dq_07_complete"
+        ]
+      }
+    }
+  ]
+}

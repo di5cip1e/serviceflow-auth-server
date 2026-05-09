@@ -1,0 +1,159 @@
+{
+  "_meta": {
+    "description": "Freelance Marauders — first enemy faction encountered. Disorganized raiders with basic equipment.",
+    "version": "1.0",
+    "objective": "#23 Tower Defense Raid System"
+  },
+
+  "enemy_freelance_raider": {
+    "id": "enemy_freelance_raider",
+    "name": "Freelance Raider",
+    "faction": "FREELANCE",
+    "type": "INFANTRY",
+    "tier": 1,
+    "base_stats": {
+      "hp": 30,
+      "speed": 1.5,
+      "damage": 8,
+      "armor": 2,
+      "attack_range": 1
+    },
+    "behavior": "PATHFIND_TO_TARGET",
+    "target_priority": "TOWN_CENTER",
+    "sprite": "spr_enemy_freelance_raider",
+    "loot_table": [
+      { "item_id": "item_scrap_iron",    "chance": 0.6, "quantity_min": 1, "quantity_max": 3 },
+      { "item_id": "item_copper_ore",    "chance": 0.3, "quantity_min": 1, "quantity_max": 2 },
+      { "item_id": "item_iron_nails",    "chance": 0.2, "quantity_min": 1, "quantity_max": 4 }
+    ],
+    "description": "Common marauder. Poorly equipped but dangerous in numbers."
+  },
+
+  "enemy_freelance_brute": {
+    "id": "enemy_freelance_brute",
+    "name": "Freelance Brute",
+    "faction": "FREELANCE",
+    "type": "HEAVY_INFANTRY",
+    "tier": 1,
+    "base_stats": {
+      "hp": 60,
+      "speed": 1.0,
+      "damage": 15,
+      "armor": 5,
+      "attack_range": 1
+    },
+    "behavior": "PATHFIND_TO_TARGET",
+    "target_priority": "NEAREST_STRUCTURE",
+    "sprite": "spr_enemy_freelance_brute",
+    "loot_table": [
+      { "item_id": "item_scrap_iron",    "chance": 0.8, "quantity_min": 2, "quantity_max": 5 },
+      { "item_id": "item_steel_plate",   "chance": 0.2, "quantity_min": 1, "quantity_max": 1 }
+    ],
+    "description": "Tough melee fighter. Prioritizes smashing structures."
+  },
+
+  "enemy_freelance_sapper": {
+    "id": "enemy_freelance_sapper",
+    "name": "Freelance Sapper",
+    "faction": "FREELANCE",
+    "type": "SAPPER",
+    "tier": 1,
+    "base_stats": {
+      "hp": 20,
+      "speed": 2.0,
+      "damage": 25,
+      "armor": 0,
+      "attack_range": 1,
+      "damage_vs_walls_mult": 3.0
+    },
+    "behavior": "PATHFIND_TO_WALLS",
+    "target_priority": "NEAREST_WALL",
+    "sprite": "spr_enemy_freelance_sapper",
+    "loot_table": [
+      { "item_id": "item_scrap_iron",    "chance": 0.5, "quantity_min": 1, "quantity_max": 2 },
+      { "item_id": "item_gunpowder",     "chance": 0.3, "quantity_min": 1, "quantity_max": 1 }
+    ],
+    "description": "Fast, fragile demolitions expert. Deals massive damage to walls."
+  },
+
+  "enemy_freelance_archer": {
+    "id": "enemy_freelance_archer",
+    "name": "Freelance Archer",
+    "faction": "FREELANCE",
+    "type": "RANGED",
+    "tier": 1,
+    "base_stats": {
+      "hp": 20,
+      "speed": 1.8,
+      "damage": 10,
+      "armor": 1,
+      "attack_range": 5
+    },
+    "behavior": "RANGED_ATTACK",
+    "target_priority": "NEAREST_TURRET",
+    "sprite": "spr_enemy_freelance_archer",
+    "loot_table": [
+      { "item_id": "item_scrap_iron",    "chance": 0.4, "quantity_min": 1, "quantity_max": 2 },
+      { "item_id": "item_arrow_bundle",  "chance": 0.3, "quantity_min": 1, "quantity_max": 1 }
+    ],
+    "description": "Ranged attacker. Prioritizes turrets to weaken defenses."
+  },
+
+  "enemy_freelance_lieutenant": {
+    "id": "enemy_freelance_lieutenant",
+    "name": "Freelance Lieutenant",
+    "faction": "FREELANCE",
+    "type": "ELITE",
+    "tier": 2,
+    "base_stats": {
+      "hp": 120,
+      "speed": 1.3,
+      "damage": 20,
+      "armor": 10,
+      "attack_range": 1
+    },
+    "behavior": "PATHFIND_TO_TARGET",
+    "target_priority": "TOWN_CENTER",
+    "sprite": "spr_enemy_freelance_lieutenant",
+    "abilities": ["rally_nearby"],
+    "rally_nearby": {
+      "radius": 4,
+      "speed_buff": 1.3,
+      "damage_buff": 1.2,
+      "duration_seconds": 10
+    },
+    "loot_table": [
+      { "item_id": "item_scrap_iron",      "chance": 1.0, "quantity_min": 3, "quantity_max": 6 },
+      { "item_id": "item_steel_plate",     "chance": 0.5, "quantity_min": 1, "quantity_max": 2 },
+      { "item_id": "item_brass_gears",     "chance": 0.3, "quantity_min": 1, "quantity_max": 2 }
+    ],
+    "description": "Experienced leader. Rallies nearby units for increased effectiveness."
+  },
+
+  "enemy_freelance_thief": {
+    "id": "enemy_freelance_thief",
+    "name": "Freelance Thief",
+    "faction": "FREELANCE",
+    "type": "STEALTH",
+    "tier": 1,
+    "base_stats": {
+      "hp": 15,
+      "speed": 2.5,
+      "damage": 5,
+      "armor": 0,
+      "attack_range": 1
+    },
+    "behavior": "PATHFIND_TO_WORKSHOP",
+    "target_priority": "WORKSHOP",
+    "sprite": "spr_enemy_freelance_thief",
+    "special": {
+      "stealth": true,
+      "detection_difficulty": 0.5,
+      "steal_amount": 3
+    },
+    "loot_table": [
+      { "item_id": "item_scrap_iron", "chance": 0.3, "quantity_min": 1, "quantity_max": 1 }
+    ],
+    "description": "Sneaky infiltrator. Runs past defenses to steal from the workshop."
+  }
+}

@@ -1,0 +1,648 @@
+{
+  "_meta": {
+    "description": "Dialogue data for Leera (Salvage Scout / Explorer). Seasonal/daily pool + heart milestones.",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue"
+  },
+  "entries": [
+    {
+      "entry_id": "npc_leera_sd_001",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Hey, Jack. Heading toward the treeline today. Keep up if you want.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_sd_002",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Rain doesn't stop expeditions. Just makes them more interesting.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_sd_003",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Found fresh tracks near the Rustwood. Something big. Exciting.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_sd_004",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Perfect scouting weather! The ruins are calling, Jack!",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_sd_005",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Wet ruins are slippery ruins. Brought extra rope. Always bring extra rope.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_sd_006",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Mapped a new path through the foothills. Shaves two hours off the trek.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_sd_007",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Autumn in the Rustwood is gorgeous. Copper leaves, copper bark, copper everything.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_sd_008",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Muddy trails mean fresh prints. Tracked a patrol route today.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_sd_009",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Stocking up for winter expeditions. Cold doesn't scare me. Boredom does.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_sd_010",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Crisp air, clear sightlines. Winter scouting has its perks.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_sd_011",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "weather": "SNOW",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Snow reveals everything. Tracks, hidden paths, buried ruins. Nature's treasure map.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_sd_012",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Harrow wants me to scout the eastern road. Again. Fine. I'll find something cool.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_sd_013",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "weather": "STORM",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Storm's too wild even for me. ALMOST too wild. Okay, maybe I went out briefly.",
+          "portrait": "embarrassed"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_sd_014",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "weather": "FOG",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Fog is a scout's worst friend. Can't see past twenty feet. Staying close today.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_sd_015",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Race you to The Hollow and back. Loser buys drinks at the Gear. Ready? GO!",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_sd_016",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Found this in the Rustwood. Fully intact pre-war compass. Pretty, right? Don't tell anyone I said pretty.",
+          "portrait": "embarrassed"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_sd_017",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "What happens when there's nothing left to explore? When every ruin is mapped?",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_sd_018",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Brought back components from the coast. Salt-corroded but salvageable.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_sd_019",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Pip wants to come exploring. I said she's too young. She said I started at her age. She's right.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_sd_020",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Kaydee made me pay FULL PRICE for ale last night. After I brought her rare ingredients!",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_sd_021",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "The world's bigger than Coppervale, Jack. There's so much out there.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_sd_022",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "I don't get scared easily. But the deep Rustwood at night... even I hurry.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_sd_023",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Michelle patched up my ankle again. Third time this season. She didn't even lecture me.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_sd_024",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Found a vantage point where you can see the Spire on clear days. Breathtaking.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_sd_025",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Home isn't where you sleep. It's where someone's waiting for you. I'm learning that.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_hm_02",
+      "npc_id": "npc_leera",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 2
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_leera_milestone_2",
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Here. A salvage map I drew myself. Best spots marked. Don't share it.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_hm_04",
+      "npc_id": "npc_leera",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 4
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_leera_milestone_4",
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "You know, most people think I'm reckless. You see something different. I appreciate that.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_hm_06",
+      "npc_id": "npc_leera",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 6
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_leera_milestone_6",
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "I found something in the ruins. I've never shown anyone. Come with me?",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_hm_08",
+      "npc_id": "npc_leera",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 8
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_leera_milestone_8",
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Jack... what if home isn't a place? What if it's a person? Hypothetically.",
+          "portrait": "embarrassed"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_hm_10",
+      "npc_id": "npc_leera",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 10
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_leera_milestone_10",
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Wherever I go, I'll always come back. To Coppervale. To you. That's a promise.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_y2_spring_031",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Led the patrol along the new trade route. Clean run. Almost boring. Almost.",
+          "portrait": "satisfied"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_y2_summer_032",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "The bunker data you brought back — I studied the patrol maps. The Marshal's got blind spots. We can exploit them.",
+          "portrait": "strategic"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_y2_autumn_033",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Let him come. I've been waiting for a real fight.",
+          "portrait": "fierce"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_y2_winter_034",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Side by side on the walls, Jack. Where else would I be?",
+          "portrait": "loyal"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_y3_spring_035",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "I'm coming with you to the Spire. Don't even try to argue.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_y3_autumn_036",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "We did it. Together. Just like I knew we would.",
+          "portrait": "proud"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_leera_y4_spring_037",
+      "npc_id": "npc_leera",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 4,
+        "hearts_gte": 0,
+        "story_flag": "flag_main_story_complete"
+      },
+      "priority": 11,
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "Peace is... quieter than I expected. I'm learning to enjoy it. Slowly.",
+          "portrait": "adjusting"
+        }
+      ]
+    }
+  ]
+}

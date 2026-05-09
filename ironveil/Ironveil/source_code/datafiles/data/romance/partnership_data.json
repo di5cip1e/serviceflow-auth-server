@@ -1,0 +1,170 @@
+{
+  "_meta": {
+    "description": "Partnership ceremony data and post-partnership content for all 6 romance candidates.",
+    "version": "1.0",
+    "objective": "#34 Romance System"
+  },
+
+  "partnership_requirements": {
+    "heart_level": 10,
+    "story_flag_required": "romance_active_[npc_id]",
+    "triggers_flag": "partnership_[npc_id]",
+    "ceremony_location": "rm_town_coppervale",
+    "officiant": "npc_linden"
+  },
+
+  "ceremony_dialogue": {
+    "officiant_opening": "Friends of Coppervale! We gather today to witness a partnership — a promise made not just between two people, but to this community we've built together.",
+    "officiant_vows": "Do you, Jack, promise to stand with [PARTNER_NAME] through every season, every raid, every quiet evening and every storm?",
+    "player_response": "I do.",
+    "officiant_declaration": "Then by the authority vested in me by this town and its people — I declare you partners. May your workshop always hum and your hearth always burn warm.",
+    "crowd_reactions": {
+      "npc_spark": "WOOOO! YEAH! This is the BEST DAY!",
+      "npc_harrow": "...Congratulations. Carry on.",
+      "npc_pip": "They're MARRIED! Wait, are they married? Is this married?!",
+      "npc_maren": "Oh, my dears. My heart is so full. Oren would have loved this.",
+      "npc_kaydee": "Drinks are on the house tonight! ...Don't get used to it."
+    }
+  },
+
+  "partners": {
+    "npc_leera": {
+      "partner_schedule_override": {
+        "morning": { "start_hour": 7, "end_hour": 9, "location": "rm_int_living_quarters", "pos": [4, 3], "note": "Morning together" },
+        "evening": { "start_hour": 20, "end_hour": 22, "location": "rm_int_living_quarters", "pos": [4, 3], "note": "Evening at home" }
+      },
+      "morning_dialogue_pool": [
+        "Morning! I already scouted the perimeter. Habit. Coffee?",
+        "I mapped three new routes in my head while you were sleeping. Is that weird?",
+        "Hey. Still here. Still choosing this. Every morning."
+      ],
+      "evening_dialogue_pool": [
+        "Tell me about your day. Every gear and bolt.",
+        "I found something on my run today. Closing my eyes. Hold out your hand.",
+        "The stars are good tonight. Come look. Bring a blanket."
+      ],
+      "packed_lunch_items": ["item_trail_rations", "item_energy_bar", "item_dried_fruit"],
+      "partner_activity": {
+        "name": "Joint Expedition",
+        "description": "Explore together — Leera scouts while Jack salvages. Double discovery chance.",
+        "bonus": "exploration_discovery_chance_x2"
+      },
+      "anniversary_line": "One year. You know what? I'd race you to The Hollow and back right now. For old times' sake."
+    },
+    "npc_michelle": {
+      "partner_schedule_override": {
+        "morning": { "start_hour": 7, "end_hour": 9, "location": "rm_int_living_quarters", "pos": [4, 3], "note": "Morning together" },
+        "evening": { "start_hour": 20, "end_hour": 22, "location": "rm_int_living_quarters", "pos": [4, 3], "note": "Evening at home" }
+      },
+      "morning_dialogue_pool": [
+        "G-good morning. I made tea. The chamomile kind you like.",
+        "I checked your hands while you slept. No new calluses. Good.",
+        "The greenhouse is blooming. I named the biggest flower after you. Don't tell anyone."
+      ],
+      "evening_dialogue_pool": [
+        "How are you? Really. Not the engineer answer. The real one.",
+        "I saved you some of the herbal blend I made today. It's calming.",
+        "Can we just sit? Quietly? I like quiet with you."
+      ],
+      "packed_lunch_items": ["item_herbal_tea", "item_fresh_bread", "item_medicinal_salve"],
+      "partner_activity": {
+        "name": "Herb Garden",
+        "description": "Tend the greenhouse together — Michelle grows, Jack builds trellises. Rare herb yield bonus.",
+        "bonus": "herb_yield_x1_5"
+      },
+      "anniversary_line": "One year. I still can't believe you built me a greenhouse. I still can't believe you chose me."
+    },
+    "npc_kaydee": {
+      "partner_schedule_override": {
+        "morning": { "start_hour": 9, "end_hour": 10, "location": "rm_int_living_quarters", "pos": [4, 3], "note": "Late morning (she sleeps in)" },
+        "evening": { "start_hour": 22, "end_hour": 23, "location": "rm_int_living_quarters", "pos": [4, 3], "note": "Late evening after tavern closes" }
+      },
+      "morning_dialogue_pool": [
+        "Coffee. Don't talk to me until I've had coffee. ...Good morning.",
+        "I dreamed about inventory management. This is YOUR fault.",
+        "You're still here. Good. I mean — obviously you're still here. Whatever."
+      ],
+      "evening_dialogue_pool": [
+        "Long night at the Gear. Come sit with me. Don't talk. Just sit.",
+        "I saved you the good stuff. Top shelf. Don't tell the customers.",
+        "You know what nobody tells you about love? It's exhausting. In the best way."
+      ],
+      "packed_lunch_items": ["item_tavern_stew", "item_strong_coffee", "item_honey_cake"],
+      "partner_activity": {
+        "name": "Tavern Improvements",
+        "description": "Build upgrades for The Rusty Gear — Jack engineers, Kaydee designs. Community morale bonus.",
+        "bonus": "community_morale_x1_2"
+      },
+      "anniversary_line": "One year. I still don't have a witty comeback for how you make me feel. I've stopped trying."
+    },
+    "npc_janis": {
+      "partner_schedule_override": {
+        "morning": { "start_hour": 7, "end_hour": 8, "location": "rm_int_living_quarters", "pos": [4, 3], "note": "Early morning (she's punctual)" },
+        "evening": { "start_hour": 20, "end_hour": 22, "location": "rm_int_living_quarters", "pos": [4, 3], "note": "Evening at home" }
+      },
+      "morning_dialogue_pool": [
+        "Good morning. I've already drafted a schedule for today. Yours is on the table.",
+        "The sunrise was 7% more vivid than yesterday. I'm tracking it. For... personal reasons.",
+        "I wrote my mother again. This time I didn't apologize for staying."
+      ],
+      "evening_dialogue_pool": [
+        "Tell me about the machines. I find your explanations... soothing.",
+        "I reorganized the bookshelf. By subject, then author, then publication date. You're welcome.",
+        "Jack. Thank you for letting me be imperfect in front of you."
+      ],
+      "packed_lunch_items": ["item_refined_meal", "item_imported_tea", "item_energy_supplement"],
+      "partner_activity": {
+        "name": "Administrative Optimization",
+        "description": "Janis coordinates town logistics while Jack engineers solutions. Resource efficiency bonus.",
+        "bonus": "resource_efficiency_x1_15"
+      },
+      "anniversary_line": "One year. I had a speech prepared. But you taught me that sometimes the best words are the simplest. I love you."
+    },
+    "npc_kiery": {
+      "partner_schedule_override": {
+        "morning": { "start_hour": 7, "end_hour": 9, "location": "rm_int_living_quarters", "pos": [4, 3], "note": "Morning together" },
+        "evening": { "start_hour": 20, "end_hour": 22, "location": "rm_int_living_quarters", "pos": [4, 3], "note": "Evening at home" }
+      },
+      "morning_dialogue_pool": [
+        "Good morning. I've been sewing since dawn. I made you a pocket square. It's nothing.",
+        "The morning light is perfect for dyeing. Want to help? I'll teach you.",
+        "I chose this. Every morning I wake up and I choose this. I want you to know that."
+      ],
+      "evening_dialogue_pool": [
+        "I finished a new tapestry today. It has our workshop in it. And two figures. Guess who.",
+        "Can I mend that shirt? It has a tear on the shoulder. I noticed three days ago.",
+        "Tell me about your day. All of it. Even the boring parts. Especially the boring parts."
+      ],
+      "packed_lunch_items": ["item_homemade_bread", "item_wildflower_tea", "item_fruit_preserves"],
+      "partner_activity": {
+        "name": "Textile Engineering",
+        "description": "Combine Kiery's weaving with Jack's engineering — create reinforced fabrics. Armor quality bonus.",
+        "bonus": "armor_quality_x1_1"
+      },
+      "anniversary_line": "One year. I made you something. It took a month. Every stitch is a day I chose you."
+    },
+    "npc_paige": {
+      "partner_schedule_override": {
+        "morning": { "start_hour": 7, "end_hour": 8, "location": "rm_int_living_quarters", "pos": [4, 3], "note": "Morning together" },
+        "evening": { "start_hour": 21, "end_hour": 22, "location": "rm_int_living_quarters", "pos": [4, 3], "note": "Late evening after Archive closes" }
+      },
+      "morning_dialogue_pool": [
+        "Good morning. I've bookmarked three passages I think you'd appreciate.",
+        "Coffee is on the counter. I measured the grounds precisely. You'll notice the difference.",
+        "Wren's memorial day was yesterday. I went. I told him about us. He'd approve."
+      ],
+      "evening_dialogue_pool": [
+        "I catalogued twelve new documents today. A productive day by any measure.",
+        "Read to me? Anything. I just want to hear your voice while I organize these notes.",
+        "The Archive closes at dusk. But home opens at dusk. I like that symmetry."
+      ],
+      "packed_lunch_items": ["item_pressed_sandwich", "item_bookmarked_note", "item_dried_fruit"],
+      "partner_activity": {
+        "name": "Research Partnership",
+        "description": "Paige researches while Jack engineers prototypes. Blueprint research speed bonus.",
+        "bonus": "research_speed_x1_25"
+      },
+      "anniversary_line": "One year. I started a new section in the Archive. 'Personal History.' It begins with you."
+    }
+  }
+}

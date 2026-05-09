@@ -1,0 +1,1051 @@
+{
+  "_meta": {
+    "description": "Core NPC side quest chains (Spark, Harrow, Maren, Linden, Pip).",
+    "version": "1.0",
+    "objective": "#41"
+  },
+  "quests": [
+    {
+      "quest_id": "sq_spark_01",
+      "name": "Spark's Challenge",
+      "type": "SIDE_NPC",
+      "giver": "npc_spark",
+      "description": "Spark challenges Jack to build a better gadget. Timed crafting mini-game.",
+      "trigger": {
+        "prerequisite_quests": [],
+        "heart_level": {
+          "npc_spark": 2
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "craft",
+          "target": "gadget_challenge",
+          "description": "Win the crafting challenge",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 200,
+        "items": [
+          {
+            "item_id": "item_rare_gear",
+            "quantity": 1
+          }
+        ],
+        "hearts": {
+          "npc_spark": 3
+        },
+        "reputation": 10,
+        "story_flags_set": [
+          "sq_spark_01_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_spark_02",
+      "name": "Grounded Dreams",
+      "type": "SIDE_NPC",
+      "giver": "npc_spark",
+      "description": "Spark shows her secret flying machine project. Needs Flight Components.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_spark_01"
+        ],
+        "heart_level": {
+          "npc_spark": 3
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "visit",
+          "target": "rm_int_npc_spark",
+          "description": "See Spark's secret project",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "gather",
+          "target": "item_flight_component",
+          "description": "Find 5 Flight Components",
+          "target_count": 5
+        }
+      ],
+      "rewards": {
+        "cogs": 300,
+        "items": [],
+        "hearts": {
+          "npc_spark": 3
+        },
+        "reputation": 10,
+        "story_flags_set": [
+          "sq_spark_02_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_spark_03",
+      "name": "Test Flight",
+      "type": "SIDE_NPC",
+      "giver": "npc_spark",
+      "description": "Help test Spark's prototype. It crashes. Repair and analyze.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_spark_02"
+        ],
+        "heart_level": {
+          "npc_spark": 4
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "visit",
+          "target": "rm_town_coppervale",
+          "description": "Watch test flight",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "craft",
+          "target": "flyer_repair_spark",
+          "description": "Repair the prototype",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 400,
+        "items": [],
+        "hearts": {
+          "npc_spark": 4
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "sq_spark_03_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_spark_04",
+      "name": "Spark's Fear",
+      "type": "SIDE_NPC",
+      "giver": "npc_spark",
+      "description": "Spark confides she's afraid she'll never fly. Encourage or challenge her.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_spark_03"
+        ],
+        "heart_level": {
+          "npc_spark": 5
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "talk",
+          "target": "npc_spark",
+          "description": "Talk to Spark about her fears",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "choice",
+          "target": "spark_encouragement",
+          "description": "Encourage or challenge",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 200,
+        "items": [
+          {
+            "item_id": "item_music_box",
+            "quantity": 1
+          }
+        ],
+        "hearts": {
+          "npc_spark": 5
+        },
+        "reputation": 10,
+        "story_flags_set": [
+          "sq_spark_04_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_spark_05",
+      "name": "Wind Beneath",
+      "type": "SIDE_NPC",
+      "giver": "npc_spark",
+      "description": "Secretly build critical flight components while Spark sleeps.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_spark_04"
+        ],
+        "heart_level": {
+          "npc_spark": 6
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "craft",
+          "target": "item_flight_engine_spark",
+          "description": "Build flight engine components",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 500,
+        "items": [],
+        "hearts": {
+          "npc_spark": 5
+        },
+        "reputation": 20,
+        "story_flags_set": [
+          "sq_spark_05_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_spark_06",
+      "name": "First Flight",
+      "type": "SIDE_NPC",
+      "giver": "npc_spark",
+      "description": "Spark's machine flies! Watch from The Overlook as she soars.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_spark_05"
+        ],
+        "heart_level": {
+          "npc_spark": 7
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "visit",
+          "target": "rm_town_coppervale",
+          "description": "Watch from The Overlook",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 800,
+        "items": [],
+        "hearts": {
+          "npc_spark": 8
+        },
+        "reputation": 30,
+        "story_flags_set": [
+          "sq_spark_06_complete",
+          "spark_can_fly"
+        ],
+        "blueprints": [
+          "bp_personal_flyer_upgrade"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_harrow_01",
+      "name": "The Perimeter",
+      "type": "SIDE_NPC",
+      "giver": "npc_harrow",
+      "description": "Join Harrow on a perimeter patrol. Learn defensive positioning.",
+      "trigger": {
+        "prerequisite_quests": [],
+        "heart_level": {
+          "npc_harrow": 2
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "visit",
+          "target": "rm_town_coppervale",
+          "description": "Join Harrow's patrol",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "talk",
+          "target": "npc_harrow",
+          "description": "Learn defense strategy",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 200,
+        "items": [],
+        "hearts": {
+          "npc_harrow": 3
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "sq_harrow_01_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_harrow_02",
+      "name": "Ghosts",
+      "type": "SIDE_NPC",
+      "giver": "npc_harrow",
+      "description": "Help Harrow recover something from a Sundering-era battlefield.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_harrow_01"
+        ],
+        "heart_level": {
+          "npc_harrow": 3
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "explore",
+          "target": "rm_explore_ashspine_foothills",
+          "description": "Visit the old battlefield",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "gather",
+          "target": "item_military_dog_tags",
+          "description": "Recover the dog tags",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 300,
+        "items": [],
+        "hearts": {
+          "npc_harrow": 3
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "sq_harrow_02_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_harrow_03",
+      "name": "The Weight of Command",
+      "type": "SIDE_NPC",
+      "giver": "npc_harrow",
+      "description": "During a raid, Harrow freezes. After, he tells Jack about his lost soldiers.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_harrow_02"
+        ],
+        "heart_level": {
+          "npc_harrow": 4
+        },
+        "story_flags": [
+          "first_raid_survived"
+        ]
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "talk",
+          "target": "npc_harrow",
+          "description": "Listen to Harrow's story",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 200,
+        "items": [
+          {
+            "item_id": "item_harrows_medal",
+            "quantity": 1
+          }
+        ],
+        "hearts": {
+          "npc_harrow": 4
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "sq_harrow_03_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_harrow_04",
+      "name": "Old Debts",
+      "type": "SIDE_NPC",
+      "giver": "npc_harrow",
+      "description": "A former comrade accuses Harrow of abandoning their unit. Investigate.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_harrow_03"
+        ],
+        "heart_level": {
+          "npc_harrow": 5
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "talk",
+          "target": "visitor_comrade",
+          "description": "Talk to the visitor",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "inspect",
+          "target": "military_records",
+          "description": "Research military records",
+          "target_count": 1
+        },
+        {
+          "id": "obj_3",
+          "type": "talk",
+          "target": "npc_harrow",
+          "description": "Present findings to Harrow",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 400,
+        "items": [],
+        "hearts": {
+          "npc_harrow": 5
+        },
+        "reputation": 20,
+        "story_flags_set": [
+          "sq_harrow_04_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_harrow_05",
+      "name": "Stand Down, Soldier",
+      "type": "SIDE_NPC",
+      "giver": "npc_harrow",
+      "description": "After the siege, Harrow considers retiring. Help him find new purpose.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_harrow_04"
+        ],
+        "heart_level": {
+          "npc_harrow": 7
+        },
+        "story_flags": [
+          "siege_survived"
+        ]
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "talk",
+          "target": "npc_harrow",
+          "description": "Talk to Harrow about his future",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 500,
+        "items": [],
+        "hearts": {
+          "npc_harrow": 8
+        },
+        "reputation": 25,
+        "story_flags_set": [
+          "sq_harrow_05_complete"
+        ],
+        "unlocks": [
+          "militia_upgrade"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_maren_01",
+      "name": "Tea and Memories",
+      "type": "SIDE_NPC",
+      "giver": "npc_maren",
+      "description": "Visit Maren for tea. She shares stories of the Old World.",
+      "trigger": {
+        "prerequisite_quests": [],
+        "heart_level": {
+          "npc_maren": 2
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "visit",
+          "target": "rm_int_npc_maren",
+          "description": "Visit Maren for tea",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 100,
+        "items": [
+          {
+            "item_id": "item_marens_cookie_recipe",
+            "quantity": 1
+          }
+        ],
+        "hearts": {
+          "npc_maren": 3
+        },
+        "reputation": 5,
+        "story_flags_set": [
+          "sq_maren_01_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_maren_02",
+      "name": "The Workshop Before",
+      "type": "SIDE_NPC",
+      "giver": "npc_maren",
+      "description": "Maren has a lucid day. She remembers where her husband hid something.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_maren_01"
+        ],
+        "heart_level": {
+          "npc_maren": 3
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "escort",
+          "target": "npc_maren",
+          "description": "Accompany Maren to the workshop",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "inspect",
+          "target": "hidden_cache",
+          "description": "Find the hidden cache",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 200,
+        "items": [
+          {
+            "item_id": "item_rare_component",
+            "quantity": 3
+          }
+        ],
+        "hearts": {
+          "npc_maren": 3
+        },
+        "reputation": 10,
+        "story_flags_set": [
+          "sq_maren_02_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_maren_03",
+      "name": "Recording",
+      "type": "SIDE_NPC",
+      "giver": "dejin",
+      "description": "DEJIN suggests recording Maren's memories before they fade.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_maren_02"
+        ],
+        "heart_level": {
+          "npc_maren": 4
+        },
+        "story_flags": [
+          "dejin_name_discovered"
+        ]
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "craft",
+          "target": "recording_device",
+          "description": "Build a recording device",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "talk",
+          "target": "npc_maren",
+          "description": "Record Maren's memories",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 300,
+        "items": [],
+        "hearts": {
+          "npc_maren": 4
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "sq_maren_03_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_maren_04",
+      "name": "The Forgetting",
+      "type": "SIDE_NPC",
+      "giver": "npc_maren",
+      "description": "Maren doesn't recognize Jack. Gently reintroduce yourself.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_maren_03"
+        ],
+        "heart_level": {
+          "npc_maren": 5
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "talk",
+          "target": "npc_maren",
+          "description": "Reintroduce yourself gently",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "talk",
+          "target": "npc_michelle",
+          "description": "Ask Michelle to check on Maren",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 0,
+        "items": [],
+        "hearts": {
+          "npc_maren": 5,
+          "npc_michelle": 2
+        },
+        "reputation": 10,
+        "story_flags_set": [
+          "sq_maren_04_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_maren_05",
+      "name": "Maren's Legacy",
+      "type": "SIDE_NPC",
+      "giver": "npc_maren",
+      "description": "In her last lucid period, Maren gives Jack her husband's master blueprint.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_maren_04"
+        ],
+        "heart_level": {
+          "npc_maren": 6
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "visit",
+          "target": "rm_int_npc_maren",
+          "description": "Visit Maren",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 0,
+        "items": [],
+        "hearts": {
+          "npc_maren": 8
+        },
+        "reputation": 20,
+        "story_flags_set": [
+          "sq_maren_05_complete",
+          "marens_legacy"
+        ],
+        "blueprints": [
+          "bp_legendary_machine"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_linden_01",
+      "name": "Welcome Wagon",
+      "type": "SIDE_NPC",
+      "giver": "npc_linden",
+      "description": "Help welcome a new family to Coppervale.",
+      "trigger": {
+        "prerequisite_quests": [],
+        "heart_level": {
+          "npc_linden": 2
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "talk",
+          "target": "new_family",
+          "description": "Welcome the new family",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "visit",
+          "target": "rm_int_workshop",
+          "description": "Show them the workshop",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 200,
+        "items": [],
+        "hearts": {
+          "npc_linden": 3
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "sq_linden_01_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_linden_02",
+      "name": "The Clocktower",
+      "type": "SIDE_NPC",
+      "giver": "npc_linden",
+      "description": "The town clocktower needs repair \u2014 it's Coppervale's symbol of hope.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_linden_01"
+        ],
+        "heart_level": {
+          "npc_linden": 3
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "gather",
+          "target": "item_brass_gears",
+          "description": "Gather 4 brass gears",
+          "target_count": 4
+        },
+        {
+          "id": "obj_2",
+          "type": "craft",
+          "target": "clocktower_repair",
+          "description": "Repair the clocktower",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 300,
+        "items": [],
+        "hearts": {
+          "npc_linden": 4,
+          "all_npcs": 1
+        },
+        "reputation": 20,
+        "story_flags_set": [
+          "sq_linden_02_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_linden_03",
+      "name": "Linden's Doubt",
+      "type": "SIDE_NPC",
+      "giver": "npc_linden",
+      "description": "After a difficult raid, Linden doubts himself. Encourage him.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_linden_02"
+        ],
+        "heart_level": {
+          "npc_linden": 5
+        },
+        "story_flags": [
+          "first_raid_survived"
+        ]
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "talk",
+          "target": "npc_linden",
+          "description": "Encourage Mayor Linden",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 200,
+        "items": [],
+        "hearts": {
+          "npc_linden": 5
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "sq_linden_03_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_linden_04",
+      "name": "The Vision",
+      "type": "SIDE_NPC",
+      "giver": "npc_linden",
+      "description": "Linden shares his dream for Coppervale's future. Help draft the plan.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_linden_03"
+        ],
+        "heart_level": {
+          "npc_linden": 7
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "talk",
+          "target": "npc_linden",
+          "description": "Discuss the vision",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "craft",
+          "target": "town_plan",
+          "description": "Draft the development plan",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 500,
+        "items": [],
+        "hearts": {
+          "npc_linden": 8
+        },
+        "reputation": 30,
+        "story_flags_set": [
+          "sq_linden_04_complete"
+        ],
+        "unlocks": [
+          "town_development_projects"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_pip_01",
+      "name": "Look What I Found!",
+      "type": "SIDE_NPC",
+      "giver": "npc_pip",
+      "description": "Pip shows his relic collection. One item is actually valuable.",
+      "trigger": {
+        "prerequisite_quests": [],
+        "heart_level": {
+          "npc_pip": 1
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "talk",
+          "target": "npc_pip",
+          "description": "Examine Pip's collection",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 50,
+        "items": [
+          {
+            "item_id": "item_rare_component",
+            "quantity": 1
+          }
+        ],
+        "hearts": {
+          "npc_pip": 2
+        },
+        "reputation": 5,
+        "story_flags_set": [
+          "sq_pip_01_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_pip_02",
+      "name": "Treasure Hunt",
+      "type": "SIDE_NPC",
+      "giver": "npc_pip",
+      "description": "Follow Pip's hand-drawn treasure map.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_pip_01"
+        ],
+        "heart_level": {
+          "npc_pip": 2
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "have_item",
+          "target": "item_pips_map",
+          "description": "Follow Pip's map",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "reach",
+          "target": "treasure_location",
+          "description": "Find the treasure",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 200,
+        "items": [],
+        "hearts": {
+          "npc_pip": 3
+        },
+        "reputation": 10,
+        "story_flags_set": [
+          "sq_pip_02_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_pip_03",
+      "name": "The Scary Place",
+      "type": "SIDE_NPC",
+      "giver": "npc_pip",
+      "description": "Pip got lost near The Hollow. Find and rescue him.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_pip_02"
+        ],
+        "heart_level": {
+          "npc_pip": 3
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "reach",
+          "target": "hollow_edge",
+          "description": "Search near The Hollow",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "escort",
+          "target": "npc_pip",
+          "description": "Bring Pip home safely",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 200,
+        "items": [],
+        "hearts": {
+          "npc_pip": 4,
+          "npc_harrow": 2
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "sq_pip_03_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_pip_04",
+      "name": "Pip's Dream",
+      "type": "SIDE_NPC",
+      "giver": "npc_pip",
+      "description": "Pip wants to be an engineer. Build him a small automaton toy.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_pip_03"
+        ],
+        "heart_level": {
+          "npc_pip": 4
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "craft",
+          "target": "item_automaton_toy",
+          "description": "Build an automaton toy for Pip",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 100,
+        "items": [],
+        "hearts": {
+          "npc_pip": 5
+        },
+        "reputation": 10,
+        "story_flags_set": [
+          "sq_pip_04_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_pip_05",
+      "name": "The Real Relic",
+      "type": "SIDE_NPC",
+      "giver": "npc_pip",
+      "description": "Pip finds a genuine Old World artifact during play.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_pip_04"
+        ],
+        "heart_level": {
+          "npc_pip": 5
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "talk",
+          "target": "npc_pip",
+          "description": "Examine Pip's discovery",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "deliver",
+          "target": "npc_paige",
+          "description": "Show it to Paige at the Archive",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 300,
+        "items": [
+          {
+            "item_id": "item_data_core_standard",
+            "quantity": 1
+          }
+        ],
+        "hearts": {
+          "npc_pip": 5,
+          "npc_paige": 3
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "sq_pip_05_complete"
+        ]
+      }
+    }
+  ]
+}

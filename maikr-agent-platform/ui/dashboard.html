@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MAIKR - Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="logo">MAIKR</div>
+      <ul class="sidebar-nav">
+        <li><a class="active" href="#agent">Agent Info</a></li>
+        <li><a href="#soul">SOUL.md</a></li>
+        <li><a href="#memory">Memory/Logs</a></li>
+        <li><a href="#appearance">Appearance</a></li>
+        <li><a href="#advanced">Advanced</a></li>
+      </ul>
+      <button class="btn btn-outline" style="width:100%;">Sign Out</button>
+    </aside>
+    <main class="main-content">
+      <section id="agent" class="card" style="margin-bottom:1rem;">
+        <h2>Agent Info</h2>
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" value="Agent 1" />
+        </div>
+        <div class="form-group">
+          <label>Role</label>
+          <input type="text" value="Support Agent" />
+        </div>
+      </section>
+      <section id="soul" class="card" style="margin-bottom:1rem;">
+        <h2>SOUL.md Editor</h2>
+        <textarea style="height:120px; width:100%;"></textarea>
+      </section>
+      <section id="memory" class="card" style="margin-bottom:1rem; display:flex; gap:1rem;">
+        <div style="flex:1;">
+          <h3>Memory</h3>
+          <div style="height:120px; overflow:auto; border:1px solid #ddd; padding:0.5rem;">No entries</div>
+        </div>
+        <div style="flex:1;">
+          <h3>Logs</h3>
+          <div style="height:120px; overflow:auto; border:1px solid #ddd; padding:0.5rem;">No logs</div>
+        </div>
+      </section>
+      <section id="appearance" class="card" style="margin-bottom:1rem; display:flex; gap:1rem;">
+        <div style="flex:1;">
+          <h3>Appearance</h3>
+          <label>Theme</label>
+          <select><option>Light</option><option>Dark</option></select>
+        </div>
+        <div style="flex:1;">
+          <h3>Data Opt-Out</h3>
+          <label>Enable</label>
+          <input type="checkbox" />
+        </div>
+      </section>
+      <section id="advanced" class="card">
+        <h2>Advanced Options</h2>
+        <p>Data opt-out is in Appearance. Toggle and confirm.</p>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

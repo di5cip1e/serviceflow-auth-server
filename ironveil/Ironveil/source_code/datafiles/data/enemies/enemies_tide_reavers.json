@@ -1,0 +1,63 @@
+{
+  "_meta": {
+    "description": "Tide Reavers — Tier 2.5 maritime raiders. West-only river approach.",
+    "version": "1.0",
+    "objective": "#31 Full Raid System"
+  },
+
+  "enemy_tidereaver_raider": {
+    "id": "enemy_tidereaver_raider",
+    "name": "Reaver Raider",
+    "faction": "TIDE_REAVERS",
+    "type": "INFANTRY",
+    "tier": 2,
+    "base_stats": { "hp": 90, "speed": 2.0, "damage": 14, "armor": 4, "attack_range": 1 },
+    "behavior": "PATHFIND_TO_TARGET",
+    "target_priority": "TOWN_CENTER",
+    "sprite": "spr_enemy_tidereaver_raider",
+    "loot_table": [
+      { "item_id": "item_scrap_iron", "chance": 0.6, "quantity_min": 2, "quantity_max": 4 },
+      { "item_id": "item_rope", "chance": 0.4, "quantity_min": 1, "quantity_max": 3 },
+      { "item_id": "item_copper_ore", "chance": 0.3, "quantity_min": 1, "quantity_max": 2 }
+    ],
+    "description": "Agile coastal raider. Fast on water, fights aggressively on land."
+  },
+
+  "enemy_tidereaver_diver": {
+    "id": "enemy_tidereaver_diver",
+    "name": "Reaver Diver",
+    "faction": "TIDE_REAVERS",
+    "type": "INFILTRATOR",
+    "tier": 3,
+    "base_stats": { "hp": 70, "speed": 1.5, "damage": 12, "armor": 3, "attack_range": 1 },
+    "behavior": "DIVER",
+    "target_priority": "TOWN_CENTER",
+    "sprite": "spr_enemy_tidereaver_diver",
+    "special": { "can_swim": true, "water_speed_mult": 0.5, "bypasses_walls_via_water": true },
+    "loot_table": [
+      { "item_id": "item_scrap_iron", "chance": 0.5, "quantity_min": 1, "quantity_max": 3 },
+      { "item_id": "item_rope", "chance": 0.3, "quantity_min": 1, "quantity_max": 2 }
+    ],
+    "description": "Underwater infiltrator. Swims through the river to bypass walls entirely."
+  },
+
+  "enemy_tidereaver_captain": {
+    "id": "enemy_tidereaver_captain",
+    "name": "Reaver Captain",
+    "faction": "TIDE_REAVERS",
+    "type": "BOSS",
+    "tier": 3,
+    "base_stats": { "hp": 250, "speed": 1.5, "damage": 22, "armor": 10, "attack_range": 1 },
+    "behavior": "BOSS",
+    "target_priority": "TOWN_CENTER",
+    "sprite": "spr_enemy_tidereaver_captain",
+    "abilities": ["rally_nearby"],
+    "rally_nearby": { "radius": 4, "speed_buff": 1.25, "damage_buff": 1.2, "duration_seconds": 10 },
+    "loot_table": [
+      { "item_id": "item_steel_plate", "chance": 0.8, "quantity_min": 2, "quantity_max": 4 },
+      { "item_id": "item_scrap_iron", "chance": 1.0, "quantity_min": 4, "quantity_max": 8 },
+      { "item_id": "item_precision_gears", "chance": 0.3, "quantity_min": 1, "quantity_max": 2 }
+    ],
+    "description": "Pirate captain. Arrives on an armed boat. Rallies reavers with battle cries."
+  }
+}

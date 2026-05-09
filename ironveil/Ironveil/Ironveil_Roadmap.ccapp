@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "type": "cellcog_app_shortcut",
+  "name": "Ironveil Roadmap",
+  "app_url": "https://cellcog.ai/app/69bb0520def449d9fe798b7a/",
+  "chat_id": "69bb0520def449d9fe798b7a",
+  "app_path": "",
+  "created_at": "2026-03-18T20:57:00Z",
+  "description": "Interactive development roadmap tracking all 46 coding objectives across 4 milestones for the Ironveil project."
+}

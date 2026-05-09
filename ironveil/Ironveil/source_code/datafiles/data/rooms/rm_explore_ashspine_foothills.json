@@ -1,0 +1,23 @@
+{
+  "room_id": "rm_explore_ashspine_foothills", "display_name": "Ashspine Foothills", "width_tiles": 35, "height_tiles": 40, "tile_size": 16, "parent_room": null, "zone_type": "EXPLORATION",
+  "sub_zones": {
+    "mountain_path": { "name": "Mountain Path", "bounds": { "x1": 0, "y1": 0, "x2": 34, "y2": 14 }, "description": "Rocky switchback trail ascending from Coppervale. Narrow paths between rock walls, snow patches.", "threat_level": "SAFE" },
+    "alpine_meadow": { "name": "Alpine Meadow", "bounds": { "x1": 3, "y1": 15, "x2": 31, "y2": 27 }, "description": "Open mountain meadow with boulders. Old military wreckage, Aetheric Ore deposits.", "threat_level": "MEDIUM" },
+    "bunker_entrance": { "name": "Bunker Entrance", "bounds": { "x1": 8, "y1": 28, "x2": 26, "y2": 39 }, "description": "Hidden in rock face. Sealed military bunker door. Cannot be opened in Year 1.", "threat_level": "LOW" }
+  },
+  "exits": [ { "id": "exit_south_coppervale", "name": "South (Coppervale)", "tiles": { "x1": 16, "y1": 0, "x2": 18, "y2": 0 }, "target_room": "rm_town_coppervale", "target_pos": [40, 2], "collision_type": 3 } ],
+  "terrain_features": [
+    { "id": "rock_walls_path", "type": "BLOCKED", "bounds": { "x1": 0, "y1": 0, "x2": 4, "y2": 14 }, "description": "Steep mountain rock walls along path." },
+    { "id": "rock_walls_path_east", "type": "BLOCKED", "bounds": { "x1": 30, "y1": 0, "x2": 34, "y2": 14 }, "description": "Eastern rock wall." },
+    { "id": "snow_patches", "type": "WALKABLE", "positions": [[12,4],[13,4],[20,7],[21,7],[8,10],[9,10],[25,12],[26,12]], "description": "Snow patches on the path. Visual detail, no gameplay effect." },
+    { "id": "crashed_vehicle", "type": "INTERACTABLE", "bounds": { "x1": 12, "y1": 20, "x2": 16, "y2": 22 }, "description": "Crashed Old World military supply vehicle. Salvageable." },
+    { "id": "bunker_door", "type": "BLOCKED", "positions": [[17,35],[18,35],[19,35]], "description": "Sealed military bunker door. Massive, military-grade. Cannot be opened in Year 1." }
+  ],
+  "ruins": [
+    { "id": "ruin_crashed_vehicle", "name": "Crashed Supply Vehicle", "pos": [12, 20], "size": [5, 3], "has_interior": false },
+    { "id": "ruin_bunker_entrance", "name": "Bunker ASHSPINE-7", "pos": [15, 33], "size": [6, 4], "has_interior": false }
+  ],
+  "collision_rules": { "types": { "0": "WALKABLE", "1": "BLOCKED", "2": "INTERACTABLE", "3": "TRANSITION", "6": "HAZARD" }, "general": [ "Mountain path is narrow (3 tiles wide) between rock walls", "Alpine meadow is open with scattered boulders as BLOCKED", "Bunker door is BLOCKED — story gate for Year 2", "Unstable ground hazards on path at rows 6 and 11" ] },
+  "tile_layers": ["ground_base", "ground_detail", "shadows", "objects_low", "objects_mid", "objects_high", "fog_overlay", "ui_overlay"],
+  "notes": [ "Moderate zone. Introduces mountain terrain and military themes.", "Bunker entrance discovered here leads to rm_mountain_bunker in Year 2.", "Entry from Coppervale north arrives at tile (17, 1)." ]
+}

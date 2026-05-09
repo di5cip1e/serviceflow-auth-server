@@ -1,0 +1,150 @@
+{
+  "_meta": {
+    "description": "Heart event #6 for npc_leera: Under the Stars",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue / #34 Romance System"
+  },
+  "event_id": "heart_event_leera_06",
+  "npc_id": "npc_leera",
+  "heart_level_required": 8,
+  "location": "rm_town_coppervale",
+  "time_range": {
+    "start": 20,
+    "end": 23
+  },
+  "story_flag_required": "leera_event_5_complete",
+  "requires_item": "item_promise_locket",
+  "story_flag_set": "npc_leera_event_6_complete",
+  "heart_bonus": 100,
+  "title": "Under the Stars",
+  "lines": [
+    {
+      "speaker": "narrator",
+      "text": "[The Overlook, night. After a dangerous joint expedition]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "That was INSANE. That ceiling almost crushed us both. You okay?",
+      "portrait": "determined"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "I'm fine. That was incredible.",
+          "flag": "leera_confess_brave"
+        },
+        {
+          "text": "I'm okay. You saved my life back there.",
+          "flag": "leera_confess_grateful"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "I... yeah. I guess I did.",
+      "portrait": "surprised"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "Jack, can I say something weird?",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "I've explored every ruin within fifty miles. I'm not scared of anything.",
+      "portrait": "embarrassed"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "Except this. Right now. This is the scariest thing I've ever done.",
+      "portrait": "embarrassed"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "Leera...",
+          "flag": "leera_confess_soft"
+        },
+        {
+          "text": "What do you mean?",
+          "flag": "leera_confess_ask"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "You know what I mean.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "I've been running toward danger my whole life because it's easier than standing still.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "With someone. And meaning it.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "But you \u2014 you make me want to come HOME.",
+      "portrait": "determined"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "Not just survive out there. Come home. To someone.",
+      "portrait": "determined"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "So. There it is. The great explorer, terrified of three stupid words.",
+      "portrait": "embarrassed"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "I feel the same way, Leera.",
+          "flag": "leera_confess_mutual"
+        },
+        {
+          "text": "You don't have to say them. I already know.",
+          "flag": "leera_confess_understand"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "Oh thank god. I was going to DIE if you said 'let's just be friends.'",
+      "portrait": "happy"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "Okay. So. We're doing this?",
+      "portrait": "happy"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "Good. Now look at those stars. Because I am NOT looking at you right now.",
+      "portrait": "embarrassed"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "My face is doing something embarrassing.",
+      "portrait": "embarrassed"
+    }
+  ]
+}

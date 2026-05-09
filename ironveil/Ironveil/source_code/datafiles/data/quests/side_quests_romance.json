@@ -1,0 +1,912 @@
+{
+  "_meta": {
+    "description": "Romance candidate side quest chains.",
+    "version": "1.0",
+    "objective": "#41"
+  },
+  "quests": [
+    {
+      "quest_id": "sq_leera_01",
+      "name": "Leera's Challenge",
+      "type": "SIDE_NPC",
+      "giver": "npc_leera",
+      "description": "Leera challenges Jack to a race to The Hollow and back.",
+      "trigger": {
+        "prerequisite_quests": [],
+        "heart_level": {
+          "npc_leera": 2
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "talk",
+          "target": "npc_leera",
+          "description": "Accept Leera's challenge",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "reach",
+          "target": "the_hollow_entrance",
+          "description": "Race to The Hollow",
+          "target_count": 1
+        },
+        {
+          "id": "obj_3",
+          "type": "reach",
+          "target": "rm_town_coppervale",
+          "description": "Race back to town",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 200,
+        "items": [],
+        "hearts": {
+          "npc_leera": 3
+        },
+        "reputation": 10,
+        "story_flags_set": [
+          "sq_leera_01_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_leera_02",
+      "name": "Grounded Dreams",
+      "type": "SIDE_NPC",
+      "giver": "npc_leera",
+      "description": "Leera shows Jack her secret project \u2014 a flying machine frame. She needs Flight Components.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_leera_01"
+        ],
+        "heart_level": {
+          "npc_leera": 3
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "visit",
+          "target": "rm_int_npc_leera",
+          "description": "See Leera's secret project",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "gather",
+          "target": "item_flight_component",
+          "description": "Find 5 Flight Components in Ashspine",
+          "target_count": 5
+        }
+      ],
+      "rewards": {
+        "cogs": 300,
+        "items": [],
+        "hearts": {
+          "npc_leera": 3
+        },
+        "reputation": 10,
+        "story_flags_set": [
+          "sq_leera_02_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_leera_03",
+      "name": "Test Flight",
+      "type": "SIDE_NPC",
+      "giver": "npc_leera",
+      "description": "Help Leera test her prototype flyer. It crashes. Help repair and analyze.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_leera_02"
+        ],
+        "heart_level": {
+          "npc_leera": 4
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "visit",
+          "target": "rm_town_coppervale",
+          "description": "Watch Leera's test flight",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "gather",
+          "target": "item_brass_gears",
+          "description": "Gather replacement parts",
+          "target_count": 3
+        },
+        {
+          "id": "obj_3",
+          "type": "craft",
+          "target": "flyer_repair",
+          "description": "Repair the prototype",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 400,
+        "items": [],
+        "hearts": {
+          "npc_leera": 4
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "sq_leera_03_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_leera_04",
+      "name": "Wind Beneath",
+      "type": "SIDE_NPC",
+      "giver": "npc_leera",
+      "description": "Secretly build critical flight components for Leera's machine while she sleeps.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_leera_03"
+        ],
+        "heart_level": {
+          "npc_leera": 6
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "craft",
+          "target": "item_flight_engine",
+          "description": "Build the flight engine",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "deliver",
+          "target": "npc_leera",
+          "description": "Leave components at Leera's workshop",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 500,
+        "items": [],
+        "hearts": {
+          "npc_leera": 5
+        },
+        "reputation": 20,
+        "story_flags_set": [
+          "sq_leera_04_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_leera_05",
+      "name": "First Flight",
+      "type": "SIDE_NPC",
+      "giver": "npc_leera",
+      "description": "Leera's machine flies! Watch from The Overlook as she soars over Coppervale.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_leera_04"
+        ],
+        "heart_level": {
+          "npc_leera": 7
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "visit",
+          "target": "rm_town_coppervale",
+          "description": "Watch from The Overlook",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 800,
+        "items": [],
+        "hearts": {
+          "npc_leera": 8
+        },
+        "reputation": 30,
+        "story_flags_set": [
+          "sq_leera_05_complete"
+        ],
+        "blueprints": [
+          "bp_personal_flyer_upgrade"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_michelle_01",
+      "name": "Herb Emergency",
+      "type": "SIDE_NPC",
+      "giver": "npc_michelle",
+      "description": "Michelle needs rare herbs for a critical patient. Find them in the Rustwood.",
+      "trigger": {
+        "prerequisite_quests": [],
+        "heart_level": {
+          "npc_michelle": 2
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "gather",
+          "target": "item_rare_herb",
+          "description": "Find 3 rare herbs in Rustwood",
+          "target_count": 3
+        },
+        {
+          "id": "obj_2",
+          "type": "deliver",
+          "target": "npc_michelle",
+          "description": "Deliver herbs to Michelle",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 200,
+        "items": [],
+        "hearts": {
+          "npc_michelle": 3
+        },
+        "reputation": 10,
+        "story_flags_set": [
+          "sq_michelle_01_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_michelle_02",
+      "name": "Medical Texts",
+      "type": "SIDE_NPC",
+      "giver": "npc_michelle",
+      "description": "Michelle wants Old World medical texts. Search the Archive and ruins.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_michelle_01"
+        ],
+        "heart_level": {
+          "npc_michelle": 3
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "talk",
+          "target": "npc_paige",
+          "description": "Ask Paige about medical texts",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "gather",
+          "target": "item_medical_text",
+          "description": "Find 2 medical texts",
+          "target_count": 2
+        }
+      ],
+      "rewards": {
+        "cogs": 300,
+        "items": [],
+        "hearts": {
+          "npc_michelle": 3,
+          "npc_paige": 2
+        },
+        "reputation": 10,
+        "story_flags_set": [
+          "sq_michelle_02_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_michelle_03",
+      "name": "The Night Shift",
+      "type": "SIDE_NPC",
+      "giver": "npc_michelle",
+      "description": "Help Michelle through an all-night triage after a bad raid.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_michelle_02"
+        ],
+        "heart_level": {
+          "npc_michelle": 4
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "visit",
+          "target": "rm_int_clinic",
+          "description": "Go to the clinic at night",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "deliver",
+          "target": "npc_michelle",
+          "description": "Bring medical supplies",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 350,
+        "items": [],
+        "hearts": {
+          "npc_michelle": 4
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "sq_michelle_03_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_michelle_04",
+      "name": "Greenhouse Plans",
+      "type": "SIDE_NPC",
+      "giver": "npc_michelle",
+      "description": "Michelle mentions needing a proper greenhouse. Gather materials and build it.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_michelle_03"
+        ],
+        "heart_level": {
+          "npc_michelle": 6
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "gather",
+          "target": "item_glass_panel",
+          "description": "Gather 8 glass panels",
+          "target_count": 8
+        },
+        {
+          "id": "obj_2",
+          "type": "gather",
+          "target": "item_copper_pipe",
+          "description": "Gather 5 copper pipes",
+          "target_count": 5
+        },
+        {
+          "id": "obj_3",
+          "type": "build",
+          "target": "greenhouse",
+          "description": "Build the greenhouse",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 600,
+        "items": [],
+        "hearts": {
+          "npc_michelle": 5
+        },
+        "reputation": 20,
+        "story_flags_set": [
+          "sq_michelle_04_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_kaydee_01",
+      "name": "Supply Run",
+      "type": "SIDE_NPC",
+      "giver": "npc_kaydee",
+      "description": "Kaydee needs rare ingredients for a new brew. Find them via trade routes.",
+      "trigger": {
+        "prerequisite_quests": [],
+        "heart_level": {
+          "npc_kaydee": 2
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "gather",
+          "target": "item_rare_spice",
+          "description": "Find 3 rare spices",
+          "target_count": 3
+        },
+        {
+          "id": "obj_2",
+          "type": "deliver",
+          "target": "npc_kaydee",
+          "description": "Deliver to The Rusty Gear",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 250,
+        "items": [],
+        "hearts": {
+          "npc_kaydee": 3
+        },
+        "reputation": 10,
+        "story_flags_set": [
+          "sq_kaydee_01_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_kaydee_02",
+      "name": "Bar Brawl Cleanup",
+      "type": "SIDE_NPC",
+      "giver": "npc_kaydee",
+      "description": "A fight broke out. Help Kaydee repair the tavern furniture.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_kaydee_01"
+        ],
+        "heart_level": {
+          "npc_kaydee": 3
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "gather",
+          "target": "item_polished_wood",
+          "description": "Gather 4 polished wood",
+          "target_count": 4
+        },
+        {
+          "id": "obj_2",
+          "type": "craft",
+          "target": "tavern_furniture_repair",
+          "description": "Repair tavern furniture",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 300,
+        "items": [],
+        "hearts": {
+          "npc_kaydee": 3
+        },
+        "reputation": 10,
+        "story_flags_set": [
+          "sq_kaydee_02_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_kaydee_03",
+      "name": "Copper Sunset",
+      "type": "SIDE_NPC",
+      "giver": "npc_kaydee",
+      "description": "Help Kaydee perfect her signature brew recipe.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_kaydee_02"
+        ],
+        "heart_level": {
+          "npc_kaydee": 5
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "gather",
+          "target": "item_cinnamon",
+          "description": "Find cinnamon",
+          "target_count": 2
+        },
+        {
+          "id": "obj_2",
+          "type": "gather",
+          "target": "item_honey",
+          "description": "Find honey",
+          "target_count": 3
+        },
+        {
+          "id": "obj_3",
+          "type": "deliver",
+          "target": "npc_kaydee",
+          "description": "Deliver ingredients",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 400,
+        "items": [
+          {
+            "item_id": "item_copper_sunset",
+            "quantity": 3
+          }
+        ],
+        "hearts": {
+          "npc_kaydee": 4
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "sq_kaydee_03_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_janis_01",
+      "name": "The Report",
+      "type": "SIDE_NPC",
+      "giver": "npc_janis",
+      "description": "Help Janis compile her inspection report with accurate data.",
+      "trigger": {
+        "prerequisite_quests": [],
+        "heart_level": {
+          "npc_janis": 2
+        },
+        "story_flags": [
+          "janis_arrived"
+        ]
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "talk",
+          "target": "npc_linden",
+          "description": "Get town population data",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "talk",
+          "target": "npc_harrow",
+          "description": "Get defense statistics",
+          "target_count": 1
+        },
+        {
+          "id": "obj_3",
+          "type": "talk",
+          "target": "npc_janis",
+          "description": "Deliver report data to Janis",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 300,
+        "items": [],
+        "hearts": {
+          "npc_janis": 3
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "sq_janis_01_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_janis_02",
+      "name": "Council Correspondence",
+      "type": "SIDE_NPC",
+      "giver": "npc_janis",
+      "description": "Janis needs a secure courier route to the Council. Help establish one.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_janis_01"
+        ],
+        "heart_level": {
+          "npc_janis": 4
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "talk",
+          "target": "npc_wes",
+          "description": "Arrange courier service with Wes",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "build",
+          "target": "comm_relay",
+          "description": "Build a communication relay",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 500,
+        "items": [],
+        "hearts": {
+          "npc_janis": 4
+        },
+        "reputation": 20,
+        "story_flags_set": [
+          "sq_janis_02_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_janis_03",
+      "name": "A Place to Belong",
+      "type": "SIDE_NPC",
+      "giver": "npc_janis",
+      "description": "Janis is struggling between duty to the Council and love for Coppervale.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_janis_02"
+        ],
+        "heart_level": {
+          "npc_janis": 6
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "talk",
+          "target": "npc_janis",
+          "description": "Talk to Janis at The Overlook",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "choice",
+          "target": "janis_stay_or_go",
+          "description": "Encourage Janis",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 200,
+        "items": [],
+        "hearts": {
+          "npc_janis": 5
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "sq_janis_03_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_kiery_01",
+      "name": "Fabric Salvage",
+      "type": "SIDE_NPC",
+      "giver": "npc_kiery",
+      "description": "Kiery needs Old World fabrics from the ruins for her collection.",
+      "trigger": {
+        "prerequisite_quests": [],
+        "heart_level": {
+          "npc_kiery": 2
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "gather",
+          "target": "item_salvaged_fabric",
+          "description": "Find 4 salvaged fabrics in ruins",
+          "target_count": 4
+        }
+      ],
+      "rewards": {
+        "cogs": 200,
+        "items": [],
+        "hearts": {
+          "npc_kiery": 3
+        },
+        "reputation": 10,
+        "story_flags_set": [
+          "sq_kiery_01_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_kiery_02",
+      "name": "The Dye Garden",
+      "type": "SIDE_NPC",
+      "giver": "npc_kiery",
+      "description": "Help Kiery establish a dye garden with rare flowers.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_kiery_01"
+        ],
+        "heart_level": {
+          "npc_kiery": 3
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "gather",
+          "target": "item_wildflower",
+          "description": "Gather 6 wildflowers of different types",
+          "target_count": 6
+        },
+        {
+          "id": "obj_2",
+          "type": "deliver",
+          "target": "npc_kiery",
+          "description": "Deliver flowers to Kiery",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 250,
+        "items": [],
+        "hearts": {
+          "npc_kiery": 3
+        },
+        "reputation": 10,
+        "story_flags_set": [
+          "sq_kiery_02_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_kiery_03",
+      "name": "Banners for the Town",
+      "type": "SIDE_NPC",
+      "giver": "npc_kiery",
+      "description": "Kiery wants to make festival banners but needs a proper loom. Build one.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_kiery_02"
+        ],
+        "heart_level": {
+          "npc_kiery": 5
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "build",
+          "target": "weaving_loom",
+          "description": "Build a weaving loom for Kiery",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 400,
+        "items": [],
+        "hearts": {
+          "npc_kiery": 5
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "sq_kiery_03_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_paige_01",
+      "name": "Archive Expansion",
+      "type": "SIDE_NPC",
+      "giver": "npc_paige",
+      "description": "Paige needs more shelving and climate control for the growing Archive.",
+      "trigger": {
+        "prerequisite_quests": [],
+        "heart_level": {
+          "npc_paige": 2
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "gather",
+          "target": "item_polished_wood",
+          "description": "Gather 6 polished wood planks",
+          "target_count": 6
+        },
+        {
+          "id": "obj_2",
+          "type": "build",
+          "target": "archive_shelving",
+          "description": "Build archive shelving",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 300,
+        "items": [],
+        "hearts": {
+          "npc_paige": 3
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "sq_paige_01_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_paige_02",
+      "name": "The Lost Collection",
+      "type": "SIDE_NPC",
+      "giver": "npc_paige",
+      "description": "Paige heard rumors of a pre-war library cache in the Spire Wastes.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_paige_01"
+        ],
+        "heart_level": {
+          "npc_paige": 4
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "explore",
+          "target": "rm_explore_spire_wastes",
+          "description": "Search the Spire Wastes",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "gather",
+          "target": "item_old_world_book",
+          "description": "Recover 3 preserved books",
+          "target_count": 3
+        }
+      ],
+      "rewards": {
+        "cogs": 500,
+        "items": [],
+        "hearts": {
+          "npc_paige": 4
+        },
+        "reputation": 20,
+        "story_flags_set": [
+          "sq_paige_02_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_paige_03",
+      "name": "Wren's Memorial",
+      "type": "SIDE_NPC",
+      "giver": "npc_paige",
+      "description": "Help Paige create a proper memorial garden for Wren and the fallen.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_paige_02"
+        ],
+        "heart_level": {
+          "npc_paige": 6
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "gather",
+          "target": "item_stone_block",
+          "description": "Gather 4 stone blocks",
+          "target_count": 4
+        },
+        {
+          "id": "obj_2",
+          "type": "gather",
+          "target": "item_wildflower",
+          "description": "Gather flowers for planting",
+          "target_count": 5
+        },
+        {
+          "id": "obj_3",
+          "type": "build",
+          "target": "memorial_garden",
+          "description": "Build the memorial garden",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 400,
+        "items": [],
+        "hearts": {
+          "npc_paige": 5
+        },
+        "reputation": 20,
+        "story_flags_set": [
+          "sq_paige_03_complete"
+        ]
+      }
+    }
+  ]
+}

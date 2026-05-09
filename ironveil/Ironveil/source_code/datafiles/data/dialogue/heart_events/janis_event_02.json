@@ -1,0 +1,68 @@
+{
+  "_meta": {
+    "description": "Heart event #2 for npc_janis: The Raid Aftermath",
+    "version": "1.0",
+    "objective": "#33/#34"
+  },
+  "event_id": "heart_event_janis_02",
+  "npc_id": "npc_janis",
+  "heart_level_required": 3,
+  "location": "rm_town_coppervale",
+  "time_range": {
+    "start": 10,
+    "end": 18
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_janis_event_2_complete",
+  "heart_bonus": 50,
+  "title": "The Raid Aftermath",
+  "lines": [
+    {
+      "speaker": "narrator",
+      "text": "[After a raid. Janis watches the militia regroup]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "Your machines made the difference. I've seen Council garrisons do less.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "That's... not something I say lightly.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "We protect our own.",
+          "flag": "janis_raid_community"
+        },
+        {
+          "text": "The machines are only as good as the people using them.",
+          "flag": "janis_raid_humble"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "I've been to twelve Beacon Towns. None of them have this.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "This... cohesion. This willingness to fight for each other.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "My report to the Council will reflect that. Accurately.",
+      "portrait": "determined"
+    }
+  ]
+}

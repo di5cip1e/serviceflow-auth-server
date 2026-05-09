@@ -1,0 +1,114 @@
+{
+  "_meta": {
+    "description": "Year 4+ splinter faction raids. Lower intensity than Marshal's army but ongoing.",
+    "version": "1.0",
+    "objective": "#42 Full 3+ Year Story Content"
+  },
+  "schedule": {
+    "year_4": [
+      {"season": "SPRING", "day": 18, "raid_id": "raid_y4_spring", "faction": "splinter_marauders", "difficulty": "easy", "direction": "east"},
+      {"season": "SUMMER", "day": 10, "raid_id": "raid_y4_summer", "faction": "rust_remnants", "difficulty": "medium", "direction": "north"},
+      {"season": "AUTUMN", "day": 22, "raid_id": "raid_y4_autumn", "faction": "rogue_automatons", "difficulty": "medium", "direction": "south"},
+      {"season": "WINTER", "day": 8, "raid_id": "raid_y4_winter", "faction": "splinter_marauders", "difficulty": "easy", "direction": "west"}
+    ],
+    "year_5_plus": [
+      {"season": "SPRING", "day": 15, "raid_id": "raid_y5p_spring", "faction": "random", "difficulty": "medium", "direction": "random"},
+      {"season": "SUMMER", "day": 20, "raid_id": "raid_y5p_summer", "faction": "random", "difficulty": "medium", "direction": "random"},
+      {"season": "AUTUMN", "day": 12, "raid_id": "raid_y5p_autumn", "faction": "random", "difficulty": "hard", "direction": "random"},
+      {"season": "WINTER", "day": 5, "raid_id": "raid_y5p_winter", "faction": "random", "difficulty": "medium", "direction": "random"}
+    ]
+  },
+  "factions": {
+    "splinter_marauders": {
+      "name": "Iron Marauder Remnants",
+      "description": "Scattered remnants of the Marshal's disbanded army. Poorly organized but still dangerous.",
+      "units": [
+        {"type": "marauder_deserter", "hp": 60, "damage": 8, "speed": 1.2, "armor": 2, "spawn_weight": 5},
+        {"type": "marauder_scavenger", "hp": 40, "damage": 12, "speed": 1.5, "armor": 0, "spawn_weight": 3},
+        {"type": "marauder_sergeant", "hp": 100, "damage": 15, "speed": 1.0, "armor": 5, "spawn_weight": 1}
+      ],
+      "wave_sizes": [8, 12, 6],
+      "loot_table": ["item_iron_ingot", "item_scrap_metal", "item_ammo_crate"]
+    },
+    "rust_remnants": {
+      "name": "Rust Wolf Packs",
+      "description": "Former Rust Wolf raiders who lost their Alpha during Year 2. Now operate as desperate scavenger packs.",
+      "units": [
+        {"type": "rust_scavenger", "hp": 50, "damage": 10, "speed": 1.4, "armor": 1, "spawn_weight": 5},
+        {"type": "rust_berserker", "hp": 80, "damage": 18, "speed": 1.6, "armor": 0, "spawn_weight": 2},
+        {"type": "rust_packleader", "hp": 90, "damage": 14, "speed": 1.3, "armor": 3, "spawn_weight": 1}
+      ],
+      "wave_sizes": [10, 8, 5],
+      "loot_table": ["item_fur_pelt", "item_scrap_metal", "item_herbs"]
+    },
+    "rogue_automatons": {
+      "name": "Rogue Automatons",
+      "description": "Corrupted Pre-War automatons that have reactivated from dormant bunkers. Operating on degraded, hostile programming.",
+      "units": [
+        {"type": "rogue_worker_bot", "hp": 70, "damage": 8, "speed": 0.8, "armor": 6, "spawn_weight": 5},
+        {"type": "rogue_guard_bot", "hp": 120, "damage": 14, "speed": 0.9, "armor": 8, "spawn_weight": 2},
+        {"type": "rogue_assault_unit", "hp": 150, "damage": 20, "speed": 1.0, "armor": 10, "spawn_weight": 1}
+      ],
+      "wave_sizes": [6, 8, 4],
+      "loot_table": ["item_precision_gear", "item_circuit_board", "item_aetheric_ore"]
+    }
+  },
+  "raid_definitions": {
+    "raid_y4_spring": {
+      "name": "Desperate Scavengers",
+      "waves": 2,
+      "objective": "assault",
+      "intel_days_before": 3,
+      "flavor_text": "A small band of Iron Marauder deserters has been spotted heading toward Coppervale. They're desperate and hungry."
+    },
+    "raid_y4_summer": {
+      "name": "The Hungry Pack",
+      "waves": 3,
+      "objective": "theft",
+      "intel_days_before": 2,
+      "flavor_text": "Rust Wolf remnants are targeting our food stores. They're fast and they know our layout from previous attacks."
+    },
+    "raid_y4_autumn": {
+      "name": "Ghost in the Machine",
+      "waves": 3,
+      "objective": "assault",
+      "intel_days_before": 4,
+      "flavor_text": "DEJIN has detected corrupted automaton signals approaching from the south. Old War machines, running on hostile programming."
+    },
+    "raid_y4_winter": {
+      "name": "Winter Desperation",
+      "waves": 2,
+      "objective": "theft",
+      "intel_days_before": 2,
+      "flavor_text": "Winter drives the desperate to desperate measures. Marauder remnants are making a play for our supplies."
+    },
+    "raid_y5p_spring": {
+      "name": "Seasonal Trouble",
+      "waves": 2,
+      "objective": "assault",
+      "intel_days_before": 3,
+      "flavor_text": "The threats never fully end. But Coppervale is stronger than any of them."
+    },
+    "raid_y5p_summer": {
+      "name": "Summer Raiders",
+      "waves": 2,
+      "objective": "assault",
+      "intel_days_before": 2,
+      "flavor_text": "Another band of opportunists. Nothing Coppervale's defenses can't handle."
+    },
+    "raid_y5p_autumn": {
+      "name": "Autumn Offensive",
+      "waves": 3,
+      "objective": "assault",
+      "intel_days_before": 3,
+      "flavor_text": "A larger than usual raiding party. Keep the defenses sharp."
+    },
+    "raid_y5p_winter": {
+      "name": "Cold Comfort",
+      "waves": 2,
+      "objective": "theft",
+      "intel_days_before": 2,
+      "flavor_text": "Winter raiders, cold and desperate. Defend the stores."
+    }
+  }
+}

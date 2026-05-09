@@ -1,0 +1,648 @@
+{
+  "_meta": {
+    "description": "Dialogue data for Kaydee (Tavern Owner). Seasonal/daily pool + heart milestones.",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue"
+  },
+  "entries": [
+    {
+      "entry_id": "npc_kaydee_sd_001",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Coffee's hot. Bar's open. And no, I didn't sleep well. Mind your business.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_sd_002",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Rainy days are good for business. People drink more when they're bored.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_sd_003",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Festival season means double orders. My supplier better not be late. Again.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_sd_004",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Summer means tourists. Well, traders. Close enough. More customers.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_sd_005",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Wet boots on my clean floor. Every. Single. Time.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_sd_006",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "I'm experimenting with a new brew. It's either brilliant or terrible. Want to try?",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_sd_007",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Harvest Faire is MY season. The Rusty Gear hosts the best after-party. Obviously.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_sd_008",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Autumn rain and warm ale. Name a better combination. I'll wait.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_sd_009",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Stocking up for winter. The cellar's looking impressive, if I say so myself.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_sd_010",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Cold outside, warm inside. That's the Rusty Gear promise.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_sd_011",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "weather": "SNOW",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Snow day. Half the town's in here. Just the way I like it.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_sd_012",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Remembrance Day. Free round for the militia. Don't tell Harrow I have a heart.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_sd_013",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "weather": "STORM",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Storm's keeping everyone home. Except the smart ones. They're HERE.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_sd_014",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "weather": "FOG",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Foggy day. Mysterious. Like me. Except I serve drinks.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_sd_015",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Well, well. The famous engineer graces my tavern. What'll it be?",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_sd_016",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "You know what I like about you, Jack? You actually listen. Most people just hear themselves.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_sd_017",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Leera tried to arm-wrestle Hank last night. She lost. But she tried. I respect that.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_sd_018",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Gus told me the town gossip. I already knew all of it. I run a TAVERN.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_sd_019",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Someone left a love poem on a napkin. It was terrible. I framed it.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_sd_020",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Ferris tried to pay his tab with a 'rare component.' I said no. Obviously.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_sd_021",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "The Gear's been busy. Good busy. The kind that means people feel safe enough to relax.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_sd_022",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Pip asked for ale. I gave her apple juice in a fancy glass. She was thrilled.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_sd_023",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "My mother would hate this place. Too loud, too rough, too real. That's why I love it.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_sd_024",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "New recipe: Copper Sunset. Cinnamon, honey, a secret ingredient. Don't ask.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_sd_025",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "I left my old town because staying hurt too much. Coppervale... doesn't hurt.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_hm_02",
+      "npc_id": "npc_kaydee",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 2
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_kaydee_milestone_2",
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Here. On the house. Don't get used to it. This is a ONE-TIME thing.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_hm_04",
+      "npc_id": "npc_kaydee",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 4
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_kaydee_milestone_4",
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "You're the only customer who doesn't bore me. That's high praise from me.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_hm_06",
+      "npc_id": "npc_kaydee",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 6
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_kaydee_milestone_6",
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Stay after closing tonight. I want to... talk. Just talk. Don't make it weird.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_hm_08",
+      "npc_id": "npc_kaydee",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 8
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_kaydee_milestone_8",
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "I don't have a witty comeback for what I'm feeling. That's never happened before.",
+          "portrait": "surprised"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_hm_10",
+      "npc_id": "npc_kaydee",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 10
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_kaydee_milestone_10",
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "You got past every wall I built. And I'm glad. Don't tell ANYONE I said that.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_y2_spring_031",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "New trade routes mean new drinks. I got a barrel of something from Dusthaven. Tastes like regret and honey. Perfect.",
+          "portrait": "amused"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_y2_summer_032",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Everyone's tense about the Marshal. Which means everyone's drinking. Business is booming. Yay?",
+          "portrait": "dark_humor"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_y2_autumn_033",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "I'm rationing the good whiskey. We'll need it after the siege, not before.",
+          "portrait": "practical"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_y2_winter_034",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Drinks are on the house tonight. ALL of them. Even the good whiskey. We earned it.",
+          "portrait": "warm"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_y3_spring_035",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Try not to die at the Spire. I'd hate to lose my best customer.",
+          "portrait": "hiding_worry"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_y3_autumn_036",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Turns out people drink more when they're happy than when they're scared. Who knew? It's nicer this way.",
+          "portrait": "content"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kaydee_y4_spring_037",
+      "npc_id": "npc_kaydee",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 4,
+        "hearts_gte": 0,
+        "story_flag": "flag_main_story_complete"
+      },
+      "priority": 11,
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Thinking about expanding the tavern. Maybe a second floor. A music room. Dreams are free, right?",
+          "portrait": "hopeful"
+        }
+      ]
+    }
+  ]
+}

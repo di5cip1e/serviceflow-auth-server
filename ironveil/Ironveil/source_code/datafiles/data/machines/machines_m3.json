@@ -1,0 +1,215 @@
+{
+  "_meta": {
+    "description": "M3 machine definitions: new mechs, vehicles, workshop upgrades, aether-shielded wall.",
+    "version": "1.0",
+    "objective": "#30 Full Machine Catalog"
+  },
+
+  "bp_combat_mech_mk2": {
+    "category": "MECH",
+    "size_tiles": [2, 3],
+    "base_stats": {
+      "hp": 500,
+      "armor": 30,
+      "speed": 2.0,
+      "damage_primary": 40,
+      "damage_secondary": 25,
+      "fuel_capacity": 150,
+      "fuel_consumption_per_day": 18
+    },
+    "component_slots": ["Frame", "Engine Bay", "Locomotion Left", "Locomotion Right", "Cockpit", "Weapon Left", "Weapon Right", "Armor Front", "Armor Rear", "Armor Side", "Shield Module"],
+    "lubrication_rate_per_day": 18,
+    "part_degradation_rate_per_day": 5
+  },
+
+  "bp_heavy_mech": {
+    "category": "MECH",
+    "size_tiles": [3, 4],
+    "base_stats": {
+      "hp": 800,
+      "armor": 45,
+      "speed": 1.2,
+      "damage_primary": 15,
+      "damage_secondary": 50,
+      "fuel_capacity": 200,
+      "fuel_consumption_per_day": 25
+    },
+    "component_slots": ["Frame", "Engine Bay Large", "Locomotion Left", "Locomotion Right", "Cockpit", "Weapon Left Gatling", "Weapon Right Rockets", "Armor Front Heavy", "Armor Rear Heavy", "Armor Side Left", "Armor Side Right"],
+    "lubrication_rate_per_day": 22,
+    "part_degradation_rate_per_day": 6
+  },
+
+  "bp_siege_breaker": {
+    "category": "MECH",
+    "size_tiles": [3, 4],
+    "base_stats": {
+      "hp": 700,
+      "armor": 40,
+      "speed": 1.5,
+      "damage_primary": 60,
+      "damage_secondary": 10,
+      "fuel_capacity": 180,
+      "fuel_consumption_per_day": 22
+    },
+    "component_slots": ["Frame", "Engine Bay Large", "Locomotion Left", "Locomotion Right", "Cockpit", "Siege Cannon", "Flamethrower", "Ram Plate", "Armor Front Heavy", "Armor Rear", "Armor Side"],
+    "lubrication_rate_per_day": 20,
+    "part_degradation_rate_per_day": 6
+  },
+
+  "bp_scout_mech": {
+    "category": "MECH",
+    "size_tiles": [2, 2],
+    "base_stats": {
+      "hp": 250,
+      "armor": 12,
+      "speed": 3.0,
+      "damage_primary": 18,
+      "damage_secondary": 12,
+      "fuel_capacity": 80,
+      "fuel_consumption_per_day": 10
+    },
+    "component_slots": ["Frame", "Engine Bay", "Locomotion Left", "Locomotion Right", "Cockpit", "Weapon Light", "Scanner Array", "Armor Light"],
+    "lubrication_rate_per_day": 10,
+    "part_degradation_rate_per_day": 3
+  },
+
+  "bp_personal_flyer": {
+    "category": "VEHICLE",
+    "size_tiles": [2, 2],
+    "base_stats": {
+      "hp": 100,
+      "speed": 5.0,
+      "fuel_capacity": 60,
+      "fuel_consumption_per_trip": 15,
+      "passenger_capacity": 1
+    },
+    "component_slots": ["Frame", "Engine", "Propeller", "Cockpit"],
+    "lubrication_rate_per_day": 5,
+    "part_degradation_rate_per_day": 2
+  },
+
+  "bp_cargo_hauler": {
+    "category": "VEHICLE",
+    "size_tiles": [3, 2],
+    "base_stats": {
+      "hp": 150,
+      "speed": 2.0,
+      "carry_capacity": 200,
+      "fuel_capacity": 120,
+      "fuel_consumption_per_trip": 20
+    },
+    "component_slots": ["Frame", "Engine", "Cargo Bay", "Cargo Bay 2", "Wheels"],
+    "lubrication_rate_per_day": 8,
+    "part_degradation_rate_per_day": 3
+  },
+
+  "bp_cargo_zeppelin": {
+    "category": "VEHICLE",
+    "size_tiles": [4, 3],
+    "base_stats": {
+      "hp": 200,
+      "speed": 1.5,
+      "carry_capacity": 500,
+      "fuel_capacity": 200,
+      "fuel_consumption_per_trip": 30
+    },
+    "component_slots": ["Gondola Frame", "Engine", "Balloon", "Cargo Bay Large", "Navigation"],
+    "lubrication_rate_per_day": 10,
+    "part_degradation_rate_per_day": 3
+  },
+
+  "bp_battle_zeppelin": {
+    "category": "VEHICLE",
+    "size_tiles": [4, 3],
+    "base_stats": {
+      "hp": 350,
+      "armor": 15,
+      "speed": 1.2,
+      "damage": 30,
+      "range": 8,
+      "fuel_capacity": 250,
+      "fuel_consumption_per_day": 20
+    },
+    "component_slots": ["Gondola Frame", "Engine", "Balloon Armored", "Weapon Mount", "Armor Plating", "Navigation"],
+    "lubrication_rate_per_day": 14,
+    "part_degradation_rate_per_day": 4
+  },
+
+  "bp_forge_tier2": {
+    "category": "WORKSHOP_UPGRADE",
+    "size_tiles": [2, 2],
+    "base_stats": {
+      "crafting_speed_mult": 1.5,
+      "fuel_efficiency_mult": 1.25,
+      "recipe_tier_unlocked": 2
+    },
+    "component_slots": ["Frame", "Heating Element", "Bellows"],
+    "lubrication_rate_per_day": 5,
+    "part_degradation_rate_per_day": 1
+  },
+
+  "bp_forge_tier3": {
+    "category": "WORKSHOP_UPGRADE",
+    "size_tiles": [2, 2],
+    "base_stats": {
+      "crafting_speed_mult": 2.0,
+      "fuel_efficiency_mult": 1.5,
+      "recipe_tier_unlocked": 3
+    },
+    "component_slots": ["Frame", "Aether Heating Element", "Auto Bellows"],
+    "lubrication_rate_per_day": 8,
+    "part_degradation_rate_per_day": 2
+  },
+
+  "bp_fabricator_automation": {
+    "category": "WORKSHOP_UPGRADE",
+    "size_tiles": [2, 2],
+    "base_stats": {
+      "auto_craft_per_day": 3,
+      "precision_bonus": 1.2
+    },
+    "component_slots": ["Frame", "Precision Gears", "AI Module", "Arm Assembly"],
+    "lubrication_rate_per_day": 10,
+    "part_degradation_rate_per_day": 3
+  },
+
+  "bp_ai_core_tier2": {
+    "category": "WORKSHOP_UPGRADE",
+    "size_tiles": [2, 2],
+    "base_stats": {
+      "research_speed_mult": 1.5,
+      "automaton_slots_bonus": 2,
+      "memory_capacity": 20
+    },
+    "component_slots": ["Frame", "Processing Unit", "Memory Banks", "Aether Cell"],
+    "lubrication_rate_per_day": 6,
+    "part_degradation_rate_per_day": 2
+  },
+
+  "bp_ai_core_tier3": {
+    "category": "WORKSHOP_UPGRADE",
+    "size_tiles": [2, 2],
+    "base_stats": {
+      "research_speed_mult": 2.0,
+      "automaton_slots_bonus": 4,
+      "memory_capacity": 50,
+      "dejin_interaction_level": 3
+    },
+    "component_slots": ["Frame", "Advanced Processing Unit", "Memory Banks Large", "Aether Cell Large", "Neural Interface"],
+    "lubrication_rate_per_day": 10,
+    "part_degradation_rate_per_day": 3
+  },
+
+  "bp_aether_shielded_wall": {
+    "category": "WALL",
+    "size_tiles": [1, 1],
+    "base_stats": {
+      "hp": 400,
+      "shield_hp": 200,
+      "shield_regen_per_second": 3
+    },
+    "component_slots": ["Aether Cell"],
+    "lubrication_rate_per_day": 0,
+    "part_degradation_rate_per_day": 1
+  }
+}

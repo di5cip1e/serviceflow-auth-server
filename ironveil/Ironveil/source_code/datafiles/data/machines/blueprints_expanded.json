@@ -1,0 +1,350 @@
+{
+  "_meta": {
+    "description": "Blueprint definitions for expanded machines: traps, utility defenses, additional turrets.",
+    "version": "1.0",
+    "objective": "#24 10+ Craftable Machines & Automatons"
+  },
+
+  "bp_repeater_turret": {
+    "id": "bp_repeater_turret",
+    "name": "Repeater Turret",
+    "type": "DEFENSE",
+    "tier": 1,
+    "tier_label": "Common",
+    "description": "Rapid-fire turret. Low damage per shot but excellent sustained DPS. Wide firing arc.",
+    "icon": "spr_bp_repeater_turret",
+    "source": "quest",
+    "required_skill_level": 3,
+    "first_build_days": 1,
+    "automaton_build_days": 2,
+    "station_required": "ASSEMBLY",
+    "station_level_required": 1,
+    "defense_size": [2, 2],
+    "marks": {
+      "mk1": {
+        "components": [
+          { "component_id": "item_reinforced_frame", "quantity": 1 },
+          { "component_id": "item_brass_gears", "quantity": 4 },
+          { "component_id": "item_weapon_mount", "quantity": 1 },
+          { "component_id": "item_steel_plate", "quantity": 2 }
+        ],
+        "stat_multiplier": 1.0
+      },
+      "mk2": { "research_cost": { "data_cores_military": 1, "engineering_level": 5 }, "components": [], "stat_multiplier": 1.3 },
+      "mk3": { "research_cost": { "data_cores_military": 2, "engineering_level": 7 }, "components": [], "stat_multiplier": 1.6 },
+      "mk4": { "research_cost": { "data_cores_classified": 1, "engineering_level": 9 }, "components": [], "stat_multiplier": 2.0 }
+    }
+  },
+
+  "bp_tesla_coil": {
+    "id": "bp_tesla_coil",
+    "name": "Tesla Coil",
+    "type": "DEFENSE",
+    "tier": 3,
+    "tier_label": "Rare",
+    "description": "Aether-powered chain lightning generator. Hits multiple targets in sequence. Full 360° arc.",
+    "icon": "spr_bp_tesla_coil",
+    "source": "exploration",
+    "required_skill_level": 7,
+    "first_build_days": 3,
+    "automaton_build_days": 4,
+    "station_required": "ASSEMBLY",
+    "station_level_required": 3,
+    "defense_size": [2, 2],
+    "marks": {
+      "mk1": {
+        "components": [
+          { "component_id": "item_titanium_frame", "quantity": 1 },
+          { "component_id": "item_precision_gears", "quantity": 4 },
+          { "component_id": "item_aether_cell_large", "quantity": 1 },
+          { "component_id": "item_copper_wire", "quantity": 8 },
+          { "component_id": "item_steel_plate", "quantity": 3 }
+        ],
+        "stat_multiplier": 1.0
+      },
+      "mk2": { "research_cost": { "data_cores_scientific": 2, "engineering_level": 8 }, "components": [], "stat_multiplier": 1.35 },
+      "mk3": { "research_cost": { "data_cores_classified": 1, "engineering_level": 10 }, "components": [], "stat_multiplier": 1.7 },
+      "mk4": { "research_cost": { "data_cores_classified": 2, "engineering_level": 10 }, "components": [], "stat_multiplier": 2.2 }
+    }
+  },
+
+  "bp_flamethrower_turret": {
+    "id": "bp_flamethrower_turret",
+    "name": "Flamethrower Turret",
+    "type": "DEFENSE",
+    "tier": 2,
+    "tier_label": "Uncommon",
+    "description": "Close-range incendiary emplacement. Devastating against clustered enemies. Burns targets over time.",
+    "icon": "spr_bp_flamethrower",
+    "source": "exploration",
+    "required_skill_level": 5,
+    "first_build_days": 2,
+    "automaton_build_days": 3,
+    "station_required": "ASSEMBLY",
+    "station_level_required": 2,
+    "defense_size": [2, 2],
+    "marks": {
+      "mk1": {
+        "components": [
+          { "component_id": "item_reinforced_frame", "quantity": 1 },
+          { "component_id": "item_precision_gears", "quantity": 2 },
+          { "component_id": "item_fuel_tank", "quantity": 1 },
+          { "component_id": "item_copper_pipe", "quantity": 3 },
+          { "component_id": "item_steel_plate", "quantity": 2 }
+        ],
+        "stat_multiplier": 1.0
+      },
+      "mk2": { "research_cost": { "data_cores_military": 1, "data_cores_scientific": 1, "engineering_level": 7 }, "components": [], "stat_multiplier": 1.3 },
+      "mk3": { "research_cost": { "data_cores_classified": 1, "engineering_level": 9 }, "components": [], "stat_multiplier": 1.65 },
+      "mk4": { "research_cost": { "data_cores_classified": 2, "engineering_level": 10 }, "components": [], "stat_multiplier": 2.0 }
+    }
+  },
+
+  "bp_spike_strip": {
+    "id": "bp_spike_strip",
+    "name": "Spike Strip",
+    "type": "TRAP",
+    "tier": 1,
+    "tier_label": "Common",
+    "description": "A bed of sharpened spikes. Damages and slows any enemy that walks over it.",
+    "icon": "spr_bp_spike_strip",
+    "source": "starting_kit",
+    "required_skill_level": 1,
+    "first_build_days": 0,
+    "automaton_build_days": 0,
+    "station_required": "WORKBENCH",
+    "station_level_required": 1,
+    "defense_size": [2, 1],
+    "marks": {
+      "mk1": {
+        "components": [
+          { "component_id": "item_scrap_iron", "quantity": 6 },
+          { "component_id": "item_iron_nails", "quantity": 4 }
+        ],
+        "stat_multiplier": 1.0
+      }
+    }
+  },
+
+  "bp_oil_slick": {
+    "id": "bp_oil_slick",
+    "name": "Oil Slick",
+    "type": "TRAP",
+    "tier": 1,
+    "tier_label": "Common",
+    "description": "Spilled lubricant that drastically slows enemies. Can be ignited for devastating area damage.",
+    "icon": "spr_bp_oil_slick",
+    "source": "starting_kit",
+    "required_skill_level": 2,
+    "first_build_days": 0,
+    "automaton_build_days": 0,
+    "station_required": "WORKBENCH",
+    "station_level_required": 1,
+    "defense_size": [3, 3],
+    "marks": {
+      "mk1": {
+        "components": [
+          { "component_id": "item_oil_canister", "quantity": 3 },
+          { "component_id": "item_bucket", "quantity": 1 }
+        ],
+        "stat_multiplier": 1.0
+      }
+    }
+  },
+
+  "bp_concussion_mine": {
+    "id": "bp_concussion_mine",
+    "name": "Concussion Mine",
+    "type": "TRAP",
+    "tier": 2,
+    "tier_label": "Uncommon",
+    "description": "Proximity-triggered explosive. High AoE damage, stuns survivors. Single use.",
+    "icon": "spr_bp_concussion_mine",
+    "source": "quest",
+    "required_skill_level": 4,
+    "first_build_days": 0,
+    "automaton_build_days": 0,
+    "station_required": "WORKBENCH",
+    "station_level_required": 2,
+    "defense_size": [1, 1],
+    "marks": {
+      "mk1": {
+        "components": [
+          { "component_id": "item_gunpowder", "quantity": 3 },
+          { "component_id": "item_scrap_iron", "quantity": 2 },
+          { "component_id": "item_copper_wire", "quantity": 2 }
+        ],
+        "stat_multiplier": 1.0
+      },
+      "mk2": { "research_cost": { "data_cores_military": 1, "engineering_level": 6 }, "components": [], "stat_multiplier": 1.4 }
+    }
+  },
+
+  "bp_caltrops": {
+    "id": "bp_caltrops",
+    "name": "Caltrops",
+    "type": "TRAP",
+    "tier": 1,
+    "tier_label": "Common",
+    "description": "Scattered metal spikes. Cheap area denial — slows and bleeds enemies over time.",
+    "icon": "spr_bp_caltrops",
+    "source": "starting_kit",
+    "required_skill_level": 1,
+    "first_build_days": 0,
+    "automaton_build_days": 0,
+    "station_required": "WORKBENCH",
+    "station_level_required": 1,
+    "defense_size": [2, 2],
+    "marks": {
+      "mk1": {
+        "components": [
+          { "component_id": "item_scrap_iron", "quantity": 4 },
+          { "component_id": "item_iron_nails", "quantity": 6 }
+        ],
+        "stat_multiplier": 1.0
+      }
+    }
+  },
+
+  "bp_net_trap": {
+    "id": "bp_net_trap",
+    "name": "Net Trap",
+    "type": "TRAP",
+    "tier": 1,
+    "tier_label": "Common",
+    "description": "Proximity-triggered net launcher. Immobilizes a single enemy for several seconds. Single use.",
+    "icon": "spr_bp_net_trap",
+    "source": "quest",
+    "required_skill_level": 2,
+    "first_build_days": 0,
+    "automaton_build_days": 0,
+    "station_required": "WORKBENCH",
+    "station_level_required": 1,
+    "defense_size": [1, 1],
+    "marks": {
+      "mk1": {
+        "components": [
+          { "component_id": "item_rope", "quantity": 3 },
+          { "component_id": "item_brass_gears", "quantity": 2 },
+          { "component_id": "item_plank", "quantity": 1 }
+        ],
+        "stat_multiplier": 1.0
+      }
+    }
+  },
+
+  "bp_emp_mine": {
+    "id": "bp_emp_mine",
+    "name": "EMP Mine",
+    "type": "TRAP",
+    "tier": 3,
+    "tier_label": "Rare",
+    "description": "Proximity-triggered electromagnetic pulse. Damages and disables enemy special abilities. Single use.",
+    "icon": "spr_bp_emp_mine",
+    "source": "exploration",
+    "required_skill_level": 6,
+    "first_build_days": 0,
+    "automaton_build_days": 0,
+    "station_required": "WORKBENCH",
+    "station_level_required": 2,
+    "defense_size": [1, 1],
+    "marks": {
+      "mk1": {
+        "components": [
+          { "component_id": "item_aether_cell_small", "quantity": 2 },
+          { "component_id": "item_copper_wire", "quantity": 4 },
+          { "component_id": "item_precision_gears", "quantity": 2 }
+        ],
+        "stat_multiplier": 1.0
+      },
+      "mk2": { "research_cost": { "data_cores_scientific": 1, "data_cores_military": 1, "engineering_level": 8 }, "components": [], "stat_multiplier": 1.5 }
+    }
+  },
+
+  "bp_spotlight_tower": {
+    "id": "bp_spotlight_tower",
+    "name": "Spotlight Tower",
+    "type": "UTILITY_DEFENSE",
+    "tier": 1,
+    "tier_label": "Common",
+    "description": "Illumination tower that increases detection range during night raids. Essential for night defense.",
+    "icon": "spr_bp_spotlight",
+    "source": "quest",
+    "required_skill_level": 3,
+    "first_build_days": 1,
+    "automaton_build_days": 1,
+    "station_required": "ASSEMBLY",
+    "station_level_required": 1,
+    "defense_size": [2, 2],
+    "marks": {
+      "mk1": {
+        "components": [
+          { "component_id": "item_reinforced_frame", "quantity": 1 },
+          { "component_id": "item_brass_gears", "quantity": 2 },
+          { "component_id": "item_aether_cell_small", "quantity": 1 },
+          { "component_id": "item_steel_plate", "quantity": 2 }
+        ],
+        "stat_multiplier": 1.0
+      },
+      "mk2": { "research_cost": { "data_cores_standard": 1, "engineering_level": 5 }, "components": [], "stat_multiplier": 1.3 }
+    }
+  },
+
+  "bp_alarm_tower": {
+    "id": "bp_alarm_tower",
+    "name": "Alarm Tower",
+    "type": "UTILITY_DEFENSE",
+    "tier": 1,
+    "tier_label": "Common",
+    "description": "Early warning system. Extends raid warning time by 1 day and increases detection range.",
+    "icon": "spr_bp_alarm_tower",
+    "source": "quest",
+    "required_skill_level": 3,
+    "first_build_days": 1,
+    "automaton_build_days": 1,
+    "station_required": "ASSEMBLY",
+    "station_level_required": 1,
+    "defense_size": [2, 2],
+    "marks": {
+      "mk1": {
+        "components": [
+          { "component_id": "item_reinforced_frame", "quantity": 1 },
+          { "component_id": "item_brass_gears", "quantity": 2 },
+          { "component_id": "item_scanner_module", "quantity": 1 },
+          { "component_id": "item_steel_plate", "quantity": 1 }
+        ],
+        "stat_multiplier": 1.0
+      },
+      "mk2": { "research_cost": { "data_cores_standard": 1, "engineering_level": 5 }, "components": [], "stat_multiplier": 1.3 }
+    }
+  },
+
+  "bp_energy_shield_generator": {
+    "id": "bp_energy_shield_generator",
+    "name": "Energy Shield Generator",
+    "type": "UTILITY_DEFENSE",
+    "tier": 3,
+    "tier_label": "Rare",
+    "description": "Projects a temporary aether shield over a defensive area. Absorbs damage until depleted or fuel runs out.",
+    "icon": "spr_bp_energy_shield",
+    "source": "exploration",
+    "required_skill_level": 8,
+    "first_build_days": 3,
+    "automaton_build_days": 4,
+    "station_required": "ASSEMBLY",
+    "station_level_required": 3,
+    "defense_size": [2, 2],
+    "marks": {
+      "mk1": {
+        "components": [
+          { "component_id": "item_old_world_frame", "quantity": 1 },
+          { "component_id": "item_aether_cell_large", "quantity": 2 },
+          { "component_id": "item_precision_gears", "quantity": 4 },
+          { "component_id": "item_old_world_plating", "quantity": 2 }
+        ],
+        "stat_multiplier": 1.0
+      },
+      "mk2": { "research_cost": { "data_cores_classified": 2, "engineering_level": 10 }, "components": [], "stat_multiplier": 1.5 }
+    }
+  }
+}

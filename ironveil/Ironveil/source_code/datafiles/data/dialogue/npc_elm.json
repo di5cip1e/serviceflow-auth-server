@@ -1,0 +1,373 @@
+{
+  "_meta": {
+    "description": "Dialogue data for Pastor Elm (Spiritual Leader). Seasonal/daily pool + heart milestones.",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue"
+  },
+  "entries": [
+    {
+      "entry_id": "npc_elm_sd_001",
+      "npc_id": "npc_elm",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_elm",
+          "text": "A blessed morning. The world renews itself, as always.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_elm_sd_002",
+      "npc_id": "npc_elm",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_elm",
+          "text": "Spring speaks of patience. The seed waits, then grows. Like us.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_elm_sd_003",
+      "npc_id": "npc_elm",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_elm",
+          "text": "The warmth of summer reminds us of what we're building toward.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_elm_sd_004",
+      "npc_id": "npc_elm",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_elm",
+          "text": "Long days for long thoughts. Have you taken a moment to rest, Jack?",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_elm_sd_005",
+      "npc_id": "npc_elm",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_elm",
+          "text": "Harvest time. We reap what we sow — in fields and in friendships.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_elm_sd_006",
+      "npc_id": "npc_elm",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_elm",
+          "text": "Remembrance Day approaches. I've been preparing the ceremony with care.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_elm_sd_007",
+      "npc_id": "npc_elm",
+      "category": "seasonal_daily",
+      "conditions": {
+        "weather": "STORM",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_elm",
+          "text": "Storms test us. But they pass. Everything passes. That's both the sorrow and the comfort.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_elm_sd_008",
+      "npc_id": "npc_elm",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_elm",
+          "text": "DEJIN asked me if machines can pray. I said prayer is just hope with direction.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_elm_sd_009",
+      "npc_id": "npc_elm",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_elm",
+          "text": "Coppervale's chapel is small. But so was every great thing, once.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_elm_sd_010",
+      "npc_id": "npc_elm",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_elm",
+          "text": "Paige reads names at the ceremony. Her voice never breaks. Her hands do.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_elm_sd_011",
+      "npc_id": "npc_elm",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_elm",
+          "text": "Faith isn't certainty, Jack. It's showing up anyway.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_elm_sd_012",
+      "npc_id": "npc_elm",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_elm",
+          "text": "Pip asked me where people go when they die. I said into the stories we tell about them.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_elm_hm_02",
+      "npc_id": "npc_elm",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 2
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_elm_milestone_2",
+      "lines": [
+        {
+          "speaker": "npc_elm",
+          "text": "A blessing for your workshop. Not religious. Just... hopeful.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_elm_hm_04",
+      "npc_id": "npc_elm",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 4
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_elm_milestone_4",
+      "lines": [
+        {
+          "speaker": "npc_elm",
+          "text": "You build machines. I build community. Both require faith in the future.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_elm_hm_06",
+      "npc_id": "npc_elm",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 6
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_elm_milestone_6",
+      "lines": [
+        {
+          "speaker": "npc_elm",
+          "text": "I want to discuss something. About DEJIN. About what consciousness means.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_elm_hm_08",
+      "npc_id": "npc_elm",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 8
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_elm_milestone_8",
+      "lines": [
+        {
+          "speaker": "npc_elm",
+          "text": "You've given this town something no sermon could. Tangible hope.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_elm_hm_10",
+      "npc_id": "npc_elm",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 10
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_elm_milestone_10",
+      "lines": [
+        {
+          "speaker": "npc_elm",
+          "text": "In my years of service, I've seen few people change a community like you have.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_elm_y2_spring_018",
+      "npc_id": "npc_elm",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_elm",
+          "text": "The chapel hosted the summit delegates. Different faiths, different customs, but all seeking peace. Beautiful.",
+          "portrait": "serene"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_elm_y2_autumn_019",
+      "npc_id": "npc_elm",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_elm",
+          "text": "In times like these, we must remember what we're fighting for. Not walls. Each other.",
+          "portrait": "gentle"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_elm_y3_winter_020",
+      "npc_id": "npc_elm",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_elm",
+          "text": "This Remembrance Day is different. We light lanterns not in defiance, but in peace.",
+          "portrait": "fulfilled"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_elm_y4_spring_021",
+      "npc_id": "npc_elm",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 4,
+        "hearts_gte": 0,
+        "story_flag": "flag_main_story_complete"
+      },
+      "priority": 11,
+      "lines": [
+        {
+          "speaker": "npc_elm",
+          "text": "The chapel is full every week now. Not from fear — from gratitude.",
+          "portrait": "warm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "room_id": "rm_int_rusty_gear",
+  "display_name": "The Rusty Gear Tavern",
+  "width_tiles": 14,
+  "height_tiles": 10,
+  "tile_size": 16,
+  "parent_room": "rm_town_coppervale",
+
+  "exits": [
+    { "id": "door_main", "tiles": { "x1": 4, "y1": 9, "x2": 5, "y2": 9 }, "target_room": "rm_town_coppervale", "target_pos": [42, 43], "collision_type": 3 }
+  ],
+
+  "transitions_internal": [
+    { "id": "stairs_up", "tiles": { "x1": 12, "y1": 3, "x2": 12, "y2": 4 }, "target_room": "rm_int_rusty_gear_upstairs", "target_pos": [2, 5], "collision_type": 3 }
+  ],
+
+  "stations": [],
+
+  "furniture": [
+    { "id": "fireplace",    "name": "Fireplace",    "pos": [6, 5],  "size": [2, 2], "type": "DECORATIVE", "collision_type": 1 },
+    { "id": "bar_counter",  "name": "Bar Counter",  "pos": [11, 6], "size": [2, 2], "type": "SHOP",       "collision_type": 2, "interaction": "talk_kaydee" },
+    { "id": "table_1",      "name": "Table",         "pos": [2, 2],  "size": [2, 1], "type": "SEATING",    "collision_type": 1 },
+    { "id": "table_2",      "name": "Table",         "pos": [8, 2],  "size": [2, 1], "type": "SEATING",    "collision_type": 1 },
+    { "id": "table_3",      "name": "Table",         "pos": [2, 5],  "size": [2, 1], "type": "SEATING",    "collision_type": 1 },
+    { "id": "stage",        "name": "Stage",         "pos": [2, 8],  "size": [4, 1], "type": "DECORATIVE", "collision_type": 0 }
+  ],
+
+  "npc_positions": [
+    { "npc_id": "npc_kaydee",  "pos": [11, 6], "note": "Behind bar counter" },
+    { "npc_id": "npc_spark",   "pos": [2, 2],  "note": "Evening schedule — table 1" },
+    { "npc_id": "npc_harrow",  "pos": [10, 7], "note": "Evening schedule — bar stool" },
+    { "npc_id": "npc_leera",   "pos": [8, 2],  "note": "Evening schedule — table 2" },
+    { "npc_id": "npc_linden",  "pos": [2, 5],  "note": "Evening schedule — table 3" },
+    { "npc_id": "npc_hank",    "pos": [7, 5],  "note": "Evening schedule — near fireplace" }
+  ]
+}

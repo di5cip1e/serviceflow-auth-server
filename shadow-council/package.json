@@ -1,0 +1,17 @@
+{
+  "name": "shadow-council",
+  "version": "1.0.0",
+  "description": "An experimental grand strategy game where the player acts as **Counsel** to an autonomous AI Ruler, offering advice in plain English while the ruler makes their own decisions based on their personality, traits, and disposition.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@capacitor/android": "^5.7.0",
+    "@capacitor/cli": "^8.2.0",
+    "@capacitor/core": "^5.7.0"
+  }
+}

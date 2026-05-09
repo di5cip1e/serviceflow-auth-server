@@ -1,0 +1,684 @@
+{
+  "_meta": {
+    "description": "Dialogue data for Mayor Linden (Town Leader). Seasonal/daily pool + heart milestones.",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue"
+  },
+  "entries": [
+    {
+      "entry_id": "npc_linden_sd_001",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Beautiful morning! I can feel it — good day for Coppervale.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_sd_002",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "A little rain grows big gardens. That's what I always say.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_sd_003",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "The Spark Festival preparations are coming along! Community spirit, Jack.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_sd_004",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Long summer days. Perfect for building, growing, connecting.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_sd_005",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Even rainy days have their charm. Good for the crops!",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_sd_006",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Sky Day's approaching! Have you seen Spark's latest contraption?",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_sd_007",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Harvest season. The way I see it, every harvest is a victory.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_sd_008",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Cozy autumn rain. Good for reading, planning, dreaming.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_sd_009",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "The Harvest Faire preparations are coming along nicely. We all need something to celebrate.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_sd_010",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Crisp winter air! Bracing. Keeps the mind sharp.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_sd_011",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "weather": "SNOW",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Snow makes everything quiet. Peaceful. We could use more peace.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_sd_012",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Remembrance Day. We remember so we can build better.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_sd_013",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "weather": "STORM",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Storms pass, Jack. Always have. Coppervale's still standing.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_sd_014",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "weather": "FOG",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Fog rolls in, fog rolls out. Just like trouble. And we handle both.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_sd_015",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Now then, Jack — look at this town! Look how far we've come!",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_sd_016",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "The way I see it, every machine you build is a promise to tomorrow.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_sd_017",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "I try to keep spirits up. That's my job. But sometimes I wonder.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_sd_018",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "New families arrived this week! Coppervale is growing.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_sd_019",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "The Beacon Council meeting went well. We're being noticed.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_sd_020",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Harrow worries. That's his job. Mine is hope. We need both.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_sd_021",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Pip brought me a drawing of the town. She drew the clocktower twice as tall.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_sd_022",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Jack, the community project is ahead of schedule. Your machines help.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_sd_023",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Every light in a window is a family that chose to stay. That matters.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_sd_024",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "The clocktower chimed on time today. Small victories, Jack.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_sd_025",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "I believe in this town. I believe in you. Don't tell Harrow I'm being sentimental.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_hm_02",
+      "npc_id": "npc_linden",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 2
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_linden_milestone_2",
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Jack, I wrote to the Beacon Council about you. All good things!",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_hm_04",
+      "npc_id": "npc_linden",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 4
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_linden_milestone_4",
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Between us — I worry more than I show. But you make it easier to hope.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_hm_06",
+      "npc_id": "npc_linden",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 6
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_linden_milestone_6",
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "I want to propose a community project. A big one. And I need your help.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_hm_08",
+      "npc_id": "npc_linden",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 8
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_linden_milestone_8",
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "You've done more for this town than anyone since the Rekindling. Thank you.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_hm_10",
+      "npc_id": "npc_linden",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 10
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_linden_milestone_10",
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Coppervale's heart beats stronger because of you, Jack. Never forget that.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_y2_spring_031",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "The summit changed everything, Jack. We're not alone anymore. That means something to these people.",
+          "portrait": "hopeful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_y2_spring_032",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Janis is... formidable. I think she'll be good for Coppervale. Once she relaxes a little.",
+          "portrait": "amused"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_y2_summer_033",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "The town's growing. New faces from the trade routes. It's wonderful and terrifying in equal measure.",
+          "portrait": "overwhelmed"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_y2_autumn_034",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "The Marshal's broadcast shook people. But not one person asked to leave. Not one. I've never been prouder.",
+          "portrait": "moved"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_y2_winter_035",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Whatever happens in this siege, remember — Coppervale isn't the walls. It's the people inside them.",
+          "portrait": "solemn"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_y3_spring_036",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Go find the truth, Jack. We'll keep the home fires burning. Literally — it's still cold.",
+          "portrait": "warm_humor"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_y3_autumn_037",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "The Council has formally recognized Coppervale as a regional capital. We're not just a settlement anymore.",
+          "portrait": "beaming"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_y3_winter_038",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "This Remembrance Day, we light lanterns not in defiance, but in gratitude. What a difference a year makes.",
+          "portrait": "peaceful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_linden_y4_spring_039",
+      "npc_id": "npc_linden",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 4,
+        "hearts_gte": 0,
+        "story_flag": "flag_main_story_complete"
+      },
+      "priority": 11,
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "New families arriving every month. We need more housing, more infrastructure. Good problems to have.",
+          "portrait": "busy_happy"
+        }
+      ]
+    }
+  ]
+}

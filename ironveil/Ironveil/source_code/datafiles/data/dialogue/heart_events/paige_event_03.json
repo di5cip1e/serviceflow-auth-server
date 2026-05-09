@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "description": "Heart event #3 for npc_paige: The Memorial",
+    "version": "1.0",
+    "objective": "#33/#34"
+  },
+  "event_id": "heart_event_paige_03",
+  "npc_id": "npc_paige",
+  "heart_level_required": 5,
+  "location": "rm_town_coppervale",
+  "time_range": {
+    "start": 9,
+    "end": 12
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_paige_event_3_complete",
+  "heart_bonus": 50,
+  "title": "The Memorial",
+  "lines": [
+    {
+      "speaker": "narrator",
+      "text": "[You find Paige at Wren's memorial stone. She's not crying. Just... still]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "...Jack. I come here on Tuesdays.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "I don't cry anymore. I used to. For the first two years.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "Now I just... sit. And tell him about the week.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "I'll leave you alone.",
+          "flag": "paige_memorial_respect"
+        },
+        {
+          "text": "Can I sit with you?",
+          "flag": "paige_memorial_stay"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "...Stay. Please. I don't usually ask people to stay.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "Wren would like you, Jack. He'd say you have 'good hands.'",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "He judged people by their hands. Builders' hands were the best kind.",
+      "portrait": "thoughtful"
+    }
+  ]
+}

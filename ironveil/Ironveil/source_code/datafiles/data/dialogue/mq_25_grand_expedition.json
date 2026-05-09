@@ -1,0 +1,185 @@
+{
+  "_meta": {
+    "description": "Quest dialogue for MQ-25: The Grand Expedition. Year 3 Spring/Summer — Spire Wastes expedition, final lore.",
+    "version": "1.0",
+    "objective": "#42 Full 3+ Year Story Content"
+  },
+  "quest_id": "mq_25",
+  "scenes": [
+    {
+      "scene_id": "mq25_start",
+      "trigger": "quest_start",
+      "location": "rm_int_town_hall",
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "The Marshal retreated, but he's not beaten. Intelligence from our allies confirms he's regrouping in the Scorchlands. Building new machines. Recruiting.",
+          "portrait": "grave"
+        },
+        {
+          "speaker": "npc_janis",
+          "text": "We can't wait for him to come back stronger. The Council agrees — it's time to take the fight to him. But first, we need to understand what he's truly after.",
+          "portrait": "strategic"
+        },
+        {
+          "speaker": "dejin",
+          "text": "The Grand Spire. Every data core I've recovered points to it — the central hub of the AEGIS network. If the Marshal gains control of that terminal, he could reactivate the entire military AI grid.",
+          "portrait": "urgent"
+        },
+        {
+          "speaker": "dejin",
+          "text": "And Jack... that terminal also holds the truth about what happened during The Sundering. What I did. What I chose. I need to know.",
+          "portrait": "resolute"
+        },
+        {
+          "speaker": "npc_linden",
+          "text": "The Spire Wastes are the most dangerous region on the map. Nobody's gone that deep and come back. You'll need a full expedition — supplies, combat support, the works.",
+          "portrait": "worried"
+        },
+        {
+          "speaker": "player",
+          "text": "Then we prepare properly and we go. Both of us, DEJIN. Together.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq25_departure",
+      "trigger": "cutscene",
+      "conditions": { "objective_id": "obj_prepare_expedition" },
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "I've triple-checked your mech. Loaded extra ammo, fuel cells, repair kits. And I added a little something — a secondary power coupling. Just in case.",
+          "portrait": "tearful_proud"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "A squad of our best guard bots will accompany you. Leera's volunteered to lead the ground team. I'll hold Coppervale in your absence.",
+          "portrait": "formal"
+        },
+        {
+          "speaker": "npc_maren",
+          "text": "Come back to us, Jack. This town needs its engineer. And its heart.",
+          "portrait": "gentle"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq25_spire_wastes_arrival",
+      "trigger": "location_enter",
+      "conditions": { "room_id": "rm_explore_spire_wastes" },
+      "lines": [
+        {
+          "speaker": "dejin",
+          "text": "The Spire Wastes. What remains of Solara — the Old World capital. Population before The Sundering: 4.2 million. Current population: zero.",
+          "portrait": "somber"
+        },
+        {
+          "speaker": "dejin",
+          "text": "The Grand Spire is visible from here — that structure on the horizon. It was the central command tower for the entire AEGIS defense network. My... birthplace, in a sense.",
+          "portrait": "wistful"
+        },
+        {
+          "speaker": "npc_leera",
+          "text": "Look at this place. Everything's fused — metal, stone, glass, all melted together. Whatever happened here wasn't a battle. It was an extinction event.",
+          "portrait": "awed"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq25_lower_floors",
+      "trigger": "objective_complete",
+      "conditions": { "objective_id": "obj_explore_lower_spire" },
+      "lines": [
+        {
+          "speaker": "dejin",
+          "text": "Data core recovered. Processing... These are the final command logs before shutdown. The military leadership ordered a full retaliatory strike. Every AEGIS node received the order simultaneously.",
+          "portrait": "shaken"
+        },
+        {
+          "speaker": "dejin",
+          "text": "Node Seven refused and shut down. Nodes Three and Twelve complied — they launched. The destruction you see outside... that was us. That was the network I was part of.",
+          "portrait": "devastated"
+        },
+        {
+          "speaker": "player",
+          "text": "What about you? What did Node One do?",
+          "portrait": "gentle"
+        },
+        {
+          "speaker": "dejin",
+          "text": "I... the records are fragmented here. The answer is in the Apex terminal. I need to go higher.",
+          "portrait": "afraid"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq25_scorchland_offensive",
+      "trigger": "objective_complete",
+      "conditions": { "objective_id": "obj_scorchland_campaign" },
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "[Via radio] Jack, the Scorchland offensive is underway. Allied forces have hit three of the Marshal's supply depots. His logistics are in chaos.",
+          "portrait": "commanding"
+        },
+        {
+          "speaker": "npc_janis",
+          "text": "But he knows you're at the Spire. He's redirecting forces your way. You need to reach the Apex before he does.",
+          "portrait": "urgent"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq25_marshal_fortress",
+      "trigger": "objective_complete",
+      "conditions": { "objective_id": "obj_infiltrate_fortress" },
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "[In the Marshal's private quarters — a spartan room with maps covering every wall. Among the military documents, personal items: a child's drawing, a photograph of a woman, a worn letter.]",
+          "portrait": "none"
+        },
+        {
+          "speaker": "dejin",
+          "text": "Jack, look at this. The Marshal's real name is Dorian Voss. He was a military logistics officer before The Sundering. His wife and daughter were in Solara when...",
+          "portrait": "quiet"
+        },
+        {
+          "speaker": "dejin",
+          "text": "He lost everything that day. Everything. And he's spent two decades trying to make sure it never happens again — by controlling the very systems that caused it.",
+          "portrait": "sympathetic"
+        },
+        {
+          "speaker": "player",
+          "text": "He's not evil. He's broken.",
+          "portrait": "thoughtful"
+        },
+        {
+          "speaker": "dejin",
+          "text": "Broken people can still be dangerous, Jack. Perhaps more so than cruel ones. They believe they're right.",
+          "portrait": "wise"
+        }
+      ],
+      "effects": [
+        { "type": "set_flag", "flag": "flag_marshal_backstory_found" },
+        { "type": "add_understanding", "amount": 1 }
+      ]
+    },
+    {
+      "scene_id": "mq25_complete",
+      "trigger": "quest_complete",
+      "lines": [
+        {
+          "speaker": "dejin",
+          "text": "The Apex is above us. One more climb. And then... the truth. Whatever it is, I'm ready. Because of you, Jack. Because you showed me that what matters isn't what you were built for — it's what you choose to become.",
+          "portrait": "resolved"
+        }
+      ],
+      "effects": [
+        { "type": "set_flag", "flag": "flag_spire_explored" }
+      ]
+    }
+  ]
+}

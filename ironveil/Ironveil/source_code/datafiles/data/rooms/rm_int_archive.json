@@ -1,0 +1,26 @@
+{
+  "room_id": "rm_int_archive",
+  "display_name": "The Archive",
+  "width_tiles": 12,
+  "height_tiles": 10,
+  "tile_size": 16,
+  "parent_room": "rm_town_coppervale",
+
+  "exits": [
+    { "id": "door_main", "tiles": { "x1": 5, "y1": 9, "x2": 6, "y2": 9 }, "target_room": "rm_town_coppervale", "target_pos": [20, 23], "collision_type": 3 }
+  ],
+
+  "stations": [],
+
+  "furniture": [
+    { "id": "bookshelves_n",   "name": "Bookshelves (North)", "pos": [1, 1],  "size": [10, 1], "type": "DECORATIVE",  "collision_type": 1 },
+    { "id": "bookshelves_w",   "name": "Bookshelves (West)",  "pos": [1, 2],  "size": [1, 6],  "type": "DECORATIVE",  "collision_type": 1 },
+    { "id": "bookshelves_e",   "name": "Bookshelves (East)",  "pos": [10, 2], "size": [1, 6],  "type": "DECORATIVE",  "collision_type": 1 },
+    { "id": "reading_desk",    "name": "Reading Desk",        "pos": [4, 4],  "size": [2, 2],  "type": "INTERACTABLE","collision_type": 2, "interaction": "talk_paige" },
+    { "id": "data_core_reader","name": "Data Core Reader",    "pos": [2, 7],  "size": [2, 1],  "type": "INTERACTABLE","collision_type": 2, "interaction": "read_data_core" }
+  ],
+
+  "npc_positions": [
+    { "npc_id": "npc_paige", "pos": [4, 4], "note": "Seated at reading desk" }
+  ]
+}

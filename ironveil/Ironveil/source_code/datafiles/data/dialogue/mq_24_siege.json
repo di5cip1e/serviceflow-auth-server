@@ -1,0 +1,341 @@
+{
+  "_meta": {
+    "description": "Quest dialogue for MQ-24: The Siege of Coppervale. Year 2 Winter — multi-day siege climax.",
+    "version": "1.0",
+    "objective": "#42 Full 3+ Year Story Content"
+  },
+  "quest_id": "mq_24",
+  "scenes": [
+    {
+      "scene_id": "mq24_eve_of_battle",
+      "trigger": "quest_start",
+      "location": "rm_town_coppervale",
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Scouts report movement in the Scorchlands. Three columns. Infantry, siege equipment, and... mechs. At least two. They'll be here by morning.",
+          "portrait": "grave"
+        },
+        {
+          "speaker": "npc_janis",
+          "text": "This is it. All defenses to combat readiness. Turrets armed, walls manned, traps active. Everyone knows their station.",
+          "portrait": "commanding"
+        },
+        {
+          "speaker": "npc_linden",
+          "text": "I've moved the children and elderly to the shelter beneath Gus's store. Pastor Elm is with them. The rest of us... we stand our ground.",
+          "portrait": "solemn"
+        },
+        {
+          "speaker": "dejin",
+          "text": "I have calculated optimal turret firing arcs based on the enemy's likely approach vectors. Uploading targeting data now. Jack — your mech is fully fueled and armed. It's ready when you are.",
+          "portrait": "focused"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq24_harrow_speech",
+      "trigger": "cutscene",
+      "conditions": { "after_scene": "mq24_eve_of_battle" },
+      "location": "rm_town_coppervale",
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Listen up, all of you. I've been a soldier my whole life. I've seen towns fall. I've seen walls crumble. I've seen good people die because nobody stood between them and the dark.",
+          "portrait": "commanding"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "But I have NEVER — not once — seen a town like this one. You built walls out of scrap and held them with spit and stubbornness. You turned a ruin into a home.",
+          "portrait": "passionate"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "The Marshal thinks strength is about control. About forcing people to obey. But real strength? Real strength is choosing to stand when every part of you wants to run.",
+          "portrait": "fierce"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "So when those gates shake tomorrow, you remember — you are not alone. You have never been alone. Now get to your posts. And God help any raider who sets foot in our town.",
+          "portrait": "resolute"
+        },
+        {
+          "speaker": "narrator",
+          "text": "[A cheer rises from the defenders of Coppervale. It echoes off the walls and into the winter night.]",
+          "portrait": "none"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq24_day1_dawn",
+      "trigger": "cutscene",
+      "conditions": { "siege_day": 1 },
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "[Dawn breaks cold and grey. The Iron Marauder army stretches across the eastern horizon — banners of black iron against the snow.]",
+          "portrait": "none"
+        },
+        {
+          "speaker": "the_marshal",
+          "text": "[Via loudspeaker] Last chance, Coppervale. Send out the engineer and the AI core, and my army walks away. No one else needs to die today.",
+          "portrait": "broadcast"
+        },
+        {
+          "speaker": "npc_spark",
+          "text": "[From the walls] HEY MARSHAL! I BUILT SOMETHING FOR YOU! IT'S CALLED A TURRET AND IT FIRES REALLY FAST!",
+          "portrait": "defiant"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "...Spark, get behind cover. NOW.",
+          "portrait": "exasperated"
+        },
+        {
+          "speaker": "dejin",
+          "text": "Enemy advance beginning. First wave — light infantry, probing our defenses. Turrets engaging.",
+          "portrait": "tactical"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq24_day1_midday",
+      "trigger": "cutscene",
+      "conditions": { "siege_day": 1, "time_period": "midday" },
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "First wave repelled. Minimal damage to the eastern wall. Their sappers tried to breach the south gate — traps caught most of them.",
+          "portrait": "professional"
+        },
+        {
+          "speaker": "dejin",
+          "text": "Casualty analysis: enemy lost approximately 40 units. Our turret ammunition is at 78%. Two wall sections sustained structural damage — repair teams are already en route.",
+          "portrait": "analytical"
+        },
+        {
+          "speaker": "npc_michelle",
+          "text": "Three wounded so far. Nothing critical. But they're testing us, Jack. The real push hasn't come yet.",
+          "portrait": "tense"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq24_allies_arrive",
+      "trigger": "cutscene",
+      "conditions": { "siege_day": 2, "story_flag": "flag_alliance_forged" },
+      "lines": [
+        {
+          "speaker": "npc_ferris",
+          "text": "JACK! Radio contact — incoming from the north road! It's... it's the Beacon Towns! They're HERE!",
+          "portrait": "ecstatic"
+        },
+        {
+          "speaker": "npc_janis",
+          "text": "Alliance reinforcements have arrived. I told you they'd come.",
+          "portrait": "proud"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq24_allies_full",
+      "trigger": "cutscene",
+      "conditions": { "alliance_level": "full" },
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "Full deployment. Thornwall militia, Dusthaven supplies and volunteers, Ironridge sappers. Every town sent their best. Your diplomacy paid off, Jack.",
+          "portrait": "impressed"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "Sixty additional fighters, sapper teams, and enough supplies to last a week. The Marshal wasn't expecting this. Good.",
+          "portrait": "grinning"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq24_allies_partial",
+      "trigger": "cutscene",
+      "conditions": { "alliance_level": "partial" },
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "Partial deployment. Some fighters, some supplies. Better than nothing, but we'll need to rely more heavily on our own defenses.",
+          "portrait": "pragmatic"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "Thirty fighters and a sapper team. It'll make a difference on the walls, but the mech battle is still on you, Jack.",
+          "portrait": "realistic"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq24_allies_none",
+      "trigger": "cutscene",
+      "conditions": { "alliance_level": "none" },
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "...Nothing. No reinforcements. The Council sent their regrets. They're 'preserving their own defenses.'",
+          "portrait": "bitter"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "Then we do this alone. Wouldn't be the first time. Dig in, people. Every shot counts.",
+          "portrait": "grim"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq24_remembrance_truce",
+      "trigger": "cutscene",
+      "conditions": { "siege_day": 3, "festival": "remembrance_day" },
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Today is Remembrance Day. Even in the middle of a siege... especially in the middle of a siege... we honor those we've lost.",
+          "portrait": "solemn"
+        },
+        {
+          "speaker": "npc_elm",
+          "text": "The Marauders have ceased fire for the morning. Even they, it seems, respect the Day. Or perhaps they simply need rest. Either way — we take this moment.",
+          "portrait": "peaceful"
+        },
+        {
+          "speaker": "npc_maren",
+          "text": "Oren. My Oren. He would have loved to see what Jack built here. He always said this town had a future. He was right.",
+          "portrait": "tearful_proud"
+        },
+        {
+          "speaker": "npc_pip",
+          "text": "I lit a lantern for my mom. She... she would've been scared. But she would've stayed. She always stayed.",
+          "portrait": "brave"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq24_marshal_mech_battle",
+      "trigger": "cutscene",
+      "conditions": { "siege_day": 4 },
+      "lines": [
+        {
+          "speaker": "dejin",
+          "text": "ALERT. Seismic sensors detecting heavy footfall. Something large is approaching from the southeast. Very large.",
+          "portrait": "alarmed"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "That's his personal mech. I've seen it in intelligence reports — a modified Heavy class with siege weaponry. He's coming himself.",
+          "portrait": "grim"
+        },
+        {
+          "speaker": "npc_janis",
+          "text": "Jack, get to your mech. This is what we built it for.",
+          "portrait": "urgent"
+        },
+        {
+          "speaker": "dejin",
+          "text": "Combat Mech Mk II is fully operational. Weapons charged. Jack... be careful. His mech outweighs ours by forty percent.",
+          "portrait": "worried"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq24_marshal_taunts",
+      "trigger": "cutscene",
+      "conditions": { "in_mech_battle": true },
+      "lines": [
+        {
+          "speaker": "the_marshal",
+          "text": "[Via mech comm] So this is the legendary engineer of Coppervale. I expected someone... bigger.",
+          "portrait": "mech_comm"
+        },
+        {
+          "speaker": "the_marshal",
+          "text": "You know, we're not so different. We both see the broken world and want to fix it. The difference is I understand what it actually costs.",
+          "portrait": "mech_comm"
+        },
+        {
+          "speaker": "player",
+          "text": "The difference is I don't build my future on other people's ashes.",
+          "portrait": "mech_comm"
+        },
+        {
+          "speaker": "the_marshal",
+          "text": "Noble words. Let's see if they stop a cannon shell.",
+          "portrait": "mech_comm"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq24_marshal_retreats",
+      "trigger": "objective_complete",
+      "conditions": { "objective_id": "obj_defeat_marshal_mech" },
+      "lines": [
+        {
+          "speaker": "the_marshal",
+          "text": "[Mech systems failing] ...Impressive. Your machine is better than I anticipated. But this changes nothing. I'll be back. With more.",
+          "portrait": "mech_comm"
+        },
+        {
+          "speaker": "dejin",
+          "text": "His mech is withdrawing. Escort units covering his retreat. The remaining Marauder forces are breaking formation — they're falling back!",
+          "portrait": "relieved"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "THEY'RE RUNNING! Hold positions — don't pursue! Let them go!",
+          "portrait": "shouting"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq24_victory",
+      "trigger": "quest_complete",
+      "location": "rm_town_coppervale",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "[The last of the Iron Marauder army disappears into the winter snow. Coppervale stands. Battered, scarred, but standing.]",
+          "portrait": "none"
+        },
+        {
+          "speaker": "npc_linden",
+          "text": "We did it. We actually did it.",
+          "portrait": "overwhelmed"
+        },
+        {
+          "speaker": "npc_spark",
+          "text": "The turrets held! The walls held! WE held! Jack, we need to celebrate. Right now. Immediately.",
+          "portrait": "crying_happy"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "Celebrate tomorrow. Tonight we count our losses, tend our wounded, and repair what we can. But yes... you should be proud. All of you.",
+          "portrait": "exhausted_pride"
+        },
+        {
+          "speaker": "dejin",
+          "text": "The Marshal escaped. He will rebuild. He will return. But today, Coppervale proved something that no army can undo: that people who choose to stand together cannot be broken.",
+          "portrait": "profound"
+        },
+        {
+          "speaker": "dejin",
+          "text": "Jack... thank you. For not surrendering me. For believing I was worth fighting for.",
+          "portrait": "emotional"
+        },
+        {
+          "speaker": "npc_kaydee",
+          "text": "Alright, everyone. Drinks are on the house tonight. ALL of them. Even the good whiskey. We earned it.",
+          "portrait": "warm"
+        }
+      ],
+      "effects": [
+        { "type": "set_flag", "flag": "flag_siege_survived" },
+        { "type": "set_flag", "flag": "flag_marshal_defeated_year2" }
+      ]
+    }
+  ]
+}

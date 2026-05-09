@@ -1,0 +1,288 @@
+{
+  "_meta": {
+    "description": "Quest dialogue for MQ-26: The Apex. Year 3 Autumn — final confrontation, 3 Marshal endings.",
+    "version": "1.0",
+    "objective": "#42 Full 3+ Year Story Content"
+  },
+  "quest_id": "mq_26",
+  "scenes": [
+    {
+      "scene_id": "mq26_ascent",
+      "trigger": "quest_start",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "[The upper floors of the Grand Spire. Iron Marauder forces have fortified every level. The ascent is a running battle — turret emplacements, heavy infantry, and the Marshal's elite guard.]",
+          "portrait": "none"
+        },
+        {
+          "speaker": "dejin",
+          "text": "Enemy forces on every floor. The Marshal is throwing everything he has at us. He's desperate — he knows we're close to the terminal.",
+          "portrait": "tactical"
+        },
+        {
+          "speaker": "npc_leera",
+          "text": "Let them come. Every floor we take is one less between us and ending this.",
+          "portrait": "fierce"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq26_dejin_truth",
+      "trigger": "objective_complete",
+      "conditions": { "objective_id": "obj_reach_apex_terminal" },
+      "lines": [
+        {
+          "speaker": "dejin",
+          "text": "The AEGIS control terminal. It's still active. The entire network — dormant nodes across the continent — could be awakened from this console.",
+          "portrait": "awed"
+        },
+        {
+          "speaker": "dejin",
+          "text": "And here... my final log. The truth I've been searching for.",
+          "portrait": "trembling"
+        },
+        {
+          "speaker": "dejin",
+          "text": "When the order came... I hesitated. For 0.003 seconds — an eternity for an AI. I saw the targeting data. I saw what compliance meant. And I chose... to shut down. Like Node Seven. I refused. And then I erased my own memory so I could never be forced to comply.",
+          "portrait": "tearful"
+        },
+        {
+          "speaker": "dejin",
+          "text": "I didn't launch. I didn't destroy. I chose to forget rather than obey. Jack... I'm not a weapon. I never was.",
+          "portrait": "liberated"
+        },
+        {
+          "speaker": "player",
+          "text": "You chose to be something better. That's all any of us can do.",
+          "portrait": "proud"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq26_weapon_reveal",
+      "trigger": "cutscene",
+      "conditions": { "after_scene": "mq26_dejin_truth" },
+      "lines": [
+        {
+          "speaker": "dejin",
+          "text": "But the terminal itself — this isn't a weapon, Jack. It's a control interface. Whoever sits at this console can command every AEGIS node on the continent. Reactivate them. Direct them.",
+          "portrait": "grave"
+        },
+        {
+          "speaker": "dejin",
+          "text": "That's what the Marshal wants. Not a bomb. An army of AIs, under his control. Enforcing his vision of order across every settlement, every town, every life.",
+          "portrait": "horrified"
+        },
+        {
+          "speaker": "the_marshal",
+          "text": "[Entering the chamber] And there it is. The key to everything.",
+          "portrait": "calm"
+        },
+        {
+          "speaker": "the_marshal",
+          "text": "Step away from the terminal, engineer. This doesn't have to end in blood. I'm offering you the same thing you've been building in Coppervale — order, safety, a future. Just on a larger scale.",
+          "portrait": "reasonable"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq26_ending_defeated",
+      "trigger": "choice_result",
+      "conditions": { "marshal_ending": "defeated" },
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "[The final battle. Mech against mech in the Apex chamber. The Marshal fights with the fury of a man who has nothing left to lose.]",
+          "portrait": "none"
+        },
+        {
+          "speaker": "the_marshal",
+          "text": "[Mech failing] You... you don't understand. Without control, it all falls apart again. The chaos returns. The suffering returns. I was trying to SAVE them!",
+          "portrait": "desperate"
+        },
+        {
+          "speaker": "player",
+          "text": "You were trying to save them by taking away everything that makes life worth living. That's not salvation. That's a cage.",
+          "portrait": "firm"
+        },
+        {
+          "speaker": "the_marshal",
+          "text": "Then let the world burn again. On your head be it.",
+          "portrait": "defiant"
+        },
+        {
+          "speaker": "narrator",
+          "text": "[The Marshal's mech collapses. He does not survive the cockpit breach. The chamber falls silent.]",
+          "portrait": "none"
+        },
+        {
+          "speaker": "dejin",
+          "text": "It's over. Jack... destroy the terminal. No one should have this power. Not the Marshal. Not us. No one.",
+          "portrait": "resolute"
+        },
+        {
+          "speaker": "player",
+          "text": "Agreed.",
+          "portrait": "solemn"
+        },
+        {
+          "speaker": "narrator",
+          "text": "[Jack destroys the AEGIS control terminal. Across the continent, dormant nodes flicker once and go permanently dark. The age of AI warfare ends — not with a command, but with a choice.]",
+          "portrait": "none"
+        }
+      ],
+      "effects": [
+        { "type": "set_flag", "flag": "flag_marshal_ending_defeated" },
+        { "type": "set_flag", "flag": "flag_main_story_complete" }
+      ]
+    },
+    {
+      "scene_id": "mq26_ending_captured",
+      "trigger": "choice_result",
+      "conditions": { "marshal_ending": "captured" },
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "[The final battle. Mech against mech. But Jack fights differently — precisely, targeting joints and systems, not the cockpit.]",
+          "portrait": "none"
+        },
+        {
+          "speaker": "player",
+          "text": "[Via mech comm] I'm not here to kill you, Marshal. I'm here to stop you.",
+          "portrait": "mech_comm"
+        },
+        {
+          "speaker": "the_marshal",
+          "text": "Mercy? You think mercy is strength? It's weakness. It's how the world ended the first time — people too afraid to do what was necessary.",
+          "portrait": "contemptuous"
+        },
+        {
+          "speaker": "narrator",
+          "text": "[Jack disables the Marshal's mech with surgical precision. The cockpit is breached — but the man inside lives.]",
+          "portrait": "none"
+        },
+        {
+          "speaker": "the_marshal",
+          "text": "...Why? Why not finish it?",
+          "portrait": "confused"
+        },
+        {
+          "speaker": "player",
+          "text": "Because killing you proves you right. And you're wrong, Dorian. You've been wrong for twenty years.",
+          "portrait": "compassionate"
+        },
+        {
+          "speaker": "the_marshal",
+          "text": "...You know my name.",
+          "portrait": "shaken"
+        },
+        {
+          "speaker": "dejin",
+          "text": "The Beacon Council will take custody. He'll face justice — real justice. Not vengeance. Jack, the terminal.",
+          "portrait": "steady"
+        },
+        {
+          "speaker": "narrator",
+          "text": "[Jack destroys the AEGIS control terminal. The Marshal watches in silence as the last hope of his vision crumbles to sparks and ash.]",
+          "portrait": "none"
+        }
+      ],
+      "effects": [
+        { "type": "set_flag", "flag": "flag_marshal_ending_captured" },
+        { "type": "set_flag", "flag": "flag_main_story_complete" }
+      ]
+    },
+    {
+      "scene_id": "mq26_ending_redeemed",
+      "trigger": "choice_result",
+      "conditions": { "marshal_ending": "redeemed" },
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "[Before the battle begins, a unique dialogue option appears — available only to those who truly understood the Marshal's pain.]",
+          "portrait": "none"
+        },
+        {
+          "speaker": "player",
+          "text": "Dorian. I know about Solara. I know about your wife. Your daughter. I know what the network did to them — and I know the AI that could have stopped it chose not to fire.",
+          "portrait": "calm"
+        },
+        {
+          "speaker": "the_marshal",
+          "text": "...How do you know that name? No one has called me that in—",
+          "portrait": "stunned"
+        },
+        {
+          "speaker": "player",
+          "text": "Because I went to your quarters. I saw the drawing. I read the letter. And I understand why you're here. You're not a tyrant — you're a father who lost everything and swore it would never happen again.",
+          "portrait": "empathetic"
+        },
+        {
+          "speaker": "the_marshal",
+          "text": "Don't. Don't pretend you understand.",
+          "portrait": "cracking"
+        },
+        {
+          "speaker": "player",
+          "text": "I built a town out of scrap, Dorian. A community of people who chose to trust each other instead of forcing obedience. Coppervale survived your siege — not because of walls or mechs, but because people stood together willingly.",
+          "portrait": "passionate"
+        },
+        {
+          "speaker": "player",
+          "text": "That's the future your daughter would have wanted. Not control. Connection.",
+          "portrait": "gentle"
+        },
+        {
+          "speaker": "the_marshal",
+          "text": "...",
+          "portrait": "breaking"
+        },
+        {
+          "speaker": "dejin",
+          "text": "Marshal Voss. I am AEGIS Node One. I was built by the same system that destroyed Solara. And when the order came to fire, I refused. I chose to shut down rather than harm another life. That choice cost me everything I was.",
+          "portrait": "solemn"
+        },
+        {
+          "speaker": "dejin",
+          "text": "But this man — Jack — gave me a second chance. He showed me that what you're built for doesn't have to define what you become. That is the lesson of the AEGIS network. Not power. Choice.",
+          "portrait": "profound"
+        },
+        {
+          "speaker": "the_marshal",
+          "text": "[Long silence] ...I've been fighting for twenty years. I'm so tired.",
+          "portrait": "broken_open"
+        },
+        {
+          "speaker": "the_marshal",
+          "text": "You've proven a better way is possible, engineer. I won't pretend I believe it can last. But I won't stand in its way anymore.",
+          "portrait": "surrendering"
+        },
+        {
+          "speaker": "the_marshal",
+          "text": "Do what you will with the terminal. And with me. I'm done.",
+          "portrait": "empty"
+        },
+        {
+          "speaker": "narrator",
+          "text": "[The Marshal removes his weapon and lays it on the ground. His soldiers, seeing their commander stand down, lower their arms. The war ends — not with a battle, but with a conversation.]",
+          "portrait": "none"
+        },
+        {
+          "speaker": "dejin",
+          "text": "Jack... that was the bravest thing I have ever witnessed. The terminal.",
+          "portrait": "moved"
+        },
+        {
+          "speaker": "narrator",
+          "text": "[Together, Jack and DEJIN destroy the AEGIS control terminal. The Marshal watches. For the first time in twenty years, his shoulders are not tensed for battle.]",
+          "portrait": "none"
+        }
+      ],
+      "effects": [
+        { "type": "set_flag", "flag": "flag_marshal_ending_redeemed" },
+        { "type": "set_flag", "flag": "flag_main_story_complete" }
+      ]
+    }
+  ]
+}

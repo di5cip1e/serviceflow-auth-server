@@ -1,0 +1,160 @@
+{
+  "_meta": {
+    "description": "Year 3 raid schedule. The Marshal's final campaign. Escalates to story climax.",
+    "version": "1.0",
+    "objective": "#31 Full Raid System"
+  },
+
+  "raids": [
+    {
+      "raid_id": "raid_y3_spring_1",
+      "trigger_type": "SCHEDULED",
+      "trigger_date": { "season": 0, "day": 8 },
+      "size": "MODERATE",
+      "faction": "RUST_WOLVES",
+      "directions": ["SOUTH"],
+      "warning_days": 3,
+      "objective": "ASSAULT",
+      "modifiers": [],
+      "intel_message": "Rust Wolves, desperate after the Iron Marauders displaced them, attack from the south.",
+      "waves": [
+        { "wave_index": 0, "delay_seconds": 0, "enemies": [
+          { "enemy_id": "enemy_rustwolf_raider", "count": 10, "spawn_direction": "SOUTH" },
+          { "enemy_id": "enemy_rustwolf_berserker", "count": 4, "spawn_direction": "SOUTH" }
+        ]},
+        { "wave_index": 1, "delay_seconds": 40, "enemies": [
+          { "enemy_id": "enemy_rustwolf_sapper", "count": 4, "spawn_direction": "SOUTH" },
+          { "enemy_id": "enemy_rustwolf_berserker", "count": 5, "spawn_direction": "SOUTH" },
+          { "enemy_id": "enemy_rustwolf_alpha", "count": 1, "spawn_direction": "SOUTH" }
+        ]}
+      ],
+      "rewards": { "reputation": 60, "bonus_items": [
+        { "item_id": "item_scrap_iron", "quantity": 20 },
+        { "item_id": "item_steel_plate", "quantity": 4 }
+      ]}
+    },
+    {
+      "raid_id": "raid_y3_spring_2",
+      "trigger_type": "SCHEDULED",
+      "trigger_date": { "season": 0, "day": 22 },
+      "size": "MAJOR",
+      "faction": "IRON_MARAUDERS",
+      "directions": ["EAST", "NORTH"],
+      "warning_days": 3,
+      "objective": "ASSAULT",
+      "modifiers": ["coordinated"],
+      "intel_message": "The Marshal tests our defenses again. Two coordinated columns approaching.",
+      "waves": [
+        { "wave_index": 0, "delay_seconds": 0, "enemies": [
+          { "enemy_id": "enemy_iron_infantry", "count": 12, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_shieldbearer", "count": 4, "spawn_direction": "NORTH" },
+          { "enemy_id": "enemy_iron_gunner", "count": 5, "spawn_direction": "EAST" }
+        ]},
+        { "wave_index": 1, "delay_seconds": 50, "enemies": [
+          { "enemy_id": "enemy_iron_siege_ram", "count": 1, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_mech", "count": 1, "spawn_direction": "NORTH" },
+          { "enemy_id": "enemy_iron_technician", "count": 3, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_infantry", "count": 8, "spawn_direction": "NORTH" }
+        ]},
+        { "wave_index": 2, "delay_seconds": 55, "enemies": [
+          { "enemy_id": "enemy_iron_gunner", "count": 6, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_shieldbearer", "count": 3, "spawn_direction": "NORTH" },
+          { "enemy_id": "enemy_iron_lieutenant", "count": 2, "spawn_direction": "EAST" }
+        ]}
+      ],
+      "rewards": { "reputation": 100, "bonus_items": [
+        { "item_id": "item_steel_plate", "quantity": 10 },
+        { "item_id": "item_precision_gears", "quantity": 6 }
+      ]}
+    },
+    {
+      "raid_id": "raid_y3_summer_1",
+      "trigger_type": "SCHEDULED",
+      "trigger_date": { "season": 1, "day": 10 },
+      "size": "MAJOR",
+      "faction": "IRON_MARAUDERS",
+      "directions": ["EAST", "SOUTH", "WEST"],
+      "warning_days": 4,
+      "objective": "SIEGE",
+      "modifiers": ["coordinated"],
+      "intel_message": "Three-pronged assault! The Marshal is probing for weakness on every front.",
+      "waves": [
+        { "wave_index": 0, "delay_seconds": 0, "enemies": [
+          { "enemy_id": "enemy_iron_infantry", "count": 8, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_infantry", "count": 6, "spawn_direction": "SOUTH" },
+          { "enemy_id": "enemy_tidereaver_raider", "count": 5, "spawn_direction": "WEST" }
+        ]},
+        { "wave_index": 1, "delay_seconds": 50, "enemies": [
+          { "enemy_id": "enemy_iron_shieldbearer", "count": 4, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_gunner", "count": 5, "spawn_direction": "SOUTH" },
+          { "enemy_id": "enemy_tidereaver_diver", "count": 4, "spawn_direction": "WEST" }
+        ]},
+        { "wave_index": 2, "delay_seconds": 55, "enemies": [
+          { "enemy_id": "enemy_iron_mech", "count": 2, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_siege_ram", "count": 1, "spawn_direction": "SOUTH" },
+          { "enemy_id": "enemy_tidereaver_captain", "count": 1, "spawn_direction": "WEST" }
+        ]},
+        { "wave_index": 3, "delay_seconds": 55, "enemies": [
+          { "enemy_id": "enemy_iron_infantry", "count": 10, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_lieutenant", "count": 2, "spawn_direction": "SOUTH" },
+          { "enemy_id": "enemy_iron_technician", "count": 2, "spawn_direction": "EAST" }
+        ]}
+      ],
+      "rewards": { "reputation": 120, "bonus_items": [
+        { "item_id": "item_steel_plate", "quantity": 12 },
+        { "item_id": "item_precision_gears", "quantity": 8 },
+        { "item_id": "item_old_world_plating", "quantity": 2 }
+      ]}
+    },
+    {
+      "raid_id": "raid_y3_autumn_final_campaign",
+      "trigger_type": "SCHEDULED",
+      "trigger_date": { "season": 2, "day": 15 },
+      "size": "SIEGE",
+      "faction": "IRON_MARAUDERS",
+      "directions": ["EAST", "NORTH", "SOUTH", "WEST"],
+      "warning_days": 5,
+      "objective": "BOSS",
+      "modifiers": ["coordinated", "night"],
+      "intel_message": "THE MARSHAL HIMSELF MARCHES ON COPPERVALE. All four directions. This is the final battle. Everything we've built comes down to this.",
+      "waves": [
+        { "wave_index": 0, "delay_seconds": 0, "enemies": [
+          { "enemy_id": "enemy_iron_infantry", "count": 12, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_infantry", "count": 8, "spawn_direction": "NORTH" },
+          { "enemy_id": "enemy_iron_shieldbearer", "count": 4, "spawn_direction": "SOUTH" },
+          { "enemy_id": "enemy_iron_gunner", "count": 6, "spawn_direction": "WEST" }
+        ]},
+        { "wave_index": 1, "delay_seconds": 55, "enemies": [
+          { "enemy_id": "enemy_iron_siege_ram", "count": 2, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_mech", "count": 2, "spawn_direction": "NORTH" },
+          { "enemy_id": "enemy_iron_technician", "count": 4, "spawn_direction": "SOUTH" },
+          { "enemy_id": "enemy_iron_infantry", "count": 10, "spawn_direction": "WEST" }
+        ]},
+        { "wave_index": 2, "delay_seconds": 60, "enemies": [
+          { "enemy_id": "enemy_iron_shieldbearer", "count": 6, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_gunner", "count": 8, "spawn_direction": "NORTH" },
+          { "enemy_id": "enemy_iron_mech", "count": 1, "spawn_direction": "SOUTH" },
+          { "enemy_id": "enemy_iron_lieutenant", "count": 2, "spawn_direction": "EAST" }
+        ]},
+        { "wave_index": 3, "delay_seconds": 60, "enemies": [
+          { "enemy_id": "enemy_iron_infantry", "count": 15, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_siege_ram", "count": 1, "spawn_direction": "SOUTH" },
+          { "enemy_id": "enemy_iron_shieldbearer", "count": 4, "spawn_direction": "NORTH" },
+          { "enemy_id": "enemy_iron_gunner", "count": 6, "spawn_direction": "WEST" }
+        ]},
+        { "wave_index": 4, "delay_seconds": 60, "enemies": [
+          { "enemy_id": "enemy_iron_mech", "count": 2, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_lieutenant", "count": 2, "spawn_direction": "NORTH" },
+          { "enemy_id": "enemy_the_marshal", "count": 1, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_infantry", "count": 10, "spawn_direction": "SOUTH" }
+        ]}
+      ],
+      "rewards": { "reputation": 250, "bonus_items": [
+        { "item_id": "item_old_world_plating", "quantity": 5 },
+        { "item_id": "item_steel_plate", "quantity": 20 },
+        { "item_id": "item_precision_gears", "quantity": 12 },
+        { "item_id": "item_reinforced_frame", "quantity": 4 }
+      ]}
+    }
+  ]
+}

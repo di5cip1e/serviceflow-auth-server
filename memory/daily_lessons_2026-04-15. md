@@ -1,0 +1,24 @@
+# Daily Lessons — April 15, 2026
+
+## Key Lessons from April 14
+
+### ServiceFlow Development
+1. **Sub-agent workflow**: Spawned Flux repeatedly for incremental development - works well for focused tasks
+2. **Git commits track progress**: Each feature gets its own commit (job workflow, invoices, payments)
+3. **MVP order matters**: Dashboard → Job Status → Invoicing → Payments was the right sequence
+
+### Technical
+4. **Job status workflow**: Quick action buttons on job detail screen drive the full lifecycle
+5. **Invoice from job**: createInvoice() pulls job data (labor hours, parts) to calculate totals
+6. **Payment tracking**: markInvoicePaid() cascades to job status = paid
+
+### Business
+7. **PixelForge unblocked**: According to April 14 heartbeat, DATABASE_URL and OPENAI_API_KEY were already configured
+8. **ClawHub growth**: Platform at 44K skills (up from 33K) - 33% weekly growth
+
+### Revenue Impact
+9. **ServiceFlow target**: Small teams (1-10 techs) at $9-79/tech/mo - enterprise tools too expensive
+10. **Morning routine**: CLAWHUB → MONEY → SOCIAL rotation keeps market research automated
+
+---
+*Reviewed: 2026-04-15 04:29 UTC*

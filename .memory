@@ -1,0 +1,5 @@
+export USER_ID="root"
+export REDIS_HOST="10.0.0.36"
+export REDIS_PORT="6379"
+export QDRANT_URL="http://10.0.0.40:6333"
+export OLLAMA_URL="http://10.0.0.10:11434"

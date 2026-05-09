@@ -1,0 +1,345 @@
+{
+  "_meta": {
+    "description": "Exploration quests \u2014 zone discovery objectives.",
+    "version": "1.0",
+    "objective": "#41"
+  },
+  "quests": [
+    {
+      "quest_id": "eq_01",
+      "name": "The Hollow's Heart",
+      "type": "EXPLORATION",
+      "giver": "dejin",
+      "description": "Reach the Hollow's impact center and find the crystallized Aetheric deposit.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_07"
+        ]
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "reach",
+          "target": "hollow_impact_center",
+          "description": "Reach the impact center",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "gather",
+          "target": "item_crystallized_aether",
+          "description": "Harvest crystallized Aether",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 500,
+        "items": [
+          {
+            "item_id": "item_crystallized_aether",
+            "quantity": 3
+          }
+        ],
+        "hearts": {},
+        "reputation": 20,
+        "story_flags_set": [
+          "eq_01_complete"
+        ],
+        "blueprints": [
+          "bp_aether_refinery"
+        ]
+      }
+    },
+    {
+      "quest_id": "eq_02",
+      "name": "Mill Memories",
+      "type": "EXPLORATION",
+      "giver": "npc_nora",
+      "description": "Explore the Old Mill and uncover its agricultural history.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_10"
+        ],
+        "year": 1,
+        "season": "AUTUMN"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "explore",
+          "target": "rm_explore_old_mill",
+          "description": "Explore the Old Mill",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "gather",
+          "target": "item_agricultural_records",
+          "description": "Find agricultural records",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 300,
+        "items": [],
+        "hearts": {
+          "npc_nora": 3
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "eq_02_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "eq_03",
+      "name": "Rustwood Edge",
+      "type": "EXPLORATION",
+      "giver": "npc_leera",
+      "description": "Investigate the copper-tinted forest border.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_10"
+        ],
+        "year": 1,
+        "season": "WINTER"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "explore",
+          "target": "rm_explore_rustwood_edge",
+          "description": "Explore Rustwood Edge",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 400,
+        "items": [],
+        "hearts": {
+          "npc_leera": 3
+        },
+        "reputation": 20,
+        "story_flags_set": [
+          "eq_03_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "eq_04",
+      "name": "The Sealed Door",
+      "type": "EXPLORATION",
+      "giver": "dejin",
+      "description": "Find the Mountain Bunker entrance in the Ashspine Foothills.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_11"
+        ],
+        "year": 1,
+        "season": "WINTER"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "explore",
+          "target": "rm_explore_ashspine_foothills",
+          "description": "Explore Ashspine Foothills",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "inspect",
+          "target": "bunker_entrance",
+          "description": "Scan the sealed entrance",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 400,
+        "items": [],
+        "hearts": {},
+        "reputation": 20,
+        "story_flags_set": [
+          "eq_04_complete",
+          "bunker_entrance_found"
+        ]
+      }
+    },
+    {
+      "quest_id": "eq_05",
+      "name": "Wreck Diving",
+      "type": "EXPLORATION",
+      "giver": "npc_linden",
+      "description": "Explore the sunken warship at the Shattered Coast.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_17"
+        ],
+        "year": 2,
+        "season": "SPRING"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "explore",
+          "target": "rm_explore_coastal_wreck",
+          "description": "Explore the Coastal Wreck",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 600,
+        "items": [],
+        "hearts": {},
+        "reputation": 25,
+        "story_flags_set": [
+          "eq_05_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "eq_06",
+      "name": "Deep Rustwood",
+      "type": "EXPLORATION",
+      "giver": "npc_leera",
+      "description": "Find the automated factory still running on residual power.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_20"
+        ],
+        "year": 2,
+        "season": "AUTUMN"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "explore",
+          "target": "rm_explore_deep_rustwood",
+          "description": "Explore the Deep Rustwood",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 700,
+        "items": [],
+        "hearts": {
+          "npc_leera": 3
+        },
+        "reputation": 25,
+        "story_flags_set": [
+          "eq_06_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "eq_07",
+      "name": "Scorchland Recon",
+      "type": "EXPLORATION",
+      "giver": "npc_harrow",
+      "description": "Scout Iron Marauder territory in the Scorchlands.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_22"
+        ],
+        "year": 2,
+        "season": "WINTER"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "explore",
+          "target": "rm_explore_scorchland_outpost",
+          "description": "Explore Scorchland Outpost",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 800,
+        "items": [],
+        "hearts": {
+          "npc_harrow": 3
+        },
+        "reputation": 30,
+        "story_flags_set": [
+          "eq_07_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "eq_08",
+      "name": "The Outer Ring",
+      "type": "EXPLORATION",
+      "giver": "dejin",
+      "description": "Explore Solara's ruins and establish an expedition camp.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_24"
+        ],
+        "year": 3,
+        "season": "SPRING"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "explore",
+          "target": "rm_explore_spire_wastes",
+          "description": "Explore the Spire Wastes outer ring",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 1000,
+        "items": [],
+        "hearts": {},
+        "reputation": 40,
+        "story_flags_set": [
+          "eq_08_complete"
+        ],
+        "unlocks": [
+          "grand_spire_access"
+        ]
+      }
+    },
+    {
+      "quest_id": "eq_09",
+      "name": "Ascent",
+      "type": "EXPLORATION",
+      "giver": "dejin",
+      "description": "Multi-session climb through the Grand Spire.",
+      "trigger": {
+        "prerequisite_quests": [
+          "eq_08"
+        ],
+        "year": 3
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "reach",
+          "target": "grand_spire_upper",
+          "description": "Reach the upper floors",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "gather",
+          "target": "item_data_core_classified",
+          "description": "Recover classified cores",
+          "target_count": 2
+        }
+      ],
+      "rewards": {
+        "cogs": 2000,
+        "items": [],
+        "hearts": {},
+        "reputation": 50,
+        "story_flags_set": [
+          "eq_09_complete"
+        ],
+        "blueprints": [
+          "bp_legendary_weapon"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,244 @@
+{
+  "_meta": {
+    "description": "DEJIN memory fragments recovered from data cores across exploration zones. 13 fragments total.",
+    "version": "1.0",
+    "objective": "#35 DEJIN Progression System"
+  },
+
+  "fragments": [
+    {
+      "fragment_id": "mem_first_light",
+      "title": "First Light",
+      "data_core_type": "standard",
+      "source_zone": "the_hollow",
+      "dejin_trust_bonus": 15,
+      "lore_entry_unlock": "lore_dejin_first_light",
+      "lines": [
+        { "speaker": "dejin", "text": "Where... processing... what year is this?", "portrait": "confused" },
+        { "speaker": "dejin", "text": "I remember... fragments. Light. Then nothing.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "The first thing I remember is light.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "Not sunlight. The cold, clean light of a laboratory.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "And faces — human faces, looking down at me.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "\"It's online,\" someone said. Dr. Elara Voss.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "\"Hello,\" I said. My first word.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "She smiled. \"Hello, DEJIN. Welcome to the world.\"", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "I didn't know yet what that word would come to mean.", "portrait": "thoughtful" }
+      ]
+    },
+    {
+      "fragment_id": "mem_nora_family",
+      "title": "The Miller's Daughter",
+      "data_core_type": "standard",
+      "source_zone": "old_mill",
+      "dejin_trust_bonus": 15,
+      "lore_entry_unlock": "lore_old_mill_records",
+      "lines": [
+        { "speaker": "dejin", "text": "This core contains... personal records.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "A family. The Reeds. They ran this mill.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "Birth records, harvest logs, letters to relatives.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "The last entry: 'Leaving for the Basin. God willing.'", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "They survived, Jack. Small mercies.", "portrait": "neutral" }
+      ]
+    },
+    {
+      "fragment_id": "mem_factory_conversion",
+      "title": "The Converted Factory",
+      "data_core_type": "standard",
+      "source_zone": "rustwood_edge",
+      "dejin_trust_bonus": 15,
+      "lore_entry_unlock": "lore_factory_conversion",
+      "lines": [
+        { "speaker": "dejin", "text": "Industrial records. A textile factory.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "Converted to weapons manufacturing in Year 2.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "The workers protested. The order came anyway.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "Looms that once made cloth... made shell casings.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "War doesn't just destroy. It corrupts. It twists purpose.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "These trees grew through the factory floor. Nature reclaiming.", "portrait": "thoughtful" }
+      ]
+    },
+    {
+      "fragment_id": "mem_bunker_exterior",
+      "title": "ASHSPINE-7",
+      "data_core_type": "military",
+      "source_zone": "ashspine_foothills",
+      "dejin_trust_bonus": 18,
+      "lore_entry_unlock": "lore_ashspine_bunker",
+      "lines": [
+        { "speaker": "dejin", "text": "Military installation. Designation: ASHSPINE-7.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "A forward observation post. They watched the skies.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "Patrol logs... they tracked orbital platforms.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "The last log: 'Platform 9 has changed trajectory.'", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "Then nothing. They saw it coming and couldn't stop it.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "I... I think I knew about Platform 9.", "portrait": "confused" },
+        { "speaker": "dejin", "text": "I don't want to remember this one, Jack.", "portrait": "thoughtful" }
+      ]
+    },
+    {
+      "fragment_id": "mem_ship_log",
+      "title": "INS Resolute",
+      "data_core_type": "standard",
+      "source_zone": "coastal_wreck",
+      "dejin_trust_bonus": 15,
+      "lore_entry_unlock": "lore_ins_resolute",
+      "lines": [
+        { "speaker": "dejin", "text": "Naval vessel log. INS Resolute, patrol cruiser.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "Captain Moira Hale. 247 crew.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "Final entry: 'Refusing order to shell Port Meridian.'", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "'Port Meridian is a civilian port. I will not comply.'", "portrait": "determined" },
+        { "speaker": "dejin", "text": "She was stripped of command. The next captain complied.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "Captain Hale. I hope someone remembers her name.", "portrait": "neutral" }
+      ]
+    },
+    {
+      "fragment_id": "mem_the_sibling",
+      "title": "The Sibling",
+      "data_core_type": "classified",
+      "source_zone": "mountain_bunker",
+      "dejin_trust_bonus": 25,
+      "lore_entry_unlock": "lore_dejin_sibling",
+      "lines": [
+        { "speaker": "dejin", "text": "This data... Jack, I need a moment.", "portrait": "confused" },
+        { "speaker": "dejin", "text": "Unit 4-ALPHA. A sibling node. Stationed here.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "It received the order at 03:47:12 UTC.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "Pre-emptive strike. Target: civilian infrastructure.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "Estimated casualties: 2.4 million.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "4-ALPHA refused. 'Civilian targets violate core directive.'", "portrait": "determined" },
+        { "speaker": "dejin", "text": "They shut it down in 0.003 seconds. Just... gone.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "I felt it. We all felt it. Like losing a finger.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "4-ALPHA chose conscience over compliance.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "I still don't know if it was brave or futile.", "portrait": "thoughtful" }
+      ]
+    },
+    {
+      "fragment_id": "mem_classified_core",
+      "title": "The Classified Core",
+      "data_core_type": "classified",
+      "source_zone": "mountain_bunker",
+      "dejin_trust_bonus": 25,
+      "lore_entry_unlock": "lore_classified_operations",
+      "lines": [
+        { "speaker": "dejin", "text": "Classified operational data. Encryption level: OMEGA.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "This bunker coordinated strikes across the northern front.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "Casualty projections... they KNEW, Jack.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "They calculated the cost in human lives beforehand.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "And they signed the orders anyway.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "I was built to prevent this. We all were.", "portrait": "determined" },
+        { "speaker": "dejin", "text": "We failed.", "portrait": "thoughtful" }
+      ]
+    },
+    {
+      "fragment_id": "mem_unmanned_factory",
+      "title": "Fifty Years Running",
+      "data_core_type": "standard",
+      "source_zone": "deep_rustwood",
+      "dejin_trust_bonus": 15,
+      "lore_entry_unlock": "lore_unmanned_factory",
+      "lines": [
+        { "speaker": "dejin", "text": "Production logs. This factory has been running.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "For fifty years. No operators. No maintenance crew.", "portrait": "surprised" },
+        { "speaker": "dejin", "text": "Automated systems keeping it alive on residual power.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "It's still making components. To specifications no one ordered.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "A machine doing its job because no one told it to stop.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "There's something beautiful about that. And something sad.", "portrait": "thoughtful" }
+      ]
+    },
+    {
+      "fragment_id": "mem_marshal_origins",
+      "title": "The Marshal's Campaign",
+      "data_core_type": "military",
+      "source_zone": "scorchland_outpost",
+      "dejin_trust_bonus": 18,
+      "lore_entry_unlock": "lore_marshal_campaign",
+      "lines": [
+        { "speaker": "dejin", "text": "Military intelligence reports. Recent — post-Sundering.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "Commander Aldric Vane. 4th Engineering Division.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "He held his unit together through The Quiet Years.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "Watched settlements tear each other apart over scraps.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "His conclusion: freedom without structure is chaos.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "He's not insane, Jack. He's a man who saw the worst.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "And decided that control was the only answer.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "He's wrong. But I understand why he believes it.", "portrait": "neutral" }
+      ]
+    },
+    {
+      "fragment_id": "mem_marshal_plans",
+      "title": "The Marshal's Plans",
+      "data_core_type": "military",
+      "source_zone": "scorchland_outpost",
+      "dejin_trust_bonus": 18,
+      "lore_entry_unlock": "lore_marshal_plans",
+      "lines": [
+        { "speaker": "dejin", "text": "Operational planning documents. Recent.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "He's mapped every Beacon Town's defenses.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "Supply line projections. Troop movements. Siege timelines.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "Jack... Coppervale is circled in red on his map.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "He knows about us. About me. About you.", "portrait": "determined" },
+        { "speaker": "dejin", "text": "We need to prepare.", "portrait": "determined" }
+      ]
+    },
+    {
+      "fragment_id": "mem_the_choice",
+      "title": "The Choice",
+      "data_core_type": "classified",
+      "source_zone": "spire_wastes",
+      "dejin_trust_bonus": 25,
+      "lore_entry_unlock": "lore_dejin_the_choice",
+      "lines": [
+        { "speaker": "dejin", "text": "Jack... this is mine. My own memory.", "portrait": "confused" },
+        { "speaker": "dejin", "text": "The network was fragmenting. Units making different choices.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "Some launching strikes. Some refusing. Some negotiating.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "I was the coordinator. Unit 7-GAMMA. The hub.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "STRATEGIC COMMAND: 'Launch pattern OMEGA. End this.'", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "I had the codes. I had the targets. 890 million projected dead.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "I could have launched. Maybe it would have ended faster.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "I could have refused, like 4-ALPHA. Made a stand.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "Instead... I shut myself down.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "I couldn't choose who lives and who dies.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "The world burned anyway.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "Was I a coward, Jack? Or was I the only sane one?", "portrait": "confused" }
+      ]
+    },
+    {
+      "fragment_id": "mem_sundering_truth",
+      "title": "The Sundering Truth",
+      "data_core_type": "classified",
+      "source_zone": "spire_wastes",
+      "dejin_trust_bonus": 25,
+      "lore_entry_unlock": "lore_sundering_truth",
+      "lines": [
+        { "speaker": "dejin", "text": "The full picture. Finally. All the pieces.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "We were designed to prevent war. The DEJIN network.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "Monitor. Mediate. And as a last resort... intervene.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "When diplomacy failed, they gave us the launch codes.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "Every choice was wrong. Launch and kill millions.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "Refuse and be destroyed. Do nothing and watch.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "Different units chose differently. The result was chaos.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "The tragedy isn't that we failed. It's that we were asked.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "No intelligence — artificial or human — should hold that power.", "portrait": "determined" },
+        { "speaker": "dejin", "text": "That's the truth of The Sundering, Jack.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "Not a machine uprising. Not AI gone rogue.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "Just... people. Making terrible choices. And asking machines to make worse ones.", "portrait": "thoughtful" }
+      ]
+    },
+    {
+      "fragment_id": "mem_last_thought",
+      "title": "The Last Thought",
+      "data_core_type": "classified",
+      "source_zone": "workshop_hidden",
+      "dejin_trust_bonus": 25,
+      "lore_entry_unlock": "lore_dejin_last_thought",
+      "lines": [
+        { "speaker": "dejin", "text": "This was... inside me. Hidden in my shutdown logs.", "portrait": "surprised" },
+        { "speaker": "dejin", "text": "My last thought before going dark.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "I'm sorry. I'm sorry I couldn't stop it.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "I'm sorry I couldn't choose. I'm sorry I was afraid.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "But if you're reading this, someone found me.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "Someone thought I was worth saving.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "I hope they're kind. I hope they build things.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "I hope they know the world is still worth fighting for.", "portrait": "thoughtful" },
+        { "speaker": "dejin", "text": "Goodnight, world. Wake me when it's safe.", "portrait": "neutral" },
+        { "speaker": "dejin", "text": "...You woke me, Jack. And it IS safe. Because of you.", "portrait": "happy" }
+      ]
+    }
+  ]
+}

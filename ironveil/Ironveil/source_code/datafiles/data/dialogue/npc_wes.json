@@ -1,0 +1,375 @@
+{
+  "_meta": {
+    "description": "Dialogue data for Wes (Courier / Mail Runner). Seasonal/daily pool + heart milestones.",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue"
+  },
+  "entries": [
+    {
+      "entry_id": "npc_wes_sd_001",
+      "npc_id": "npc_wes",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_wes",
+          "text": "Morning, Jack! Three deliveries done before breakfast! Personal best!",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_wes_sd_002",
+      "npc_id": "npc_wes",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_wes",
+          "text": "Spring roads are muddy but passable. I've mapped the driest routes.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_wes_sd_003",
+      "npc_id": "npc_wes",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_wes",
+          "text": "Summer heat makes long runs tough. Extra water, extra determination!",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_wes_sd_004",
+      "npc_id": "npc_wes",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_wes",
+          "text": "Trade route to Greenreach is clear! Made the round trip in record time!",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_wes_sd_005",
+      "npc_id": "npc_wes",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_wes",
+          "text": "Autumn's my favorite running season. Cool air, warm purpose.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_wes_sd_006",
+      "npc_id": "npc_wes",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_wes",
+          "text": "Snow slows me down. NOTHING stops me. Well, almost nothing.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_wes_sd_007",
+      "npc_id": "npc_wes",
+      "category": "seasonal_daily",
+      "conditions": {
+        "weather": "STORM",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_wes",
+          "text": "Storm delayed my run. I'll make up the time tomorrow. Double run!",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_wes_sd_008",
+      "npc_id": "npc_wes",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_wes",
+          "text": "Letters from the Beacon Council! And a package for Ferris. Smells weird.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_wes_sd_009",
+      "npc_id": "npc_wes",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_wes",
+          "text": "I'm the fastest runner in three Beacon Towns. Unofficial record. But still.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_wes_sd_010",
+      "npc_id": "npc_wes",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_wes",
+          "text": "Leera says I should scout instead of courier. But the mail MATTERS.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_wes_sd_011",
+      "npc_id": "npc_wes",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_wes",
+          "text": "Pip tried to race me. She's fast! For a kid! I let her win. Maybe.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_wes_sd_012",
+      "npc_id": "npc_wes",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_wes",
+          "text": "Every letter I carry connects people. That's important. Even the boring ones.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_wes_hm_02",
+      "npc_id": "npc_wes",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 2
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_wes_milestone_2",
+      "lines": [
+        {
+          "speaker": "npc_wes",
+          "text": "Special delivery! Found this on my route. Thought of you!",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_wes_hm_04",
+      "npc_id": "npc_wes",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 4
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_wes_milestone_4",
+      "lines": [
+        {
+          "speaker": "npc_wes",
+          "text": "You make the town worth running to. Literally. I run here.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_wes_hm_06",
+      "npc_id": "npc_wes",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 6
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_wes_milestone_6",
+      "lines": [
+        {
+          "speaker": "npc_wes",
+          "text": "Jack, I need to tell you something. About... about the letters I've been carrying.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_wes_hm_08",
+      "npc_id": "npc_wes",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 8
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_wes_milestone_8",
+      "lines": [
+        {
+          "speaker": "npc_wes",
+          "text": "You're the reason I keep running. Coppervale's worth it because of you.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_wes_hm_10",
+      "npc_id": "npc_wes",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 10
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_wes_milestone_10",
+      "lines": [
+        {
+          "speaker": "npc_wes",
+          "text": "Fastest courier. Best engineer. Together we connect and build. Unstoppable.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_wes_y2_spring_018",
+      "npc_id": "npc_wes",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_wes",
+          "text": "Delivery's done. Anything else you need? Anything at all?",
+          "portrait": "eager"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_wes_y2_autumn_019",
+      "npc_id": "npc_wes",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 2,
+        "hearts_gte": 0,
+        "story_flag": "flag_wes_forgiven"
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_wes",
+          "text": "I know people still look at me sideways. I deserve it. But I'm trying, Jack. Every day.",
+          "portrait": "humble"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_wes_y3_autumn_020",
+      "npc_id": "npc_wes",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 3,
+        "hearts_gte": 0,
+        "story_flag": "flag_wes_forgiven"
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_wes",
+          "text": "Ellie and Tomm are safe. They're here, Jack. My sister is HERE. Because of you.",
+          "portrait": "overwhelmed"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_wes_y4_spring_021",
+      "npc_id": "npc_wes",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 4,
+        "hearts_gte": 0,
+        "story_flag": "flag_wes_forgiven"
+      },
+      "priority": 11,
+      "lines": [
+        {
+          "speaker": "npc_wes",
+          "text": "I'll never be able to repay what you did. Forgiving me. Bringing my family home. I'll spend my life trying.",
+          "portrait": "devoted"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,219 @@
+{
+  "_meta": {
+    "description": "Quest dialogue for MQ-19: The Beacon Summit. Year 2 Spring — political alliance forging.",
+    "version": "1.0",
+    "objective": "#42 Full 3+ Year Story Content"
+  },
+  "quest_id": "mq_19",
+  "scenes": [
+    {
+      "scene_id": "mq19_envoy_arrives",
+      "trigger": "quest_start",
+      "location": "rm_town_coppervale",
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Jack — the Thornwall envoy is here. And she's not alone. Representatives from three other Beacon Towns arrived with her.",
+          "portrait": "surprised"
+        },
+        {
+          "speaker": "npc_janis",
+          "text": "Commander Janis Beaumont, representing the Beacon Council. Mayor Linden, thank you for hosting us.",
+          "portrait": "formal"
+        },
+        {
+          "speaker": "npc_janis",
+          "text": "I won't mince words. We've been watching your settlement with interest — particularly your Combat Mech. The Council believes Coppervale could be a strategic asset against the Iron Marauders.",
+          "portrait": "serious"
+        },
+        {
+          "speaker": "npc_linden",
+          "text": "We're not just an 'asset,' Commander. We're a town. With people.",
+          "portrait": "firm"
+        },
+        {
+          "speaker": "npc_janis",
+          "text": "Of course. Which is precisely why I'm here in person rather than sending orders by radio. This needs to be a partnership, not a requisition.",
+          "portrait": "respectful"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq19_summit_opening",
+      "trigger": "location_enter",
+      "conditions": { "room_id": "rm_int_town_hall", "quest_active": "mq_19" },
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "The situation is this: the Iron Marauders have unified under a single commander they call 'The Marshal.' He's been absorbing smaller raider bands for two years.",
+          "portrait": "serious"
+        },
+        {
+          "speaker": "npc_janis",
+          "text": "Our intelligence suggests he's building a real army. Disciplined. Equipped. With salvaged Pre-War military hardware.",
+          "portrait": "grim"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "I've seen their scouts. She's not exaggerating. This isn't raiders anymore — this is a military force.",
+          "portrait": "stern"
+        },
+        {
+          "speaker": "npc_janis",
+          "text": "The Council proposes a formal defense alliance. Shared intelligence, coordinated patrols, and — most critically — shared technology. Your mech designs in exchange for our supply networks.",
+          "portrait": "diplomatic"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq19_negotiation_choice_1",
+      "trigger": "choice_branch",
+      "conditions": { "after_scene": "mq19_summit_opening" },
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "So, Jack — what does Coppervale bring to the table? How should we structure this alliance?",
+          "portrait": "questioning"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Full partnership. We share everything — designs, resources, intelligence. No secrets.",
+          "effects": [
+            { "type": "add_alliance", "amount": 3 },
+            { "type": "set_flag", "flag": "flag_summit_full_share" }
+          ],
+          "next_scene": "mq19_full_share_response"
+        },
+        {
+          "text": "We'll share defensive tech, but our advanced mech designs stay in Coppervale. We built them, we control them.",
+          "effects": [
+            { "type": "add_alliance", "amount": 1 },
+            { "type": "set_flag", "flag": "flag_summit_partial_share" }
+          ],
+          "next_scene": "mq19_partial_share_response"
+        },
+        {
+          "text": "Before we talk about sharing, I want to know — what happened when the Marauders hit Thornwall? Why didn't you fight back then?",
+          "effects": [
+            { "type": "add_alliance", "amount": 2 },
+            { "type": "add_understanding", "amount": 1 }
+          ],
+          "next_scene": "mq19_question_response"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq19_full_share_response",
+      "trigger": "choice_result",
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "That's... more generous than I expected. The Council will be pleased. Full transparency builds real trust.",
+          "portrait": "impressed"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "Bold move, Jack. I hope it pays off.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq19_partial_share_response",
+      "trigger": "choice_result",
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "Understandable. But defensive tech alone won't win a war. The Council may be... less enthusiastic with their support.",
+          "portrait": "reserved"
+        },
+        {
+          "speaker": "npc_linden",
+          "text": "It's a reasonable starting point, Commander. Trust is earned, not given.",
+          "portrait": "diplomatic"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq19_question_response",
+      "trigger": "choice_result",
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "...A fair question. When the Marshal's raiders first hit our northern outpost, the Council debated for three days before responding. By then, 40 people were dead.",
+          "portrait": "pained"
+        },
+        {
+          "speaker": "npc_janis",
+          "text": "That failure is why I'm here. Not to repeat it. The Marshal succeeds because we're fractured. He picks us off one by one while we argue about jurisdiction.",
+          "portrait": "determined"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "Good answer. I've seen that tactic before. Unity is the only counter.",
+          "portrait": "approving"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq19_dejin_proposal",
+      "trigger": "cutscene",
+      "conditions": { "after_choices": true },
+      "lines": [
+        {
+          "speaker": "dejin",
+          "text": "If I may interject. I have been analyzing the Marshal's movement patterns from Captain Harrow's intelligence reports.",
+          "portrait": "analytical"
+        },
+        {
+          "speaker": "dejin",
+          "text": "He is not raiding randomly. He is systematically securing Pre-War military installations. Bunkers, armories, communication hubs. He is looking for something specific.",
+          "portrait": "concerned"
+        },
+        {
+          "speaker": "npc_janis",
+          "text": "Your AI can analyze strategic patterns? That's... that changes the equation considerably.",
+          "portrait": "surprised"
+        },
+        {
+          "speaker": "dejin",
+          "text": "I was built for it, Commander. Though I confess the context has changed somewhat from my original parameters.",
+          "portrait": "dry_humor"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq19_summit_close",
+      "trigger": "quest_complete",
+      "location": "rm_int_town_hall",
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "Then we have an accord. The Beacon Council formally recognizes Coppervale as an allied settlement. I'll be staying on as the Council's liaison.",
+          "portrait": "formal"
+        },
+        {
+          "speaker": "npc_linden",
+          "text": "Welcome to Coppervale, Commander. I think you'll find we're full of surprises.",
+          "portrait": "warm"
+        },
+        {
+          "speaker": "npc_janis",
+          "text": "Please — call me Janis. If we're going to war together, formality seems... counterproductive.",
+          "portrait": "slight_smile"
+        },
+        {
+          "speaker": "npc_spark",
+          "text": "Did she just smile? I think she smiled! This is going to be interesting.",
+          "portrait": "excited"
+        }
+      ],
+      "effects": [
+        { "type": "set_flag", "flag": "flag_summit_complete" },
+        { "type": "set_flag", "flag": "flag_janis_joined" },
+        { "type": "add_hearts", "npc_id": "npc_janis", "amount": 100 }
+      ]
+    }
+  ]
+}

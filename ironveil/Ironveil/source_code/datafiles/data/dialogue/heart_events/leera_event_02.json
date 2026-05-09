@@ -1,0 +1,78 @@
+{
+  "_meta": {
+    "description": "Heart event #2 for npc_leera: The Injury",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue / #34 Romance System"
+  },
+  "event_id": "heart_event_leera_02",
+  "npc_id": "npc_leera",
+  "heart_level_required": 3,
+  "location": "rm_explore_the_hollow",
+  "time_range": {
+    "start": 10,
+    "end": 18
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_leera_event_2_complete",
+  "heart_bonus": 50,
+  "title": "The Injury",
+  "lines": [
+    {
+      "speaker": "narrator",
+      "text": "[You find Leera limping on the path from the ruins]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "I'm FINE. It's just a \u2014 ow. Okay, maybe not fine.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "Stupid loose rock. Twisted my ankle in the ruins.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "player",
+      "text": "[Help her]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "Lean on me. I'll get you back.",
+          "flag": "leera_helped_kind"
+        },
+        {
+          "text": "This is why you shouldn't go alone.",
+          "flag": "leera_helped_practical"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "I don't need \u2014 okay. Fine. Thank you.",
+      "portrait": "embarrassed"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "Don't tell Harrow. He'll lecture me for a WEEK.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "...You came looking for me, didn't you?",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "Nobody does that. Usually I just... handle it myself.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "Thanks, Jack. Really.",
+      "portrait": "happy"
+    }
+  ]
+}

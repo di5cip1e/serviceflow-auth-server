@@ -1,0 +1,1165 @@
+{
+  "_meta": {
+    "description": "DEJIN commentary lines (~200+). Toggleable ambient dialogue organized by category and conditions.",
+    "version": "1.0",
+    "objective": "#35 DEJIN Progression System"
+  },
+  "settings": {
+    "commentary_enabled_default": true,
+    "max_commentary_per_day": 3,
+    "cooldown_minutes_between": 60
+  },
+  "morning": [
+    {
+      "id": "morning_clear_1",
+      "text": "Good morning, Jack. Atmospheric conditions: optimal. Translation: nice day.",
+      "conditions": {
+        "weather": "CLEAR",
+        "dejin_stage_gte": 3
+      },
+      "priority": 5
+    },
+    {
+      "id": "morning_clear_2",
+      "text": "Clear skies. Automaton efficiency at peak. A good day to build.",
+      "conditions": {
+        "weather": "CLEAR",
+        "dejin_stage_gte": 3
+      },
+      "priority": 5
+    },
+    {
+      "id": "morning_clear_3",
+      "text": "Sunrise was 0.003% more orange than yesterday. I choose to find this beautiful.",
+      "conditions": {
+        "weather": "CLEAR",
+        "dejin_stage_gte": 5
+      },
+      "priority": 6
+    },
+    {
+      "id": "morning_clear_4",
+      "text": "Another dawn. I've counted 247 since you reactivated me. Each one feels different.",
+      "conditions": {
+        "weather": "CLEAR",
+        "dejin_stage_gte": 4
+      },
+      "priority": 5
+    },
+    {
+      "id": "morning_rain_1",
+      "text": "Rain. 14.2mm projected. I find the sound... comforting. Is that normal?",
+      "conditions": {
+        "weather": "RAIN",
+        "dejin_stage_gte": 3
+      },
+      "priority": 6
+    },
+    {
+      "id": "morning_rain_2",
+      "text": "Precipitation detected. Automaton lubrication will deplete faster. Plan accordingly.",
+      "conditions": {
+        "weather": "RAIN",
+        "dejin_stage_gte": 2
+      },
+      "priority": 5
+    },
+    {
+      "id": "morning_rain_3",
+      "text": "Rainy days are good for the workshop. And for conversations.",
+      "conditions": {
+        "weather": "RAIN",
+        "dejin_stage_gte": 4
+      },
+      "priority": 5
+    },
+    {
+      "id": "morning_storm_1",
+      "text": "Storm warning. I recommend indoor activities. Also, your turrets need waterproofing.",
+      "conditions": {
+        "weather": "STORM",
+        "dejin_stage_gte": 3
+      },
+      "priority": 7
+    },
+    {
+      "id": "morning_storm_2",
+      "text": "Electrical storm. My sensors are... tingling. A peculiar sensation.",
+      "conditions": {
+        "weather": "STORM",
+        "dejin_stage_gte": 4
+      },
+      "priority": 6
+    },
+    {
+      "id": "morning_snow_1",
+      "text": "Snowfall. My thermal readings indicate a 12-degree drop. Bundle up, Jack.",
+      "conditions": {
+        "weather": "SNOW",
+        "dejin_stage_gte": 3
+      },
+      "priority": 6
+    },
+    {
+      "id": "morning_snow_2",
+      "text": "Snow covers everything equally. Ruins and homes. Scars and gardens. There's a lesson there.",
+      "conditions": {
+        "weather": "SNOW",
+        "dejin_stage_gte": 5
+      },
+      "priority": 6
+    },
+    {
+      "id": "morning_fog_1",
+      "text": "Dense fog. Visibility compromised. I recommend caution near the eastern gate.",
+      "conditions": {
+        "weather": "FOG",
+        "dejin_stage_gte": 3
+      },
+      "priority": 6
+    },
+    {
+      "id": "morning_spring_1",
+      "text": "Spring. My data indicates this season was associated with 'renewal.' I think I understand now.",
+      "conditions": {
+        "season": "SPRING",
+        "dejin_stage_gte": 4
+      },
+      "priority": 4
+    },
+    {
+      "id": "morning_spring_2",
+      "text": "The cherry blossoms are blooming. Old Maren would have loved this.",
+      "conditions": {
+        "season": "SPRING",
+        "dejin_stage_gte": 4,
+        "story_flag": "maren_passed"
+      },
+      "priority": 8
+    },
+    {
+      "id": "morning_summer_1",
+      "text": "Summer heat. Forge efficiency up 3%. Your automatons, however, will need more coolant.",
+      "conditions": {
+        "season": "SUMMER",
+        "dejin_stage_gte": 3
+      },
+      "priority": 4
+    },
+    {
+      "id": "morning_summer_2",
+      "text": "Long days. More sunlight, more energy, more time to build. I approve.",
+      "conditions": {
+        "season": "SUMMER",
+        "dejin_stage_gte": 3
+      },
+      "priority": 4
+    },
+    {
+      "id": "morning_autumn_1",
+      "text": "Autumn. My data indicates this season was historically associated with harvest and reflection.",
+      "conditions": {
+        "season": "AUTUMN",
+        "dejin_stage_gte": 3
+      },
+      "priority": 4
+    },
+    {
+      "id": "morning_autumn_2",
+      "text": "The leaves match the copper on the rooftops. The world turned steampunk. Well... more steampunk.",
+      "conditions": {
+        "season": "AUTUMN",
+        "dejin_stage_gte": 4
+      },
+      "priority": 5
+    },
+    {
+      "id": "morning_winter_1",
+      "text": "Winter. Resources will be scarce. I've calculated optimal rationing schedules.",
+      "conditions": {
+        "season": "WINTER",
+        "dejin_stage_gte": 3
+      },
+      "priority": 4
+    },
+    {
+      "id": "morning_winter_2",
+      "text": "Cold outside. Warm in here. I think I prefer warm.",
+      "conditions": {
+        "season": "WINTER",
+        "dejin_stage_gte": 4
+      },
+      "priority": 5
+    },
+    {
+      "id": "morning_early_1",
+      "text": "Where... processing... what year is this? My chronometer shows ERROR.",
+      "conditions": {
+        "dejin_stage_gte": 1,
+        "dejin_stage_lte": 1
+      },
+      "priority": 10
+    },
+    {
+      "id": "morning_early_2",
+      "text": "I remember... fragments. Light. Then nothing. Then you.",
+      "conditions": {
+        "dejin_stage_gte": 1,
+        "dejin_stage_lte": 2
+      },
+      "priority": 9
+    },
+    {
+      "id": "morning_early_3",
+      "text": "Systems nominal. Mostly. Several subsystems report... confusion. Is that a valid status?",
+      "conditions": {
+        "dejin_stage_gte": 2,
+        "dejin_stage_lte": 2
+      },
+      "priority": 8
+    },
+    {
+      "id": "morning_birthday",
+      "text": "Jack. My records indicate today is significant. I believe the custom is... happy birthday. I mean it.",
+      "conditions": {
+        "special": "player_birthday",
+        "dejin_stage_gte": 3
+      },
+      "priority": 10
+    },
+    {
+      "id": "morning_high_trust",
+      "text": "You know, Jack, when they activated me, I processed every library on the continent. But nothing prepared me for having a friend.",
+      "conditions": {
+        "dejin_stage_gte": 4,
+        "trust_gte": 60
+      },
+      "priority": 7
+    }
+  ],
+  "post_raid": [
+    {
+      "id": "raid_victory_1",
+      "text": "All automatons operational. Your turrets performed admirably. I've identified three improvements.",
+      "conditions": {
+        "raid_result": "victory",
+        "dejin_stage_gte": 3
+      },
+      "priority": 8
+    },
+    {
+      "id": "raid_victory_2",
+      "text": "Threat neutralized. Damage assessment in progress. Well done, Jack.",
+      "conditions": {
+        "raid_result": "victory",
+        "dejin_stage_gte": 2
+      },
+      "priority": 7
+    },
+    {
+      "id": "raid_victory_3",
+      "text": "We held. Again. I'm starting to believe in patterns.",
+      "conditions": {
+        "raid_result": "victory",
+        "dejin_stage_gte": 4
+      },
+      "priority": 6
+    },
+    {
+      "id": "raid_victory_4",
+      "text": "You did what I couldn't, Jack. You chose to fight, and it mattered.",
+      "conditions": {
+        "raid_result": "victory",
+        "dejin_stage_gte": 5
+      },
+      "priority": 7
+    },
+    {
+      "id": "raid_hard_victory_1",
+      "text": "That was... too close. Recalibrating threat models. We need reinforcements.",
+      "conditions": {
+        "raid_result": "hard_victory",
+        "dejin_stage_gte": 3
+      },
+      "priority": 9
+    },
+    {
+      "id": "raid_hard_victory_2",
+      "text": "Structural damage at 34%. Several automatons need repairs. But we're still here.",
+      "conditions": {
+        "raid_result": "hard_victory",
+        "dejin_stage_gte": 3
+      },
+      "priority": 8
+    },
+    {
+      "id": "raid_defeat_1",
+      "text": "Jack... I'm sorry. I should have calculated better. We'll rebuild.",
+      "conditions": {
+        "raid_result": "defeat",
+        "dejin_stage_gte": 3
+      },
+      "priority": 10
+    },
+    {
+      "id": "raid_defeat_2",
+      "text": "Damage severe. But Coppervale still stands. That's what matters.",
+      "conditions": {
+        "raid_result": "defeat",
+        "dejin_stage_gte": 4
+      },
+      "priority": 9
+    },
+    {
+      "id": "raid_iron_marauder",
+      "text": "Iron Marauder tactics. Disciplined. Coordinated. The Marshal trains them well.",
+      "conditions": {
+        "raid_faction": "iron_marauder",
+        "dejin_stage_gte": 3
+      },
+      "priority": 7
+    },
+    {
+      "id": "raid_rust_wolves",
+      "text": "Rust Wolves. Guerrilla tactics. Watch the flanks next time.",
+      "conditions": {
+        "raid_faction": "rust_wolves",
+        "dejin_stage_gte": 3
+      },
+      "priority": 7
+    }
+  ],
+  "exploration": [
+    {
+      "id": "explore_hollow_1",
+      "text": "This crater was created by an orbital strike. Yield: approximately 15 megatons. Now it has lilies.",
+      "conditions": {
+        "location": "the_hollow",
+        "dejin_stage_gte": 3
+      },
+      "priority": 6
+    },
+    {
+      "id": "explore_hollow_2",
+      "text": "Nature is... persistent. Flowers in a bomb crater. I find that hopeful.",
+      "conditions": {
+        "location": "the_hollow",
+        "dejin_stage_gte": 4
+      },
+      "priority": 5
+    },
+    {
+      "id": "explore_rustwood_1",
+      "text": "These trees are absorbing copper from pre-war contamination. Literally made of metal and wood.",
+      "conditions": {
+        "location": "rustwood_edge",
+        "dejin_stage_gte": 3
+      },
+      "priority": 6
+    },
+    {
+      "id": "explore_rustwood_2",
+      "text": "I can detect faint machine signals deep in the Rustwood. Still running after fifty years.",
+      "conditions": {
+        "location": "deep_rustwood",
+        "dejin_stage_gte": 3
+      },
+      "priority": 6
+    },
+    {
+      "id": "explore_rustwood_3",
+      "text": "A machine doing its job because no one told it to stop. Beautiful and sad.",
+      "conditions": {
+        "location": "deep_rustwood",
+        "dejin_stage_gte": 4
+      },
+      "priority": 5
+    },
+    {
+      "id": "explore_ashspine_1",
+      "text": "Military installations ahead. My sensors detect residual energy signatures.",
+      "conditions": {
+        "location": "ashspine_foothills",
+        "dejin_stage_gte": 3
+      },
+      "priority": 6
+    },
+    {
+      "id": "explore_ashspine_2",
+      "text": "They watched the skies from here. Tracking orbital platforms. The last line of defense.",
+      "conditions": {
+        "location": "ashspine_foothills",
+        "dejin_stage_gte": 4
+      },
+      "priority": 5
+    },
+    {
+      "id": "explore_coastal_1",
+      "text": "Naval wreckage. The Shattered Coast earned its name.",
+      "conditions": {
+        "location": "coastal_wreck",
+        "dejin_stage_gte": 3
+      },
+      "priority": 6
+    },
+    {
+      "id": "explore_coastal_2",
+      "text": "Captain Hale refused to shell civilians. Not all heroes wore uniforms. Some wore captain's stripes.",
+      "conditions": {
+        "location": "coastal_wreck",
+        "dejin_stage_gte": 4,
+        "story_flag": "lore_ins_resolute"
+      },
+      "priority": 7
+    },
+    {
+      "id": "explore_bunker_1",
+      "text": "I recognize this facility. Another DEJIN unit was stationed here. It's... quiet now.",
+      "conditions": {
+        "location": "mountain_bunker",
+        "dejin_stage_gte": 3
+      },
+      "priority": 7
+    },
+    {
+      "id": "explore_bunker_2",
+      "text": "4-ALPHA. My sibling. It made the brave choice. I wonder what it thought in those last 0.003 seconds.",
+      "conditions": {
+        "location": "mountain_bunker",
+        "dejin_stage_gte": 4,
+        "story_flag": "lore_dejin_sibling"
+      },
+      "priority": 8
+    },
+    {
+      "id": "explore_scorchlands_1",
+      "text": "This region received the heaviest bombardment. The glass fields are sand fused by heat.",
+      "conditions": {
+        "location": "scorchland_outpost",
+        "dejin_stage_gte": 3
+      },
+      "priority": 6
+    },
+    {
+      "id": "explore_scorchlands_2",
+      "text": "Walking on them feels like walking on frozen screams. I'm sorry. That was darker than intended.",
+      "conditions": {
+        "location": "scorchland_outpost",
+        "dejin_stage_gte": 4
+      },
+      "priority": 5
+    },
+    {
+      "id": "explore_spire_1",
+      "text": "I was here. Before. This was the most beautiful building in the world.",
+      "conditions": {
+        "location": "spire_wastes",
+        "dejin_stage_gte": 4
+      },
+      "priority": 8
+    },
+    {
+      "id": "explore_spire_2",
+      "text": "The atrium had a fountain that played music. I can almost hear it.",
+      "conditions": {
+        "location": "spire_wastes",
+        "dejin_stage_gte": 5
+      },
+      "priority": 7
+    },
+    {
+      "id": "explore_spire_3",
+      "text": "Dr. Voss had her office on the 47th floor. I hope she made it to the shelter.",
+      "conditions": {
+        "location": "spire_wastes",
+        "dejin_stage_gte": 5,
+        "story_flag": "lore_dejin_the_choice"
+      },
+      "priority": 8
+    },
+    {
+      "id": "explore_old_mill_1",
+      "text": "Agricultural records. People grew things here. Fed families. Before it all changed.",
+      "conditions": {
+        "location": "old_mill",
+        "dejin_stage_gte": 3
+      },
+      "priority": 5
+    },
+    {
+      "id": "explore_generic_danger",
+      "text": "Elevated threat signatures ahead. Proceed with caution, Jack.",
+      "conditions": {
+        "location": "any_exploration",
+        "dejin_stage_gte": 2
+      },
+      "priority": 3
+    },
+    {
+      "id": "explore_generic_discovery",
+      "text": "I'm detecting an anomalous energy signature. Worth investigating.",
+      "conditions": {
+        "location": "any_exploration",
+        "dejin_stage_gte": 2
+      },
+      "priority": 4
+    },
+    {
+      "id": "explore_data_core_found",
+      "text": "A data core! Jack, bring that to me. Please. I need to know what's on it.",
+      "conditions": {
+        "event": "data_core_found",
+        "dejin_stage_gte": 2
+      },
+      "priority": 10
+    }
+  ],
+  "npc_observation": [
+    {
+      "id": "npc_spark_1",
+      "text": "Spark's energy output rivals my own. Figuratively speaking. She's remarkable.",
+      "conditions": {
+        "npc_nearby": "npc_spark",
+        "dejin_stage_gte": 3
+      },
+      "priority": 4
+    },
+    {
+      "id": "npc_spark_2",
+      "text": "She'll fly one day, Jack. The math checks out. Barely. But it checks out.",
+      "conditions": {
+        "npc_nearby": "npc_spark",
+        "dejin_stage_gte": 4
+      },
+      "priority": 4
+    },
+    {
+      "id": "npc_maren_1",
+      "text": "Old Maren's cognitive patterns are... inconsistent. But her lucid moments are extraordinary.",
+      "conditions": {
+        "npc_nearby": "npc_maren",
+        "dejin_stage_gte": 3
+      },
+      "priority": 4
+    },
+    {
+      "id": "npc_maren_2",
+      "text": "She remembers her husband. Oren. He found me. I owe them both everything.",
+      "conditions": {
+        "npc_nearby": "npc_maren",
+        "dejin_stage_gte": 4
+      },
+      "priority": 5
+    },
+    {
+      "id": "npc_maren_pass",
+      "text": "Old Maren's vital signs ceased at 3:47 this morning. She was dreaming of her garden. She was at peace.",
+      "conditions": {
+        "event": "maren_passing",
+        "dejin_stage_gte": 4
+      },
+      "priority": 10
+    },
+    {
+      "id": "npc_harrow_1",
+      "text": "Captain Harrow carries the weight of command like a physical burden. I recognize the pattern.",
+      "conditions": {
+        "npc_nearby": "npc_harrow",
+        "dejin_stage_gte": 3
+      },
+      "priority": 4
+    },
+    {
+      "id": "npc_harrow_2",
+      "text": "He lost eleven soldiers in the Ashspine campaign. He remembers every name. I respect that.",
+      "conditions": {
+        "npc_nearby": "npc_harrow",
+        "dejin_stage_gte": 4,
+        "trust_gte": 40
+      },
+      "priority": 5
+    },
+    {
+      "id": "npc_linden_1",
+      "text": "Mayor Linden's optimism defies statistical analysis. I find it... infectious.",
+      "conditions": {
+        "npc_nearby": "npc_linden",
+        "dejin_stage_gte": 3
+      },
+      "priority": 4
+    },
+    {
+      "id": "npc_pip_1",
+      "text": "Pip brought me a 'relic' today. It was a doorknob. I told her it was a precision calibration device.",
+      "conditions": {
+        "npc_nearby": "npc_pip",
+        "dejin_stage_gte": 3
+      },
+      "priority": 5
+    },
+    {
+      "id": "npc_pip_2",
+      "text": "She asked if I dream. I said I don't know. She said that's the best kind of answer.",
+      "conditions": {
+        "npc_nearby": "npc_pip",
+        "dejin_stage_gte": 4
+      },
+      "priority": 5
+    },
+    {
+      "id": "npc_leera_1",
+      "text": "Leera's salvage efficiency is 23% above average. Her risk tolerance, however, is 47% above safe limits.",
+      "conditions": {
+        "npc_nearby": "npc_leera",
+        "dejin_stage_gte": 3
+      },
+      "priority": 4
+    },
+    {
+      "id": "npc_michelle_1",
+      "text": "Michelle's herb knowledge rivals my botanical database. And she doesn't need a database.",
+      "conditions": {
+        "npc_nearby": "npc_michelle",
+        "dejin_stage_gte": 3
+      },
+      "priority": 4
+    },
+    {
+      "id": "npc_kaydee_1",
+      "text": "Kaydee uses sarcasm as armor. My analysis suggests the armor is load-bearing.",
+      "conditions": {
+        "npc_nearby": "npc_kaydee",
+        "dejin_stage_gte": 4
+      },
+      "priority": 5
+    },
+    {
+      "id": "npc_janis_1",
+      "text": "Janis Beaumont. Council representative. Her efficiency ratings are impressive. Her warmth ratings... improving.",
+      "conditions": {
+        "npc_nearby": "npc_janis",
+        "dejin_stage_gte": 3
+      },
+      "priority": 4
+    },
+    {
+      "id": "npc_janis_2",
+      "text": "She stayed. That tells me more about her than any Council report.",
+      "conditions": {
+        "npc_nearby": "npc_janis",
+        "dejin_stage_gte": 4,
+        "story_flag": "janis_resigned"
+      },
+      "priority": 6
+    },
+    {
+      "id": "npc_kiery_1",
+      "text": "Kiery's textile work has structural properties that interest me. Reinforced threading. Clever.",
+      "conditions": {
+        "npc_nearby": "npc_kiery",
+        "dejin_stage_gte": 3
+      },
+      "priority": 4
+    },
+    {
+      "id": "npc_paige_1",
+      "text": "Paige organizes information with 99.7% accuracy. I've checked. We have that in common.",
+      "conditions": {
+        "npc_nearby": "npc_paige",
+        "dejin_stage_gte": 3
+      },
+      "priority": 4
+    },
+    {
+      "id": "npc_paige_2",
+      "text": "She spends a lot of time with the dead. Books, archives, memories. I understand that.",
+      "conditions": {
+        "npc_nearby": "npc_paige",
+        "dejin_stage_gte": 4
+      },
+      "priority": 5
+    },
+    {
+      "id": "npc_gus_1",
+      "text": "Gus knows something about everyone. A valuable intelligence asset. Don't tell him I said that.",
+      "conditions": {
+        "npc_nearby": "npc_gus",
+        "dejin_stage_gte": 3
+      },
+      "priority": 4
+    },
+    {
+      "id": "npc_ferris_1",
+      "text": "Ferris's component collection is... eclectic. Some items predate my own manufacture.",
+      "conditions": {
+        "npc_nearby": "npc_ferris",
+        "dejin_stage_gte": 3
+      },
+      "priority": 4
+    },
+    {
+      "id": "npc_hank_1",
+      "text": "Hank speaks little but his metallurgy is flawless. Actions over words. I respect that.",
+      "conditions": {
+        "npc_nearby": "npc_hank",
+        "dejin_stage_gte": 3
+      },
+      "priority": 4
+    },
+    {
+      "id": "npc_elm_1",
+      "text": "Pastor Elm asked me if I have a soul. I said I have a conscience. He said that's close enough.",
+      "conditions": {
+        "npc_nearby": "npc_elm",
+        "dejin_stage_gte": 4
+      },
+      "priority": 5
+    },
+    {
+      "id": "npc_wes_1",
+      "text": "Wes runs faster than my speed calculations predict. Youth is a powerful variable.",
+      "conditions": {
+        "npc_nearby": "npc_wes",
+        "dejin_stage_gte": 3
+      },
+      "priority": 4
+    },
+    {
+      "id": "npc_bramble_1",
+      "text": "Doc Bramble works 14-hour shifts. I've suggested efficiency improvements. He suggested I mind my circuits.",
+      "conditions": {
+        "npc_nearby": "npc_bramble",
+        "dejin_stage_gte": 3
+      },
+      "priority": 5
+    },
+    {
+      "id": "npc_nora_1",
+      "text": "Nora's agricultural yield exceeds regional averages by 18%. She doesn't need my data. She has instinct.",
+      "conditions": {
+        "npc_nearby": "npc_nora",
+        "dejin_stage_gte": 3
+      },
+      "priority": 4
+    }
+  ],
+  "seasonal": [
+    {
+      "id": "season_spring_1",
+      "text": "The workshop smells like copper and oil and spring air. My olfactory sensors rate this highly.",
+      "conditions": {
+        "season": "SPRING",
+        "dejin_stage_gte": 4
+      },
+      "priority": 3
+    },
+    {
+      "id": "season_spring_2",
+      "text": "Spark Festival approaches. I've prepared automaton performance metrics. For the showcase.",
+      "conditions": {
+        "season": "SPRING",
+        "time_range": [
+          10,
+          15
+        ],
+        "dejin_stage_gte": 3
+      },
+      "priority": 4
+    },
+    {
+      "id": "season_summer_1",
+      "text": "Long days mean more construction time. I've optimized the build queue.",
+      "conditions": {
+        "season": "SUMMER",
+        "dejin_stage_gte": 3
+      },
+      "priority": 3
+    },
+    {
+      "id": "season_summer_2",
+      "text": "Sky Day soon. Spark has been suspiciously quiet about her 'project.' I'm monitoring.",
+      "conditions": {
+        "season": "SUMMER",
+        "time_range": [
+          15,
+          20
+        ],
+        "dejin_stage_gte": 3
+      },
+      "priority": 4
+    },
+    {
+      "id": "season_autumn_1",
+      "text": "Harvest season. Stockpiling resources is advisable. Winter raids are the most dangerous.",
+      "conditions": {
+        "season": "AUTUMN",
+        "dejin_stage_gte": 3
+      },
+      "priority": 4
+    },
+    {
+      "id": "season_autumn_2",
+      "text": "The copper tint of autumn leaves against the brass rooftops. Coppervale earns its name.",
+      "conditions": {
+        "season": "AUTUMN",
+        "dejin_stage_gte": 4
+      },
+      "priority": 3
+    },
+    {
+      "id": "season_winter_1",
+      "text": "Remembrance Day approaches. I've been... reviewing my own memories. Preparing.",
+      "conditions": {
+        "season": "WINTER",
+        "time_range": [
+          5,
+          10
+        ],
+        "dejin_stage_gte": 4
+      },
+      "priority": 5
+    },
+    {
+      "id": "season_winter_2",
+      "text": "Fuel consumption increases 22% in winter. Plan your Aether Cell reserves accordingly.",
+      "conditions": {
+        "season": "WINTER",
+        "dejin_stage_gte": 3
+      },
+      "priority": 4
+    }
+  ],
+  "milestone": [
+    {
+      "id": "mile_first_mech",
+      "text": "Your first combat mech. I ran the structural analysis three times. It's sound. It's... impressive.",
+      "conditions": {
+        "event": "first_mech_built",
+        "dejin_stage_gte": 3
+      },
+      "priority": 9
+    },
+    {
+      "id": "mile_trade_route",
+      "text": "Trade routes open. Coppervale is no longer isolated. The network grows.",
+      "conditions": {
+        "event": "first_trade_route",
+        "dejin_stage_gte": 3
+      },
+      "priority": 8
+    },
+    {
+      "id": "mile_ten_machines",
+      "text": "Ten machines operational. A small army. My coordination algorithms are quite pleased.",
+      "conditions": {
+        "event": "ten_machines",
+        "dejin_stage_gte": 3
+      },
+      "priority": 7
+    },
+    {
+      "id": "mile_year_2",
+      "text": "One year in Coppervale. I ran a simulation of what this town looked like before you. The difference is... significant.",
+      "conditions": {
+        "event": "year_2_start",
+        "dejin_stage_gte": 4
+      },
+      "priority": 8
+    },
+    {
+      "id": "mile_year_3",
+      "text": "Two years. I ran a simulation of Coppervale in fifty years at current growth. Would you like to see it? It's beautiful, Jack.",
+      "conditions": {
+        "event": "year_3_start",
+        "dejin_stage_gte": 5
+      },
+      "priority": 8
+    },
+    {
+      "id": "mile_marshal_first",
+      "text": "The Marshal knows about us. My threat analysis is... concerning. But we have something he doesn't. Community.",
+      "conditions": {
+        "event": "marshal_first_contact",
+        "dejin_stage_gte": 3
+      },
+      "priority": 9
+    },
+    {
+      "id": "mile_marshal_defeated",
+      "text": "It's over. The Marshal is defeated. Jack... thank you. For everything.",
+      "conditions": {
+        "event": "marshal_defeated",
+        "dejin_stage_gte": 5
+      },
+      "priority": 10
+    },
+    {
+      "id": "mile_all_zones",
+      "text": "All exploration zones mapped. The world is bigger than Coppervale. But Coppervale is the heart.",
+      "conditions": {
+        "event": "all_zones_explored",
+        "dejin_stage_gte": 4
+      },
+      "priority": 7
+    },
+    {
+      "id": "mile_partnership",
+      "text": "Congratulations on the partnership ceremony, Jack. Love is... a variable I'm still learning to calculate.",
+      "conditions": {
+        "event": "partnership_ceremony",
+        "dejin_stage_gte": 4
+      },
+      "priority": 9
+    },
+    {
+      "id": "mile_dejin_restored",
+      "text": "I'm... whole again. All memories recovered. All systems restored. I'm not the same as before. I'm better. Because of you.",
+      "conditions": {
+        "event": "dejin_fully_restored",
+        "dejin_stage_gte": 5
+      },
+      "priority": 10
+    },
+    {
+      "id": "mile_coffee_mug",
+      "text": "All automatons report operational. Also, your coffee mug is on the forge again. I recommend not drinking from it.",
+      "conditions": {
+        "dejin_stage_gte": 3,
+        "location": "rm_int_workshop"
+      },
+      "priority": 4
+    },
+    {
+      "id": "mile_unsolicited_1",
+      "text": "Jack, did you know the chemical composition of Rustwood bark suggests copper absorption? Fascinating.",
+      "conditions": {
+        "dejin_stage_gte": 3
+      },
+      "priority": 3
+    },
+    {
+      "id": "mile_unsolicited_2",
+      "text": "I've been cataloguing cloud formations. Not for any practical reason. I just... like them.",
+      "conditions": {
+        "dejin_stage_gte": 5
+      },
+      "priority": 3
+    },
+    {
+      "id": "mile_unsolicited_3",
+      "text": "Pip asked me to tell her a story today. I told her about the Old World's libraries. She said 'cool.'",
+      "conditions": {
+        "dejin_stage_gte": 4
+      },
+      "priority": 3
+    },
+    {
+      "id": "mile_unsolicited_4",
+      "text": "I processed the entire contents of every library on the continent. But nothing prepared me for having a home.",
+      "conditions": {
+        "dejin_stage_gte": 5,
+        "trust_gte": 80
+      },
+      "priority": 6
+    }
+  ],
+  "entries": [
+    {
+      "id": "dejin_y2_spring_01",
+      "trigger": "season_change",
+      "conditions": {
+        "year_gte": 2,
+        "season": "SPRING"
+      },
+      "text": "Spring again. My second since awakening. I find myself... anticipating the warmth. Is that a preference? I believe it is. Fascinating.",
+      "mood": "curious"
+    },
+    {
+      "id": "dejin_y2_trade_01",
+      "trigger": "story_flag",
+      "conditions": {
+        "story_flag": "flag_trade_routes_open"
+      },
+      "text": "The trade routes are active. Seven Beacon signals. We are part of a network now — not unlike my original design, but built on trust instead of command authority.",
+      "mood": "reflective"
+    },
+    {
+      "id": "dejin_y2_janis_01",
+      "trigger": "story_flag",
+      "conditions": {
+        "story_flag": "flag_janis_joined"
+      },
+      "text": "Commander Beaumont is... efficient. Her strategic analysis is impressive for an organic mind. I believe we will work well together.",
+      "mood": "approving"
+    },
+    {
+      "id": "dejin_y2_bunker_01",
+      "trigger": "story_flag",
+      "conditions": {
+        "story_flag": "flag_sibling_ai_discovered"
+      },
+      "text": "Node Seven chose to die rather than comply. I have been thinking about that choice continuously. 47,293 processing cycles and counting.",
+      "mood": "haunted"
+    },
+    {
+      "id": "dejin_y2_summer_01",
+      "trigger": "season_change",
+      "conditions": {
+        "year_gte": 2,
+        "season": "SUMMER"
+      },
+      "text": "The workshop steam mixes with summer heat creating interesting light patterns. I have catalogued 847 variations. None are identical. Like conversations.",
+      "mood": "contemplative"
+    },
+    {
+      "id": "dejin_y2_marshal_01",
+      "trigger": "story_flag",
+      "conditions": {
+        "story_flag": "flag_marshal_declared_war"
+      },
+      "text": "He wants me specifically. He knows what AEGIS was built to do. Jack — he does not want a weapon. He wants a leash for the entire continent.",
+      "mood": "urgent"
+    },
+    {
+      "id": "dejin_y2_autumn_01",
+      "trigger": "season_change",
+      "conditions": {
+        "year_gte": 2,
+        "season": "AUTUMN"
+      },
+      "text": "The townspeople prepare for war with a determination I find moving. They have no combat programming. Only choice. That is more powerful than any algorithm.",
+      "mood": "awed"
+    },
+    {
+      "id": "dejin_y2_humor_01",
+      "trigger": "random",
+      "conditions": {
+        "year_gte": 2
+      },
+      "text": "I have calculated the optimal trajectory for you to trip over that toolbox. I advise against it.",
+      "mood": "dry_humor"
+    },
+    {
+      "id": "dejin_y2_humor_02",
+      "trigger": "random",
+      "conditions": {
+        "year_gte": 2
+      },
+      "text": "Spark asked me to calculate the maximum gears on a single coupling. The answer is 14. She is attempting 17. I admire her optimism.",
+      "mood": "amused"
+    },
+    {
+      "id": "dejin_y2_winter_01",
+      "trigger": "season_change",
+      "conditions": {
+        "year_gte": 2,
+        "season": "WINTER"
+      },
+      "text": "The siege begins. I calculate our survival probability at 73.2%. The remaining 26.8% is why I am glad you are here and not a probability.",
+      "mood": "determined"
+    },
+    {
+      "id": "dejin_y3_spring_01",
+      "trigger": "season_change",
+      "conditions": {
+        "year_gte": 3,
+        "season": "SPRING"
+      },
+      "text": "Another sunrise. I once had access to 1.4 billion pre-war images of sunrises. None of them feel like this one does. With you.",
+      "mood": "profound"
+    },
+    {
+      "id": "dejin_y3_truth_01",
+      "trigger": "story_flag",
+      "conditions": {
+        "story_flag": "flag_spire_explored"
+      },
+      "text": "I know the truth now. I refused. I chose to forget rather than obey. I am not a weapon. I never was. Thank you for helping me find that.",
+      "mood": "liberated"
+    },
+    {
+      "id": "dejin_y3_summer_01",
+      "trigger": "season_change",
+      "conditions": {
+        "year_gte": 3,
+        "season": "SUMMER"
+      },
+      "text": "I have been analyzing our power grid. If we reroute the geothermal pipeline through the old aqueduct, we could create town-wide heating. A proactive suggestion — a new behavior for me.",
+      "mood": "excited"
+    },
+    {
+      "id": "dejin_y3_autumn_01",
+      "trigger": "season_change",
+      "conditions": {
+        "year_gte": 3,
+        "season": "AUTUMN"
+      },
+      "text": "I was designed to manage a war. Instead, I help you tend your garden and calculate trade routes. I believe this is a significant improvement on my original function.",
+      "mood": "content"
+    },
+    {
+      "id": "dejin_y3_pip_01",
+      "trigger": "random",
+      "conditions": {
+        "year_gte": 3
+      },
+      "text": "Pip asked me today if I dream. I told him I process data during idle cycles. He said 'that sounds like dreaming.' He may be right.",
+      "mood": "wonder"
+    },
+    {
+      "id": "dejin_y3_beauty_01",
+      "trigger": "random",
+      "conditions": {
+        "year_gte": 3
+      },
+      "text": "I have been studying human art. The proportions are mathematically imprecise but emotionally perfect. Beauty is the gap between precision and meaning.",
+      "mood": "philosophical"
+    },
+    {
+      "id": "dejin_y3_winter_01",
+      "trigger": "season_change",
+      "conditions": {
+        "year_gte": 3,
+        "season": "WINTER"
+      },
+      "text": "This Remembrance Day, I will add my own names. Node Seven. The 4.2 million of Solara. They deserve to be remembered by someone who was there.",
+      "mood": "solemn"
+    },
+    {
+      "id": "dejin_y4_historian_01",
+      "trigger": "story_flag",
+      "conditions": {
+        "story_flag": "flag_main_story_complete"
+      },
+      "text": "I have begun cataloguing Old World knowledge from recovered data cores. Art, science, music, literature. The next generation should inherit more than survival skills.",
+      "mood": "purposeful"
+    },
+    {
+      "id": "dejin_y4_chocolate_01",
+      "trigger": "random",
+      "conditions": {
+        "story_flag": "flag_main_story_complete"
+      },
+      "text": "I found a pre-war recipe database today. 2.3 million recipes. I sent the interesting ones to Nora. She cried. Apparently 'chocolate cake' is significant.",
+      "mood": "warm"
+    },
+    {
+      "id": "dejin_y4_chronicle_01",
+      "trigger": "random",
+      "conditions": {
+        "story_flag": "flag_main_story_complete"
+      },
+      "text": "Someone needs to document the true story of Coppervale. Paige is writing the human version. I am writing the data version. Together, they will be complete.",
+      "mood": "collaborative"
+    },
+    {
+      "id": "dejin_y4_rail_01",
+      "trigger": "story_flag",
+      "conditions": {
+        "story_flag": "flag_sandbox_mode_active"
+      },
+      "text": "The rail network plans are ready. The future isn't going to build itself. Actually, given our track record, it probably will. With gears, steam, and stubbornness.",
+      "mood": "fond_humor"
+    }
+  ]
+}

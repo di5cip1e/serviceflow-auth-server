@@ -1,0 +1,98 @@
+{
+  "_meta": {
+    "description": "Rust Wolves — Tier 2 forest-dwelling bandits with guerrilla tactics.",
+    "version": "1.0",
+    "objective": "#31 Full Raid System"
+  },
+
+  "enemy_rustwolf_scout": {
+    "id": "enemy_rustwolf_scout",
+    "name": "Wolf Scout",
+    "faction": "RUST_WOLVES",
+    "type": "SCOUT",
+    "tier": 2,
+    "base_stats": { "hp": 60, "speed": 3.0, "damage": 8, "armor": 2, "attack_range": 1 },
+    "behavior": "PATHFIND_TO_TARGET",
+    "target_priority": "TOWN_CENTER",
+    "sprite": "spr_enemy_rustwolf_scout",
+    "special": { "reveals_traps": true, "detection_range": 4 },
+    "loot_table": [
+      { "item_id": "item_scrap_iron", "chance": 0.5, "quantity_min": 1, "quantity_max": 2 },
+      { "item_id": "item_rope", "chance": 0.3, "quantity_min": 1, "quantity_max": 2 }
+    ],
+    "description": "Fast recon unit. Probes defenses and reveals trap locations to allies."
+  },
+
+  "enemy_rustwolf_raider": {
+    "id": "enemy_rustwolf_raider",
+    "name": "Wolf Raider",
+    "faction": "RUST_WOLVES",
+    "type": "INFANTRY",
+    "tier": 2,
+    "base_stats": { "hp": 100, "speed": 1.8, "damage": 14, "armor": 5, "attack_range": 1 },
+    "behavior": "PATHFIND_TO_TARGET",
+    "target_priority": "TOWN_CENTER",
+    "sprite": "spr_enemy_rustwolf_raider",
+    "loot_table": [
+      { "item_id": "item_scrap_iron", "chance": 0.7, "quantity_min": 2, "quantity_max": 4 },
+      { "item_id": "item_steel_plate", "chance": 0.2, "quantity_min": 1, "quantity_max": 1 },
+      { "item_id": "item_rope", "chance": 0.3, "quantity_min": 1, "quantity_max": 2 }
+    ],
+    "description": "Standard Rust Wolf infantry. Attacks in packs with coordinated aggression."
+  },
+
+  "enemy_rustwolf_berserker": {
+    "id": "enemy_rustwolf_berserker",
+    "name": "Wolf Berserker",
+    "faction": "RUST_WOLVES",
+    "type": "HEAVY_INFANTRY",
+    "tier": 2,
+    "base_stats": { "hp": 150, "speed": 2.2, "damage": 22, "armor": 3, "attack_range": 1 },
+    "behavior": "PATHFIND_TO_TARGET",
+    "target_priority": "NEAREST_STRUCTURE",
+    "sprite": "spr_enemy_rustwolf_berserker",
+    "special": { "enrage_threshold": 0.3, "enrage_damage_mult": 1.5, "enrage_speed_mult": 1.3 },
+    "loot_table": [
+      { "item_id": "item_scrap_iron", "chance": 0.8, "quantity_min": 3, "quantity_max": 5 },
+      { "item_id": "item_steel_plate", "chance": 0.3, "quantity_min": 1, "quantity_max": 2 }
+    ],
+    "description": "Ferocious melee fighter. Enrages when below 30% HP, gaining damage and speed."
+  },
+
+  "enemy_rustwolf_sapper": {
+    "id": "enemy_rustwolf_sapper",
+    "name": "Wolf Sapper",
+    "faction": "RUST_WOLVES",
+    "type": "SAPPER",
+    "tier": 2,
+    "base_stats": { "hp": 70, "speed": 1.5, "damage": 30, "armor": 2, "attack_range": 1, "damage_vs_walls_mult": 3.5 },
+    "behavior": "PATHFIND_TO_WALLS",
+    "target_priority": "NEAREST_WALL",
+    "sprite": "spr_enemy_rustwolf_sapper",
+    "loot_table": [
+      { "item_id": "item_gunpowder", "chance": 0.5, "quantity_min": 1, "quantity_max": 2 },
+      { "item_id": "item_scrap_iron", "chance": 0.4, "quantity_min": 1, "quantity_max": 3 }
+    ],
+    "description": "Explosives expert. Plants charges on walls for devastating structural damage."
+  },
+
+  "enemy_rustwolf_alpha": {
+    "id": "enemy_rustwolf_alpha",
+    "name": "Alpha Wolf",
+    "faction": "RUST_WOLVES",
+    "type": "BOSS",
+    "tier": 3,
+    "base_stats": { "hp": 300, "speed": 1.8, "damage": 25, "armor": 12, "attack_range": 1 },
+    "behavior": "BOSS",
+    "target_priority": "TOWN_CENTER",
+    "sprite": "spr_enemy_rustwolf_alpha",
+    "abilities": ["rally_nearby"],
+    "rally_nearby": { "radius": 5, "speed_buff": 1.3, "damage_buff": 1.25, "duration_seconds": 12 },
+    "loot_table": [
+      { "item_id": "item_scrap_iron", "chance": 1.0, "quantity_min": 5, "quantity_max": 10 },
+      { "item_id": "item_steel_plate", "chance": 0.6, "quantity_min": 2, "quantity_max": 4 },
+      { "item_id": "item_precision_gears", "chance": 0.3, "quantity_min": 1, "quantity_max": 2 }
+    ],
+    "description": "Pack leader. Rallies nearby Wolves with howl, buffing their speed and damage."
+  }
+}

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" width="200" height="150">
+  <!-- Ornate Panel Border -->
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffd700"/>
+      <stop offset="50%" style="stop-color:#c9a227"/>
+      <stop offset="100%" style="stop-color:#8b7500"/>
+    </linearGradient>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a24"/>
+      <stop offset="100%" style="stop-color:#0a0a0f"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+  
+  <!-- Main background -->
+  <rect x="10" y="10" width="180" height="130" fill="url(#bgGrad)" rx="3"/>
+  
+  <!-- Outer border -->
+  <rect x="10" y="10" width="180" height="130" fill="none" stroke="url(#goldGrad)" stroke-width="2" rx="3"/>
+  
+  <!-- Inner border -->
+  <rect x="18" y="18" width="164" height="114" fill="none" stroke="url(#goldGrad)" stroke-width="1" rx="2"/>
+  
+  <!-- Corner ornaments - top left -->
+  <path d="M10,25 L10,10 L25,10" fill="none" stroke="url(#goldGrad)" stroke-width="2"/>
+  <circle cx="15" cy="15" r="2" fill="url(#goldGrad)"/>
+  
+  <!-- Corner ornaments - top right -->
+  <path d="M175,10 L190,10 L190,25" fill="none" stroke="url(#goldGrad)" stroke-width="2"/>
+  <circle cx="185" cy="15" r="2" fill="url(#goldGrad)"/>
+  
+  <!-- Corner ornaments - bottom left -->
+  <path d="M10,125 L10,140 L25,140" fill="none" stroke="url(#goldGrad)" stroke-width="2"/>
+  <circle cx="15" cy="135" r="2" fill="url(#goldGrad)"/>
+  
+  <!-- Corner ornaments - bottom right -->
+  <path d="M175,140 L190,140 L190,125" fill="none" stroke="url(#goldGrad)" stroke-width="2"/>
+  <circle cx="185" cy="135" r="2" fill="url(#goldGrad)"/>
+  
+  <!-- Decorative runes on sides -->
+  <path d="M12,75 L18,70 L18,80 Z" fill="url(#goldGrad)"/>
+  <path d="M188,75 L182,70 L182,80 Z" fill="url(#goldGrad)"/>
+  
+  <!-- Top decorative line -->
+  <line x1="60" y1="10" x2="140" y2="10" stroke="url(#goldGrad)" stroke-width="1"/>
+  <circle cx="100" cy="10" r="2" fill="url(#goldGrad)"/>
+  
+  <!-- Bottom decorative line -->
+  <line x1="60" y1="140" x2="140" y2="140" stroke="url(#goldGrad)" stroke-width="1"/>
+  <circle cx="100" cy="140" r="2" fill="url(#goldGrad)"/>
+</svg>

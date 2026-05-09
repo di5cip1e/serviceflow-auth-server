@@ -1,0 +1,27 @@
+{
+  "room_id": "rm_explore_deep_rustwood", "display_name": "Deep Rustwood", "width_tiles": 30, "height_tiles": 50, "tile_size": 16, "parent_room": null, "zone_type": "EXPLORATION",
+  "sub_zones": {
+    "deep_forest": { "name": "Deep Forest", "bounds": { "x1": 0, "y1": 0, "x2": 29, "y2": 14 }, "description": "Extremely dense copper-tinted canopy. Bioluminescent fungi provide ambient light.", "threat_level": "LOW" },
+    "factory_approach": { "name": "Factory Approach", "bounds": { "x1": 0, "y1": 15, "x2": 29, "y2": 29 }, "description": "Trees thin as industrial infrastructure appears. Pipes, steam vents.", "threat_level": "MEDIUM" },
+    "living_factory": { "name": "The Living Factory", "bounds": { "x1": 2, "y1": 30, "x2": 27, "y2": 44 }, "description": "A functioning automated factory still producing on residual Aetheric power.", "threat_level": "HIGH" },
+    "loading_dock": { "name": "Loading Dock", "bounds": { "x1": 5, "y1": 45, "x2": 24, "y2": 49 }, "description": "Factory output area. Exit back to forest trail.", "threat_level": "LOW" }
+  },
+  "exits": [ { "id": "exit_north_rustwood_edge", "name": "North (Rustwood Edge)", "tiles": { "x1": 14, "y1": 0, "x2": 16, "y2": 0 }, "target_room": "rm_explore_rustwood_edge", "target_pos": [17, 43], "collision_type": 3 }, { "id": "exit_south_loading_dock", "name": "Loading Dock Exit", "tiles": { "x1": 14, "y1": 49, "x2": 16, "y2": 49 }, "target_room": "rm_explore_rustwood_edge", "target_pos": [17, 5], "collision_type": 3 } ],
+  "terrain_features": [
+    { "id": "dense_trees_west", "type": "BLOCKED", "bounds": { "x1": 0, "y1": 0, "x2": 3, "y2": 29 }, "description": "Impenetrable forest wall — west." },
+    { "id": "dense_trees_east", "type": "BLOCKED", "bounds": { "x1": 26, "y1": 0, "x2": 29, "y2": 29 }, "description": "Impenetrable forest wall — east." },
+    { "id": "factory_walls", "type": "BLOCKED", "bounds": { "x1": 1, "y1": 30, "x2": 1, "y2": 44 }, "description": "Factory outer wall — left." },
+    { "id": "factory_walls_right", "type": "BLOCKED", "bounds": { "x1": 28, "y1": 30, "x2": 28, "y2": 44 }, "description": "Factory outer wall — right." },
+    { "id": "steam_vent_1", "type": "HAZARD", "positions": [[12,20],[13,20]], "description": "Periodic steam burst from underground pipe." },
+    { "id": "steam_vent_2", "type": "HAZARD", "positions": [[20,24],[21,24]], "description": "Another steam vent." },
+    { "id": "steam_vent_3", "type": "HAZARD", "positions": [[8,27]], "description": "Steam vent near factory entrance." },
+    { "id": "conveyor_belts", "type": "HAZARD", "bounds": { "x1": 6, "y1": 34, "x2": 24, "y2": 35 }, "description": "Active conveyor belts. Moving hazard tiles (timed, pattern-based)." }
+  ],
+  "ruins": [
+    { "id": "ruin_factory_building", "name": "Automated Factory", "pos": [2, 30], "size": [26, 15], "has_interior": true },
+    { "id": "ruin_control_room", "name": "Factory Control Room", "pos": [10, 38], "size": [6, 4], "has_interior": true }
+  ],
+  "collision_rules": { "types": { "0": "WALKABLE", "1": "BLOCKED", "2": "INTERACTABLE", "3": "TRANSITION", "6": "HAZARD" }, "general": [ "Dense forest along edges is BLOCKED", "Factory interior has active machinery as timed HAZARD", "Control room lever deactivates dangerous conveyor lines", "Steam vents are periodic HAZARD — Scanner detects timing pattern" ] },
+  "tile_layers": ["ground_base", "ground_detail", "shadows", "objects_low", "objects_mid", "objects_high", "fog_overlay", "ui_overlay"],
+  "notes": [ "Hard zone. The factory is still running on Aetheric power.", "If secured via quest, factory provides passive component production bonus.", "Entry from Rustwood Edge south exit." ]
+}

@@ -1,0 +1,63 @@
+{
+  "_meta": {
+    "description": "Heart event #1 for npc_kiery: The Commission",
+    "version": "1.0",
+    "objective": "#33/#34"
+  },
+  "event_id": "heart_event_kiery_01",
+  "npc_id": "npc_kiery",
+  "heart_level_required": 2,
+  "location": "rm_int_npc_kiery",
+  "time_range": {
+    "start": 10,
+    "end": 17
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_kiery_event_1_complete",
+  "heart_bonus": 50,
+  "title": "The Commission",
+  "lines": [
+    {
+      "speaker": "npc_kiery",
+      "text": "Jack! You came to my shop! Most people just pass by.",
+      "portrait": "happy"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "I'd like to commission something.",
+          "flag": "kiery_commission_business"
+        },
+        {
+          "text": "I wanted to see your work.",
+          "flag": "kiery_commission_interest"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "You... value my work? Really?",
+      "portrait": "surprised"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "Most people think sewing is small work. But every stitch is a choice.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "I'll make you something special. Give me a week.",
+      "portrait": "happy"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "Thank you for seeing the craft. Not just the cloth.",
+      "portrait": "happy"
+    }
+  ]
+}

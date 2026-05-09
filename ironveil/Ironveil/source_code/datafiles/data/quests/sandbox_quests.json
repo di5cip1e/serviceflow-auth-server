@@ -1,0 +1,294 @@
+{
+  "_meta": {
+    "description": "Post-story sandbox quests. Activated when flag_main_story_complete is set. Rail network, town growth, DEJIN historian quests.",
+    "version": "1.0",
+    "objective": "#42 Full 3+ Year Story Content"
+  },
+  "quests": [
+    {
+      "quest_id": "sb_rail_01",
+      "name": "The Thornwall Line",
+      "type": "BUILD",
+      "giver": "npc_linden",
+      "description": "Build the first rail connection to Thornwall. Requires massive resources: 500 Iron, 200 Copper, 100 Aetheric Ore, and 50 Precision Gears.",
+      "trigger": {
+        "prerequisite_quests": ["mq_27"],
+        "story_flags": ["flag_main_story_complete", "flag_thornwall_contact"]
+      },
+      "objectives": [
+        {"id": "obj_1", "type": "gather", "target": "item_iron_ingot", "description": "Gather 500 Iron Ingots", "target_count": 500},
+        {"id": "obj_2", "type": "gather", "target": "item_copper_ingot", "description": "Gather 200 Copper Ingots", "target_count": 200},
+        {"id": "obj_3", "type": "gather", "target": "item_aetheric_ore", "description": "Gather 100 Aetheric Ore", "target_count": 100},
+        {"id": "obj_4", "type": "gather", "target": "item_precision_gear", "description": "Gather 50 Precision Gears", "target_count": 50},
+        {"id": "obj_5", "type": "build", "target": "machine_rail_segment", "description": "Build 10 Rail Segments", "target_count": 10}
+      ],
+      "rewards": {
+        "cogs": 5000,
+        "reputation": 100,
+        "story_flags_set": ["flag_rail_thornwall_complete"],
+        "unlocks": ["trade_route_rail_thornwall"]
+      }
+    },
+    {
+      "quest_id": "sb_rail_02",
+      "name": "The Dusthaven Extension",
+      "type": "BUILD",
+      "giver": "npc_gus",
+      "description": "Extend the rail network to Dusthaven. Their agricultural exports will feed the growing region.",
+      "trigger": {
+        "prerequisite_quests": ["sb_rail_01"],
+        "story_flags": ["flag_rail_thornwall_complete"]
+      },
+      "objectives": [
+        {"id": "obj_1", "type": "gather", "target": "item_iron_ingot", "description": "Gather 400 Iron Ingots", "target_count": 400},
+        {"id": "obj_2", "type": "gather", "target": "item_copper_ingot", "description": "Gather 150 Copper Ingots", "target_count": 150},
+        {"id": "obj_3", "type": "build", "target": "machine_rail_segment", "description": "Build 8 Rail Segments", "target_count": 8},
+        {"id": "obj_4", "type": "build", "target": "machine_rail_bridge", "description": "Build 2 Rail Bridges (river crossing)", "target_count": 2}
+      ],
+      "rewards": {
+        "cogs": 4000,
+        "reputation": 80,
+        "story_flags_set": ["flag_rail_dusthaven_complete"],
+        "unlocks": ["trade_route_rail_dusthaven"]
+      }
+    },
+    {
+      "quest_id": "sb_rail_03",
+      "name": "The Ironridge Tunnel",
+      "type": "BUILD",
+      "giver": "npc_ferris",
+      "description": "The most ambitious rail project yet — a tunnel through the Ashspine foothills to connect Ironridge. Their mining expertise will be invaluable.",
+      "trigger": {
+        "prerequisite_quests": ["sb_rail_02"],
+        "story_flags": ["flag_rail_dusthaven_complete"]
+      },
+      "objectives": [
+        {"id": "obj_1", "type": "gather", "target": "item_iron_ingot", "description": "Gather 600 Iron Ingots", "target_count": 600},
+        {"id": "obj_2", "type": "gather", "target": "item_reinforced_plate", "description": "Gather 100 Reinforced Plates", "target_count": 100},
+        {"id": "obj_3", "type": "build", "target": "machine_rail_segment", "description": "Build 12 Rail Segments", "target_count": 12},
+        {"id": "obj_4", "type": "build", "target": "machine_tunnel_borer", "description": "Build the Tunnel Boring Machine", "target_count": 1}
+      ],
+      "rewards": {
+        "cogs": 8000,
+        "reputation": 150,
+        "story_flags_set": ["flag_rail_ironridge_complete", "flag_rail_network_complete"],
+        "unlocks": ["trade_route_rail_ironridge"]
+      }
+    },
+    {
+      "quest_id": "sb_growth_01",
+      "name": "New Arrivals",
+      "type": "BUILD",
+      "giver": "npc_linden",
+      "description": "Three families from the eastern settlements want to move to Coppervale. Build housing for them.",
+      "trigger": {
+        "prerequisite_quests": ["mq_27"],
+        "story_flags": ["flag_main_story_complete"]
+      },
+      "objectives": [
+        {"id": "obj_1", "type": "build", "target": "building_house", "description": "Build 3 Houses", "target_count": 3},
+        {"id": "obj_2", "type": "talk", "target": "npc_linden", "description": "Report to Mayor Linden", "target_count": 1}
+      ],
+      "rewards": {
+        "cogs": 1500,
+        "reputation": 50,
+        "story_flags_set": ["flag_new_families_arrived"]
+      }
+    },
+    {
+      "quest_id": "sb_growth_02",
+      "name": "The Schoolhouse",
+      "type": "BUILD",
+      "giver": "npc_elm",
+      "description": "With more children in town, Pastor Elm proposes building a proper school. Pip is especially excited.",
+      "trigger": {
+        "prerequisite_quests": ["sb_growth_01"],
+        "story_flags": ["flag_new_families_arrived"]
+      },
+      "objectives": [
+        {"id": "obj_1", "type": "gather", "target": "item_lumber", "description": "Gather 200 Lumber", "target_count": 200},
+        {"id": "obj_2", "type": "gather", "target": "item_glass_pane", "description": "Gather 20 Glass Panes", "target_count": 20},
+        {"id": "obj_3", "type": "build", "target": "building_school", "description": "Build the Schoolhouse", "target_count": 1}
+      ],
+      "rewards": {
+        "cogs": 2000,
+        "reputation": 60,
+        "story_flags_set": ["flag_school_built"],
+        "hearts": {"npc_elm": 50, "npc_pip": 100}
+      }
+    },
+    {
+      "quest_id": "sb_growth_03",
+      "name": "The Water Tower",
+      "type": "BUILD",
+      "giver": "npc_bramble",
+      "description": "Doc Bramble insists on a proper water purification system. Clean water prevents disease better than any medicine.",
+      "trigger": {
+        "prerequisite_quests": ["sb_growth_01"],
+        "story_flags": ["flag_new_families_arrived"]
+      },
+      "objectives": [
+        {"id": "obj_1", "type": "gather", "target": "item_iron_ingot", "description": "Gather 150 Iron Ingots", "target_count": 150},
+        {"id": "obj_2", "type": "gather", "target": "item_filter_membrane", "description": "Gather 10 Filter Membranes", "target_count": 10},
+        {"id": "obj_3", "type": "build", "target": "machine_water_tower", "description": "Build the Water Purification Tower", "target_count": 1}
+      ],
+      "rewards": {
+        "cogs": 2500,
+        "reputation": 70,
+        "story_flags_set": ["flag_water_tower_built"],
+        "hearts": {"npc_bramble": 50, "npc_michelle": 50}
+      }
+    },
+    {
+      "quest_id": "sb_growth_04",
+      "name": "The Market Square Expansion",
+      "type": "BUILD",
+      "giver": "npc_gus",
+      "description": "With rail trade booming, Gus needs a proper market square with stalls for visiting merchants.",
+      "trigger": {
+        "prerequisite_quests": ["sb_rail_01"],
+        "story_flags": ["flag_rail_thornwall_complete"]
+      },
+      "objectives": [
+        {"id": "obj_1", "type": "gather", "target": "item_lumber", "description": "Gather 300 Lumber", "target_count": 300},
+        {"id": "obj_2", "type": "gather", "target": "item_stone_block", "description": "Gather 100 Stone Blocks", "target_count": 100},
+        {"id": "obj_3", "type": "build", "target": "building_market_stall", "description": "Build 5 Market Stalls", "target_count": 5}
+      ],
+      "rewards": {
+        "cogs": 3000,
+        "reputation": 80,
+        "story_flags_set": ["flag_market_expanded"],
+        "hearts": {"npc_gus": 100}
+      }
+    },
+    {
+      "quest_id": "sb_growth_05",
+      "name": "Spark's Dream",
+      "type": "BUILD",
+      "giver": "npc_spark",
+      "description": "Spark wants to build a proper airfield for her flyer — and future aircraft. A landing strip, hangar, and wind sock.",
+      "trigger": {
+        "prerequisite_quests": ["mq_27"],
+        "story_flags": ["flag_main_story_complete"],
+        "heart_level": {"npc_spark": 8}
+      },
+      "objectives": [
+        {"id": "obj_1", "type": "gather", "target": "item_stone_block", "description": "Gather 200 Stone Blocks", "target_count": 200},
+        {"id": "obj_2", "type": "gather", "target": "item_iron_ingot", "description": "Gather 100 Iron Ingots", "target_count": 100},
+        {"id": "obj_3", "type": "build", "target": "building_hangar", "description": "Build the Hangar", "target_count": 1},
+        {"id": "obj_4", "type": "build", "target": "building_landing_strip", "description": "Build the Landing Strip", "target_count": 1}
+      ],
+      "rewards": {
+        "cogs": 5000,
+        "reputation": 100,
+        "story_flags_set": ["flag_airfield_built"],
+        "hearts": {"npc_spark": 200}
+      }
+    },
+    {
+      "quest_id": "sb_dejin_01",
+      "name": "The Archive Project",
+      "type": "EXPLORATION",
+      "giver": "dejin",
+      "description": "DEJIN wants to establish a proper archive of Old World knowledge. The first step: recover data cores from previously explored zones that weren't fully catalogued.",
+      "trigger": {
+        "prerequisite_quests": ["mq_27"],
+        "story_flags": ["flag_main_story_complete"]
+      },
+      "objectives": [
+        {"id": "obj_1", "type": "gather", "target": "item_data_core_misc", "description": "Recover 5 uncatalogued Data Cores", "target_count": 5},
+        {"id": "obj_2", "type": "visit", "target": "rm_int_archive", "description": "Deliver cores to the Archive", "target_count": 1}
+      ],
+      "rewards": {
+        "cogs": 2000,
+        "reputation": 40,
+        "story_flags_set": ["flag_archive_started"]
+      }
+    },
+    {
+      "quest_id": "sb_dejin_02",
+      "name": "Voices of the Past",
+      "type": "EXPLORATION",
+      "giver": "dejin",
+      "description": "DEJIN has detected faint signals from a dormant AEGIS monitoring station. It may contain audio recordings from before The Sundering — music, speeches, everyday conversations.",
+      "trigger": {
+        "prerequisite_quests": ["sb_dejin_01"],
+        "story_flags": ["flag_archive_started"]
+      },
+      "objectives": [
+        {"id": "obj_1", "type": "explore", "target": "rm_explore_old_mill", "description": "Search the Old Mill subbasement", "target_count": 1},
+        {"id": "obj_2", "type": "gather", "target": "item_audio_archive", "description": "Recover the Audio Archive Module", "target_count": 1}
+      ],
+      "rewards": {
+        "cogs": 3000,
+        "reputation": 50,
+        "story_flags_set": ["flag_audio_archive_recovered"]
+      }
+    },
+    {
+      "quest_id": "sb_dejin_03",
+      "name": "The Art of Memory",
+      "type": "EXPLORATION",
+      "giver": "dejin",
+      "description": "A pre-war art gallery's digital archive has been located in the ruins near the Shattered Coast. DEJIN believes preserving human art is essential for cultural recovery.",
+      "trigger": {
+        "prerequisite_quests": ["sb_dejin_02"],
+        "story_flags": ["flag_audio_archive_recovered"]
+      },
+      "objectives": [
+        {"id": "obj_1", "type": "explore", "target": "rm_explore_coastal_wreck", "description": "Locate the gallery archive in the Coastal Wreck", "target_count": 1},
+        {"id": "obj_2", "type": "gather", "target": "item_art_database", "description": "Recover the Art Database", "target_count": 1},
+        {"id": "obj_3", "type": "visit", "target": "rm_int_archive", "description": "Install in the Archive", "target_count": 1}
+      ],
+      "rewards": {
+        "cogs": 3000,
+        "reputation": 60,
+        "story_flags_set": ["flag_art_archive_recovered"],
+        "hearts": {"npc_kiery": 50, "npc_paige": 50}
+      }
+    },
+    {
+      "quest_id": "sb_dejin_04",
+      "name": "The Scientific Record",
+      "type": "EXPLORATION",
+      "giver": "dejin",
+      "description": "The Mountain Bunker's research wing contains scientific papers and engineering manuals that could accelerate technological recovery for generations.",
+      "trigger": {
+        "prerequisite_quests": ["sb_dejin_03"],
+        "story_flags": ["flag_art_archive_recovered"]
+      },
+      "objectives": [
+        {"id": "obj_1", "type": "explore", "target": "rm_explore_mountain_bunker", "description": "Access the restricted research archive", "target_count": 1},
+        {"id": "obj_2", "type": "gather", "target": "item_science_database", "description": "Recover the Scientific Database", "target_count": 1}
+      ],
+      "rewards": {
+        "cogs": 4000,
+        "reputation": 80,
+        "story_flags_set": ["flag_science_archive_recovered"],
+        "hearts": {"npc_spark": 50}
+      }
+    },
+    {
+      "quest_id": "sb_dejin_05",
+      "name": "The Complete Record",
+      "type": "BUILD",
+      "giver": "dejin",
+      "description": "With all archives recovered, DEJIN proposes building a proper museum and library — the first in the post-Sundering world. A monument to what was lost and what was rebuilt.",
+      "trigger": {
+        "prerequisite_quests": ["sb_dejin_04"],
+        "story_flags": ["flag_science_archive_recovered"]
+      },
+      "objectives": [
+        {"id": "obj_1", "type": "gather", "target": "item_stone_block", "description": "Gather 300 Stone Blocks", "target_count": 300},
+        {"id": "obj_2", "type": "gather", "target": "item_glass_pane", "description": "Gather 50 Glass Panes", "target_count": 50},
+        {"id": "obj_3", "type": "gather", "target": "item_lumber", "description": "Gather 200 Lumber", "target_count": 200},
+        {"id": "obj_4", "type": "build", "target": "building_museum", "description": "Build the Coppervale Museum & Library", "target_count": 1}
+      ],
+      "rewards": {
+        "cogs": 10000,
+        "reputation": 200,
+        "story_flags_set": ["flag_museum_built", "flag_dejin_historian_complete"]
+      }
+    }
+  ]
+}

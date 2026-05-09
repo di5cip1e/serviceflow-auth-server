@@ -1,0 +1,776 @@
+{
+  "_meta": {
+    "description": "Dialogue data for Spark (Mechanic). Seasonal/daily pool + heart milestones.",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue"
+  },
+  "entries": [
+    {
+      "entry_id": "npc_spark_sd_001",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "Morning, Jack! I had the BEST idea at 3am. Okay, it might be terrible. Come see!",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_sd_002",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "Stuck inside all day. Which means MORE TIME FOR INVENTING! Silver lining!",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_sd_003",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "So — hear me out — what if we added EXTRA gears to the coupling? Too much?",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_sd_004",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "It's gorgeous out! Almost makes me want to go outside. Almost. Workshop's better.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_sd_005",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "Rain on the roof sounds like tiny hammers. I love it.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_sd_006",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "I tested the rotary coupling again. Only caught fire ONCE this time. Progress!",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_sd_007",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "The leaves match the copper on the rooftops. Like the world turned MORE steampunk.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_sd_008",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "Autumn rain smells like wet metal and possibilities.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_sd_009",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "Harvest Faire's coming! I'm entering the Machine Showcase. Watch out, Jack.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_sd_010",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "Cold hands, warm forge. That's the engineer's motto. I just made that up.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_sd_011",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "weather": "SNOW",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "SNOW! Do you think we could build a snow-mech? Asking for science.",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_sd_012",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "Remembrance Day is soon. I've been thinking about what we're building. And why.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_sd_013",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "weather": "STORM",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "Storm's wild out there! My instruments are going haywire. In a GOOD way!",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_sd_014",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "weather": "FOG",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "Fog makes everything look mysterious. Like we're in an adventure story.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_sd_015",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "You ever just stare at a gear and think about how perfect circles are? No? Just me?",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_sd_016",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "I almost got the rotary coupling to WORK yesterday! ...Almost.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_sd_017",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "Saw Pip collecting 'relics' again. She found a doorknob. Told her it was rare.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_sd_018",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "Do you think I'll ever actually fly, Jack? Or am I just pretending?",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_sd_019",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "I've been up since 4am. Best ideas happen before dawn. And after midnight.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_sd_020",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "Leera brought back parts from the Rustwood. I'm vibrating with excitement. Literally.",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_sd_021",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "Harrow asked me to fix his rifle scope. AGAIN. The man has no delicacy with optics.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_sd_022",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "Made Maren tea today. She called me by her granddaughter's name. I didn't correct her.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_sd_023",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "The workshop smells like copper and possibility today. My favorite combination.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_sd_024",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "I catalogued every tool on the wall rack. Twice. I might have a problem.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_sd_025",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "Jack, can I borrow your wrench? Mine is... inside a wall. Don't ask.",
+          "portrait": "embarrassed"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_hm_02",
+      "npc_id": "npc_spark",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 2
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_spark_milestone_2",
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "Here, Jack. I made you a custom wrench. It's got EXTRA torque!",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_hm_04",
+      "npc_id": "npc_spark",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 4
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_spark_milestone_4",
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "You know... you're the only one who takes my flying dream seriously.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_hm_06",
+      "npc_id": "npc_spark",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 6
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_spark_milestone_6",
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "I've been thinking about what happens when I finally fly. Maybe... you could come with me?",
+          "portrait": "embarrassed"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_hm_08",
+      "npc_id": "npc_spark",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 8
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_spark_milestone_8",
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "Jack, you're my best friend. Like, BEST best friend. Don't make it weird.",
+          "portrait": "embarrassed"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_hm_10",
+      "npc_id": "npc_spark",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 10
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_spark_milestone_10",
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "I couldn't have built any of this without you. The flying machine is OURS, Jack.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_y2_spring_031",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "New trade routes mean new PARTS! Ferris got a crate of precision gears from Thornwall. I nearly cried.",
+          "portrait": "ecstatic"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_y2_spring_032",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "I've been studying the Mk II blueprints you brought back. The power coupling is genius. Whoever designed this was a real artist.",
+          "portrait": "awed"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_y2_summer_033",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "The workshop's running three shifts since the summit. Janis wants turret upgrades for all the Beacon Towns. I'm in heaven.",
+          "portrait": "excited"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_y2_summer_034",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "Jack, between you and me — I'm scared about the Marshal. But I'm more scared of not building enough to stop him.",
+          "portrait": "serious"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_y2_autumn_035",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "Every turret I build is one more chance we survive. No pressure, right? Ha. Ha. I'm fine.",
+          "portrait": "nervous_humor"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_y2_autumn_036",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "Heard the Marshal's broadcast. You know what I heard? A man who doesn't understand that building is harder than breaking.",
+          "portrait": "defiant"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_y2_winter_037",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "If we survive this siege, I'm taking a whole day off. Maybe two. Okay probably not, but I'll THINK about it.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_y3_spring_038",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "The expedition prep is done. Your mech is loaded with every upgrade I could fit. Please bring it back in one piece. And yourself.",
+          "portrait": "tearful_proud"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_y3_spring_039",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "I tested the flyer prototype this morning. Twelve seconds of actual flight! The chapel steeple has a dent now but PROGRESS!",
+          "portrait": "ecstatic"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_y3_summer_040",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "Every day you're at the Spire, I check the radio. Every single day. Come back safe, Jack.",
+          "portrait": "worried"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_y3_autumn_041",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "You did it. You actually did it. The Marshal's done and you're home and I can stop stress-inventing at 3am. Maybe.",
+          "portrait": "crying_happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_y3_winter_042",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "Best Remembrance Day ever. We're lighting lanterns for hope this year, not just survival. Oren would be proud.",
+          "portrait": "warm"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_y4_spring_043",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 4,
+        "hearts_gte": 0,
+        "story_flag": "flag_main_story_complete"
+      },
+      "priority": 11,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "The rail network plans are INCREDIBLE. Steam-powered rail across the whole region! This is the biggest project we've ever done!",
+          "portrait": "ecstatic"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_spark_y4_spring_044",
+      "npc_id": "npc_spark",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 4,
+        "hearts_gte": 0,
+        "story_flag": "flag_main_story_complete"
+      },
+      "priority": 11,
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "Pip asked me to teach him precision welding yesterday. That kid's got talent, Jack. Real talent.",
+          "portrait": "proud"
+        }
+      ]
+    }
+  ]
+}

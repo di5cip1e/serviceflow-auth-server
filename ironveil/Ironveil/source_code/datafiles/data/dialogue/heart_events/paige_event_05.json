@@ -1,0 +1,83 @@
+{
+  "_meta": {
+    "description": "Heart event #5 for npc_paige: The Laugh",
+    "version": "1.0",
+    "objective": "#33/#34"
+  },
+  "event_id": "heart_event_paige_05",
+  "npc_id": "npc_paige",
+  "heart_level_required": 7,
+  "location": "rm_int_archive",
+  "time_range": {
+    "start": 14,
+    "end": 20
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_paige_event_5_complete",
+  "heart_bonus": 50,
+  "title": "The Laugh",
+  "lines": [
+    {
+      "speaker": "narrator",
+      "text": "[Paige and Jack are organizing books. Jack makes an unexpected joke]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "That's \u2014 ha! That's not even \u2014 HA!",
+      "portrait": "happy"
+    },
+    {
+      "speaker": "narrator",
+      "text": "[Paige laughs. Really, genuinely laughs. Then stops, surprised]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "I... I just laughed.",
+      "portrait": "surprised"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "I haven't laughed like that in years.",
+      "portrait": "surprised"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "I'd forgotten what it sounded like. My own laugh.",
+      "portrait": "surprised"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "Isn't that strange? Forgetting your own laugh?",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "It's a wonderful sound.",
+          "flag": "paige_laugh_compliment"
+        },
+        {
+          "text": "It's been waiting for the right moment.",
+          "flag": "paige_laugh_poetic"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "...Don't make me laugh again. I might get used to it.",
+      "portrait": "happy"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "Actually... please do. Make me laugh again.",
+      "portrait": "happy"
+    }
+  ]
+}

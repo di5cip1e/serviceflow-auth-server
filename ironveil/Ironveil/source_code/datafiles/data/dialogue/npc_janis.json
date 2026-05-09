@@ -1,0 +1,648 @@
+{
+  "_meta": {
+    "description": "Dialogue data for Janis (Beacon Council Representative). Seasonal/daily pool + heart milestones.",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue"
+  },
+  "entries": [
+    {
+      "entry_id": "npc_janis_sd_001",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "Adequate weather. I've scheduled inspections for the eastern district.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_sd_002",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "Rain delays my schedule. I don't appreciate delays.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_sd_003",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "The Spark Festival is... quaint. I've seen grander. But the enthusiasm is genuine.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_sd_004",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "Efficient weather for construction. I've noted the progress in my report.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_sd_005",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "My correspondence is getting damp. This town needs covered walkways.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_sd_006",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "The Council requests quarterly updates. Coppervale's numbers are... improving.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_sd_007",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "The aesthetic of autumn here is surprisingly pleasant. I've photographed it for my report.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_sd_008",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "Autumn mud is unbecoming. Where are the paved roads?",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_sd_009",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "I received another letter from the Council. They want me back. I used it to light the fireplace.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_sd_010",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "Bracing. At least the cold keeps things... focused.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_sd_011",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "weather": "SNOW",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "Snow. Everywhere. My boots were not designed for this.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_sd_012",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "Remembrance Day. Even the Council observes it. Some things transcend politics.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_sd_013",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "weather": "STORM",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "Storm damage will set the schedule back. I'll adjust projections.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_sd_014",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "weather": "FOG",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "Visibility is poor. Much like the Council's long-term planning.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_sd_015",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "Charming workshop. I've seen military outposts with more organization.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_sd_016",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "I wrote my report. Coppervale has... potential. Don't let it go to your head.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_sd_017",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "The mech is adequate. The turret placement is... actually quite clever.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_sd_018",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "Linden's optimism is infectious. In a clinical sense. I may need treatment.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_sd_019",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "I could have gone back to the Council cities. Better food, better company. But I stayed.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_sd_020",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "Kaydee's tavern is rough. The ale, however, is surprisingly refined.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_sd_021",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "Pip asked me what the Council does. I said 'argues professionally.' She seemed satisfied.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_sd_022",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "Your engineering output exceeds my initial projections by 34%. I'm... impressed.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_sd_023",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "My family expects greatness. Coppervale wasn't part of that plan. Plans change.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_sd_024",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "I've started learning the names. Of everyone. That wasn't in my job description.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_sd_025",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "Don't mistake my criticism for contempt. I criticize because I see the potential.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_hm_02",
+      "npc_id": "npc_janis",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 2
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_janis_milestone_2",
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "Your efficiency report is... above expectations. I've noted it officially.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_hm_04",
+      "npc_id": "npc_janis",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 4
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_janis_milestone_4",
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "I misjudged this town. And you. I don't often admit mistakes. Note the occasion.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_hm_06",
+      "npc_id": "npc_janis",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 6
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_janis_milestone_6",
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "I received a letter from home. It made me realize... this IS home now.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_hm_08",
+      "npc_id": "npc_janis",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 8
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_janis_milestone_8",
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "I had words prepared. Perfect words. But looking at you, I can't remember any of them.",
+          "portrait": "surprised"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_hm_10",
+      "npc_id": "npc_janis",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 10
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_janis_milestone_10",
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "I choose this. I choose Coppervale. I choose you. And I never make choices lightly.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_y2_spring_031",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "The Council's intelligence network is now sharing data with Coppervale. You have no idea how rare that is.",
+          "portrait": "impressed"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_y2_summer_032",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "The Marshal's movements match DEJIN's predictions exactly. Your AI is... remarkable.",
+          "portrait": "respectful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_y2_autumn_033",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "I've coordinated with all allied towns. Reinforcement plans are locked in. We're as ready as we'll ever be.",
+          "portrait": "commanding"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_y2_winter_034",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "When this is over, Jack... I'd like to stay. In Coppervale. If that's acceptable.",
+          "portrait": "vulnerable"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_y3_spring_035",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "The Scorchland offensive is my design. If it fails, it's on me. If it succeeds... well. It needs to succeed.",
+          "portrait": "intense"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_y3_autumn_036",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "Jack. I came here as a liaison. A bureaucratic assignment. I never expected to find... this.",
+          "portrait": "moved"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_janis_y4_spring_037",
+      "npc_id": "npc_janis",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 4,
+        "hearts_gte": 0,
+        "story_flag": "flag_main_story_complete"
+      },
+      "priority": 11,
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "The Council wants me back. I told them my post is here. Permanently.",
+          "portrait": "resolute"
+        }
+      ]
+    }
+  ]
+}

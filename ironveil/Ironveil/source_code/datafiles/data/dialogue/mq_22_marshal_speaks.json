@@ -1,0 +1,211 @@
+{
+  "_meta": {
+    "description": "Quest dialogue for MQ-22: The Marshal Speaks. Year 2 Autumn — broadcast ultimatum + NPC reactions.",
+    "version": "1.0",
+    "objective": "#42 Full 3+ Year Story Content"
+  },
+  "quest_id": "mq_22",
+  "scenes": [
+    {
+      "scene_id": "mq22_broadcast",
+      "trigger": "quest_start",
+      "location": "rm_town_coppervale",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "[A sharp burst of static erupts from every radio in Coppervale. Then a voice — calm, measured, terrifyingly composed.]",
+          "portrait": "none"
+        },
+        {
+          "speaker": "the_marshal",
+          "text": "People of the Beacon Towns. My name is irrelevant. You know me as the Marshal. I address you now not as an enemy, but as a realist.",
+          "portrait": "broadcast"
+        },
+        {
+          "speaker": "the_marshal",
+          "text": "For two years I have watched you cling to the ruins of the old world, scavenging like rats in a graveyard. Building your little walls. Playing at civilization.",
+          "portrait": "broadcast"
+        },
+        {
+          "speaker": "the_marshal",
+          "text": "But civilization requires order. And order requires strength. You have neither. What you have is a borrowed clock — and I am here to tell you that time is up.",
+          "portrait": "broadcast"
+        },
+        {
+          "speaker": "the_marshal",
+          "text": "When winter comes, I will take Coppervale. Not because I hate you. Because the world cannot afford your weakness. Surrender your technology, your AI, and your engineer — and I promise your people will be treated fairly under my protection.",
+          "portrait": "broadcast"
+        },
+        {
+          "speaker": "the_marshal",
+          "text": "Resist, and I will demonstrate what real strength looks like. You have until the first snow. Choose wisely.",
+          "portrait": "broadcast"
+        },
+        {
+          "speaker": "narrator",
+          "text": "[The broadcast ends. Silence hangs over Coppervale like a held breath.]",
+          "portrait": "none"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq22_town_meeting",
+      "trigger": "cutscene",
+      "conditions": { "after_scene": "mq22_broadcast" },
+      "location": "rm_int_town_hall",
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Everyone... please. I know you're frightened. I am too. But panicking helps no one.",
+          "portrait": "shaken"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "He's given us a timeline. That's both a threat and a gift. We know when he's coming. That means we can prepare.",
+          "portrait": "battle_ready"
+        },
+        {
+          "speaker": "npc_janis",
+          "text": "I've already sent word to the Council. If our alliance holds, reinforcements can arrive before the snow. But we need to move fast.",
+          "portrait": "urgent"
+        },
+        {
+          "speaker": "dejin",
+          "text": "I have analyzed the broadcast signal. It originated from the Scorchlands — approximately 80 kilometers southeast. He has a permanent base of operations.",
+          "portrait": "analytical"
+        },
+        {
+          "speaker": "dejin",
+          "text": "And Jack... he asked for me specifically. He knows what I am. That means he knows what the AEGIS network was designed to do.",
+          "portrait": "worried"
+        },
+        {
+          "speaker": "player",
+          "text": "Then he's not just after territory. He wants control of the old military systems.",
+          "portrait": "grim"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "Which means we don't just need to defend Coppervale. We need to make sure he never gets his hands on that technology. Ever.",
+          "portrait": "resolute"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq22_npc_reactions_core",
+      "trigger": "npc_interact",
+      "conditions": { "quest_active": "mq_22", "scene_complete": "mq22_town_meeting" },
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "He wants to take our workshop? OUR machines? Over my cold, dead, grease-stained hands. I'm tripling production on turret components starting NOW.",
+          "portrait": "furious"
+        },
+        {
+          "speaker": "npc_maren",
+          "text": "I've survived worse than a bully with a radio, dear. My Oren faced down raiders when this town was nothing but tents. We endured then. We'll endure now.",
+          "portrait": "steely"
+        },
+        {
+          "speaker": "npc_pip",
+          "text": "Mister Jack? Are the bad men really coming? I... I can help! I've been practicing with the scanner, just like you showed me!",
+          "portrait": "scared_brave"
+        },
+        {
+          "speaker": "npc_elm",
+          "text": "In times like these, we must remember what we're fighting for. Not just walls and machines — but each other. I'll be in the chapel if anyone needs to talk.",
+          "portrait": "serene"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq22_npc_reactions_romance",
+      "trigger": "npc_interact",
+      "conditions": { "quest_active": "mq_22", "scene_complete": "mq22_town_meeting" },
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "A siege? Good. I've been itching for a real fight. Those patrol skirmishes barely count. Let them come — we'll show them what Coppervale steel can do.",
+          "portrait": "fierce"
+        },
+        {
+          "speaker": "npc_michelle",
+          "text": "I need to prepare the clinic for mass casualties. Jack, can you help me stockpile medical supplies? Bandages, antiseptic, splints. We'll need everything.",
+          "portrait": "focused"
+        },
+        {
+          "speaker": "npc_kaydee",
+          "text": "Well. That's one way to ruin a perfectly good autumn. I'll start rationing the good whiskey — we'll need it after, not before.",
+          "portrait": "dark_humor"
+        },
+        {
+          "speaker": "npc_kiery",
+          "text": "I... I thought we were safe here. I thought I'd found somewhere that wouldn't be taken from me again.",
+          "portrait": "trembling"
+        },
+        {
+          "speaker": "npc_kiery",
+          "text": "But I'm not running. Not this time. Whatever you need, Jack. I'm here.",
+          "portrait": "determined"
+        },
+        {
+          "speaker": "npc_paige",
+          "text": "I'm going to document everything. Every preparation, every conversation, every moment of courage. This town's story deserves to be remembered, whatever happens.",
+          "portrait": "resolute"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq22_npc_reactions_support",
+      "trigger": "npc_interact",
+      "conditions": { "quest_active": "mq_22", "scene_complete": "mq22_town_meeting" },
+      "lines": [
+        {
+          "speaker": "npc_gus",
+          "text": "I'm converting the back storage into an emergency shelter. Thick walls, supplies for two weeks. The children and elderly go there first if the walls are breached.",
+          "portrait": "practical"
+        },
+        {
+          "speaker": "npc_ferris",
+          "text": "I can modify the radio to jam their communications during the attack. It'll burn out the transmitter, but if it gives us even an hour of confusion...",
+          "portrait": "intense"
+        },
+        {
+          "speaker": "npc_hank",
+          "text": "I'll forge day and night if I have to. Every bolt, every plate, every blade. The smithy doesn't close until that man is beaten.",
+          "portrait": "grim_determined"
+        },
+        {
+          "speaker": "npc_bramble",
+          "text": "I've seen siege injuries before, in my years traveling. Crush wounds, burns, shrapnel. I'll assist Michelle. Two medics are better than one.",
+          "portrait": "somber"
+        },
+        {
+          "speaker": "npc_nora",
+          "text": "I'll organize the food stores. Preservation, rationing, emergency cooking. If we're under siege, nobody goes hungry on my watch.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq22_complete",
+      "trigger": "quest_complete",
+      "location": "rm_int_town_hall",
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "The town knows what's coming. And not a single person has asked to leave. Jack, I've never been prouder of this place.",
+          "portrait": "moved"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "Pride won't stop arrows. But it'll keep people standing when the arrows fly. That's something.",
+          "portrait": "gruff_respect"
+        }
+      ],
+      "effects": [
+        { "type": "set_flag", "flag": "flag_marshal_declared_war" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,374 @@
+{
+  "_meta": {
+    "description": "Dialogue data for Gus (General Store Owner). Seasonal/daily pool + heart milestones.",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue"
+  },
+  "entries": [
+    {
+      "entry_id": "npc_gus_sd_001",
+      "npc_id": "npc_gus",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_gus",
+          "text": "Morning, Jack! Fresh shipment of copper wire. Well, 'fresh.' Fifty years old.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_gus_sd_002",
+      "npc_id": "npc_gus",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_gus",
+          "text": "Spring means new stock! Or at least, new-to-us stock. Same thing!",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_gus_sd_003",
+      "npc_id": "npc_gus",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_gus",
+          "text": "Hot day! Got cool drinks in the back. First one's free for engineers.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_gus_sd_004",
+      "npc_id": "npc_gus",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_gus",
+          "text": "Trade caravans are running more often. Good for business!",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_gus_sd_005",
+      "npc_id": "npc_gus",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_gus",
+          "text": "Harvest Faire stock is ready! Got special items this year.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_gus_sd_006",
+      "npc_id": "npc_gus",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_gus",
+          "text": "Stocking up for winter. Prices go up when the snow comes. Supply and demand!",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_gus_sd_007",
+      "npc_id": "npc_gus",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_gus",
+          "text": "Cold out there! Got hand warmers, insulated gloves, and hot cocoa mix.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_gus_sd_008",
+      "npc_id": "npc_gus",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_gus",
+          "text": "I know everything about everyone in this town. Occupational hazard.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_gus_sd_009",
+      "npc_id": "npc_gus",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_gus",
+          "text": "Ferris gets the weird parts. I get the useful ones. That's our arrangement.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_gus_sd_010",
+      "npc_id": "npc_gus",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_gus",
+          "text": "New arrivals bought half my stock yesterday. Growing town, growing business!",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_gus_sd_011",
+      "npc_id": "npc_gus",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_gus",
+          "text": "Pip tried to trade me a 'rare relic' for candy. It was a doorknob. I gave her the candy anyway.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_gus_sd_012",
+      "npc_id": "npc_gus",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_gus",
+          "text": "Between you and me, Jack — Kaydee's tab is... impressive. Don't tell her I said that.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_gus_hm_02",
+      "npc_id": "npc_gus",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 2
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_gus_milestone_2",
+      "lines": [
+        {
+          "speaker": "npc_gus",
+          "text": "Friend discount! 5% off everything! Don't tell the other customers.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_gus_hm_04",
+      "npc_id": "npc_gus",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 4
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_gus_milestone_4",
+      "lines": [
+        {
+          "speaker": "npc_gus",
+          "text": "You've been good for business, Jack. And good for the town. Here — on the house.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_gus_hm_06",
+      "npc_id": "npc_gus",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 6
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_gus_milestone_6",
+      "lines": [
+        {
+          "speaker": "npc_gus",
+          "text": "I hear things, Jack. People talk in my store. And they talk well of you.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_gus_hm_08",
+      "npc_id": "npc_gus",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 8
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_gus_milestone_8",
+      "lines": [
+        {
+          "speaker": "npc_gus",
+          "text": "You're family now. In this town, that means something. Here — my best stock.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_gus_hm_10",
+      "npc_id": "npc_gus",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 10
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_gus_milestone_10",
+      "lines": [
+        {
+          "speaker": "npc_gus",
+          "text": "Coppervale's best customer AND best citizen. I'll tell my grandkids about you.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_gus_y2_spring_018",
+      "npc_id": "npc_gus",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_gus",
+          "text": "New trade partners mean new goods! Thornwall's sending machine parts, Dusthaven's got the best grain.",
+          "portrait": "delighted"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_gus_y2_autumn_019",
+      "npc_id": "npc_gus",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_gus",
+          "text": "I'm converting the back storage into an emergency shelter. Thick walls, two weeks of supplies.",
+          "portrait": "practical"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_gus_y3_autumn_020",
+      "npc_id": "npc_gus",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_gus",
+          "text": "Business has never been better. Peace is good for commerce. Who knew?",
+          "portrait": "cheerful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_gus_y4_spring_021",
+      "npc_id": "npc_gus",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 4,
+        "hearts_gte": 0,
+        "story_flag": "flag_main_story_complete"
+      },
+      "priority": 11,
+      "lines": [
+        {
+          "speaker": "npc_gus",
+          "text": "The general store needs a bigger store! Three new trade routes. This is wonderful.",
+          "portrait": "beaming"
+        }
+      ]
+    }
+  ]
+}

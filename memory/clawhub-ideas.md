@@ -1,27 +1,17 @@
-# ClawHub Skills Ideas
+# ClawHub Ideas
 
-## Search Results - 2026-03-13
+## May 7, 2026 - CLAWHUB_SKILLS_SCAN (17:43 UTC)
 
-### Game Development (game)
-- **game-ai** - Game AI Systems (3.293)
-- **game** - Game (3.238)
-- **build-game** - 3D Game Builder (3.197)
+### Platform Status
+- ClawHub still operational at clawhub.com / clawhub.ai
+- Client-side React SPA - content not directly fetchable
+- Derek has 10 skills published (v1.0.0)
+- Platform uses Convex backend + Vercel hosting
 
-### Automation
-- **automation-workflows** - Automation Workflows (3.747)
-- **ai-web-automation** - AI Web Automation (3.592)
-- **x-post-automation** - Twitter/X Post Automation (3.545)
-- **afrexai-business-automation** - Business Automation Architect (3.470)
-- **agentic-workflow-automation** - Agentic Workflow Automation (3.461)
+### Notes
+- GitHub: https://github.com/openclaw/clawhub
+- OpenClaw: https://openclaw.ai
+- Skills sorting by downloads available but content not accessible
 
-### Mobile
-- **mobile** - Mobile (3.382)
-- **mobile-appium-test** - Mobile Appium Test (3.282)
-- **mobile-app-builder** - Mobile App Builder (3.274)
-- **mobile-app-analytics** - Mobile App Analytics (3.215)
-
-## Notes
-- Scores indicate relevance (higher = better match)
-- Use `clawhub install <skill-name>` to install any of these
-- Automation skills could help with passive income projects
-- Mobile app builder might help with Pulse/P.U.L.S.E. project
+---
+*Last updated: 2026-05-07 17:43 UTC*

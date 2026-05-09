@@ -1,0 +1,267 @@
+{
+  "_meta": {
+    "description": "Repeatable quest templates for bounties, deliveries, salvage runs, etc.",
+    "version": "1.0",
+    "objective": "#41"
+  },
+  "templates": [
+    {
+      "template_id": "tpl_bounty",
+      "name_template": "Bounty: {ENEMY} Hunt",
+      "giver": "npc_harrow",
+      "description_template": "Captain Harrow wants {QTY} {ENEMY} eliminated in the {ZONE} area.",
+      "variable_pools": {
+        "zones": [
+          "The Hollow",
+          "Rustwood Edge",
+          "Ashspine Foothills",
+          "Coastal Wreck"
+        ],
+        "enemy_types": [
+          "Freelance Raider",
+          "Rust Wolf Scout",
+          "Rust Wolf Raider",
+          "Iron Marauder Infantry"
+        ],
+        "items": [
+          "item_scrap_iron"
+        ],
+        "quantity_range": [
+          3,
+          8
+        ]
+      },
+      "objective_templates": [
+        {
+          "type": "kill",
+          "target_template": "{ENEMY}",
+          "use_quantity": true,
+          "description_template": "Defeat {QTY} {ENEMY}"
+        }
+      ],
+      "reward_template": {
+        "cogs": 200,
+        "items": [],
+        "hearts": {
+          "npc_harrow": 1
+        },
+        "reputation": 10,
+        "story_flags_set": []
+      }
+    },
+    {
+      "template_id": "tpl_delivery",
+      "name_template": "Delivery: {ITEM}",
+      "giver": "town_board",
+      "description_template": "Deliver {QTY} {ITEM} to the town supply depot.",
+      "variable_pools": {
+        "zones": [
+          "Coppervale"
+        ],
+        "enemy_types": [
+          "none"
+        ],
+        "items": [
+          "item_scrap_iron",
+          "item_copper_wire",
+          "item_brass_gears",
+          "item_aetheric_ore"
+        ],
+        "quantity_range": [
+          5,
+          15
+        ]
+      },
+      "objective_templates": [
+        {
+          "type": "gather",
+          "target_template": "{ITEM}",
+          "use_quantity": true,
+          "description_template": "Gather {QTY} {ITEM}"
+        }
+      ],
+      "reward_template": {
+        "cogs": 150,
+        "items": [],
+        "hearts": {},
+        "reputation": 5,
+        "story_flags_set": []
+      }
+    },
+    {
+      "template_id": "tpl_salvage_run",
+      "name_template": "Salvage Run: {ZONE}",
+      "giver": "npc_gus",
+      "description_template": "Gus needs salvage from {ZONE}. Bring back {QTY} resources.",
+      "variable_pools": {
+        "zones": [
+          "The Hollow",
+          "Old Mill",
+          "Rustwood Edge",
+          "Ashspine Foothills"
+        ],
+        "enemy_types": [
+          "none"
+        ],
+        "items": [
+          "item_scrap_iron",
+          "item_copper_ore",
+          "item_brass_alloy"
+        ],
+        "quantity_range": [
+          8,
+          20
+        ]
+      },
+      "objective_templates": [
+        {
+          "type": "explore",
+          "target_template": "{ZONE}",
+          "use_quantity": false,
+          "description_template": "Visit {ZONE}"
+        },
+        {
+          "type": "gather",
+          "target_template": "{ITEM}",
+          "use_quantity": true,
+          "description_template": "Gather {QTY} salvage"
+        }
+      ],
+      "reward_template": {
+        "cogs": 250,
+        "items": [],
+        "hearts": {
+          "npc_gus": 1
+        },
+        "reputation": 8,
+        "story_flags_set": []
+      }
+    },
+    {
+      "template_id": "tpl_repair",
+      "name_template": "Repair Request",
+      "giver": "town_board",
+      "description_template": "Repair damaged infrastructure in Coppervale.",
+      "variable_pools": {
+        "zones": [
+          "Coppervale"
+        ],
+        "enemy_types": [
+          "none"
+        ],
+        "items": [
+          "item_scrap_iron",
+          "item_copper_wire"
+        ],
+        "quantity_range": [
+          3,
+          8
+        ]
+      },
+      "objective_templates": [
+        {
+          "type": "craft",
+          "target_template": "town_repair",
+          "use_quantity": false,
+          "description_template": "Complete the repair job"
+        }
+      ],
+      "reward_template": {
+        "cogs": 180,
+        "items": [],
+        "hearts": {
+          "all_npcs": 1
+        },
+        "reputation": 8,
+        "story_flags_set": []
+      }
+    },
+    {
+      "name_template": "Trade Run: {ZONE}",
+      "giver": "npc_gus",
+      "description_template": "Send a trade automaton to {ZONE} for profit.",
+      "variable_pools": {
+        "zones": [
+          "Greenreach",
+          "Beacon North",
+          "Scorchlands Trade Post"
+        ],
+        "enemy_types": [
+          "none"
+        ],
+        "items": [
+          "item_trade_goods"
+        ],
+        "quantity_range": [
+          1,
+          3
+        ]
+      },
+      "objective_templates": [
+        {
+          "type": "craft",
+          "target_template": "trade_dispatch",
+          "use_quantity": false,
+          "description_template": "Dispatch trade automaton to {ZONE}"
+        }
+      ],
+      "reward_template": {
+        "cogs": 300,
+        "items": [],
+        "hearts": {
+          "npc_gus": 1
+        },
+        "reputation": 10,
+        "story_flags_set": []
+      },
+      "template_id": "tpl_trade_run"
+    },
+    {
+      "template_id": "tpl_patrol",
+      "name_template": "Patrol: {ZONE}",
+      "giver": "npc_harrow",
+      "description_template": "Captain Harrow needs a patrol sweep of {ZONE}.",
+      "variable_pools": {
+        "zones": [
+          "Eastern Gate",
+          "Rustwood Border",
+          "Northern Path",
+          "Southern Fields"
+        ],
+        "enemy_types": [
+          "any"
+        ],
+        "items": [
+          "item_scrap_iron"
+        ],
+        "quantity_range": [
+          1,
+          1
+        ]
+      },
+      "objective_templates": [
+        {
+          "type": "visit",
+          "target_template": "{ZONE}",
+          "use_quantity": false,
+          "description_template": "Patrol {ZONE}"
+        },
+        {
+          "type": "talk",
+          "target_template": "npc_harrow",
+          "use_quantity": false,
+          "description_template": "Report to Harrow"
+        }
+      ],
+      "reward_template": {
+        "cogs": 120,
+        "items": [],
+        "hearts": {
+          "npc_harrow": 1
+        },
+        "reputation": 5,
+        "story_flags_set": []
+      }
+    }
+  ]
+}

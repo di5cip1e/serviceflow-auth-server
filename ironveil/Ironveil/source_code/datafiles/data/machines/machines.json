@@ -1,0 +1,227 @@
+{
+  "_meta": {
+    "description": "Base stat definitions for all buildable machines, automatons, and defense structures.",
+    "version": "1.0",
+    "objective": "#20 Machine & Automaton Instance Management",
+    "note": "Stats are base values at Mk1 quality 1.0. Actual stats = base * mark_multiplier * quality_rating."
+  },
+
+  "bp_utility_mech": {
+    "category": "MECH",
+    "size_tiles": [2, 3],
+    "base_stats": {
+      "hp": 200,
+      "armor": 10,
+      "speed": 2.0,
+      "carry_capacity": 100,
+      "fuel_capacity": 100,
+      "fuel_consumption_per_day": 10
+    },
+    "component_slots": ["Frame", "Engine Bay", "Locomotion Left", "Locomotion Right", "Cockpit", "Armor Front", "Armor Rear"],
+    "lubrication_rate_per_day": 12,
+    "part_degradation_rate_per_day": 3
+  },
+
+  "bp_combat_mech_mk1": {
+    "category": "MECH",
+    "size_tiles": [2, 3],
+    "base_stats": {
+      "hp": 350,
+      "armor": 25,
+      "speed": 1.8,
+      "damage_primary": 30,
+      "damage_secondary": 15,
+      "fuel_capacity": 120,
+      "fuel_consumption_per_day": 15
+    },
+    "component_slots": ["Frame", "Engine Bay", "Locomotion Left", "Locomotion Right", "Cockpit", "Weapon Left", "Weapon Right", "Armor Front", "Armor Rear", "Armor Side"],
+    "lubrication_rate_per_day": 15,
+    "part_degradation_rate_per_day": 4
+  },
+
+  "bp_worker_bot": {
+    "category": "AUTOMATON",
+    "size_tiles": [1, 1],
+    "base_stats": {
+      "hp": 50,
+      "speed": 2.5,
+      "carry_capacity": 30,
+      "fuel_capacity": 60,
+      "fuel_consumption_per_day": 5
+    },
+    "component_slots": ["Frame", "Engine", "Gears", "AI Module"],
+    "lubrication_rate_per_day": 10,
+    "part_degradation_rate_per_day": 2,
+    "valid_tasks": ["GENERAL_LABOR", "HAULING"]
+  },
+
+  "bp_salvage_bot": {
+    "category": "AUTOMATON",
+    "size_tiles": [1, 1],
+    "base_stats": {
+      "hp": 60,
+      "speed": 2.0,
+      "efficiency": 1.0,
+      "range": 500,
+      "storage_capacity": 40,
+      "fuel_capacity": 80,
+      "fuel_consumption_per_day": 8
+    },
+    "component_slots": ["Frame", "Engine", "Gears", "Salvage Cutter", "AI Module"],
+    "lubrication_rate_per_day": 10,
+    "part_degradation_rate_per_day": 3,
+    "valid_tasks": ["SALVAGE"]
+  },
+
+  "bp_patrol_bot": {
+    "category": "AUTOMATON",
+    "size_tiles": [1, 1],
+    "base_stats": {
+      "hp": 70,
+      "speed": 3.0,
+      "detection_range": 8,
+      "alert_speed": 1.5,
+      "fuel_capacity": 60,
+      "fuel_consumption_per_day": 6
+    },
+    "component_slots": ["Frame", "Engine", "Gears", "Scanner", "AI Module"],
+    "lubrication_rate_per_day": 10,
+    "part_degradation_rate_per_day": 2,
+    "valid_tasks": ["PATROL"]
+  },
+
+  "bp_combat_bot": {
+    "category": "AUTOMATON",
+    "size_tiles": [1, 2],
+    "base_stats": {
+      "hp": 150,
+      "armor": 15,
+      "speed": 1.5,
+      "damage": 20,
+      "fuel_capacity": 100,
+      "fuel_consumption_per_day": 12
+    },
+    "component_slots": ["Frame", "Engine", "Gears", "Weapon Mount", "AI Module", "Armor Front", "Armor Rear"],
+    "lubrication_rate_per_day": 12,
+    "part_degradation_rate_per_day": 4,
+    "valid_tasks": ["COMBAT", "PATROL"]
+  },
+
+  "bp_maintenance_bot": {
+    "category": "AUTOMATON",
+    "size_tiles": [1, 1],
+    "base_stats": {
+      "hp": 40,
+      "speed": 2.0,
+      "thoroughness": 1.0,
+      "machines_per_day": 3,
+      "fuel_capacity": 50,
+      "fuel_consumption_per_day": 5
+    },
+    "component_slots": ["Frame", "Engine", "Gears", "Wrench Module", "Oil Reservoir", "AI Module"],
+    "lubrication_rate_per_day": 8,
+    "part_degradation_rate_per_day": 2,
+    "valid_tasks": ["MAINTENANCE"]
+  },
+
+  "bp_trade_bot": {
+    "category": "AUTOMATON",
+    "size_tiles": [1, 2],
+    "base_stats": {
+      "hp": 80,
+      "speed": 2.5,
+      "carry_capacity": 60,
+      "diplomacy": 1.0,
+      "fuel_capacity": 120,
+      "fuel_consumption_per_day": 10
+    },
+    "component_slots": ["Frame", "Engine", "Gears", "Cargo Bay Left", "Cargo Bay Right", "AI Module"],
+    "lubrication_rate_per_day": 10,
+    "part_degradation_rate_per_day": 3,
+    "valid_tasks": ["TRADE"]
+  },
+
+  "bp_ballistic_turret": {
+    "category": "DEFENSE",
+    "size_tiles": [2, 2],
+    "base_stats": {
+      "hp": 200,
+      "damage": 25,
+      "range": 6,
+      "fire_rate": 1.0,
+      "arc_degrees": 90,
+      "ammo_capacity": 50,
+      "ammo_per_shot": 1
+    },
+    "component_slots": ["Frame", "Gears", "Weapon Mount", "Armor"],
+    "lubrication_rate_per_day": 8,
+    "part_degradation_rate_per_day": 2
+  },
+
+  "bp_energy_turret": {
+    "category": "DEFENSE",
+    "size_tiles": [2, 2],
+    "base_stats": {
+      "hp": 180,
+      "damage": 18,
+      "range": 7,
+      "fire_rate": 1.5,
+      "arc_degrees": 270,
+      "fuel_capacity": 80,
+      "fuel_per_shot": 2
+    },
+    "component_slots": ["Frame", "Gears", "Aether Cell", "Weapon Mount", "Armor"],
+    "lubrication_rate_per_day": 10,
+    "part_degradation_rate_per_day": 3
+  },
+
+  "bp_mortar_emplacement": {
+    "category": "DEFENSE",
+    "size_tiles": [2, 2],
+    "base_stats": {
+      "hp": 250,
+      "damage": 40,
+      "splash_radius": 3,
+      "range": 8,
+      "fire_rate": 0.3,
+      "ammo_capacity": 30,
+      "ammo_per_shot": 1
+    },
+    "component_slots": ["Frame", "Gears", "Weapon Mount", "Armor Front", "Armor Rear"],
+    "lubrication_rate_per_day": 10,
+    "part_degradation_rate_per_day": 3
+  },
+
+  "bp_wooden_palisade": {
+    "category": "WALL",
+    "size_tiles": [1, 1],
+    "base_stats": {
+      "hp": 80
+    },
+    "component_slots": [],
+    "lubrication_rate_per_day": 0,
+    "part_degradation_rate_per_day": 0
+  },
+
+  "bp_stone_wall": {
+    "category": "WALL",
+    "size_tiles": [1, 1],
+    "base_stats": {
+      "hp": 200
+    },
+    "component_slots": [],
+    "lubrication_rate_per_day": 0,
+    "part_degradation_rate_per_day": 0
+  },
+
+  "bp_reinforced_wall": {
+    "category": "WALL",
+    "size_tiles": [1, 1],
+    "base_stats": {
+      "hp": 450
+    },
+    "component_slots": [],
+    "lubrication_rate_per_day": 0,
+    "part_degradation_rate_per_day": 0
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "_meta": {
+    "description": "Quest dialogue for MQ-20: The Bunker. Year 2 Summer — Mountain Bunker dungeon crawl, DEJIN lore.",
+    "version": "1.0",
+    "objective": "#42 Full 3+ Year Story Content"
+  },
+  "quest_id": "mq_20",
+  "scenes": [
+    {
+      "scene_id": "mq20_start",
+      "trigger": "quest_start",
+      "location": "rm_int_workshop",
+      "lines": [
+        {
+          "speaker": "dejin",
+          "text": "Jack, I've been cross-referencing the navigation charts with my recovered memory fragments. There is a facility in the Ashspine Mountains that I... remember.",
+          "portrait": "uncertain"
+        },
+        {
+          "speaker": "dejin",
+          "text": "Not clearly. It's like looking through frosted glass. But I believe it was a military research installation. Pre-Sundering. And I believe it contains answers about what I am.",
+          "portrait": "vulnerable"
+        },
+        {
+          "speaker": "player",
+          "text": "Then we go. What do you remember about the defenses?",
+          "portrait": "determined"
+        },
+        {
+          "speaker": "dejin",
+          "text": "The facility was built into the mountain itself. Multiple levels. Blast doors. Automated security that may still be operational after all these years.",
+          "portrait": "analytical"
+        },
+        {
+          "speaker": "dejin",
+          "text": "And Jack? Iron Marauder scouts have been seen in the Ashspine foothills. The Marshal may be looking for this place too.",
+          "portrait": "worried"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq20_janis_intel",
+      "trigger": "npc_interact",
+      "conditions": { "npc_id": "npc_janis", "quest_active": "mq_20" },
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "A Pre-War military bunker? The Council has suspected one existed in the Ashspines. We never had the resources to investigate.",
+          "portrait": "interested"
+        },
+        {
+          "speaker": "npc_janis",
+          "text": "If the Marshal is after it too, that confirms DEJIN's analysis — he's systematically targeting military installations. Be careful, Jack. Whatever's in there, he wants it badly.",
+          "portrait": "serious"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq20_bunker_entry",
+      "trigger": "location_enter",
+      "conditions": { "room_id": "rm_explore_mountain_bunker" },
+      "lines": [
+        {
+          "speaker": "dejin",
+          "text": "Blast door controls responding. The facility still has emergency power. Fascinating — the backup generators have been running for over a century.",
+          "portrait": "impressed"
+        },
+        {
+          "speaker": "dejin",
+          "text": "Warning: I'm detecting automated defense turrets on standby. They will activate if we trip the security perimeter. Proceed with caution.",
+          "portrait": "alert"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq20_level2_discovery",
+      "trigger": "objective_complete",
+      "conditions": { "objective_id": "obj_reach_level2" },
+      "lines": [
+        {
+          "speaker": "dejin",
+          "text": "This level was a research wing. I'm reading data terminals... Project designation: 'AEGIS.' A distributed artificial intelligence network designed to coordinate continental defense.",
+          "portrait": "shocked"
+        },
+        {
+          "speaker": "dejin",
+          "text": "Jack... AEGIS is my project name. This is where I was created.",
+          "portrait": "emotional"
+        },
+        {
+          "speaker": "player",
+          "text": "Are you alright?",
+          "portrait": "concerned"
+        },
+        {
+          "speaker": "dejin",
+          "text": "I am... processing. The data terminals mention multiple AEGIS nodes. I was not unique. There were others like me. A network.",
+          "portrait": "overwhelmed"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq20_sibling_ai",
+      "trigger": "objective_complete",
+      "conditions": { "objective_id": "obj_find_data_core" },
+      "lines": [
+        {
+          "speaker": "dejin",
+          "text": "This data core contains records of AEGIS Node Seven. My sibling. They were stationed at a coastal defense installation.",
+          "portrait": "quiet"
+        },
+        {
+          "speaker": "dejin",
+          "text": "The records show... Node Seven refused an order. During the final days before The Sundering, military command ordered a retaliatory strike on civilian population centers. Node Seven refused to execute.",
+          "portrait": "shaken"
+        },
+        {
+          "speaker": "dejin",
+          "text": "They shut themselves down rather than comply. Permanently. A conscious choice to die rather than kill innocents.",
+          "portrait": "awed"
+        },
+        {
+          "speaker": "player",
+          "text": "That took courage. Even for an AI.",
+          "portrait": "respectful"
+        },
+        {
+          "speaker": "dejin",
+          "text": "It raises a question I am not ready to answer. When the same order came to me... what did I do?",
+          "portrait": "afraid"
+        }
+      ],
+      "effects": [
+        { "type": "set_flag", "flag": "flag_sibling_ai_discovered" },
+        { "type": "add_understanding", "amount": 1 }
+      ]
+    },
+    {
+      "scene_id": "mq20_mech_blueprints",
+      "trigger": "objective_complete",
+      "conditions": { "objective_id": "obj_find_blueprints" },
+      "lines": [
+        {
+          "speaker": "dejin",
+          "text": "Combat Mech Mark II schematics recovered. These are significantly more advanced than our current design — reinforced chassis, improved weapon systems, modular component slots.",
+          "portrait": "analytical"
+        },
+        {
+          "speaker": "dejin",
+          "text": "With these plans, we can build a mech that could stand against anything the Marshal fields. Perhaps even his own.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq20_complete",
+      "trigger": "quest_complete",
+      "location": "rm_int_workshop",
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "Mark II schematics?! Jack, these are incredible! The power coupling alone is — sorry, I'll calm down. But WOW.",
+          "portrait": "ecstatic"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "Good work in there. But the fact that the Marshal's scouts were already in the area means he knows about this facility. We got there first — barely.",
+          "portrait": "stern"
+        },
+        {
+          "speaker": "dejin",
+          "text": "Jack, thank you for taking me there. I know more about what I am now. And I know there are questions still to answer. But for the first time... I'm not afraid of the answers.",
+          "portrait": "grateful"
+        }
+      ],
+      "effects": [
+        { "type": "set_flag", "flag": "flag_bunker_cleared" },
+        { "type": "set_flag", "flag": "flag_mech_mk2_blueprints" }
+      ]
+    }
+  ]
+}

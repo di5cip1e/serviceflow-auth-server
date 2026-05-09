@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "description": "Heart event #3 for npc_janis: The Overlook",
+    "version": "1.0",
+    "objective": "#33/#34"
+  },
+  "event_id": "heart_event_janis_03",
+  "npc_id": "npc_janis",
+  "heart_level_required": 5,
+  "location": "rm_town_coppervale",
+  "time_range": {
+    "start": 19,
+    "end": 22
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_janis_event_3_complete",
+  "heart_bonus": 50,
+  "title": "The Overlook",
+  "lines": [
+    {
+      "speaker": "narrator",
+      "text": "[Janis stands at The Overlook alone, her composure cracked]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "...Jack. I didn't hear you approach.",
+      "portrait": "surprised"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "I was just... assessing the view. For my report.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "...That's a lie. I come here to think.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "It's the best thinking spot in town.",
+          "flag": "janis_overlook_casual"
+        },
+        {
+          "text": "You don't have to be 'on' all the time.",
+          "flag": "janis_overlook_real"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "In the Council cities, vulnerability is a tactical error.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "Here... people just ASK how you're doing. Without an agenda.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "It's disorienting. And... not unpleasant.",
+      "portrait": "thoughtful"
+    }
+  ]
+}

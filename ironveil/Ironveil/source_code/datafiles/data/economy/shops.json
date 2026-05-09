@@ -1,0 +1,85 @@
+{
+  "_meta": {
+    "description": "Shop inventory definitions for Coppervale's three merchants.",
+    "version": "1.0",
+    "objective": "#37 Economy & Trade System"
+  },
+
+  "gus_general": {
+    "shop_id": "gus_general",
+    "owner_npc": "gus",
+    "display_name": "Gus's General Store",
+    "description": "Everything you need for daily life in Coppervale.",
+    "base_inventory": [
+      { "item_id": "item_bread", "base_price": 5, "stock": 10, "category": "FOOD" },
+      { "item_id": "item_stew", "base_price": 12, "stock": 5, "category": "FOOD" },
+      { "item_id": "item_preserved_food", "base_price": 8, "stock": 8, "category": "FOOD" },
+      { "item_id": "item_medicinal_herb", "base_price": 6, "stock": 10, "category": "FOOD" },
+      { "item_id": "item_oil_canister", "base_price": 15, "stock": 5, "category": "MATERIALS" },
+      { "item_id": "item_coal", "base_price": 8, "stock": 15, "category": "MATERIALS" },
+      { "item_id": "item_rope", "base_price": 10, "stock": 8, "category": "MATERIALS" },
+      { "item_id": "item_plank", "base_price": 4, "stock": 20, "category": "MATERIALS" },
+      { "item_id": "item_iron_nails", "base_price": 3, "stock": 30, "category": "MATERIALS" },
+      { "item_id": "item_bucket", "base_price": 8, "stock": 5, "category": "TOOLS" },
+      { "item_id": "item_torch", "base_price": 5, "stock": 10, "category": "TOOLS" },
+      { "item_id": "item_seed_wheat", "base_price": 3, "stock": 15, "category": "SEEDS" },
+      { "item_id": "item_seed_potato", "base_price": 4, "stock": 10, "category": "SEEDS" }
+    ],
+    "trade_route_inventory": [
+      { "item_id": "item_exotic_spice", "base_price": 25, "stock": 3, "category": "FOOD", "requires_route": "route_greenreach" },
+      { "item_id": "item_fine_fabric", "base_price": 30, "stock": 5, "category": "MATERIALS", "requires_route": "route_greenreach" },
+      { "item_id": "item_aether_cell_small", "base_price": 40, "stock": 3, "category": "MATERIALS", "requires_route": "route_beacon_north" }
+    ]
+  },
+
+  "ferris_parts": {
+    "shop_id": "ferris_parts",
+    "owner_npc": "ferris",
+    "display_name": "Ferris's Parts & Components",
+    "description": "Gears, frames, engines, and everything a tinkerer needs.",
+    "base_inventory": [
+      { "item_id": "item_scrap_iron", "base_price": 3, "stock": 30, "category": "RAW_MATERIALS" },
+      { "item_id": "item_copper_ore", "base_price": 5, "stock": 20, "category": "RAW_MATERIALS" },
+      { "item_id": "item_iron_ore", "base_price": 6, "stock": 15, "category": "RAW_MATERIALS" },
+      { "item_id": "item_brass_gears", "base_price": 10, "stock": 15, "category": "COMPONENTS" },
+      { "item_id": "item_copper_wire", "base_price": 8, "stock": 20, "category": "COMPONENTS" },
+      { "item_id": "item_copper_pipe", "base_price": 12, "stock": 10, "category": "COMPONENTS" },
+      { "item_id": "item_small_frame", "base_price": 20, "stock": 5, "category": "FRAMES" },
+      { "item_id": "item_steel_plate", "base_price": 18, "stock": 8, "category": "COMPONENTS" },
+      { "item_id": "item_steam_engine_tiny", "base_price": 35, "stock": 3, "category": "ENGINES" },
+      { "item_id": "item_ai_module_basic", "base_price": 50, "stock": 2, "category": "MODULES" },
+      { "item_id": "item_scanner_module", "base_price": 40, "stock": 2, "category": "MODULES" }
+    ],
+    "trade_route_inventory": [
+      { "item_id": "item_precision_gears", "base_price": 25, "stock": 5, "category": "COMPONENTS", "requires_route": "route_beacon_north" },
+      { "item_id": "item_reinforced_frame", "base_price": 45, "stock": 2, "category": "FRAMES", "requires_route": "route_beacon_north" },
+      { "item_id": "item_titanium_scrap", "base_price": 30, "stock": 5, "category": "RAW_MATERIALS", "requires_route": "route_scorchlands" },
+      { "item_id": "item_aether_cell_medium", "base_price": 75, "stock": 2, "category": "POWER", "requires_route": "route_scorchlands" },
+      { "item_id": "item_ai_module_improved", "base_price": 80, "stock": 1, "category": "MODULES", "requires_route": "route_spire_wastes" },
+      { "item_id": "item_old_world_plating", "base_price": 120, "stock": 1, "category": "COMPONENTS", "requires_route": "route_spire_wastes" }
+    ]
+  },
+
+  "hank_smithy": {
+    "shop_id": "hank_smithy",
+    "owner_npc": "hank",
+    "display_name": "Hank's Smithy",
+    "description": "Forged goods, armor plating, and repair services.",
+    "base_inventory": [
+      { "item_id": "item_armor_plating_basic", "base_price": 25, "stock": 5, "category": "ARMOR" },
+      { "item_id": "item_weapon_mount", "base_price": 30, "stock": 3, "category": "WEAPONS" },
+      { "item_id": "item_stone_block", "base_price": 8, "stock": 15, "category": "BUILDING" },
+      { "item_id": "item_morite_paste", "base_price": 12, "stock": 8, "category": "BUILDING" },
+      { "item_id": "item_reinforced_frame", "base_price": 50, "stock": 2, "category": "FRAMES" },
+      { "item_id": "item_fuel_tank", "base_price": 20, "stock": 4, "category": "COMPONENTS" },
+      { "item_id": "item_gunpowder", "base_price": 15, "stock": 8, "category": "AMMO" },
+      { "item_id": "item_salvage_cutter", "base_price": 40, "stock": 2, "category": "TOOLS" },
+      { "item_id": "item_wrench_module", "base_price": 35, "stock": 2, "category": "TOOLS" }
+    ],
+    "trade_route_inventory": [
+      { "item_id": "item_armor_plating_improved", "base_price": 50, "stock": 3, "category": "ARMOR", "requires_route": "route_beacon_north" },
+      { "item_id": "item_armor_plating_advanced", "base_price": 90, "stock": 2, "category": "ARMOR", "requires_route": "route_scorchlands" },
+      { "item_id": "item_weapon_mount_mk2", "base_price": 65, "stock": 2, "category": "WEAPONS", "requires_route": "route_scorchlands" }
+    ]
+  }
+}

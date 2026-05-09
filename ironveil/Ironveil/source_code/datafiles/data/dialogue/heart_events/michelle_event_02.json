@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "description": "Heart event #2 for npc_michelle: The Quiet Evening",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue / #34 Romance System"
+  },
+  "event_id": "heart_event_michelle_02",
+  "npc_id": "npc_michelle",
+  "heart_level_required": 3,
+  "location": "rm_int_clinic",
+  "time_range": {
+    "start": 19,
+    "end": 22
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_michelle_event_2_complete",
+  "heart_bonus": 50,
+  "title": "The Quiet Evening",
+  "lines": [
+    {
+      "speaker": "narrator",
+      "text": "[You find Michelle reading alone in the clinic after hours]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "Oh! Jack! I didn't expect \u2014 the clinic's closed, but you can stay.",
+      "portrait": "surprised"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "I was reading an Old World medical text. The things they could do...",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "What were you reading about?",
+          "flag": "michelle_reading_curious"
+        },
+        {
+          "text": "You read a lot. What drives you?",
+          "flag": "michelle_reading_personal"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "They could mend bones in hours. Cure diseases we can barely name.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "I want to help people that much. I just... don't know if I'm good enough.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "Sorry. That's too much. You came here to... why DID you come here?",
+      "portrait": "embarrassed"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "...To see me? Oh. That's... that's nice. Thank you.",
+      "portrait": "embarrassed"
+    }
+  ]
+}

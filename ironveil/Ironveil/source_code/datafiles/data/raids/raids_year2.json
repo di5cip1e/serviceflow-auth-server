@@ -1,0 +1,254 @@
+{
+  "_meta": {
+    "description": "Year 2 raid schedule. Iron Marauders escalate. Rust Wolves persist. Tide Reavers appear.",
+    "version": "1.0",
+    "objective": "#31 Full Raid System"
+  },
+
+  "raids": [
+    {
+      "raid_id": "raid_y2_spring_1",
+      "trigger_type": "SCHEDULED",
+      "trigger_date": { "season": 0, "day": 10 },
+      "size": "MODERATE",
+      "faction": "RUST_WOLVES",
+      "directions": ["SOUTH"],
+      "warning_days": 3,
+      "objective": "ASSAULT",
+      "modifiers": [],
+      "intel_message": "Rust Wolves spotted regrouping in the southern forest. They look organized this time.",
+      "waves": [
+        { "wave_index": 0, "delay_seconds": 0, "enemies": [
+          { "enemy_id": "enemy_rustwolf_scout", "count": 3, "spawn_direction": "SOUTH" },
+          { "enemy_id": "enemy_rustwolf_raider", "count": 6, "spawn_direction": "SOUTH" }
+        ]},
+        { "wave_index": 1, "delay_seconds": 40, "enemies": [
+          { "enemy_id": "enemy_rustwolf_raider", "count": 5, "spawn_direction": "SOUTH" },
+          { "enemy_id": "enemy_rustwolf_berserker", "count": 3, "spawn_direction": "SOUTH" },
+          { "enemy_id": "enemy_rustwolf_sapper", "count": 2, "spawn_direction": "SOUTH" }
+        ]},
+        { "wave_index": 2, "delay_seconds": 45, "enemies": [
+          { "enemy_id": "enemy_rustwolf_berserker", "count": 4, "spawn_direction": "SOUTH" },
+          { "enemy_id": "enemy_rustwolf_alpha", "count": 1, "spawn_direction": "SOUTH" }
+        ]}
+      ],
+      "rewards": { "reputation": 60, "bonus_items": [
+        { "item_id": "item_scrap_iron", "quantity": 25 },
+        { "item_id": "item_steel_plate", "quantity": 4 }
+      ]}
+    },
+    {
+      "raid_id": "raid_y2_spring_2",
+      "trigger_type": "SCHEDULED",
+      "trigger_date": { "season": 0, "day": 24 },
+      "size": "MODERATE",
+      "faction": "IRON_MARAUDERS",
+      "directions": ["EAST"],
+      "warning_days": 3,
+      "objective": "ASSAULT",
+      "modifiers": [],
+      "intel_message": "Iron Marauder scouts spotted on the Hollow Road. This is their first probe.",
+      "waves": [
+        { "wave_index": 0, "delay_seconds": 0, "enemies": [
+          { "enemy_id": "enemy_iron_infantry", "count": 6, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_gunner", "count": 2, "spawn_direction": "EAST" }
+        ]},
+        { "wave_index": 1, "delay_seconds": 45, "enemies": [
+          { "enemy_id": "enemy_iron_infantry", "count": 5, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_shieldbearer", "count": 2, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_gunner", "count": 3, "spawn_direction": "EAST" }
+        ]},
+        { "wave_index": 2, "delay_seconds": 50, "enemies": [
+          { "enemy_id": "enemy_iron_infantry", "count": 4, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_technician", "count": 1, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_lieutenant", "count": 1, "spawn_direction": "EAST" }
+        ]}
+      ],
+      "rewards": { "reputation": 70, "bonus_items": [
+        { "item_id": "item_steel_plate", "quantity": 5 },
+        { "item_id": "item_precision_gears", "quantity": 3 }
+      ], "blueprint_drop": { "blueprint_id": "bp_combat_mech_mk2", "chance": 0.4 }}
+    },
+    {
+      "raid_id": "raid_y2_summer_1",
+      "trigger_type": "SCHEDULED",
+      "trigger_date": { "season": 1, "day": 8 },
+      "size": "MODERATE",
+      "faction": "TIDE_REAVERS",
+      "directions": ["WEST"],
+      "warning_days": 2,
+      "objective": "THEFT",
+      "modifiers": [],
+      "intel_message": "Boats spotted on the river. Tide Reavers — they're after our supplies!",
+      "waves": [
+        { "wave_index": 0, "delay_seconds": 0, "enemies": [
+          { "enemy_id": "enemy_tidereaver_raider", "count": 6, "spawn_direction": "WEST" },
+          { "enemy_id": "enemy_tidereaver_diver", "count": 3, "spawn_direction": "WEST" }
+        ]},
+        { "wave_index": 1, "delay_seconds": 40, "enemies": [
+          { "enemy_id": "enemy_tidereaver_raider", "count": 5, "spawn_direction": "WEST" },
+          { "enemy_id": "enemy_tidereaver_diver", "count": 2, "spawn_direction": "WEST" },
+          { "enemy_id": "enemy_tidereaver_captain", "count": 1, "spawn_direction": "WEST" }
+        ]}
+      ],
+      "rewards": { "reputation": 55, "bonus_items": [
+        { "item_id": "item_rope", "quantity": 10 },
+        { "item_id": "item_copper_ore", "quantity": 8 }
+      ]}
+    },
+    {
+      "raid_id": "raid_y2_summer_2",
+      "trigger_type": "SCHEDULED",
+      "trigger_date": { "season": 1, "day": 20 },
+      "size": "MAJOR",
+      "faction": "IRON_MARAUDERS",
+      "directions": ["EAST", "NORTH"],
+      "warning_days": 3,
+      "objective": "SABOTAGE",
+      "modifiers": ["coordinated"],
+      "intel_message": "Coordinated Iron Marauder assault incoming! They're targeting our turrets and defenses.",
+      "waves": [
+        { "wave_index": 0, "delay_seconds": 0, "enemies": [
+          { "enemy_id": "enemy_iron_infantry", "count": 8, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_gunner", "count": 4, "spawn_direction": "NORTH" }
+        ]},
+        { "wave_index": 1, "delay_seconds": 45, "enemies": [
+          { "enemy_id": "enemy_iron_shieldbearer", "count": 3, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_infantry", "count": 6, "spawn_direction": "NORTH" },
+          { "enemy_id": "enemy_iron_technician", "count": 2, "spawn_direction": "EAST" }
+        ]},
+        { "wave_index": 2, "delay_seconds": 50, "enemies": [
+          { "enemy_id": "enemy_iron_gunner", "count": 4, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_infantry", "count": 5, "spawn_direction": "NORTH" },
+          { "enemy_id": "enemy_iron_mech", "count": 1, "spawn_direction": "EAST" }
+        ]},
+        { "wave_index": 3, "delay_seconds": 55, "enemies": [
+          { "enemy_id": "enemy_iron_infantry", "count": 6, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_shieldbearer", "count": 2, "spawn_direction": "NORTH" },
+          { "enemy_id": "enemy_iron_lieutenant", "count": 1, "spawn_direction": "EAST" }
+        ]}
+      ],
+      "rewards": { "reputation": 90, "bonus_items": [
+        { "item_id": "item_steel_plate", "quantity": 8 },
+        { "item_id": "item_precision_gears", "quantity": 5 },
+        { "item_id": "item_copper_wire", "quantity": 10 }
+      ], "blueprint_drop": { "blueprint_id": "bp_heavy_mech", "chance": 0.3 }}
+    },
+    {
+      "raid_id": "raid_y2_autumn_1",
+      "trigger_type": "SCHEDULED",
+      "trigger_date": { "season": 2, "day": 6 },
+      "size": "MODERATE",
+      "faction": "RUST_WOLVES",
+      "directions": ["SOUTH", "EAST"],
+      "warning_days": 3,
+      "objective": "ASSAULT",
+      "modifiers": ["night"],
+      "intel_message": "Night raid incoming! Rust Wolves moving under darkness from two directions.",
+      "waves": [
+        { "wave_index": 0, "delay_seconds": 0, "enemies": [
+          { "enemy_id": "enemy_rustwolf_scout", "count": 5, "spawn_direction": "SOUTH" },
+          { "enemy_id": "enemy_rustwolf_raider", "count": 6, "spawn_direction": "EAST" }
+        ]},
+        { "wave_index": 1, "delay_seconds": 40, "enemies": [
+          { "enemy_id": "enemy_rustwolf_berserker", "count": 4, "spawn_direction": "SOUTH" },
+          { "enemy_id": "enemy_rustwolf_sapper", "count": 3, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_rustwolf_raider", "count": 5, "spawn_direction": "SOUTH" }
+        ]},
+        { "wave_index": 2, "delay_seconds": 45, "enemies": [
+          { "enemy_id": "enemy_rustwolf_berserker", "count": 3, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_rustwolf_alpha", "count": 1, "spawn_direction": "SOUTH" }
+        ]}
+      ],
+      "rewards": { "reputation": 65, "bonus_items": [
+        { "item_id": "item_scrap_iron", "quantity": 20 },
+        { "item_id": "item_steel_plate", "quantity": 4 }
+      ]}
+    },
+    {
+      "raid_id": "raid_y2_autumn_2",
+      "trigger_type": "SCHEDULED",
+      "trigger_date": { "season": 2, "day": 18 },
+      "size": "MAJOR",
+      "faction": "IRON_MARAUDERS",
+      "directions": ["EAST", "SOUTH"],
+      "warning_days": 3,
+      "objective": "ASSAULT",
+      "modifiers": [],
+      "intel_message": "The Marshal sends his lieutenants. Full assault on two fronts.",
+      "waves": [
+        { "wave_index": 0, "delay_seconds": 0, "enemies": [
+          { "enemy_id": "enemy_iron_infantry", "count": 10, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_shieldbearer", "count": 3, "spawn_direction": "SOUTH" },
+          { "enemy_id": "enemy_iron_gunner", "count": 4, "spawn_direction": "EAST" }
+        ]},
+        { "wave_index": 1, "delay_seconds": 50, "enemies": [
+          { "enemy_id": "enemy_iron_infantry", "count": 8, "spawn_direction": "SOUTH" },
+          { "enemy_id": "enemy_iron_technician", "count": 2, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_siege_ram", "count": 1, "spawn_direction": "EAST" }
+        ]},
+        { "wave_index": 2, "delay_seconds": 55, "enemies": [
+          { "enemy_id": "enemy_iron_shieldbearer", "count": 3, "spawn_direction": "SOUTH" },
+          { "enemy_id": "enemy_iron_gunner", "count": 5, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_mech", "count": 1, "spawn_direction": "SOUTH" }
+        ]},
+        { "wave_index": 3, "delay_seconds": 55, "enemies": [
+          { "enemy_id": "enemy_iron_infantry", "count": 8, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_lieutenant", "count": 2, "spawn_direction": "SOUTH" }
+        ]}
+      ],
+      "rewards": { "reputation": 100, "bonus_items": [
+        { "item_id": "item_steel_plate", "quantity": 10 },
+        { "item_id": "item_precision_gears", "quantity": 6 },
+        { "item_id": "item_reinforced_frame", "quantity": 2 }
+      ]}
+    },
+    {
+      "raid_id": "raid_y2_winter_siege",
+      "trigger_type": "SCHEDULED",
+      "trigger_date": { "season": 3, "day": 12 },
+      "size": "SIEGE",
+      "faction": "IRON_MARAUDERS",
+      "directions": ["EAST", "NORTH", "SOUTH"],
+      "warning_days": 4,
+      "objective": "SIEGE",
+      "modifiers": ["coordinated", "storm"],
+      "intel_message": "SIEGE INCOMING! The Marshal's army approaches from three directions. A storm front follows them. Prepare everything.",
+      "waves": [
+        { "wave_index": 0, "delay_seconds": 0, "enemies": [
+          { "enemy_id": "enemy_iron_infantry", "count": 10, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_gunner", "count": 5, "spawn_direction": "NORTH" },
+          { "enemy_id": "enemy_iron_shieldbearer", "count": 4, "spawn_direction": "SOUTH" }
+        ]},
+        { "wave_index": 1, "delay_seconds": 50, "enemies": [
+          { "enemy_id": "enemy_iron_infantry", "count": 8, "spawn_direction": "SOUTH" },
+          { "enemy_id": "enemy_iron_siege_ram", "count": 1, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_technician", "count": 3, "spawn_direction": "NORTH" },
+          { "enemy_id": "enemy_iron_gunner", "count": 4, "spawn_direction": "EAST" }
+        ]},
+        { "wave_index": 2, "delay_seconds": 55, "enemies": [
+          { "enemy_id": "enemy_iron_mech", "count": 2, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_infantry", "count": 8, "spawn_direction": "NORTH" },
+          { "enemy_id": "enemy_iron_shieldbearer", "count": 3, "spawn_direction": "SOUTH" }
+        ]},
+        { "wave_index": 3, "delay_seconds": 55, "enemies": [
+          { "enemy_id": "enemy_iron_infantry", "count": 10, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_gunner", "count": 6, "spawn_direction": "SOUTH" },
+          { "enemy_id": "enemy_iron_siege_ram", "count": 1, "spawn_direction": "NORTH" }
+        ]},
+        { "wave_index": 4, "delay_seconds": 60, "enemies": [
+          { "enemy_id": "enemy_iron_infantry", "count": 12, "spawn_direction": "EAST" },
+          { "enemy_id": "enemy_iron_shieldbearer", "count": 4, "spawn_direction": "SOUTH" },
+          { "enemy_id": "enemy_iron_mech", "count": 1, "spawn_direction": "NORTH" },
+          { "enemy_id": "enemy_iron_lieutenant", "count": 2, "spawn_direction": "EAST" }
+        ]}
+      ],
+      "rewards": { "reputation": 150, "bonus_items": [
+        { "item_id": "item_steel_plate", "quantity": 15 },
+        { "item_id": "item_precision_gears", "quantity": 8 },
+        { "item_id": "item_reinforced_frame", "quantity": 3 },
+        { "item_id": "item_old_world_plating", "quantity": 1 }
+      ], "blueprint_drop": { "blueprint_id": "bp_siege_breaker", "chance": 0.25 }}
+    }
+  ]
+}

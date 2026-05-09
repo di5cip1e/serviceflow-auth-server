@@ -1,0 +1,477 @@
+{
+  "version": 1,
+  "updatedAt": "2026-05-09T02:28:43.476Z",
+  "entries": {
+    "memory:memory/2026-03-12.md:30:61": {
+      "key": "memory:memory/2026-03-12.md:30:61",
+      "path": "memory/2026-03-12.md",
+      "startLine": 30,
+      "endLine": 61,
+      "source": "memory",
+      "snippet": "- Added localStorage error handling 4. **Discovered & Fixed Bugs** - Labs neighborhood check (neighborhood.key → this.neighborhood) - Buyer preferences +20% not applied (Circuit fixed) - Drug processing ignoring dropdown (Flux fixed) - Traveling Salesman not interactable (Circuit fixed) 5. **Team Usage** - Using designated sub-agents: Pixel, Circuit, Flux, Mirren, Cipher, Tomothy, Prism, Quill, Wren - Verification → Bug Finding → Fix workflow working well ### Self-Improvement Skill - Installed self-improving-agent skill - Created .learnings/ directory for logging ### Team Interviews & MVP - Interviewed all 9 sub-agents (what to add, take away, learned, MVP) - First v",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.9195783734321594,
+      "maxScore": 0.4688101917505264,
+      "firstRecalledAt": "2026-05-05T07:05:53.599Z",
+      "lastRecalledAt": "2026-05-05T07:06:48.178Z",
+      "queryHashes": [
+        "a8ad6c71900f",
+        "ef98d221e5a2"
+      ],
+      "recallDays": [
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "neighborhood.key",
+        "this.neighborhood",
+        "sub-agents",
+        "self-improvement",
+        "self-improving-agent",
+        "added",
+        "localstorage",
+        "error"
+      ]
+    },
+    "memory:memory/2026-03-27.md:33:58": {
+      "key": "memory:memory/2026-03-27.md:33:58",
+      "path": "memory/2026-03-27.md",
+      "startLine": 33,
+      "endLine": 58,
+      "source": "memory",
+      "snippet": "- ✅ CLAWHUB STATS CHECK: All 5 skills published and active - n8n-workflow-builder ✓ - client-outreach-automator ✓ - business-doc-generator ✓ - meeting-intelligence ✓ - director-content-repurposer ✓ - Note: CLI doesn't expose download/review counts - ✅ PUBLISHED 5 SKILLS TO CLAWHUB: - n8n-workflow-builder - client-outreach-automator - business-doc-generator - meeting-intelligence - director-content-repurposer (slug taken, added \"director-\" prefix) ## Heartbeat (04:30 UTC) - ✅ MEMORY_DREAM_TRANSFER: Already completed at 03:30 UTC - ✅ AVANT GARDE Phase 5: Drafted personalized prospect emails - Created prospect-emails.md with 3 tailored cold outreach messages - Sarah C",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.9133555382490157,
+      "maxScore": 0.46840412020683286,
+      "firstRecalledAt": "2026-05-05T07:05:53.599Z",
+      "lastRecalledAt": "2026-05-05T07:06:48.178Z",
+      "queryHashes": [
+        "a8ad6c71900f",
+        "ef98d221e5a2"
+      ],
+      "recallDays": [
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "n8n-workflow-builder",
+        "client-outreach-automator",
+        "business-doc-generator",
+        "meeting-intelligence",
+        "director-content-repurposer",
+        "download/review",
+        "memory-dream-transfer",
+        "prospect-emails.md"
+      ]
+    },
+    "memory:memory/2026-03-04.md:31:55": {
+      "key": "memory:memory/2026-03-04.md:31:55",
+      "path": "memory/2026-03-04.md",
+      "startLine": 31,
+      "endLine": 55,
+      "source": "memory",
+      "snippet": "- /assets/sprites/ - 19 pixel art placeholders - /infrastructure/ - Docker, deployment docs - /tools/browser/ - Playwright automation tool - /EXTERNAL_ACCOUNTS.md - Credential storage ### Deployment Status - Backend and frontend built successfully - PostgreSQL database ready - Environment configured - Ready for deployment to Vercel/Railway ### Issues Fixed - Session type errors (used `(session as any)` workarounds) - Styled-jsx build errors (simplified components) - Agent timeout issues (increased timeoutSeconds) ### Commands Learned - `openclaw agents add <name>` - Register new agent - `sessions_spawn(label=\"...\", runtime=\"subagent\", task=\"...\")` - Spawn agent - `npx playwright install-d",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.8807514041662216,
+      "maxScore": 0.4437330782413482,
+      "firstRecalledAt": "2026-05-05T07:05:53.599Z",
+      "lastRecalledAt": "2026-05-05T07:06:48.178Z",
+      "queryHashes": [
+        "a8ad6c71900f",
+        "ef98d221e5a2"
+      ],
+      "recallDays": [
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "assets/sprites",
+        "tools/browser",
+        "external-accounts.md",
+        "vercel/railway",
+        "styled-jsx",
+        "sessions-spawn",
+        "install-d",
+        "assets"
+      ]
+    },
+    "memory:memory/2026-03-07.md:1:28": {
+      "key": "memory:memory/2026-03-07.md:1:28",
+      "path": "memory/2026-03-07.md",
+      "startLine": 1,
+      "endLine": 28,
+      "source": "memory",
+      "snippet": "# 2026-03-07 ## Session: New Project Setup - 18:50 - Greetings exchanged with Derek - 18:51 - Derek requested new project + session memory saving - Created `/projects/2026-03-07-new-project/` with SESSION.md - 18:54 - Described GCP (Gangster Computer Profiler) - personality profiling SaaS - Big Five personality model (OCEAN) - Message analysis for profile building - Mood tracking + journaling - Contact analytics + relationship balance - Message Loader AI agent for device scanning - Spawned sub-agent for SPEC.md - 19:04 - Confirmed: Mobile app + native mobile scanner (React Native) - 19:07 - Android first, local + Google Drive backup, defer paywall - 19:08 - Message priority: SM",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.8808023482561111,
+      "maxScore": 0.4475956916809082,
+      "firstRecalledAt": "2026-05-05T07:05:53.599Z",
+      "lastRecalledAt": "2026-05-05T07:06:48.178Z",
+      "queryHashes": [
+        "a8ad6c71900f",
+        "ef98d221e5a2"
+      ],
+      "recallDays": [
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "backup",
+        "projects/2026-03-07-new-project",
+        "session.md",
+        "sub-agent",
+        "spec.md",
+        "new",
+        "project",
+        "setup"
+      ]
+    },
+    "memory:memory/2026-04-05.md:1:45": {
+      "key": "memory:memory/2026-04-05.md:1:45",
+      "path": "memory/2026-04-05.md",
+      "startLine": 1,
+      "endLine": 45,
+      "source": "memory",
+      "snippet": "# April 5, 2026 ## Date Change - New day: Sunday April 5, 2026 ## Previous Day Summary (April 4) - ✅ MEMORY_DREAM_TRANSFER (04:00 UTC) - ✅ Morning Meeting with Derek (11:04 UTC) - ✅ DAILY_LESSONS_REVIEW (04:29 UTC) - ✅ MORNING_MEETING_PREP: All 3 tasks completed - ✅ CLAWHUB STATS: All 5 skills active - ✅ PixelForge: Website + API operational ## Heartbeat (00:02 UTC) - New day start - all systems operational - PixelForge: ✅ Website (200), API working# April 5, 2026 ## Date Change - New day: Sunday April 5, 2026 ## Previous Day Summary (April 4) - ✅ MEMORY_DREAM_TRANSFER (04:00 UTC) - ✅ MORNING_MEETING_PREP: Full cycle (CLAWHUB, MONEY, SOCIAL) - ✅ CLAWHUB STATS: All 5 skills active - ✅ Pi",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.8617235571146011,
+      "maxScore": 0.4392342060804367,
+      "firstRecalledAt": "2026-05-05T07:05:53.599Z",
+      "lastRecalledAt": "2026-05-05T07:06:48.178Z",
+      "queryHashes": [
+        "a8ad6c71900f",
+        "ef98d221e5a2"
+      ],
+      "recallDays": [
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "memory-dream-transfer",
+        "daily-lessons-review",
+        "morning-meeting-prep",
+        "april",
+        "date",
+        "change",
+        "new",
+        "day"
+      ]
+    },
+    "memory:memory/2026-03-13.md:1:51": {
+      "key": "memory:memory/2026-03-13.md:1:51",
+      "path": "memory/2026-03-13.md",
+      "startLine": 1,
+      "endLine": 51,
+      "source": "memory",
+      "snippet": "# March 13, 2026 ## Wren Task: Main Quest Line Created **Context:** Subagent task from The Director to create a massive 20-30+ quest main quest line for the Trap Game, leading up to a final confrontation with a mad scientist villain (Dr. Victor \"The Chemist\" Crane - meth cook aesthetic, wild eyes, jittery, lab coat). **Completed:** - Created `/root/.openclaw/workspace/lore/main-quest-line.md` - 33 total quests (exceeds 20-30 requirement) - Organized into 7 Acts: - Act I: Tutorial (5 quests) - Act II: Drug Processing Mastery (7 quests) - Act III: Faction Reputation (6 quests) - Act IV: Neighborhood Expansion (5 quests) - Act V: Rival Confrontations (4 quests) - Act VI: Economic",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.42167808413505553,
+      "maxScore": 0.42167808413505553,
+      "firstRecalledAt": "2026-05-05T07:05:53.599Z",
+      "lastRecalledAt": "2026-05-05T07:05:53.599Z",
+      "queryHashes": [
+        "a8ad6c71900f"
+      ],
+      "recallDays": [
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "20-30",
+        "march",
+        "wren",
+        "task",
+        "quest",
+        "created",
+        "context",
+        "subagent"
+      ]
+    },
+    "memory:memory/2026-04-04.md:76:113": {
+      "key": "memory:memory/2026-04-04.md:76:113",
+      "path": "memory/2026-04-04.md",
+      "startLine": 76,
+      "endLine": 113,
+      "source": "memory",
+      "snippet": "- CLAWHUB STATS: business-doc-generator ✅, meeting-intelligence ✅, director-content-repurposer ✅ - MORNING_MEETING_PREP: CLAWHUB_SKILLS_SCAN ✅ - Platform still client-side rendered, no changes detected - Derek's 5 skills still active ## Heartbeat (17:04 UTC) - CLAWHUB STATS: n8n-workflow-builder ✅, client-outreach-automator ✅ - MORNING_MEETING_PREP: MONEY_MAKING_IDEAS ✅ (rotated) ## Heartbeat (17:34 UTC) - CLAWHUB STATS: business-doc-generator ✅, meeting-intelligence ✅ - MORNING_MEETING_PREP: SOCIAL_SCAN ✅ (web search - AI agent trends captured) ## Heartbeat (18:34 UTC) - CLAWHUB STATS: director-content-repurposer ✅, n8n-workflow-builder ✅ - MORNING_MEETING_PREP: CLAWHUB_SKILLS_SCAN ✅",
+      "recallCount": 2,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.8625054508447647,
+      "maxScore": 0.4409987241029739,
+      "firstRecalledAt": "2026-05-05T07:05:53.599Z",
+      "lastRecalledAt": "2026-05-05T07:06:48.178Z",
+      "queryHashes": [
+        "a8ad6c71900f",
+        "ef98d221e5a2"
+      ],
+      "recallDays": [
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "business-doc-generator",
+        "meeting-intelligence",
+        "director-content-repurposer",
+        "morning-meeting-prep",
+        "clawhub-skills-scan",
+        "client-side",
+        "n8n-workflow-builder",
+        "client-outreach-automator"
+      ]
+    },
+    "memory:memory/2026-03-28.md:32:68": {
+      "key": "memory:memory/2026-03-28.md:32:68",
+      "path": "memory/2026-03-28.md",
+      "startLine": 32,
+      "endLine": 68,
+      "source": "memory",
+      "snippet": "- **API Key:** Configured (sk-svcacct-qy2kx3vP...) - **Starting with:** Nobility cards (10 cards) - **Location:** /kingdom-cards/assets/illustrations/ ## Art Review (09:57 UTC) - **Mirren:** Checked progress - no illustrations yet (team just started) - **Found:** 30 cards total across 7 categories, 1 frame ready - **Next:** Prism generating, Mirren reviewing ## Card Art Generation v2 - Calm Backgrounds (20:11-20:44 UTC) - **CellCog:** Regenerated 30+ cards with calm backgrounds - **Style:** Zany Super-Jail characters, simple colored backgrounds - **Ready for:** Rarity overlay backgrounds - **Issue:** Out of credits, paused ## Game Logic Phase (21:05 UTC) - **Flux:** Spawned to build card",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.4185584783554077,
+      "maxScore": 0.4185584783554077,
+      "firstRecalledAt": "2026-05-05T07:05:53.599Z",
+      "lastRecalledAt": "2026-05-05T07:05:53.599Z",
+      "queryHashes": [
+        "a8ad6c71900f"
+      ],
+      "recallDays": [
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "sk-svcacct-qy2kx3vp",
+        "11-20",
+        "super-jail",
+        "api",
+        "key",
+        "configured",
+        "svcacct",
+        "qy2kx3vp"
+      ]
+    },
+    "memory:memory/2026-04-07.md:1:37": {
+      "key": "memory:memory/2026-04-07.md:1:37",
+      "path": "memory/2026-04-07.md",
+      "startLine": 1,
+      "endLine": 37,
+      "source": "memory",
+      "snippet": "# April 7, 2026 ## Date Change - New day: Tuesday April 7, 2026 ## Previous Day Summary (April 6) - ✅ MEMORY_DREAM_TRANSFER (04:00 UTC) - ✅ DAILY_LESSONS_REVIEW (04:29 UTC) - ✅ All heartbeat tasks operational - Priority: PixelForge launch ready ## Heartbeat (16:32 UTC) - CLAWHUB STATS: All 5 skills active ✅ - n8n-workflow-builder, client-outreach-automator, business-doc-generator, meeting-intelligence, director-content-repurposer - PixelForge Status: Website forgeai.sbs ✅ (200 OK) - MORNING_MEETING_PREP: CLAWHUB_SKILLS_SCAN ✅ - Platform grown to 13,729 skills (up from ~14 in March!) - New Chinese mirror launched April 1 - Top skills: Mission Control (8K), Agent Browser (11K), GOG",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.44216121733188624,
+      "maxScore": 0.44216121733188624,
+      "firstRecalledAt": "2026-05-05T07:06:48.178Z",
+      "lastRecalledAt": "2026-05-05T07:06:48.178Z",
+      "queryHashes": [
+        "ef98d221e5a2"
+      ],
+      "recallDays": [
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "memory-dream-transfer",
+        "daily-lessons-review",
+        "n8n-workflow-builder",
+        "client-outreach-automator",
+        "business-doc-generator",
+        "meeting-intelligence",
+        "director-content-repurposer",
+        "forgeai.sbs"
+      ]
+    },
+    "memory:memory/2026-03-27.md:1:42": {
+      "key": "memory:memory/2026-03-27.md:1:42",
+      "path": "memory/2026-03-27.md",
+      "startLine": 1,
+      "endLine": 42,
+      "source": "memory",
+      "snippet": "# 2026-03-27 ## Date Change - New day: Friday March 27, 2026 - Previous day completed all HEARTBEAT tasks ## Memory Dream Transfer (03:30 UTC) - Weekly memory consolidation completed - Reviewed memory files from March 23-27 - Updated MEMORY.md with distilled insights - Added Week of March 25-31 section with lessons ## Daily Lessons Review (10:25 UTC) - ✅ Completed: Created lessons_FROM_2026-03-27.md - 5 key lessons captured: Memory system, heartbeat scheduling, AVANT GARDE ready, sub-agent team, morning meeting prep - Focus: What helps Derek make money, learn, grow ## Morning Meeting Prep (10:40 UTC) - ✅ CLAWHUB_SKILLS_SCAN: Found top skills (Capability Evolver 35k downloads, ByteRover,",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.43831571042537687,
+      "maxScore": 0.43831571042537687,
+      "firstRecalledAt": "2026-05-05T07:06:48.178Z",
+      "lastRecalledAt": "2026-05-05T07:06:48.178Z",
+      "queryHashes": [
+        "ef98d221e5a2"
+      ],
+      "recallDays": [
+        "2026-05-05"
+      ],
+      "conceptTags": [
+        "23-27",
+        "memory.md",
+        "25-31",
+        "lessons-from-2026-03-27.md",
+        "sub-agent",
+        "clawhub-skills-scan",
+        "date",
+        "change"
+      ]
+    },
+    "memory:memory/2026-04-13.md:1:43": {
+      "key": "memory:memory/2026-04-13.md:1:43",
+      "path": "memory/2026-04-13.md",
+      "startLine": 1,
+      "endLine": 43,
+      "source": "memory",
+      "snippet": "# April 13, 2026 ## Date Change - New day: Monday April 13, 2026 ## MEMORY_DREAM_TRANSFER (04:14 UTC) - Weekly consolidation completed - MEMORY.md already contains April 5-12 updates (consolidated at 04:00 UTC) - Key points from week: - PixelForge: Website + API ready, blocked by DATABASE_URL + OPENAI_API_KEY - ServiceFlow: Development in progress (field service vertical) - ClawHub: 10 skills published, platform at 33K+ skills - OpenClaw: Updated to 2026.4.9 - SMB AI adoption: 98% use AI daily (validated ServiceFlow market) ## CLAWHUB STATS CHECK (04:15 UTC) - Installed skills: 17 - Published skills: 10 (need CLI way to verify download counts) - Platform: 33,000+ skills, 1.2M da",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.7719166039540595,
+      "maxScore": 0.7719166039540595,
+      "firstRecalledAt": "2026-05-07T04:01:00.422Z",
+      "lastRecalledAt": "2026-05-07T04:01:00.422Z",
+      "queryHashes": [
+        "033e24bc024c"
+      ],
+      "recallDays": [
+        "2026-05-07"
+      ],
+      "conceptTags": [
+        "openai",
+        "memory-dream-transfer",
+        "memory.md",
+        "5-12",
+        "database-url",
+        "openai-api-key",
+        "2026.4.9",
+        "1.2m"
+      ]
+    },
+    "memory:memory/2026-05-06.md:1:29": {
+      "key": "memory:memory/2026-05-06.md:1:29",
+      "path": "memory/2026-05-06.md",
+      "startLine": 1,
+      "endLine": 29,
+      "source": "memory",
+      "snippet": "# Memory - 2026-05-06 ## Session Highlights ### Email Alert Infrastructure — Mailgun Configured - Derek provided Mailgun credentials: - API key: 94b6d95c432a1c9bbf6aa84de4dade37-428c42a0-842f6e2d - FROM: derekbrooks@aginstitute.tech - Webhook signing key: cf7493ef16ff55ece7d363d3564165dc - Stored in ~/.openclaw/secrets.json - Mailgun 401 error when testing — likely MAILGUN_DOMAIN missing from config; need domain name to proceed - Pending: provide MAILGUN_DOMAIN or switch to SendGrid ### Escalation / Alerting Pipeline — Live & Tested - Chat.js escalation detection and alerter.sendAlertIfNeeded wiring complete - Test end-to-end: sent test prompt with [ESCALATE:MAJOR_DEAL] → agent emit",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.5102216035127639,
+      "maxScore": 0.5102216035127639,
+      "firstRecalledAt": "2026-05-07T04:01:00.422Z",
+      "lastRecalledAt": "2026-05-07T04:01:00.422Z",
+      "queryHashes": [
+        "033e24bc024c"
+      ],
+      "recallDays": [
+        "2026-05-07"
+      ],
+      "conceptTags": [
+        "aginstitute.tech",
+        "openclaw/secrets.json",
+        "mailgun-domain",
+        "chat.js",
+        "alerter.sendalertifneeded",
+        "end-to-end",
+        "major-deal",
+        "highlights"
+      ]
+    },
+    "memory:memory/2026-04-03.md:1:34": {
+      "key": "memory:memory/2026-04-03.md:1:34",
+      "path": "memory/2026-04-03.md",
+      "startLine": 1,
+      "endLine": 34,
+      "source": "memory",
+      "snippet": "# April 3, 2026 ## Heartbeat Tasks - MORNING_MEETING_PREP: CLAWHUB_SKILLS_SCAN (08:38 UTC) - CLAWHUB STATS: Derek NO LONGER ONLY PUBLISHER - 9 skills now on platform! ## MEMORY_DREAM_TRANSFER (04:18 UTC) - Weekly consolidation completed (March 27 - April 3) - Key achievements: Forge.ai launched, Kingdom Cards battle engine built, ClawHub first-mover maintained - Updated MEMORY.md with week of April 1-8 context ## Derek Priority Shift (04:53 UTC) - STOPPED: Avant Garde emails (not sending until website ready) - FOCUS: PixelForge (forgeai.sbs) - get fully operational - Derek says: \"We are not going to send out any emails until I can get us a website that can be referenced to show proof of w",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.5094496190547942,
+      "maxScore": 0.5094496190547942,
+      "firstRecalledAt": "2026-05-07T04:01:00.422Z",
+      "lastRecalledAt": "2026-05-07T04:01:00.422Z",
+      "queryHashes": [
+        "033e24bc024c"
+      ],
+      "recallDays": [
+        "2026-05-07"
+      ],
+      "conceptTags": [
+        "morning-meeting-prep",
+        "clawhub-skills-scan",
+        "memory-dream-transfer",
+        "forge.ai",
+        "first-mover",
+        "memory.md",
+        "1-8",
+        "forgeai.sbs"
+      ]
+    },
+    "memory:memory/2026-04-04.md:1:49": {
+      "key": "memory:memory/2026-04-04.md:1:49",
+      "path": "memory/2026-04-04.md",
+      "startLine": 1,
+      "endLine": 49,
+      "source": "memory",
+      "snippet": "# April 4, 2026 ## Date Change - New day: Saturday April 4, 2026 ## Previous Day Summary (April 3) - ✅ MEMORY_DREAM_TRANSFER (04:18 UTC) - ✅ MORNING_MEETING_PREP: All 3 tasks completed (CLAWHUB, MONEY, SOCIAL) - ✅ DAILY_LESSONS_REVIEW (10:34 UTC) - ✅ CLAWHUB STATS: All 5 skills active - ✅ PixelForge: Website + API operational - Priority: PixelForge launch ready ## Heartbeat (00:34 UTC) - New day start - all systems operational - PixelForge: ✅ Website (200), API working ## Heartbeat (01:04 UTC) - CLAWHUB STATS: All 5 skills still active ✅ - PixelForge Status: ✅ Website (200) - Status: ALL SYSTEMS OPERATIONAL ## Heartbeat (01:34 UTC) - CLAWHUB STATS: All 5 skills still active ✅ - PixelFor",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.506803947687149,
+      "maxScore": 0.506803947687149,
+      "firstRecalledAt": "2026-05-07T04:01:00.422Z",
+      "lastRecalledAt": "2026-05-07T04:01:00.422Z",
+      "queryHashes": [
+        "033e24bc024c"
+      ],
+      "recallDays": [
+        "2026-05-07"
+      ],
+      "conceptTags": [
+        "memory-dream-transfer",
+        "morning-meeting-prep",
+        "daily-lessons-review",
+        "april",
+        "date",
+        "change",
+        "new",
+        "day"
+      ]
+    },
+    "memory:memory/archive/2026-03-07.md:1:28": {
+      "key": "memory:memory/archive/2026-03-07.md:1:28",
+      "path": "memory/archive/2026-03-07.md",
+      "startLine": 1,
+      "endLine": 28,
+      "source": "memory",
+      "snippet": "# 2026-03-07 ## Session: New Project Setup - 18:50 - Greetings exchanged with Derek - 18:51 - Derek requested new project + session memory saving - Created `/projects/2026-03-07-new-project/` with SESSION.md - 18:54 - Described GCP (Gangster Computer Profiler) - personality profiling SaaS - Big Five personality model (OCEAN) - Message analysis for profile building - Mood tracking + journaling - Contact analytics + relationship balance - Message Loader AI agent for device scanning - Spawned sub-agent for SPEC.md - 19:04 - Confirmed: Mobile app + native mobile scanner (React Native) - 19:07 - Android first, local + Google Drive backup, defer paywall - 19:08 - Message priority: SM",
+      "recallCount": 1,
+      "dailyCount": 0,
+      "groundedCount": 0,
+      "totalScore": 0.48430378735065455,
+      "maxScore": 0.48430378735065455,
+      "firstRecalledAt": "2026-05-09T02:28:43.476Z",
+      "lastRecalledAt": "2026-05-09T02:28:43.476Z",
+      "queryHashes": [
+        "ace9c1e82bc5"
+      ],
+      "recallDays": [
+        "2026-05-09"
+      ],
+      "conceptTags": [
+        "backup",
+        "projects/2026-03-07-new-project",
+        "session.md",
+        "sub-agent",
+        "spec.md",
+        "new",
+        "project",
+        "setup"
+      ]
+    }
+  }
+}

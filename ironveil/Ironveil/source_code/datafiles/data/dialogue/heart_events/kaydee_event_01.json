@@ -1,0 +1,68 @@
+{
+  "_meta": {
+    "description": "Heart event #1 for npc_kaydee: The Banter Test",
+    "version": "1.0",
+    "objective": "#33/#34"
+  },
+  "event_id": "heart_event_kaydee_01",
+  "npc_id": "npc_kaydee",
+  "heart_level_required": 2,
+  "location": "rm_int_rusty_gear",
+  "time_range": {
+    "start": 19,
+    "end": 23
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_kaydee_event_1_complete",
+  "heart_bonus": 50,
+  "title": "The Banter Test",
+  "lines": [
+    {
+      "speaker": "npc_kaydee",
+      "text": "Well, well. Engineer's back. Starting to think you like my company.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "Or maybe it's the ale. Hard to tell with you.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "Maybe it's both.",
+          "flag": "kaydee_banter_smooth"
+        },
+        {
+          "text": "Definitely the ale.",
+          "flag": "kaydee_banter_witty"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "HA! Not bad, engineer. Not bad at all.",
+      "portrait": "happy"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "Most people can't keep up. They hear the sharp tongue and run.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "You just... sat back down and ordered another round.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "I respect that. Don't let it go to your head.",
+      "portrait": "neutral"
+    }
+  ]
+}

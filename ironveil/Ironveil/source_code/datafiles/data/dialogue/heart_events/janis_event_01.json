@@ -1,0 +1,63 @@
+{
+  "_meta": {
+    "description": "Heart event #1 for npc_janis: The Inspection",
+    "version": "1.0",
+    "objective": "#33/#34"
+  },
+  "event_id": "heart_event_janis_01",
+  "npc_id": "npc_janis",
+  "heart_level_required": 2,
+  "location": "rm_int_workshop",
+  "time_range": {
+    "start": 9,
+    "end": 17
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_janis_event_1_complete",
+  "heart_bonus": 50,
+  "title": "The Inspection",
+  "lines": [
+    {
+      "speaker": "npc_janis",
+      "text": "I'm here to inspect the workshop. Council protocol.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "The organization is... questionable. But the mech is adequate.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "Adequate? It's the best mech in the region.",
+          "flag": "janis_inspect_confident"
+        },
+        {
+          "text": "I'd be happy to walk you through the designs.",
+          "flag": "janis_inspect_polite"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "...You stood your ground. Most people defer to the Council pin.",
+      "portrait": "surprised"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "Interesting. Perhaps Coppervale has more spine than I assumed.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "I'll note that in my report. Favorably.",
+      "portrait": "neutral"
+    }
+  ]
+}

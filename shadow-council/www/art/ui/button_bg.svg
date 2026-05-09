@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" width="120" height="40">
+  <!-- Runed Button Background -->
+  <defs>
+    <linearGradient id="btnGoldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffd700"/>
+      <stop offset="50%" style="stop-color:#c9a227"/>
+      <stop offset="100%" style="stop-color:#8b7500"/>
+    </linearGradient>
+    <linearGradient id="btnBgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2a2a3a"/>
+      <stop offset="50%" style="stop-color:#1a1a24"/>
+      <stop offset="100%" style="stop-color:#0a0a0f"/>
+    </linearGradient>
+    <linearGradient id="btnBgHoverGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3a3a4a"/>
+      <stop offset="50%" style="stop-color:#2a2a34"/>
+      <stop offset="100%" style="stop-color:#1a1a1f"/>
+    </linearGradient>
+    <filter id="btnShadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+  
+  <!-- Button background -->
+  <rect x="2" y="2" width="116" height="36" fill="url(#btnBgGrad)" rx="4" filter="url(#btnShadow)"/>
+  
+  <!-- Outer border -->
+  <rect x="2" y="2" width="116" height="36" fill="none" stroke="url(#btnGoldGrad)" stroke-width="1.5" rx="4"/>
+  
+  <!-- Inner subtle border -->
+  <rect x="5" y="5" width="110" height="30" fill="none" stroke="url(#btnGoldGrad)" stroke-width="0.5" rx="3" opacity="0.5"/>
+  
+  <!-- Decorative runes - left -->
+  <path d="M12,20 L15,15 L15,25 Z" fill="url(#btnGoldGrad)" opacity="0.7"/>
+  <circle cx="15" cy="20" r="1.5" fill="url(#btnGoldGrad)"/>
+  
+  <!-- Decorative runes - right -->
+  <path d="M108,20 L105,15 L105,25 Z" fill="url(#btnGoldGrad)" opacity="0.7"/>
+  <circle cx="105" cy="20" r="1.5" fill="url(#btnGoldGrad)"/>
+  
+  <!-- Top highlight line -->
+  <line x1="20" y1="4" x2="100" y2="4" stroke="url(#btnGoldGrad)" stroke-width="0.5" opacity="0.6"/>
+</svg>

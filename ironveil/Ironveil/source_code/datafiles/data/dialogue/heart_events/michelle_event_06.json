@@ -1,0 +1,129 @@
+{
+  "_meta": {
+    "description": "Heart event #6 for npc_michelle: In the Greenhouse",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue / #34 Romance System"
+  },
+  "event_id": "heart_event_michelle_06",
+  "npc_id": "npc_michelle",
+  "heart_level_required": 8,
+  "location": "rm_int_workshop",
+  "time_range": {
+    "start": 18,
+    "end": 22
+  },
+  "story_flag_required": "michelle_event_5_complete",
+  "requires_item": "item_promise_locket",
+  "story_flag_set": "npc_michelle_event_6_complete",
+  "heart_bonus": 100,
+  "title": "In the Greenhouse",
+  "lines": [
+    {
+      "speaker": "narrator",
+      "text": "[The greenhouse, evening. Michelle is tending flowers]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "Oh! J-Jack. I didn't hear you come in.",
+      "portrait": "embarrassed"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "I was just... the lavender needs \u2014 actually, that's a lie.",
+      "portrait": "embarrassed"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "I know exactly what's wrong with me.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "You built me this greenhouse. You carried the glass panels yourself.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "You spent three days on the heating system.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "No one has ever done something like that for me.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "I've spent my whole life taking care of everyone else.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "And I never thought to ask for anything for myself.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "But I'm asking now.",
+      "portrait": "determined"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "Ask me anything.",
+          "flag": "michelle_confess_open"
+        },
+        {
+          "text": "Michelle, you don't have to\u2014",
+          "flag": "michelle_confess_gentle"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "Stay. Just... stay. Not as the engineer. Not as my friend.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "As... more. I want more. Is that selfish?",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "It's the bravest thing I've ever heard you say.",
+          "flag": "michelle_confess_brave"
+        },
+        {
+          "text": "I've been wanting to hear you say that.",
+          "flag": "michelle_confess_waiting"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "Really? You're not just being nice?",
+      "portrait": "happy"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "Oh no. I'm crying in my greenhouse. This is so embarrassing.",
+      "portrait": "embarrassed"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "...Okay. It's not that embarrassing.",
+      "portrait": "happy"
+    }
+  ]
+}

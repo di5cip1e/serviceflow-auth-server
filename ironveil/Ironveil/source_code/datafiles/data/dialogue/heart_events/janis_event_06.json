@@ -1,0 +1,118 @@
+{
+  "_meta": {
+    "description": "Heart event #6 for npc_janis: Words Fail",
+    "version": "1.0",
+    "objective": "#33/#34"
+  },
+  "event_id": "heart_event_janis_06",
+  "npc_id": "npc_janis",
+  "heart_level_required": 8,
+  "location": "rm_town_coppervale",
+  "time_range": {
+    "start": 18,
+    "end": 22
+  },
+  "story_flag_required": "npc_janis_event_5_complete",
+  "requires_item": "item_promise_locket",
+  "story_flag_set": "npc_janis_event_6_complete",
+  "heart_bonus": 100,
+  "title": "Words Fail",
+  "lines": [
+    {
+      "speaker": "narrator",
+      "text": "[The Overlook, sunset. Janis has removed her Council brooch]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "I sent my resignation to the Council today.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "They said I was throwing away a promising career.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "My mother said worse.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "I had a five-year plan. A trajectory. A purpose.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "Now I can't imagine being anywhere else. And that terrifies me.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "I have been in control of every moment of my life since I was twelve.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "Every word calculated. Every move strategic.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "But you are the one variable I cannot control.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "I had a speech prepared. Twelve sentences. Perfectly structured.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "But standing here, looking at you, I can barely...",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "I am Janis Beaumont. I ALWAYS have the perfect words.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "And right now I can't find a single one that's good enough.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "Then don't talk. Just stay.",
+          "flag": "janis_confess_quiet"
+        },
+        {
+          "text": "You don't need perfect words. Just honest ones.",
+          "flag": "janis_confess_honest"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "Well. That's a first. Janis Beaumont, speechless.",
+      "portrait": "happy"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "I choose this. I choose Coppervale. I choose you.",
+      "portrait": "determined"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "And if that's not eloquent enough, I don't care.",
+      "portrait": "happy"
+    }
+  ]
+}

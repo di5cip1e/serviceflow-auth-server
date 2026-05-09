@@ -1,0 +1,25 @@
+{
+  "_meta": { "description": "Zone data for Ashspine Foothills: salvage, hazards, enemies, discoveries.", "version": "1.0", "objective": "#29 All Exploration Zones" },
+  "zone_id": "ashspine_foothills", "room_id": "rm_explore_ashspine_foothills", "display_name": "Ashspine Foothills", "recommended_level": 3, "first_visit_dialogue": "dlg_ashspine_first_visit",
+  "salvage_nodes": [
+    { "id": "salvage_ore_vein_1", "type": "ORE_VEIN", "pos": [8, 6], "sub_zone": "mountain_path", "loot_table": [ { "item_id": "item_iron_ore", "chance": 0.9, "quantity_min": 2, "quantity_max": 4 }, { "item_id": "item_titanium_scrap", "chance": 0.2, "quantity_min": 1, "quantity_max": 1 } ], "energy_cost": 10, "respawn_days": 7, "sprite": "spr_salvage_ore_vein" },
+    { "id": "salvage_ore_vein_2", "type": "ORE_VEIN", "pos": [26, 10], "sub_zone": "mountain_path", "loot_table": [ { "item_id": "item_iron_ore", "chance": 0.9, "quantity_min": 2, "quantity_max": 4 }, { "item_id": "item_copper_ore", "chance": 0.5, "quantity_min": 1, "quantity_max": 3 } ], "energy_cost": 10, "respawn_days": 7, "sprite": "spr_salvage_ore_vein" },
+    { "id": "salvage_ore_vein_3", "type": "ORE_VEIN", "pos": [15, 13], "sub_zone": "mountain_path", "loot_table": [ { "item_id": "item_titanium_scrap", "chance": 0.4, "quantity_min": 1, "quantity_max": 2 }, { "item_id": "item_iron_ore", "chance": 0.7, "quantity_min": 2, "quantity_max": 3 } ], "energy_cost": 10, "respawn_days": 7, "sprite": "spr_salvage_ore_vein" },
+    { "id": "salvage_aetheric_deposit_1", "type": "ORE_VEIN", "pos": [20, 18], "sub_zone": "alpine_meadow", "loot_table": [ { "item_id": "item_aetheric_ore", "chance": 0.8, "quantity_min": 1, "quantity_max": 3 } ], "energy_cost": 12, "respawn_days": 10, "sprite": "spr_salvage_aetheric_deposit" },
+    { "id": "salvage_aetheric_deposit_2", "type": "ORE_VEIN", "pos": [10, 24], "sub_zone": "alpine_meadow", "loot_table": [ { "item_id": "item_aetheric_ore", "chance": 0.8, "quantity_min": 1, "quantity_max": 3 } ], "energy_cost": 12, "respawn_days": 10, "sprite": "spr_salvage_aetheric_deposit" },
+    { "id": "salvage_military_wreck_1", "type": "COMPONENT_CACHE", "pos": [13, 21], "sub_zone": "alpine_meadow", "loot_table": [ { "item_id": "item_steel_plate", "chance": 0.7, "quantity_min": 1, "quantity_max": 3 }, { "item_id": "item_weapon_mount", "chance": 0.2, "quantity_min": 1, "quantity_max": 1 }, { "item_id": "item_scrap_iron", "chance": 0.8, "quantity_min": 3, "quantity_max": 6 } ], "energy_cost": 10, "respawn_days": 7, "sprite": "spr_salvage_crate" },
+    { "id": "salvage_military_cache", "type": "COMPONENT_CACHE", "pos": [16, 33], "sub_zone": "bunker_entrance", "loot_table": [ { "item_id": "item_titanium_scrap", "chance": 0.6, "quantity_min": 1, "quantity_max": 2 }, { "item_id": "item_military_rations", "chance": 0.8, "quantity_min": 2, "quantity_max": 4 }, { "item_id": "item_signal_flare", "chance": 0.5, "quantity_min": 1, "quantity_max": 1 } ], "energy_cost": 8, "respawn_days": 14, "sprite": "spr_salvage_military_crate" }
+  ],
+  "hazards": [
+    { "id": "hazard_unstable_ground_1", "type": "UNSTABLE_FLOOR", "tiles": [[10,6],[11,6]], "effect": { "energy_loss": 5, "stumble_duration_seconds": 1.0 }, "warning_sprite": "spr_hazard_crack", "description": "Loose rocks on mountain path. Scanner detects in advance." },
+    { "id": "hazard_unstable_ground_2", "type": "UNSTABLE_FLOOR", "tiles": [[22,11],[23,11]], "effect": { "energy_loss": 5, "stumble_duration_seconds": 1.0 }, "warning_sprite": "spr_hazard_crack", "description": "More loose rocks higher on the path." }
+  ],
+  "enemy_patrols": [
+    { "id": "patrol_mountain_bandits", "enemy_type": "enemy_freelance_raider", "count": 2, "sub_zone": "alpine_meadow", "patrol_path": [[8,18],[22,18],[22,25],[8,25]], "aggro_range": 5, "respawn_days": 5 }
+  ],
+  "discoveries": [
+    { "id": "discovery_bunker_exterior_terminal", "type": "DATA_CORE", "sub_type": "MILITARY", "pos": [20, 34], "sub_zone": "bunker_entrance", "interaction_sprite": "spr_interactable_terminal", "one_time": true, "lore_id": "lore_ashspine7_exterior", "lore_title": "ASHSPINE-7 External Terminal", "lore_summary": "Partially functional terminal at the bunker entrance. Reveals: 'Installation ASHSPINE-7. Status: SEALED. Last entry: Day 0 of Sundering. All personnel accounted for. Initiating lockdown protocol.'", "dejin_reaction": "dlg_dejin_ashspine_terminal", "reward_items": [ { "item_id": "item_data_core_military", "quantity": 1 } ] },
+    { "id": "discovery_bp_scout_mech", "type": "BLUEPRINT_CHEST", "pos": [14, 21], "sub_zone": "alpine_meadow", "interaction_sprite": "spr_interactable_blueprint_case", "one_time": true, "blueprint_id": "bp_scout_mech", "description": "Military blueprint case found in the crashed supply vehicle wreckage. Contains Scout Mech schematics.", "reward_items": [] }
+  ],
+  "fog_of_war": { "enabled": true, "default_state": "HIDDEN", "reveal_radius_tiles": 5, "scanner_bonus_radius": 4, "persistence": "SAVE_PER_ZONE" }
+}

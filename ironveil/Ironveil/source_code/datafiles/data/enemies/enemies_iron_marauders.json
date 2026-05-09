@@ -1,0 +1,155 @@
+{
+  "_meta": {
+    "description": "Iron Marauders — Tier 3 disciplined military remnants. Primary antagonist faction.",
+    "version": "1.0",
+    "objective": "#31 Full Raid System"
+  },
+
+  "enemy_iron_infantry": {
+    "id": "enemy_iron_infantry",
+    "name": "Iron Infantry",
+    "faction": "IRON_MARAUDERS",
+    "type": "INFANTRY",
+    "tier": 3,
+    "base_stats": { "hp": 120, "speed": 1.5, "damage": 16, "armor": 8, "attack_range": 1 },
+    "behavior": "PATHFIND_TO_TARGET",
+    "target_priority": "TOWN_CENTER",
+    "sprite": "spr_enemy_iron_infantry",
+    "loot_table": [
+      { "item_id": "item_steel_plate", "chance": 0.5, "quantity_min": 1, "quantity_max": 2 },
+      { "item_id": "item_scrap_iron", "chance": 0.7, "quantity_min": 2, "quantity_max": 4 },
+      { "item_id": "item_brass_gears", "chance": 0.2, "quantity_min": 1, "quantity_max": 2 }
+    ],
+    "description": "Disciplined soldier. Advances in formation with consistent, reliable attacks."
+  },
+
+  "enemy_iron_shieldbearer": {
+    "id": "enemy_iron_shieldbearer",
+    "name": "Iron Shieldbearer",
+    "faction": "IRON_MARAUDERS",
+    "type": "HEAVY_INFANTRY",
+    "tier": 3,
+    "base_stats": { "hp": 200, "speed": 1.0, "damage": 10, "armor": 18, "attack_range": 1 },
+    "behavior": "SHIELDBEARER",
+    "target_priority": "TOWN_CENTER",
+    "sprite": "spr_enemy_iron_shieldbearer",
+    "loot_table": [
+      { "item_id": "item_steel_plate", "chance": 0.7, "quantity_min": 2, "quantity_max": 3 },
+      { "item_id": "item_reinforced_frame", "chance": 0.15, "quantity_min": 1, "quantity_max": 1 }
+    ],
+    "description": "Heavy shield unit. Absorbs damage for units behind. 50% self-DR, 25% aura DR."
+  },
+
+  "enemy_iron_gunner": {
+    "id": "enemy_iron_gunner",
+    "name": "Iron Gunner",
+    "faction": "IRON_MARAUDERS",
+    "type": "RANGED",
+    "tier": 3,
+    "base_stats": { "hp": 80, "speed": 1.2, "damage": 20, "armor": 5, "attack_range": 7 },
+    "behavior": "RANGED_ATTACK",
+    "target_priority": "NEAREST_TURRET",
+    "sprite": "spr_enemy_iron_gunner",
+    "loot_table": [
+      { "item_id": "item_scrap_iron", "chance": 0.6, "quantity_min": 2, "quantity_max": 4 },
+      { "item_id": "item_copper_wire", "chance": 0.3, "quantity_min": 1, "quantity_max": 3 },
+      { "item_id": "item_gunpowder", "chance": 0.3, "quantity_min": 1, "quantity_max": 2 }
+    ],
+    "description": "Long-range suppression. Hangs back and focuses fire on turrets and defenses."
+  },
+
+  "enemy_iron_technician": {
+    "id": "enemy_iron_technician",
+    "name": "Iron Technician",
+    "faction": "IRON_MARAUDERS",
+    "type": "SUPPORT",
+    "tier": 3,
+    "base_stats": { "hp": 100, "speed": 1.5, "damage": 8, "armor": 4, "attack_range": 1 },
+    "behavior": "TECHNICIAN",
+    "target_priority": "NEAREST_STRUCTURE",
+    "sprite": "spr_enemy_iron_technician",
+    "special": { "disables_traps": true, "repair_amount_per_second": 5 },
+    "loot_table": [
+      { "item_id": "item_precision_gears", "chance": 0.5, "quantity_min": 1, "quantity_max": 2 },
+      { "item_id": "item_copper_wire", "chance": 0.4, "quantity_min": 2, "quantity_max": 4 },
+      { "item_id": "item_brass_gears", "chance": 0.3, "quantity_min": 1, "quantity_max": 3 }
+    ],
+    "description": "Combat engineer. Disables traps on contact and repairs damaged enemy machines."
+  },
+
+  "enemy_iron_mech": {
+    "id": "enemy_iron_mech",
+    "name": "Iron Mech",
+    "faction": "IRON_MARAUDERS",
+    "type": "BOSS",
+    "tier": 4,
+    "base_stats": { "hp": 500, "speed": 0.8, "damage": 40, "armor": 20, "attack_range": 2 },
+    "behavior": "BOSS",
+    "target_priority": "NEAREST_STRUCTURE",
+    "sprite": "spr_enemy_iron_mech",
+    "abilities": ["siege_ram"],
+    "loot_table": [
+      { "item_id": "item_steel_plate", "chance": 1.0, "quantity_min": 4, "quantity_max": 8 },
+      { "item_id": "item_precision_gears", "chance": 0.6, "quantity_min": 2, "quantity_max": 4 },
+      { "item_id": "item_reinforced_frame", "chance": 0.3, "quantity_min": 1, "quantity_max": 1 }
+    ],
+    "description": "Salvaged war mech. Slow but devastating. Uses siege ram ability against walls."
+  },
+
+  "enemy_iron_siege_ram": {
+    "id": "enemy_iron_siege_ram",
+    "name": "Siege Ram",
+    "faction": "IRON_MARAUDERS",
+    "type": "SIEGE",
+    "tier": 4,
+    "base_stats": { "hp": 800, "speed": 0.5, "damage": 80, "armor": 25, "attack_range": 1, "damage_vs_walls_mult": 5.0 },
+    "behavior": "PATHFIND_TO_WALLS",
+    "target_priority": "NEAREST_WALL",
+    "sprite": "spr_enemy_iron_siege_ram",
+    "loot_table": [
+      { "item_id": "item_steel_plate", "chance": 1.0, "quantity_min": 5, "quantity_max": 10 },
+      { "item_id": "item_reinforced_frame", "chance": 0.5, "quantity_min": 1, "quantity_max": 2 }
+    ],
+    "description": "Battering ram. Extremely slow, extremely tough, devastating to walls."
+  },
+
+  "enemy_iron_lieutenant": {
+    "id": "enemy_iron_lieutenant",
+    "name": "Iron Lieutenant",
+    "faction": "IRON_MARAUDERS",
+    "type": "BOSS",
+    "tier": 4,
+    "base_stats": { "hp": 400, "speed": 1.3, "damage": 25, "armor": 15, "attack_range": 1 },
+    "behavior": "BOSS",
+    "target_priority": "TOWN_CENTER",
+    "sprite": "spr_enemy_iron_lieutenant",
+    "abilities": ["rally_nearby"],
+    "rally_nearby": { "radius": 6, "speed_buff": 1.2, "damage_buff": 1.3, "duration_seconds": 15 },
+    "loot_table": [
+      { "item_id": "item_steel_plate", "chance": 1.0, "quantity_min": 3, "quantity_max": 6 },
+      { "item_id": "item_precision_gears", "chance": 0.5, "quantity_min": 2, "quantity_max": 4 },
+      { "item_id": "item_copper_wire", "chance": 0.4, "quantity_min": 2, "quantity_max": 5 }
+    ],
+    "description": "Field commander. Rallies all nearby Iron Marauders with tactical commands."
+  },
+
+  "enemy_the_marshal": {
+    "id": "enemy_the_marshal",
+    "name": "The Marshal",
+    "faction": "IRON_MARAUDERS",
+    "type": "BOSS",
+    "tier": 5,
+    "base_stats": { "hp": 1000, "speed": 1.3, "damage": 35, "armor": 22, "attack_range": 2 },
+    "behavior": "BOSS",
+    "target_priority": "TOWN_CENTER",
+    "sprite": "spr_enemy_the_marshal",
+    "abilities": ["rally_nearby", "summon_reinforcements"],
+    "rally_nearby": { "radius": 8, "speed_buff": 1.3, "damage_buff": 1.4, "duration_seconds": 20 },
+    "loot_table": [
+      { "item_id": "item_old_world_plating", "chance": 1.0, "quantity_min": 2, "quantity_max": 4 },
+      { "item_id": "item_precision_gears", "chance": 1.0, "quantity_min": 3, "quantity_max": 6 },
+      { "item_id": "item_reinforced_frame", "chance": 0.5, "quantity_min": 1, "quantity_max": 2 }
+    ],
+    "description": "Final boss. The iron-fisted warlord who commands all Marauder forces. Rallies and summons reinforcements."
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "_meta": {
+    "description": "Heart event #5 for npc_kaydee: The Brewing Machine",
+    "version": "1.0",
+    "objective": "#33/#34"
+  },
+  "event_id": "heart_event_kaydee_05",
+  "npc_id": "npc_kaydee",
+  "heart_level_required": 7,
+  "location": "rm_int_rusty_gear",
+  "time_range": {
+    "start": 10,
+    "end": 14
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_kaydee_event_5_complete",
+  "heart_bonus": 50,
+  "title": "The Brewing Machine",
+  "lines": [
+    {
+      "speaker": "narrator",
+      "text": "[You've built Kaydee a custom automated brewing machine]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "What... is this?",
+      "portrait": "surprised"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "You built me a BREWING MACHINE?",
+      "portrait": "surprised"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "Temperature controlled. Automated hops infusion. Copper piping.",
+      "portrait": "surprised"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "This is... this is the most thoughtful thing anyone's ever...",
+      "portrait": "surprised"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "You mentioned the old one was broken.",
+          "flag": "kaydee_brew_listened"
+        },
+        {
+          "text": "The Rusty Gear deserves the best equipment.",
+          "flag": "kaydee_brew_business"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "You LISTENED. You actually listened when I complained about the brewer.",
+      "portrait": "surprised"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "Nobody listens. Nobody ever listens.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "Jack, I... I need to go check on something. In the cellar. Alone.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "I'm not crying. The hops are strong. That's all.",
+      "portrait": "embarrassed"
+    }
+  ]
+}

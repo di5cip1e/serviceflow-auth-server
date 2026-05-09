@@ -1,0 +1,83 @@
+{
+  "_meta": {
+    "description": "Heart event #3 for npc_leera: The Secret Ruin",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue / #34 Romance System"
+  },
+  "event_id": "heart_event_leera_03",
+  "npc_id": "npc_leera",
+  "heart_level_required": 5,
+  "location": "rm_explore_rustwood_edge",
+  "time_range": {
+    "start": 10,
+    "end": 18
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_leera_event_3_complete",
+  "heart_bonus": 50,
+  "title": "The Secret Ruin",
+  "lines": [
+    {
+      "speaker": "npc_leera",
+      "text": "Jack. I want to show you something. Follow me.",
+      "portrait": "determined"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "I found this place two years ago. Never told anyone.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "narrator",
+      "text": "[Leera leads you to a hidden clearing with a pre-war observatory]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "An observatory. The roof's gone but the telescope still works.",
+      "portrait": "happy"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "On clear nights you can see... everything. The whole sky.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "I come here when the world feels too small.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "It's beautiful. Thank you for sharing this.",
+          "flag": "leera_secret_grateful"
+        },
+        {
+          "text": "Why show me?",
+          "flag": "leera_secret_question"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "Because you're the only person who'd understand.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "Most people see ruins and think 'salvage.' You see... possibility.",
+      "portrait": "happy"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "Same as me. We're the same kind of crazy.",
+      "portrait": "happy"
+    }
+  ]
+}

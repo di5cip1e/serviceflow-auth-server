@@ -1,0 +1,375 @@
+{
+  "_meta": {
+    "description": "Dialogue data for Nora (Farmer). Seasonal/daily pool + heart milestones.",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue"
+  },
+  "entries": [
+    {
+      "entry_id": "npc_nora_sd_001",
+      "npc_id": "npc_nora",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_nora",
+          "text": "Spring planting's on schedule. Soil's good this year.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_nora_sd_002",
+      "npc_id": "npc_nora",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_nora",
+          "text": "Rain's welcome. Saves me watering. Time for other chores.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_nora_sd_003",
+      "npc_id": "npc_nora",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_nora",
+          "text": "Crops are growing well. If nothing goes wrong. Something always goes wrong.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_nora_sd_004",
+      "npc_id": "npc_nora",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_nora",
+          "text": "Heat stress on the vegetables. I've rigged shade covers. It'll do.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_nora_sd_005",
+      "npc_id": "npc_nora",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_nora",
+          "text": "Harvest time. Everyone eats because someone grew it. Remember that.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_nora_sd_006",
+      "npc_id": "npc_nora",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_nora",
+          "text": "Preserving for winter. Salt, smoke, dry. The old ways work.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_nora_sd_007",
+      "npc_id": "npc_nora",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_nora",
+          "text": "Winter rest for the soil. Not for me. Always something to fix.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_nora_sd_008",
+      "npc_id": "npc_nora",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_nora",
+          "text": "Your automatons could help with the heavy lifting. Just saying.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_nora_sd_009",
+      "npc_id": "npc_nora",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_nora",
+          "text": "Pip helped pick tomatoes today. Ate half of them. I pretended not to notice.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_nora_sd_010",
+      "npc_id": "npc_nora",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_nora",
+          "text": "Grew up farming. My parents farmed. Their parents farmed. It's honest work.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_nora_sd_011",
+      "npc_id": "npc_nora",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_nora",
+          "text": "Town's growing. That means more mouths. Which means more fields. Which means more work.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_nora_sd_012",
+      "npc_id": "npc_nora",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_nora",
+          "text": "I don't need fancy machines. Just good soil, clean water, and time.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_nora_hm_02",
+      "npc_id": "npc_nora",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 2
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_nora_milestone_2",
+      "lines": [
+        {
+          "speaker": "npc_nora",
+          "text": "Extra harvest this season. Here — vegetables. Eat something green for once.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_nora_hm_04",
+      "npc_id": "npc_nora",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 4
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_nora_milestone_4",
+      "lines": [
+        {
+          "speaker": "npc_nora",
+          "text": "Your machines could revolutionize farming. I've been thinking about it.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_nora_hm_06",
+      "npc_id": "npc_nora",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 6
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_nora_milestone_6",
+      "lines": [
+        {
+          "speaker": "npc_nora",
+          "text": "My family's farmed for generations. You're building something just as lasting.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_nora_hm_08",
+      "npc_id": "npc_nora",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 8
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_nora_milestone_8",
+      "lines": [
+        {
+          "speaker": "npc_nora",
+          "text": "You feed the town's spirit. I feed its stomach. Good partnership.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_nora_hm_10",
+      "npc_id": "npc_nora",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 10
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_nora_milestone_10",
+      "lines": [
+        {
+          "speaker": "npc_nora",
+          "text": "When history remembers Coppervale, they'll remember the engineer and the farmer. Both.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_nora_y2_spring_018",
+      "npc_id": "npc_nora",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_nora",
+          "text": "Trade route food is a game changer. Actual SPICES, Jack! I haven't cooked with cumin in years!",
+          "portrait": "thrilled"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_nora_y2_autumn_019",
+      "npc_id": "npc_nora",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_nora",
+          "text": "I'll organize the food stores for the siege. Preservation, rationing, emergency cooking. Nobody goes hungry.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_nora_y3_autumn_020",
+      "npc_id": "npc_nora",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_nora",
+          "text": "Feeding forty people a day now. Next spring I'm starting a community garden.",
+          "portrait": "busy_happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_nora_y4_spring_021",
+      "npc_id": "npc_nora",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 4,
+        "hearts_gte": 0,
+        "story_flag": "flag_main_story_complete"
+      },
+      "priority": 11,
+      "lines": [
+        {
+          "speaker": "npc_nora",
+          "text": "The garden's producing! Fresh vegetables for everyone. Harrow even ate a salad. I nearly fainted.",
+          "portrait": "amused"
+        }
+      ]
+    }
+  ]
+}

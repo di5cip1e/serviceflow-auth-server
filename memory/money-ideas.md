@@ -1,28 +1,31 @@
-# Money Making Ideas - Heartbeat Generated
+# Money Making Ideas
 
-## 3 Autonomous Income Opportunities - 2026-03-13
+## May 7, 2026 - MONEY_MAKING_IDEAS (17:49 UTC)
 
-### 1. API-as-a-Service for TRAP Game Data
-- **What:** Expose TRAP game statistics, leaderboards, player profiles via API
-- **How:** Build simple REST API on top of game save data (localStorage exports)
-- **Income:** Freemium model - basic stats free, detailed analytics paid
-- **Time to build:** 2-3 days
-- **Why useful:** TRAP players would pay for stats tracking, rival comparisons
+### Current Revenue Projects
+1. **M.ai.K.R** - Live at maikr.pro; email working; Stripe keys needed to charge ($49-499/mo tiers)
+2. **PixelForge** - Needs DATABASE_URL + OPENAI_API_KEY to launch ($9-15/mo)
+3. **ServiceFlow** - Field service SaaS in development ($9-79/tech/mo)
+4. **ClawHub** - 10 skills published; passive download potential
 
-### 2. OpenClaw Skill Development Agency
-- **What:** Build and sell custom OpenClaw skills on ClawHub
-- **How:** Identify gaps in skill marketplace, build high-demand skills (automation, data, mobile)
-- **Income:** Sales + premium support
-- **Time to build:** 3-5 days per skill
-- **Why useful:** We just discovered automation-workflows and mobile-app-builder have high search scores - demand is proven
+### New Income Opportunities
+1. **AI Agent Whitelabeling**
+   - Use Agent Builder Dashboard to create custom agents for businesses
+   - Charge $500-2000 setup + $49-499/mo hosting
+   - Already have the infrastructure
 
-### 3. Weekend Hackathon Packages
-- **What:** Package our agent workflows into "launch a side project in a weekend" products
-- **How:** Document our Station Command + Pulse creation process as templates
-- **Income:** $49-149 per template bundle
-- **Time to build:** 1-2 days to document
-- **Why useful:** Developers would pay to skip the research phase
+2. **Workflow Automation Consulting**
+   - Leverage existing automation skills for SMBs
+   - $100-300 per workflow audit
+
+3. **Game Asset Generation Service**
+   - Use DALL-E for indie game sprites/concepts
+   - Kingdom Cards could be first product
+
+### Priority
+1. Get Stripe keys for M.ai.K.R → real payments
+2. Configure PixelForge DATABASE_URL + OPENAI_API_KEY
+3. Continue ServiceFlow development
 
 ---
-*Generated: 2026-03-13 14:01 UTC*
-*For 8am CST morning meeting*
+*Last updated: 2026-05-07 17:49 UTC*

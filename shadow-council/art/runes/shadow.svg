@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Shadow - Shadow Magic Rune -->
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffd700"/>
+      <stop offset="50%" style="stop-color:#c9a227"/>
+      <stop offset="100%" style="stop-color:#8b7500"/>
+    </linearGradient>
+    <linearGradient id="shadowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2a2a3a"/>
+      <stop offset="100%" style="stop-color:#0a0a0f"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Cloak shape background -->
+  <path d="M50,10 Q20,30 15,50 Q10,80 25,95 L50,85 L75,95 Q90,80 85,50 Q80,30 50,10" fill="url(#shadowGrad)" stroke="url(#goldGrad)" stroke-width="2"/>
+  <!-- Inner hood curve -->
+  <path d="M50,20 Q30,35 25,55" fill="none" stroke="url(#goldGrad)" stroke-width="1.5"/>
+  <path d="M50,20 Q70,35 75,55" fill="none" stroke="url(#goldGrad)" stroke-width="1.5"/>
+  <!-- Vertical staff line -->
+  <line x1="50" y1="25" x2="50" y2="75" stroke="url(#goldGrad)" stroke-width="2" filter="url(#glow)"/>
+  <!-- Horizontal dash -->
+  <line x1="35" y1="50" x2="65" y2="50" stroke="url(#goldGrad)" stroke-width="2"/>
+  <!-- Bottom point -->
+  <line x1="50" y1="75" x2="50" y2="90" stroke="url(#goldGrad)" stroke-width="2"/>
+  <!-- Left shroud lines -->
+  <path d="M35,40 Q25,50 30,65" fill="none" stroke="url(#goldGrad)" stroke-width="1.5"/>
+  <path d="M40,55 Q32,60 35,70" fill="none" stroke="url(#goldGrad)" stroke-width="1"/>
+  <!-- Right shroud lines -->
+  <path d="M65,40 Q75,50 70,65" fill="none" stroke="url(#goldGrad)" stroke-width="1.5"/>
+  <path d="M60,55 Q68,60 65,70" fill="none" stroke="url(#goldGrad)" stroke-width="1"/>
+</svg>

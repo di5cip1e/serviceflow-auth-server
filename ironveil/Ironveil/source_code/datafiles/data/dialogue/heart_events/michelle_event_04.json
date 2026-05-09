@@ -1,0 +1,93 @@
+{
+  "_meta": {
+    "description": "Heart event #4 for npc_michelle: The Breakdown",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue / #34 Romance System"
+  },
+  "event_id": "heart_event_michelle_04",
+  "npc_id": "npc_michelle",
+  "heart_level_required": 6,
+  "location": "rm_int_npc_michelle",
+  "time_range": {
+    "start": 19,
+    "end": 22
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_michelle_event_4_complete",
+  "heart_bonus": 50,
+  "title": "The Breakdown",
+  "lines": [
+    {
+      "speaker": "narrator",
+      "text": "[Michelle's home. She's sitting on the floor, surrounded by herb bundles]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "Jack? I \u2014 sorry. I'm fine. I'm always fine.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "...No. I'm not fine.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "Everyone needs something. Doc Bramble needs help. Pip needs bandages.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "The militia needs medicine. Maren needs visits. Everyone needs.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "And I give and I give and I give and nobody ever asks if I'M okay.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "Are you okay, Michelle?",
+          "flag": "michelle_breakdown_ask"
+        },
+        {
+          "text": "You don't have to carry everyone. Not alone.",
+          "flag": "michelle_breakdown_comfort"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "...You asked. You actually asked.",
+      "portrait": "surprised"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "I'm tired, Jack. I'm so tired of being the strong one.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "My parents died and the town healer took me in and I just... started helping.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "I never stopped. I don't know HOW to stop.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "...Thank you for sitting here. On my floor. Among my herbs.",
+      "portrait": "happy"
+    }
+  ]
+}

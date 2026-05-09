@@ -1,0 +1,92 @@
+{
+  "room_id": "rm_explore_old_mill",
+  "display_name": "Old Mill Ruins",
+  "width_tiles": 30,
+  "height_tiles": 40,
+  "tile_size": 16,
+  "parent_room": null,
+  "zone_type": "EXPLORATION",
+
+  "sub_zones": {
+    "exterior_grounds": {
+      "name": "Exterior Grounds",
+      "bounds": { "x1": 0, "y1": 0, "x2": 29, "y2": 11 },
+      "description": "Overgrown farmland, collapsed fences, nature reclaiming agriculture. Safe entrance area.",
+      "threat_level": "SAFE"
+    },
+    "mill_ground_floor": {
+      "name": "Mill Interior — Ground Floor",
+      "bounds": { "x1": 5, "y1": 12, "x2": 24, "y2": 24 },
+      "description": "Rusted milling machinery, conveyor belts, grain storage vats. Light salvage.",
+      "threat_level": "LOW"
+    },
+    "underground_storage": {
+      "name": "Underground Storage",
+      "bounds": { "x1": 7, "y1": 25, "x2": 22, "y2": 39 },
+      "description": "Preserved supply cellar. Sealed blueprint cabinet, food preservation, Nora's family records.",
+      "threat_level": "MEDIUM"
+    }
+  },
+
+  "exits": [
+    {
+      "id": "exit_north_coppervale",
+      "name": "North (Coppervale)",
+      "tiles": { "x1": 14, "y1": 0, "x2": 16, "y2": 0 },
+      "target_room": "rm_town_coppervale",
+      "target_pos": [40, 58],
+      "collision_type": 3
+    }
+  ],
+
+  "terrain_features": [
+    {
+      "id": "overgrown_fields",
+      "type": "WALKABLE",
+      "bounds": { "x1": 0, "y1": 0, "x2": 29, "y2": 11 },
+      "description": "Wild crops and overgrown grass. Freely walkable."
+    },
+    {
+      "id": "mill_walls",
+      "type": "BLOCKED",
+      "positions": [[5,12],[6,12],[7,12],[8,12],[9,12],[10,12],[11,12],[12,12],[13,12],[14,12],[15,12],[16,12],[17,12],[18,12],[19,12],[20,12],[21,12],[22,12],[23,12],[24,12]],
+      "description": "Mill building exterior walls (north face). Interior accessed via door."
+    },
+    {
+      "id": "collapsed_barn",
+      "type": "BLOCKED",
+      "bounds": { "x1": 22, "y1": 4, "x2": 27, "y2": 8 },
+      "description": "Collapsed barn structure. Partially accessible for salvage."
+    },
+    {
+      "id": "ladder_to_underground",
+      "type": "INTERACTABLE",
+      "positions": [[14,24],[15,24]],
+      "description": "Ladder descending to underground storage level."
+    }
+  ],
+
+  "ruins": [
+    { "id": "ruin_barn", "name": "Collapsed Barn", "pos": [22, 4], "size": [6, 5], "has_interior": false },
+    { "id": "ruin_mill_main", "name": "Mill Building", "pos": [5, 12], "size": [20, 13], "has_interior": true },
+    { "id": "ruin_farmstead", "name": "Old Farmstead", "pos": [2, 6], "size": [4, 3], "has_interior": false }
+  ],
+
+  "collision_rules": {
+    "types": { "0": "WALKABLE", "1": "BLOCKED", "2": "INTERACTABLE", "3": "TRANSITION", "6": "HAZARD" },
+    "general": [
+      "Mill building walls are BLOCKED except door at (13,12) and (14,12)",
+      "Collapsed barn partially BLOCKED, gap at (24,4) for entry",
+      "Underground accessed via ladder at (14-15, 24)",
+      "Exterior is fully walkable with decorative elements"
+    ]
+  },
+
+  "tile_layers": ["ground_base", "ground_detail", "shadows", "objects_low", "objects_mid", "objects_high", "fog_overlay", "ui_overlay"],
+
+  "notes": [
+    "Small, easy exploration zone. Good introduction to the exploration loop.",
+    "Entry from Coppervale south exit arrives at tile (15, 1).",
+    "NPC encounter (Nora) possible at (8, 8) if her quest is active."
+  ]
+}

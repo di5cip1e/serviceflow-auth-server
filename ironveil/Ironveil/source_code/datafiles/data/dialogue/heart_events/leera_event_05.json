@@ -1,0 +1,83 @@
+{
+  "_meta": {
+    "description": "Heart event #5 for npc_leera: The Gift",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue / #34 Romance System"
+  },
+  "event_id": "heart_event_leera_05",
+  "npc_id": "npc_leera",
+  "heart_level_required": 7,
+  "location": "rm_int_workshop",
+  "time_range": {
+    "start": 14,
+    "end": 20
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_leera_event_5_complete",
+  "heart_bonus": 50,
+  "title": "The Gift",
+  "lines": [
+    {
+      "speaker": "narrator",
+      "text": "[Leera arrives at the workshop with an unusual expression]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "Jack. I need you to build something for me.",
+      "portrait": "determined"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "An expedition scanner. Longer range than anything we have.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "narrator",
+      "text": "[You spend the afternoon building it together]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "You didn't ask why. You just... started building.",
+      "portrait": "surprised"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "Nobody's ever just... helped like that. No questions.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "You asked. That was enough.",
+          "flag": "leera_gift_simple"
+        },
+        {
+          "text": "Your expeditions keep this town safe. It's worth building.",
+          "flag": "leera_gift_practical"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "Jack, I...",
+      "portrait": "embarrassed"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "...I'm really glad you came to Coppervale.",
+      "portrait": "happy"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "Like, REALLY glad. Don't make me say it twice.",
+      "portrait": "embarrassed"
+    }
+  ]
+}

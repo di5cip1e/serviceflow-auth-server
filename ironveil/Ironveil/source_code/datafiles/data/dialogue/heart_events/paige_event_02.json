@@ -1,0 +1,78 @@
+{
+  "_meta": {
+    "description": "Heart event #2 for npc_paige: The Late Night",
+    "version": "1.0",
+    "objective": "#33/#34"
+  },
+  "event_id": "heart_event_paige_02",
+  "npc_id": "npc_paige",
+  "heart_level_required": 3,
+  "location": "rm_int_archive",
+  "time_range": {
+    "start": 19,
+    "end": 22
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_paige_event_2_complete",
+  "heart_bonus": 50,
+  "title": "The Late Night",
+  "lines": [
+    {
+      "speaker": "narrator",
+      "text": "[Late evening. Paige and Jack research a blueprint together]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "Cross-reference the technical specifications with appendix C.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "The indexing system is chronological within each section.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "narrator",
+      "text": "[Hours pass. The candles burn low]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "...I haven't worked with someone like this in years.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "Wren used to help me catalogue. He had no patience for organization.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "But he'd sit here all night if I asked. Just... keeping me company.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "He sounds like a good man.",
+          "flag": "paige_late_kind"
+        },
+        {
+          "text": "I'm happy to keep you company.",
+          "flag": "paige_late_offer"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "...Yes. He was. Thank you for not changing the subject.",
+      "portrait": "neutral"
+    }
+  ]
+}

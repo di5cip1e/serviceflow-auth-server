@@ -1,0 +1,30 @@
+{
+  "room_id": "rm_int_clinic",
+  "display_name": "Doc Bramble's Clinic",
+  "width_tiles": 12,
+  "height_tiles": 8,
+  "tile_size": 16,
+  "parent_room": "rm_town_coppervale",
+
+  "exits": [
+    { "id": "door_main", "tiles": { "x1": 5, "y1": 7, "x2": 6, "y2": 7 }, "target_room": "rm_town_coppervale", "target_pos": [47, 34], "collision_type": 3 }
+  ],
+
+  "transitions_internal": [
+    { "id": "internal_door", "tiles": { "x1": 4, "y1": 4, "x2": 4, "y2": 4 }, "note": "Separates waiting area from treatment area" }
+  ],
+
+  "stations": [],
+
+  "furniture": [
+    { "id": "curtained_beds", "name": "Curtained Beds",   "pos": [2, 2],  "size": [2, 2], "type": "DECORATIVE",  "collision_type": 1 },
+    { "id": "patient_beds",   "name": "Patient Beds",     "pos": [6, 2],  "size": [2, 2], "type": "DECORATIVE",  "collision_type": 1 },
+    { "id": "medicine_cab",   "name": "Medicine Cabinet",  "pos": [9, 2],  "size": [2, 2], "type": "SHOP",        "collision_type": 2, "interaction": "buy_medical" },
+    { "id": "bookshelf",      "name": "Medical Bookshelf", "pos": [2, 5],  "size": [2, 1], "type": "DECORATIVE",  "collision_type": 1 }
+  ],
+
+  "npc_positions": [
+    { "npc_id": "npc_bramble",  "pos": [3, 5], "note": "Near bookshelf" },
+    { "npc_id": "npc_michelle", "pos": [9, 5], "note": "Nurse assistant area" }
+  ]
+}

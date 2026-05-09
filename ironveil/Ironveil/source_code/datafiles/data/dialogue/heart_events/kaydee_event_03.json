@@ -1,0 +1,78 @@
+{
+  "_meta": {
+    "description": "Heart event #3 for npc_kaydee: After Hours",
+    "version": "1.0",
+    "objective": "#33/#34"
+  },
+  "event_id": "heart_event_kaydee_03",
+  "npc_id": "npc_kaydee",
+  "heart_level_required": 5,
+  "location": "rm_int_rusty_gear",
+  "time_range": {
+    "start": 22,
+    "end": 23
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_kaydee_event_3_complete",
+  "heart_bonus": 50,
+  "title": "After Hours",
+  "lines": [
+    {
+      "speaker": "narrator",
+      "text": "[Late night. The tavern is empty. Kaydee is cleaning alone]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "Closing time was an hour ago, engineer.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "...But I don't feel like kicking you out tonight.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "You ever notice how different this place is when it's empty?",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "During the day it's noise and laughter and performance.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "At night it's just... a room. With a woman wiping tables.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "It's a good room. With a remarkable woman.",
+          "flag": "kaydee_late_compliment"
+        },
+        {
+          "text": "You don't have to perform for me.",
+          "flag": "kaydee_late_real"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "...Careful, Jack. Flattery after midnight is dangerous.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "I might start believing you mean it.",
+      "portrait": "thoughtful"
+    }
+  ]
+}

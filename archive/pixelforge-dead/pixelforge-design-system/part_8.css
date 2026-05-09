@@ -1,0 +1,1759 @@
+@charset "utf-8";
+
+.fa { font-family: var(--fa-style-family,"Font Awesome 6 Free"); font-weight: var(--fa-style,900); }
+
+.fa, .fa-brands, .fa-classic, .fa-regular, .fa-sharp, .fa-solid, .fab, .far, .fas { -webkit-font-smoothing: antialiased; display: var(--fa-display,inline-block); font-style: normal; font-variant: normal; line-height: 1; text-rendering: auto; }
+
+.fa-classic, .fa-regular, .fa-solid, .far, .fas { font-family: "Font Awesome 6 Free"; }
+
+.fa-brands, .fab { font-family: "Font Awesome 6 Brands"; }
+
+.fa-1x { font-size: 1em; }
+
+.fa-2x { font-size: 2em; }
+
+.fa-3x { font-size: 3em; }
+
+.fa-4x { font-size: 4em; }
+
+.fa-5x { font-size: 5em; }
+
+.fa-6x { font-size: 6em; }
+
+.fa-7x { font-size: 7em; }
+
+.fa-8x { font-size: 8em; }
+
+.fa-9x { font-size: 9em; }
+
+.fa-10x { font-size: 10em; }
+
+.fa-2xs { font-size: 0.625em; line-height: 0.1em; vertical-align: 0.225em; }
+
+.fa-xs { font-size: 0.75em; line-height: 0.08333em; vertical-align: 0.125em; }
+
+.fa-sm { font-size: 0.875em; line-height: 0.07143em; vertical-align: 0.05357em; }
+
+.fa-lg { font-size: 1.25em; line-height: 0.05em; vertical-align: -0.075em; }
+
+.fa-xl { font-size: 1.5em; line-height: 0.04167em; vertical-align: -0.125em; }
+
+.fa-2xl { font-size: 2em; line-height: 0.03125em; vertical-align: -0.1875em; }
+
+.fa-fw { text-align: center; width: 1.25em; }
+
+.fa-ul { list-style-type: none; margin-left: var(--fa-li-margin,2.5em); padding-left: 0px; }
+
+.fa-ul > li { position: relative; }
+
+.fa-li { left: calc(var(--fa-li-width, 2em)*-1); position: absolute; text-align: center; width: var(--fa-li-width,2em); line-height: inherit; }
+
+.fa-border { border-radius: var(--fa-border-radius,.1em); border: var(--fa-border-width,.08em) var(--fa-border-style,solid) var(--fa-border-color,#eee); padding: var(--fa-border-padding,.2em .25em .15em); }
+
+.fa-pull-left { float: left; margin-right: var(--fa-pull-margin,.3em); }
+
+.fa-pull-right { float: right; margin-left: var(--fa-pull-margin,.3em); }
+
+.fa-beat { animation-name: fa-beat; animation-delay: var(--fa-animation-delay,0s); animation-direction: var(--fa-animation-direction,normal); animation-duration: var(--fa-animation-duration,1s); animation-iteration-count: var(--fa-animation-iteration-count,infinite); animation-timing-function: var(--fa-animation-timing,ease-in-out); }
+
+.fa-bounce { animation-name: fa-bounce; animation-delay: var(--fa-animation-delay,0s); animation-direction: var(--fa-animation-direction,normal); animation-duration: var(--fa-animation-duration,1s); animation-iteration-count: var(--fa-animation-iteration-count,infinite); animation-timing-function: var(--fa-animation-timing,cubic-bezier(.28,.84,.42,1)); }
+
+.fa-fade { animation-name: fa-fade; animation-iteration-count: var(--fa-animation-iteration-count,infinite); animation-timing-function: var(--fa-animation-timing,cubic-bezier(.4,0,.6,1)); }
+
+.fa-beat-fade, .fa-fade { animation-delay: var(--fa-animation-delay,0s); animation-direction: var(--fa-animation-direction,normal); animation-duration: var(--fa-animation-duration,1s); }
+
+.fa-beat-fade { animation-name: fa-beat-fade; animation-iteration-count: var(--fa-animation-iteration-count,infinite); animation-timing-function: var(--fa-animation-timing,cubic-bezier(.4,0,.6,1)); }
+
+.fa-flip { animation-name: fa-flip; animation-delay: var(--fa-animation-delay,0s); animation-direction: var(--fa-animation-direction,normal); animation-duration: var(--fa-animation-duration,1s); animation-iteration-count: var(--fa-animation-iteration-count,infinite); animation-timing-function: var(--fa-animation-timing,ease-in-out); }
+
+.fa-shake { animation-name: fa-shake; animation-duration: var(--fa-animation-duration,1s); animation-iteration-count: var(--fa-animation-iteration-count,infinite); animation-timing-function: var(--fa-animation-timing,linear); }
+
+.fa-shake, .fa-spin { animation-delay: var(--fa-animation-delay,0s); animation-direction: var(--fa-animation-direction,normal); }
+
+.fa-spin { animation-name: fa-spin; animation-duration: var(--fa-animation-duration,2s); animation-iteration-count: var(--fa-animation-iteration-count,infinite); animation-timing-function: var(--fa-animation-timing,linear); }
+
+.fa-spin-reverse { --fa-animation-direction: reverse; }
+
+.fa-pulse, .fa-spin-pulse { animation-name: fa-spin; animation-direction: var(--fa-animation-direction,normal); animation-duration: var(--fa-animation-duration,1s); animation-iteration-count: var(--fa-animation-iteration-count,infinite); animation-timing-function: var(--fa-animation-timing,steps(8)); }
+
+@media (prefers-reduced-motion: reduce) {
+  .fa-beat, .fa-beat-fade, .fa-bounce, .fa-fade, .fa-flip, .fa-pulse, .fa-shake, .fa-spin, .fa-spin-pulse { animation-delay: -1ms; animation-duration: 1ms; animation-iteration-count: 1; transition-delay: 0s; transition-duration: 0s; }
+}
+
+@-webkit-keyframes fa-beat { 
+  0%, 90% { transform: scale(1); }
+  45% { transform: scale(var(--fa-beat-scale,1.25)); }
+}
+
+@keyframes fa-beat { 
+  0%, 90% { transform: scale(1); }
+  45% { transform: scale(var(--fa-beat-scale,1.25)); }
+}
+
+@-webkit-keyframes fa-bounce { 
+  0% { transform: scale(1) translateY(0px); }
+  10% { transform: scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0); }
+  30% { transform: scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em)); }
+  50% { transform: scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0); }
+  57% { transform: scale(1) translateY(var(--fa-bounce-rebound,-.125em)); }
+  64% { transform: scale(1) translateY(0px); }
+  100% { transform: scale(1) translateY(0px); }
+}
+
+@keyframes fa-bounce { 
+  0% { transform: scale(1) translateY(0px); }
+  10% { transform: scale(var(--fa-bounce-start-scale-x,1.1),var(--fa-bounce-start-scale-y,.9)) translateY(0); }
+  30% { transform: scale(var(--fa-bounce-jump-scale-x,.9),var(--fa-bounce-jump-scale-y,1.1)) translateY(var(--fa-bounce-height,-.5em)); }
+  50% { transform: scale(var(--fa-bounce-land-scale-x,1.05),var(--fa-bounce-land-scale-y,.95)) translateY(0); }
+  57% { transform: scale(1) translateY(var(--fa-bounce-rebound,-.125em)); }
+  64% { transform: scale(1) translateY(0px); }
+  100% { transform: scale(1) translateY(0px); }
+}
+
+@-webkit-keyframes fa-fade { 
+  50% { opacity: var(--fa-fade-opacity,.4); }
+}
+
+@keyframes fa-fade { 
+  50% { opacity: var(--fa-fade-opacity,.4); }
+}
+
+@-webkit-keyframes fa-beat-fade { 
+  0%, 100% { opacity: var(--fa-beat-fade-opacity,.4); transform: scale(1); }
+  50% { opacity: 1; transform: scale(var(--fa-beat-fade-scale,1.125)); }
+}
+
+@keyframes fa-beat-fade { 
+  0%, 100% { opacity: var(--fa-beat-fade-opacity,.4); transform: scale(1); }
+  50% { opacity: 1; transform: scale(var(--fa-beat-fade-scale,1.125)); }
+}
+
+@-webkit-keyframes fa-flip { 
+  50% { transform: rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg)); }
+}
+
+@keyframes fa-flip { 
+  50% { transform: rotate3d(var(--fa-flip-x,0),var(--fa-flip-y,1),var(--fa-flip-z,0),var(--fa-flip-angle,-180deg)); }
+}
+
+@-webkit-keyframes fa-shake { 
+  0% { transform: rotate(-15deg); }
+  4% { transform: rotate(15deg); }
+  8%, 24% { transform: rotate(-18deg); }
+  12%, 28% { transform: rotate(18deg); }
+  16% { transform: rotate(-22deg); }
+  20% { transform: rotate(22deg); }
+  32% { transform: rotate(-12deg); }
+  36% { transform: rotate(12deg); }
+  40%, 100% { transform: rotate(0deg); }
+}
+
+@keyframes fa-shake { 
+  0% { transform: rotate(-15deg); }
+  4% { transform: rotate(15deg); }
+  8%, 24% { transform: rotate(-18deg); }
+  12%, 28% { transform: rotate(18deg); }
+  16% { transform: rotate(-22deg); }
+  20% { transform: rotate(22deg); }
+  32% { transform: rotate(-12deg); }
+  36% { transform: rotate(12deg); }
+  40%, 100% { transform: rotate(0deg); }
+}
+
+@-webkit-keyframes fa-spin { 
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(1turn); }
+}
+
+@keyframes fa-spin { 
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(1turn); }
+}
+
+.fa-rotate-90 { transform: rotate(90deg); }
+
+.fa-rotate-180 { transform: rotate(180deg); }
+
+.fa-rotate-270 { transform: rotate(270deg); }
+
+.fa-flip-horizontal { transform: scaleX(-1); }
+
+.fa-flip-vertical { transform: scaleY(-1); }
+
+.fa-flip-both, .fa-flip-horizontal.fa-flip-vertical { transform: scale(-1); }
+
+.fa-rotate-by { transform: rotate(var(--fa-rotate-angle,none)); }
+
+.fa-stack { display: inline-block; height: 2em; line-height: 2em; position: relative; vertical-align: middle; width: 2.5em; }
+
+.fa-stack-1x, .fa-stack-2x { left: 0px; position: absolute; text-align: center; width: 100%; z-index: var(--fa-stack-z-index,auto); }
+
+.fa-stack-1x { line-height: inherit; }
+
+.fa-stack-2x { font-size: 2em; }
+
+.fa-inverse { color: var(--fa-inverse,#fff); }
+
+.fa-0::before { content: "0"; }
+
+.fa-1::before { content: "1"; }
+
+.fa-2::before { content: "2"; }
+
+.fa-3::before { content: "3"; }
+
+.fa-4::before { content: "4"; }
+
+.fa-5::before { content: "5"; }
+
+.fa-6::before { content: "6"; }
+
+.fa-7::before { content: "7"; }
+
+.fa-8::before { content: "8"; }
+
+.fa-9::before { content: "9"; }
+
+.fa-fill-drip::before { content: ""; }
+
+.fa-arrows-to-circle::before { content: ""; }
+
+.fa-chevron-circle-right::before, .fa-circle-chevron-right::before { content: ""; }
+
+.fa-at::before { content: "@"; }
+
+.fa-trash-alt::before, .fa-trash-can::before { content: ""; }
+
+.fa-text-height::before { content: ""; }
+
+.fa-user-times::before, .fa-user-xmark::before { content: ""; }
+
+.fa-stethoscope::before { content: ""; }
+
+.fa-comment-alt::before, .fa-message::before { content: ""; }
+
+.fa-info::before { content: ""; }
+
+.fa-compress-alt::before, .fa-down-left-and-up-right-to-center::before { content: ""; }
+
+.fa-explosion::before { content: ""; }
+
+.fa-file-alt::before, .fa-file-lines::before, .fa-file-text::before { content: ""; }
+
+.fa-wave-square::before { content: ""; }
+
+.fa-ring::before { content: ""; }
+
+.fa-building-un::before { content: ""; }
+
+.fa-dice-three::before { content: ""; }
+
+.fa-calendar-alt::before, .fa-calendar-days::before { content: ""; }
+
+.fa-anchor-circle-check::before { content: ""; }
+
+.fa-building-circle-arrow-right::before { content: ""; }
+
+.fa-volleyball-ball::before, .fa-volleyball::before { content: ""; }
+
+.fa-arrows-up-to-line::before { content: ""; }
+
+.fa-sort-desc::before, .fa-sort-down::before { content: ""; }
+
+.fa-circle-minus::before, .fa-minus-circle::before { content: ""; }
+
+.fa-door-open::before { content: ""; }
+
+.fa-right-from-bracket::before, .fa-sign-out-alt::before { content: ""; }
+
+.fa-atom::before { content: ""; }
+
+.fa-soap::before { content: ""; }
+
+.fa-heart-music-camera-bolt::before, .fa-icons::before { content: ""; }
+
+.fa-microphone-alt-slash::before, .fa-microphone-lines-slash::before { content: ""; }
+
+.fa-bridge-circle-check::before { content: ""; }
+
+.fa-pump-medical::before { content: ""; }
+
+.fa-fingerprint::before { content: ""; }
+
+.fa-hand-point-right::before { content: ""; }
+
+.fa-magnifying-glass-location::before, .fa-search-location::before { content: ""; }
+
+.fa-forward-step::before, .fa-step-forward::before { content: ""; }
+
+.fa-face-smile-beam::before, .fa-smile-beam::before { content: ""; }
+
+.fa-flag-checkered::before { content: ""; }
+
+.fa-football-ball::before, .fa-football::before { content: ""; }
+
+.fa-school-circle-exclamation::before { content: ""; }
+
+.fa-crop::before { content: ""; }
+
+.fa-angle-double-down::before, .fa-angles-down::before { content: ""; }
+
+.fa-users-rectangle::before { content: ""; }
+
+.fa-people-roof::before { content: ""; }
+
+.fa-people-line::before { content: ""; }
+
+.fa-beer-mug-empty::before, .fa-beer::before { content: ""; }
+
+.fa-diagram-predecessor::before { content: ""; }
+
+.fa-arrow-up-long::before, .fa-long-arrow-up::before { content: ""; }
+
+.fa-burn::before, .fa-fire-flame-simple::before { content: ""; }
+
+.fa-male::before, .fa-person::before { content: ""; }
+
+.fa-laptop::before { content: ""; }
+
+.fa-file-csv::before { content: ""; }
+
+.fa-menorah::before { content: ""; }
+
+.fa-truck-plane::before { content: ""; }
+
+.fa-record-vinyl::before { content: ""; }
+
+.fa-face-grin-stars::before, .fa-grin-stars::before { content: ""; }
+
+.fa-bong::before { content: ""; }
+
+.fa-pastafarianism::before, .fa-spaghetti-monster-flying::before { content: ""; }
+
+.fa-arrow-down-up-across-line::before { content: ""; }
+
+.fa-spoon::before, .fa-utensil-spoon::before { content: ""; }
+
+.fa-jar-wheat::before { content: ""; }
+
+.fa-envelopes-bulk::before, .fa-mail-bulk::before { content: ""; }
+
+.fa-file-circle-exclamation::before { content: ""; }
+
+.fa-circle-h::before, .fa-hospital-symbol::before { content: ""; }
+
+.fa-pager::before { content: ""; }
+
+.fa-address-book::before, .fa-contact-book::before { content: ""; }
+
+.fa-strikethrough::before { content: ""; }
+
+.fa-k::before { content: "K"; }
+
+.fa-landmark-flag::before { content: ""; }
+
+.fa-pencil-alt::before, .fa-pencil::before { content: ""; }
+
+.fa-backward::before { content: ""; }
+
+.fa-caret-right::before { content: ""; }
+
+.fa-comments::before { content: ""; }
+
+.fa-file-clipboard::before, .fa-paste::before { content: ""; }
+
+.fa-code-pull-request::before { content: ""; }
+
+.fa-clipboard-list::before { content: ""; }
+
+.fa-truck-loading::before, .fa-truck-ramp-box::before { content: ""; }
+
+.fa-user-check::before { content: ""; }
+
+.fa-vial-virus::before { content: ""; }
+
+.fa-sheet-plastic::before { content: ""; }
+
+.fa-blog::before { content: ""; }
+
+.fa-user-ninja::before { content: ""; }
+
+.fa-person-arrow-up-from-line::before { content: ""; }
+
+.fa-scroll-torah::before, .fa-torah::before { content: ""; }
+
+.fa-broom-ball::before, .fa-quidditch-broom-ball::before, .fa-quidditch::before { content: ""; }
+
+.fa-toggle-off::before { content: ""; }
+
+.fa-archive::before, .fa-box-archive::before { content: ""; }
+
+.fa-person-drowning::before { content: ""; }
+
+.fa-arrow-down-9-1::before, .fa-sort-numeric-desc::before, .fa-sort-numeric-down-alt::before { content: ""; }
+
+.fa-face-grin-tongue-squint::before, .fa-grin-tongue-squint::before { content: ""; }
+
+.fa-spray-can::before { content: ""; }
+
+.fa-truck-monster::before { content: ""; }
+
+.fa-w::before { content: "W"; }
+
+.fa-earth-africa::before, .fa-globe-africa::before { content: ""; }
+
+.fa-rainbow::before { content: ""; }
+
+.fa-circle-notch::before { content: ""; }
+
+.fa-tablet-alt::before, .fa-tablet-screen-button::before { content: ""; }
+
+.fa-paw::before { content: ""; }
+
+.fa-cloud::before { content: ""; }
+
+.fa-trowel-bricks::before { content: ""; }
+
+.fa-face-flushed::before, .fa-flushed::before { content: ""; }
+
+.fa-hospital-user::before { content: ""; }
+
+.fa-tent-arrow-left-right::before { content: ""; }
+
+.fa-gavel::before, .fa-legal::before { content: ""; }
+
+.fa-binoculars::before { content: ""; }
+
+.fa-microphone-slash::before { content: ""; }
+
+.fa-box-tissue::before { content: ""; }
+
+.fa-motorcycle::before { content: ""; }
+
+.fa-bell-concierge::before, .fa-concierge-bell::before { content: ""; }
+
+.fa-pen-ruler::before, .fa-pencil-ruler::before { content: ""; }
+
+.fa-people-arrows-left-right::before, .fa-people-arrows::before { content: ""; }
+
+.fa-mars-and-venus-burst::before { content: ""; }
+
+.fa-caret-square-right::before, .fa-square-caret-right::before { content: ""; }
+
+.fa-cut::before, .fa-scissors::before { content: ""; }
+
+.fa-sun-plant-wilt::before { content: ""; }
+
+.fa-toilets-portable::before { content: ""; }
+
+.fa-hockey-puck::before { content: ""; }
+
+.fa-table::before { content: ""; }
+
+.fa-magnifying-glass-arrow-right::before { content: ""; }
+
+.fa-digital-tachograph::before, .fa-tachograph-digital::before { content: ""; }
+
+.fa-users-slash::before { content: ""; }
+
+.fa-clover::before { content: ""; }
+
+.fa-mail-reply::before, .fa-reply::before { content: ""; }
+
+.fa-star-and-crescent::before { content: ""; }
+
+.fa-house-fire::before { content: ""; }
+
+.fa-minus-square::before, .fa-square-minus::before { content: ""; }
+
+.fa-helicopter::before { content: ""; }
+
+.fa-compass::before { content: ""; }
+
+.fa-caret-square-down::before, .fa-square-caret-down::before { content: ""; }
+
+.fa-file-circle-question::before { content: ""; }
+
+.fa-laptop-code::before { content: ""; }
+
+.fa-swatchbook::before { content: ""; }
+
+.fa-prescription-bottle::before { content: ""; }
+
+.fa-bars::before, .fa-navicon::before { content: ""; }
+
+.fa-people-group::before { content: ""; }
+
+.fa-hourglass-3::before, .fa-hourglass-end::before { content: ""; }
+
+.fa-heart-broken::before, .fa-heart-crack::before { content: ""; }
+
+.fa-external-link-square-alt::before, .fa-square-up-right::before { content: ""; }
+
+.fa-face-kiss-beam::before, .fa-kiss-beam::before { content: ""; }
+
+.fa-film::before { content: ""; }
+
+.fa-ruler-horizontal::before { content: ""; }
+
+.fa-people-robbery::before { content: ""; }
+
+.fa-lightbulb::before { content: ""; }
+
+.fa-caret-left::before { content: ""; }
+
+.fa-circle-exclamation::before, .fa-exclamation-circle::before { content: ""; }
+
+.fa-school-circle-xmark::before { content: ""; }
+
+.fa-arrow-right-from-bracket::before, .fa-sign-out::before { content: ""; }
+
+.fa-chevron-circle-down::before, .fa-circle-chevron-down::before { content: ""; }
+
+.fa-unlock-alt::before, .fa-unlock-keyhole::before { content: ""; }
+
+.fa-cloud-showers-heavy::before { content: ""; }
+
+.fa-headphones-alt::before, .fa-headphones-simple::before { content: ""; }
+
+.fa-sitemap::before { content: ""; }
+
+.fa-circle-dollar-to-slot::before, .fa-donate::before { content: ""; }
+
+.fa-memory::before { content: ""; }
+
+.fa-road-spikes::before { content: ""; }
+
+.fa-fire-burner::before { content: ""; }
+
+.fa-flag::before { content: ""; }
+
+.fa-hanukiah::before { content: ""; }
+
+.fa-feather::before { content: ""; }
+
+.fa-volume-down::before, .fa-volume-low::before { content: ""; }
+
+.fa-comment-slash::before { content: ""; }
+
+.fa-cloud-sun-rain::before { content: ""; }
+
+.fa-compress::before { content: ""; }
+
+.fa-wheat-alt::before, .fa-wheat-awn::before { content: ""; }
+
+.fa-ankh::before { content: ""; }
+
+.fa-hands-holding-child::before { content: ""; }
+
+.fa-asterisk::before { content: "*"; }
+
+.fa-check-square::before, .fa-square-check::before { content: ""; }
+
+.fa-peseta-sign::before { content: ""; }
+
+.fa-header::before, .fa-heading::before { content: ""; }
+
+.fa-ghost::before { content: ""; }
+
+.fa-list-squares::before, .fa-list::before { content: ""; }
+
+.fa-phone-square-alt::before, .fa-square-phone-flip::before { content: ""; }
+
+.fa-cart-plus::before { content: ""; }
+
+.fa-gamepad::before { content: ""; }
+
+.fa-circle-dot::before, .fa-dot-circle::before { content: ""; }
+
+.fa-dizzy::before, .fa-face-dizzy::before { content: ""; }
+
+.fa-egg::before { content: ""; }
+
+.fa-house-medical-circle-xmark::before { content: ""; }
+
+.fa-campground::before { content: ""; }
+
+.fa-folder-plus::before { content: ""; }
+
+.fa-futbol-ball::before, .fa-futbol::before, .fa-soccer-ball::before { content: ""; }
+
+.fa-paint-brush::before, .fa-paintbrush::before { content: ""; }
+
+.fa-lock::before { content: ""; }
+
+.fa-gas-pump::before { content: ""; }
+
+.fa-hot-tub-person::before, .fa-hot-tub::before { content: ""; }
+
+.fa-map-location::before, .fa-map-marked::before { content: ""; }
+
+.fa-house-flood-water::before { content: ""; }
+
+.fa-tree::before { content: ""; }
+
+.fa-bridge-lock::before { content: ""; }
+
+.fa-sack-dollar::before { content: ""; }
+
+.fa-edit::before, .fa-pen-to-square::before { content: ""; }
+
+.fa-car-side::before { content: ""; }
+
+.fa-share-alt::before, .fa-share-nodes::before { content: ""; }
+
+.fa-heart-circle-minus::before { content: ""; }
+
+.fa-hourglass-2::before, .fa-hourglass-half::before { content: ""; }
+
+.fa-microscope::before { content: ""; }
+
+.fa-sink::before { content: ""; }
+
+.fa-bag-shopping::before, .fa-shopping-bag::before { content: ""; }
+
+.fa-arrow-down-z-a::before, .fa-sort-alpha-desc::before, .fa-sort-alpha-down-alt::before { content: ""; }
+
+.fa-mitten::before { content: ""; }
+
+.fa-person-rays::before { content: ""; }
+
+.fa-users::before { content: ""; }
+
+.fa-eye-slash::before { content: ""; }
+
+.fa-flask-vial::before { content: ""; }
+
+.fa-hand-paper::before, .fa-hand::before { content: ""; }
+
+.fa-om::before { content: ""; }
+
+.fa-worm::before { content: ""; }
+
+.fa-house-circle-xmark::before { content: ""; }
+
+.fa-plug::before { content: ""; }
+
+.fa-chevron-up::before { content: ""; }
+
+.fa-hand-spock::before { content: ""; }
+
+.fa-stopwatch::before { content: ""; }
+
+.fa-face-kiss::before, .fa-kiss::before { content: ""; }
+
+.fa-bridge-circle-xmark::before { content: ""; }
+
+.fa-face-grin-tongue::before, .fa-grin-tongue::before { content: ""; }
+
+.fa-chess-bishop::before { content: ""; }
+
+.fa-face-grin-wink::before, .fa-grin-wink::before { content: ""; }
+
+.fa-deaf::before, .fa-deafness::before, .fa-ear-deaf::before, .fa-hard-of-hearing::before { content: ""; }
+
+.fa-road-circle-check::before { content: ""; }
+
+.fa-dice-five::before { content: ""; }
+
+.fa-rss-square::before, .fa-square-rss::before { content: ""; }
+
+.fa-land-mine-on::before { content: ""; }
+
+.fa-i-cursor::before { content: ""; }
+
+.fa-stamp::before { content: ""; }
+
+.fa-stairs::before { content: ""; }
+
+.fa-i::before { content: "I"; }
+
+.fa-hryvnia-sign::before, .fa-hryvnia::before { content: ""; }
+
+.fa-pills::before { content: ""; }
+
+.fa-face-grin-wide::before, .fa-grin-alt::before { content: ""; }
+
+.fa-tooth::before { content: ""; }
+
+.fa-v::before { content: "V"; }
+
+.fa-bangladeshi-taka-sign::before { content: ""; }
+
+.fa-bicycle::before { content: ""; }
+
+.fa-rod-asclepius::before, .fa-rod-snake::before, .fa-staff-aesculapius::before, .fa-staff-snake::before { content: ""; }
+
+.fa-head-side-cough-slash::before { content: ""; }
+
+.fa-ambulance::before, .fa-truck-medical::before { content: ""; }
+
+.fa-wheat-awn-circle-exclamation::before { content: ""; }
+
+.fa-snowman::before { content: ""; }
+
+.fa-mortar-pestle::before { content: ""; }
+
+.fa-road-barrier::before { content: ""; }
+
+.fa-school::before { content: ""; }
+
+.fa-igloo::before { content: ""; }
+
+.fa-joint::before { content: ""; }
+
+.fa-angle-right::before { content: ""; }
+
+.fa-horse::before { content: ""; }
+
+.fa-q::before { content: "Q"; }
+
+.fa-g::before { content: "G"; }
+
+.fa-notes-medical::before { content: ""; }
+
+.fa-temperature-2::before, .fa-temperature-half::before, .fa-thermometer-2::before, .fa-thermometer-half::before { content: ""; }
+
+.fa-dong-sign::before { content: ""; }
+
+.fa-capsules::before { content: ""; }
+
+.fa-poo-bolt::before, .fa-poo-storm::before { content: ""; }
+
+.fa-face-frown-open::before, .fa-frown-open::before { content: ""; }
+
+.fa-hand-point-up::before { content: ""; }
+
+.fa-money-bill::before { content: ""; }
+
+.fa-bookmark::before { content: ""; }
+
+.fa-align-justify::before { content: ""; }
+
+.fa-umbrella-beach::before { content: ""; }
+
+.fa-helmet-un::before { content: ""; }
+
+.fa-bullseye::before { content: ""; }
+
+.fa-bacon::before { content: ""; }
+
+.fa-hand-point-down::before { content: ""; }
+
+.fa-arrow-up-from-bracket::before { content: ""; }
+
+.fa-folder-blank::before, .fa-folder::before { content: ""; }
+
+.fa-file-medical-alt::before, .fa-file-waveform::before { content: ""; }
+
+.fa-radiation::before { content: ""; }
+
+.fa-chart-simple::before { content: ""; }
+
+.fa-mars-stroke::before { content: ""; }
+
+.fa-vial::before { content: ""; }
+
+.fa-dashboard::before, .fa-gauge-med::before, .fa-gauge::before, .fa-tachometer-alt-average::before { content: ""; }
+
+.fa-magic-wand-sparkles::before, .fa-wand-magic-sparkles::before { content: ""; }
+
+.fa-e::before { content: "E"; }
+
+.fa-pen-alt::before, .fa-pen-clip::before { content: ""; }
+
+.fa-bridge-circle-exclamation::before { content: ""; }
+
+.fa-user::before { content: ""; }
+
+.fa-school-circle-check::before { content: ""; }
+
+.fa-dumpster::before { content: ""; }
+
+.fa-shuttle-van::before, .fa-van-shuttle::before { content: ""; }
+
+.fa-building-user::before { content: ""; }
+
+.fa-caret-square-left::before, .fa-square-caret-left::before { content: ""; }
+
+.fa-highlighter::before { content: ""; }
+
+.fa-key::before { content: ""; }
+
+.fa-bullhorn::before { content: ""; }
+
+.fa-globe::before { content: ""; }
+
+.fa-synagogue::before { content: ""; }
+
+.fa-person-half-dress::before { content: ""; }
+
+.fa-road-bridge::before { content: ""; }
+
+.fa-location-arrow::before { content: ""; }
+
+.fa-c::before { content: "C"; }
+
+.fa-tablet-button::before { content: ""; }
+
+.fa-building-lock::before { content: ""; }
+
+.fa-pizza-slice::before { content: ""; }
+
+.fa-money-bill-wave::before { content: ""; }
+
+.fa-area-chart::before, .fa-chart-area::before { content: ""; }
+
+.fa-house-flag::before { content: ""; }
+
+.fa-person-circle-minus::before { content: ""; }
+
+.fa-ban::before, .fa-cancel::before { content: ""; }
+
+.fa-camera-rotate::before { content: ""; }
+
+.fa-air-freshener::before, .fa-spray-can-sparkles::before { content: ""; }
+
+.fa-star::before { content: ""; }
+
+.fa-repeat::before { content: ""; }
+
+.fa-cross::before { content: ""; }
+
+.fa-box::before { content: ""; }
+
+.fa-venus-mars::before { content: ""; }
+
+.fa-arrow-pointer::before, .fa-mouse-pointer::before { content: ""; }
+
+.fa-expand-arrows-alt::before, .fa-maximize::before { content: ""; }
+
+.fa-charging-station::before { content: ""; }
+
+.fa-shapes::before, .fa-triangle-circle-square::before { content: ""; }
+
+.fa-random::before, .fa-shuffle::before { content: ""; }
+
+.fa-person-running::before, .fa-running::before { content: ""; }
+
+.fa-mobile-retro::before { content: ""; }
+
+.fa-grip-lines-vertical::before { content: ""; }
+
+.fa-spider::before { content: ""; }
+
+.fa-hands-bound::before { content: ""; }
+
+.fa-file-invoice-dollar::before { content: ""; }
+
+.fa-plane-circle-exclamation::before { content: ""; }
+
+.fa-x-ray::before { content: ""; }
+
+.fa-spell-check::before { content: ""; }
+
+.fa-slash::before { content: ""; }
+
+.fa-computer-mouse::before, .fa-mouse::before { content: ""; }
+
+.fa-arrow-right-to-bracket::before, .fa-sign-in::before { content: ""; }
+
+.fa-shop-slash::before, .fa-store-alt-slash::before { content: ""; }
+
+.fa-server::before { content: ""; }
+
+.fa-virus-covid-slash::before { content: ""; }
+
+.fa-shop-lock::before { content: ""; }
+
+.fa-hourglass-1::before, .fa-hourglass-start::before { content: ""; }
+
+.fa-blender-phone::before { content: ""; }
+
+.fa-building-wheat::before { content: ""; }
+
+.fa-person-breastfeeding::before { content: ""; }
+
+.fa-right-to-bracket::before, .fa-sign-in-alt::before { content: ""; }
+
+.fa-venus::before { content: ""; }
+
+.fa-passport::before { content: ""; }
+
+.fa-heart-pulse::before, .fa-heartbeat::before { content: ""; }
+
+.fa-people-carry-box::before, .fa-people-carry::before { content: ""; }
+
+.fa-temperature-high::before { content: ""; }
+
+.fa-microchip::before { content: ""; }
+
+.fa-crown::before { content: ""; }
+
+.fa-weight-hanging::before { content: ""; }
+
+.fa-xmarks-lines::before { content: ""; }
+
+.fa-file-prescription::before { content: ""; }
+
+.fa-weight-scale::before, .fa-weight::before { content: ""; }
+
+.fa-user-friends::before, .fa-user-group::before { content: ""; }
+
+.fa-arrow-up-a-z::before, .fa-sort-alpha-up::before { content: ""; }
+
+.fa-chess-knight::before { content: ""; }
+
+.fa-face-laugh-squint::before, .fa-laugh-squint::before { content: ""; }
+
+.fa-wheelchair::before { content: ""; }
+
+.fa-arrow-circle-up::before, .fa-circle-arrow-up::before { content: ""; }
+
+.fa-toggle-on::before { content: ""; }
+
+.fa-person-walking::before, .fa-walking::before { content: ""; }
+
+.fa-l::before { content: "L"; }
+
+.fa-fire::before { content: ""; }
+
+.fa-bed-pulse::before, .fa-procedures::before { content: ""; }
+
+.fa-shuttle-space::before, .fa-space-shuttle::before { content: ""; }
+
+.fa-face-laugh::before, .fa-laugh::before { content: ""; }
+
+.fa-folder-open::before { content: ""; }
+
+.fa-heart-circle-plus::before { content: ""; }
+
+.fa-code-fork::before { content: ""; }
+
+.fa-city::before { content: ""; }
+
+.fa-microphone-alt::before, .fa-microphone-lines::before { content: ""; }
+
+.fa-pepper-hot::before { content: ""; }
+
+.fa-unlock::before { content: ""; }
+
+.fa-colon-sign::before { content: ""; }
+
+.fa-headset::before { content: ""; }
+
+.fa-store-slash::before { content: ""; }
+
+.fa-road-circle-xmark::before { content: ""; }
+
+.fa-user-minus::before { content: ""; }
+
+.fa-mars-stroke-up::before, .fa-mars-stroke-v::before { content: ""; }
+
+.fa-champagne-glasses::before, .fa-glass-cheers::before { content: ""; }
+
+.fa-clipboard::before { content: ""; }
+
+.fa-house-circle-exclamation::before { content: ""; }
+
+.fa-file-arrow-up::before, .fa-file-upload::before { content: ""; }
+
+.fa-wifi-3::before, .fa-wifi-strong::before, .fa-wifi::before { content: ""; }
+
+.fa-bath::before, .fa-bathtub::before { content: ""; }
+
+.fa-underline::before { content: ""; }
+
+.fa-user-edit::before, .fa-user-pen::before { content: ""; }
+
+.fa-signature::before { content: ""; }
+
+.fa-stroopwafel::before { content: ""; }
+
+.fa-bold::before { content: ""; }
+
+.fa-anchor-lock::before { content: ""; }
+
+.fa-building-ngo::before { content: ""; }
+
+.fa-manat-sign::before { content: ""; }
+
+.fa-not-equal::before { content: ""; }
+
+.fa-border-style::before, .fa-border-top-left::before { content: ""; }
+
+.fa-map-location-dot::before, .fa-map-marked-alt::before { content: ""; }
+
+.fa-jedi::before { content: ""; }
+
+.fa-poll::before, .fa-square-poll-vertical::before { content: ""; }
+
+.fa-mug-hot::before { content: ""; }
+
+.fa-battery-car::before, .fa-car-battery::before { content: ""; }
+
+.fa-gift::before { content: ""; }
+
+.fa-dice-two::before { content: ""; }
+
+.fa-chess-queen::before { content: ""; }
+
+.fa-glasses::before { content: ""; }
+
+.fa-chess-board::before { content: ""; }
+
+.fa-building-circle-check::before { content: ""; }
+
+.fa-person-chalkboard::before { content: ""; }
+
+.fa-mars-stroke-h::before, .fa-mars-stroke-right::before { content: ""; }
+
+.fa-hand-back-fist::before, .fa-hand-rock::before { content: ""; }
+
+.fa-caret-square-up::before, .fa-square-caret-up::before { content: ""; }
+
+.fa-cloud-showers-water::before { content: ""; }
+
+.fa-bar-chart::before, .fa-chart-bar::before { content: ""; }
+
+.fa-hands-bubbles::before, .fa-hands-wash::before { content: ""; }
+
+.fa-less-than-equal::before { content: ""; }
+
+.fa-train::before { content: ""; }
+
+.fa-eye-low-vision::before, .fa-low-vision::before { content: ""; }
+
+.fa-crow::before { content: ""; }
+
+.fa-sailboat::before { content: ""; }
+
+.fa-window-restore::before { content: ""; }
+
+.fa-plus-square::before, .fa-square-plus::before { content: ""; }
+
+.fa-torii-gate::before { content: ""; }
+
+.fa-frog::before { content: ""; }
+
+.fa-bucket::before { content: ""; }
+
+.fa-image::before { content: ""; }
+
+.fa-microphone::before { content: ""; }
+
+.fa-cow::before { content: ""; }
+
+.fa-caret-up::before { content: ""; }
+
+.fa-screwdriver::before { content: ""; }
+
+.fa-folder-closed::before { content: ""; }
+
+.fa-house-tsunami::before { content: ""; }
+
+.fa-square-nfi::before { content: ""; }
+
+.fa-arrow-up-from-ground-water::before { content: ""; }
+
+.fa-glass-martini-alt::before, .fa-martini-glass::before { content: ""; }
+
+.fa-rotate-back::before, .fa-rotate-backward::before, .fa-rotate-left::before, .fa-undo-alt::before { content: ""; }
+
+.fa-columns::before, .fa-table-columns::before { content: ""; }
+
+.fa-lemon::before { content: ""; }
+
+.fa-head-side-mask::before { content: ""; }
+
+.fa-handshake::before { content: ""; }
+
+.fa-gem::before { content: ""; }
+
+.fa-dolly-box::before, .fa-dolly::before { content: ""; }
+
+.fa-smoking::before { content: ""; }
+
+.fa-compress-arrows-alt::before, .fa-minimize::before { content: ""; }
+
+.fa-monument::before { content: ""; }
+
+.fa-snowplow::before { content: ""; }
+
+.fa-angle-double-right::before, .fa-angles-right::before { content: ""; }
+
+.fa-cannabis::before { content: ""; }
+
+.fa-circle-play::before, .fa-play-circle::before { content: ""; }
+
+.fa-tablets::before { content: ""; }
+
+.fa-ethernet::before { content: ""; }
+
+.fa-eur::before, .fa-euro-sign::before, .fa-euro::before { content: ""; }
+
+.fa-chair::before { content: ""; }
+
+.fa-check-circle::before, .fa-circle-check::before { content: ""; }
+
+.fa-circle-stop::before, .fa-stop-circle::before { content: ""; }
+
+.fa-compass-drafting::before, .fa-drafting-compass::before { content: ""; }
+
+.fa-plate-wheat::before { content: ""; }
+
+.fa-icicles::before { content: ""; }
+
+.fa-person-shelter::before { content: ""; }
+
+.fa-neuter::before { content: ""; }
+
+.fa-id-badge::before { content: ""; }
+
+.fa-marker::before { content: ""; }
+
+.fa-face-laugh-beam::before, .fa-laugh-beam::before { content: ""; }
+
+.fa-helicopter-symbol::before { content: ""; }
+
+.fa-universal-access::before { content: ""; }
+
+.fa-chevron-circle-up::before, .fa-circle-chevron-up::before { content: ""; }
+
+.fa-lari-sign::before { content: ""; }
+
+.fa-volcano::before { content: ""; }
+
+.fa-person-walking-dashed-line-arrow-right::before { content: ""; }
+
+.fa-gbp::before, .fa-pound-sign::before, .fa-sterling-sign::before { content: ""; }
+
+.fa-viruses::before { content: ""; }
+
+.fa-square-person-confined::before { content: ""; }
+
+.fa-user-tie::before { content: ""; }
+
+.fa-arrow-down-long::before, .fa-long-arrow-down::before { content: ""; }
+
+.fa-tent-arrow-down-to-line::before { content: ""; }
+
+.fa-certificate::before { content: ""; }
+
+.fa-mail-reply-all::before, .fa-reply-all::before { content: ""; }
+
+.fa-suitcase::before { content: ""; }
+
+.fa-person-skating::before, .fa-skating::before { content: ""; }
+
+.fa-filter-circle-dollar::before, .fa-funnel-dollar::before { content: ""; }
+
+.fa-camera-retro::before { content: ""; }
+
+.fa-arrow-circle-down::before, .fa-circle-arrow-down::before { content: ""; }
+
+.fa-arrow-right-to-file::before, .fa-file-import::before { content: ""; }
+
+.fa-external-link-square::before, .fa-square-arrow-up-right::before { content: ""; }
+
+.fa-box-open::before { content: ""; }
+
+.fa-scroll::before { content: ""; }
+
+.fa-spa::before { content: ""; }
+
+.fa-location-pin-lock::before { content: ""; }
+
+.fa-pause::before { content: ""; }
+
+.fa-hill-avalanche::before { content: ""; }
+
+.fa-temperature-0::before, .fa-temperature-empty::before, .fa-thermometer-0::before, .fa-thermometer-empty::before { content: ""; }
+
+.fa-bomb::before { content: ""; }
+
+.fa-registered::before { content: ""; }
+
+.fa-address-card::before, .fa-contact-card::before, .fa-vcard::before { content: ""; }
+
+.fa-balance-scale-right::before, .fa-scale-unbalanced-flip::before { content: ""; }
+
+.fa-subscript::before { content: ""; }
+
+.fa-diamond-turn-right::before, .fa-directions::before { content: ""; }
+
+.fa-burst::before { content: ""; }
+
+.fa-house-laptop::before, .fa-laptop-house::before { content: ""; }
+
+.fa-face-tired::before, .fa-tired::before { content: ""; }
+
+.fa-money-bills::before { content: ""; }
+
+.fa-smog::before { content: ""; }
+
+.fa-crutch::before { content: ""; }
+
+.fa-cloud-arrow-up::before, .fa-cloud-upload-alt::before, .fa-cloud-upload::before { content: ""; }
+
+.fa-palette::before { content: ""; }
+
+.fa-arrows-turn-right::before { content: ""; }
+
+.fa-vest::before { content: ""; }
+
+.fa-ferry::before { content: ""; }
+
+.fa-arrows-down-to-people::before { content: ""; }
+
+.fa-seedling::before, .fa-sprout::before { content: ""; }
+
+.fa-arrows-alt-h::before, .fa-left-right::before { content: ""; }
+
+.fa-boxes-packing::before { content: ""; }
+
+.fa-arrow-circle-left::before, .fa-circle-arrow-left::before { content: ""; }
+
+.fa-group-arrows-rotate::before { content: ""; }
+
+.fa-bowl-food::before { content: ""; }
+
+.fa-candy-cane::before { content: ""; }
+
+.fa-arrow-down-wide-short::before, .fa-sort-amount-asc::before, .fa-sort-amount-down::before { content: ""; }
+
+.fa-cloud-bolt::before, .fa-thunderstorm::before { content: ""; }
+
+.fa-remove-format::before, .fa-text-slash::before { content: ""; }
+
+.fa-face-smile-wink::before, .fa-smile-wink::before { content: ""; }
+
+.fa-file-word::before { content: ""; }
+
+.fa-file-powerpoint::before { content: ""; }
+
+.fa-arrows-h::before, .fa-arrows-left-right::before { content: ""; }
+
+.fa-house-lock::before { content: ""; }
+
+.fa-cloud-arrow-down::before, .fa-cloud-download-alt::before, .fa-cloud-download::before { content: ""; }
+
+.fa-children::before { content: ""; }
+
+.fa-blackboard::before, .fa-chalkboard::before { content: ""; }
+
+.fa-user-alt-slash::before, .fa-user-large-slash::before { content: ""; }
+
+.fa-envelope-open::before { content: ""; }
+
+.fa-handshake-alt-slash::before, .fa-handshake-simple-slash::before { content: ""; }
+
+.fa-mattress-pillow::before { content: ""; }
+
+.fa-guarani-sign::before { content: ""; }
+
+.fa-arrows-rotate::before, .fa-refresh::before, .fa-sync::before { content: ""; }
+
+.fa-fire-extinguisher::before { content: ""; }
+
+.fa-cruzeiro-sign::before { content: ""; }
+
+.fa-greater-than-equal::before { content: ""; }
+
+.fa-shield-alt::before, .fa-shield-halved::before { content: ""; }
+
+.fa-atlas::before, .fa-book-atlas::before { content: ""; }
+
+.fa-virus::before { content: ""; }
+
+.fa-envelope-circle-check::before { content: ""; }
+
+.fa-layer-group::before { content: ""; }
+
+.fa-arrows-to-dot::before { content: ""; }
+
+.fa-archway::before { content: ""; }
+
+.fa-heart-circle-check::before { content: ""; }
+
+.fa-house-chimney-crack::before, .fa-house-damage::before { content: ""; }
+
+.fa-file-archive::before, .fa-file-zipper::before { content: ""; }
+
+.fa-square::before { content: ""; }
+
+.fa-glass-martini::before, .fa-martini-glass-empty::before { content: ""; }
+
+.fa-couch::before { content: ""; }
+
+.fa-cedi-sign::before { content: ""; }
+
+.fa-italic::before { content: ""; }
+
+.fa-church::before { content: ""; }
+
+.fa-comments-dollar::before { content: ""; }
+
+.fa-democrat::before { content: ""; }
+
+.fa-z::before { content: "Z"; }
+
+.fa-person-skiing::before, .fa-skiing::before { content: ""; }
+
+.fa-road-lock::before { content: ""; }
+
+.fa-a::before { content: "A"; }
+
+.fa-temperature-arrow-down::before, .fa-temperature-down::before { content: ""; }
+
+.fa-feather-alt::before, .fa-feather-pointed::before { content: ""; }
+
+.fa-p::before { content: "P"; }
+
+.fa-snowflake::before { content: ""; }
+
+.fa-newspaper::before { content: ""; }
+
+.fa-ad::before, .fa-rectangle-ad::before { content: ""; }
+
+.fa-arrow-circle-right::before, .fa-circle-arrow-right::before { content: ""; }
+
+.fa-filter-circle-xmark::before { content: ""; }
+
+.fa-locust::before { content: ""; }
+
+.fa-sort::before, .fa-unsorted::before { content: ""; }
+
+.fa-list-1-2::before, .fa-list-numeric::before, .fa-list-ol::before { content: ""; }
+
+.fa-person-dress-burst::before { content: ""; }
+
+.fa-money-check-alt::before, .fa-money-check-dollar::before { content: ""; }
+
+.fa-vector-square::before { content: ""; }
+
+.fa-bread-slice::before { content: ""; }
+
+.fa-language::before { content: ""; }
+
+.fa-face-kiss-wink-heart::before, .fa-kiss-wink-heart::before { content: ""; }
+
+.fa-filter::before { content: ""; }
+
+.fa-question::before { content: "?"; }
+
+.fa-file-signature::before { content: ""; }
+
+.fa-arrows-alt::before, .fa-up-down-left-right::before { content: ""; }
+
+.fa-house-chimney-user::before { content: ""; }
+
+.fa-hand-holding-heart::before { content: ""; }
+
+.fa-puzzle-piece::before { content: ""; }
+
+.fa-money-check::before { content: ""; }
+
+.fa-star-half-alt::before, .fa-star-half-stroke::before { content: ""; }
+
+.fa-code::before { content: ""; }
+
+.fa-glass-whiskey::before, .fa-whiskey-glass::before { content: ""; }
+
+.fa-building-circle-exclamation::before { content: ""; }
+
+.fa-magnifying-glass-chart::before { content: ""; }
+
+.fa-arrow-up-right-from-square::before, .fa-external-link::before { content: ""; }
+
+.fa-cubes-stacked::before { content: ""; }
+
+.fa-krw::before, .fa-won-sign::before, .fa-won::before { content: ""; }
+
+.fa-virus-covid::before { content: ""; }
+
+.fa-austral-sign::before { content: ""; }
+
+.fa-f::before { content: "F"; }
+
+.fa-leaf::before { content: ""; }
+
+.fa-road::before { content: ""; }
+
+.fa-cab::before, .fa-taxi::before { content: ""; }
+
+.fa-person-circle-plus::before { content: ""; }
+
+.fa-chart-pie::before, .fa-pie-chart::before { content: ""; }
+
+.fa-bolt-lightning::before { content: ""; }
+
+.fa-sack-xmark::before { content: ""; }
+
+.fa-file-excel::before { content: ""; }
+
+.fa-file-contract::before { content: ""; }
+
+.fa-fish-fins::before { content: ""; }
+
+.fa-building-flag::before { content: ""; }
+
+.fa-face-grin-beam::before, .fa-grin-beam::before { content: ""; }
+
+.fa-object-ungroup::before { content: ""; }
+
+.fa-poop::before { content: ""; }
+
+.fa-location-pin::before, .fa-map-marker::before { content: ""; }
+
+.fa-kaaba::before { content: ""; }
+
+.fa-toilet-paper::before { content: ""; }
+
+.fa-hard-hat::before, .fa-hat-hard::before, .fa-helmet-safety::before { content: ""; }
+
+.fa-eject::before { content: ""; }
+
+.fa-arrow-alt-circle-right::before, .fa-circle-right::before { content: ""; }
+
+.fa-plane-circle-check::before { content: ""; }
+
+.fa-face-rolling-eyes::before, .fa-meh-rolling-eyes::before { content: ""; }
+
+.fa-object-group::before { content: ""; }
+
+.fa-chart-line::before, .fa-line-chart::before { content: ""; }
+
+.fa-mask-ventilator::before { content: ""; }
+
+.fa-arrow-right::before { content: ""; }
+
+.fa-map-signs::before, .fa-signs-post::before { content: ""; }
+
+.fa-cash-register::before { content: ""; }
+
+.fa-person-circle-question::before { content: ""; }
+
+.fa-h::before { content: "H"; }
+
+.fa-tarp::before { content: ""; }
+
+.fa-screwdriver-wrench::before, .fa-tools::before { content: ""; }
+
+.fa-arrows-to-eye::before { content: ""; }
+
+.fa-plug-circle-bolt::before { content: ""; }
+
+.fa-heart::before { content: ""; }
+
+.fa-mars-and-venus::before { content: ""; }
+
+.fa-home-user::before, .fa-house-user::before { content: ""; }
+
+.fa-dumpster-fire::before { content: ""; }
+
+.fa-house-crack::before { content: ""; }
+
+.fa-cocktail::before, .fa-martini-glass-citrus::before { content: ""; }
+
+.fa-face-surprise::before, .fa-surprise::before { content: ""; }
+
+.fa-bottle-water::before { content: ""; }
+
+.fa-circle-pause::before, .fa-pause-circle::before { content: ""; }
+
+.fa-toilet-paper-slash::before { content: ""; }
+
+.fa-apple-alt::before, .fa-apple-whole::before { content: ""; }
+
+.fa-kitchen-set::before { content: ""; }
+
+.fa-r::before { content: "R"; }
+
+.fa-temperature-1::before, .fa-temperature-quarter::before, .fa-thermometer-1::before, .fa-thermometer-quarter::before { content: ""; }
+
+.fa-cube::before { content: ""; }
+
+.fa-bitcoin-sign::before { content: ""; }
+
+.fa-shield-dog::before { content: ""; }
+
+.fa-solar-panel::before { content: ""; }
+
+.fa-lock-open::before { content: ""; }
+
+.fa-elevator::before { content: ""; }
+
+.fa-money-bill-transfer::before { content: ""; }
+
+.fa-money-bill-trend-up::before { content: ""; }
+
+.fa-house-flood-water-circle-arrow-right::before { content: ""; }
+
+.fa-poll-h::before, .fa-square-poll-horizontal::before { content: ""; }
+
+.fa-circle::before { content: ""; }
+
+.fa-backward-fast::before, .fa-fast-backward::before { content: ""; }
+
+.fa-recycle::before { content: ""; }
+
+.fa-user-astronaut::before { content: ""; }
+
+.fa-plane-slash::before { content: ""; }
+
+.fa-trademark::before { content: ""; }
+
+.fa-basketball-ball::before, .fa-basketball::before { content: ""; }
+
+.fa-satellite-dish::before { content: ""; }
+
+.fa-arrow-alt-circle-up::before, .fa-circle-up::before { content: ""; }
+
+.fa-mobile-alt::before, .fa-mobile-screen-button::before { content: ""; }
+
+.fa-volume-high::before, .fa-volume-up::before { content: ""; }
+
+.fa-users-rays::before { content: ""; }
+
+.fa-wallet::before { content: ""; }
+
+.fa-clipboard-check::before { content: ""; }
+
+.fa-file-audio::before { content: ""; }
+
+.fa-burger::before, .fa-hamburger::before { content: ""; }
+
+.fa-wrench::before { content: ""; }
+
+.fa-bugs::before { content: ""; }
+
+.fa-rupee-sign::before, .fa-rupee::before { content: ""; }
+
+.fa-file-image::before { content: ""; }
+
+.fa-circle-question::before, .fa-question-circle::before { content: ""; }
+
+.fa-plane-departure::before { content: ""; }
+
+.fa-handshake-slash::before { content: ""; }
+
+.fa-book-bookmark::before { content: ""; }
+
+.fa-code-branch::before { content: ""; }
+
+.fa-hat-cowboy::before { content: ""; }
+
+.fa-bridge::before { content: ""; }
+
+.fa-phone-alt::before, .fa-phone-flip::before { content: ""; }
+
+.fa-truck-front::before { content: ""; }
+
+.fa-cat::before { content: ""; }
+
+.fa-anchor-circle-exclamation::before { content: ""; }
+
+.fa-truck-field::before { content: ""; }
+
+.fa-route::before { content: ""; }
+
+.fa-clipboard-question::before { content: ""; }
+
+.fa-panorama::before { content: ""; }
+
+.fa-comment-medical::before { content: ""; }
+
+.fa-teeth-open::before { content: ""; }
+
+.fa-file-circle-minus::before { content: ""; }
+
+.fa-tags::before { content: ""; }
+
+.fa-wine-glass::before { content: ""; }
+
+.fa-fast-forward::before, .fa-forward-fast::before { content: ""; }
+
+.fa-face-meh-blank::before, .fa-meh-blank::before { content: ""; }
+
+.fa-parking::before, .fa-square-parking::before { content: ""; }
+
+.fa-house-signal::before { content: ""; }
+
+.fa-bars-progress::before, .fa-tasks-alt::before { content: ""; }
+
+.fa-faucet-drip::before { content: ""; }
+
+.fa-cart-flatbed::before, .fa-dolly-flatbed::before { content: ""; }
+
+.fa-ban-smoking::before, .fa-smoking-ban::before { content: ""; }
+
+.fa-terminal::before { content: ""; }
+
+.fa-mobile-button::before { content: ""; }
+
+.fa-house-medical-flag::before { content: ""; }
+
+.fa-basket-shopping::before, .fa-shopping-basket::before { content: ""; }
+
+.fa-tape::before { content: ""; }
+
+.fa-bus-alt::before, .fa-bus-simple::before { content: ""; }
+
+.fa-eye::before { content: ""; }
+
+.fa-face-sad-cry::before, .fa-sad-cry::before { content: ""; }
+
+.fa-audio-description::before { content: ""; }
+
+.fa-person-military-to-person::before { content: ""; }
+
+.fa-file-shield::before { content: ""; }
+
+.fa-user-slash::before { content: ""; }
+
+.fa-pen::before { content: ""; }
+
+.fa-tower-observation::before { content: ""; }
+
+.fa-file-code::before { content: ""; }
+
+.fa-signal-5::before, .fa-signal-perfect::before, .fa-signal::before { content: ""; }
+
+.fa-bus::before { content: ""; }
+
+.fa-heart-circle-xmark::before { content: ""; }
+
+.fa-home-lg::before, .fa-house-chimney::before { content: ""; }
+
+.fa-window-maximize::before { content: ""; }
+
+.fa-face-frown::before, .fa-frown::before { content: ""; }
+
+.fa-prescription::before { content: ""; }
+
+.fa-shop::before, .fa-store-alt::before { content: ""; }
+
+.fa-floppy-disk::before, .fa-save::before { content: ""; }
+
+.fa-vihara::before { content: ""; }
+
+.fa-balance-scale-left::before, .fa-scale-unbalanced::before { content: ""; }
+
+.fa-sort-asc::before, .fa-sort-up::before { content: ""; }
+
+.fa-comment-dots::before, .fa-commenting::before { content: ""; }
+
+.fa-plant-wilt::before { content: ""; }
+
+.fa-diamond::before { content: ""; }
+
+.fa-face-grin-squint::before, .fa-grin-squint::before { content: ""; }
+
+.fa-hand-holding-dollar::before, .fa-hand-holding-usd::before { content: ""; }
+
+.fa-bacterium::before { content: ""; }
+
+.fa-hand-pointer::before { content: ""; }
+
+.fa-drum-steelpan::before { content: ""; }
+
+.fa-hand-scissors::before { content: ""; }
+
+.fa-hands-praying::before, .fa-praying-hands::before { content: ""; }
+
+.fa-arrow-right-rotate::before, .fa-arrow-rotate-forward::before, .fa-arrow-rotate-right::before, .fa-redo::before { content: ""; }
+
+.fa-biohazard::before { content: ""; }
+
+.fa-location-crosshairs::before, .fa-location::before { content: ""; }
+
+.fa-mars-double::before { content: ""; }
+
+.fa-child-dress::before { content: ""; }
+
+.fa-users-between-lines::before { content: ""; }
+
+.fa-lungs-virus::before { content: ""; }
+
+.fa-face-grin-tears::before, .fa-grin-tears::before { content: ""; }
+
+.fa-phone::before { content: ""; }
+
+.fa-calendar-times::before, .fa-calendar-xmark::before { content: ""; }
+
+.fa-child-reaching::before { content: ""; }
+
+.fa-head-side-virus::before { content: ""; }
+
+.fa-user-cog::before, .fa-user-gear::before { content: ""; }
+
+.fa-arrow-up-1-9::before, .fa-sort-numeric-up::before { content: ""; }
+
+.fa-door-closed::before { content: ""; }
+
+.fa-shield-virus::before { content: ""; }
+
+.fa-dice-six::before { content: ""; }
+
+.fa-mosquito-net::before { content: ""; }
+
+.fa-bridge-water::before { content: ""; }
+
+.fa-person-booth::before { content: ""; }
+
+.fa-text-width::before { content: ""; }
+
+.fa-hat-wizard::before { content: ""; }
+
+.fa-pen-fancy::before { content: ""; }
+
+.fa-digging::before, .fa-person-digging::before { content: ""; }
+
+.fa-trash::before { content: ""; }
+
+.fa-gauge-simple-med::before, .fa-gauge-simple::before, .fa-tachometer-average::before { content: ""; }
+
+.fa-book-medical::before { content: ""; }
+
+.fa-poo::before { content: ""; }
+
+.fa-quote-right-alt::before, .fa-quote-right::before { content: ""; }
+
+.fa-shirt::before, .fa-t-shirt::before, .fa-tshirt::before { content: ""; }
+
+.fa-cubes::before { content: ""; }
+
+.fa-divide::before { content: ""; }
+
+.fa-tenge-sign::before, .fa-tenge::before { content: ""; }
+
+.fa-headphones::before { content: ""; }
+
+.fa-hands-holding::before { content: ""; }
+
+.fa-hands-clapping::before { content: ""; }
+
+.fa-republican::before { content: ""; }
+
+.fa-arrow-left::before { content: ""; }
+
+.fa-person-circle-xmark::before { content: ""; }
+
+.fa-ruler::before { content: ""; }
+
+.fa-align-left::before { content: ""; }
+
+.fa-dice-d6::before { content: ""; }
+
+.fa-restroom::before { content: ""; }
+
+.fa-j::before { content: "J"; }
+
+.fa-users-viewfinder::before { content: ""; }
+
+.fa-file-video::before { content: ""; }
+
+.fa-external-link-alt::before, .fa-up-right-from-square::before { content: ""; }
+
+.

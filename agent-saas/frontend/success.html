@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Successful - M.ai.K.R</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body { background: #0a0a0a; color: #fff; font-family: 'Courier New', monospace; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
+    .success-container { text-align: center; max-width: 600px; padding: 40px; background: #111; border: 2px solid #00ff41; border-radius: 16px; box-shadow: 0 0 30px #00ff4180; }
+    .checkmark { font-size: 64px; margin-bottom: 20px; }
+    h1 { color: #00ff41; margin-bottom: 10px; }
+    .subtitle { color: #888; margin-bottom: 30px; }
+    .agent-url { background: #0a0a0a; border: 1px solid #00ff41; padding: 20px; border-radius: 12px; margin: 30px 0; }
+    .agent-url label { display: block; color: #888; margin-bottom: 10px; }
+    .agent-url input { width: 100%; padding: 12px; background: #111; border: 1px solid #333; border-radius: 8px; color: #00ff41; font-family: monospace; text-align: center; }
+    .btn { display: inline-block; padding: 14px 30px; background: #00ff41; color: #0a0a0a; text-decoration: none; border-radius: 8px; font-weight: bold; margin-top: 20px; }
+    .btn:hover { box-shadow: 0 0 20px #00ff4180; }
+  </style>
+</head>
+<body>
+  <div class="success-container">
+    <div class="checkmark">✅</div>
+    <h1>Payment Successful!</h1>
+    <p class="subtitle">Your custom AI agent is being created</p>
+    
+    <div class="agent-url">
+      <label>Your Agent Chat URL:</label>
+      <input type="text" id="agentUrl" readonly>
+    </div>
+    
+    <p style="color:#666; font-size:14px;">Your agent will be ready in a few minutes. We've sent a confirmation email with your details.</p>
+    
+    <a href="#" class="btn" id="chatBtn">Start Chatting →</a>
+  </div>
+
+  <script>
+    // Get session_id from URL and fetch agent details
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get('session_id');
+    
+    if (sessionId) {
+      fetch('http://187.77.31.252:3001/api/get-agent?session_id=' + sessionId)
+        .then(r => r.json())
+        .then(data => {
+          if (data.agentUrl) {
+            document.getElementById('agentUrl').value = data.agentUrl;
+            document.getElementById('chatBtn').href = data.agentUrl;
+          }
+        })
+        .catch(err => console.error(err));
+    }
+  </script>
+</body>
+</html>

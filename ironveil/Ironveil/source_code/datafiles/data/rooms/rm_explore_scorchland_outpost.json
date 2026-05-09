@@ -1,0 +1,24 @@
+{
+  "room_id": "rm_explore_scorchland_outpost", "display_name": "Scorchland Outpost", "width_tiles": 40, "height_tiles": 40, "tile_size": 16, "parent_room": null, "zone_type": "EXPLORATION",
+  "sub_zones": {
+    "wasteland_approach": { "name": "Wasteland Approach", "bounds": { "x1": 0, "y1": 0, "x2": 39, "y2": 11 }, "description": "Cracked earth, glass fields, dust. The most desolate environment.", "threat_level": "SAFE" },
+    "glass_fields": { "name": "Glass Fields", "bounds": { "x1": 0, "y1": 12, "x2": 39, "y2": 24 }, "description": "Vast fields of fused glass. Aetheric Ore deposits. Iron Marauder patrols.", "threat_level": "HIGH" },
+    "abandoned_outpost": { "name": "Abandoned Outpost", "bounds": { "x1": 5, "y1": 25, "x2": 34, "y2": 34 }, "description": "Former Iron Marauder forward base. Intel documents, military supplies.", "threat_level": "HIGH" },
+    "bunker_cache": { "name": "Bunker Cache", "bounds": { "x1": 10, "y1": 35, "x2": 29, "y2": 39 }, "description": "Underground ammunition bunker. Heavily trapped. Elite guards.", "threat_level": "HIGH" }
+  },
+  "exits": [ { "id": "exit_west", "name": "West (Coppervale Region)", "tiles": { "x1": 0, "y1": 5, "x2": 0, "y2": 7 }, "target_room": "rm_town_coppervale", "target_pos": [78, 20], "collision_type": 3 } ],
+  "terrain_features": [
+    { "id": "glass_fields_sharp", "type": "HAZARD", "bounds": { "x1": 5, "y1": 14, "x2": 34, "y2": 22 }, "description": "Sharp fused glass. Cuts through basic boots. Requires reinforced equipment." },
+    { "id": "cracked_earth", "type": "WALKABLE", "bounds": { "x1": 0, "y1": 0, "x2": 39, "y2": 11 }, "description": "Dry cracked earth. Walkable but desolate." },
+    { "id": "outpost_walls", "type": "BLOCKED", "positions": [[5,25],[6,25],[7,25],[8,25],[9,25],[30,25],[31,25],[32,25],[33,25],[34,25]], "description": "Sandbag walls around abandoned outpost." },
+    { "id": "bunker_entrance", "type": "INTERACTABLE", "positions": [[19,34],[20,34]], "description": "Hatch to underground bunker cache." }
+  ],
+  "ruins": [
+    { "id": "ruin_military_tents", "name": "Military Camp", "pos": [10, 26], "size": [10, 5], "has_interior": false },
+    { "id": "ruin_comm_tent", "name": "Communications Tent", "pos": [22, 27], "size": [6, 4], "has_interior": false },
+    { "id": "ruin_vehicle_wreck", "name": "Wrecked Transport", "pos": [28, 26], "size": [5, 3], "has_interior": false }
+  ],
+  "collision_rules": { "types": { "0": "WALKABLE", "1": "BLOCKED", "2": "INTERACTABLE", "3": "TRANSITION", "6": "HAZARD" }, "general": [ "Glass fields are HAZARD — damage over time without proper boots", "Outpost sandbag walls partially BLOCKED", "Bunker cache heavily trapped (mines, tripwires)", "Heat shimmer visual effect across the zone" ] },
+  "tile_layers": ["ground_base", "ground_detail", "shadows", "objects_low", "objects_mid", "objects_high", "fog_overlay", "ui_overlay"],
+  "notes": [ "Hard zone. Iron Marauder territory.", "Requires Heavy Mech or Zeppelin to reach (Year 2 Winter).", "Contains critical Marshal intel for story progression." ]
+}

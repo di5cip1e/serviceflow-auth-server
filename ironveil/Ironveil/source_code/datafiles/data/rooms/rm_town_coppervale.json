@@ -1,0 +1,163 @@
+{
+  "room_id": "rm_town_coppervale",
+  "display_name": "Coppervale",
+  "width_tiles": 80,
+  "height_tiles": 60,
+  "tile_size": 16,
+  
+  "zones": {
+    "the_overlook": {
+      "name": "The Overlook",
+      "bounds": { "x1": 8, "y1": 0, "x2": 55, "y2": 10 },
+      "description": "High ground with panoramic views. Terrain advantage for turrets (+range)."
+    },
+    "ashspine_exit": {
+      "name": "Ashspine Foothills Exit",
+      "bounds": { "x1": 56, "y1": 0, "x2": 79, "y2": 10 },
+      "description": "Northern path leading to Ashspine Foothills exploration zone."
+    },
+    "river_western_edge": {
+      "name": "River & Western Edge",
+      "bounds": { "x1": 0, "y1": 0, "x2": 7, "y2": 59 },
+      "description": "River runs along western border. Cols 0-3 deep water (blocked), cols 4-5 shallow (walkable+slow)."
+    },
+    "residential": {
+      "name": "Residential Area",
+      "bounds": { "x1": 8, "y1": 10, "x2": 28, "y2": 37 },
+      "description": "NPC homes and daily life hub."
+    },
+    "market_district": {
+      "name": "Market District",
+      "bounds": { "x1": 29, "y1": 10, "x2": 52, "y2": 24 },
+      "description": "Shops and commercial area."
+    },
+    "hollow_road_eastern_gate": {
+      "name": "The Hollow Road & Eastern Gate",
+      "bounds": { "x1": 53, "y1": 10, "x2": 79, "y2": 39 },
+      "description": "Main eastern entry/exit. Defense zone for raids."
+    },
+    "town_square": {
+      "name": "Town Square",
+      "bounds": { "x1": 29, "y1": 25, "x2": 52, "y2": 37 },
+      "description": "Central hub. Clocktower at (39,29). Festival and gathering area."
+    },
+    "workshop_district": {
+      "name": "Workshop District",
+      "bounds": { "x1": 8, "y1": 38, "x2": 28, "y2": 57 },
+      "description": "Player's workshop and living quarters. Core crafting area."
+    },
+    "rusty_gear_south_center": {
+      "name": "Rusty Gear & South-Center",
+      "bounds": { "x1": 29, "y1": 38, "x2": 52, "y2": 54 },
+      "description": "Tavern, Harrow's quarters, clinic, smithy, courier post."
+    },
+    "southern_treeline": {
+      "name": "Southern Treeline & Rustwood Exit",
+      "bounds": { "x1": 53, "y1": 40, "x2": 65, "y2": 59 },
+      "description": "Forest edge. Path to Rustwood exploration zone."
+    },
+    "rail_station": {
+      "name": "Rail Station",
+      "bounds": { "x1": 66, "y1": 54, "x2": 79, "y2": 59 },
+      "description": "Train station for long-distance travel and trade."
+    }
+  },
+
+  "buildings": [
+    { "id": "old_marens_house",     "name": "Old Maren's House",      "zone": "residential",           "pos": [10, 12], "size": [5, 4], "interior_room": "rm_int_npc_maren" },
+    { "id": "sparks_garage",        "name": "Spark's Garage",         "zone": "residential",           "pos": [10, 18], "size": [6, 4], "interior_room": "rm_int_npc_spark" },
+    { "id": "kierys_shop",          "name": "Kiery's Shop",           "zone": "residential",           "pos": [18, 10], "size": [5, 4], "interior_room": "rm_int_npc_kiery" },
+    { "id": "paiges_archive",       "name": "Paige's Home/Archive",   "zone": "residential",           "pos": [18, 18], "size": [6, 5], "interior_room": "rm_int_archive" },
+    { "id": "elms_chapel",          "name": "Pastor Elm's Chapel",    "zone": "residential",           "pos": [26, 10], "size": [5, 5], "interior_room": "rm_int_chapel" },
+    { "id": "lindens_home",         "name": "Mayor Linden's Home",    "zone": "residential",           "pos": [26, 18], "size": [5, 4], "interior_room": "rm_int_npc_linden" },
+    { "id": "michelles_home",       "name": "Michelle's Home",        "zone": "residential",           "pos": [32, 10], "size": [4, 4], "interior_room": "rm_int_npc_michelle" },
+    { "id": "npc_home_1",           "name": "NPC Home 1",             "zone": "residential",           "pos": [32, 18], "size": [4, 3], "interior_room": "rm_int_npc_home_1" },
+    { "id": "npc_home_2",           "name": "NPC Home 2",             "zone": "residential",           "pos": [32, 23], "size": [4, 3], "interior_room": "rm_int_npc_home_2" },
+    { "id": "npc_home_3",           "name": "NPC Home 3",             "zone": "residential",           "pos": [36, 10], "size": [4, 3], "interior_room": "rm_int_npc_home_3" },
+    { "id": "general_store",        "name": "General Store (Gus)",    "zone": "market_district",       "pos": [12, 30], "size": [6, 5], "interior_room": "rm_int_general_store" },
+    { "id": "parts_dealer",         "name": "Parts Dealer (Ferris)",  "zone": "market_district",       "pos": [12, 38], "size": [5, 5], "interior_room": "rm_int_parts_dealer" },
+    { "id": "food_vendor",          "name": "Food Vendor",            "zone": "market_district",       "pos": [20, 30], "size": [4, 4], "interior_room": null },
+    { "id": "clocktower",           "name": "Clocktower",             "zone": "town_square",           "pos": [29, 39], "size": [3, 3], "interior_room": null },
+    { "id": "rusty_gear_tavern",    "name": "The Rusty Gear Tavern",  "zone": "rusty_gear_south_center","pos": [39, 38], "size": [7, 5], "interior_room": "rm_int_rusty_gear" },
+    { "id": "harrows_quarters",     "name": "Captain Harrow's Quarters","zone": "rusty_gear_south_center","pos": [39, 30], "size": [5, 4], "interior_room": "rm_int_npc_harrow" },
+    { "id": "brambles_clinic",      "name": "Doc Bramble's Clinic",   "zone": "rusty_gear_south_center","pos": [45, 30], "size": [5, 4], "interior_room": "rm_int_clinic" },
+    { "id": "wes_courier_post",     "name": "Wes's Courier Post",     "zone": "rusty_gear_south_center","pos": [45, 38], "size": [4, 3], "interior_room": "rm_int_npc_wes" },
+    { "id": "hanks_smithy",         "name": "Hank's Smithy",          "zone": "rusty_gear_south_center","pos": [45, 44], "size": [5, 4], "interior_room": "rm_int_smithy" },
+    { "id": "player_workshop",      "name": "Player's Workshop",      "zone": "workshop_district",     "pos": [40, 12], "size": [8, 6], "interior_room": "rm_int_workshop" },
+    { "id": "player_living_quarters","name": "Player's Living Quarters","zone": "workshop_district",    "pos": [45, 21], "size": [3, 2], "interior_room": "rm_int_living_quarters" },
+    { "id": "rail_station_building","name": "Rail Station Building",   "zone": "rail_station",          "pos": [55, 74], "size": [4, 3], "interior_room": "rm_int_rail_station" },
+    { "id": "town_hall",            "name": "Town Hall",               "zone": "town_square",           "pos": [35, 29], "size": [6, 5], "interior_room": "rm_int_town_hall" }
+  ],
+
+  "transitions": [
+    { "id": "exit_north",       "name": "North (Ashspine)",     "tiles": { "x1": 45, "y1": 0,  "x2": 47, "y2": 0  }, "target_room": "rm_explore_ashspine_foothills", "target_pos": [24, 48], "collision_type": 3 },
+    { "id": "exit_east",        "name": "East (The Hollow)",    "tiles": { "x1": 79, "y1": 19, "x2": 79, "y2": 21 }, "target_room": "rm_explore_the_hollow",         "target_pos": [2, 24],  "collision_type": 3 },
+    { "id": "exit_south_rust",  "name": "South (Rustwood)",     "tiles": { "x1": 57, "y1": 59, "x2": 59, "y2": 59 }, "target_room": "rm_explore_rustwood_edge",      "target_pos": [30, 2],  "collision_type": 3 },
+    { "id": "exit_south_rail",  "name": "South (Rail Station)", "tiles": { "x1": 70, "y1": 59, "x2": 72, "y2": 59 }, "target_room": "rm_int_rail_station_platform",  "target_pos": [5, 2],   "collision_type": 3 },
+    { "id": "exit_west",        "name": "West (Shattered Coast)","tiles": { "x1": 0,  "y1": 42, "x2": 0,  "y2": 44 }, "target_room": "rm_explore_shattered_coast",   "target_pos": [38, 24], "collision_type": 3 }
+  ],
+
+  "npc_spawns": [
+    { "npc_id": "npc_spark",    "name": "Spark",        "home_pos": [12, 19], "home_building": "sparks_garage" },
+    { "npc_id": "npc_maren",    "name": "Old Maren",    "home_pos": [12, 13], "home_building": "old_marens_house" },
+    { "npc_id": "npc_harrow",   "name": "Harrow",       "home_pos": [41, 31], "home_building": "harrows_quarters" },
+    { "npc_id": "npc_linden",   "name": "Linden",       "home_pos": [28, 19], "home_building": "lindens_home" },
+    { "npc_id": "npc_michelle", "name": "Michelle",     "home_pos": [34, 11], "home_building": "michelles_home" },
+    { "npc_id": "npc_kaydee",   "name": "Kaydee",       "home_pos": [0, 0],   "home_building": "rusty_gear_tavern", "note": "Spawns in tavern interior" },
+    { "npc_id": "npc_kiery",    "name": "Kiery",        "home_pos": [20, 11], "home_building": "kierys_shop" },
+    { "npc_id": "npc_paige",    "name": "Paige",        "home_pos": [20, 19], "home_building": "paiges_archive" },
+    { "npc_id": "npc_gus",      "name": "Gus",          "home_pos": [0, 0],   "home_building": "general_store", "note": "Spawns in store interior" },
+    { "npc_id": "npc_ferris",   "name": "Ferris",       "home_pos": [0, 0],   "home_building": "parts_dealer", "note": "Spawns in shop interior" },
+    { "npc_id": "npc_hank",     "name": "Hank",         "home_pos": [47, 45], "home_building": "hanks_smithy" },
+    { "npc_id": "npc_nora",     "name": "Nora",         "home_pos": [50, 30], "home_building": null, "note": "Farm plot in eastern fields" },
+    { "npc_id": "npc_wes",      "name": "Wes",          "home_pos": [47, 39], "home_building": "wes_courier_post" },
+    { "npc_id": "npc_elm",      "name": "Elm",          "home_pos": [28, 11], "home_building": "elms_chapel" },
+    { "npc_id": "npc_bramble",  "name": "Bramble",      "home_pos": [47, 31], "home_building": "brambles_clinic" }
+  ],
+
+  "collision_rules": {
+    "types": {
+      "0": "WALKABLE",
+      "1": "BLOCKED",
+      "2": "INTERACTABLE",
+      "3": "TRANSITION",
+      "4": "WATER_SHALLOW",
+      "5": "DEFENSE_ZONE"
+    },
+    "general": [
+      "All building footprints are BLOCKED (1) except door tiles which are INTERACTABLE (2)",
+      "River cols 0-3 are BLOCKED (1), cols 4-5 are WATER_SHALLOW (4), cols 6-7 are WALKABLE (0) riverbank",
+      "Tree trunks are BLOCKED (1)",
+      "Fence tiles are BLOCKED (1) except gate tiles which are WALKABLE (0)",
+      "All outer edge tiles are BLOCKED (1) unless designated TRANSITION (3)",
+      "Eastern Gate area, field positions, workshop perimeter, southern treeline have DEFENSE_ZONE (5) tiles"
+    ]
+  },
+
+  "defense_zones": [
+    { "id": "eastern_gate",       "bounds": { "x1": 60, "y1": 15, "x2": 78, "y2": 35 }, "slots": 12, "terrain_bonus": "none" },
+    { "id": "northern_pass",      "bounds": { "x1": 40, "y1": 1,  "x2": 55, "y2": 8  }, "slots": 6,  "terrain_bonus": "none", "note": "Natural chokepoint" },
+    { "id": "the_overlook",       "bounds": { "x1": 15, "y1": 2,  "x2": 35, "y2": 8  }, "slots": 8,  "terrain_bonus": "range_plus_2" },
+    { "id": "western_bridge",     "bounds": { "x1": 2,  "y1": 38, "x2": 10, "y2": 48 }, "slots": 5,  "terrain_bonus": "none", "note": "Natural chokepoint" },
+    { "id": "southern_treeline",  "bounds": { "x1": 53, "y1": 45, "x2": 65, "y2": 58 }, "slots": 8,  "terrain_bonus": "trap_bonus" },
+    { "id": "workshop_perimeter", "bounds": { "x1": 8,  "y1": 50, "x2": 28, "y2": 57 }, "slots": 6,  "terrain_bonus": "none" }
+  ],
+
+  "tile_layers": [
+    "ground_base",
+    "ground_detail",
+    "shadows",
+    "objects_low",
+    "objects_mid",
+    "objects_high",
+    "weather",
+    "ui_overlay"
+  ],
+
+  "notes": [
+    "This JSON defines the spatial data for rm_town_coppervale.",
+    "Actual tile placement is done in GameMaker IDE room editor using referenced tilesets.",
+    "Collision map is generated at room load from building footprints, water, and transition data.",
+    "NPC spawns with home_pos of [0,0] spawn inside their interior room instead."
+  ]
+}

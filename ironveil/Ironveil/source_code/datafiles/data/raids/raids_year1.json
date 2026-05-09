@@ -1,0 +1,234 @@
+{
+  "_meta": {
+    "description": "Year 1 raid schedule. Raids escalate from minor to moderate as the year progresses.",
+    "version": "1.0",
+    "objective": "#23 Tower Defense Raid System"
+  },
+
+  "raids": [
+    {
+      "raid_id": "raid_y1_spring_1",
+      "trigger_type": "SCHEDULED",
+      "trigger_date": { "season": 0, "day": 14 },
+      "size": "MINOR",
+      "faction": "FREELANCE",
+      "directions": ["EAST"],
+      "warning_days": 2,
+      "intel_message": "Harrow spots a small band of freelance raiders approaching from the east.",
+      "waves": [
+        {
+          "wave_index": 0,
+          "delay_seconds": 0,
+          "enemies": [
+            { "enemy_id": "enemy_freelance_raider", "count": 4, "spawn_direction": "EAST" },
+            { "enemy_id": "enemy_freelance_archer", "count": 2, "spawn_direction": "EAST" }
+          ]
+        },
+        {
+          "wave_index": 1,
+          "delay_seconds": 45,
+          "enemies": [
+            { "enemy_id": "enemy_freelance_raider", "count": 5, "spawn_direction": "EAST" },
+            { "enemy_id": "enemy_freelance_sapper", "count": 1, "spawn_direction": "EAST" }
+          ]
+        }
+      ],
+      "rewards": {
+        "reputation": 25,
+        "bonus_items": [
+          { "item_id": "item_scrap_iron", "quantity": 10 }
+        ]
+      }
+    },
+    {
+      "raid_id": "raid_y1_summer_1",
+      "trigger_type": "SCHEDULED",
+      "trigger_date": { "season": 1, "day": 7 },
+      "size": "MINOR",
+      "faction": "FREELANCE",
+      "directions": ["SOUTH"],
+      "warning_days": 2,
+      "intel_message": "Scouts report freelancers gathering in the southern treeline.",
+      "waves": [
+        {
+          "wave_index": 0,
+          "delay_seconds": 0,
+          "enemies": [
+            { "enemy_id": "enemy_freelance_raider", "count": 5, "spawn_direction": "SOUTH" },
+            { "enemy_id": "enemy_freelance_brute",  "count": 2, "spawn_direction": "SOUTH" }
+          ]
+        },
+        {
+          "wave_index": 1,
+          "delay_seconds": 40,
+          "enemies": [
+            { "enemy_id": "enemy_freelance_raider", "count": 4, "spawn_direction": "SOUTH" },
+            { "enemy_id": "enemy_freelance_archer", "count": 3, "spawn_direction": "SOUTH" },
+            { "enemy_id": "enemy_freelance_sapper", "count": 2, "spawn_direction": "SOUTH" }
+          ]
+        }
+      ],
+      "rewards": {
+        "reputation": 30,
+        "bonus_items": [
+          { "item_id": "item_scrap_iron",  "quantity": 12 },
+          { "item_id": "item_copper_ore",  "quantity": 5 }
+        ]
+      }
+    },
+    {
+      "raid_id": "raid_y1_summer_2",
+      "trigger_type": "SCHEDULED",
+      "trigger_date": { "season": 1, "day": 21 },
+      "size": "MODERATE",
+      "faction": "FREELANCE",
+      "directions": ["EAST", "SOUTH"],
+      "warning_days": 3,
+      "intel_message": "Harrow's patrol bots detect a coordinated two-pronged approach. This is bigger than before.",
+      "waves": [
+        {
+          "wave_index": 0,
+          "delay_seconds": 0,
+          "enemies": [
+            { "enemy_id": "enemy_freelance_raider", "count": 6, "spawn_direction": "EAST" },
+            { "enemy_id": "enemy_freelance_archer", "count": 2, "spawn_direction": "SOUTH" },
+            { "enemy_id": "enemy_freelance_brute",  "count": 2, "spawn_direction": "SOUTH" }
+          ]
+        },
+        {
+          "wave_index": 1,
+          "delay_seconds": 45,
+          "enemies": [
+            { "enemy_id": "enemy_freelance_sapper",  "count": 3, "spawn_direction": "EAST" },
+            { "enemy_id": "enemy_freelance_raider",  "count": 5, "spawn_direction": "SOUTH" },
+            { "enemy_id": "enemy_freelance_thief",   "count": 2, "spawn_direction": "EAST" }
+          ]
+        },
+        {
+          "wave_index": 2,
+          "delay_seconds": 50,
+          "enemies": [
+            { "enemy_id": "enemy_freelance_raider",     "count": 4, "spawn_direction": "EAST" },
+            { "enemy_id": "enemy_freelance_brute",      "count": 3, "spawn_direction": "SOUTH" },
+            { "enemy_id": "enemy_freelance_lieutenant", "count": 1, "spawn_direction": "EAST" }
+          ]
+        }
+      ],
+      "rewards": {
+        "reputation": 50,
+        "bonus_items": [
+          { "item_id": "item_scrap_iron",    "quantity": 20 },
+          { "item_id": "item_steel_plate",   "quantity": 3 },
+          { "item_id": "item_brass_gears",   "quantity": 4 }
+        ]
+      }
+    },
+    {
+      "raid_id": "raid_y1_autumn_1",
+      "trigger_type": "SCHEDULED",
+      "trigger_date": { "season": 2, "day": 10 },
+      "size": "MODERATE",
+      "faction": "FREELANCE",
+      "directions": ["WEST"],
+      "warning_days": 3,
+      "intel_message": "Raiders spotted crossing the western bridge. They're getting bolder.",
+      "waves": [
+        {
+          "wave_index": 0,
+          "delay_seconds": 0,
+          "enemies": [
+            { "enemy_id": "enemy_freelance_raider", "count": 8, "spawn_direction": "WEST" },
+            { "enemy_id": "enemy_freelance_archer", "count": 3, "spawn_direction": "WEST" }
+          ]
+        },
+        {
+          "wave_index": 1,
+          "delay_seconds": 40,
+          "enemies": [
+            { "enemy_id": "enemy_freelance_brute",   "count": 4, "spawn_direction": "WEST" },
+            { "enemy_id": "enemy_freelance_sapper",  "count": 3, "spawn_direction": "WEST" }
+          ]
+        },
+        {
+          "wave_index": 2,
+          "delay_seconds": 50,
+          "enemies": [
+            { "enemy_id": "enemy_freelance_raider",     "count": 6,  "spawn_direction": "WEST" },
+            { "enemy_id": "enemy_freelance_lieutenant", "count": 1,  "spawn_direction": "WEST" },
+            { "enemy_id": "enemy_freelance_thief",      "count": 3,  "spawn_direction": "WEST" }
+          ]
+        }
+      ],
+      "rewards": {
+        "reputation": 50,
+        "bonus_items": [
+          { "item_id": "item_scrap_iron",    "quantity": 18 },
+          { "item_id": "item_copper_ore",    "quantity": 8 },
+          { "item_id": "item_brass_gears",   "quantity": 3 }
+        ]
+      }
+    },
+    {
+      "raid_id": "raid_y1_winter_1",
+      "trigger_type": "SCHEDULED",
+      "trigger_date": { "season": 3, "day": 15 },
+      "size": "MAJOR",
+      "faction": "FREELANCE",
+      "directions": ["EAST", "NORTH"],
+      "warning_days": 3,
+      "intel_message": "A major force is assembling. Multiple attack vectors detected. Prepare everything.",
+      "waves": [
+        {
+          "wave_index": 0,
+          "delay_seconds": 0,
+          "enemies": [
+            { "enemy_id": "enemy_freelance_raider",  "count": 8,  "spawn_direction": "EAST" },
+            { "enemy_id": "enemy_freelance_archer",  "count": 4,  "spawn_direction": "NORTH" },
+            { "enemy_id": "enemy_freelance_brute",   "count": 3,  "spawn_direction": "EAST" }
+          ]
+        },
+        {
+          "wave_index": 1,
+          "delay_seconds": 50,
+          "enemies": [
+            { "enemy_id": "enemy_freelance_sapper",  "count": 4,  "spawn_direction": "EAST" },
+            { "enemy_id": "enemy_freelance_raider",  "count": 6,  "spawn_direction": "NORTH" },
+            { "enemy_id": "enemy_freelance_thief",   "count": 3,  "spawn_direction": "NORTH" }
+          ]
+        },
+        {
+          "wave_index": 2,
+          "delay_seconds": 55,
+          "enemies": [
+            { "enemy_id": "enemy_freelance_brute",      "count": 5,  "spawn_direction": "EAST" },
+            { "enemy_id": "enemy_freelance_archer",     "count": 4,  "spawn_direction": "NORTH" },
+            { "enemy_id": "enemy_freelance_lieutenant", "count": 2,  "spawn_direction": "EAST" }
+          ]
+        },
+        {
+          "wave_index": 3,
+          "delay_seconds": 60,
+          "enemies": [
+            { "enemy_id": "enemy_freelance_raider",     "count": 10, "spawn_direction": "EAST" },
+            { "enemy_id": "enemy_freelance_brute",      "count": 4,  "spawn_direction": "NORTH" },
+            { "enemy_id": "enemy_freelance_sapper",     "count": 3,  "spawn_direction": "EAST" },
+            { "enemy_id": "enemy_freelance_lieutenant", "count": 1,  "spawn_direction": "NORTH" }
+          ]
+        }
+      ],
+      "rewards": {
+        "reputation": 80,
+        "bonus_items": [
+          { "item_id": "item_scrap_iron",     "quantity": 30 },
+          { "item_id": "item_steel_plate",    "quantity": 5 },
+          { "item_id": "item_brass_gears",    "quantity": 6 },
+          { "item_id": "item_copper_ore",     "quantity": 10 }
+        ],
+        "blueprint_drop": {
+          "blueprint_id": "bp_stone_wall",
+          "chance": 0.5
+        }
+      }
+    }
+  ]
+}

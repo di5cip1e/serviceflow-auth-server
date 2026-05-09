@@ -1,0 +1,8 @@
+# Memory System Environment Variables
+export WORKSPACE_DIR="/root/.openclaw/workspace"
+export USER_ID="root"
+export REDIS_HOST="127.0.0.1"
+export REDIS_PORT="6379"
+export QDRANT_URL="http://127.0.0.1:6333"
+export OLLAMA_URL="http://127.0.0.1:11434"
+export MEMORY_INITIALIZED="true"

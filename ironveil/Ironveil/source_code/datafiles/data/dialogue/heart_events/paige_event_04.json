@@ -1,0 +1,78 @@
+{
+  "_meta": {
+    "description": "Heart event #4 for npc_paige: Wren's Story",
+    "version": "1.0",
+    "objective": "#33/#34"
+  },
+  "event_id": "heart_event_paige_04",
+  "npc_id": "npc_paige",
+  "heart_level_required": 6,
+  "location": "rm_int_archive",
+  "time_range": {
+    "start": 19,
+    "end": 22
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_paige_event_4_complete",
+  "heart_bonus": 50,
+  "title": "Wren's Story",
+  "lines": [
+    {
+      "speaker": "npc_paige",
+      "text": "Jack. I want to tell you about Wren.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "I haven't spoken his name out loud in two years.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "He was a militia volunteer. Stubborn. Kind. Terrible at cooking.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "He died defending a supply convoy from marauders. Five years ago.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "I threw myself into building this Archive. To avoid... everything.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "Thank you for trusting me with this.",
+          "flag": "paige_story_trust"
+        },
+        {
+          "text": "He'd be proud of what you've built.",
+          "flag": "paige_story_proud"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "He would say 'Paige, the books aren't going anywhere. Go LIVE.'",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "He was always right about the important things.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "I'm... starting to listen.",
+      "portrait": "neutral"
+    }
+  ]
+}

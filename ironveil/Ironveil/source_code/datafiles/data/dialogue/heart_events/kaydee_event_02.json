@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "description": "Heart event #2 for npc_kaydee: The Broken Tap",
+    "version": "1.0",
+    "objective": "#33/#34"
+  },
+  "event_id": "heart_event_kaydee_02",
+  "npc_id": "npc_kaydee",
+  "heart_level_required": 3,
+  "location": "rm_int_rusty_gear",
+  "time_range": {
+    "start": 14,
+    "end": 18
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_kaydee_event_2_complete",
+  "heart_bonus": 50,
+  "title": "The Broken Tap",
+  "lines": [
+    {
+      "speaker": "npc_kaydee",
+      "text": "The main tap is busted AGAIN. Third time this month.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "If I have to pour from bottles all evening, someone's getting hurt.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "Let me look at it.",
+          "flag": "kaydee_tap_fix"
+        },
+        {
+          "text": "I can build you a better one.",
+          "flag": "kaydee_tap_build"
+        }
+      ]
+    },
+    {
+      "speaker": "narrator",
+      "text": "[You repair the tap in twenty minutes]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "...You just fixed it. No fuss. No asking what's in it for you.",
+      "portrait": "surprised"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "Most people want something when they help. What do you want?",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "...Nothing? You want nothing. That's... new.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "Fine. One free ale. ONE. Don't push your luck.",
+      "portrait": "neutral"
+    }
+  ]
+}

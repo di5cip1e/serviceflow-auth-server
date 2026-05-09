@@ -1,0 +1,215 @@
+{
+  "_meta": {
+    "description": "Expanded machine definitions: traps, utility defenses, additional turrets. Supplements machines.json.",
+    "version": "1.0",
+    "objective": "#24 10+ Craftable Machines & Automatons"
+  },
+
+  "bp_repeater_turret": {
+    "category": "DEFENSE",
+    "size_tiles": [2, 2],
+    "base_stats": {
+      "hp": 150,
+      "damage": 10,
+      "range": 5,
+      "fire_rate": 3.0,
+      "arc_degrees": 180,
+      "ammo_capacity": 100,
+      "ammo_per_shot": 1
+    },
+    "component_slots": ["Frame", "Gears", "Weapon Mount", "Armor"],
+    "lubrication_rate_per_day": 12,
+    "part_degradation_rate_per_day": 3
+  },
+
+  "bp_tesla_coil": {
+    "category": "DEFENSE",
+    "size_tiles": [2, 2],
+    "base_stats": {
+      "hp": 160,
+      "damage": 12,
+      "range": 4,
+      "fire_rate": 0.8,
+      "arc_degrees": 360,
+      "chain_targets": 3,
+      "fuel_capacity": 100,
+      "fuel_per_shot": 3
+    },
+    "component_slots": ["Frame", "Gears", "Aether Cell", "Coil Assembly", "Armor"],
+    "lubrication_rate_per_day": 14,
+    "part_degradation_rate_per_day": 4
+  },
+
+  "bp_flamethrower_turret": {
+    "category": "DEFENSE",
+    "size_tiles": [2, 2],
+    "base_stats": {
+      "hp": 180,
+      "damage": 8,
+      "range": 3,
+      "fire_rate": 5.0,
+      "arc_degrees": 90,
+      "fuel_capacity": 120,
+      "fuel_per_shot": 1,
+      "burn_damage_per_second": 3,
+      "burn_duration_seconds": 4
+    },
+    "component_slots": ["Frame", "Gears", "Fuel Tank", "Nozzle Assembly", "Armor"],
+    "lubrication_rate_per_day": 10,
+    "part_degradation_rate_per_day": 3
+  },
+
+  "bp_spike_strip": {
+    "category": "TRAP",
+    "size_tiles": [2, 1],
+    "base_stats": {
+      "hp": 40,
+      "damage": 5,
+      "slow_percent": 40,
+      "slow_duration_seconds": 3,
+      "max_triggers": -1,
+      "trigger_radius": 0
+    },
+    "component_slots": [],
+    "lubrication_rate_per_day": 0,
+    "part_degradation_rate_per_day": 1,
+    "trap_type": "PASSIVE",
+    "trap_trigger": "STEP_ON"
+  },
+
+  "bp_oil_slick": {
+    "category": "TRAP",
+    "size_tiles": [3, 3],
+    "base_stats": {
+      "hp": 20,
+      "damage": 0,
+      "slow_percent": 60,
+      "slow_duration_seconds": 5,
+      "max_triggers": -1,
+      "trigger_radius": 0,
+      "flammable": true,
+      "burn_damage_on_ignite": 20,
+      "burn_radius": 2
+    },
+    "component_slots": [],
+    "lubrication_rate_per_day": 0,
+    "part_degradation_rate_per_day": 0,
+    "trap_type": "PASSIVE",
+    "trap_trigger": "STEP_ON"
+  },
+
+  "bp_concussion_mine": {
+    "category": "TRAP",
+    "size_tiles": [1, 1],
+    "base_stats": {
+      "hp": 10,
+      "damage": 40,
+      "splash_radius": 2,
+      "max_triggers": 1,
+      "trigger_radius": 1,
+      "stun_duration_seconds": 2
+    },
+    "component_slots": [],
+    "lubrication_rate_per_day": 0,
+    "part_degradation_rate_per_day": 0,
+    "trap_type": "SINGLE_USE",
+    "trap_trigger": "PROXIMITY"
+  },
+
+  "bp_caltrops": {
+    "category": "TRAP",
+    "size_tiles": [2, 2],
+    "base_stats": {
+      "hp": 15,
+      "damage": 3,
+      "slow_percent": 50,
+      "bleed_damage_per_second": 2,
+      "bleed_duration_seconds": 5,
+      "max_triggers": -1,
+      "trigger_radius": 0
+    },
+    "component_slots": [],
+    "lubrication_rate_per_day": 0,
+    "part_degradation_rate_per_day": 0,
+    "trap_type": "PASSIVE",
+    "trap_trigger": "STEP_ON"
+  },
+
+  "bp_net_trap": {
+    "category": "TRAP",
+    "size_tiles": [1, 1],
+    "base_stats": {
+      "hp": 10,
+      "damage": 0,
+      "immobilize_duration_seconds": 4,
+      "max_triggers": 1,
+      "trigger_radius": 1
+    },
+    "component_slots": [],
+    "lubrication_rate_per_day": 0,
+    "part_degradation_rate_per_day": 0,
+    "trap_type": "SINGLE_USE",
+    "trap_trigger": "PROXIMITY"
+  },
+
+  "bp_emp_mine": {
+    "category": "TRAP",
+    "size_tiles": [1, 1],
+    "base_stats": {
+      "hp": 10,
+      "damage": 15,
+      "splash_radius": 3,
+      "max_triggers": 1,
+      "trigger_radius": 1,
+      "disable_abilities_seconds": 6
+    },
+    "component_slots": [],
+    "lubrication_rate_per_day": 0,
+    "part_degradation_rate_per_day": 0,
+    "trap_type": "SINGLE_USE",
+    "trap_trigger": "PROXIMITY"
+  },
+
+  "bp_spotlight_tower": {
+    "category": "UTILITY_DEFENSE",
+    "size_tiles": [2, 2],
+    "base_stats": {
+      "hp": 120,
+      "detection_range_bonus": 4,
+      "fuel_capacity": 80,
+      "fuel_consumption_per_day": 8
+    },
+    "component_slots": ["Frame", "Gears", "Lens Assembly"],
+    "lubrication_rate_per_day": 6,
+    "part_degradation_rate_per_day": 1
+  },
+
+  "bp_alarm_tower": {
+    "category": "UTILITY_DEFENSE",
+    "size_tiles": [2, 2],
+    "base_stats": {
+      "hp": 100,
+      "warning_days_bonus": 1,
+      "detection_range_bonus": 2
+    },
+    "component_slots": ["Frame", "Gears", "Scanner"],
+    "lubrication_rate_per_day": 4,
+    "part_degradation_rate_per_day": 1
+  },
+
+  "bp_energy_shield_generator": {
+    "category": "UTILITY_DEFENSE",
+    "size_tiles": [2, 2],
+    "base_stats": {
+      "hp": 200,
+      "shield_hp": 300,
+      "shield_radius": 4,
+      "shield_regen_per_second": 2,
+      "fuel_capacity": 150,
+      "fuel_consumption_per_second_active": 1
+    },
+    "component_slots": ["Frame", "Aether Cell", "Projector Assembly", "Armor"],
+    "lubrication_rate_per_day": 12,
+    "part_degradation_rate_per_day": 4
+  }
+}

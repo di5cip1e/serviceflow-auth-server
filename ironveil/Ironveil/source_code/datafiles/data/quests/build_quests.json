@@ -1,0 +1,433 @@
+{
+  "_meta": {
+    "description": "Build quests \u2014 town improvement requests.",
+    "version": "1.0",
+    "objective": "#41"
+  },
+  "quests": [
+    {
+      "quest_id": "bq_01",
+      "name": "Power to the People",
+      "type": "BUILD",
+      "giver": "npc_linden",
+      "description": "Build an Aether Engine for the town power grid.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_09"
+        ],
+        "year": 1,
+        "season": "SUMMER"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "build",
+          "target": "bp_aether_engine",
+          "description": "Build Aether Engine",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 500,
+        "items": [],
+        "hearts": {
+          "all_npcs": 2
+        },
+        "reputation": 25,
+        "story_flags_set": [
+          "bq_01_complete"
+        ],
+        "unlocks": [
+          "power_grid"
+        ]
+      }
+    },
+    {
+      "quest_id": "bq_02",
+      "name": "Clean Water",
+      "type": "BUILD",
+      "giver": "npc_bramble",
+      "description": "Build a Water Purifier for the town.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_09"
+        ],
+        "year": 1,
+        "season": "AUTUMN"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "build",
+          "target": "bp_water_purifier",
+          "description": "Build Water Purifier",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 400,
+        "items": [],
+        "hearts": {
+          "npc_bramble": 3
+        },
+        "reputation": 20,
+        "story_flags_set": [
+          "bq_02_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "bq_03",
+      "name": "Eyes on the Road",
+      "type": "BUILD",
+      "giver": "npc_harrow",
+      "description": "Build 3 Spotlights for the perimeter.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_06"
+        ],
+        "year": 1,
+        "season": "WINTER"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "build",
+          "target": "bp_spotlight",
+          "description": "Build 3 Spotlights",
+          "target_count": 3
+        }
+      ],
+      "rewards": {
+        "cogs": 600,
+        "items": [],
+        "hearts": {
+          "npc_harrow": 3
+        },
+        "reputation": 20,
+        "story_flags_set": [
+          "bq_03_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "bq_04",
+      "name": "The Mail Must Flow",
+      "type": "BUILD",
+      "giver": "npc_wes",
+      "description": "Build a Cargo Hauler for mail deliveries.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_17"
+        ],
+        "year": 2,
+        "season": "SPRING"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "build",
+          "target": "bp_cargo_hauler",
+          "description": "Build Cargo Hauler",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 500,
+        "items": [],
+        "hearts": {
+          "npc_wes": 4
+        },
+        "reputation": 20,
+        "story_flags_set": [
+          "bq_04_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "bq_05",
+      "name": "Ferris's Fabricator",
+      "type": "BUILD",
+      "giver": "npc_ferris",
+      "description": "Build a Component Fabricator upgrade for Ferris.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_17"
+        ],
+        "year": 2,
+        "season": "SPRING"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "build",
+          "target": "fabricator_upgrade",
+          "description": "Build Fabricator upgrade",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 700,
+        "items": [],
+        "hearts": {
+          "npc_ferris": 4
+        },
+        "reputation": 20,
+        "story_flags_set": [
+          "bq_05_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "bq_06",
+      "name": "Nora's Irrigation",
+      "type": "BUILD",
+      "giver": "npc_nora",
+      "description": "Build an automated irrigation system for the farm.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_18"
+        ],
+        "year": 2,
+        "season": "SUMMER"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "build",
+          "target": "irrigation_system",
+          "description": "Build irrigation system",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 400,
+        "items": [],
+        "hearts": {
+          "npc_nora": 4
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "bq_06_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "bq_07",
+      "name": "Tavern Renovation",
+      "type": "BUILD",
+      "giver": "npc_kaydee",
+      "description": "Build a mechanical brewing system for The Rusty Gear.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_18"
+        ],
+        "year": 2,
+        "season": "SUMMER"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "build",
+          "target": "brewing_machine",
+          "description": "Build brewing machine",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 500,
+        "items": [],
+        "hearts": {
+          "npc_kaydee": 3
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "bq_07_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "bq_08",
+      "name": "The Library Engine",
+      "type": "BUILD",
+      "giver": "npc_paige",
+      "description": "Build climate control for the Archive.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_18"
+        ],
+        "year": 2,
+        "season": "AUTUMN"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "build",
+          "target": "climate_control",
+          "description": "Build climate control system",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 600,
+        "items": [],
+        "hearts": {
+          "npc_paige": 3
+        },
+        "reputation": 20,
+        "story_flags_set": [
+          "bq_08_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "bq_09",
+      "name": "Clinic Upgrade",
+      "type": "BUILD",
+      "giver": "npc_michelle",
+      "description": "Build a medical automaton assistant for the clinic.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_18"
+        ],
+        "year": 2,
+        "season": "AUTUMN"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "build",
+          "target": "medical_automaton",
+          "description": "Build medical automaton",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 700,
+        "items": [],
+        "hearts": {
+          "npc_michelle": 3
+        },
+        "reputation": 20,
+        "story_flags_set": [
+          "bq_09_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "bq_10",
+      "name": "Signal Tower",
+      "type": "BUILD",
+      "giver": "npc_linden",
+      "description": "Build a Communication Array for inter-town communication.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_22"
+        ],
+        "year": 2,
+        "season": "WINTER"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "build",
+          "target": "bp_comm_array",
+          "description": "Build Communication Array",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 1000,
+        "items": [],
+        "hearts": {
+          "all_npcs": 3
+        },
+        "reputation": 40,
+        "story_flags_set": [
+          "bq_10_complete"
+        ],
+        "unlocks": [
+          "inter_town_communication"
+        ]
+      }
+    },
+    {
+      "quest_id": "bq_11",
+      "name": "Airship Dock",
+      "type": "BUILD",
+      "giver": "npc_linden",
+      "description": "Build a Zeppelin landing platform.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_25"
+        ],
+        "year": 3,
+        "season": "SPRING"
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "build",
+          "target": "zeppelin_dock",
+          "description": "Build Zeppelin dock",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 1500,
+        "items": [],
+        "hearts": {},
+        "reputation": 40,
+        "story_flags_set": [
+          "bq_11_complete"
+        ],
+        "unlocks": [
+          "air_trade_routes"
+        ]
+      }
+    },
+    {
+      "quest_id": "bq_12",
+      "name": "The Rail Dream",
+      "type": "BUILD",
+      "giver": "npc_linden",
+      "description": "The ultimate town project: restore rail service.",
+      "trigger": {
+        "prerequisite_quests": [
+          "mq_27"
+        ],
+        "year": 3
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "build",
+          "target": "rail_engine",
+          "description": "Build rail engine",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "build",
+          "target": "rail_track",
+          "description": "Lay rail track",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 3000,
+        "items": [],
+        "hearts": {
+          "all_npcs": 5
+        },
+        "reputation": 100,
+        "story_flags_set": [
+          "bq_12_complete"
+        ],
+        "unlocks": [
+          "rail_travel"
+        ]
+      }
+    }
+  ]
+}

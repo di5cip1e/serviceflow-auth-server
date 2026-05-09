@@ -1,0 +1,99 @@
+{
+  "room_id": "rm_explore_rustwood_edge",
+  "display_name": "Rustwood Edge",
+  "width_tiles": 35,
+  "height_tiles": 45,
+  "tile_size": 16,
+  "parent_room": null,
+  "zone_type": "EXPLORATION",
+
+  "sub_zones": {
+    "forest_entrance": {
+      "name": "Forest Entrance",
+      "bounds": { "x1": 0, "y1": 0, "x2": 34, "y2": 9 },
+      "description": "Dense copper-tinted trees forming a canopy. Narrow winding path through undergrowth.",
+      "threat_level": "SAFE"
+    },
+    "factory_exterior": {
+      "name": "Overgrown Factory Exterior",
+      "bounds": { "x1": 0, "y1": 10, "x2": 34, "y2": 24 },
+      "description": "Factory walls visible through trees. Vines covering everything. Industrial salvage.",
+      "threat_level": "MEDIUM"
+    },
+    "factory_interior": {
+      "name": "Factory Interior",
+      "bounds": { "x1": 7, "y1": 25, "x2": 27, "y2": 37 },
+      "description": "Partially collapsed factory floor. Trees growing through the floor and ceiling.",
+      "threat_level": "MEDIUM"
+    },
+    "sealed_workshop": {
+      "name": "Sealed Workshop",
+      "bounds": { "x1": 10, "y1": 38, "x2": 25, "y2": 44 },
+      "description": "Behind the powered door. Intact Old World workshop — surprisingly preserved.",
+      "threat_level": "MEDIUM",
+      "locked": true,
+      "unlock_requirement": "puzzle_pipe_connection"
+    }
+  },
+
+  "exits": [
+    {
+      "id": "exit_north_coppervale",
+      "name": "North (Coppervale)",
+      "tiles": { "x1": 16, "y1": 0, "x2": 18, "y2": 0 },
+      "target_room": "rm_town_coppervale",
+      "target_pos": [40, 58],
+      "collision_type": 3
+    }
+  ],
+
+  "terrain_features": [
+    {
+      "id": "dense_forest_canopy",
+      "type": "WALKABLE",
+      "bounds": { "x1": 0, "y1": 0, "x2": 34, "y2": 9 },
+      "description": "Dense copper-tinted canopy — objects_high layer provides shading effect."
+    },
+    {
+      "id": "factory_walls_exterior",
+      "type": "BLOCKED",
+      "bounds": { "x1": 5, "y1": 24, "x2": 29, "y2": 24 },
+      "description": "Factory building exterior wall. Entry via door."
+    },
+    {
+      "id": "toxic_pool",
+      "type": "HAZARD",
+      "bounds": { "x1": 14, "y1": 30, "x2": 16, "y2": 31 },
+      "description": "Green toxic liquid pool inside factory. Damages on contact."
+    },
+    {
+      "id": "fungal_grove_path",
+      "type": "WALKABLE",
+      "bounds": { "x1": 0, "y1": 16, "x2": 5, "y2": 20 },
+      "description": "Hidden trail to fungal grove. Optional side area."
+    }
+  ],
+
+  "ruins": [
+    { "id": "ruin_factory_main", "name": "Overgrown Factory", "pos": [7, 25], "size": [21, 13], "has_interior": true },
+    { "id": "ruin_sealed_workshop", "name": "Sealed Workshop", "pos": [10, 38], "size": [16, 7], "has_interior": true }
+  ],
+
+  "collision_rules": {
+    "types": { "0": "WALKABLE", "1": "BLOCKED", "2": "INTERACTABLE", "3": "TRANSITION", "6": "HAZARD" },
+    "general": [
+      "Dense trees along edges are BLOCKED (cols 0-3 and 31-34 in forest section)",
+      "Factory walls BLOCKED except doors",
+      "Toxic pool is HAZARD type — energy drain + damage",
+      "Sealed workshop door requires pipe puzzle completion"
+    ]
+  },
+
+  "tile_layers": ["ground_base", "ground_detail", "shadows", "objects_low", "objects_mid", "objects_high", "fog_overlay", "ui_overlay"],
+
+  "notes": [
+    "Moderate difficulty zone. First encounter with Rust Wolves.",
+    "Pipe puzzle in factory is the first environmental puzzle beyond The Hollow.",
+    "Entry from Coppervale south-west arrives at tile (17, 1)."
+  ]
+}

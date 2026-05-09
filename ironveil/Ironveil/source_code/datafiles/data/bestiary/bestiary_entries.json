@@ -1,0 +1,162 @@
+{
+  "_meta": {
+    "description": "Bestiary display data for all enemy types across 4 factions + Old World.",
+    "version": "1.0",
+    "objective": "#38"
+  },
+  "entries": [
+    {
+      "enemy_type": "freelance_raider",
+      "name": "Freelance Raider",
+      "faction": "Freelance",
+      "stats_display": "HP: 30 | ATK: 8 | DEF: 3 | SPD: 4",
+      "description_short": "Opportunistic bandits with basic weapons. Poorly organized but numerous.",
+      "description_full": "Freelance Raiders are displaced survivors who turned to banditry. They operate in small, uncoordinated groups with salvaged weapons and makeshift armor. Individually weak but dangerous in numbers.",
+      "lore": "Most freelance raiders were once farmers, traders, or workers displaced by The Sundering's aftermath. Desperation, not malice, drives most of them. Some can be reasoned with. Most can't."
+    },
+    {
+      "enemy_type": "freelance_scout",
+      "name": "Freelance Scout",
+      "faction": "Freelance",
+      "stats_display": "HP: 20 | ATK: 5 | DEF: 2 | SPD: 7",
+      "description_short": "Fast-moving reconnaissance unit. Lightly armed but hard to catch.",
+      "description_full": "Scouts operate ahead of raider groups, mapping defenses and identifying targets. They prefer to flee rather than fight, making them frustrating to deal with.",
+      "lore": "A good scout is worth ten raiders. They map your turrets, count your walls, and time your patrols. By the time the main force arrives, they already know your weaknesses."
+    },
+    {
+      "enemy_type": "security_drone",
+      "name": "Security Drone",
+      "faction": "Old World",
+      "stats_display": "HP: 40 | ATK: 10 | DEF: 5 | SPD: 3",
+      "description_short": "Pre-war automated defense unit. Still operational on residual power.",
+      "description_full": "Old World security drones patrol ruined installations on centuries-old programming. They attack anything that moves \u2014 they can't distinguish friend from foe. Their weapons are degraded but still dangerous.",
+      "lore": "These drones were built to protect. Fifty years later, they still do \u2014 they just don't know the war is over. DEJIN calls them 'the loyal ones.' There's sadness in that."
+    },
+    {
+      "enemy_type": "rust_wolf_scout",
+      "name": "Rust Wolf Scout",
+      "faction": "Rust Wolves",
+      "stats_display": "HP: 25 | ATK: 7 | DEF: 3 | SPD: 6",
+      "description_short": "Forest-dwelling scout. Uses terrain and foliage for ambush tactics.",
+      "description_full": "Rust Wolf Scouts operate in the Rustwood border, using the copper-tinted forest as cover. They're stealthier than freelance scouts and often set traps.",
+      "lore": "The Rust Wolves learned from the forest. They move like shadows between the copper trees, and they know every root and ravine. Underestimate them at your peril."
+    },
+    {
+      "enemy_type": "rust_wolf_raider",
+      "name": "Rust Wolf Raider",
+      "faction": "Rust Wolves",
+      "stats_display": "HP: 40 | ATK: 12 | DEF: 5 | SPD: 5",
+      "description_short": "Standard Rust Wolf combatant. Better equipped than freelancers.",
+      "description_full": "Rust Wolf Raiders are the backbone of the faction's fighting force. They carry salvaged industrial tools repurposed as weapons \u2014 pipe wrenches, cutting torches, pneumatic hammers.",
+      "lore": "They take their name from the rust-colored forest they call home. Their weapons are crude but effective \u2014 nothing quite like being hit with a pneumatic hammer."
+    },
+    {
+      "enemy_type": "rust_wolf_berserker",
+      "name": "Rust Wolf Berserker",
+      "faction": "Rust Wolves",
+      "stats_display": "HP: 60 | ATK: 18 | DEF: 3 | SPD: 7",
+      "description_short": "Frenzied melee fighter. High damage, low defense, terrifyingly fast.",
+      "description_full": "Berserkers charge headlong into defenses with reckless abandon. They wear minimal armor for maximum speed and deal devastating melee damage. Turrets struggle to track their erratic movement.",
+      "lore": "Some say the Berserkers drink Rustwood sap before battle \u2014 the copper-infused liquid causes a temporary frenzy. Whether that's true or propaganda, the result is the same: pure chaos."
+    },
+    {
+      "enemy_type": "rust_wolf_sapper",
+      "name": "Rust Wolf Sapper",
+      "faction": "Rust Wolves",
+      "stats_display": "HP: 20 | ATK: 5 | DEF: 2 | SPD: 5 | BOMB: 50",
+      "description_short": "Demolitions specialist. Targets walls and structures with explosives.",
+      "description_full": "Sappers carry improvised explosives and target defensive structures. They're fragile but devastating if they reach a wall \u2014 a single charge can breach a stone barrier.",
+      "lore": "The Rust Wolves discovered an old munitions factory in the deep Rustwood. Now they make their own explosives. Crude, unstable, and terrifyingly effective."
+    },
+    {
+      "enemy_type": "alpha_wolf",
+      "name": "Alpha Wolf",
+      "faction": "Rust Wolves",
+      "stats_display": "HP: 120 | ATK: 22 | DEF: 8 | SPD: 5",
+      "description_short": "Rust Wolf leader. Heavily armed, commands pack tactics.",
+      "description_full": "The Alpha Wolf is the Rust Wolf faction leader \u2014 a massive, scarred veteran who commands through strength and cunning. In battle, nearby Rust Wolves gain morale and coordination bonuses.",
+      "lore": "Nobody knows the Alpha Wolf's real name. They say he was a factory foreman before The Sundering \u2014 a man used to commanding workers. Now he commands wolves."
+    },
+    {
+      "enemy_type": "iron_marauder_infantry",
+      "name": "Iron Marauder Infantry",
+      "faction": "Iron Marauders",
+      "stats_display": "HP: 50 | ATK: 14 | DEF: 8 | SPD: 4",
+      "description_short": "Disciplined soldier. Professional equipment and formation tactics.",
+      "description_full": "Iron Marauder Infantry are well-trained, well-equipped soldiers operating under strict military discipline. They attack in formation, use cover effectively, and retreat when outmatched rather than dying pointlessly.",
+      "lore": "The Marshal's infantry are the remnants of a real military unit \u2014 the 4th Engineering Division. They maintained discipline through The Quiet Years while the world fell apart. That discipline is their greatest weapon."
+    },
+    {
+      "enemy_type": "iron_marauder_shieldbearer",
+      "name": "Iron Marauder Shieldbearer",
+      "faction": "Iron Marauders",
+      "stats_display": "HP: 70 | ATK: 8 | DEF: 15 | SPD: 3",
+      "description_short": "Heavy defender. Absorbs damage for units behind it.",
+      "description_full": "Shieldbearers carry massive salvaged metal shields that can deflect turret fire. They advance slowly, creating mobile cover for infantry and gunners behind them.",
+      "lore": "The shields are made from salvaged vehicle armor \u2014 car doors, truck panels, even aircraft fuselage. Ugly but functional. Like everything the Marshal builds."
+    },
+    {
+      "enemy_type": "iron_marauder_gunner",
+      "name": "Iron Marauder Gunner",
+      "faction": "Iron Marauders",
+      "stats_display": "HP: 35 | ATK: 20 | DEF: 4 | SPD: 3",
+      "description_short": "Ranged specialist. Devastating damage from distance.",
+      "description_full": "Gunners carry heavy pre-war firearms \u2014 rare and well-maintained. They set up behind Shieldbearers and deliver concentrated fire on turrets and defensive positions.",
+      "lore": "Working firearms are the rarest weapons in the post-war world. The Marshal's armory maintains them with religious devotion. Each bullet is hand-loaded with salvaged propellant."
+    },
+    {
+      "enemy_type": "iron_marauder_technician",
+      "name": "Iron Marauder Technician",
+      "faction": "Iron Marauders",
+      "stats_display": "HP: 30 | ATK: 6 | DEF: 4 | SPD: 4",
+      "description_short": "Combat engineer. Disables traps and repairs siege equipment.",
+      "description_full": "Technicians are the Marshal's answer to defensive engineering. They can disable traps, bypass energy shields temporarily, and repair damaged siege equipment mid-battle.",
+      "lore": "The Marshal recruits engineers whenever he can \u2014 willingly or not. His Technicians are skilled but conflicted. Some serve out of loyalty. Others out of fear."
+    },
+    {
+      "enemy_type": "iron_mech_boss",
+      "name": "Iron Mech",
+      "faction": "Iron Marauders",
+      "stats_display": "HP: 200 | ATK: 30 | DEF: 12 | SPD: 2",
+      "description_short": "Salvaged combat mech. The Marshal's heavy weapon.",
+      "description_full": "The Iron Mech is a pre-war combat walker crudely repaired and modified by the Marshal's technicians. It's slower and less refined than Jack's mechs but carries devastating firepower.",
+      "lore": "The Marshal found this mech in an Ashspine bunker \u2014 partially intact, barely functional. His engineers spent two years making it operational. It's their pride and their terror."
+    },
+    {
+      "enemy_type": "the_marshal",
+      "name": "The Marshal",
+      "faction": "Iron Marauders",
+      "stats_display": "HP: 300 | ATK: 35 | DEF: 15 | SPD: 4",
+      "description_short": "Commander Aldric Vane. The Iron Marauders' supreme leader.",
+      "description_full": "The Marshal pilots a heavily modified command mech with advanced weapons and tactical systems. He's a brilliant tactician who fights from the front \u2014 earning the loyalty of his troops through shared danger.",
+      "lore": "Commander Aldric Vane survived The Sundering, The Quiet Years, and thirty years of chaos. He watched communities destroy each other and concluded that only absolute authority could prevent another apocalypse. He's wrong. But he's not evil. He's a man who saw the worst of humanity and made the worst possible conclusion."
+    },
+    {
+      "enemy_type": "tide_reaver_raider",
+      "name": "Tide Reaver Raider",
+      "faction": "Tide Reavers",
+      "stats_display": "HP: 35 | ATK: 10 | DEF: 4 | SPD: 5",
+      "description_short": "Maritime raider. Attacks from the western coast.",
+      "description_full": "Tide Reaver Raiders are former fishermen and sailors turned pirates. They attack coastal settlements and trade routes, using salvaged boats and improvised naval weapons.",
+      "lore": "The Shattered Coast breeds hard people. When the fishing runs dry and the storms get worse, some turn to raiding. The Tide Reavers are organized, ruthless, and know the waters better than anyone."
+    },
+    {
+      "enemy_type": "tide_reaver_diver",
+      "name": "Tide Reaver Diver",
+      "faction": "Tide Reavers",
+      "stats_display": "HP: 25 | ATK: 8 | DEF: 3 | SPD: 6",
+      "description_short": "Infiltrator. Bypasses walls via water routes.",
+      "description_full": "Divers use underwater approaches to bypass land-based defenses entirely. They surface inside defensive perimeters and attack from unexpected angles. Particularly dangerous for coastal settlements.",
+      "lore": "The Divers train in the freezing waters of the Shattered Coast. They can hold their breath for four minutes and swim through currents that would drown most people. Walls mean nothing to them."
+    },
+    {
+      "enemy_type": "tide_reaver_captain",
+      "name": "Tide Reaver Captain",
+      "faction": "Tide Reavers",
+      "stats_display": "HP: 100 | ATK: 18 | DEF: 7 | SPD: 5",
+      "description_short": "Tide Reaver leader. Commands from a salvaged gunboat.",
+      "description_full": "Tide Reaver Captains are veteran pirates who've survived decades on the Shattered Coast. They command small fleets and coordinate amphibious assaults with practiced efficiency.",
+      "lore": "Captain Moira's granddaughter leads the largest Tide Reaver fleet. She claims her grandmother was the captain of the INS Resolute who refused to shell civilians. Whether that's true or legend, it gives her crew a cause beyond mere piracy."
+    }
+  ]
+}

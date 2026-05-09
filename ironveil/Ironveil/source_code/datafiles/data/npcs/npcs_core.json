@@ -1,0 +1,1089 @@
+{
+  "_meta": {
+    "description": "Complete NPC definitions for all 18 Coppervale-area characters. Includes 15 town residents, 1 outskirts scout (Leera), 1 late-arrival (Janis), and 1 child (Pip).",
+    "version": "1.0",
+    "objective": "#16 Complete NPC System"
+  },
+
+  "npc_spark": {
+    "id": "npc_spark",
+    "name": "Spark",
+    "display_name": "Elara \"Spark\" Vance",
+    "role": "Mechanic",
+    "personality_tag": "energetic",
+    "home_building": "sparks_garage",
+    "sprite": "spr_npc_spark",
+    "portrait": "spr_portrait_spark",
+    "is_romance_candidate": false,
+    "birthday": { "season": "SPRING", "day": 18 },
+    "gift_preferences": {
+      "loved": ["item_flight_component", "item_rare_gear", "item_aviation_book"],
+      "liked": ["item_brass_gears", "item_copper_wire", "item_mechanical_toy", "item_strong_coffee"],
+      "hated": ["item_cleaning_supplies", "item_formal_clothes", "item_wildflower"]
+    },
+    "schedules": {
+      "spring_default": [
+        { "start_hour": 8,  "end_hour": 12, "location": "sparks_garage",    "room_id": "rm_int_npc_spark",   "pos": [3, 3] },
+        { "start_hour": 12, "end_hour": 14, "location": "market_district",  "room_id": "rm_town_coppervale", "pos": [35, 15] },
+        { "start_hour": 14, "end_hour": 17, "location": "town_wandering",   "room_id": "rm_town_coppervale", "pos": [30, 30] },
+        { "start_hour": 17, "end_hour": 19, "location": "the_overlook",     "room_id": "rm_town_coppervale", "pos": [25, 5] },
+        { "start_hour": 19, "end_hour": 22, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [7, 5] }
+      ],
+      "spring_rainy": [
+        { "start_hour": 8,  "end_hour": 22, "location": "sparks_garage",    "room_id": "rm_int_npc_spark",   "pos": [3, 3] }
+      ],
+      "summer_default": [
+        { "start_hour": 8,  "end_hour": 12, "location": "sparks_garage",    "room_id": "rm_int_npc_spark",   "pos": [3, 3] },
+        { "start_hour": 12, "end_hour": 14, "location": "market_district",  "room_id": "rm_town_coppervale", "pos": [35, 15] },
+        { "start_hour": 14, "end_hour": 17, "location": "town_wandering",   "room_id": "rm_town_coppervale", "pos": [30, 30] },
+        { "start_hour": 17, "end_hour": 19, "location": "the_overlook",     "room_id": "rm_town_coppervale", "pos": [25, 5] },
+        { "start_hour": 19, "end_hour": 22, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [7, 5] }
+      ],
+      "summer_rainy": [
+        { "start_hour": 8,  "end_hour": 22, "location": "sparks_garage",    "room_id": "rm_int_npc_spark",   "pos": [3, 3] }
+      ],
+      "autumn_default": [
+        { "start_hour": 9,  "end_hour": 17, "location": "sparks_garage",    "room_id": "rm_int_npc_spark",   "pos": [3, 3] },
+        { "start_hour": 17, "end_hour": 22, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [7, 5] }
+      ],
+      "autumn_rainy": [
+        { "start_hour": 9,  "end_hour": 22, "location": "sparks_garage",    "room_id": "rm_int_npc_spark",   "pos": [3, 3] }
+      ],
+      "winter_default": [
+        { "start_hour": 9,  "end_hour": 17, "location": "sparks_garage",    "room_id": "rm_int_npc_spark",   "pos": [3, 3] },
+        { "start_hour": 17, "end_hour": 22, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [7, 5] }
+      ],
+      "winter_rainy": [
+        { "start_hour": 9,  "end_hour": 22, "location": "sparks_garage",    "room_id": "rm_int_npc_spark",   "pos": [3, 3] }
+      ]
+    },
+    "conditional_schedules": [
+      {
+        "condition": "hearts_gte",
+        "value": 4,
+        "seasons": ["SPRING", "SUMMER"],
+        "weather": "CLEAR",
+        "override_entry": { "start_hour": 14, "end_hour": 16, "location": "player_workshop", "room_id": "rm_int_workshop", "pos": [4, 4] }
+      }
+    ]
+  },
+
+  "npc_maren": {
+    "id": "npc_maren",
+    "name": "Maren",
+    "display_name": "Old Maren",
+    "role": "Retired Engineer / Elder",
+    "personality_tag": "gentle",
+    "home_building": "old_marens_house",
+    "sprite": "spr_npc_maren",
+    "portrait": "spr_portrait_maren",
+    "is_romance_candidate": false,
+    "birthday": { "season": "AUTUMN", "day": 4 },
+    "gift_preferences": {
+      "loved": ["item_data_core_standard", "item_herbal_tea", "item_warm_cooked_meal"],
+      "liked": ["item_soft_fabric", "item_book_generic", "item_wildflower"],
+      "hated": ["item_concussion_mine", "item_scrap_iron", "item_weapon_mount"]
+    },
+    "schedules": {
+      "spring_default": [
+        { "start_hour": 9,  "end_hour": 12, "location": "marens_house",     "room_id": "rm_int_npc_maren",   "pos": [3, 3] },
+        { "start_hour": 12, "end_hour": 15, "location": "town_square_bench","room_id": "rm_town_coppervale", "pos": [35, 32] },
+        { "start_hour": 15, "end_hour": 22, "location": "marens_house",     "room_id": "rm_int_npc_maren",   "pos": [3, 3] }
+      ],
+      "spring_rainy": [
+        { "start_hour": 9,  "end_hour": 22, "location": "marens_house",     "room_id": "rm_int_npc_maren",   "pos": [3, 3] }
+      ],
+      "summer_default": [
+        { "start_hour": 9,  "end_hour": 12, "location": "marens_house",     "room_id": "rm_int_npc_maren",   "pos": [3, 3] },
+        { "start_hour": 12, "end_hour": 15, "location": "town_square_bench","room_id": "rm_town_coppervale", "pos": [35, 32] },
+        { "start_hour": 15, "end_hour": 22, "location": "marens_house",     "room_id": "rm_int_npc_maren",   "pos": [3, 3] }
+      ],
+      "summer_rainy": [
+        { "start_hour": 9,  "end_hour": 22, "location": "marens_house",     "room_id": "rm_int_npc_maren",   "pos": [3, 3] }
+      ],
+      "autumn_default": [
+        { "start_hour": 10, "end_hour": 14, "location": "town_square_bench","room_id": "rm_town_coppervale", "pos": [35, 32] },
+        { "start_hour": 14, "end_hour": 22, "location": "marens_house",     "room_id": "rm_int_npc_maren",   "pos": [3, 3] }
+      ],
+      "autumn_rainy": [
+        { "start_hour": 9,  "end_hour": 22, "location": "marens_house",     "room_id": "rm_int_npc_maren",   "pos": [3, 3] }
+      ],
+      "winter_default": [
+        { "start_hour": 9,  "end_hour": 22, "location": "marens_house",     "room_id": "rm_int_npc_maren",   "pos": [3, 3] }
+      ],
+      "winter_rainy": [
+        { "start_hour": 9,  "end_hour": 22, "location": "marens_house",     "room_id": "rm_int_npc_maren",   "pos": [3, 3] }
+      ]
+    },
+    "conditional_schedules": [
+      {
+        "condition": "hearts_gte",
+        "value": 6,
+        "seasons": ["SPRING", "SUMMER", "AUTUMN"],
+        "weather": "ANY",
+        "override_entry": { "start_hour": 9, "end_hour": 10, "location": "marens_house_door", "room_id": "rm_int_npc_maren", "pos": [4, 6], "note": "Waiting by door to give Jack a recipe" }
+      }
+    ]
+  },
+
+  "npc_harrow": {
+    "id": "npc_harrow",
+    "name": "Harrow",
+    "display_name": "Captain Aris Harrow",
+    "role": "Militia Leader",
+    "personality_tag": "gruff",
+    "home_building": "harrows_quarters",
+    "sprite": "spr_npc_harrow",
+    "portrait": "spr_portrait_harrow",
+    "is_romance_candidate": false,
+    "birthday": { "season": "SUMMER", "day": 28 },
+    "gift_preferences": {
+      "loved": ["item_steel_beam", "item_military_rations", "item_military_manual"],
+      "liked": ["item_repair_kit", "item_scrap_iron", "item_strong_coffee"],
+      "hated": ["item_mechanical_toy", "item_wildflower", "item_alcohol"]
+    },
+    "schedules": {
+      "spring_default": [
+        { "start_hour": 8,  "end_hour": 18, "location": "eastern_gate_patrol", "room_id": "rm_town_coppervale", "pos": [65, 25] },
+        { "start_hour": 18, "end_hour": 21, "location": "rusty_gear_tavern",   "room_id": "rm_int_rusty_gear",  "pos": [10, 4] },
+        { "start_hour": 21, "end_hour": 23, "location": "harrows_quarters",    "room_id": "rm_int_npc_harrow",  "pos": [3, 3] }
+      ],
+      "spring_rainy": [
+        { "start_hour": 8,  "end_hour": 18, "location": "harrows_quarters",    "room_id": "rm_int_npc_harrow",  "pos": [3, 3] },
+        { "start_hour": 18, "end_hour": 21, "location": "rusty_gear_tavern",   "room_id": "rm_int_rusty_gear",  "pos": [10, 4] },
+        { "start_hour": 21, "end_hour": 23, "location": "harrows_quarters",    "room_id": "rm_int_npc_harrow",  "pos": [3, 3] }
+      ],
+      "summer_default": [
+        { "start_hour": 7,  "end_hour": 19, "location": "eastern_gate_patrol", "room_id": "rm_town_coppervale", "pos": [65, 25] },
+        { "start_hour": 19, "end_hour": 21, "location": "rusty_gear_tavern",   "room_id": "rm_int_rusty_gear",  "pos": [10, 4] },
+        { "start_hour": 21, "end_hour": 23, "location": "harrows_quarters",    "room_id": "rm_int_npc_harrow",  "pos": [3, 3] }
+      ],
+      "summer_rainy": [
+        { "start_hour": 8,  "end_hour": 18, "location": "harrows_quarters",    "room_id": "rm_int_npc_harrow",  "pos": [3, 3] },
+        { "start_hour": 18, "end_hour": 21, "location": "rusty_gear_tavern",   "room_id": "rm_int_rusty_gear",  "pos": [10, 4] },
+        { "start_hour": 21, "end_hour": 23, "location": "harrows_quarters",    "room_id": "rm_int_npc_harrow",  "pos": [3, 3] }
+      ],
+      "autumn_default": [
+        { "start_hour": 8,  "end_hour": 17, "location": "eastern_gate_patrol", "room_id": "rm_town_coppervale", "pos": [65, 25] },
+        { "start_hour": 17, "end_hour": 21, "location": "rusty_gear_tavern",   "room_id": "rm_int_rusty_gear",  "pos": [10, 4] },
+        { "start_hour": 21, "end_hour": 23, "location": "harrows_quarters",    "room_id": "rm_int_npc_harrow",  "pos": [3, 3] }
+      ],
+      "autumn_rainy": [
+        { "start_hour": 8,  "end_hour": 18, "location": "harrows_quarters",    "room_id": "rm_int_npc_harrow",  "pos": [3, 3] },
+        { "start_hour": 18, "end_hour": 21, "location": "rusty_gear_tavern",   "room_id": "rm_int_rusty_gear",  "pos": [10, 4] },
+        { "start_hour": 21, "end_hour": 23, "location": "harrows_quarters",    "room_id": "rm_int_npc_harrow",  "pos": [3, 3] }
+      ],
+      "winter_default": [
+        { "start_hour": 8,  "end_hour": 16, "location": "eastern_gate_patrol", "room_id": "rm_town_coppervale", "pos": [65, 25] },
+        { "start_hour": 16, "end_hour": 21, "location": "rusty_gear_tavern",   "room_id": "rm_int_rusty_gear",  "pos": [10, 4] },
+        { "start_hour": 21, "end_hour": 23, "location": "harrows_quarters",    "room_id": "rm_int_npc_harrow",  "pos": [3, 3] }
+      ],
+      "winter_rainy": [
+        { "start_hour": 8,  "end_hour": 18, "location": "harrows_quarters",    "room_id": "rm_int_npc_harrow",  "pos": [3, 3] },
+        { "start_hour": 18, "end_hour": 21, "location": "rusty_gear_tavern",   "room_id": "rm_int_rusty_gear",  "pos": [10, 4] },
+        { "start_hour": 21, "end_hour": 23, "location": "harrows_quarters",    "room_id": "rm_int_npc_harrow",  "pos": [3, 3] }
+      ]
+    },
+    "conditional_schedules": [
+      {
+        "condition": "hearts_gte",
+        "value": 5,
+        "seasons": ["SPRING", "SUMMER", "AUTUMN", "WINTER"],
+        "weather": "ANY",
+        "override_entry": { "start_hour": 15, "end_hour": 16, "location": "player_workshop", "room_id": "rm_int_workshop", "pos": [6, 3], "note": "Inspecting defense crafting progress" }
+      },
+      {
+        "condition": "story_flag",
+        "value": "raid_intel_active",
+        "seasons": ["SPRING", "SUMMER", "AUTUMN", "WINTER"],
+        "weather": "ANY",
+        "override_entry": { "start_hour": 6, "end_hour": 23, "location": "eastern_gate_outpost", "room_id": "rm_town_coppervale", "pos": [70, 22], "note": "Stationed at outpost during raid intel phase" }
+      }
+    ]
+  },
+
+  "npc_linden": {
+    "id": "npc_linden",
+    "name": "Linden",
+    "display_name": "Mayor Linden",
+    "role": "Town Leader",
+    "personality_tag": "warm",
+    "home_building": "lindens_home",
+    "sprite": "spr_npc_linden",
+    "portrait": "spr_portrait_linden",
+    "is_romance_candidate": false,
+    "birthday": { "season": "SPRING", "day": 8 },
+    "gift_preferences": {
+      "loved": ["item_old_world_book", "item_crafted_impressive", "item_large_pie"],
+      "liked": ["item_polished_wood", "item_stone_block", "item_vegetable_basket"],
+      "hated": ["item_marauder_salvage", "item_weapon_mount", "item_scrap_iron"]
+    },
+    "schedules": {
+      "spring_default": [
+        { "start_hour": 9,  "end_hour": 17, "location": "town_hall",        "room_id": "rm_int_town_hall",   "pos": [4, 3] },
+        { "start_hour": 17, "end_hour": 20, "location": "town_square_walk", "room_id": "rm_town_coppervale", "pos": [38, 32] }
+      ],
+      "spring_rainy": [
+        { "start_hour": 9,  "end_hour": 22, "location": "town_hall",        "room_id": "rm_int_town_hall",   "pos": [4, 3] }
+      ],
+      "summer_default": [
+        { "start_hour": 9,  "end_hour": 17, "location": "town_hall",        "room_id": "rm_int_town_hall",   "pos": [4, 3] },
+        { "start_hour": 17, "end_hour": 20, "location": "town_square_walk", "room_id": "rm_town_coppervale", "pos": [38, 32] }
+      ],
+      "summer_rainy": [
+        { "start_hour": 9,  "end_hour": 22, "location": "town_hall",        "room_id": "rm_int_town_hall",   "pos": [4, 3] }
+      ],
+      "autumn_default": [
+        { "start_hour": 9,  "end_hour": 18, "location": "town_hall",        "room_id": "rm_int_town_hall",   "pos": [4, 3] },
+        { "start_hour": 18, "end_hour": 21, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [5, 6] }
+      ],
+      "autumn_rainy": [
+        { "start_hour": 9,  "end_hour": 22, "location": "town_hall",        "room_id": "rm_int_town_hall",   "pos": [4, 3] }
+      ],
+      "winter_default": [
+        { "start_hour": 9,  "end_hour": 18, "location": "town_hall",        "room_id": "rm_int_town_hall",   "pos": [4, 3] },
+        { "start_hour": 18, "end_hour": 21, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [5, 6] }
+      ],
+      "winter_rainy": [
+        { "start_hour": 9,  "end_hour": 22, "location": "town_hall",        "room_id": "rm_int_town_hall",   "pos": [4, 3] }
+      ]
+    },
+    "conditional_schedules": [
+      {
+        "condition": "hearts_gte",
+        "value": 4,
+        "seasons": ["SPRING", "SUMMER", "AUTUMN", "WINTER"],
+        "weather": "ANY",
+        "override_entry": { "start_hour": 9, "end_hour": 10, "location": "player_workshop", "room_id": "rm_int_workshop", "pos": [4, 5], "note": "Discussing community projects" }
+      }
+    ]
+  },
+
+  "npc_michelle": {
+    "id": "npc_michelle",
+    "name": "Michelle",
+    "display_name": "Michelle Weaver",
+    "role": "Clinic Assistant / Herbalist",
+    "personality_tag": "gentle",
+    "home_building": "michelles_home",
+    "sprite": "spr_npc_michelle",
+    "portrait": "spr_portrait_michelle",
+    "is_romance_candidate": true,
+    "birthday": { "season": "SUMMER", "day": 12 },
+    "gift_preferences": {
+      "loved": ["item_rare_herb", "item_medical_supplies", "item_medical_text"],
+      "liked": ["item_wildflower", "item_herbal_tea", "item_book_generic"],
+      "hated": ["item_weapon_mount", "item_marauder_salvage", "item_alcohol"]
+    },
+    "schedules": {
+      "spring_default": [
+        { "start_hour": 9,  "end_hour": 13, "location": "clinic",           "room_id": "rm_int_clinic",      "pos": [3, 3] },
+        { "start_hour": 13, "end_hour": 17, "location": "greenhouse",       "room_id": "rm_town_coppervale", "pos": [36, 13] },
+        { "start_hour": 17, "end_hour": 22, "location": "michelles_home",   "room_id": "rm_int_npc_michelle","pos": [2, 2] }
+      ],
+      "spring_rainy": [
+        { "start_hour": 9,  "end_hour": 22, "location": "clinic",           "room_id": "rm_int_clinic",      "pos": [3, 3] }
+      ],
+      "summer_default": [
+        { "start_hour": 9,  "end_hour": 13, "location": "clinic",           "room_id": "rm_int_clinic",      "pos": [3, 3] },
+        { "start_hour": 13, "end_hour": 17, "location": "greenhouse",       "room_id": "rm_town_coppervale", "pos": [36, 13] },
+        { "start_hour": 17, "end_hour": 22, "location": "michelles_home",   "room_id": "rm_int_npc_michelle","pos": [2, 2] }
+      ],
+      "summer_rainy": [
+        { "start_hour": 9,  "end_hour": 22, "location": "clinic",           "room_id": "rm_int_clinic",      "pos": [3, 3] }
+      ],
+      "autumn_default": [
+        { "start_hour": 9,  "end_hour": 16, "location": "clinic",           "room_id": "rm_int_clinic",      "pos": [3, 3] },
+        { "start_hour": 16, "end_hour": 22, "location": "michelles_home",   "room_id": "rm_int_npc_michelle","pos": [2, 2] }
+      ],
+      "autumn_rainy": [
+        { "start_hour": 9,  "end_hour": 22, "location": "clinic",           "room_id": "rm_int_clinic",      "pos": [3, 3] }
+      ],
+      "winter_default": [
+        { "start_hour": 9,  "end_hour": 16, "location": "clinic",           "room_id": "rm_int_clinic",      "pos": [3, 3] },
+        { "start_hour": 16, "end_hour": 22, "location": "michelles_home",   "room_id": "rm_int_npc_michelle","pos": [2, 2] }
+      ],
+      "winter_rainy": [
+        { "start_hour": 9,  "end_hour": 22, "location": "clinic",           "room_id": "rm_int_clinic",      "pos": [3, 3] }
+      ]
+    },
+    "conditional_schedules": [
+      {
+        "condition": "hearts_gte",
+        "value": 5,
+        "seasons": ["SPRING", "SUMMER"],
+        "weather": "CLEAR",
+        "override_entry": { "start_hour": 17, "end_hour": 19, "location": "river_walk", "room_id": "rm_town_coppervale", "pos": [6, 30], "note": "Walking by the river on clear evenings" }
+      }
+    ]
+  },
+
+  "npc_kaydee": {
+    "id": "npc_kaydee",
+    "name": "Kaydee",
+    "display_name": "Kaydee Voss",
+    "role": "Tavern Owner",
+    "personality_tag": "confident",
+    "home_building": "rusty_gear_tavern",
+    "sprite": "spr_npc_kaydee",
+    "portrait": "spr_portrait_kaydee",
+    "is_romance_candidate": true,
+    "birthday": { "season": "AUTUMN", "day": 17 },
+    "gift_preferences": {
+      "loved": ["item_rare_spirits", "item_mechanical_gadget", "item_bold_jewelry"],
+      "liked": ["item_warm_cooked_meal", "item_rare_mineral", "item_strong_coffee"],
+      "hated": ["item_wildflower", "item_cheap_trinket", "item_generic_gift"]
+    },
+    "schedules": {
+      "spring_default": [
+        { "start_hour": 10, "end_hour": 11, "location": "market_district",  "room_id": "rm_town_coppervale", "pos": [35, 17] },
+        { "start_hour": 11, "end_hour": 2,  "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [7, 3] }
+      ],
+      "spring_rainy": [
+        { "start_hour": 11, "end_hour": 2,  "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [7, 3] }
+      ],
+      "summer_default": [
+        { "start_hour": 10, "end_hour": 11, "location": "market_district",  "room_id": "rm_town_coppervale", "pos": [35, 17] },
+        { "start_hour": 11, "end_hour": 2,  "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [7, 3] }
+      ],
+      "summer_rainy": [
+        { "start_hour": 11, "end_hour": 2,  "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [7, 3] }
+      ],
+      "autumn_default": [
+        { "start_hour": 11, "end_hour": 2,  "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [7, 3] }
+      ],
+      "autumn_rainy": [
+        { "start_hour": 11, "end_hour": 2,  "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [7, 3] }
+      ],
+      "winter_default": [
+        { "start_hour": 11, "end_hour": 2,  "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [7, 3] }
+      ],
+      "winter_rainy": [
+        { "start_hour": 11, "end_hour": 2,  "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [7, 3] }
+      ]
+    },
+    "conditional_schedules": [
+      {
+        "condition": "hearts_gte",
+        "value": 6,
+        "seasons": ["SPRING", "SUMMER", "AUTUMN"],
+        "weather": "CLEAR",
+        "override_entry": { "start_hour": 2, "end_hour": 3, "location": "the_overlook", "room_id": "rm_town_coppervale", "pos": [25, 5], "note": "Late-night stargazing after tavern closes" }
+      }
+    ]
+  },
+
+  "npc_kiery": {
+    "id": "npc_kiery",
+    "name": "Kiery",
+    "display_name": "Kiery Dalton",
+    "role": "Seamstress / Textile Worker",
+    "personality_tag": "sweet",
+    "home_building": "kierys_shop",
+    "sprite": "spr_npc_kiery",
+    "portrait": "spr_portrait_kiery",
+    "is_romance_candidate": true,
+    "birthday": { "season": "SPRING", "day": 26 },
+    "gift_preferences": {
+      "loved": ["item_beautiful_fabric", "item_dye_set", "item_sewing_tools"],
+      "liked": ["item_colorful_mineral", "item_herbal_tea", "item_handcrafted_jewelry"],
+      "hated": ["item_weapon_mount", "item_planner_book", "item_scrap_iron"]
+    },
+    "schedules": {
+      "spring_default": [
+        { "start_hour": 9,  "end_hour": 17, "location": "kierys_shop",      "room_id": "rm_int_npc_kiery",   "pos": [3, 3] },
+        { "start_hour": 17, "end_hour": 19, "location": "river_walk",       "room_id": "rm_town_coppervale", "pos": [6, 25] }
+      ],
+      "spring_rainy": [
+        { "start_hour": 9,  "end_hour": 22, "location": "kierys_shop",      "room_id": "rm_int_npc_kiery",   "pos": [3, 3] }
+      ],
+      "summer_default": [
+        { "start_hour": 9,  "end_hour": 17, "location": "kierys_shop",      "room_id": "rm_int_npc_kiery",   "pos": [3, 3] },
+        { "start_hour": 17, "end_hour": 19, "location": "river_walk",       "room_id": "rm_town_coppervale", "pos": [6, 25] }
+      ],
+      "summer_rainy": [
+        { "start_hour": 9,  "end_hour": 22, "location": "kierys_shop",      "room_id": "rm_int_npc_kiery",   "pos": [3, 3] }
+      ],
+      "autumn_default": [
+        { "start_hour": 10, "end_hour": 18, "location": "kierys_shop",      "room_id": "rm_int_npc_kiery",   "pos": [3, 3] }
+      ],
+      "autumn_rainy": [
+        { "start_hour": 10, "end_hour": 22, "location": "kierys_shop",      "room_id": "rm_int_npc_kiery",   "pos": [3, 3] }
+      ],
+      "winter_default": [
+        { "start_hour": 10, "end_hour": 18, "location": "kierys_shop",      "room_id": "rm_int_npc_kiery",   "pos": [3, 3] }
+      ],
+      "winter_rainy": [
+        { "start_hour": 10, "end_hour": 22, "location": "kierys_shop",      "room_id": "rm_int_npc_kiery",   "pos": [3, 3] }
+      ]
+    },
+    "conditional_schedules": [
+      {
+        "condition": "hearts_gte",
+        "value": 5,
+        "seasons": ["AUTUMN", "WINTER"],
+        "weather": "ANY",
+        "override_entry": { "start_hour": 18, "end_hour": 20, "location": "marens_house", "room_id": "rm_int_npc_maren", "pos": [4, 4], "note": "Visiting Old Maren to chat and mend clothes" }
+      }
+    ]
+  },
+
+  "npc_paige": {
+    "id": "npc_paige",
+    "name": "Paige",
+    "display_name": "Paige Thornton",
+    "role": "Librarian / Archivist",
+    "personality_tag": "disciplined",
+    "home_building": "paiges_archive",
+    "sprite": "spr_npc_paige",
+    "portrait": "spr_portrait_paige",
+    "is_romance_candidate": true,
+    "birthday": { "season": "WINTER", "day": 22 },
+    "gift_preferences": {
+      "loved": ["item_rare_book", "item_old_world_document", "item_data_core_standard", "item_archival_supplies"],
+      "liked": ["item_black_coffee", "item_fountain_pen", "item_simple_meal"],
+      "hated": ["item_romantic_gift", "item_frivolous_decoration", "item_alcohol"]
+    },
+    "schedules": {
+      "spring_default": [
+        { "start_hour": 9,  "end_hour": 18, "location": "archive",          "room_id": "rm_int_archive",     "pos": [4, 4] }
+      ],
+      "spring_rainy": [
+        { "start_hour": 9,  "end_hour": 20, "location": "archive",          "room_id": "rm_int_archive",     "pos": [4, 4] }
+      ],
+      "summer_default": [
+        { "start_hour": 9,  "end_hour": 18, "location": "archive",          "room_id": "rm_int_archive",     "pos": [4, 4] }
+      ],
+      "summer_rainy": [
+        { "start_hour": 9,  "end_hour": 20, "location": "archive",          "room_id": "rm_int_archive",     "pos": [4, 4] }
+      ],
+      "autumn_default": [
+        { "start_hour": 9,  "end_hour": 18, "location": "archive",          "room_id": "rm_int_archive",     "pos": [4, 4] }
+      ],
+      "autumn_rainy": [
+        { "start_hour": 9,  "end_hour": 20, "location": "archive",          "room_id": "rm_int_archive",     "pos": [4, 4] }
+      ],
+      "winter_default": [
+        { "start_hour": 9,  "end_hour": 18, "location": "archive",          "room_id": "rm_int_archive",     "pos": [4, 4] }
+      ],
+      "winter_rainy": [
+        { "start_hour": 9,  "end_hour": 20, "location": "archive",          "room_id": "rm_int_archive",     "pos": [4, 4] }
+      ]
+    },
+    "conditional_schedules": [
+      {
+        "condition": "hearts_gte",
+        "value": 6,
+        "seasons": ["SPRING", "SUMMER"],
+        "weather": "CLEAR",
+        "override_entry": { "start_hour": 19, "end_hour": 21, "location": "the_overlook", "room_id": "rm_town_coppervale", "pos": [20, 5], "note": "Reading at The Overlook in the evening" }
+      },
+      {
+        "condition": "special_day",
+        "value": "season_day_10",
+        "seasons": ["SPRING", "SUMMER", "AUTUMN", "WINTER"],
+        "weather": "ANY",
+        "override_entry": { "start_hour": 9, "end_hour": 12, "location": "memorial", "room_id": "rm_town_coppervale", "pos": [40, 35], "note": "Visiting husband's memorial on 10th of every season" }
+      }
+    ]
+  },
+
+  "npc_gus": {
+    "id": "npc_gus",
+    "name": "Gus",
+    "display_name": "Gus",
+    "role": "General Store Owner",
+    "personality_tag": "friendly",
+    "home_building": "general_store",
+    "sprite": "spr_npc_gus",
+    "portrait": "spr_portrait_gus",
+    "is_romance_candidate": false,
+    "birthday": { "season": "SUMMER", "day": 4 },
+    "gift_preferences": {
+      "loved": ["item_rare_trade_goods", "item_high_value_salvage", "item_fine_wine"],
+      "liked": ["item_vegetable_basket", "item_warm_cooked_meal", "item_plank"],
+      "hated": ["item_scrap_iron", "item_weed", "item_junk_salvage"]
+    },
+    "schedules": {
+      "spring_default": [
+        { "start_hour": 9,  "end_hour": 18, "location": "general_store",    "room_id": "rm_int_general_store","pos": [3, 3] },
+        { "start_hour": 18, "end_hour": 21, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [4, 5] }
+      ],
+      "spring_rainy": [
+        { "start_hour": 9,  "end_hour": 18, "location": "general_store",    "room_id": "rm_int_general_store","pos": [3, 3] },
+        { "start_hour": 18, "end_hour": 21, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [4, 5] }
+      ],
+      "summer_default": [
+        { "start_hour": 9,  "end_hour": 18, "location": "general_store",    "room_id": "rm_int_general_store","pos": [3, 3] },
+        { "start_hour": 18, "end_hour": 21, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [4, 5] }
+      ],
+      "summer_rainy": [
+        { "start_hour": 9,  "end_hour": 18, "location": "general_store",    "room_id": "rm_int_general_store","pos": [3, 3] },
+        { "start_hour": 18, "end_hour": 21, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [4, 5] }
+      ],
+      "autumn_default": [
+        { "start_hour": 9,  "end_hour": 18, "location": "general_store",    "room_id": "rm_int_general_store","pos": [3, 3] },
+        { "start_hour": 18, "end_hour": 21, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [4, 5] }
+      ],
+      "autumn_rainy": [
+        { "start_hour": 9,  "end_hour": 18, "location": "general_store",    "room_id": "rm_int_general_store","pos": [3, 3] },
+        { "start_hour": 18, "end_hour": 21, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [4, 5] }
+      ],
+      "winter_default": [
+        { "start_hour": 9,  "end_hour": 18, "location": "general_store",    "room_id": "rm_int_general_store","pos": [3, 3] },
+        { "start_hour": 18, "end_hour": 21, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [4, 5] }
+      ],
+      "winter_rainy": [
+        { "start_hour": 9,  "end_hour": 18, "location": "general_store",    "room_id": "rm_int_general_store","pos": [3, 3] },
+        { "start_hour": 18, "end_hour": 21, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [4, 5] }
+      ]
+    },
+    "conditional_schedules": [
+      {
+        "condition": "hearts_gte",
+        "value": 5,
+        "seasons": ["SPRING", "SUMMER", "AUTUMN", "WINTER"],
+        "weather": "ANY",
+        "override_entry": null,
+        "special_effect": "discount_10_percent",
+        "note": "Offers 10% discount on one item per day at 5+ hearts"
+      }
+    ]
+  },
+
+  "npc_ferris": {
+    "id": "npc_ferris",
+    "name": "Ferris",
+    "display_name": "Ferris",
+    "role": "Parts Dealer",
+    "personality_tag": "eccentric",
+    "home_building": "parts_dealer",
+    "sprite": "spr_npc_ferris",
+    "portrait": "spr_portrait_ferris",
+    "is_romance_candidate": false,
+    "birthday": { "season": "AUTUMN", "day": 21 },
+    "gift_preferences": {
+      "loved": ["item_rare_component", "item_old_world_artifact", "item_aetheric_ore"],
+      "liked": ["item_brass_gears", "item_precision_gears", "item_metal_ingot"],
+      "hated": ["item_warm_cooked_meal", "item_wildflower", "item_plank"]
+    },
+    "schedules": {
+      "spring_default": [
+        { "start_hour": 10, "end_hour": 17, "location": "parts_dealer",     "room_id": "rm_int_parts_dealer","pos": [3, 3] },
+        { "start_hour": 17, "end_hour": 21, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [9, 6] }
+      ],
+      "spring_rainy": [
+        { "start_hour": 10, "end_hour": 16, "location": "parts_dealer",     "room_id": "rm_int_parts_dealer","pos": [3, 3] },
+        { "start_hour": 16, "end_hour": 21, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [9, 6] }
+      ],
+      "summer_default": [
+        { "start_hour": 10, "end_hour": 17, "location": "parts_dealer",     "room_id": "rm_int_parts_dealer","pos": [3, 3] },
+        { "start_hour": 17, "end_hour": 21, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [9, 6] }
+      ],
+      "summer_rainy": [
+        { "start_hour": 10, "end_hour": 16, "location": "parts_dealer",     "room_id": "rm_int_parts_dealer","pos": [3, 3] },
+        { "start_hour": 16, "end_hour": 21, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [9, 6] }
+      ],
+      "autumn_default": [
+        { "start_hour": 10, "end_hour": 17, "location": "parts_dealer",     "room_id": "rm_int_parts_dealer","pos": [3, 3] },
+        { "start_hour": 17, "end_hour": 21, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [9, 6] }
+      ],
+      "autumn_rainy": [
+        { "start_hour": 10, "end_hour": 16, "location": "parts_dealer",     "room_id": "rm_int_parts_dealer","pos": [3, 3] },
+        { "start_hour": 16, "end_hour": 21, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [9, 6] }
+      ],
+      "winter_default": [
+        { "start_hour": 10, "end_hour": 17, "location": "parts_dealer",     "room_id": "rm_int_parts_dealer","pos": [3, 3] },
+        { "start_hour": 17, "end_hour": 21, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [9, 6] }
+      ],
+      "winter_rainy": [
+        { "start_hour": 10, "end_hour": 16, "location": "parts_dealer",     "room_id": "rm_int_parts_dealer","pos": [3, 3] },
+        { "start_hour": 16, "end_hour": 21, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [9, 6] }
+      ]
+    },
+    "conditional_schedules": [
+      {
+        "condition": "hearts_gte",
+        "value": 7,
+        "seasons": ["SPRING", "SUMMER", "AUTUMN", "WINTER"],
+        "weather": "ANY",
+        "override_entry": null,
+        "special_effect": "rare_stock_unlock",
+        "note": "Occasionally stocks ultra-rare components for Jack at 7+ hearts"
+      }
+    ]
+  },
+
+  "npc_hank": {
+    "id": "npc_hank",
+    "name": "Hank",
+    "display_name": "Hank",
+    "role": "Blacksmith",
+    "personality_tag": "stoic",
+    "home_building": "hanks_smithy",
+    "sprite": "spr_npc_hank",
+    "portrait": "spr_portrait_hank",
+    "is_romance_candidate": false,
+    "birthday": { "season": "WINTER", "day": 6 },
+    "gift_preferences": {
+      "loved": ["item_rare_ore", "item_high_quality_ingot", "item_cold_beer"],
+      "liked": ["item_copper_ore", "item_coal", "item_hearty_meal"],
+      "hated": ["item_wildflower", "item_soft_fabric", "item_sewing_tools"]
+    },
+    "schedules": {
+      "spring_default": [
+        { "start_hour": 8,  "end_hour": 19, "location": "smithy",           "room_id": "rm_int_smithy",      "pos": [3, 3] }
+      ],
+      "spring_rainy": [
+        { "start_hour": 8,  "end_hour": 19, "location": "smithy",           "room_id": "rm_int_smithy",      "pos": [3, 3] }
+      ],
+      "summer_default": [
+        { "start_hour": 8,  "end_hour": 19, "location": "smithy",           "room_id": "rm_int_smithy",      "pos": [3, 3] }
+      ],
+      "summer_rainy": [
+        { "start_hour": 8,  "end_hour": 19, "location": "smithy",           "room_id": "rm_int_smithy",      "pos": [3, 3] }
+      ],
+      "autumn_default": [
+        { "start_hour": 8,  "end_hour": 19, "location": "smithy",           "room_id": "rm_int_smithy",      "pos": [3, 3] }
+      ],
+      "autumn_rainy": [
+        { "start_hour": 8,  "end_hour": 19, "location": "smithy",           "room_id": "rm_int_smithy",      "pos": [3, 3] }
+      ],
+      "winter_default": [
+        { "start_hour": 8,  "end_hour": 19, "location": "smithy",           "room_id": "rm_int_smithy",      "pos": [3, 3] }
+      ],
+      "winter_rainy": [
+        { "start_hour": 8,  "end_hour": 19, "location": "smithy",           "room_id": "rm_int_smithy",      "pos": [3, 3] }
+      ]
+    },
+    "conditional_schedules": [
+      {
+        "condition": "hearts_gte",
+        "value": 5,
+        "seasons": ["SPRING", "SUMMER", "AUTUMN", "WINTER"],
+        "weather": "ANY",
+        "override_entry": null,
+        "special_effect": "gift_iron_ingot",
+        "note": "Leaves refined metal outside forge for Jack once per week"
+      }
+    ]
+  },
+
+  "npc_nora": {
+    "id": "npc_nora",
+    "name": "Nora",
+    "display_name": "Nora",
+    "role": "Farmer",
+    "personality_tag": "practical",
+    "home_building": null,
+    "sprite": "spr_npc_nora",
+    "portrait": "spr_portrait_nora",
+    "is_romance_candidate": false,
+    "birthday": { "season": "SUMMER", "day": 16 },
+    "gift_preferences": {
+      "loved": ["item_quality_seeds", "item_durable_tools", "item_fertilizer"],
+      "liked": ["item_fresh_fish", "item_stone_block", "item_warm_cooked_meal"],
+      "hated": ["item_scrap_iron", "item_brass_gears", "item_weapon_mount"]
+    },
+    "schedules": {
+      "spring_default": [
+        { "start_hour": 7,  "end_hour": 18, "location": "farm_fields",      "room_id": "rm_town_coppervale", "pos": [50, 30] },
+        { "start_hour": 18, "end_hour": 22, "location": "farm_house",       "room_id": "rm_town_coppervale", "pos": [52, 28] }
+      ],
+      "spring_rainy": [
+        { "start_hour": 8,  "end_hour": 22, "location": "farm_house",       "room_id": "rm_town_coppervale", "pos": [52, 28] }
+      ],
+      "summer_default": [
+        { "start_hour": 7,  "end_hour": 18, "location": "farm_fields",      "room_id": "rm_town_coppervale", "pos": [50, 30] },
+        { "start_hour": 18, "end_hour": 22, "location": "farm_house",       "room_id": "rm_town_coppervale", "pos": [52, 28] }
+      ],
+      "summer_rainy": [
+        { "start_hour": 8,  "end_hour": 22, "location": "farm_house",       "room_id": "rm_town_coppervale", "pos": [52, 28] }
+      ],
+      "autumn_default": [
+        { "start_hour": 7,  "end_hour": 18, "location": "farm_fields",      "room_id": "rm_town_coppervale", "pos": [50, 30] },
+        { "start_hour": 18, "end_hour": 22, "location": "farm_house",       "room_id": "rm_town_coppervale", "pos": [52, 28] }
+      ],
+      "autumn_rainy": [
+        { "start_hour": 8,  "end_hour": 22, "location": "farm_house",       "room_id": "rm_town_coppervale", "pos": [52, 28] }
+      ],
+      "winter_default": [
+        { "start_hour": 9,  "end_hour": 16, "location": "farm_house",       "room_id": "rm_town_coppervale", "pos": [52, 28] }
+      ],
+      "winter_rainy": [
+        { "start_hour": 9,  "end_hour": 22, "location": "farm_house",       "room_id": "rm_town_coppervale", "pos": [52, 28] }
+      ]
+    },
+    "conditional_schedules": [
+      {
+        "condition": "hearts_gte",
+        "value": 4,
+        "seasons": ["SPRING", "SUMMER", "AUTUMN"],
+        "weather": "ANY",
+        "override_entry": null,
+        "special_effect": "weekly_produce_basket",
+        "note": "Leaves seasonal produce at farm gate for Jack once per week"
+      }
+    ]
+  },
+
+  "npc_wes": {
+    "id": "npc_wes",
+    "name": "Wes",
+    "display_name": "Wes",
+    "role": "Courier / Mail Runner",
+    "personality_tag": "energetic",
+    "home_building": "wes_courier_post",
+    "sprite": "spr_npc_wes",
+    "portrait": "spr_portrait_wes",
+    "is_romance_candidate": false,
+    "birthday": { "season": "SPRING", "day": 22 },
+    "gift_preferences": {
+      "loved": ["item_energy_meal", "item_durable_boots", "item_map"],
+      "liked": ["item_strong_coffee", "item_military_rations", "item_repair_kit"],
+      "hated": ["item_rare_ore", "item_high_quality_ingot", "item_stone_block"]
+    },
+    "schedules": {
+      "spring_default": [
+        { "start_hour": 8,  "end_hour": 10, "location": "town_hall",        "room_id": "rm_int_town_hall",   "pos": [5, 4] },
+        { "start_hour": 10, "end_hour": 12, "location": "general_store",    "room_id": "rm_int_general_store","pos": [4, 3] },
+        { "start_hour": 12, "end_hour": 14, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [6, 4] },
+        { "start_hour": 14, "end_hour": 22, "location": "wes_courier_post", "room_id": "rm_int_npc_wes",     "pos": [2, 2] }
+      ],
+      "spring_rainy": [
+        { "start_hour": 9,  "end_hour": 22, "location": "wes_courier_post", "room_id": "rm_int_npc_wes",     "pos": [2, 2] }
+      ],
+      "summer_default": [
+        { "start_hour": 8,  "end_hour": 10, "location": "town_hall",        "room_id": "rm_int_town_hall",   "pos": [5, 4] },
+        { "start_hour": 10, "end_hour": 12, "location": "general_store",    "room_id": "rm_int_general_store","pos": [4, 3] },
+        { "start_hour": 12, "end_hour": 14, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [6, 4] },
+        { "start_hour": 14, "end_hour": 22, "location": "wes_courier_post", "room_id": "rm_int_npc_wes",     "pos": [2, 2] }
+      ],
+      "summer_rainy": [
+        { "start_hour": 9,  "end_hour": 22, "location": "wes_courier_post", "room_id": "rm_int_npc_wes",     "pos": [2, 2] }
+      ],
+      "autumn_default": [
+        { "start_hour": 8,  "end_hour": 10, "location": "town_hall",        "room_id": "rm_int_town_hall",   "pos": [5, 4] },
+        { "start_hour": 10, "end_hour": 12, "location": "general_store",    "room_id": "rm_int_general_store","pos": [4, 3] },
+        { "start_hour": 12, "end_hour": 22, "location": "wes_courier_post", "room_id": "rm_int_npc_wes",     "pos": [2, 2] }
+      ],
+      "autumn_rainy": [
+        { "start_hour": 9,  "end_hour": 22, "location": "wes_courier_post", "room_id": "rm_int_npc_wes",     "pos": [2, 2] }
+      ],
+      "winter_default": [
+        { "start_hour": 9,  "end_hour": 11, "location": "town_hall",        "room_id": "rm_int_town_hall",   "pos": [5, 4] },
+        { "start_hour": 11, "end_hour": 22, "location": "wes_courier_post", "room_id": "rm_int_npc_wes",     "pos": [2, 2] }
+      ],
+      "winter_rainy": [
+        { "start_hour": 9,  "end_hour": 22, "location": "wes_courier_post", "room_id": "rm_int_npc_wes",     "pos": [2, 2] }
+      ]
+    },
+    "conditional_schedules": [],
+    "away_schedule": {
+      "description": "Wes leaves town for 2-3 day courier runs. When away, he is not present in any room.",
+      "frequency": "every_5_to_7_days",
+      "duration_days_min": 2,
+      "duration_days_max": 3,
+      "flag_when_away": "wes_on_courier_run"
+    }
+  },
+
+  "npc_elm": {
+    "id": "npc_elm",
+    "name": "Elm",
+    "display_name": "Pastor Elm",
+    "role": "Spiritual Leader",
+    "personality_tag": "calm",
+    "home_building": "elms_chapel",
+    "sprite": "spr_npc_elm",
+    "portrait": "spr_portrait_elm",
+    "is_romance_candidate": false,
+    "birthday": { "season": "WINTER", "day": 14 },
+    "gift_preferences": {
+      "loved": ["item_rare_book", "item_incense", "item_polished_wood"],
+      "liked": ["item_herbal_tea", "item_wildflower", "item_simple_meal"],
+      "hated": ["item_weapon_mount", "item_alcohol", "item_money_pouch"]
+    },
+    "schedules": {
+      "spring_default": [
+        { "start_hour": 10, "end_hour": 17, "location": "chapel",           "room_id": "rm_int_chapel",      "pos": [3, 4] },
+        { "start_hour": 17, "end_hour": 20, "location": "river_walk",       "room_id": "rm_town_coppervale", "pos": [6, 20] }
+      ],
+      "spring_rainy": [
+        { "start_hour": 10, "end_hour": 22, "location": "chapel",           "room_id": "rm_int_chapel",      "pos": [3, 4] }
+      ],
+      "summer_default": [
+        { "start_hour": 10, "end_hour": 17, "location": "chapel",           "room_id": "rm_int_chapel",      "pos": [3, 4] },
+        { "start_hour": 17, "end_hour": 20, "location": "river_walk",       "room_id": "rm_town_coppervale", "pos": [6, 20] }
+      ],
+      "summer_rainy": [
+        { "start_hour": 10, "end_hour": 22, "location": "chapel",           "room_id": "rm_int_chapel",      "pos": [3, 4] }
+      ],
+      "autumn_default": [
+        { "start_hour": 10, "end_hour": 17, "location": "chapel",           "room_id": "rm_int_chapel",      "pos": [3, 4] },
+        { "start_hour": 17, "end_hour": 20, "location": "chapel_reading",   "room_id": "rm_int_chapel",      "pos": [4, 2] }
+      ],
+      "autumn_rainy": [
+        { "start_hour": 10, "end_hour": 22, "location": "chapel",           "room_id": "rm_int_chapel",      "pos": [3, 4] }
+      ],
+      "winter_default": [
+        { "start_hour": 10, "end_hour": 17, "location": "chapel",           "room_id": "rm_int_chapel",      "pos": [3, 4] },
+        { "start_hour": 17, "end_hour": 20, "location": "chapel_reading",   "room_id": "rm_int_chapel",      "pos": [4, 2] }
+      ],
+      "winter_rainy": [
+        { "start_hour": 10, "end_hour": 22, "location": "chapel",           "room_id": "rm_int_chapel",      "pos": [3, 4] }
+      ]
+    },
+    "conditional_schedules": [
+      {
+        "condition": "hearts_gte",
+        "value": 6,
+        "seasons": ["SPRING", "SUMMER", "AUTUMN", "WINTER"],
+        "weather": "ANY",
+        "override_entry": null,
+        "special_effect": "weekly_blessing",
+        "note": "Offers a weekly blessing providing a small temporary luck boost"
+      }
+    ]
+  },
+
+  "npc_bramble": {
+    "id": "npc_bramble",
+    "name": "Bramble",
+    "display_name": "Doc Bramble",
+    "role": "Town Doctor",
+    "personality_tag": "gruff",
+    "home_building": "brambles_clinic",
+    "sprite": "spr_npc_bramble",
+    "portrait": "spr_portrait_bramble",
+    "is_romance_candidate": false,
+    "birthday": { "season": "AUTUMN", "day": 9 },
+    "gift_preferences": {
+      "loved": ["item_medical_supplies", "item_rare_herb", "item_strong_coffee"],
+      "liked": ["item_medical_text", "item_alcohol", "item_clean_fabric"],
+      "hated": ["item_junk_food", "item_junk_salvage", "item_cheap_trinket"]
+    },
+    "schedules": {
+      "spring_default": [
+        { "start_hour": 9,  "end_hour": 18, "location": "clinic",           "room_id": "rm_int_clinic",      "pos": [5, 3] }
+      ],
+      "spring_rainy": [
+        { "start_hour": 9,  "end_hour": 18, "location": "clinic",           "room_id": "rm_int_clinic",      "pos": [5, 3] }
+      ],
+      "summer_default": [
+        { "start_hour": 9,  "end_hour": 18, "location": "clinic",           "room_id": "rm_int_clinic",      "pos": [5, 3] }
+      ],
+      "summer_rainy": [
+        { "start_hour": 9,  "end_hour": 18, "location": "clinic",           "room_id": "rm_int_clinic",      "pos": [5, 3] }
+      ],
+      "autumn_default": [
+        { "start_hour": 9,  "end_hour": 18, "location": "clinic",           "room_id": "rm_int_clinic",      "pos": [5, 3] }
+      ],
+      "autumn_rainy": [
+        { "start_hour": 9,  "end_hour": 18, "location": "clinic",           "room_id": "rm_int_clinic",      "pos": [5, 3] }
+      ],
+      "winter_default": [
+        { "start_hour": 9,  "end_hour": 18, "location": "clinic",           "room_id": "rm_int_clinic",      "pos": [5, 3] }
+      ],
+      "winter_rainy": [
+        { "start_hour": 9,  "end_hour": 18, "location": "clinic",           "room_id": "rm_int_clinic",      "pos": [5, 3] }
+      ]
+    },
+    "conditional_schedules": []
+  },
+
+  "npc_leera": {
+    "id": "npc_leera",
+    "name": "Leera",
+    "display_name": "Leera Ashford",
+    "role": "Salvage Scout / Explorer",
+    "personality_tag": "bold",
+    "home_building": null,
+    "home_location_note": "Small scout camp on The Hollow Road, outside Coppervale proper",
+    "sprite": "spr_npc_leera",
+    "portrait": "spr_portrait_leera",
+    "is_romance_candidate": true,
+    "birthday": { "season": "AUTUMN", "day": 7 },
+    "gift_preferences": {
+      "loved": ["item_rare_salvage", "item_exploration_gadget", "item_unexplored_map"],
+      "liked": ["item_military_rations", "item_repair_kit", "item_strong_coffee"],
+      "hated": ["item_cleaning_supplies", "item_formal_clothes", "item_wildflower"]
+    },
+    "schedules": {
+      "spring_default": [
+        { "start_hour": 7,  "end_hour": 16, "location": "exploring_away",   "room_id": null,                 "pos": null, "note": "Away from town exploring" },
+        { "start_hour": 16, "end_hour": 18, "location": "hollow_road_camp", "room_id": "rm_town_coppervale", "pos": [72, 22] },
+        { "start_hour": 18, "end_hour": 22, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [8, 7] }
+      ],
+      "spring_rainy": [
+        { "start_hour": 8,  "end_hour": 14, "location": "hollow_road_camp", "room_id": "rm_town_coppervale", "pos": [72, 22] },
+        { "start_hour": 14, "end_hour": 17, "location": "market_district",  "room_id": "rm_town_coppervale", "pos": [35, 17], "note": "Trading with Ferris" },
+        { "start_hour": 17, "end_hour": 22, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [8, 7] }
+      ],
+      "summer_default": [
+        { "start_hour": 7,  "end_hour": 16, "location": "exploring_away",   "room_id": null,                 "pos": null },
+        { "start_hour": 16, "end_hour": 18, "location": "hollow_road_camp", "room_id": "rm_town_coppervale", "pos": [72, 22] },
+        { "start_hour": 18, "end_hour": 22, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [8, 7] }
+      ],
+      "summer_rainy": [
+        { "start_hour": 8,  "end_hour": 14, "location": "hollow_road_camp", "room_id": "rm_town_coppervale", "pos": [72, 22] },
+        { "start_hour": 14, "end_hour": 17, "location": "market_district",  "room_id": "rm_town_coppervale", "pos": [35, 17] },
+        { "start_hour": 17, "end_hour": 22, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [8, 7] }
+      ],
+      "autumn_default": [
+        { "start_hour": 8,  "end_hour": 15, "location": "exploring_away",   "room_id": null,                 "pos": null },
+        { "start_hour": 15, "end_hour": 17, "location": "hollow_road_camp", "room_id": "rm_town_coppervale", "pos": [72, 22] },
+        { "start_hour": 17, "end_hour": 22, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [8, 7] }
+      ],
+      "autumn_rainy": [
+        { "start_hour": 9,  "end_hour": 22, "location": "hollow_road_camp", "room_id": "rm_town_coppervale", "pos": [72, 22] }
+      ],
+      "winter_default": [
+        { "start_hour": 8,  "end_hour": 15, "location": "exploring_away",   "room_id": null,                 "pos": null },
+        { "start_hour": 15, "end_hour": 17, "location": "hollow_road_camp", "room_id": "rm_town_coppervale", "pos": [72, 22] },
+        { "start_hour": 17, "end_hour": 22, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [8, 7] }
+      ],
+      "winter_rainy": [
+        { "start_hour": 9,  "end_hour": 14, "location": "hollow_road_camp", "room_id": "rm_town_coppervale", "pos": [72, 22] },
+        { "start_hour": 14, "end_hour": 22, "location": "rusty_gear_tavern","room_id": "rm_int_rusty_gear",  "pos": [8, 7] }
+      ]
+    },
+    "conditional_schedules": [
+      {
+        "condition": "hearts_gte",
+        "value": 5,
+        "seasons": ["SPRING", "SUMMER", "AUTUMN", "WINTER"],
+        "weather": "CLEAR",
+        "override_entry": { "start_hour": 16, "end_hour": 18, "location": "player_workshop", "room_id": "rm_int_workshop", "pos": [5, 4], "note": "Visits Jack's workshop to see what he's building" }
+      }
+    ]
+  },
+
+  "npc_janis": {
+    "id": "npc_janis",
+    "name": "Janis",
+    "display_name": "Janis Beaumont",
+    "role": "Beacon Council Representative",
+    "personality_tag": "polished",
+    "home_building": "town_hall",
+    "home_location_note": "Administrative office and private quarters within Town Hall. Arrives via story event after early milestone.",
+    "sprite": "spr_npc_janis",
+    "portrait": "spr_portrait_janis",
+    "is_romance_candidate": true,
+    "birthday": { "season": "WINTER", "day": 5 },
+    "spawn_condition": { "type": "story_flag", "flag": "janis_arrived", "note": "NPC only spawns after story event triggers her arrival" },
+    "gift_preferences": {
+      "loved": ["item_old_world_artifact", "item_data_core_standard", "item_elegant_crafted", "item_rare_gem"],
+      "liked": ["item_warm_cooked_meal", "item_rare_book", "item_fine_wine"],
+      "hated": ["item_scrap_iron", "item_cheap_trinket", "item_junk_food"]
+    },
+    "schedules": {
+      "spring_default": [
+        { "start_hour": 9,  "end_hour": 13, "location": "town_hall_office",  "room_id": "rm_int_town_hall",   "pos": [7, 3] },
+        { "start_hour": 13, "end_hour": 16, "location": "town_inspection",   "room_id": "rm_town_coppervale", "pos": [38, 30] },
+        { "start_hour": 17, "end_hour": 19, "location": "the_overlook",      "room_id": "rm_town_coppervale", "pos": [20, 5] },
+        { "start_hour": 19, "end_hour": 22, "location": "town_hall_quarters","room_id": "rm_int_town_hall",   "pos": [8, 6] }
+      ],
+      "spring_rainy": [
+        { "start_hour": 9,  "end_hour": 18, "location": "town_hall_office",  "room_id": "rm_int_town_hall",   "pos": [7, 3] },
+        { "start_hour": 18, "end_hour": 21, "location": "rusty_gear_tavern", "room_id": "rm_int_rusty_gear",  "pos": [5, 3] }
+      ],
+      "summer_default": [
+        { "start_hour": 9,  "end_hour": 13, "location": "town_hall_office",  "room_id": "rm_int_town_hall",   "pos": [7, 3] },
+        { "start_hour": 13, "end_hour": 16, "location": "town_inspection",   "room_id": "rm_town_coppervale", "pos": [38, 30] },
+        { "start_hour": 17, "end_hour": 19, "location": "the_overlook",      "room_id": "rm_town_coppervale", "pos": [20, 5] },
+        { "start_hour": 19, "end_hour": 22, "location": "town_hall_quarters","room_id": "rm_int_town_hall",   "pos": [8, 6] }
+      ],
+      "summer_rainy": [
+        { "start_hour": 9,  "end_hour": 18, "location": "town_hall_office",  "room_id": "rm_int_town_hall",   "pos": [7, 3] },
+        { "start_hour": 18, "end_hour": 21, "location": "rusty_gear_tavern", "room_id": "rm_int_rusty_gear",  "pos": [5, 3] }
+      ],
+      "autumn_default": [
+        { "start_hour": 9,  "end_hour": 13, "location": "town_hall_office",  "room_id": "rm_int_town_hall",   "pos": [7, 3] },
+        { "start_hour": 13, "end_hour": 16, "location": "town_inspection",   "room_id": "rm_town_coppervale", "pos": [38, 30] },
+        { "start_hour": 17, "end_hour": 19, "location": "the_overlook",      "room_id": "rm_town_coppervale", "pos": [20, 5] },
+        { "start_hour": 19, "end_hour": 22, "location": "town_hall_quarters","room_id": "rm_int_town_hall",   "pos": [8, 6] }
+      ],
+      "autumn_rainy": [
+        { "start_hour": 9,  "end_hour": 18, "location": "town_hall_office",  "room_id": "rm_int_town_hall",   "pos": [7, 3] },
+        { "start_hour": 18, "end_hour": 21, "location": "rusty_gear_tavern", "room_id": "rm_int_rusty_gear",  "pos": [5, 3] }
+      ],
+      "winter_default": [
+        { "start_hour": 9,  "end_hour": 13, "location": "town_hall_office",  "room_id": "rm_int_town_hall",   "pos": [7, 3] },
+        { "start_hour": 13, "end_hour": 16, "location": "town_inspection",   "room_id": "rm_town_coppervale", "pos": [38, 30] },
+        { "start_hour": 17, "end_hour": 19, "location": "the_overlook",      "room_id": "rm_town_coppervale", "pos": [20, 5] },
+        { "start_hour": 19, "end_hour": 22, "location": "town_hall_quarters","room_id": "rm_int_town_hall",   "pos": [8, 6] }
+      ],
+      "winter_rainy": [
+        { "start_hour": 9,  "end_hour": 18, "location": "town_hall_office",  "room_id": "rm_int_town_hall",   "pos": [7, 3] },
+        { "start_hour": 18, "end_hour": 21, "location": "rusty_gear_tavern", "room_id": "rm_int_rusty_gear",  "pos": [5, 3] }
+      ]
+    },
+    "conditional_schedules": [
+      {
+        "condition": "hearts_gte",
+        "value": 6,
+        "seasons": ["SPRING", "SUMMER", "AUTUMN", "WINTER"],
+        "weather": "ANY",
+        "override_entry": { "start_hour": 13, "end_hour": 14, "location": "player_workshop", "room_id": "rm_int_workshop", "pos": [6, 3], "note": "Officially inspecting Jack's contributions (excuse to visit)" }
+      }
+    ]
+  },
+
+  "npc_pip": {
+    "id": "npc_pip",
+    "name": "Pip",
+    "display_name": "Pip",
+    "role": "Child / Relic Collector",
+    "personality_tag": "curious",
+    "home_building": "elms_chapel",
+    "home_location_note": "Orphan living with Pastor Elm at the chapel",
+    "sprite": "spr_npc_pip",
+    "portrait": "spr_portrait_pip",
+    "is_romance_candidate": false,
+    "birthday": { "season": "SUMMER", "day": 22 },
+    "gift_preferences": {
+      "loved": ["item_mechanical_toy", "item_pristine_gear", "item_candy"],
+      "liked": ["item_fruit", "item_shiny_rock", "item_copper_wire"],
+      "hated": ["item_vegetable_basket", "item_book_generic", "item_boring_food"]
+    },
+    "schedules": {
+      "spring_default": [
+        { "start_hour": 8,  "end_hour": 12, "location": "town_square_play", "room_id": "rm_town_coppervale", "pos": [38, 34] },
+        { "start_hour": 12, "end_hour": 16, "location": "workshop_area",    "room_id": "rm_town_coppervale", "pos": [42, 16], "note": "Watching Jack work near workshop" },
+        { "start_hour": 16, "end_hour": 20, "location": "residential_play", "room_id": "rm_town_coppervale", "pos": [18, 15] },
+        { "start_hour": 20, "end_hour": 22, "location": "chapel_home",      "room_id": "rm_int_chapel",      "pos": [3, 3] }
+      ],
+      "spring_rainy": [
+        { "start_hour": 8,  "end_hour": 22, "location": "chapel_reading",   "room_id": "rm_int_chapel",      "pos": [4, 2], "note": "Reading comics about Old World heroes" }
+      ],
+      "summer_default": [
+        { "start_hour": 7,  "end_hour": 12, "location": "town_square_play", "room_id": "rm_town_coppervale", "pos": [38, 34] },
+        { "start_hour": 12, "end_hour": 17, "location": "workshop_area",    "room_id": "rm_town_coppervale", "pos": [42, 16] },
+        { "start_hour": 17, "end_hour": 21, "location": "river_play",       "room_id": "rm_town_coppervale", "pos": [6, 25] },
+        { "start_hour": 21, "end_hour": 22, "location": "chapel_home",      "room_id": "rm_int_chapel",      "pos": [3, 3] }
+      ],
+      "summer_rainy": [
+        { "start_hour": 8,  "end_hour": 22, "location": "chapel_reading",   "room_id": "rm_int_chapel",      "pos": [4, 2] }
+      ],
+      "autumn_default": [
+        { "start_hour": 8,  "end_hour": 12, "location": "town_square_play", "room_id": "rm_town_coppervale", "pos": [38, 34] },
+        { "start_hour": 12, "end_hour": 16, "location": "workshop_area",    "room_id": "rm_town_coppervale", "pos": [42, 16] },
+        { "start_hour": 16, "end_hour": 20, "location": "residential_play", "room_id": "rm_town_coppervale", "pos": [18, 15] },
+        { "start_hour": 20, "end_hour": 22, "location": "chapel_home",      "room_id": "rm_int_chapel",      "pos": [3, 3] }
+      ],
+      "autumn_rainy": [
+        { "start_hour": 8,  "end_hour": 22, "location": "chapel_reading",   "room_id": "rm_int_chapel",      "pos": [4, 2] }
+      ],
+      "winter_default": [
+        { "start_hour": 9,  "end_hour": 12, "location": "chapel_home",      "room_id": "rm_int_chapel",      "pos": [3, 3] },
+        { "start_hour": 12, "end_hour": 16, "location": "town_square_play", "room_id": "rm_town_coppervale", "pos": [38, 34], "note": "Building snow-mechs" },
+        { "start_hour": 16, "end_hour": 22, "location": "chapel_home",      "room_id": "rm_int_chapel",      "pos": [3, 3] }
+      ],
+      "winter_rainy": [
+        { "start_hour": 9,  "end_hour": 22, "location": "chapel_reading",   "room_id": "rm_int_chapel",      "pos": [4, 2] }
+      ]
+    },
+    "conditional_schedules": []
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "description": "Heart event #1 for npc_leera: The Race",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue / #34 Romance System"
+  },
+  "event_id": "heart_event_leera_01",
+  "npc_id": "npc_leera",
+  "heart_level_required": 2,
+  "location": "rm_town_coppervale",
+  "time_range": {
+    "start": 14,
+    "end": 20
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_leera_event_1_complete",
+  "heart_bonus": 50,
+  "title": "The Race",
+  "lines": [
+    {
+      "speaker": "npc_leera",
+      "text": "Hey, Jack! Race you to The Hollow and back!",
+      "portrait": "excited"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "Loser buys drinks at the Gear. Ready?",
+      "portrait": "determined"
+    },
+    {
+      "speaker": "player",
+      "text": "[Accept the challenge]",
+      "portrait": "determined",
+      "choice": true,
+      "options": [
+        {
+          "text": "You're on!",
+          "flag": "leera_race_accepted"
+        },
+        {
+          "text": "You'll regret this.",
+          "flag": "leera_race_cocky"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "HA! That's the spirit! GO!",
+      "portrait": "excited"
+    },
+    {
+      "speaker": "narrator",
+      "text": "[After the race \u2014 Leera wins by a hair]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "I win! Barely! You're faster than you look, engineer.",
+      "portrait": "happy"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "Most people won't even try to keep up with me.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_leera",
+      "text": "You're alright, Jack. Drinks are on you tonight!",
+      "portrait": "happy"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "description": "Heart event #1 for npc_michelle: The Herb Basket",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue / #34 Romance System"
+  },
+  "event_id": "heart_event_michelle_01",
+  "npc_id": "npc_michelle",
+  "heart_level_required": 2,
+  "location": "rm_town_coppervale",
+  "time_range": {
+    "start": 13,
+    "end": 17
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_michelle_event_1_complete",
+  "heart_bonus": 50,
+  "title": "The Herb Basket",
+  "lines": [
+    {
+      "speaker": "narrator",
+      "text": "[Michelle drops her herb basket. Dried flowers scatter everywhere]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "Oh no! Oh no no no \u2014 my calendula!",
+      "portrait": "surprised"
+    },
+    {
+      "speaker": "narrator",
+      "text": "[You help her collect everything]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "Th-thank you! I'm so clumsy. I'm sorry for the trouble.",
+      "portrait": "embarrassed"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "No trouble at all. These smell amazing.",
+          "flag": "michelle_basket_kind"
+        },
+        {
+          "text": "You carry too much. Let me help you to the clinic.",
+          "flag": "michelle_basket_help"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "You... you really don't have to. But thank you.",
+      "portrait": "embarrassed"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "The calendula is for burn salve. For the workshop injuries.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "I-I mean, not that YOU get burned. I just... prepare for everything.",
+      "portrait": "embarrassed"
+    }
+  ]
+}

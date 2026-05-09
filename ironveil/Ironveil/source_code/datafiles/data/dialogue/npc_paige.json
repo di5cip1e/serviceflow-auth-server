@@ -1,0 +1,648 @@
+{
+  "_meta": {
+    "description": "Dialogue data for Paige (Librarian / Archivist). Seasonal/daily pool + heart milestones.",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue"
+  },
+  "entries": [
+    {
+      "entry_id": "npc_paige_sd_001",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "The Archive received new documents this week. Pre-war agricultural records. Riveting.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_sd_002",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "Rain and old paper don't mix. I've sealed the east windows.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_sd_003",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "Spring cleaning the Archive. Every document in its place. Every place documented.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_sd_004",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "Good light for reading. Bad light for preservation. I've drawn the curtains.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_sd_005",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "The humidity is concerning. I've activated the dehumidifiers. Both of them.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_sd_006",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "A traveling scholar visited. We disagreed on Old World chronology. Productively.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_sd_007",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "The Archive is lovely in autumn. Golden light through the windows.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_sd_008",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "Perfect archiving weather. No visitors. No interruptions. Just the work.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_sd_009",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "I've been cataloguing the data cores you've recovered. Fascinating material.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_sd_010",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "Cold preserves paper. One advantage of winter.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_sd_011",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "weather": "SNOW",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "Wren always said winter made the Archive cozy. He was right.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_sd_012",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "Remembrance Day preparations. I've been reviewing the names for the ceremony.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_sd_013",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "weather": "STORM",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "Storm damage report filed. The Archive is secure. I checked. Twice.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_sd_014",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "weather": "FOG",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "Fog makes the town look like a photograph. Frozen in time. Like my Archive.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_sd_015",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "Wren used to say that books are how the dead talk to the living.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_sd_016",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "I haven't laughed like that in years. I'd forgotten my own laugh. Isn't that strange?",
+          "portrait": "surprised"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_sd_017",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "The organizational system is alphabetical by era, then subject. Obviously.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_sd_018",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "Pip borrowed a book. She returned it on TIME. I'm... impressed.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_sd_019",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "I visit the memorial on Tuesdays. It's become routine. Routine is... safe.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_sd_020",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "Your data core recoveries are invaluable. The Archive grows because of you.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_sd_021",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "Elm asked me to read at the next ceremony. I said yes before I could say no.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_sd_022",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "Five years. Five years since Wren. Some days it feels like yesterday.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_sd_023",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "I organize because chaos is the enemy. Of knowledge. Of memory. Of everything.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_sd_024",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "A new family donated their grandmother's journal. Pre-Sundering. Priceless.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_sd_025",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "I spend a lot of time with the dead. Books, archives, memories. I understand that.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_hm_02",
+      "npc_id": "npc_paige",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 2
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_paige_milestone_2",
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "I found a passage in an Old World text. It reminded me of your work. Here.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_hm_04",
+      "npc_id": "npc_paige",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 4
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_paige_milestone_4",
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "You're the first person who's made the Archive feel less... lonely.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_hm_06",
+      "npc_id": "npc_paige",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 6
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_paige_milestone_6",
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "I want to show you something. Wren's favorite book. I've never shared it before.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_hm_08",
+      "npc_id": "npc_paige",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 8
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_paige_milestone_8",
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "I'm removing the ring from my neck. Not discarding it. Honoring it. Moving forward.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_hm_10",
+      "npc_id": "npc_paige",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 10
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_paige_milestone_10",
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "New chapter, Jack. Ours. And I intend to write it with exacting precision.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_y2_spring_031",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "The summit was fascinating. I've documented every word. This is history, Jack. Living history.",
+          "portrait": "passionate"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_y2_summer_032",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "I found old newspapers in the bunker archive. Pre-Sundering journalism. The writing style is so different from ours.",
+          "portrait": "fascinated"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_y2_autumn_033",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "I'm documenting the preparations. Every conversation, every act of courage. This story matters.",
+          "portrait": "resolute"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_y2_winter_034",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "The siege will be the most important chapter. Win or lose, it needs to be told truthfully.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_y3_spring_035",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "I'm coming as far as the Scorchlands. Someone needs to document the offensive. History demands a witness.",
+          "portrait": "brave"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_y3_autumn_036",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "The ending... all three possible endings... I've written them all. The real one is the most beautiful.",
+          "portrait": "moved"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_paige_y4_spring_037",
+      "npc_id": "npc_paige",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 4,
+        "hearts_gte": 0,
+        "story_flag": "flag_main_story_complete"
+      },
+      "priority": 11,
+      "lines": [
+        {
+          "speaker": "npc_paige",
+          "text": "My book is nearly finished. 'The Ironveil Chronicle.' I think people will want to read this someday.",
+          "portrait": "fulfilled"
+        }
+      ]
+    }
+  ]
+}

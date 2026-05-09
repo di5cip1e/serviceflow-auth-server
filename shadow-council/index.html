@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0a0a0f">
+    <meta name="description" content="Shadow Council - A dark fantasy strategy game">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Shadow Council">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="art/generated/runes/eldritch.svg">
+    <link rel="apple-touch-icon" href="art/generated/runes/eldritch.svg">
+    <title>Shadow Council</title>
+    <!-- Existing game styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@400;600&display=swap">
+    <style>
+        /* Runic Dark Theme */
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #1a1a24;
+            --gold-primary: #c9a227;
+            --gold-bright: #ffd700;
+        }
+        body {
+            background: var(--bg-primary);
+            color: #e0e0e0;
+            font-family: 'Cormorant Garamond', serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container"></div>
+    <script src="main.js"></script>
+    <script>
+        // Register service worker for PWA
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(() => {});
+        }
+    </script>
+</body>
+</html>

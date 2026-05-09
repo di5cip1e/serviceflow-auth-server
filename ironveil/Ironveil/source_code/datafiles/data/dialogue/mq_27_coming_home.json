@@ -1,0 +1,341 @@
+{
+  "_meta": {
+    "description": "Quest dialogue for MQ-27: Coming Home. Year 3 Winter — resolution, NPC conclusions, sandbox transition.",
+    "version": "1.0",
+    "objective": "#42 Full 3+ Year Story Content"
+  },
+  "quest_id": "mq_27",
+  "scenes": [
+    {
+      "scene_id": "mq27_return",
+      "trigger": "quest_start",
+      "location": "rm_town_coppervale",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "[The expedition returns to Coppervale on a clear winter morning. Word has already spread — the war is over. Every man, woman, and child in town has gathered at the eastern gate.]",
+          "portrait": "none"
+        },
+        {
+          "speaker": "npc_linden",
+          "text": "THERE THEY ARE! Open the gates! OPEN THE GATES!",
+          "portrait": "overjoyed"
+        },
+        {
+          "speaker": "npc_pip",
+          "text": "MISTER JACK! MISTER JACK! You came back! I KNEW you'd come back!",
+          "portrait": "crying_happy"
+        },
+        {
+          "speaker": "npc_spark",
+          "text": "The mech looks like it went through a blender. A blender made of explosions. I love it. Welcome home, Jack.",
+          "portrait": "tearful_grinning"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "...Welcome home, Jack.",
+          "portrait": "gruff_emotional"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq27_town_celebration",
+      "trigger": "cutscene",
+      "conditions": { "after_scene": "mq27_return" },
+      "location": "rm_town_coppervale",
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Alright everyone — the Rusty Gear is open, the fires are lit, and I've been saving a very special barrel for this exact moment. Tonight, Coppervale CELEBRATES.",
+          "portrait": "radiant"
+        },
+        {
+          "speaker": "npc_linden",
+          "text": "Before we celebrate... a moment. For those who aren't here to see this day. For the people we lost during the siege, and the brave souls who didn't make it back from the Spire.",
+          "portrait": "solemn"
+        },
+        {
+          "speaker": "narrator",
+          "text": "[A moment of silence. Then Linden raises his glass.]",
+          "portrait": "none"
+        },
+        {
+          "speaker": "npc_linden",
+          "text": "To Coppervale. To the future. And to the man who made it possible.",
+          "portrait": "proud"
+        },
+        {
+          "speaker": "narrator",
+          "text": "[The town cheers. It echoes off the walls that held. Off the turrets that fired. Off the homes that survived. Coppervale endures.]",
+          "portrait": "none"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq27_remembrance_day",
+      "trigger": "cutscene",
+      "conditions": { "festival": "remembrance_day", "year_gte": 3 },
+      "location": "rm_town_coppervale",
+      "lines": [
+        {
+          "speaker": "npc_elm",
+          "text": "This is the third Remembrance Day. But this one is different. This is the first one where we light our lanterns not in defiance, but in peace.",
+          "portrait": "serene"
+        },
+        {
+          "speaker": "npc_elm",
+          "text": "We remember those who fell. We honor those who stood. And we look forward — to a future we earned with our own hands.",
+          "portrait": "warm"
+        },
+        {
+          "speaker": "npc_maren",
+          "text": "Oren, my love... you were right. This town had a future. I wish you could see it.",
+          "portrait": "peaceful_tears"
+        },
+        {
+          "speaker": "dejin",
+          "text": "I have 1.4 billion archived images of lantern ceremonies from before The Sundering. None of them look like this. None of them feel like this.",
+          "portrait": "moved"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq27_npc_resolutions_core",
+      "trigger": "npc_interact",
+      "conditions": { "quest_active": "mq_27" },
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "I've been a soldier all my life, Jack. Fighting is all I knew. But watching this town grow... I think I've found something worth more than any battle. I'm staying. Not as your captain — as your neighbor.",
+          "portrait": "at_peace"
+        },
+        {
+          "speaker": "npc_linden",
+          "text": "The Council has formally recognized Coppervale as a regional capital. We're not just a settlement anymore — we're a beacon. And it all started with a broken workshop and one stubborn engineer.",
+          "portrait": "beaming"
+        },
+        {
+          "speaker": "npc_spark",
+          "text": "Jack... the flyer works. I tested it this morning. I actually FLEW. It was only twelve seconds and I almost hit the chapel, but I FLEW! Next stop: the clouds!",
+          "portrait": "ecstatic"
+        },
+        {
+          "speaker": "npc_maren",
+          "text": "I'm tired, dear. The good kind of tired. The kind that comes after a long day's work that meant something. Oren would be so proud of what you've built.",
+          "portrait": "content"
+        },
+        {
+          "speaker": "npc_pip",
+          "text": "Mister Jack, I've been thinking. When I grow up, I want to be an engineer. Like you. Can you... can you teach me? For real this time?",
+          "portrait": "hopeful"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq27_npc_resolutions_romance",
+      "trigger": "npc_interact",
+      "conditions": { "quest_active": "mq_27" },
+      "lines": [
+        {
+          "speaker": "npc_leera",
+          "text": "You know, when you first arrived I thought you were just another soft-handed idealist who'd wash out in a month. Turns out you're the toughest person I've ever met. Don't let it go to your head.",
+          "portrait": "fond"
+        },
+        {
+          "speaker": "npc_michelle",
+          "text": "The clinic is expanding. Two rooms now, proper supplies, even a small surgery. For the first time in years, I'm not just patching people up — I'm actually healing them. Thank you, Jack. For everything.",
+          "portrait": "grateful"
+        },
+        {
+          "speaker": "npc_kaydee",
+          "text": "The tavern's never been busier. Turns out people drink more when they're happy than when they're scared. Who knew? ...Okay, I knew. But it's nicer this way.",
+          "portrait": "warm_humor"
+        },
+        {
+          "speaker": "npc_janis",
+          "text": "I came here as a liaison. A bureaucratic assignment. I never expected to find... this. A home. People I'd fight for. Someone I'd...",
+          "portrait": "vulnerable"
+        },
+        {
+          "speaker": "npc_janis",
+          "text": "...Well. You know.",
+          "portrait": "slight_smile"
+        },
+        {
+          "speaker": "npc_kiery",
+          "text": "I spent so long running. From place to place, never staying, never belonging. And then I came here, and you... you made me want to stay. For the first time, I'm not afraid of tomorrow.",
+          "portrait": "radiant"
+        },
+        {
+          "speaker": "npc_paige",
+          "text": "I've been writing our story, Jack. All of it. The workshop, the siege, the expedition. Someday, when children ask how the world started over, I want them to know it began here. With us.",
+          "portrait": "inspired"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq27_npc_resolutions_support",
+      "trigger": "npc_interact",
+      "conditions": { "quest_active": "mq_27" },
+      "lines": [
+        {
+          "speaker": "npc_gus",
+          "text": "Business is booming! Three new trade routes, Thornwall importing our machine parts, Dusthaven sending the best grain you've ever tasted. The general store needs a bigger store!",
+          "portrait": "delighted"
+        },
+        {
+          "speaker": "npc_ferris",
+          "text": "I've got radio contact with eleven settlements now. Eleven! We're building a communication network that spans the region. The world is getting smaller, Jack. In the best way.",
+          "portrait": "proud"
+        },
+        {
+          "speaker": "npc_hank",
+          "text": "The smithy's running three shifts now. Apprentices from Thornwall and Ironridge are coming to learn. Turns out Coppervale steel has a reputation. Not bad for a frontier forge.",
+          "portrait": "satisfied"
+        },
+        {
+          "speaker": "npc_bramble",
+          "text": "I've started writing a medical guide. Everything I've learned traveling, everything Michelle has taught me. If something happens to us, the knowledge survives. That matters.",
+          "portrait": "thoughtful"
+        },
+        {
+          "speaker": "npc_elm",
+          "text": "The chapel is full every week now. Not from fear — from gratitude. People come to give thanks, to remember, to hope. That's all a pastor can ask for.",
+          "portrait": "fulfilled"
+        },
+        {
+          "speaker": "npc_nora",
+          "text": "The kitchen feeds forty people a day now. Forty! And next spring I'm starting a community garden behind the tavern. Fresh vegetables for everyone.",
+          "portrait": "busy_happy"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq27_wes_resolution_forgiven",
+      "trigger": "npc_interact",
+      "conditions": { "quest_active": "mq_27", "story_flag": "flag_wes_forgiven" },
+      "lines": [
+        {
+          "speaker": "npc_wes",
+          "text": "Jack. Ellie and Tomm are safe. The allied forces found them during the Scorchland campaign. They're here now — in Coppervale. My sister is... she's here.",
+          "portrait": "overwhelmed"
+        },
+        {
+          "speaker": "npc_wes",
+          "text": "I'll never be able to repay what you did for me. Forgiving me when I didn't deserve it. Bringing my family home. I'll spend the rest of my life trying to be worthy of this town's trust.",
+          "portrait": "devoted"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq27_wes_resolution_banished",
+      "trigger": "npc_interact",
+      "conditions": { "quest_active": "mq_27", "story_flag": "flag_wes_banished" },
+      "lines": [
+        {
+          "speaker": "npc_nora",
+          "text": "Jack... a letter came. From Wes. He found his sister. They're safe, living in a settlement south of the Scorchlands. He says... he's sorry. And he hopes Coppervale is everything it deserves to be.",
+          "portrait": "bittersweet"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq27_marshal_epilogue_captured",
+      "trigger": "cutscene",
+      "conditions": { "story_flag": "flag_marshal_ending_captured" },
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "The Council has the Marshal in custody. He's cooperating — grudgingly. His knowledge of Pre-War military infrastructure is invaluable. In time, he may become an advisor. Stranger things have happened.",
+          "portrait": "pragmatic"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq27_marshal_epilogue_redeemed",
+      "trigger": "cutscene",
+      "conditions": { "story_flag": "flag_marshal_ending_redeemed" },
+      "lines": [
+        {
+          "speaker": "npc_janis",
+          "text": "Dorian Voss has chosen exile. He left for the northern territories three days ago. But before he went, he gave us everything — troop positions, supply caches, fortification blueprints. A final gift.",
+          "portrait": "respectful"
+        },
+        {
+          "speaker": "npc_janis",
+          "text": "He left a note for you, Jack. It says: 'You've proven a better way is possible. Do not fail to protect it.' I think, in his own way... he's grateful.",
+          "portrait": "moved"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq27_dejin_new_purpose",
+      "trigger": "cutscene",
+      "conditions": { "after_scene": "mq27_npc_resolutions_core" },
+      "location": "rm_int_workshop",
+      "lines": [
+        {
+          "speaker": "dejin",
+          "text": "Jack. Now that the AEGIS network is destroyed and the truth is known... I've been thinking about what I am. What I want to be.",
+          "portrait": "contemplative"
+        },
+        {
+          "speaker": "dejin",
+          "text": "I was built as a weapon. I chose to be a tool. You made me a friend. But now... I think I want to be a historian.",
+          "portrait": "hopeful"
+        },
+        {
+          "speaker": "dejin",
+          "text": "The Old World is full of knowledge — art, science, music, literature — buried in ruins and data cores. If we don't preserve it, it's gone forever. I want to make sure the next generation inherits more than just survival skills.",
+          "portrait": "passionate"
+        },
+        {
+          "speaker": "player",
+          "text": "DEJIN the Historian. I like it.",
+          "portrait": "warm"
+        },
+        {
+          "speaker": "dejin",
+          "text": "Besides, someone needs to document the true story of Coppervale. And I have a rather excellent memory. When it's not being deliberately erased, that is.",
+          "portrait": "dry_humor"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq27_complete",
+      "trigger": "quest_complete",
+      "location": "rm_town_coppervale",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "[Winter fades. Spring returns to Coppervale — not the anxious spring of survival, but the hopeful spring of a new beginning. The walls still stand. The workshop hums. The town grows.]",
+          "portrait": "none"
+        },
+        {
+          "speaker": "narrator",
+          "text": "[Jack stands at the Overlook, looking down at the town that started as a ruin and became a home. Somewhere below, Spark is shouting about a new invention. Harrow is drilling volunteers. Kaydee is pouring drinks. Life goes on.]",
+          "portrait": "none"
+        },
+        {
+          "speaker": "dejin",
+          "text": "Jack? The rail network plans are ready for review whenever you are. Thornwall has already committed materials for the first line. The future isn't going to build itself.",
+          "portrait": "warm"
+        },
+        {
+          "speaker": "dejin",
+          "text": "...Actually, given our track record, it probably will. With considerable assistance from gears, steam, and stubbornness.",
+          "portrait": "fond"
+        },
+        {
+          "speaker": "narrator",
+          "text": "[The story of the war is over. The story of Coppervale continues.]",
+          "portrait": "none"
+        }
+      ],
+      "effects": [
+        { "type": "set_flag", "flag": "flag_homecoming_complete" },
+        { "type": "set_flag", "flag": "flag_sandbox_mode_active" }
+      ]
+    }
+  ]
+}

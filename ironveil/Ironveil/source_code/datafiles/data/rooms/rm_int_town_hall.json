@@ -1,0 +1,25 @@
+{
+  "room_id": "rm_int_town_hall",
+  "display_name": "Town Hall",
+  "width_tiles": 12,
+  "height_tiles": 10,
+  "tile_size": 16,
+  "parent_room": "rm_town_coppervale",
+
+  "exits": [
+    { "id": "door_main", "tiles": { "x1": 5, "y1": 9, "x2": 6, "y2": 9 }, "target_room": "rm_town_coppervale", "target_pos": [38, 34], "collision_type": 3 }
+  ],
+
+  "stations": [],
+
+  "furniture": [
+    { "id": "council_table",   "name": "Council Table",   "pos": [2, 2],  "size": [7, 1], "type": "DECORATIVE",  "collision_type": 1 },
+    { "id": "podium",          "name": "Podium",          "pos": [5, 5],  "size": [2, 1], "type": "INTERACTABLE","collision_type": 2, "interaction": "town_announcements" },
+    { "id": "lindens_office",  "name": "Linden's Office", "pos": [4, 7],  "size": [3, 2], "type": "INTERACTABLE","collision_type": 2, "interaction": "talk_linden_official" },
+    { "id": "guest_quarters",  "name": "Guest Quarters",  "pos": [9, 7],  "size": [2, 2], "type": "DECORATIVE",  "collision_type": 1 }
+  ],
+
+  "npc_positions": [
+    { "npc_id": "npc_linden", "pos": [5, 7], "note": "At office desk during work hours" }
+  ]
+}

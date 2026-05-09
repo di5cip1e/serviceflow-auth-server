@@ -1,0 +1,78 @@
+{
+  "_meta": {
+    "description": "Heart event #5 for npc_michelle: The Greenhouse",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue / #34 Romance System"
+  },
+  "event_id": "heart_event_michelle_05",
+  "npc_id": "npc_michelle",
+  "heart_level_required": 7,
+  "location": "rm_int_workshop",
+  "time_range": {
+    "start": 10,
+    "end": 18
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_michelle_event_5_complete",
+  "heart_bonus": 50,
+  "title": "The Greenhouse",
+  "lines": [
+    {
+      "speaker": "narrator",
+      "text": "[You've built Michelle a proper greenhouse. She's seeing it for the first time]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "Jack... what is this?",
+      "portrait": "surprised"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "You... built me a greenhouse?",
+      "portrait": "surprised"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "The glass panels... the heating system... you spent DAYS on this.",
+      "portrait": "surprised"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "Your herbs deserve a proper home.",
+          "flag": "michelle_greenhouse_herbs"
+        },
+        {
+          "text": "You deserve something built just for you.",
+          "flag": "michelle_greenhouse_personal"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "No one has ever... done something like this for me.",
+      "portrait": "surprised"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "Not because I asked. Not because they had to.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "Just because they wanted me to be happy.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_michelle",
+      "text": "I'm going to cry now. In my beautiful new greenhouse. And I'm not sorry.",
+      "portrait": "happy"
+    }
+  ]
+}

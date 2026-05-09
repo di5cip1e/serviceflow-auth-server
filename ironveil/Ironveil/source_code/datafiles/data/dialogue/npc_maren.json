@@ -1,0 +1,666 @@
+{
+  "_meta": {
+    "description": "Dialogue data for Old Maren (Retired Engineer / Elder). Seasonal/daily pool + heart milestones.",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue"
+  },
+  "entries": [
+    {
+      "entry_id": "npc_maren_sd_001",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "Come in, dear. I've made tea. The kind with the mint — or was it chamomile?",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_sd_002",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "Rain again. My joints know before the sky does, these days.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_sd_003",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "The garden's coming along. Oren always said spring was for planting hope.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_sd_004",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "What a lovely day. Reminds me of... hmm. Something nice.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_sd_005",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "Stay dry, dear. Wet clothes lead to cold bones. Trust an old woman.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_sd_006",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "I found one of Oren's notebooks yesterday. His handwriting was terrible. I miss it.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_sd_007",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "Autumn light through the window. Golden. Like honey. Like memory.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_sd_008",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "Quiet days are good for remembering. And for soup.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_sd_009",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "The Harvest Faire reminds me of when this town was just four families and a well.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_sd_010",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "Bundle up, dear. The cold doesn't announce itself politely.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_sd_011",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "weather": "SNOW",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "Snow covers everything equally. Scars and gardens alike.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_sd_012",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "Remembrance Day. I remember too much some days. Not enough on others.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_sd_013",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "weather": "STORM",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "Storms like this... Oren used to hold my hand during them. Silly old man.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_sd_014",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "weather": "FOG",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "Fog makes the town look like a dream. Or a memory. Same thing, at my age.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_sd_015",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "My Oren used to say the machines would outlast us all. He was right about the machines.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_sd_016",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "Have you eaten today, dear? You work too hard. Just like Oren.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_sd_017",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "The AI Core... Oren didn't find it by accident. He was LOOKING for it.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_sd_018",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "Pip visited today. She reminds me of someone. I can't remember who.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_sd_019",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "I made extra biscuits. Take some to Spark. That girl forgets to eat.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_sd_020",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "My memory isn't what it was. But I remember the important things. Mostly.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_sd_021",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "Listen carefully, Jack. The journal — have you read it all? There are coded parts.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_sd_022",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "Some days are clearer than others. Today is... medium.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_sd_023",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "The cherry blossoms remind me of our wedding day. Or was that dogwood?",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_sd_024",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "You're a good boy, Jack. This town needed you. Even if they don't all say it.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_sd_025",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "Tea's on the stove. Sit. Tell me about your machines.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_hm_02",
+      "npc_id": "npc_maren",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 2
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_maren_milestone_2",
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "Here, dear. Oren's old toolkit. You'll put it to better use than my shelf.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_hm_04",
+      "npc_id": "npc_maren",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 4
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_maren_milestone_4",
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "You remind me of him. Oren. The way you look at machines — like they're alive.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_hm_06",
+      "npc_id": "npc_maren",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 6
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_maren_milestone_6",
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "I have something to tell you. About the AI Core. About what Oren really found.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_hm_08",
+      "npc_id": "npc_maren",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 8
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_maren_milestone_8",
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "You've become family, Jack. This old woman doesn't say that lightly.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_hm_10",
+      "npc_id": "npc_maren",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 10
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_maren_milestone_10",
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "Take care of Coppervale when I'm gone. And take care of DEJIN. Promise me.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_y2_spring_031",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "New people coming through town. Reminds me of the early days, when Oren and I first arrived. So much hope.",
+          "portrait": "nostalgic"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_y2_summer_032",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "The bunker... Oren searched for that place for years. He'd be so pleased you found it, dear.",
+          "portrait": "gentle"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_y2_autumn_033",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "I've survived worse than a bully with a radio. My Oren faced down raiders when this town was nothing but tents.",
+          "portrait": "steely"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_y2_winter_034",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "Be careful in that siege, dear. This old woman still needs her engineer.",
+          "portrait": "worried_loving"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_y3_spring_035",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "I'm tired more often now. But I can still see the Overlook from my window. Still beautiful.",
+          "portrait": "content"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_y3_autumn_036",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "You did it, Jack. You really did it. Oren is smiling somewhere. I can feel it.",
+          "portrait": "peaceful_tears"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_y3_winter_037",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "This is my last Remembrance Day, I think. But what a beautiful one to end on.",
+          "portrait": "serene"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_maren_y4_spring_038",
+      "npc_id": "npc_maren",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 4,
+        "hearts_gte": 0,
+        "story_flag": "flag_main_story_complete"
+      },
+      "priority": 11,
+      "lines": [
+        {
+          "speaker": "npc_maren",
+          "text": "Every sunrise is a gift now, dear. And this town... this town is the best gift of all.",
+          "portrait": "grateful"
+        }
+      ]
+    }
+  ]
+}

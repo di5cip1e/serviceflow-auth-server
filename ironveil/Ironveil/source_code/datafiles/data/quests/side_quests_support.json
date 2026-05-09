@@ -1,0 +1,637 @@
+{
+  "_meta": {
+    "description": "Supporting NPC side quest chains.",
+    "version": "1.0",
+    "objective": "#41"
+  },
+  "quests": [
+    {
+      "quest_id": "sq_bramble_01",
+      "name": "Medical Equipment",
+      "type": "SIDE_NPC",
+      "giver": "npc_bramble",
+      "description": "Build medical equipment for the clinic.",
+      "trigger": {
+        "prerequisite_quests": [],
+        "heart_level": {
+          "npc_bramble": 2
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "build",
+          "target": "medical_equipment",
+          "description": "Build medical equipment",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 400,
+        "items": [],
+        "hearts": {
+          "npc_bramble": 3
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "sq_bramble_01_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_bramble_02",
+      "name": "Triage",
+      "type": "SIDE_NPC",
+      "giver": "npc_bramble",
+      "description": "Help Doc Bramble during post-raid triage.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_bramble_01"
+        ],
+        "heart_level": {
+          "npc_bramble": 3
+        },
+        "story_flags": [
+          "first_raid_survived"
+        ]
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "deliver",
+          "target": "npc_bramble",
+          "description": "Bring medical supplies",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "visit",
+          "target": "rm_int_clinic",
+          "description": "Assist at the clinic",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 300,
+        "items": [],
+        "hearts": {
+          "npc_bramble": 3,
+          "npc_michelle": 2
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "sq_bramble_02_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_bramble_03",
+      "name": "Old World Medicine",
+      "type": "SIDE_NPC",
+      "giver": "npc_bramble",
+      "description": "Find Old World medical texts in the ruins.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_bramble_02"
+        ],
+        "heart_level": {
+          "npc_bramble": 4
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "gather",
+          "target": "item_medical_text",
+          "description": "Find 2 medical texts in ruins",
+          "target_count": 2
+        }
+      ],
+      "rewards": {
+        "cogs": 500,
+        "items": [],
+        "hearts": {
+          "npc_bramble": 4
+        },
+        "reputation": 20,
+        "story_flags_set": [
+          "sq_bramble_03_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_gus_01",
+      "name": "The Big Deal",
+      "type": "SIDE_NPC",
+      "giver": "npc_gus",
+      "description": "Help Gus negotiate a trade deal with a visiting merchant.",
+      "trigger": {
+        "prerequisite_quests": [],
+        "heart_level": {
+          "npc_gus": 2
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "talk",
+          "target": "visiting_merchant",
+          "description": "Negotiate the deal",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 300,
+        "items": [],
+        "hearts": {
+          "npc_gus": 3
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "sq_gus_01_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_gus_02",
+      "name": "Supply Protection",
+      "type": "SIDE_NPC",
+      "giver": "npc_gus",
+      "description": "Protect a supply shipment from raiders.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_gus_01"
+        ],
+        "heart_level": {
+          "npc_gus": 3
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "survive_raid",
+          "target": "supply_escort",
+          "description": "Protect the shipment",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 500,
+        "items": [],
+        "hearts": {
+          "npc_gus": 4
+        },
+        "reputation": 20,
+        "story_flags_set": [
+          "sq_gus_02_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_gus_03",
+      "name": "Rare Goods Section",
+      "type": "SIDE_NPC",
+      "giver": "npc_gus",
+      "description": "Help Gus expand his store with a rare goods section.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_gus_02"
+        ],
+        "heart_level": {
+          "npc_gus": 5
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "build",
+          "target": "store_expansion",
+          "description": "Build store expansion",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 400,
+        "items": [],
+        "hearts": {
+          "npc_gus": 5
+        },
+        "reputation": 20,
+        "story_flags_set": [
+          "sq_gus_03_complete"
+        ],
+        "unlocks": [
+          "rare_goods_shop"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_ferris_01",
+      "name": "The Rare Find",
+      "type": "SIDE_NPC",
+      "giver": "npc_ferris",
+      "description": "Ferris seeks a specific rare component. Search the ruins.",
+      "trigger": {
+        "prerequisite_quests": [],
+        "heart_level": {
+          "npc_ferris": 2
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "gather",
+          "target": "item_pre_war_actuator",
+          "description": "Find the pre-war actuator",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 300,
+        "items": [],
+        "hearts": {
+          "npc_ferris": 3
+        },
+        "reputation": 10,
+        "story_flags_set": [
+          "sq_ferris_01_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_ferris_02",
+      "name": "Organized Chaos",
+      "type": "SIDE_NPC",
+      "giver": "npc_ferris",
+      "description": "Help Ferris organize his chaotic workshop.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_ferris_01"
+        ],
+        "heart_level": {
+          "npc_ferris": 3
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "visit",
+          "target": "rm_int_parts_dealer",
+          "description": "Help organize the workshop",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 200,
+        "items": [
+          {
+            "item_id": "item_rare_component",
+            "quantity": 2
+          }
+        ],
+        "hearts": {
+          "npc_ferris": 3
+        },
+        "reputation": 10,
+        "story_flags_set": [
+          "sq_ferris_02_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_ferris_03",
+      "name": "Dangerous Prototype",
+      "type": "SIDE_NPC",
+      "giver": "npc_ferris",
+      "description": "Ferris discovers a pre-war prototype in his collection. It's dangerous.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_ferris_02"
+        ],
+        "heart_level": {
+          "npc_ferris": 4
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "inspect",
+          "target": "dangerous_prototype",
+          "description": "Analyze the prototype",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "choice",
+          "target": "prototype_fate",
+          "description": "Dismantle or repurpose",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 500,
+        "items": [],
+        "hearts": {
+          "npc_ferris": 5
+        },
+        "reputation": 20,
+        "story_flags_set": [
+          "sq_ferris_03_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_hank_01",
+      "name": "The Difficult Forge",
+      "type": "SIDE_NPC",
+      "giver": "npc_hank",
+      "description": "Help Hank with a challenging forging project.",
+      "trigger": {
+        "prerequisite_quests": [],
+        "heart_level": {
+          "npc_hank": 2
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "gather",
+          "target": "item_rare_ore",
+          "description": "Bring rare ore",
+          "target_count": 2
+        },
+        {
+          "id": "obj_2",
+          "type": "visit",
+          "target": "rm_int_smithy",
+          "description": "Assist at the forge",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 300,
+        "items": [],
+        "hearts": {
+          "npc_hank": 3
+        },
+        "reputation": 10,
+        "story_flags_set": [
+          "sq_hank_01_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_hank_02",
+      "name": "Art Not War",
+      "type": "SIDE_NPC",
+      "giver": "npc_hank",
+      "description": "Hank reveals he was a pacifist. Build him a forge upgrade for art.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_hank_01"
+        ],
+        "heart_level": {
+          "npc_hank": 4
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "build",
+          "target": "forge_art_upgrade",
+          "description": "Build artistic forge upgrade",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 400,
+        "items": [],
+        "hearts": {
+          "npc_hank": 5
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "sq_hank_02_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_nora_01",
+      "name": "Pest Problem",
+      "type": "SIDE_NPC",
+      "giver": "npc_nora",
+      "description": "Nora has a pest problem. Build a mechanical solution.",
+      "trigger": {
+        "prerequisite_quests": [],
+        "heart_level": {
+          "npc_nora": 2
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "build",
+          "target": "pest_deterrent",
+          "description": "Build pest deterrent machine",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 250,
+        "items": [],
+        "hearts": {
+          "npc_nora": 3
+        },
+        "reputation": 10,
+        "story_flags_set": [
+          "sq_nora_01_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_nora_02",
+      "name": "Frost Warning",
+      "type": "SIDE_NPC",
+      "giver": "npc_nora",
+      "description": "Early frost threatens Nora's harvest. Build a greenhouse heater.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_nora_01"
+        ],
+        "heart_level": {
+          "npc_nora": 3
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "build",
+          "target": "greenhouse_heater",
+          "description": "Build a greenhouse heater",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 350,
+        "items": [],
+        "hearts": {
+          "npc_nora": 4
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "sq_nora_02_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_elm_01",
+      "name": "The Meditation Garden",
+      "type": "SIDE_NPC",
+      "giver": "npc_elm",
+      "description": "Help Elm build a meditation garden from war debris.",
+      "trigger": {
+        "prerequisite_quests": [],
+        "heart_level": {
+          "npc_elm": 2
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "gather",
+          "target": "item_stone_block",
+          "description": "Gather 3 stone blocks",
+          "target_count": 3
+        },
+        {
+          "id": "obj_2",
+          "type": "build",
+          "target": "meditation_garden",
+          "description": "Build the garden",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 250,
+        "items": [],
+        "hearts": {
+          "npc_elm": 3
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "sq_elm_01_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_elm_02",
+      "name": "The Question",
+      "type": "SIDE_NPC",
+      "giver": "npc_elm",
+      "description": "Elm asks philosophical questions about technology and responsibility.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_elm_01"
+        ],
+        "heart_level": {
+          "npc_elm": 4
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "talk",
+          "target": "npc_elm",
+          "description": "Discuss philosophy with Elm",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 150,
+        "items": [],
+        "hearts": {
+          "npc_elm": 4
+        },
+        "reputation": 10,
+        "story_flags_set": [
+          "sq_elm_02_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_wes_01",
+      "name": "Express Delivery",
+      "type": "SIDE_NPC",
+      "giver": "npc_wes",
+      "description": "Help Wes with an urgent delivery run.",
+      "trigger": {
+        "prerequisite_quests": [],
+        "heart_level": {
+          "npc_wes": 2
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "deliver",
+          "target": "delivery_recipient",
+          "description": "Complete the urgent delivery",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 200,
+        "items": [],
+        "hearts": {
+          "npc_wes": 3
+        },
+        "reputation": 10,
+        "story_flags_set": [
+          "sq_wes_01_complete"
+        ]
+      }
+    },
+    {
+      "quest_id": "sq_wes_02",
+      "name": "Route Mapping",
+      "type": "SIDE_NPC",
+      "giver": "npc_wes",
+      "description": "Help Wes map safer courier routes between towns.",
+      "trigger": {
+        "prerequisite_quests": [
+          "sq_wes_01"
+        ],
+        "heart_level": {
+          "npc_wes": 3
+        }
+      },
+      "objectives": [
+        {
+          "id": "obj_1",
+          "type": "explore",
+          "target": "rm_explore_rustwood_edge",
+          "description": "Scout the Rustwood route",
+          "target_count": 1
+        },
+        {
+          "id": "obj_2",
+          "type": "talk",
+          "target": "npc_wes",
+          "description": "Report findings to Wes",
+          "target_count": 1
+        }
+      ],
+      "rewards": {
+        "cogs": 300,
+        "items": [],
+        "hearts": {
+          "npc_wes": 4
+        },
+        "reputation": 15,
+        "story_flags_set": [
+          "sq_wes_02_complete"
+        ]
+      }
+    }
+  ]
+}

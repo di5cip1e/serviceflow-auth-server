@@ -1,0 +1,218 @@
+{
+  "_meta": {
+    "description": "Zone-specific data for The Hollow exploration area: salvage nodes, hazards, enemies, discoveries.",
+    "version": "1.0",
+    "objective": "#25 First Exploration Zone"
+  },
+
+  "zone_id": "the_hollow",
+  "room_id": "rm_explore_the_hollow",
+  "display_name": "The Hollow",
+  "recommended_level": 1,
+  "first_visit_dialogue": "dlg_hollow_first_visit",
+
+  "salvage_nodes": [
+    {
+      "id": "salvage_scrap_pile_1",
+      "type": "SCRAP_PILE",
+      "pos": [8, 14],
+      "sub_zone": "slope_descent",
+      "loot_table": [
+        { "item_id": "item_scrap_iron",  "chance": 0.8, "quantity_min": 2, "quantity_max": 5 },
+        { "item_id": "item_copper_ore",  "chance": 0.4, "quantity_min": 1, "quantity_max": 2 },
+        { "item_id": "item_iron_nails",  "chance": 0.3, "quantity_min": 1, "quantity_max": 3 }
+      ],
+      "energy_cost": 8,
+      "respawn_days": 3,
+      "sprite": "spr_salvage_scrap_pile"
+    },
+    {
+      "id": "salvage_scrap_pile_2",
+      "type": "SCRAP_PILE",
+      "pos": [25, 18],
+      "sub_zone": "slope_descent",
+      "loot_table": [
+        { "item_id": "item_scrap_iron",  "chance": 0.8, "quantity_min": 2, "quantity_max": 5 },
+        { "item_id": "item_copper_ore",  "chance": 0.4, "quantity_min": 1, "quantity_max": 2 }
+      ],
+      "energy_cost": 8,
+      "respawn_days": 3,
+      "sprite": "spr_salvage_scrap_pile"
+    },
+    {
+      "id": "salvage_scrap_pile_3",
+      "type": "SCRAP_PILE",
+      "pos": [12, 28],
+      "sub_zone": "crater_floor",
+      "loot_table": [
+        { "item_id": "item_scrap_iron",   "chance": 0.9, "quantity_min": 3, "quantity_max": 6 },
+        { "item_id": "item_copper_ore",   "chance": 0.5, "quantity_min": 1, "quantity_max": 3 },
+        { "item_id": "item_brass_gears",  "chance": 0.2, "quantity_min": 1, "quantity_max": 2 }
+      ],
+      "energy_cost": 8,
+      "respawn_days": 3,
+      "sprite": "spr_salvage_scrap_pile"
+    },
+    {
+      "id": "salvage_scrap_pile_4",
+      "type": "SCRAP_PILE",
+      "pos": [28, 30],
+      "sub_zone": "crater_floor",
+      "loot_table": [
+        { "item_id": "item_scrap_iron",   "chance": 0.9, "quantity_min": 3, "quantity_max": 6 },
+        { "item_id": "item_steel_plate",  "chance": 0.2, "quantity_min": 1, "quantity_max": 1 }
+      ],
+      "energy_cost": 8,
+      "respawn_days": 3,
+      "sprite": "spr_salvage_scrap_pile"
+    },
+    {
+      "id": "salvage_component_cache_1",
+      "type": "COMPONENT_CACHE",
+      "pos": [9, 33],
+      "sub_zone": "crater_floor",
+      "loot_table": [
+        { "item_id": "item_brass_gears",    "chance": 0.7, "quantity_min": 2, "quantity_max": 4 },
+        { "item_id": "item_copper_wire",    "chance": 0.6, "quantity_min": 2, "quantity_max": 5 },
+        { "item_id": "item_precision_gears","chance": 0.2, "quantity_min": 1, "quantity_max": 1 },
+        { "item_id": "item_ai_module_basic","chance": 0.1, "quantity_min": 1, "quantity_max": 1 }
+      ],
+      "energy_cost": 12,
+      "respawn_days": 5,
+      "sprite": "spr_salvage_component_cache"
+    },
+    {
+      "id": "salvage_component_cache_2",
+      "type": "COMPONENT_CACHE",
+      "pos": [22, 27],
+      "sub_zone": "crater_floor",
+      "loot_table": [
+        { "item_id": "item_brass_gears",    "chance": 0.7, "quantity_min": 2, "quantity_max": 4 },
+        { "item_id": "item_copper_wire",    "chance": 0.6, "quantity_min": 2, "quantity_max": 5 },
+        { "item_id": "item_steam_engine_tiny","chance": 0.15, "quantity_min": 1, "quantity_max": 1 }
+      ],
+      "energy_cost": 12,
+      "respawn_days": 5,
+      "sprite": "spr_salvage_component_cache"
+    },
+    {
+      "id": "salvage_ore_vein_small_1",
+      "type": "ORE_VEIN",
+      "pos": [15, 15],
+      "sub_zone": "slope_descent",
+      "loot_table": [
+        { "item_id": "item_copper_ore",  "chance": 0.9, "quantity_min": 2, "quantity_max": 4 },
+        { "item_id": "item_iron_ore",    "chance": 0.6, "quantity_min": 1, "quantity_max": 3 }
+      ],
+      "energy_cost": 10,
+      "respawn_days": 7,
+      "sprite": "spr_salvage_ore_vein"
+    },
+    {
+      "id": "salvage_ore_vein_aetheric",
+      "type": "ORE_VEIN",
+      "pos": [19, 44],
+      "sub_zone": "impact_center",
+      "loot_table": [
+        { "item_id": "item_aetheric_ore", "chance": 1.0, "quantity_min": 2, "quantity_max": 4 },
+        { "item_id": "item_rare_mineral", "chance": 0.3, "quantity_min": 1, "quantity_max": 1 }
+      ],
+      "energy_cost": 15,
+      "respawn_days": 14,
+      "sprite": "spr_salvage_aetheric_deposit",
+      "note": "Primary Aetheric Ore deposit at impact center"
+    }
+  ],
+
+  "hazards": [
+    {
+      "id": "hazard_unstable_floor_1",
+      "type": "UNSTABLE_FLOOR",
+      "tiles": [
+        [10, 12], [11, 12], [12, 13], [20, 16], [21, 17], [28, 14]
+      ],
+      "effect": { "energy_loss": 5, "stumble_duration_seconds": 1.0 },
+      "warning_sprite": "spr_hazard_crack",
+      "description": "Loose rocks that cause stumbling and energy loss."
+    },
+    {
+      "id": "hazard_unstable_floor_2",
+      "type": "UNSTABLE_FLOOR",
+      "tiles": [
+        [15, 20], [16, 21], [24, 19]
+      ],
+      "effect": { "energy_loss": 5, "stumble_duration_seconds": 1.0 },
+      "warning_sprite": "spr_hazard_crack",
+      "description": "More loose rocks on the lower slope."
+    }
+  ],
+
+  "enemy_patrols": [
+    {
+      "id": "patrol_crater_floor_1",
+      "enemy_type": "enemy_freelance_raider",
+      "count": 3,
+      "sub_zone": "crater_floor",
+      "patrol_path": [[10, 30], [18, 30], [18, 36], [10, 36]],
+      "aggro_range": 5,
+      "respawn_days": 5
+    },
+    {
+      "id": "patrol_crater_floor_2",
+      "enemy_type": "enemy_freelance_raider",
+      "count": 2,
+      "sub_zone": "crater_floor",
+      "patrol_path": [[24, 26], [32, 26], [32, 32], [24, 32]],
+      "aggro_range": 5,
+      "respawn_days": 5
+    },
+    {
+      "id": "patrol_impact_guard",
+      "enemy_type": "enemy_freelance_brute",
+      "count": 1,
+      "sub_zone": "impact_center",
+      "patrol_path": [[16, 43], [23, 43], [23, 47], [16, 47]],
+      "aggro_range": 4,
+      "respawn_days": 7,
+      "note": "Brute guarding the impact center area"
+    }
+  ],
+
+  "discoveries": [
+    {
+      "id": "discovery_data_core_hollow",
+      "type": "DATA_CORE",
+      "sub_type": "STANDARD",
+      "pos": [11, 36],
+      "sub_zone": "crater_floor",
+      "interaction_sprite": "spr_interactable_terminal",
+      "one_time": true,
+      "lore_id": "lore_orbital_bombardment",
+      "lore_title": "Orbital Bombardment Record",
+      "lore_summary": "A recovered data fragment describing the orbital bombardment that created The Hollow crater. Pre-Sundering military records confirm it was a targeted strike against an underground facility.",
+      "dejin_reaction": "dlg_dejin_hollow_datacore",
+      "reward_items": [
+        { "item_id": "item_data_core_standard", "quantity": 1 }
+      ]
+    },
+    {
+      "id": "discovery_blueprint_chest_hollow",
+      "type": "BLUEPRINT_CHEST",
+      "pos": [20, 45],
+      "sub_zone": "impact_center",
+      "interaction_sprite": "spr_interactable_blueprint_case",
+      "one_time": true,
+      "blueprint_id": "bp_aether_refinery",
+      "description": "A sealed blueprint case wedged between crystal formations at the impact center.",
+      "reward_items": []
+    }
+  ],
+
+  "fog_of_war": {
+    "enabled": true,
+    "default_state": "HIDDEN",
+    "reveal_radius_tiles": 5,
+    "scanner_bonus_radius": 3,
+    "persistence": "SAVE_PER_ZONE"
+  }
+}

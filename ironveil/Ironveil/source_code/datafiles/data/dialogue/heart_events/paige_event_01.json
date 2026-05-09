@@ -1,0 +1,68 @@
+{
+  "_meta": {
+    "description": "Heart event #1 for npc_paige: The Donation",
+    "version": "1.0",
+    "objective": "#33/#34"
+  },
+  "event_id": "heart_event_paige_01",
+  "npc_id": "npc_paige",
+  "heart_level_required": 2,
+  "location": "rm_int_archive",
+  "time_range": {
+    "start": 9,
+    "end": 17
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_paige_event_1_complete",
+  "heart_bonus": 50,
+  "title": "The Donation",
+  "lines": [
+    {
+      "speaker": "npc_paige",
+      "text": "You're donating a recovered Old World book? To the Archive?",
+      "portrait": "surprised"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "Do you understand how rare this is? The binding alone is\u2014",
+      "portrait": "surprised"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "I'll catalogue it immediately. Section 4-B, pre-war literature.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "I thought the Archive should have it.",
+          "flag": "paige_donate_archive"
+        },
+        {
+          "text": "I found it and thought of you.",
+          "flag": "paige_donate_personal"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "You thought of the Archive. That's... appreciated.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "Most people don't think about preservation. You clearly do.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_paige",
+      "text": "Thank you, Jack. This matters more than you know.",
+      "portrait": "happy"
+    }
+  ]
+}

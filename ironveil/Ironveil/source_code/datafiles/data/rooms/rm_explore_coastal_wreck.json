@@ -1,0 +1,26 @@
+{
+  "room_id": "rm_explore_coastal_wreck", "display_name": "Coastal Wreck", "width_tiles": 35, "height_tiles": 40, "tile_size": 16, "parent_room": null, "zone_type": "EXPLORATION",
+  "sub_zones": {
+    "rocky_shore": { "name": "Rocky Shore", "bounds": { "x1": 0, "y1": 0, "x2": 34, "y2": 11 }, "description": "Jagged coastline with tide pools and sea caves. Ship wreck visible in background.", "threat_level": "SAFE" },
+    "ship_exterior": { "name": "Ship Exterior", "bounds": { "x1": 5, "y1": 12, "x2": 29, "y2": 24 }, "description": "Tilted deck of the wrecked warship. Brass fittings, naval salvage.", "threat_level": "MEDIUM" },
+    "ship_interior": { "name": "Ship Interior", "bounds": { "x1": 8, "y1": 25, "x2": 26, "y2": 34 }, "description": "Below decks: engine room, navigation room, captain's quarters. Partially flooded.", "threat_level": "MEDIUM" },
+    "cargo_hold": { "name": "Cargo Hold", "bounds": { "x1": 10, "y1": 35, "x2": 24, "y2": 39 }, "description": "Massive cargo bay, partially flooded. High-value naval components.", "threat_level": "HIGH" }
+  },
+  "exits": [ { "id": "exit_east_coppervale", "name": "East (Coppervale)", "tiles": { "x1": 34, "y1": 5, "x2": 34, "y2": 7 }, "target_room": "rm_town_coppervale", "target_pos": [2, 30], "collision_type": 3 } ],
+  "terrain_features": [
+    { "id": "tide_pools", "type": "WATER_SHALLOW", "bounds": { "x1": 0, "y1": 0, "x2": 4, "y2": 11 }, "movement_modifier": 0.6, "description": "Shallow tide pools along western shore." },
+    { "id": "ship_hull_walls", "type": "BLOCKED", "bounds": { "x1": 4, "y1": 12, "x2": 4, "y2": 34 }, "description": "Ship hull — port side." },
+    { "id": "ship_hull_walls_stbd", "type": "BLOCKED", "bounds": { "x1": 30, "y1": 12, "x2": 30, "y2": 34 }, "description": "Ship hull — starboard side." },
+    { "id": "flooded_section", "type": "WATER_SHALLOW", "bounds": { "x1": 8, "y1": 28, "x2": 16, "y2": 32 }, "movement_modifier": 0.5, "description": "Flooded below-decks section. Waist-deep water slows movement." },
+    { "id": "unstable_deck_1", "type": "HAZARD", "positions": [[12,16],[13,16],[14,16]], "description": "Unstable deck section that collapses under weight." },
+    { "id": "unstable_deck_2", "type": "HAZARD", "positions": [[22,20],[23,20]], "description": "Another unstable deck section." }
+  ],
+  "ruins": [
+    { "id": "ruin_warship", "name": "Old World Warship", "pos": [5, 12], "size": [25, 23], "has_interior": true },
+    { "id": "ruin_navigation_room", "name": "Navigation Room", "pos": [18, 28], "size": [6, 4], "has_interior": true },
+    { "id": "ruin_captain_quarters", "name": "Captain's Quarters", "pos": [20, 25], "size": [5, 3], "has_interior": true }
+  ],
+  "collision_rules": { "types": { "0": "WALKABLE", "1": "BLOCKED", "2": "INTERACTABLE", "3": "TRANSITION", "4": "WATER_SHALLOW", "6": "HAZARD" }, "general": [ "Ship hull walls are BLOCKED", "Flooded sections are WATER_SHALLOW (walkable, 50% speed)", "Unstable deck is HAZARD — falls through, energy loss", "Valve puzzle drains flooded section to reveal navigation room" ] },
+  "tile_layers": ["ground_base", "ground_detail", "shadows", "objects_low", "objects_mid", "objects_high", "fog_overlay", "ui_overlay"],
+  "notes": [ "Moderate zone. First encounter with Tide Reavers.", "Ship is tilted — visual effect via diagonal shading on deck tiles.", "Entry from Coppervale west arrives at tile (33, 6)." ]
+}

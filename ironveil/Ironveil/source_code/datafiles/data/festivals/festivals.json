@@ -1,0 +1,103 @@
+{
+  "_meta": {
+    "description": "Festival definitions for all 4 seasonal festivals.",
+    "version": "1.0",
+    "objective": "#36"
+  },
+  "festivals": [
+    {
+      "festival_id": "spark_festival",
+      "name": "Spark Festival",
+      "season": "SPRING",
+      "day": 15,
+      "description": "A celebration of engineering and innovation. Machine showcases, automaton races, and fireworks.",
+      "attendance_heart_bonus": 2,
+      "reputation_bonus": 15,
+      "minigames": [
+        "machine_showcase",
+        "automaton_race",
+        "dance"
+      ],
+      "schedule_override": {
+        "location": "rm_town_coppervale",
+        "pos": [
+          35,
+          30
+        ],
+        "note": "Town Square festival area"
+      },
+      "ambient": "festival_music_spring",
+      "decorations": "spark_banners"
+    },
+    {
+      "festival_id": "sky_day",
+      "name": "Sky Day",
+      "season": "SUMMER",
+      "day": 20,
+      "description": "A celebration of flight, freedom, and the open sky. Zeppelin viewing, flyer races, and picnics.",
+      "attendance_heart_bonus": 2,
+      "reputation_bonus": 15,
+      "minigames": [
+        "flyer_race",
+        "dance"
+      ],
+      "schedule_override": {
+        "location": "rm_town_coppervale",
+        "pos": [
+          30,
+          25
+        ],
+        "note": "The Overlook viewing area"
+      },
+      "ambient": "festival_music_summer",
+      "decorations": "sky_streamers"
+    },
+    {
+      "festival_id": "harvest_faire",
+      "name": "Harvest Faire",
+      "season": "AUTUMN",
+      "day": 25,
+      "description": "A harvest celebration with trading, cooking competitions, and a community feast.",
+      "attendance_heart_bonus": 2,
+      "reputation_bonus": 15,
+      "minigames": [
+        "cooking_competition",
+        "trading_day",
+        "dance"
+      ],
+      "schedule_override": {
+        "location": "rm_town_coppervale",
+        "pos": [
+          38,
+          32
+        ],
+        "note": "Market District feast tables"
+      },
+      "ambient": "festival_music_autumn",
+      "decorations": "harvest_garlands"
+    },
+    {
+      "festival_id": "remembrance_day",
+      "name": "Remembrance Day",
+      "season": "WINTER",
+      "day": 10,
+      "description": "A solemn day of remembrance for those lost in The Sundering. Lantern lighting, ceremony, gift exchange.",
+      "attendance_heart_bonus": 3,
+      "reputation_bonus": 20,
+      "minigames": [
+        "lantern_lighting",
+        "gift_exchange"
+      ],
+      "schedule_override": {
+        "location": "rm_town_coppervale",
+        "pos": [
+          35,
+          35
+        ],
+        "note": "River bank for lantern ceremony"
+      },
+      "ambient": "festival_music_winter_solemn",
+      "decorations": "memorial_lanterns"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "description": "Heart event #2 for npc_kiery: The Collection",
+    "version": "1.0",
+    "objective": "#33/#34"
+  },
+  "event_id": "heart_event_kiery_02",
+  "npc_id": "npc_kiery",
+  "heart_level_required": 3,
+  "location": "rm_int_npc_kiery",
+  "time_range": {
+    "start": 14,
+    "end": 20
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_kiery_event_2_complete",
+  "heart_bonus": 50,
+  "title": "The Collection",
+  "lines": [
+    {
+      "speaker": "npc_kiery",
+      "text": "Jack, can I show you something? My secret collection.",
+      "portrait": "happy"
+    },
+    {
+      "speaker": "narrator",
+      "text": "[Kiery opens a chest filled with salvaged Old World textiles]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "This was a ball gown. Pre-war. Silk that doesn't exist anymore.",
+      "portrait": "happy"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "And this \u2014 a military uniform. Still has the rank insignia.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "Each one was someone's life. Someone's story. I gave them new purpose.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "They're beautiful. All of them.",
+          "flag": "kiery_collection_beauty"
+        },
+        {
+          "text": "You preserve memories through fabric.",
+          "flag": "kiery_collection_deep"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "Nobody's ever said that before. Memory through fabric.",
+      "portrait": "surprised"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "That's exactly what it is. Thank you for understanding.",
+      "portrait": "happy"
+    }
+  ]
+}

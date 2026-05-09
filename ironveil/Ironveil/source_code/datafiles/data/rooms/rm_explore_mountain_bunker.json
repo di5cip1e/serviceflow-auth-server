@@ -1,0 +1,28 @@
+{
+  "room_id": "rm_explore_mountain_bunker", "display_name": "Mountain Bunker", "width_tiles": 30, "height_tiles": 60, "tile_size": 16, "parent_room": null, "zone_type": "EXPLORATION",
+  "sub_zones": {
+    "decontamination": { "name": "Decontamination Level", "bounds": { "x1": 0, "y1": 0, "x2": 29, "y2": 14 }, "description": "Airlock entrance. Sterile environment. Power puzzle to open inner doors.", "threat_level": "SAFE" },
+    "barracks": { "name": "Barracks Level", "bounds": { "x1": 0, "y1": 15, "x2": 29, "y2": 29 }, "description": "Soldier quarters: bunks, lockers, mess hall. Personal effects and letters.", "threat_level": "MEDIUM" },
+    "armory": { "name": "Armory Level", "bounds": { "x1": 0, "y1": 30, "x2": 29, "y2": 44 }, "description": "Weapons research lab and storage. Combat Mech Mk II blueprint location.", "threat_level": "HIGH" },
+    "command_center": { "name": "Command Center", "bounds": { "x1": 0, "y1": 45, "x2": 29, "y2": 59 }, "description": "Heart of the bunker. DEJIN sibling discovery. Classified Data Core.", "threat_level": "HIGH" }
+  },
+  "exits": [ { "id": "exit_surface", "name": "Surface (Ashspine Foothills)", "tiles": { "x1": 14, "y1": 0, "x2": 16, "y2": 0 }, "target_room": "rm_explore_ashspine_foothills", "target_pos": [17, 36], "collision_type": 3 }, { "id": "exit_emergency_shaft", "name": "Emergency Exit", "tiles": { "x1": 14, "y1": 59, "x2": 16, "y2": 59 }, "target_room": "rm_explore_ashspine_foothills", "target_pos": [25, 30], "collision_type": 3 } ],
+  "terrain_features": [
+    { "id": "bunker_walls", "type": "BLOCKED", "bounds": { "x1": 0, "y1": 0, "x2": 2, "y2": 59 }, "description": "Reinforced bunker walls — left side." },
+    { "id": "bunker_walls_right", "type": "BLOCKED", "bounds": { "x1": 27, "y1": 0, "x2": 29, "y2": 59 }, "description": "Reinforced bunker walls — right side." },
+    { "id": "airlock_inner_door", "type": "INTERACTABLE", "positions": [[14,14],[15,14],[16,14]], "description": "Inner airlock door. Requires power puzzle to open." },
+    { "id": "level_stairs_1", "type": "INTERACTABLE", "positions": [[14,29],[15,29]], "description": "Stairs from barracks to armory." },
+    { "id": "level_stairs_2", "type": "INTERACTABLE", "positions": [[14,44],[15,44]], "description": "Stairs from armory to command center." }
+  ],
+  "ruins": [
+    { "id": "ruin_bunk_rows", "name": "Bunk Rows", "pos": [4, 16], "size": [10, 6], "has_interior": false },
+    { "id": "ruin_mess_hall", "name": "Mess Hall", "pos": [16, 16], "size": [10, 6], "has_interior": false },
+    { "id": "ruin_weapons_lab", "name": "Weapons Research Lab", "pos": [4, 32], "size": [12, 8], "has_interior": false },
+    { "id": "ruin_weapons_locker", "name": "Sealed Weapons Locker", "pos": [18, 34], "size": [6, 4], "has_interior": false },
+    { "id": "ruin_command_room", "name": "Command Room", "pos": [4, 48], "size": [22, 8], "has_interior": false },
+    { "id": "ruin_dejin_terminal", "name": "AI Terminal Chamber", "pos": [10, 52], "size": [10, 5], "has_interior": false }
+  ],
+  "collision_rules": { "types": { "0": "WALKABLE", "1": "BLOCKED", "2": "INTERACTABLE", "3": "TRANSITION", "6": "HAZARD" }, "general": [ "Multi-level vertical progression via stairs", "Airlock inner door requires power puzzle", "Weapons locker requires keycard from barracks", "Trip wire hazards in armory level", "Emergency exit shaft at bottom — one-way shortcut out" ] },
+  "tile_layers": ["ground_base", "ground_detail", "shadows", "objects_low", "objects_mid", "objects_high", "fog_overlay", "ui_overlay"],
+  "notes": [ "Hard difficulty zone. Multi-level vertical dungeon.", "Requires Combat Mech + team to access (Year 2 Summer).", "Contains critical story content: DEJIN sibling discovery.", "Entry from Ashspine Foothills bunker door." ]
+}

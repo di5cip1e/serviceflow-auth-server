@@ -1,0 +1,648 @@
+{
+  "_meta": {
+    "description": "Dialogue data for Kiery (Seamstress / Textile Worker). Seasonal/daily pool + heart milestones.",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue"
+  },
+  "entries": [
+    {
+      "entry_id": "npc_kiery_sd_001",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "Good morning! The light is perfect for dyeing today. Spring colors!",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_sd_002",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "Rain means indoor work. My favorite kind. The loom is waiting.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_sd_003",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "I've been collecting spring flowers for new dyes. Lavender makes the loveliest purple.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_sd_004",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "Summer light through my window makes the fabrics glow. Like they're alive.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_sd_005",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "The humidity is hard on finished fabrics. I've covered everything carefully.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_sd_006",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "I finished a commission for Gus. New curtains for the store. He was so pleased.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_sd_007",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "Autumn leaves make the best dyes. Copper, amber, gold. This season is a gift.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_sd_008",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "Cozy weather for sewing. The shop smells like wool and cinnamon.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_sd_009",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "I've been dyeing fabrics with the autumn leaves. Every batch is unique.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_sd_010",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "Cold fingers make fine stitching harder. I've been wearing fingerless gloves.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_sd_011",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "weather": "SNOW",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "Snow on the windowsill while I sew. Peaceful. Safe.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_sd_012",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "I'm making scarves for everyone. Don't tell — they're winter gifts.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_sd_013",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "weather": "STORM",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "Storms make me... nervous. But the shop is warm and the needle is steady.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_sd_014",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "weather": "FOG",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "Foggy days feel like the world is wrapped in gauze. Soft. Protected.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_sd_015",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "This fabric — feel it. It was part of a curtain in the old schoolhouse. New life now.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_sd_016",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "You're kind, Jack. Genuinely kind. Not kind-because-you-want-something.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_sd_017",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "Pip asked me to teach her to sew. She has good hands. Patient.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_sd_018",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "Michelle brings me herbs for fabric treatment. We trade — herbs for handkerchiefs.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_sd_019",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "I made something for the tavern. Tablecloths. Kaydee pretended not to care. She uses them.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_sd_020",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "Each stitch is a choice. Thread by thread, you build something beautiful.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_sd_021",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "I came to Coppervale with nothing. I built this shop with my own hands.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_sd_022",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "Some people think sewing is small work. But every soldier needs a uniform. Every family needs warmth.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_sd_023",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "The salvaged fabrics from the ruins... each one was someone's curtain. Someone's dress.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_sd_024",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "I like routine. Wake, work, create, rest. Simple. Safe. Mine.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_sd_025",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "Please don't raise your voice. I know you didn't mean— I just— it's not about you.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_hm_02",
+      "npc_id": "npc_kiery",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 2
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_kiery_milestone_2",
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "I made you something. A scarf. The thread is reinforced. For warmth. And protection.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_hm_04",
+      "npc_id": "npc_kiery",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 4
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_kiery_milestone_4",
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "You've never once told me what to do. Do you know how rare that is?",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_hm_06",
+      "npc_id": "npc_kiery",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 6
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_kiery_milestone_6",
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "There's something I need to tell you. About before. About why I came here.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_hm_08",
+      "npc_id": "npc_kiery",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 8
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_kiery_milestone_8",
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "I'm choosing this. Choosing you. On my own terms. For the first time.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_hm_10",
+      "npc_id": "npc_kiery",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 10
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_kiery_milestone_10",
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "Every stitch I sew now has your warmth in it. That's not a metaphor. I mean it.",
+          "portrait": "happy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_y2_spring_031",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "The new trade goods include art supplies. Actual pigments and canvas. I haven't painted in years.",
+          "portrait": "wonder"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_y2_summer_032",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "I made something for the town hall. A mural of Coppervale. It's... it's the first place that felt like home.",
+          "portrait": "shy_proud"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_y2_autumn_033",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "I thought I'd found somewhere safe. I'm not running again. Not this time.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_y2_winter_034",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "Whatever you need during the siege, Jack. I'm here. I'm not going anywhere.",
+          "portrait": "steady"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_y3_spring_035",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "I'll paint something for you to carry. A little piece of Coppervale, for the journey.",
+          "portrait": "tender"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_y3_autumn_036",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "You came back. I'm not afraid of tomorrow anymore.",
+          "portrait": "radiant"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_kiery_y4_spring_037",
+      "npc_id": "npc_kiery",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 4,
+        "hearts_gte": 0,
+        "story_flag": "flag_main_story_complete"
+      },
+      "priority": 11,
+      "lines": [
+        {
+          "speaker": "npc_kiery",
+          "text": "I'm teaching the children to paint. They see the world so differently. So much color.",
+          "portrait": "joyful"
+        }
+      ]
+    }
+  ]
+}

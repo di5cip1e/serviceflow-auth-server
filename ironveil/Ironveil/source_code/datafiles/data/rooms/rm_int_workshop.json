@@ -1,0 +1,38 @@
+{
+  "room_id": "rm_int_workshop",
+  "display_name": "Player's Workshop",
+  "width_tiles": 16,
+  "height_tiles": 12,
+  "tile_size": 16,
+  "parent_room": "rm_town_coppervale",
+
+  "exits": [
+    { "id": "door_south", "tiles": { "x1": 7, "y1": 11, "x2": 8, "y2": 11 }, "target_room": "rm_town_coppervale", "target_pos": [44, 18], "collision_type": 3 }
+  ],
+
+  "stations": [
+    { "id": "station_forge",              "name": "Forge",                "pos": [2, 2],  "size": [3, 3], "station_type": "FORGE",       "level": 1, "collision_type": 2 },
+    { "id": "station_assembly_crane",     "name": "Assembly Crane",      "pos": [8, 2],  "size": [3, 3], "station_type": "ASSEMBLY",    "level": 1, "collision_type": 2 },
+    { "id": "station_component_fab",      "name": "Component Fabricator","pos": [2, 5],  "size": [3, 2], "station_type": "FABRICATOR",  "level": 1, "collision_type": 2 },
+    { "id": "station_workbench",          "name": "Workbench",           "pos": [12, 4], "size": [2, 2], "station_type": "WORKBENCH",   "level": 1, "collision_type": 2 },
+    { "id": "station_ai_core",            "name": "AI Core (DEJIN)",     "pos": [2, 8],  "size": [3, 2], "station_type": "AI_CORE",     "level": 1, "collision_type": 2 },
+    { "id": "station_testing_platform",   "name": "Testing Platform",    "pos": [8, 8],  "size": [2, 2], "station_type": "TESTING",     "level": 1, "collision_type": 2 },
+    { "id": "station_aether_refinery",    "name": "Aether Refinery",     "pos": [12, 7], "size": [2, 2], "station_type": "REFINERY",    "level": 1, "collision_type": 2 }
+  ],
+
+  "furniture": [
+    { "id": "storage_chest_1", "name": "Storage Chest",  "pos": [14, 2], "size": [1, 1], "type": "STORAGE", "storage_size": 20, "collision_type": 2 },
+    { "id": "storage_chest_2", "name": "Storage Chest",  "pos": [14, 3], "size": [1, 1], "type": "STORAGE", "storage_size": 20, "collision_type": 2 },
+    { "id": "wall_tools",      "name": "Wall Tool Rack",  "pos": [6, 0],  "size": [2, 1], "type": "DECORATIVE", "collision_type": 1 },
+    { "id": "blueprint_board",  "name": "Blueprint Board", "pos": [11, 0], "size": [2, 1], "type": "DECORATIVE", "collision_type": 1 }
+  ],
+
+  "npc_positions": [],
+
+  "collision_notes": [
+    "All wall tiles (row 0, col 0, col 15, row 11 except door) are BLOCKED (1)",
+    "All station footprints are INTERACTABLE (2) at their front-facing tile",
+    "Door tiles at (7,11) and (8,11) are TRANSITION (3)",
+    "Floor tiles are WALKABLE (0)"
+  ]
+}

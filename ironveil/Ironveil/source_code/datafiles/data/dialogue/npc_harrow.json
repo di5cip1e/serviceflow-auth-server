@@ -1,0 +1,756 @@
+{
+  "_meta": {
+    "description": "Dialogue data for Captain Harrow (Militia Leader). Seasonal/daily pool + heart milestones.",
+    "version": "1.0",
+    "objective": "#33 Complete NPC Dialogue"
+  },
+  "entries": [
+    {
+      "entry_id": "npc_harrow_sd_001",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Engineer. Eastern perimeter's quiet. Stay sharp.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_sd_002",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Rain keeps the raiders indoors too. Small mercies.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_sd_003",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Spring means longer days. Longer days mean more patrol time. Good.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_sd_004",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Hot. Militia's on half-rations of water. Fix that pump, engineer.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_sd_005",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Wet powder doesn't fire. Check the turret housing seals.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_sd_006",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Summer raids hit at dawn. I've doubled the morning watch.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_sd_007",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Autumn raids hit harder. They're stockpiling for winter. So are we.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_sd_008",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "weather": "RAIN",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Muddy ground slows raiders. Slows us too. Maintain the paths.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_sd_009",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Harvest Faire. I'll attend. Briefly. Someone has to watch the gate.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_sd_010",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "weather": "CLEAR",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Cold steel, steady hands. Winter doesn't care about your comfort.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_sd_011",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "weather": "SNOW",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Snow reveals tracks. Good for us. Post scouts at the treeline.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_sd_012",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Remembrance Day. I remember every name. Every face.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_sd_013",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "weather": "STORM",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Storms provide cover for raiders. All units on alert.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_sd_014",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "weather": "FOG",
+        "hearts_gte": 0
+      },
+      "priority": 6,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Visibility compromised. I want sentries at double intervals.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_sd_015",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Those turrets need repositioning. Eastern flank is exposed.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_sd_016",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "I've seen what happens when towns can't defend themselves. Not here.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_sd_017",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Your machines are... adequate. Build more.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_sd_018",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Militia drill at dawn. Your automatons should participate.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_sd_019",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "The Marshal knows about us now. That changes everything.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_sd_020",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Leera's scouting reports are useful. Don't tell her I said that.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_sd_021",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Pip tried to join the militia today. I gave her a wooden sword. She was thrilled.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_sd_022",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "I lost eleven soldiers in the Ashspine campaign. I remember every name.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_sd_023",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Good work on the wall repairs. Solid engineering.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_sd_024",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Stay alert, engineer. The quiet doesn't mean safety. It means waiting.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_sd_025",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "hearts_gte": 0
+      },
+      "priority": 5,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Linden's optimism is... useful. Keeps morale up. Someone has to worry though.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_hm_02",
+      "npc_id": "npc_harrow",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 2
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_harrow_milestone_2",
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Here. Military-grade maintenance kit. Keep your machines combat-ready.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_hm_04",
+      "npc_id": "npc_harrow",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 4
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_harrow_milestone_4",
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "You've earned my respect, engineer. That's not something I give easily.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_hm_06",
+      "npc_id": "npc_harrow",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 6
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_harrow_milestone_6",
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "I'm going to tell you something I've never told anyone. About Ashspine.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_hm_08",
+      "npc_id": "npc_harrow",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 8
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_harrow_milestone_8",
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "If the Marshal comes... I need you beside me. Not behind me. Beside me.",
+          "portrait": "determined"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_hm_10",
+      "npc_id": "npc_harrow",
+      "category": "heart_milestone",
+      "conditions": {
+        "hearts_eq": 10
+      },
+      "priority": 10,
+      "one_time": true,
+      "story_flag_set": "npc_harrow_milestone_10",
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "You're the best soldier who never enlisted. Coppervale's lucky to have you, Jack.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_y2_spring_031",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "The alliance is good news. But alliances are only as strong as the weakest link. We need to be the strongest.",
+          "portrait": "stern"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_y2_spring_032",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Janis knows her strategy. I'll give her that. Having a Council liaison changes our intelligence picture considerably.",
+          "portrait": "grudging_respect"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_y2_summer_033",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "The bunker confirmed what I suspected. The Marshal isn't a raider — he's a general. Different breed entirely.",
+          "portrait": "grim"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_y2_summer_034",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "I've been drilling the militia harder. Some of them complain. They won't complain when the walls hold.",
+          "portrait": "pragmatic"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_y2_autumn_035",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "He gave us a timeline. Good. Now we use every second of it. No wasted days, Jack.",
+          "portrait": "focused"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_y2_autumn_036",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "The allied forces are arriving. Good fighters. Need to integrate them into our defense grid without ego getting in the way.",
+          "portrait": "professional"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_y2_winter_037",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "year_gte": 2,
+        "hearts_gte": 0
+      },
+      "priority": 9,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "This is what I trained for my whole life. Defending a home. Funny — took me sixty years to find one worth defending.",
+          "portrait": "reflective"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_y3_spring_038",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "The expedition to the Spire is the most dangerous mission we've attempted. I wish I was going with you. But someone has to hold Coppervale.",
+          "portrait": "heavy"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_y3_summer_039",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SUMMER",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Radio reports from the Scorchland offensive are good. We're hitting his supply lines hard. Keep pushing, Jack.",
+          "portrait": "tactical"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_y3_autumn_040",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "It's over. After all these years... it's actually over. I don't quite know what to do with myself.",
+          "portrait": "lost"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_y3_autumn_041",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "AUTUMN",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "Maybe I'll teach. Train the next generation of defenders. God knows they'll need it — the world's still dangerous.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_y3_winter_042",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "WINTER",
+        "year_gte": 3,
+        "hearts_gte": 0
+      },
+      "priority": 10,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "I've been a soldier all my life. But watching this town grow... I think I've found something worth more than any battle.",
+          "portrait": "at_peace"
+        }
+      ]
+    },
+    {
+      "entry_id": "npc_harrow_y4_spring_043",
+      "npc_id": "npc_harrow",
+      "category": "seasonal_daily",
+      "conditions": {
+        "season": "SPRING",
+        "year_gte": 4,
+        "hearts_gte": 0,
+        "story_flag": "flag_main_story_complete"
+      },
+      "priority": 11,
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "The splinter raiders are nothing compared to the Marshal's army. We handle them. But I keep the watch sharp. Always.",
+          "portrait": "vigilant"
+        }
+      ]
+    }
+  ]
+}

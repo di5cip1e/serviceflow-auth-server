@@ -1,0 +1,83 @@
+{
+  "_meta": {
+    "description": "Heart event #4 for npc_kiery: The Truth",
+    "version": "1.0",
+    "objective": "#33/#34"
+  },
+  "event_id": "heart_event_kiery_04",
+  "npc_id": "npc_kiery",
+  "heart_level_required": 6,
+  "location": "rm_int_npc_kiery",
+  "time_range": {
+    "start": 19,
+    "end": 22
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_kiery_event_4_complete",
+  "heart_bonus": 50,
+  "title": "The Truth",
+  "lines": [
+    {
+      "speaker": "npc_kiery",
+      "text": "Jack. I need to tell you why I came to Coppervale.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "I was with someone. In my old town. He said he loved me.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "But what he loved was controlling me. Every choice. Every word.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "I left with nothing. Arrived here with a needle and a spool of thread.",
+      "portrait": "determined"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "I rebuilt myself. Thread by thread. Stitch by stitch.",
+      "portrait": "determined"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "You're the strongest person I know.",
+          "flag": "kiery_truth_strength"
+        },
+        {
+          "text": "You built something beautiful from nothing.",
+          "flag": "kiery_truth_admire"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "I chose my own fabrics. My own colors. My own hours.",
+      "portrait": "determined"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "I chose who to smile at. I chose when to be alone.",
+      "portrait": "determined"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "And now... I'm choosing who to trust. That's harder.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_kiery",
+      "text": "But I'm choosing, Jack. On my own terms.",
+      "portrait": "happy"
+    }
+  ]
+}

@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avant Garde Institute | Automation Consulting for Austin Small Business</title>
+    <meta name="description" content="We automate repetitive tasks for Austin solopreneurs and small businesses. Save 15+ hours/week without hiring. Free consultation.">
+    <style>
+        /* Base Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif; 
+            line-height: 1.6; 
+            color: #1a1a2e;
+            background: #fafbfc;
+        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+        
+        /* Header */
+        header { 
+            background: #fff; 
+            border-bottom: 1px solid #e1e4e8;
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        .logo { 
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo img { height: 48px; width: auto; border-radius: 8px; }
+        .logo-text { 
+            font-size: 1.4rem; 
+            font-weight: 800; 
+            color: #1a1a2e;
+            letter-spacing: -0.5px;
+        }
+        .logo-text span { color: #2563eb; }
+        .nav-links { display: flex; gap: 32px; list-style: none; }
+        .nav-links a { 
+            color: #4b5563; 
+            text-decoration: none; 
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: #2563eb; }
+        
+        /* Hero Section */
+        .hero { 
+            background: linear-gradient(180deg, #fff 0%, #f0f4ff 100%);
+            padding: 80px 0 100px;
+            text-align: center;
+        }
+        .hero h1 { 
+            font-size: 3rem; 
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            color: #1a1a2e;
+        }
+        .hero h1 .highlight { color: #2563eb; }
+        .hero p { 
+            font-size: 1.25rem; 
+            color: #4b5563; 
+            max-width: 640px; 
+            margin: 0 auto 36px;
+        }
+        .hero-cta-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .cta-btn { 
+            background: #2563eb; 
+            color: #fff; 
+            padding: 14px 32px; 
+            border: none;
+            border-radius: 8px; 
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer; 
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+        .cta-btn:hover { 
+            background: #1d4ed8; 
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+        }
+        .cta-btn.secondary {
+            background: #fff;
+            color: #374151;
+            border: 2px solid #e5e7eb;
+        }
+        .cta-btn.secondary:hover {
+            background: #f9fafb;
+            border-color: #d1d5db;
+        }
+        
+        /* Problem/Solution Section */
+        .problem-section {
+            padding: 80px 0;
+            background: #fff;
+        }
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .problem h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #1a1a2e;
+        }
+        .problem-list {
+            list-style: none;
+        }
+        .problem-list li {
+            padding: 12px 0;
+            padding-left: 32px;
+            position: relative;
+            color: #4b5563;
+            font-size: 1.05rem;
+        }
+        .problem-list li::before {
+            content: '✕';
+            position: absolute;
+            left: 0;
+            color: #ef4444;
+            font-weight: bold;
+        }
+        .solution-list li::before {
+            content: '✓';
+            color: #10b981;
+        }
+        
+        /* Stats Banner */
+        .stats-banner {
+            background: #1a1a2e;
+            padding: 50px 0;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            text-align: center;
+        }
+        .stat-item { color: #fff; }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #60a5fa;
+            display: block;
+        }
+        .stat-label {
+            font-size: 1rem;
+            color: #9ca3af;
+            margin-top: 8px;
+        }
+        
+        /* Services / Pricing */
+        .services { 
+            padding: 80px 0; 
+            background: #f9fafb;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 16px;
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: #6b7280;
+            margin-bottom: 48px;
+            font-size: 1.1rem;
+        }
+        .pricing-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 24px; 
+        }
+        .pricing-card { 
+            background: #fff; 
+            border-radius: 16px; 
+            padding: 32px; 
+            text-align: center; 
+            border: 2px solid #e5e7eb;
+            transition: all 0.3s;
+        }
+        .pricing-card:hover { 
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+        .pricing-card.featured { 
+            border-color: #2563eb;
+            position: relative;
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.15);
+        }
+        .pricing-card.featured::before { 
+            content: 'Most Popular'; 
+            position: absolute; 
+            top: -12px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            background: #2563eb; 
+            color: #fff; 
+            padding: 6px 20px; 
+            border-radius: 20px; 
+            font-size: 0.8rem; 
+            font-weight: 600;
+        }
+        .package-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #1a1a2e;
+        }
+        .package-desc {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+        .price { 
+            font-size: 2.75rem; 
+            font-weight: 800; 
+            color: #1a1a2e; 
+            margin: 16px 0;
+        }
+        .price span { 
+            font-size: 1rem; 
+            color: #6b7280;
+            font-weight: 500;
+        }
+        .features { 
+            list-style: none; 
+            margin: 24px 0; 
+            text-align: left; 
+        }
+        .features li { 
+            padding: 10px 0; 
+            border-bottom: 1px solid #f3f4f6;
+            font-size: 0.95rem;
+            color: #374151;
+        }
+        .features li:last-child { border-bottom: none; }
+        .features li::before { 
+            content: '✓'; 
+            color: #10b981; 
+            margin-right: 10px; 
+            font-weight: bold;
+        }
+        
+        /* Workflow Examples */
+        .workflows { 
+            padding: 80px 0; 
+            background: #fff;
+        }
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
+        .workflow-card {
+            background: #f9fafb;
+            border-radius: 12px;
+            padding: 28px;
+            border: 1px solid #e5e7eb;
+        }
+        .workflow-icon {
+            font-size: 2rem;
+            margin-bottom: 16px;
+            display: block;
+        }
+        .workflow-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            color: #1a1a2e;
+        }
+        .workflow-card p {
+            color: #6b7280;
+            font-size: 0.95rem;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            background: linear-gradient(180deg, #f0f4ff 0%, #fff 100%);
+        }
+        .contact-box {
+            background: #fff;
+            border-radius: 20px;
+            padding: 48px;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+            border: 1px solid #e5e7eb;
+        }
+        .contact-box h2 {
+            font-size: 1.75rem;
+            margin-bottom: 12px;
+        }
+        .contact-box p {
+            color: #6b7280;
+            margin-bottom: 32px;
+        }
+        .contact-form {
+            text-align: left;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #374151;
+            font-size: 0.9rem;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+            font-family: inherit;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer { 
+            background: #1a1a2e; 
+            color: #9ca3af; 
+            padding: 40px 0; 
+            text-align: center; 
+        }
+        footer p { margin: 8px 0; }
+        footer a { color: #60a5fa; text-decoration: none; }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2rem; }
+            .problem-grid { grid-template-columns: 1fr; gap: 40px; }
+            .stats-grid { grid-template-columns: 1fr; gap: 30px; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .pricing-card.featured { order: -1; }
+            .contact-box { padding: 32px 24px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="/" class="logo">
+                    <span class="logo-text">Avant<span>Garde</span> Institute</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#problem">How It Works</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#workflows">What We Automate</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Work <span class="highlight">50+ Hours</span> But Feel Like You're Treading Water?</h1>
+            <p>What if you could reclaim 15 hours every week—without hiring an employee? We build custom automation workflows that handle your repetitive tasks so you can focus on growing your business.</p>
+            <div class="hero-cta-group">
+                <a href="#contact" class="cta-btn">Get Your Free Audit</a>
+                <a href="#workflows" class="cta-btn secondary">See What We Automate</a>
+            </div>
+            <p style="margin-top: 20px; font-size: 0.9rem; color: #9ca3af;">Serving Austin &amp; surrounding areas • Average client ROI in 60 days</p>
+        </div>
+    </section>
+    
+    <!-- Problem/Solution Section -->
+    <section class="problem-section" id="problem">
+        <div class="container">
+            <div class="problem-grid">
+                <div class="problem">
+                    <h2>The Manual Work That's Killing Your Productivity</h2>
+                    <ul class="problem-list">
+                        <li>Sending follow-up emails after every inquiry</li>
+                        <li>Manually entering data across multiple apps</li>
+                        <li>Chasing overdue invoices and payments</li>
+                        <li>Scheduling appointments back and forth</li>
+                        <li>Copy-pasting information from one system to another</li>
+                    </ul>
+                </div>
+                <div class="problem">
+                    <h2 style="color: #10b981;">What Automation Can Do For You</h2>
+                    <ul class="problem-list solution-list">
+                        <li>Instant lead response—even while you sleep</li>
+                        <li>Data syncs automatically across all your tools</li>
+                        <li>Payment reminders sent on autopilot</li>
+                        <li>Calendar bookings that self-confirm</li>
+                        <li>Everything flows without you lifting a finger</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Stats Banner -->
+    <section class="stats-banner">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">Hours Saved Per Week</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">60</span>
+                    <span class="stat-label">Days to ROI (Average)</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">U.S.-Based Support</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing Section -->
+    <section class="services" id="pricing">
+        <div class="container">
+            <h2 class="section-title">Choose Your Package</h2>
+            <p class="section-subtitle">One-time setup fees. No monthly retainers. We build it, you own it.</p>
+            
+            <div class="pricing-grid">
+                <!-- Starter -->
+                <div class="pricing-card">
+                    <div class="package-name">Starter</div>
+                    <div class="package-desc">Perfect for solopreneurs ready to automate their first workflow</div>
+                    <div class="price">$497</div>
+                    <ul class="features">
+                        <li>Process audit & optimization</li>
+                        <li>1 workflow automation</li>
+                        <li>Tool selection guidance</li>
+                        <li>30-day support for tweaks</li>
+                        <li>Training walkthrough</li>
+                    </ul>
+                    <a href="#contact" class="cta-btn secondary" style="width:100%;">Get Started</a>
+                </div>
+                
+                <!-- Growth - Featured -->
+                <div class="pricing-card featured">
+                    <div class="package-name">Growth</div>
+                    <div class="package-desc">For small teams (2-10) needing multiple integrated workflows</div>
+                    <div class="price">$1,497</div>
+                    <ul class="features">
+                        <li>Comprehensive process audit</li>
+                        <li>3 workflow automations</li>
+                        <li>CRM setup or optimization</li>
+                        <li>60-day priority support</li>
+                        <li>Staff training (up to 3)</li>
+                        <li>Documentation & runbooks</li>
+                    </ul>
+                    <a href="#contact" class="cta-btn" style="width:100%;">Get Started</a>
+                </div>
+                
+                <!-- Scale -->
+                <div class="pricing-card">
+                    <div class="package-name">Scale</div>
+                    <div class="package-desc">For growing SMBs needing advanced, complex automations</div>
+                    <div class="price">$3,997</div>
+                    <ul class="features">
+                        <li>Full operational audit & strategy</li>
+                        <li>7 workflow automations</li>
+                        <li>Custom API connections</li>
+                        <li>90-day premium support</li>
+                        <li>Team training (up to 6)</li>
+                        <li>Quarterly check-in calls</li>
+                    </ul>
+                    <a href="#contact" class="cta-btn secondary" style="width:100%;">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- What We Automate -->
+    <section class="workflows" id="workflows">
+        <div class="container">
+            <h2 class="section-title">What We Automate</h2>
+            <p class="section-subtitle">Common pain points we solve for Austin small businesses</p>
+            
+            <div class="workflow-grid">
+                <div class="workflow-card">
+                    <span class="workflow-icon">💰</span>
+                    <h3>Invoicing & Payments</h3>
+                    <p>Automated invoicing, payment reminders, and reconciliation so you get paid faster.</p>
+                </div>
+                <div class="workflow-card">
+                    <span class="workflow-icon">📋</span>
+                    <h3>CRM & Lead Follow-up</h3>
+                    <p>Instant lead capture, pipeline updates, and automated follow-ups that never drop the ball.</p>
+                </div>
+                <div class="workflow-card">
+                    <span class="workflow-icon">📅</span>
+                    <h3>Scheduling</h3>
+                    <p>Calendar booking, confirmations, and reminders that handle everything automatically.</p>
+                </div>
+                <div class="workflow-card">
+                    <span class="workflow-icon">📱</span>
+                    <h3>Social Media</h3>
+                    <p>Post scheduling, content queuing, and engagement tracking across platforms.</p>
+                </div>
+                <div class="workflow-card">
+                    <span class="workflow-icon">📊</span>
+                    <h3>Data Entry</h3>
+                    <p>Automatic data sync between apps—no more copy-pasting between tools.</p>
+                </div>
+                <div class="workflow-card">
+                    <span class="workflow-icon">🛎️</span>
+                    <h3>Customer Service</h3>
+                    <p>Support ticket routing, chatbots, and 24/7 response automation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-box">
+                <h2>Ready to Reclaim Your Time?</h2>
+                <p>Tell us about your biggest time drain and we'll show you exactly how automation can fix it.</p>
+                
+                <form class="contact-form" action="mailto:hello@avantgarde.ai" method="post" enctype="text/plain">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required placeholder="John Smith">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required placeholder="john@company.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="package">Interested Package</label>
+                        <select id="package" name="package">
+                            <option value="">Not sure yet - just want to chat</option>
+                            <option value="starter">Starter - $497</option>
+                            <option value="growth">Growth - $1,497</option>
+                            <option value="scale">Scale - $3,997</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">What's your biggest time drain?</label>
+                        <textarea id="message" name="message" placeholder="e.g., I spend 2 hours every day sending follow-up emails..."></textarea>
+                    </div>
+                    <button type="submit" class="cta-btn" style="width:100%;">Request Free Consultation</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p><strong>Avant Garde Institute LLC</strong></p>
+            <p>Austin, Texas • Serving solopreneurs & small businesses (2-5 people)</p>
+            <p style="margin-top: 16px;"><a href="mailto:hello@avantgarde.ai">hello@avantgarde.ai</a></p>
+            <p style="margin-top: 16px; font-size: 0.85rem; opacity: 0.7;">Proudly powering PixelForge AI</p>
+        </div>
+    </footer>
+</body>
+</html>

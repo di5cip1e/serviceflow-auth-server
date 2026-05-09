@@ -1,0 +1,139 @@
+{
+  "room_id": "rm_explore_the_hollow",
+  "display_name": "The Hollow",
+  "width_tiles": 40,
+  "height_tiles": 50,
+  "tile_size": 16,
+  "parent_room": null,
+  "zone_type": "EXPLORATION",
+
+  "sub_zones": {
+    "crater_rim": {
+      "name": "Crater Rim",
+      "bounds": { "x1": 0, "y1": 0, "x2": 39, "y2": 8 },
+      "description": "Safe entrance area with a panoramic overlook. Players can prepare here.",
+      "threat_level": "SAFE"
+    },
+    "slope_descent": {
+      "name": "Slope Descent",
+      "bounds": { "x1": 5, "y1": 9, "x2": 34, "y2": 22 },
+      "description": "Winding path down the crater wall. Light salvage and environmental hazards.",
+      "threat_level": "LOW"
+    },
+    "crater_floor": {
+      "name": "Crater Floor",
+      "bounds": { "x1": 2, "y1": 23, "x2": 37, "y2": 40 },
+      "description": "Open area with shallow lake, overgrown ruins, and rich salvage nodes.",
+      "threat_level": "MEDIUM"
+    },
+    "underwater_cave": {
+      "name": "Underwater Cave",
+      "bounds": { "x1": 28, "y1": 33, "x2": 37, "y2": 40 },
+      "description": "Optional cave accessible from lake. Requires rebreather or sealed mech. Contains rare resources.",
+      "threat_level": "HIGH",
+      "locked": true,
+      "unlock_requirement": "item_rebreather"
+    },
+    "impact_center": {
+      "name": "Impact Center",
+      "bounds": { "x1": 12, "y1": 41, "x2": 27, "y2": 49 },
+      "description": "Center of the crater. Fused crystal formations. Main discovery site.",
+      "threat_level": "MEDIUM"
+    }
+  },
+
+  "exits": [
+    {
+      "id": "exit_west_coppervale",
+      "name": "West (Coppervale)",
+      "tiles": { "x1": 0, "y1": 23, "x2": 0, "y2": 25 },
+      "target_room": "rm_town_coppervale",
+      "target_pos": [77, 20],
+      "collision_type": 3
+    }
+  ],
+
+  "terrain_features": [
+    {
+      "id": "shallow_lake",
+      "type": "WATER_SHALLOW",
+      "bounds": { "x1": 15, "y1": 28, "x2": 30, "y2": 37 },
+      "movement_modifier": 0.5,
+      "description": "Shallow crater lake. Slows movement to 50%."
+    },
+    {
+      "id": "crystal_formations",
+      "type": "BLOCKED",
+      "positions": [[14, 44], [15, 43], [18, 46], [22, 42], [25, 45], [24, 47]],
+      "description": "Fused crystal formations at impact center. Impassable."
+    },
+    {
+      "id": "crater_walls_west",
+      "type": "BLOCKED",
+      "bounds": { "x1": 0, "y1": 9, "x2": 4, "y2": 49 },
+      "description": "Steep crater wall. Impassable."
+    },
+    {
+      "id": "crater_walls_east",
+      "type": "BLOCKED",
+      "bounds": { "x1": 35, "y1": 9, "x2": 39, "y2": 49 },
+      "description": "Steep crater wall. Impassable."
+    },
+    {
+      "id": "crater_cliff_south",
+      "type": "BLOCKED",
+      "bounds": { "x1": 0, "y1": 48, "x2": 11, "y2": 49 },
+      "description": "Southern cliff edge."
+    },
+    {
+      "id": "crater_cliff_south_east",
+      "type": "BLOCKED",
+      "bounds": { "x1": 28, "y1": 48, "x2": 39, "y2": 49 },
+      "description": "South-east cliff edge."
+    }
+  ],
+
+  "collision_rules": {
+    "types": {
+      "0": "WALKABLE",
+      "1": "BLOCKED",
+      "2": "INTERACTABLE",
+      "3": "TRANSITION",
+      "4": "WATER_SHALLOW",
+      "6": "HAZARD"
+    },
+    "general": [
+      "Crater walls (cols 0-4 and 35-39 below row 9) are BLOCKED",
+      "Shallow lake area is WATER_SHALLOW (4) — walkable but 50% speed",
+      "Crystal formations at impact center are BLOCKED",
+      "Ruin footprints on crater floor are partially BLOCKED with INTERACTABLE doors",
+      "Hazard tiles on slope descent are HAZARD (6) — energy drain on step"
+    ]
+  },
+
+  "ruins": [
+    { "id": "ruin_settlement_1", "name": "Collapsed Dwelling",   "pos": [6, 26], "size": [4, 3], "has_interior": false },
+    { "id": "ruin_settlement_2", "name": "Crumbling Workshop",   "pos": [8, 31], "size": [5, 4], "has_interior": false },
+    { "id": "ruin_terminal",     "name": "Data Terminal Ruin",   "pos": [10, 35], "size": [3, 3], "has_interior": false, "note": "Contains the Data Core" },
+    { "id": "ruin_storehouse",   "name": "Old Storehouse",       "pos": [20, 26], "size": [4, 3], "has_interior": false },
+    { "id": "ruin_watchtower",   "name": "Fallen Watchtower",    "pos": [30, 24], "size": [3, 4], "has_interior": false }
+  ],
+
+  "tile_layers": [
+    "ground_base",
+    "ground_detail",
+    "shadows",
+    "objects_low",
+    "objects_mid",
+    "objects_high",
+    "fog_overlay",
+    "ui_overlay"
+  ],
+
+  "notes": [
+    "This JSON defines the spatial data for rm_explore_the_hollow.",
+    "Fog of war overlay covers the entire room; revealed as player explores.",
+    "Entry from Coppervale east exit arrives at tile (2, 24).",
+    "Enemy patrols are defined in exploration_the_hollow.json."
+  ]
+}

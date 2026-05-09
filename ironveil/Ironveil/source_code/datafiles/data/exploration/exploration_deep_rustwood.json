@@ -1,0 +1,27 @@
+{
+  "_meta": { "description": "Zone data for Deep Rustwood.", "version": "1.0", "objective": "#29 All Exploration Zones" },
+  "zone_id": "deep_rustwood", "room_id": "rm_explore_deep_rustwood", "display_name": "Deep Rustwood", "recommended_level": 6, "first_visit_dialogue": "dlg_deep_rustwood_first_visit",
+  "salvage_nodes": [
+    { "id": "salvage_fungi_cluster_1", "type": "NATURAL_RESOURCE", "pos": [8, 5], "sub_zone": "deep_forest", "loot_table": [ { "item_id": "item_bioluminescent_fungi", "chance": 0.9, "quantity_min": 2, "quantity_max": 4 }, { "item_id": "item_rare_mushroom", "chance": 0.4, "quantity_min": 1, "quantity_max": 2 } ], "energy_cost": 5, "respawn_days": 3, "sprite": "spr_salvage_fungi_glow" },
+    { "id": "salvage_fungi_cluster_2", "type": "NATURAL_RESOURCE", "pos": [22, 8], "sub_zone": "deep_forest", "loot_table": [ { "item_id": "item_bioluminescent_fungi", "chance": 0.9, "quantity_min": 2, "quantity_max": 4 } ], "energy_cost": 5, "respawn_days": 3, "sprite": "spr_salvage_fungi_glow" },
+    { "id": "salvage_pipe_junction_1", "type": "MACHINERY_REMAINS", "pos": [15, 18], "sub_zone": "factory_approach", "loot_table": [ { "item_id": "item_copper_pipe", "chance": 0.8, "quantity_min": 2, "quantity_max": 5 }, { "item_id": "item_brass_gears", "chance": 0.5, "quantity_min": 2, "quantity_max": 4 }, { "item_id": "item_precision_gears", "chance": 0.3, "quantity_min": 1, "quantity_max": 2 } ], "energy_cost": 10, "respawn_days": 7, "sprite": "spr_salvage_machinery" },
+    { "id": "salvage_pipe_junction_2", "type": "MACHINERY_REMAINS", "pos": [8, 22], "sub_zone": "factory_approach", "loot_table": [ { "item_id": "item_copper_pipe", "chance": 0.8, "quantity_min": 2, "quantity_max": 4 }, { "item_id": "item_scrap_iron", "chance": 0.7, "quantity_min": 3, "quantity_max": 6 } ], "energy_cost": 10, "respawn_days": 7, "sprite": "spr_salvage_machinery" },
+    { "id": "salvage_assembly_line_output", "type": "COMPONENT_CACHE", "pos": [14, 36], "sub_zone": "living_factory", "loot_table": [ { "item_id": "item_precision_gears", "chance": 0.8, "quantity_min": 3, "quantity_max": 6 }, { "item_id": "item_reinforced_frame", "chance": 0.3, "quantity_min": 1, "quantity_max": 1 }, { "item_id": "item_brass_gears", "chance": 0.7, "quantity_min": 4, "quantity_max": 8 } ], "energy_cost": 12, "respawn_days": 10, "sprite": "spr_salvage_component_cache" },
+    { "id": "salvage_loading_dock_crates", "type": "COMPONENT_CACHE", "pos": [10, 47], "sub_zone": "loading_dock", "loot_table": [ { "item_id": "item_steel_plate", "chance": 0.7, "quantity_min": 2, "quantity_max": 4 }, { "item_id": "item_copper_wire", "chance": 0.6, "quantity_min": 3, "quantity_max": 6 } ], "energy_cost": 8, "respawn_days": 7, "sprite": "spr_salvage_crate" }
+  ],
+  "hazards": [
+    { "id": "hazard_steam_vent_1", "type": "STEAM_VENT", "tiles": [[12,20],[13,20]], "effect": { "damage": 8, "energy_loss": 5 }, "warning_sprite": "spr_hazard_steam", "description": "Periodic steam burst. 3-second cycle." },
+    { "id": "hazard_steam_vent_2", "type": "STEAM_VENT", "tiles": [[20,24],[21,24]], "effect": { "damage": 8, "energy_loss": 5 }, "warning_sprite": "spr_hazard_steam", "description": "Another steam vent." },
+    { "id": "hazard_steam_vent_3", "type": "STEAM_VENT", "tiles": [[8,27]], "effect": { "damage": 8, "energy_loss": 5 }, "warning_sprite": "spr_hazard_steam", "description": "Steam vent near factory entrance." },
+    { "id": "hazard_conveyor_belt", "type": "MOVING_HAZARD", "tiles": [[6,34],[8,34],[10,34],[12,34],[14,34],[16,34],[18,34],[20,34],[22,34],[24,34]], "effect": { "damage": 10, "knockback_tiles": 2 }, "warning_sprite": "spr_hazard_conveyor", "description": "Active conveyor belt with robotic arms. Timed pattern — cross between cycles." }
+  ],
+  "enemy_patrols": [
+    { "id": "patrol_rustwolf_ambush_1", "enemy_type": "enemy_rustwolf_raider", "count": 3, "sub_zone": "factory_approach", "patrol_path": [[6,16],[20,16],[20,26],[6,26]], "aggro_range": 4, "respawn_days": 7 },
+    { "id": "patrol_security_units", "enemy_type": "enemy_freelance_brute", "count": 2, "sub_zone": "living_factory", "patrol_path": [[5,32],[24,32],[24,42],[5,42]], "aggro_range": 5, "respawn_days": 14, "note": "Factory automated security — heavy units" }
+  ],
+  "discoveries": [
+    { "id": "discovery_bp_heavy_mech", "type": "BLUEPRINT_CHEST", "pos": [14, 40], "sub_zone": "living_factory", "interaction_sprite": "spr_interactable_blueprint_case", "one_time": true, "blueprint_id": "bp_heavy_mech", "description": "Industrial blueprint safe in the factory control room. Contains Heavy Mech schematics.", "reward_items": [] },
+    { "id": "discovery_factory_lore", "type": "DATA_CORE", "sub_type": "SCIENTIFIC", "pos": [12, 39], "sub_zone": "living_factory", "interaction_sprite": "spr_interactable_terminal", "one_time": true, "lore_id": "lore_living_factory", "lore_title": "Production Terminal — 50 Years of Silence", "lore_summary": "The factory's production log shows 50 years of continuous unmanned operation. It has been building components for no one — a machine fulfilling its purpose in an empty world. The last human operator's note reads: 'Automated systems engaged. Production will continue. Someone will need these parts when the world recovers.'", "dejin_reaction": "dlg_dejin_factory_persistence", "reward_items": [ { "item_id": "item_data_core_scientific", "quantity": 1 } ] }
+  ],
+  "fog_of_war": { "enabled": true, "default_state": "HIDDEN", "reveal_radius_tiles": 3, "scanner_bonus_radius": 3, "persistence": "SAVE_PER_ZONE" }
+}

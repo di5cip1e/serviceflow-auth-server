@@ -1,0 +1,95 @@
+{
+  "_meta": {
+    "description": "Game balance configuration values. Tunable without code changes.",
+    "version": "1.0"
+  },
+
+  "maintenance": {
+    "base_breakdown_chance": 0.02,
+    "max_breakdown_chance": 0.15,
+    "lubrication_warning_threshold": 30,
+    "fuel_warning_threshold": 20,
+    "component_critical_threshold": 20,
+    "efficiency_penalty_lubrication_threshold": 50,
+    "efficiency_penalty_multiplier": 0.8,
+    "hidden_defect_chance": 0.15,
+    "hidden_defect_condition_penalty": 25,
+    "weather_breakdown_modifiers": {
+      "CLEAR": 1.0,
+      "CLOUDY": 1.0,
+      "RAIN": 1.1,
+      "STORM": 1.5,
+      "SNOW": 1.2,
+      "FOG": 1.0
+    }
+  },
+
+  "fuel_restoration": {
+    "item_coal": 20,
+    "item_aether_cell_small": 30,
+    "item_aether_cell": 50,
+    "item_aether_cell_medium": 75,
+    "item_aether_cell_large": 100
+  },
+
+  "personality_thresholds": {
+    "min_tasks_for_personality": 5,
+    "personality_bonuses": {
+      "Curious":     { "efficiency": 1.15 },
+      "Loyal":       { "detection": 1.2 },
+      "Brave":       { "damage": 1.15 },
+      "Diligent":    { "thoroughness": 1.2 },
+      "Friendly":    { "diplomacy": 1.15 },
+      "Industrious": { "speed": 1.15 },
+      "Helpful":     { "speed": 1.1 },
+      "Sturdy":      { "carry_capacity": 1.2 }
+    }
+  },
+
+  "raid": {
+    "wave_pause_seconds": {
+      "minor": 30,
+      "moderate": 30,
+      "major": 45,
+      "siege": 60
+    },
+    "defeat_resource_loss_percent": 0.25,
+    "partial_victory_reputation_multiplier": 0.5,
+    "victory_reputation_base": 50,
+    "salvage_drop_rate": 0.6,
+    "difficulty_modifiers": {
+      "night": {
+        "turret_range_mult": 0.7,
+        "enemy_speed_mult": 1.1,
+        "detection_range_mult": 0.5
+      },
+      "storm": {
+        "energy_turret_damage_mult": 0.75,
+        "enemy_armor_bonus": 2,
+        "trap_malfunction_chance": 0.1
+      },
+      "fog": {
+        "turret_range_mult": 0.5,
+        "detection_range_mult": 0.3,
+        "enemy_stealth_bonus": 0.3
+      },
+      "coordinated": {
+        "enemy_damage_mult": 1.15,
+        "enemy_armor_bonus": 3,
+        "wave_pause_reduction": 0.8
+      }
+    }
+  },
+
+  "energy": {
+    "walk": 0,
+    "run": 0.02,
+    "tool_use": 5,
+    "salvage_cut": 8,
+    "scan": 3,
+    "climb": 10,
+    "combat": 15,
+    "collapse_hour": 2,
+    "fatigue_penalty_start_hour": 0
+  }
+}

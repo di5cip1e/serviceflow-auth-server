@@ -1,0 +1,290 @@
+{
+  "_meta": {
+    "description": "Quest dialogue for MQ-21: Broken Trust. Year 2 Summer — traitor investigation, major Forgive/Banish branch.",
+    "version": "1.0",
+    "objective": "#42 Full 3+ Year Story Content"
+  },
+  "quest_id": "mq_21",
+  "scenes": [
+    {
+      "scene_id": "mq21_start",
+      "trigger": "quest_start",
+      "location": "rm_int_town_hall",
+      "lines": [
+        {
+          "speaker": "npc_harrow",
+          "text": "We have a problem. The Marauders knew exactly where our patrol gaps were during the last raid. That's not luck — that's intelligence.",
+          "portrait": "angry"
+        },
+        {
+          "speaker": "npc_janis",
+          "text": "I concur. The attack vector was too precise. Someone in Coppervale is feeding them information.",
+          "portrait": "grim"
+        },
+        {
+          "speaker": "npc_linden",
+          "text": "A traitor? Among our own people? I refuse to believe—",
+          "portrait": "distressed"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "Belief doesn't change facts, Mayor. Jack, I need you to investigate. Quietly. If word gets out, the spy will go to ground.",
+          "portrait": "stern"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq21_investigate_spark",
+      "trigger": "npc_interact",
+      "conditions": { "npc_id": "npc_spark", "quest_active": "mq_21", "objective_active": "obj_investigate" },
+      "lines": [
+        {
+          "speaker": "npc_spark",
+          "text": "A spy? That's terrifying. I mean, I'm in the workshop all day — I wouldn't notice if someone was being shady.",
+          "portrait": "worried"
+        },
+        {
+          "speaker": "npc_spark",
+          "text": "Actually... wait. Wes has been making extra courier runs lately. He said they were supply pickups, but the manifests didn't match when I checked the parts inventory.",
+          "portrait": "thinking"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq21_investigate_kaydee",
+      "trigger": "npc_interact",
+      "conditions": { "npc_id": "npc_kaydee", "quest_active": "mq_21", "objective_active": "obj_investigate" },
+      "lines": [
+        {
+          "speaker": "npc_kaydee",
+          "text": "Someone's selling us out? Can't say I'm surprised. Fear makes people do stupid things.",
+          "portrait": "cynical"
+        },
+        {
+          "speaker": "npc_kaydee",
+          "text": "Look, I pour drinks. People talk. And Wes... he's been drinking alone lately. Nervous. Jumpy. He flinches every time someone mentions the Marauders.",
+          "portrait": "serious"
+        },
+        {
+          "speaker": "npc_kaydee",
+          "text": "Could be guilt. Could be fear. Either way, something's eating at him.",
+          "portrait": "thoughtful"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq21_investigate_nora",
+      "trigger": "npc_interact",
+      "conditions": { "npc_id": "npc_nora", "quest_active": "mq_21", "objective_active": "obj_investigate" },
+      "lines": [
+        {
+          "speaker": "npc_nora",
+          "text": "Wes? He's... he's a good man, Jack. But he's been different since spring. Distant. He won't tell me what's wrong.",
+          "portrait": "worried"
+        },
+        {
+          "speaker": "npc_nora",
+          "text": "I found a letter he'd hidden. It was in Marauder code — I recognized the cipher marks from Harrow's intelligence briefings. I... I didn't know what to do.",
+          "portrait": "tearful"
+        },
+        {
+          "speaker": "npc_nora",
+          "text": "Please, Jack. Whatever happened, I know Wes. He wouldn't do this willingly. Something must have forced his hand.",
+          "portrait": "pleading"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq21_dejin_analysis",
+      "trigger": "objective_complete",
+      "conditions": { "objective_id": "obj_gather_evidence" },
+      "lines": [
+        {
+          "speaker": "dejin",
+          "text": "I've decoded the intercepted communications. The cipher is Iron Marauder standard issue. The content confirms patrol schedules, supply routes, and defense positions were transmitted.",
+          "portrait": "analytical"
+        },
+        {
+          "speaker": "dejin",
+          "text": "But Jack — there's something else. The final message reads: 'Compliance confirmed. Family status: secured.' I believe Wes was coerced. They have leverage over him.",
+          "portrait": "concerned"
+        },
+        {
+          "speaker": "dejin",
+          "text": "His family. He mentioned a sister and nephew in a settlement east of here. If the Marauders are holding them...",
+          "portrait": "sympathetic"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq21_confront_wes",
+      "trigger": "npc_interact",
+      "conditions": { "npc_id": "npc_wes", "story_flag": "mq21_evidence_gathered" },
+      "lines": [
+        {
+          "speaker": "player",
+          "text": "Wes. We need to talk.",
+          "portrait": "serious"
+        },
+        {
+          "speaker": "npc_wes",
+          "text": "...You know, don't you.",
+          "portrait": "defeated"
+        },
+        {
+          "speaker": "npc_wes",
+          "text": "They have my sister, Jack. Ellie and her boy, Tomm. A lieutenant came to me in spring. Said if I didn't cooperate, they'd... he showed me proof. A photograph. A knife.",
+          "portrait": "broken"
+        },
+        {
+          "speaker": "npc_wes",
+          "text": "I know what I did is unforgivable. I put everyone here at risk. But I couldn't let them die. I couldn't.",
+          "portrait": "anguished"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "People DID die, Wes. In the raid you enabled. Three guard bots destroyed. Nora nearly caught a crossbow bolt.",
+          "portrait": "furious"
+        },
+        {
+          "speaker": "npc_wes",
+          "text": "I know. God, I know. I've been dying inside every day since. Just... do what you have to do.",
+          "portrait": "resigned"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq21_the_choice",
+      "trigger": "choice_branch",
+      "conditions": { "after_scene": "mq21_confront_wes" },
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "Jack... this is your call. You're the one who uncovered it. You're the one who has to decide what happens next.",
+          "portrait": "heavy"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "He betrayed us. Banishment is the minimum. In wartime, it would be worse.",
+          "portrait": "cold"
+        },
+        {
+          "speaker": "npc_janis",
+          "text": "A coerced asset is still an asset — but turned the other way. Think strategically, not emotionally.",
+          "portrait": "calculating"
+        }
+      ],
+      "choices": [
+        {
+          "text": "Wes, you were put in an impossible situation. We forgive you — and we're going to get your family back.",
+          "effects": [
+            { "type": "set_flag", "flag": "flag_wes_forgiven" },
+            { "type": "set_flag", "flag": "flag_wes_double_agent" },
+            { "type": "add_understanding", "amount": 1 },
+            { "type": "add_hearts", "npc_id": "npc_wes", "amount": 200 }
+          ],
+          "next_scene": "mq21_forgive_result"
+        },
+        {
+          "text": "What you did endangered every person in this town. You need to leave Coppervale. Today.",
+          "effects": [
+            { "type": "set_flag", "flag": "flag_wes_banished" },
+            { "type": "set_flag", "flag": "flag_morale_boost" }
+          ],
+          "next_scene": "mq21_banish_result"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq21_forgive_result",
+      "trigger": "choice_result",
+      "lines": [
+        {
+          "speaker": "npc_wes",
+          "text": "...What?",
+          "portrait": "stunned"
+        },
+        {
+          "speaker": "player",
+          "text": "You heard me. The Marshal uses fear to control people. We don't. That's the whole point of what we're building here.",
+          "portrait": "firm"
+        },
+        {
+          "speaker": "npc_janis",
+          "text": "A wise choice. Wes, from now on you report directly to me. Every message the Marauders send you, I see first. We feed them exactly what we want them to know.",
+          "portrait": "sharp"
+        },
+        {
+          "speaker": "npc_wes",
+          "text": "I... yes. Yes, Commander. I'll do whatever it takes. I swear it.",
+          "portrait": "tearful_relief"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "Hmph. I hope you're right about this, Jack. If he betrays us again...",
+          "portrait": "skeptical"
+        },
+        {
+          "speaker": "npc_nora",
+          "text": "Thank you, Jack. Thank you.",
+          "portrait": "grateful"
+        },
+        {
+          "speaker": "dejin",
+          "text": "Jack, I have logged the Marauder communication protocols from Wes's intercepted messages. We can now craft disinformation. This is a significant intelligence advantage.",
+          "portrait": "strategic"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq21_banish_result",
+      "trigger": "choice_result",
+      "lines": [
+        {
+          "speaker": "npc_wes",
+          "text": "I understand. I deserve worse.",
+          "portrait": "hollow"
+        },
+        {
+          "speaker": "npc_linden",
+          "text": "Wes... take supplies. Enough for a week's travel. I won't send a man out to die, even one who betrayed us.",
+          "portrait": "sad"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "Justice was served. The town is safer. We'll need a new courier — I'll handle logistics.",
+          "portrait": "satisfied"
+        },
+        {
+          "speaker": "npc_nora",
+          "text": "Jack... I understand why. But please — if you ever hear anything about his sister and her boy... please tell me.",
+          "portrait": "heartbroken"
+        },
+        {
+          "speaker": "dejin",
+          "text": "The town's morale has stabilized. The people see that betrayal has consequences. It is a harsh lesson, but a clear one.",
+          "portrait": "neutral"
+        }
+      ]
+    },
+    {
+      "scene_id": "mq21_complete",
+      "trigger": "quest_complete",
+      "lines": [
+        {
+          "speaker": "npc_linden",
+          "text": "It's done. Whatever path we chose, we move forward together. That's what matters now.",
+          "portrait": "resolute"
+        },
+        {
+          "speaker": "npc_harrow",
+          "text": "The Marshal will realize his spy has gone silent eventually. We need to be ready for his response. It won't be subtle.",
+          "portrait": "grim"
+        }
+      ],
+      "effects": [
+        { "type": "set_flag", "flag": "flag_broken_trust_resolved" }
+      ]
+    }
+  ]
+}

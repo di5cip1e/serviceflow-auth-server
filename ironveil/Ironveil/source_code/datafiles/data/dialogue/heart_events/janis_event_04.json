@@ -1,0 +1,78 @@
+{
+  "_meta": {
+    "description": "Heart event #4 for npc_janis: The Letter",
+    "version": "1.0",
+    "objective": "#33/#34"
+  },
+  "event_id": "heart_event_janis_04",
+  "npc_id": "npc_janis",
+  "heart_level_required": 6,
+  "location": "rm_int_town_hall",
+  "time_range": {
+    "start": 17,
+    "end": 22
+  },
+  "story_flag_required": null,
+  "requires_item": null,
+  "story_flag_set": "npc_janis_event_4_complete",
+  "heart_bonus": 50,
+  "title": "The Letter",
+  "lines": [
+    {
+      "speaker": "narrator",
+      "text": "[Janis holds a crumpled letter. Her hands are shaking slightly]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "My mother wrote. She called my posting here a 'career death.'",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "She said the Beaumont name deserves better than a backwater town.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "She's right, of course. By every metric I was raised to value.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "She doesn't know what Coppervale really is.",
+          "flag": "janis_letter_defend"
+        },
+        {
+          "text": "What do YOU value?",
+          "flag": "janis_letter_personal"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "What do I value? Status. Achievement. Recognition. That's what I was MADE for.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "But lately... I value Pip's drawings. And Linden's optimism.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "And your machines. And this stupid, wonderful, stubborn town.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_janis",
+      "text": "Don't tell my mother I said that.",
+      "portrait": "neutral"
+    }
+  ]
+}

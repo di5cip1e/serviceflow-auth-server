@@ -1,0 +1,135 @@
+{
+  "_meta": {
+    "description": "Heart event #6 for npc_kaydee: Last Call",
+    "version": "1.0",
+    "objective": "#33/#34"
+  },
+  "event_id": "heart_event_kaydee_06",
+  "npc_id": "npc_kaydee",
+  "heart_level_required": 8,
+  "location": "rm_int_rusty_gear",
+  "time_range": {
+    "start": 22,
+    "end": 23
+  },
+  "story_flag_required": "npc_kaydee_event_5_complete",
+  "requires_item": "item_promise_locket",
+  "story_flag_set": "npc_kaydee_event_6_complete",
+  "heart_bonus": 100,
+  "title": "Last Call",
+  "lines": [
+    {
+      "speaker": "narrator",
+      "text": "[The tavern is empty. Kaydee wipes the bar. Jack sits on the last stool]",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "Last call was twenty minutes ago. Even you don't get special treatment.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "Then why haven't you kicked me out?",
+          "flag": "kaydee_confess_direct"
+        },
+        {
+          "text": "I'll go if you want.",
+          "flag": "kaydee_confess_gentle"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "Because I don't want you to go. And that's the problem.",
+      "portrait": "neutral"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "I've got the attitude. The sharp tongue. The 'don't get too close' routine.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "It works. It's worked for years.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "But you didn't back off. You built me a brewing machine.",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "Nobody LISTENS. And now I'm having feelings like some kind of...",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "Human being?",
+          "flag": "kaydee_confess_human"
+        },
+        {
+          "text": "Person who actually cares?",
+          "flag": "kaydee_confess_cares"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "Don't you DARE make me laugh right now. I'm being vulnerable.",
+      "portrait": "happy"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "Do you know how hard this is for me?",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "So what are we doing here, Jack?",
+      "portrait": "thoughtful"
+    },
+    {
+      "speaker": "player",
+      "text": "[Respond]",
+      "portrait": "neutral",
+      "choice": true,
+      "options": [
+        {
+          "text": "I'm not going anywhere, Kaydee.",
+          "flag": "kaydee_confess_stay"
+        },
+        {
+          "text": "I'm scared too.",
+          "flag": "kaydee_confess_honest"
+        }
+      ]
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "You know what? I don't have a witty comeback for that.",
+      "portrait": "happy"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "First time in my life.",
+      "portrait": "happy"
+    },
+    {
+      "speaker": "npc_kaydee",
+      "text": "Don't tell anyone I smiled. I have a reputation.",
+      "portrait": "embarrassed"
+    }
+  ]
+}
