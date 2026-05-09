@@ -2,6 +2,8 @@ const { v4: uuidv4 } = require('uuid');
 const db = require('../database');
 const { generateAgentFiles } = require('./agent-generator');
 const { startAgentSession } = require('./session-manager');
+const { sendEmail } = require('./alerter');
+const https = require('https');
 
 // Provision new customer and their agent after payment
 async function provisionCustomer(paymentData) {
@@ -26,7 +28,7 @@ async function provisionCustomer(paymentData) {
     db.run(
       `INSERT INTO customers (id, email, stripe_customer_id, stripe_subscription_id, stripe_session_id, plan, status)
        VALUES (?, ?, ?, ?, ?, ?, 'active')`,
-      [customerId_db, email, customerId, subscriptionId, paymentData.eventId, plan],
+      [customerId_db, email, customerId, subscriptionId, paymentData.sessionId, plan],
       function(err) {
         if (err) reject(err);
         else resolve(this.lastID);
@@ -103,24 +105,28 @@ async function provisionCustomer(paymentData) {
   // Wait for all inserts
   await Promise.all([customerInsert, agentInsert, apiKeyInsert]);
 
-
-  // Return provisioning results
+  // 7. Send welcome email via Mailgun
   const welcomeEmail = generateWelcomeEmail({
     email,
     agentName,
     businessName,
-    dashboardUrl: `http://maikr.pro/dashboard.html?agent=${agentId}&key=${apiKey}`,
-    chatUrl: `http://maikr.pro/chat.html?agent=${agentId}`,
+    dashboardUrl: `https://maikr.pro/dashboard.html?agent=${agentId}&key=${apiKey}`,
+    chatUrl: `https://maikr.pro/chat.html?agent=${agentId}`,
     apiKey
   });
-
-  console.log('📧 Welcome email generated:', welcomeEmail.subject);
+  try {
+    const emailResult = await sendEmail(email, welcomeEmail.subject, welcomeEmail.body);
+    console.log('📧 Welcome email sent:', emailResult.success ? 'OK' : 'FAILED', emailResult.status || emailResult.error);
+  } catch(e) {
+    console.error('📧 Welcome email failed:', e.message);
+  }
   console.log('🔗 Dashboard URL:', `http://maikr.pro/dashboard.html?agent=${agentId}&key=${apiKey}`);
 
   // Return provisioning results
   return {
     success: true,
     stripeEventId: paymentData.eventId,
+    stripeSessionId: paymentData.sessionId,
     customerId: customerId_db,
     customerEmail: email,
     agentId,
