@@ -49,7 +49,12 @@ app.use('/api/admin', adminRoutes);
 
 // Health check
 app.get('/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+  res.json({
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    uptime: Math.floor(process.uptime()),
+    memory: Math.round(process.memoryUsage().rss / 1024 / 1024)
+  });
 });
 
 app.listen(PORT, () => {

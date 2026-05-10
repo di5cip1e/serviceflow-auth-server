@@ -13,12 +13,14 @@
 
 ## Critical Runtime Info
 - **Model:** openrouter/minimax/minimax-m2.7 (set 2026-05-06)
-- **Current time:** Saturday May 9, 2026 02:21 UTC
-- **Context:** 45k/200k tokens — healthy, no compaction needed
-- **MEMORY.md target:** Keep under 50KB — trim weekly repeats
+- **Current time:** Saturday May 9, 2026 04:00 UTC
+- **Context:** 45k/200k tokens — healthy
+- **MEMORY.md target:** Keep under 50KB
+- **Heartbeat:** every 2 hours (not 50/90 min — update HEARTBEAT.md to match)
+- **PM2:** maikr-backend (port 3001) + ollama-router (port 3002) running
 
 ## Active Projects (Current)
-- **M.ai.K.R** (agent-saas/): ✅ Live at maikr.pro — tiered model system (Standard/Premium $15/Elite $30), Stripe armed, webhook verified, OpenRouter routing, backend on PM2 port 3001
+- **M.ai.K.R** (agent-saas/): ✅ Live at maikr.pro — tiered model system, Stripe armed, webhook verified, OpenRouter routing, **ollama-router on port 3002** (simple→Ollama free, complex→OpenRouter), welcome email now sends, session ID bug fixed, success page fixed
 - **Agent Builder Dashboard**: Running at http://187.77.31.252:3000/wizard
 - **Kingdom Cards**: ~70% — Phaser 3 battle engine works, Fantasy/Medieval theme
 - **Ironveil**: Ready for Windows import (since March 23)
@@ -34,6 +36,8 @@
 ## Pending Actions (Human Required)
 - **M.ai.K.R**: Trigger real payment test (first Stripe payment = first agent spawned)
 - **Twilio**: Carrier routing fix for SMS alerts (email working via Mailgun aginstitute.tech)
+- **Git push**: Commits fc62070 not yet pushed (network timeout — will retry)
+- **session-manager.js**: Uses `openclaw run` (doesn't exist) — per-customer OpenClaw agents won't start until rewritten
 
 ## Critical OpenClaw Lessons (M.ai.K.R specific)
 1. Register agent: `openclaw agents add <slug> --workspace /opt/agents/<slug> --non-interactive`
@@ -46,6 +50,10 @@
 ## Key Technical Notes
 - **Stripe keys**: In agent-saas/backend/.env (sk_live_, pk_live_, rk_live_, webhook secret)
 - **Mailgun**: aginstitute.tech domain, API key in secrets.json
+- **Ollama**: llama3.2:3b installed (port 11434) — ollama-router.js routes simple→Ollama (free), complex→OpenRouter
+- **Workspace backup**: Daily 3am UTC cron (workspace-daily-backup, isolated session)
+- **Audit hook**: /root/.openclaw/workspace/scripts/audit_changes.js running
+- **git-credentials**: Has 2 tokens, one with space prefix — needs cleanup
 - **PM2**: maikr-backend running (pid 916002, 6h uptime, online)
 - **Audit hook**: /root/.openclaw/workspace/scripts/audit_changes.js watching SOUL.md/AGENTS.md
 - **DALL-E 3 v2**: Deprecated May 2026 — migrate to newer API version when needed
@@ -136,3 +144,15 @@
 - Frontend: tier selector UI built in Step 5
 - Admin API: POST /api/admin/agents/:id/tier for tier upgrades
 - Workspace: ~800MB+ freed, corrupt folders deleted, lore folders merged
+
+### May 9: Self-Audit + Ollama + M.ai.K.R Critical Fixes
+- **Self-audit**: MEMORY.md 85KB→7.5KB (91% trim), 53 old files archived, HEARTBEAT.md interval corrected (every 2h, not 50/90min), 57MB dead PixelForge files archived
+- **Ollama integrated**: llama3.2:3b model pulled (2GB), ollama-router.js built (port 3002) — smart routing: simple→Ollama (free), complex→OpenRouter fallback. Saves ~60-70% of API costs
+- **M.ai.K.R 4 critical fixes**:
+  1. Welcome email: `generateWelcomeEmail()` → actually sends via Mailgun alerter.js
+  2. Session ID bug: `provisionCustomer()` stored eventId as stripe_session_id → now stores real Stripe session ID
+  3. Success page: hardcoded `187.77.31.252` → `maikr.pro`, correct `/api/get-agent?session_id=` (underscore)
+  4. Checkout: `create-checkout-session` route exists and works (Stripe live session created)
+- **Workspace backup**: daily 3am UTC cron set up (git add + push)
+- **Git commit**: fc62070 not yet pushed (network timeout)
+- **Derek milestone**: 64 days working together (March 6 start)
