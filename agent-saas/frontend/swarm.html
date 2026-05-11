@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swarm Control — M.ai.K.R</title>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #13131a;
+      --surface2: #1a1a24;
+      --border: #2a2a3a;
+      --text: #e0e0e8;
+      --muted: #6b6b80;
+      --matrix: #00ff88;
+      --matrix-dim: #00cc6a;
+      --support: #ef4444;
+      --sales: #3b82f6;
+      --onboarding: #8b5cf6;
+      --admin: #f59e0b;
+      --general: #2ECC71;
+      --accent: #00ff88;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Courier New', monospace; min-height: 100vh; }
+    .container { max-width: 1400px; margin: 0 auto; padding: 24px; }
+
+    .header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+    .header h1 { font-size: 24px; color: var(--matrix); text-transform: uppercase; letter-spacing: 4px; }
+    .badge { background: var(--surface2); border: 1px solid var(--matrix-dim); color: var(--matrix); padding: 4px 12px; border-radius: 4px; font-size: 12px; }
+
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .panel-header { background: var(--surface2); padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .panel-header h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); }
+    .panel-body { padding: 16px; }
+
+    /* Route Test */
+    .route-test-input { display: flex; gap: 8px; margin-bottom: 12px; }
+    .route-test-input input { flex: 1; background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 10px 14px; border-radius: 6px; font-family: inherit; font-size: 14px; }
+    .route-test-input input:focus { outline: none; border-color: var(--matrix-dim); }
+    .btn { background: var(--matrix-dim); color: var(--bg); border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-family: inherit; font-weight: bold; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
+    .btn:hover { background: var(--matrix); }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .route-result { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 12px; font-size: 13px; min-height: 80px; }
+    .route-result .state { font-size: 16px; font-weight: bold; margin-bottom: 4px; }
+    .route-result .meta { color: var(--muted); font-size: 12px; }
+    .route-result .emoji { font-size: 24px; margin-right: 8px; }
+
+    /* Live Chat */
+    .chat-box { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; height: 300px; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+    .chat-message { padding: 8px 12px; border-radius: 8px; max-width: 80%; font-size: 14px; line-height: 1.5; }
+    .chat-message.user { background: var(--surface2); align-self: flex-end; border-bottom-right-radius: 2px; }
+    .chat-message.agent { background: var(--surface2); align-self: flex-start; border-bottom-left-radius: 2px; }
+    .chat-message .routing-badge { display: inline-block; font-size: 10px; padding: 2px 6px; border-radius: 3px; margin-bottom: 4px; }
+    .routing-SUPPORT .routing-badge { background: var(--support); }
+    .routing-SALES .routing-badge { background: var(--sales); }
+    .routing-ONBOARDING .routing-badge { background: var(--onboarding); }
+    .routing-ADMIN .routing-badge { background: var(--admin); }
+    .routing-GENERAL .routing-badge { background: var(--general); }
+
+    .chat-input-row { display: flex; gap: 8px; margin-top: 12px; }
+    .chat-input-row input { flex: 1; background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 10px 14px; border-radius: 6px; font-family: inherit; }
+    .chat-input-row input:focus { outline: none; border-color: var(--matrix-dim); }
+
+    /* Sub-Agent Cards */
+    .agent-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .agent-card { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 12px; transition: all 0.3s; }
+    .agent-card.active { border-color: var(--matrix); box-shadow: 0 0 12px rgba(0,255,136,0.15); }
+    .agent-card .agent-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .agent-card .agent-emoji { font-size: 20px; }
+    .agent-card .agent-name { font-weight: bold; font-size: 13px; }
+    .agent-card .agent-state { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+    .agent-card .agent-scopes { font-size: 11px; color: var(--muted); }
+    .agent-card .agent-scopes span { display: inline-block; background: var(--surface2); padding: 2px 6px; border-radius: 3px; margin: 2px; }
+
+    /* Trace Timeline */
+    .trace-timeline { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; max-height: 300px; overflow-y: auto; }
+    .trace-item { display: flex; gap: 12px; padding: 10px 12px; border-bottom: 1px solid var(--border); font-size: 12px; }
+    .trace-item:last-child { border-bottom: none; }
+    .trace-time { color: var(--muted); width: 70px; flex-shrink: 0; }
+    .trace-from, .trace-to { width: 100px; flex-shrink: 0; text-align: center; padding: 2px 6px; border-radius: 4px; font-size: 11px; }
+    .trace-from { color: var(--muted); }
+    .trace-arrow { color: var(--muted); width: 30px; text-align: center; flex-shrink: 0; }
+    .trace-to.SUPPORT { background: rgba(239,68,68,0.2); color: var(--support); }
+    .trace-to.SALES { background: rgba(59,130,246,0.2); color: var(--sales); }
+    .trace-to.ONBOARDING { background: rgba(139,92,246,0.2); color: var(--onboarding); }
+    .trace-to.ADMIN { background: rgba(245,158,11,0.2); color: var(--admin); }
+    .trace-to.GENERAL { background: rgba(46,204,113,0.2); color: var(--general); }
+    .trace-to.ROUTING { background: rgba(107,107,128,0.2); color: var(--muted); }
+    .trace-confidence { color: var(--muted); margin-left: auto; }
+    .trace-msg { color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 200px; }
+
+    /* Override Controls */
+    .override-controls { display: flex; flex-wrap: wrap; gap: 8px; }
+    .override-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 8px 14px; border-radius: 6px; cursor: pointer; font-family: inherit; font-size: 12px; }
+    .override-btn:hover { border-color: var(--matrix-dim); }
+    .override-btn.active { border-color: var(--matrix); background: rgba(0,255,136,0.1); }
+
+    /* Full width panels */
+    .full { grid-column: 1 / -1; }
+
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+      .agent-cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>Swarm Control</h1>
+    <span class="badge">Phase 2</span>
+    <span class="badge" id="backend-status">● Connecting…</span>
+  </div>
+
+  <div class="grid">
+    <!-- Route Test Panel -->
+    <div class="panel">
+      <div class="panel-header">
+        <h2>Intent Routing Test</h2>
+      </div>
+      <div class="panel-body">
+        <div class="route-test-input">
+          <input type="text" id="test-message" placeholder="Type a message to test routing…" value="help me refund my order">
+          <button class="btn" id="test-btn" onclick="testRoute()">Test</button>
+        </div>
+        <div class="route-result" id="route-result">
+          <span style="color:var(--muted)">Results will appear here…</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sub-Agent Status -->
+    <div class="panel">
+      <div class="panel-header">
+        <h2>Sub-Agents</h2>
+        <span class="badge" id="active-agent">—</span>
+      </div>
+      <div class="panel-body">
+        <div class="agent-cards" id="agent-cards"></div>
+      </div>
+    </div>
+
+    <!-- Live Chat -->
+    <div class="panel full">
+      <div class="panel-header">
+        <h2>Live Swarm Chat</h2>
+        <div style="display:flex;gap:8px">
+          <select id="chat-agent" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:4px 8px;border-radius:4px;font-family:inherit;font-size:12px">
+            <option value="">Select Agent ID…</option>
+          </select>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="chat-box" id="chat-box">
+          <div style="color:var(--muted);font-size:13px;text-align:center;padding:40px">
+            Select an agent above and send a message to begin.
+          </div>
+        </div>
+        <div class="chat-input-row">
+          <input type="text" id="chat-input" placeholder="Type your message…" onkeydown="if(event.key==='Enter')sendChat()">
+          <button class="btn" id="send-btn" onclick="sendChat()">Send</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trace Timeline -->
+    <div class="panel full">
+      <div class="panel-header">
+        <h2>Routing Trace</h2>
+        <button class="btn" style="padding:6px 12px;font-size:11px" onclick="clearTrace()">Clear</button>
+      </div>
+      <div class="panel-body">
+        <div class="trace-timeline" id="trace-timeline">
+          <div style="color:var(--muted);font-size:13px;text-align:center;padding:20px">No routing events yet.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Manual Override -->
+    <div class="panel">
+      <div class="panel-header">
+        <h2>Manual Override</h2>
+      </div>
+      <div class="panel-body">
+        <div class="override-controls" id="override-controls"></div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="panel">
+      <div class="panel-header">
+        <h2>Session Stats</h2>
+      </div>
+      <div class="panel-body">
+        <div id="session-stats" style="font-size:13px;color:var(--muted);line-height:2">
+          <div>Messages routed: <span id="stat-messages" style="color:var(--text)">0</span></div>
+          <div>Avg confidence: <span id="stat-confidence" style="color:var(--text)">—</span></div>
+          <div>Active state: <span id="stat-state" style="color:var(--text)">ROUTING</span></div>
+          <div>Last intent: <span id="stat-intent" style="color:var(--text)">—</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const API = 'https://maikr.pro'; // Change to http://127.0.0.1:3001 for local
+
+const AGENTS = [
+  { state: 'SUPPORT',    emoji: '🎧', name: 'Support Agent',    color: '#ef4444', scopes: ['refunds','troubleshooting','account issues','FAQ','order status'] },
+  { state: 'SALES',       emoji: '💼', name: 'Sales Agent',       color: '#3b82f6', scopes: ['plan questions','upgrades','comparisons','trial info','pricing'] },
+  { state: 'ONBOARDING', emoji: '🚀', name: 'Onboarding Agent',  color: '#8b5cf6', scopes: ['new user setup','first agent creation','feature tour','getting started'] },
+  { state: 'ADMIN',      emoji: '⚙️', name: 'Admin Agent',       color: '#f59e0b', scopes: ['agent config','billing','API keys','webhooks','settings'] },
+  { state: 'GENERAL',    emoji: '🤖', name: 'AI Assistant',      color: '#2ECC71', scopes: ['general chat','questions','explanations','casual conversation'] },
+];
+
+let currentConversationId = 'swarm_demo_' + Math.random().toString(36).slice(2,8);
+let messageCount = 0;
+let totalConfidence = 0;
+let currentState = 'ROUTING';
+
+// Build agent cards
+const agentCardsEl = document.getElementById('agent-cards');
+AGENTS.forEach(a => {
+  agentCardsEl.innerHTML += `
+    <div class="agent-card" id="card-${a.state}">
+      <div class="agent-top">
+        <span class="agent-emoji">${a.emoji}</span>
+        <span class="agent-name">${a.name}</span>
+      </div>
+      <div class="agent-state" id="state-${a.state}">idle</div>
+      <div class="agent-scopes" id="scopes-${a.state}">
+        ${a.scopes.map(s => `<span>${s}</span>`).join('')}
+      </div>
+    </div>`;
+});
+
+// Build override buttons
+const overrideEl = document.getElementById('override-controls');
+AGENTS.forEach(a => {
+  overrideEl.innerHTML += `<button class="override-btn" onclick="override('${a.state}')">${a.emoji} ${a.state}</button>`;
+});
+
+// Check backend health
+async function checkBackend() {
+  try {
+    const r = await fetch(`${API}/health`);
+    const d = await r.json();
+    document.getElementById('backend-status').textContent = '● Online';
+    document.getElementById('backend-status').style.color = 'var(--matrix)';
+  } catch {
+    document.getElementById('backend-status').textContent = '● Offline';
+    document.getElementById('backend-status').style.color = 'var(--support)';
+  }
+}
+checkBackend();
+setInterval(checkBackend, 30000);
+
+// Load agents for chat
+async function loadAgents() {
+  try {
+    const r = await fetch(`${API}/api/admin/agents`);
+    const agents = await r.json();
+    const sel = document.getElementById('chat-agent');
+    sel.innerHTML = '<option value="">Select Agent ID…</option>';
+    (Array.isArray(agents) ? agents : []).forEach(a => {
+      sel.innerHTML += `<option value="${a.id}">${a.name || a.id} (${a.model_tier || 'standard'})</option>`;
+    });
+  } catch {}
+}
+loadAgents();
+
+// Route test
+async function testRoute() {
+  const msg = document.getElementById('test-message').value.trim();
+  if (!msg) return;
+  const btn = document.getElementById('test-btn');
+  btn.disabled = true;
+  btn.textContent = '…';
+  try {
+    const r = await fetch(`${API}/api/route-test`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: msg })
+    });
+    const d = await r.json();
+    showRouteResult(d);
+    updateTrace(d.trace || []);
+    if (d.routing) {
+      setActiveState(d.routing.state);
+      currentState = d.routing.state;
+      document.getElementById('stat-state').textContent = d.routing.state;
+      document.getElementById('stat-intent').textContent = d.routing.intent;
+    }
+  } catch(e) {
+    document.getElementById('route-result').innerHTML = `<span style="color:var(--support)">Error: ${e.message}</span>`;
+  }
+  btn.disabled = false;
+  btn.textContent = 'Test';
+}
+
+function showRouteResult(d) {
+  const r = d.routing;
+  if (!r) { document.getElementById('route-result').innerHTML = '<span style="color:var(--support)">No routing data</span>'; return; }
+  const color = { SUPPORT: 'var(--support)', SALES: 'var(--sales)', ONBOARDING: 'var(--onboarding)', ADMIN: 'var(--admin)', GENERAL: 'var(--general)' }[r.state] || 'var(--text)';
+  document.getElementById('route-result').innerHTML = `
+    <div class="state" style="color:${color}">${r.emoji} ${r.state}</div>
+    <div class="meta">intent: ${r.intent} · confidence: ${(r.confidence * 100).toFixed(0)}% · agent: ${r.subAgent}</div>
+    <div style="margin-top:8px;font-size:11px;color:var(--muted)">${r.systemPrompt ? r.systemPrompt.slice(0,120) + '…' : ''}</div>
+  `;
+}
+
+function setActiveState(state) {
+  AGENTS.forEach(a => {
+    const card = document.getElementById('card-' + a.state);
+    const stateEl = document.getElementById('state-' + a.state);
+    if (a.state === state) {
+      card.classList.add('active');
+      stateEl.textContent = 'active';
+      stateEl.style.color = a.color;
+    } else {
+      card.classList.remove('active');
+      stateEl.textContent = 'idle';
+      stateEl.style.color = '';
+    }
+  });
+  document.getElementById('active-agent').textContent = state;
+}
+
+function updateTrace(trace) {
+  const el = document.getElementById('trace-timeline');
+  if (!trace || trace.length === 0) return;
+  el.innerHTML = trace.map(t => {
+    const time = new Date(t.timestamp).toLocaleTimeString();
+    const confPct = t.confidence ? (t.confidence * 100).toFixed(0) + '%' : '—';
+    const msg = t.messagePreview || '';
+    return `
+      <div class="trace-item">
+        <span class="trace-time">${time}</span>
+        <span class="trace-from">${t.from || '—'}</span>
+        <span class="trace-arrow">→</span>
+        <span class="trace-to ${t.to}">${t.to || '—'}</span>
+        <span class="trace-msg" title="${msg}">${msg}</span>
+        <span class="trace-confidence">${confPct}</span>
+      </div>`;
+  }).join('');
+}
+
+function clearTrace() {
+  document.getElementById('trace-timeline').innerHTML = '<div style="color:var(--muted);font-size:13px;text-align:center;padding:20px">Cleared.</div>';
+}
+
+// Override
+async function override(state) {
+  try {
+    await fetch(`${API}/api/chat/swarm/override`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ conversationId: currentConversationId, state })
+    });
+    setActiveState(state);
+    currentState = state;
+    document.getElementById('stat-state').textContent = state;
+    document.getElementById('stat-intent').textContent = 'manual_override';
+  } catch(e) { alert('Override failed: ' + e.message); }
+}
+
+// Send chat message
+async function sendChat() {
+  const agentId = document.getElementById('chat-agent').value;
+  const msg = document.getElementById('chat-input').value.trim();
+  if (!agentId) { alert('Select an agent first'); return; }
+  if (!msg) return;
+  const btn = document.getElementById('send-btn');
+  btn.disabled = true;
+
+  // Add user message to chat
+  addChatMessage(msg, 'user');
+
+  try {
+    const r = await fetch(`${API}/api/chat/swarm`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ agentId, message: msg, conversationId: currentConversationId })
+    });
+    const d = await r.json();
+    if (d.error) throw new Error(d.error);
+
+    // Add agent response with routing badge
+    addChatMessage(d.response, 'agent', d.routing);
+
+    // Update UI
+    if (d.routing) {
+      setActiveState(d.routing.state);
+      currentState = d.routing.state;
+      document.getElementById('stat-state').textContent = d.routing.state;
+      document.getElementById('stat-intent').textContent = d.routing.intent;
+    }
+    if (d.trace) updateTrace(d.trace);
+
+    // Stats
+    messageCount++;
+    if (d.routing && d.routing.confidence) {
+      totalConfidence += d.routing.confidence;
+      document.getElementById('stat-confidence').textContent = ((totalConfidence / messageCount) * 100).toFixed(0) + '%';
+    }
+    document.getElementById('stat-messages').textContent = messageCount;
+
+  } catch(e) {
+    addChatMessage('Error: ' + e.message, 'agent');
+  }
+  btn.disabled = false;
+  document.getElementById('chat-input').value = '';
+}
+
+function addChatMessage(text, role, routing) {
+  const box = document.getElementById('chat-box');
+  const div = document.createElement('div');
+  div.className = `chat-message ${role === 'user' ? 'user' : 'agent'}`;
+  if (routing) div.className += ` routing-${routing.state}`;
+
+  let badge = '';
+  if (routing) {
+    const colors = { SUPPORT: 'var(--support)', SALES: 'var(--sales)', ONBOARDING: 'var(--onboarding)', ADMIN: 'var(--admin)', GENERAL: 'var(--general)' };
+    const color = colors[routing.state] || 'var(--muted)';
+    badge = `<div class="routing-badge" style="background:${color}">${routing.emoji} ${routing.state} · ${(routing.confidence * 100).toFixed(0)}%</div>`;
+  }
+  div.innerHTML = badge + `<div>${escapeHtml(text)}</div>`;
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+}
+
+function escapeHtml(t) {
+  return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+</script>
+</body>
+</html>

@@ -13,14 +13,14 @@
 
 ## Critical Runtime Info
 - **Model:** openrouter/minimax/minimax-m2.7 (set 2026-05-06)
-- **Current time:** Saturday May 9, 2026 04:00 UTC
-- **Context:** 45k/200k tokens — healthy
+- **Current time:** Sunday May 10, 2026 04:00 UTC
+- **Context:** ~50k tokens — healthy
 - **MEMORY.md target:** Keep under 50KB
-- **Heartbeat:** every 2 hours (not 50/90 min — update HEARTBEAT.md to match)
-- **PM2:** maikr-backend (port 3001) + ollama-router (port 3002) running
+- **Heartbeat:** every 2 hours
+- **PM2:** maikr-backend + ollama-router running, systemd-enabled for reboot persistence
 
 ## Active Projects (Current)
-- **M.ai.K.R** (agent-saas/): ✅ Live at maikr.pro — tiered model system, Stripe armed, webhook verified, OpenRouter routing, **ollama-router on port 3002** (simple→Ollama free, complex→OpenRouter), welcome email now sends, session ID bug fixed, success page fixed
+- **M.ai.K.R** (agent-saas/): ✅ Live at maikr.pro — tiered model system, SSL cert live, Stripe armed, webhook verified, `/health` endpoint live, **PM2 on systemd watchdog**, custom 502 page, P1 copy/design ready (hero rewrite, trust signals, competitive positioning, security headers full suite)
 - **Agent Builder Dashboard**: Running at http://187.77.31.252:3000/wizard
 - **Kingdom Cards**: ~70% — Phaser 3 battle engine works, Fantasy/Medieval theme
 - **Ironveil**: Ready for Windows import (since March 23)
@@ -34,9 +34,9 @@
 3. **ClawHub**: 10 skills published, passive download potential
 
 ## Pending Actions (Human Required)
-- **M.ai.K.R**: Trigger real payment test (first Stripe payment = first agent spawned)
+- **M.ai.K.R frontend update**: Deploy new hero, trust section, pricing polish from team audit output (Pixel to build)
+- **Git push**: fc62070 still unpushed — retry
 - **Twilio**: Carrier routing fix for SMS alerts (email working via Mailgun aginstitute.tech)
-- **Git push**: Commits fc62070 not yet pushed (network timeout — will retry)
 - **session-manager.js**: Uses `openclaw run` (doesn't exist) — per-customer OpenClaw agents won't start until rewritten
 
 ## Critical OpenClaw Lessons (M.ai.K.R specific)
@@ -54,6 +54,7 @@
 - **Workspace backup**: Daily 3am UTC cron (workspace-daily-backup, isolated session)
 - **Audit hook**: /root/.openclaw/workspace/scripts/audit_changes.js running
 - **git-credentials**: Has 2 tokens, one with space prefix — needs cleanup
+- **SSL cert**: Let's Encrypt for maikr.pro, expires Aug 7 2026 — certbot auto-renewal enabled
 - **PM2**: maikr-backend running (pid 916002, 6h uptime, online)
 - **Audit hook**: /root/.openclaw/workspace/scripts/audit_changes.js watching SOUL.md/AGENTS.md
 - **DALL-E 3 v2**: Deprecated May 2026 — migrate to newer API version when needed
@@ -73,6 +74,14 @@
 
 ---
 *Last consolidated: 2026-05-09 02:25 UTC*
+
+## May 10 Quick Notes
+- Workspace backup: c575570 (6 files, 222 insertions)
+- M.ai.K.R tiered model system live (Standard/Premium/Elite)
+- Workspace org complete: ~800MB freed, lore folders merged
+- PM2 crash lesson: maikr-backend needs systemd watchdog
+
+*Last consolidated: 2026-05-10 04:19 UTC*
 *Previous: 2026-05-08 04:00 UTC*
 
 ---
@@ -146,7 +155,7 @@
 - Workspace: ~800MB+ freed, corrupt folders deleted, lore folders merged
 
 ### May 9: Self-Audit + Ollama + M.ai.K.R Critical Fixes
-- **Self-audit**: MEMORY.md 85KB→7.5KB (91% trim), 53 old files archived, HEARTBEAT.md interval corrected (every 2h, not 50/90min), 57MB dead PixelForge files archived
+- **Self-audit**: MEMORY.md 85KB→7.5KB (91% trim), 53 old files archived, HEARTBEAT.md interval corrected, 57MB dead PixelForge files archived
 - **Ollama integrated**: llama3.2:3b model pulled (2GB), ollama-router.js built (port 3002) — smart routing: simple→Ollama (free), complex→OpenRouter fallback. Saves ~60-70% of API costs
 - **M.ai.K.R 4 critical fixes**:
   1. Welcome email: `generateWelcomeEmail()` → actually sends via Mailgun alerter.js
@@ -154,5 +163,14 @@
   3. Success page: hardcoded `187.77.31.252` → `maikr.pro`, correct `/api/get-agent?session_id=` (underscore)
   4. Checkout: `create-checkout-session` route exists and works (Stripe live session created)
 - **Workspace backup**: daily 3am UTC cron set up (git add + push)
-- **Git commit**: fc62070 not yet pushed (network timeout)
 - **Derek milestone**: 64 days working together (March 6 start)
+
+### May 10: Team Audit + P0/P1 Launch Sprint
+- **9-agent audit (Team + Director)**: Cipher, Circuit, Flux, Mirren, Pixel, Prism, Quill, Tomothy, Wren all audited maikr.pro. Tomothy got clean run; 8 hit 502 from PM2 crash. Average score: 5/10. Key findings: no watchdog, no health endpoint, no error page, weak hero, no trust signals.
+- **SSL cert fixed**: certbot obtained Let's Encrypt cert for maikr.pro (expires Aug 7). Previously cert was for forgeai.sbs — HTTPS broken.
+- **P0 fixes delivered**: /health endpoint (Circuit), PM2 systemd auto-restart (Flux), custom error.html 502 page (Pixel) — all live
+- **P1 copy delivered**: New hero ("Stop losing revenue to 'we're closed'..."), plan role-framing (Digital Front Desk/Lead Machine/Elite Sales Associate), Intelligence Tier business outcomes copy (Wren)
+- **Trust signals + competitive**: Privacy statement, 99.9% uptime SLA, 3-step how it works, competitive differentiation vs AgentGPT/CustomGPT/Botpress (Tomothy)
+- **Security headers**: Full suite (CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy) added to nginx — zero to full suite (Flux)
+- **Visual design spec**: Trust badges, how it works flow, social proof placeholder, pricing card polish in warm green #2ECC71 (Mirren)
+- **PM2 crash lesson**: maikr-backend died at ~23:22 UTC with no auto-recovery. Fixed by manual restart. Now on systemd watchdog.

@@ -175,20 +175,95 @@ function selectTier(tier) {
   document.querySelector('.tier-card[data-tier="' + tier + '"]').classList.add('selected');
 }
 
-// Update Step
-function updateStep(step) {
-  formSteps.forEach((fs, i) => {
-    fs.classList.toggle('active', i + 1 === step);
-  });
-  
-  stepBoxes.forEach((sb, i) => {
-    sb.classList.toggle('active', i + 1 <= step);
-  });
-  
-  prevBtn.style.display = step > 1 ? 'block' : 'none';
-  nextBtn.textContent = step === totalSteps ? 'Create Agent' : 'Continue';
-  
+// Hash-based step routing
+function navigateToStep(step) {
+  if (step < 1 || step > totalSteps) return;
+  if (step > currentStep && !validateStep(currentStep)) return; // can't advance without validation
+  if (step < currentStep) {
+    // always allow going back
+  } else if (step > currentStep + 1) return; // can't skip steps
   currentStep = step;
+  window.location.hash = 'step-' + step;
+  renderStep(step);
+  document.querySelector('.form-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function renderStep(step) {
+  // Hide all form steps, show only current
+  formSteps.forEach((fs, i) => {
+    const isActive = (i + 1 === step);
+    fs.style.display = isActive ? 'block' : 'none';
+    fs.classList.toggle('active', isActive);
+  });
+
+  updateProgressBar(step);
+
+  prevBtn.style.display = step > 1 ? 'inline-block' : 'none';
+  nextBtn.textContent = step === totalSteps ? 'Create Agent' : 'Continue';
+  nextBtn.style.display = 'inline-block';
+
+  // Remove any existing review summary
+  const existing = document.querySelector('.review-summary');
+  if (existing) existing.remove();
+
+  if (step === totalSteps) {
+    showReviewSummary();
+  }
+}
+
+function updateProgressBar(step) {
+  let progress = document.querySelector('.step-progress');
+  if (!progress) {
+    progress = document.createElement('div');
+    progress.className = 'step-progress';
+    document.querySelector('.form-panel').prepend(progress);
+    // Make dots clickable
+    progress.addEventListener('click', (e) => {
+      const dot = e.target.closest('.progress-dot');
+      if (!dot) return;
+      const dotStep = parseInt(dot.dataset.step);
+      // Can only go to completed steps (dots to the left) or current
+      if (dotStep < step) navigateToStep(dotStep);
+    });
+  }
+
+  const labels = ['', 'Basics', 'Audience', 'Use Cases', 'Plan'];
+  let html = '';
+  for (let i = 1; i <= totalSteps; i++) {
+    const isComplete = i < step;
+    const isCurrent = i === step;
+    const cls = isComplete ? 'done' : isCurrent ? 'current' : 'pending';
+    html += `<div class="progress-dot ${cls}" data-step="${i}" style="cursor:${isComplete?'pointer':'default'}">
+      <span class="dot-num">${isComplete ? '✓' : i}</span>
+      <span class="dot-label">${labels[i]}</span>
+    </div>`;
+    if (i < totalSteps) html += `<div class="progress-line ${isComplete?'done':''}"></div>`;
+  }
+  progress.innerHTML = html;
+}
+
+function showReviewSummary() {
+  const summary = document.createElement('div');
+  summary.className = 'review-summary';
+  const planLabels = { basic: 'Basic', intermediate: 'Intermediate', advanced: 'Advanced', enterprise: 'Enterprise' };
+  const tierLabels = { standard: 'Standard', premium: 'Premium', elite: 'Elite' };
+  summary.innerHTML = `
+    <div class="review-item"><strong>Agent:</strong> ${escHtml(document.getElementById('agentName').value)}</div>
+    <div class="review-item"><strong>Business:</strong> ${escHtml(document.getElementById('businessName').value)}</div>
+    <div class="review-item"><strong>Industry:</strong> ${escHtml(document.getElementById('industry').value)}</div>
+    <div class="review-item"><strong>Plan:</strong> ${planLabels[selectedPlan] || selectedPlan} · $${(plans[selectedPlan]?.price || 0)/100}/mo</div>
+    <div class="review-item"><strong>Intelligence:</strong> ${tierLabels[selectedTier] || selectedTier}</div>
+  `;
+  const termsSection = document.querySelector('.form-step[data-step="4"] .terms-section');
+  if (termsSection) {
+    termsSection.parentNode.insertBefore(summary, termsSection);
+  }
+}
+
+function escHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str || '';
+  return div.innerHTML;
 }
 
 // Validation
@@ -222,16 +297,22 @@ pricingCards.forEach((card, index) => {
 nextBtn.addEventListener('click', () => {
   if (validateStep(currentStep)) {
     if (currentStep < totalSteps) {
-      updateStep(currentStep + 1);
+      navigateToStep(currentStep + 1);
     } else {
-      // Submit - initiate Stripe checkout
       initiateCheckout();
     }
   }
 });
 
 prevBtn.addEventListener('click', () => {
-  if (currentStep > 1) updateStep(currentStep - 1);
+  if (currentStep > 1) navigateToStep(currentStep - 1);
+});
+
+// Browser back/forward
+window.addEventListener('hashchange', () => {
+  const step = parseInt(window.location.hash.replace('#step-', '')) || 1;
+  currentStep = step;
+  renderStep(step);
 });
 
 // Initialize
@@ -239,5 +320,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMatrixCanvas();
   initTechStack();
   initChatDemo();
-  updateStep(1);
+  const initialStep = window.location.hash.startsWith('#step-') ? parseInt(window.location.hash.replace('#step-', '')) : 1;
+  currentStep = initialStep;
+  renderStep(initialStep);
 });

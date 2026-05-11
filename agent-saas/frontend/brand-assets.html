@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Assets — M.ai.K.R</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f8fafc; color: #1e293b; }
+  .container { max-width: 720px; margin: 0 auto; padding: 32px 16px; }
+  h1 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+  .subtitle { color: #475569; font-size: 14px; margin-bottom: 32px; }
+  .upload-zone {
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    margin-bottom: 24px;
+    background: #fff;
+  }
+  .upload-zone:hover, .upload-zone.dragover { border-color: #2ECC71; background: #f0fdf4; }
+  .upload-zone input { display: none; }
+  .upload-icon { font-size: 40px; margin-bottom: 12px; }
+  .upload-title { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+  .upload-sub { font-size: 13px; color: #94a3b8; }
+  .or { text-align: center; color: #94a3b8; font-size: 13px; margin: 12px 0; }
+  .url-input-group { display: flex; gap: 8px; margin-bottom: 24px; }
+  .url-input-group input { flex: 1; padding: 10px 14px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px; }
+  .url-input-group button { padding: 10px 20px; background: #2ECC71; color: #fff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+  .url-input-group button:hover { background: #27AE60; }
+  .text-upload { margin-bottom: 24px; }
+  .text-upload textarea { width: 100%; min-height: 120px; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px; resize: vertical; font-family: inherit; }
+  .text-upload-row { display: flex; gap: 8px; align-items: flex-start; margin-top: 8px; }
+  .text-upload-row input { flex: 1; padding: 10px 14px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px; }
+  .text-upload-row button { padding: 10px 20px; background: #2ECC71; color: #fff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+  .docs-header { display: flex; justify-content: space-between; align-items: center; margin: 24px 0 12px; }
+  .docs-header h2 { font-size: 16px; font-weight: 600; }
+  .doc-list { display: flex; flex-direction: column; gap: 8px; }
+  .doc-card {
+    display: flex; align-items: center; justify-content: space-between;
+    background: #fff; border: 1px solid #e2e8f0; border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .doc-info { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
+  .doc-icon { font-size: 24px; }
+  .doc-details { flex: 1; min-width: 0; }
+  .doc-name { font-size: 14px; font-weight: 600; color: #1e293b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .doc-meta { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+  .doc-delete { background: none; border: none; color: #ef4444; cursor: pointer; font-size: 18px; padding: 4px 8px; border-radius: 6px; }
+  .doc-delete:hover { background: #fef2f2; }
+  .empty-state { text-align: center; color: #94a3b8; font-size: 14px; padding: 24px; }
+  .toast {
+    position: fixed; bottom: 24px; right: 24px; background: #1e293b; color: #fff;
+    padding: 12px 20px; border-radius: 10px; font-size: 14px; font-weight: 500;
+    opacity: 0; transition: opacity 0.3s; z-index: 1000;
+  }
+  .toast.show { opacity: 1; }
+  .toast.success { background: #16a34a; }
+  .toast.error { background: #dc2626; }
+  .test-section { margin-top: 32px; padding: 20px; background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; }
+  .test-section h3 { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+  .test-row { display: flex; gap: 8px; }
+  .test-row input { flex: 1; padding: 8px 12px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 13px; }
+  .test-row button { padding: 8px 16px; background: #1e3a5f; color: #fff; border: none; border-radius: 6px; font-size: 13px; cursor: pointer; }
+  .test-results { margin-top: 12px; font-size: 12px; color: #475569; max-height: 200px; overflow-y: auto; background: #f8fafc; border-radius: 6px; padding: 12px; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>📚 Brand Assets</h1>
+  <p class="subtitle">Upload your brand guidelines, knowledge bases, or documentation. Your agent will use these to give accurate, on-brand answers.</p>
+
+  <!-- File Upload -->
+  <div class="upload-zone" id="uploadZone">
+    <input type="file" id="fileInput" accept=".pdf,.txt,.md,.doc,.docx">
+    <div class="upload-icon">📎</div>
+    <div class="upload-title">Drop files here or click to browse</div>
+    <div class="upload-sub">PDF, TXT, MD, DOC — up to 10MB</div>
+  </div>
+
+  <!-- URL Paste -->
+  <div class="or">— or paste a URL —</div>
+  <div class="url-input-group">
+    <input type="url" id="urlInput" placeholder="https://your-site.com/brand-guide">
+    <button onclick="submitUrl()">Fetch &amp; Index</button>
+  </div>
+
+  <!-- Plain Text Paste -->
+  <div class="or">— or paste text directly —</div>
+  <div class="text-upload">
+    <textarea id="textContent" placeholder="Paste brand guidelines, FAQs, policies, or any text your agent should know..."></textarea>
+    <div class="text-upload-row">
+      <input type="text" id="textName" placeholder="Document name (e.g., Brand Voice Guidelines)">
+      <button onclick="submitText()">Save Text</button>
+    </div>
+  </div>
+
+  <!-- Document List -->
+  <div class="docs-header">
+    <h2>📄 Indexed Documents</h2>
+  </div>
+  <div id="docList"></div>
+
+  <!-- RAG Test -->
+  <div class="test-section">
+    <h3>🔍 Test RAG Search</h3>
+    <div class="test-row">
+      <input type="text" id="testQuery" placeholder="Ask a question your agent should answer using brand context...">
+      <button onclick="testRag()">Search</button>
+    </div>
+    <div id="testResults" class="test-results" style="display:none"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const API = '';
+let agentId = 'TEST_AGENT_ID'; // Will be replaced dynamically
+let userId = 'TEST_USER_ID';
+
+// Get agentId from URL or localStorage
+try {
+  const params = new URLSearchParams(window.location.search);
+  agentId = params.get('agentId') || localStorage.getItem('maikr_agent_id') || agentId;
+  userId = localStorage.getItem('maikr_user_id') || userId;
+} catch(e) {}
+
+function showToast(msg, type = 'success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast ' + type + ' show';
+  setTimeout(() => t.className = 'toast', 3000);
+}
+
+// File upload
+const zone = document.getElementById('uploadZone');
+const fileInput = document.getElementById('fileInput');
+zone.addEventListener('click', () => fileInput.click());
+zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+zone.addEventListener('drop', e => {
+  e.preventDefault();
+  zone.classList.remove('dragover');
+  if (e.dataTransfer.files[0]) fileInput.files = e.dataTransfer.files;
+  uploadFile();
+});
+fileInput.addEventListener('change', uploadFile);
+
+async function uploadFile() {
+  const file = fileInput.files[0];
+  if (!file) return;
+  const fd = new FormData();
+  fd.append('file', file);
+  fd.append('agentId', agentId);
+  fd.append('userId', userId);
+  try {
+    const res = await fetch(API + '/api/documents/upload', { method: 'POST', body: fd });
+    const d = await res.json();
+    if (d.success) {
+      showToast(`Indexed "${file.name}" — ${d.chunkCount} chunks created`);
+      loadDocs();
+    } else {
+      showToast(d.error || 'Upload failed', 'error');
+    }
+  } catch(e) { showToast('Upload failed: ' + e.message, 'error'); }
+}
+
+async function submitUrl() {
+  const url = document.getElementById('urlInput').value.trim();
+  if (!url) return;
+  try {
+    const res = await fetch(API + '/api/documents/upload-url', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ agentId, userId, url })
+    });
+    const d = await res.json();
+    if (d.success) {
+      showToast(`Indexed "${d.documentId.slice(0,8)}..." — ${d.chunkCount} chunks`);
+      document.getElementById('urlInput').value = '';
+      loadDocs();
+    } else {
+      showToast(d.error || 'Failed', 'error');
+    }
+  } catch(e) { showToast(e.message, 'error'); }
+}
+
+async function submitText() {
+  const content = document.getElementById('textContent').value.trim();
+  const name = document.getElementById('textName').value.trim() || 'Pasted Text';
+  if (!content) return;
+  try {
+    const res = await fetch(API + '/api/documents/upload-text', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ agentId, userId, name, content })
+    });
+    const d = await res.json();
+    if (d.success) {
+      showToast(`Saved "${name}" — ${d.chunkCount} chunks`);
+      document.getElementById('textContent').value = '';
+      document.getElementById('textName').value = '';
+      loadDocs();
+    } else {
+      showToast(d.error || 'Failed', 'error');
+    }
+  } catch(e) { showToast(e.message, 'error'); }
+}
+
+async function loadDocs() {
+  try {
+    const res = await fetch(API + '/api/documents?agentId=' + agentId);
+    const d = await res.json();
+    const list = document.getElementById('docList');
+    if (!d.documents || d.documents.length === 0) {
+      list.innerHTML = '<div class="empty-state">No documents yet. Upload your first brand asset above.</div>';
+      return;
+    }
+    list.innerHTML = d.documents.map(doc => `
+      <div class="doc-card">
+        <div class="doc-info">
+          <span class="doc-icon">${docIcon(doc.source_type)}</span>
+          <div class="doc-details">
+            <div class="doc-name">${esc(doc.name)}</div>
+            <div class="doc-meta">${doc.source_type} · ${doc.chunk_count} chunks · ${new Date(doc.created_at).toLocaleDateString()}</div>
+          </div>
+        </div>
+        <button class="doc-delete" onclick="deleteDoc('${doc.id}')" title="Delete">✕</button>
+      </div>
+    `).join('');
+  } catch(e) { console.error(e); }
+}
+
+function docIcon(type) { return { pdf: '📕', url: '🔗', text: '📝', doc: '📄' }[type] || '📄'; }
+function esc(s) { return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+async function deleteDoc(id) {
+  if (!confirm('Delete this document and all its chunks?')) return;
+  try { const res = await fetch(API + '/api/documents/' + id, { method: 'DELETE' }); const d = await res.json(); if (d.success) { showToast('Deleted'); loadDocs(); } else { showToast(d.error || 'Failed', 'error'); } } catch(e) { showToast(e.message, 'error'); }
+}
+
+async function testRag() {
+  const query = document.getElementById('testQuery').value.trim(); if (!query) return;
+  const results = document.getElementById('testResults'); results.style.display = 'block'; results.textContent = 'Searching...';
+  try {
+    const res = await fetch(API + '/api/admin/agents/' + agentId + '/rag-preview?query=' + encodeURIComponent(query));
+    const d = await res.json(); if (d.results) {
+      results.textContent = d.results.map((r, i) => `Result ${i+1} (${(r.similarity*100).toFixed(0)}% match from "${r.docName}"):\n${r.content.slice(0, 300)}...`).join('\n\n');
+    } else { results.textContent = d.error || 'No results'; }
+  } catch(e) { results.textContent = e.message; }
+}
+
+loadDocs();
+</script>
+</body>
+</html>

@@ -1,5 +1,8 @@
 /* ===== CSS Variables - Trust-Building Palette ===== */
 :root {
+  /* Brand color shift: cold → warm emerald */
+  --brand-green: #2ECC71;
+  --brand-green-hover: #27AE60;
   /* Primary: Deep navy/slate for stability */
   --primary-navy: #1e3a5f;
   --primary-slate: #475569;
@@ -74,15 +77,30 @@ header {
   gap: 12px;
 }
 
+.logo-img {
+  height: 48px;
+  width: auto;
+  max-height: 48px;
+  object-fit: contain;
+}
+
+.logo-text-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+
 .logo-text {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 700;
   color: var(--primary-navy);
   letter-spacing: -0.5px;
+  line-height: 1.1;
 }
 
 .logo-subtitle {
-  font-size: 13px;
+  font-size: 11px;
   color: var(--text-muted);
   font-weight: 500;
 }
@@ -816,3 +834,78 @@ footer {
   color: #94a3b8;
   line-height: 1.4;
 }
+
+/* ===== Step Progress Bar ===== */
+.step-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 24px;
+  padding: 16px 0;
+}
+.progress-dot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.dot-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  border: 2px solid #e5e5e5;
+  background: #fff;
+  color: #94a3b8;
+}
+.progress-dot.current .dot-num {
+  border-color: #2ECC71;
+  background: #2ECC71;
+  color: #fff;
+}
+.progress-dot.done .dot-num {
+  border-color: #2ECC71;
+  background: #2ECC71;
+  color: #fff;
+}
+.dot-label {
+  font-size: 11px;
+  color: #94a3b8;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.progress-dot.current .dot-label { color: #2ECC71; font-weight: 600; }
+.progress-dot.done .dot-label { color: #1e3a5f; }
+.progress-line {
+  width: 40px;
+  height: 2px;
+  background: #e5e5e5;
+  margin-bottom: 20px;
+}
+.progress-line.done { background: #2ECC71; }
+
+/* ===== Review Summary ===== */
+.review-summary {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.review-item { font-size: 13px; color: #475569; }
+.review-item strong { color: #1e3a5f; }
+
+/* ===== Form Step Full-Page Feel ===== */
+.form-step {
+  min-height: 60vh;
+  padding: 8px 0;
+}
+.form-step[data-step="1"] { min-height: auto; }

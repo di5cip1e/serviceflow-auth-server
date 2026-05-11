@@ -38,6 +38,9 @@ function isFreeModel(m) {
   return FREE_MODELS.includes(m) || FREE_MODELS.includes(m.replace('openrouter/', ''));
 }
 
+const { similaritySearch } = require('../services/vectorStore');
+const { getEmbedding } = require('../services/embeddingService');
+
 router.post('/', async (req, res) => {
   const { agentId, agent_id, message } = req.body;
 
@@ -63,6 +66,22 @@ router.post('/', async (req, res) => {
 
     const systemPrompt = row.system_prompt || 'You are a helpful AI assistant.';
     const sessionKey = row.session_key;
+
+    // RAG: retrieve relevant context from brand documents
+    let ragContext = '';
+    try {
+      const queryEmbedding = await getEmbedding(message);
+      const relevantChunks = await similaritySearch(queryEmbedding, resolvedAgentId, 5);
+      if (relevantChunks.length > 0) {
+        ragContext = '\n\n--- BRAND CONTEXT ---\n' +
+          relevantChunks.map((c, i) => `[${i+1}] From ${c.doc_name}:\n${c.content}`).join('\n\n') +
+          '\n--- END BRAND CONTEXT ---\n';
+      }
+    } catch (err) {
+      console.warn('RAG lookup failed:', err.message);
+      // Don't fail the request if RAG errors — proceed without context
+    }
+
     const tier = row.model_tier || DEFAULT_TIER;
     const tierConfig = TIER_MODELS[tier] || TIER_MODELS[DEFAULT_TIER];
     const selectedModel = tierConfig.model;
@@ -97,7 +116,7 @@ router.post('/', async (req, res) => {
     // ✅ TIER-BASED MODEL — agent uses the model matching their selected tier
     // Users cannot override this. Platform cost is tracked per tier.
     const messages = [
-      { role: 'system', content: systemPrompt },
+      { role: 'system', content: systemPrompt + ragContext },
       ...history.map(h => ({ role: h.role, content: h.content })),
       { role: 'user', content: message }
     ];

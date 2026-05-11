@@ -267,3 +267,31 @@ router.get('/system', (req, res) => {
 
 module.exports = router;
 
+// GET /api/admin/agents/:id/rag-preview?query=your question
+router.get('/agents/:id/rag-preview', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { query } = req.query;
+    if (!query) return res.status(400).json({ error: 'query parameter required' });
+    
+    const { similaritySearch } = require('../services/vectorStore');
+    const { getEmbedding } = require('../services/embeddingService');
+    
+    const queryEmbedding = await getEmbedding(query);
+    const results = await similaritySearch(queryEmbedding, id, 5);
+    
+    res.json({
+      query,
+      results: results.map(r => ({
+        docName: r.doc_name,
+        chunkIndex: r.chunk_index,
+        content: r.content,
+        similarity: Math.round(r.similarity * 100) / 100
+      }))
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+

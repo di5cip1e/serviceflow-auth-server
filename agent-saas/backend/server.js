@@ -20,6 +20,8 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const checkoutRoutes = require('./routes/checkout');
+const documentsRoutes = require('./routes/documents');
+const swarmRoutes = require('./routes/swarm');
 const webhookRoutes = require('./routes/webhook');
 const chatRoutes = require('./routes/chat');  // Disabled for testing
 const agentRoutes = require('./routes/agent');
@@ -45,6 +47,9 @@ app.get('/', (req, res) => {
 app.use('/create-checkout-session', checkoutRoutes);
 app.use('/api/chat', chatRoutes);  // Disabled for testing
 app.use('/api', agentRoutes);
+app.use('/api/documents', documentsRoutes);
+app.use('/api/chat', swarmRoutes);
+app.use('/api', swarmRoutes);
 app.use('/api/admin', adminRoutes);
 
 // Health check
