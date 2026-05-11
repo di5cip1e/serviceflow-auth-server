@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MCP Tool Servers — M.ai.K.R</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --card: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #2ECC71;
+      --danger: #f85149;
+      --warn: #d29922;
+      --blue: #58a6ff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+    }
+    .topnav {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      height: 56px;
+    }
+    .topnav .logo {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+    .topnav .logo span { color: #fff; }
+    .nav-links { display: flex; gap: 4px; margin-left: 16px; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: all 0.15s;
+    }
+    .nav-links a:hover { color: var(--text); background: var(--border); }
+    .nav-links a.active { color: var(--accent); }
+    main { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+    h1 { font-size: 24px; font-weight: 600; margin-bottom: 8px; }
+    .subtitle { color: var(--muted); font-size: 14px; margin-bottom: 32px; }
+    .section-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 12px;
+      margin-top: 32px;
+    }
+    .templates-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .template-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .template-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .template-card .icon { font-size: 24px; margin-bottom: 8px; }
+    .template-card .name { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+    .template-card .desc { font-size: 12px; color: var(--muted); }
+    .connected-section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+    .connected-section h2 { font-size: 16px; margin-bottom: 16px; }
+    .server-list { display: flex; flex-direction: column; gap: 8px; }
+    .server-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+    .server-item .info { display: flex; align-items: center; gap: 10px; }
+    .server-item .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+    .server-item .dot.offline { background: var(--muted); }
+    .server-item .name { font-size: 14px; font-weight: 500; }
+    .server-item .tools { font-size: 12px; color: var(--muted); }
+    .server-item .actions { display: flex; gap: 6px; }
+    .btn {
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      transition: all 0.15s;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+    }
+    .btn-primary:hover { background: #3ddc84; }
+    .btn-danger {
+      background: transparent;
+      border: 1px solid var(--danger);
+      color: var(--danger);
+    }
+    .btn-danger:hover { background: var(--danger); color: #fff; }
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .btn-ghost:hover { color: var(--text); border-color: var(--muted); }
+    .add-form {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .add-form h2 { font-size: 16px; margin-bottom: 16px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-group label { font-size: 12px; color: var(--muted); font-weight: 500; }
+    .form-group input, .form-group textarea, .form-group select {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      padding: 8px 12px;
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      border-color: var(--accent);
+    }
+    .form-group textarea { resize: vertical; min-height: 72px; font-family: monospace; font-size: 13px; }
+    .env-vars-section { margin-top: 16px; border-top: 1px solid var(--border); padding-top: 16px; }
+    .env-var-row { display: flex; gap: 8px; margin-bottom: 8px; }
+    .env-var-row input { flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--text); padding: 6px 10px; font-size: 13px; font-family: monospace; }
+    .env-var-row .remove-var { color: var(--danger); cursor: pointer; background: none; border: none; font-size: 16px; padding: 0 4px; }
+    .form-actions { display: flex; gap: 8px; margin-top: 16px; }
+    #addEnvBtn {
+      font-size: 12px;
+      padding: 4px 10px;
+      background: transparent;
+      border: 1px dashed var(--border);
+      color: var(--muted);
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    #addEnvBtn:hover { border-color: var(--accent); color: var(--accent); }
+    .status-bar {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-top: 24px;
+      display: flex;
+      gap: 32px;
+    }
+    .status-item .label { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+    .status-item .value { font-size: 20px; font-weight: 600; }
+    .status-item .value.live { color: var(--accent); }
+    .status-item .value.offline { color: var(--muted); }
+    .empty-state {
+      text-align: center;
+      padding: 40px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 18px;
+      font-size: 14px;
+      z-index: 1000;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.2s;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast.success { border-color: var(--accent); color: var(--accent); }
+    .toast.error { border-color: var(--danger); color: var(--danger); }
+  </style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="/" class="logo">M<span>.ai</span><span>.K.R</span></a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/observe.html">Monitor</a>
+    <a href="/swarm.html">Swarm</a>
+    <a href="/mcp.html" class="active">MCP</a>
+    <a href="/channels.html">Channels</a>
+    <a href="/command-center.html">Command Center</a>
+  </div>
+</nav>
+
+<main>
+  <h1>MCP Tool Servers</h1>
+  <p class="subtitle">Connect AI models to GitHub, Notion, Slack, AWS, and more — with full tool injection into your agent swarm.</p>
+
+  <!-- Status Bar -->
+  <div class="status-bar">
+    <div class="status-item">
+      <div class="label">Connected Servers</div>
+      <div class="value live" id="serverCount">0</div>
+    </div>
+    <div class="status-item">
+      <div class="label">Available Templates</div>
+      <div class="value">5</div>
+    </div>
+    <div class="status-item">
+      <div class="label">Agent</div>
+      <div class="value" id="agentId" style="font-size:14px;margin-top:4px;">—</div>
+    </div>
+  </div>
+
+  <!-- Templates -->
+  <div class="section-label">Quick Start — Template Presets</div>
+  <div class="templates-grid" id="templatesGrid"></div>
+
+  <!-- Connected Servers -->
+  <div class="section-label">Connected Servers</div>
+  <div class="connected-section">
+    <h2>Active MCP Servers</h2>
+    <div class="server-list" id="serverList">
+      <div class="empty-state">No servers connected yet. Use a template or add a custom server below.</div>
+    </div>
+  </div>
+
+  <!-- Add Custom Server -->
+  <div class="section-label">Add Custom Server</div>
+  <div class="add-form">
+    <h2>New MCP Server Connection</h2>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Server Name</label>
+        <input type="text" id="serverName" placeholder="e.g. my-github">
+      </div>
+      <div class="form-group">
+        <label>Server Type</label>
+        <select id="serverType">
+          <option value="stdio">Local (STDIO)</option>
+          <option value="http">HTTP Endpoint</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label>Command / URL</label>
+        <input type="text" id="serverCommand" placeholder="e.g. npx @modelcontextprotocol/server-github or https://mcp.example.com">
+      </div>
+      <div class="env-vars-section full">
+        <label style="font-size:12px;color:var(--muted);font-weight:500;display:block;margin-bottom:8px;">Environment Variables</label>
+        <div id="envVars"></div>
+        <button type="button" id="addEnvBtn">+ Add Env Variable</button>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-primary" onclick="addServer()">Connect Server</button>
+      <button class="btn btn-ghost" onclick="testConnection()">Test Connection</button>
+    </div>
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const AGENT_ID = localStorage.getItem('maikr_agent_id') || 'demo-agent';
+  let servers = [];
+  let templates = [];
+
+  document.getElementById('agentId').textContent = AGENT_ID;
+
+  // Load templates
+  fetch('/api/mcp/templates')
+    .then(r => r.json())
+    .then(data => {
+      templates = data.templates || data || [];
+      renderTemplates();
+    })
+    .catch(() => renderTemplates());
+
+  // Load connected servers
+  loadServers();
+
+  function renderTemplates() {
+    const grid = document.getElementById('templatesGrid');
+    const defaults = [
+      { id: 'github', name: 'GitHub', icon: '🐙', desc: 'Repos, issues, PRs' },
+      { id: 'filesystem', name: 'Filesystem', icon: '📁', desc: 'Read/write files' },
+      { id: 'notion', name: 'Notion', icon: '🗒️', desc: 'Pages and databases' },
+      { id: 'slack', name: 'Slack', icon: '💬', desc: 'Messages and channels' },
+      { id: 'aws-kb', name: 'AWS KB', icon: '☁️', desc: 'Knowledge Base search' },
+    ];
+    const list = templates.length ? templates : defaults;
+    grid.innerHTML = list.map(t => `
+      <div class="template-card" onclick="useTemplate('${t.id || t.name?.toLowerCase()}')">
+        <div class="icon">${t.icon || '🔌'}</div>
+        <div class="name">${t.name}</div>
+        <div class="desc">${t.description || t.desc || 'Click to use'}</div>
+      </div>
+    `).join('');
+  }
+
+  function useTemplate(id) {
+    document.getElementById('serverName').value = id;
+    const tpls = { github: 'npx @modelcontextprotocol/server-github', filesystem: 'npx @modelcontextprotocol/server-filesystem', notion: 'npx @modelcontextprotocol/server-notion', slack: 'npx @modelcontextprotocol/server-slack', 'aws-kb': 'npx @modelcontextprotocol/server-aws-kb' };
+    document.getElementById('serverCommand').value = tpls[id] || '';
+    document.querySelector('.add-form').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  async function loadServers() {
+    try {
+      const r = await fetch(`/api/mcp/servers/${AGENT_ID}`);
+      const data = await r.json();
+      servers = data.servers || data || [];
+      renderServers();
+    } catch { renderServers(); }
+  }
+
+  function renderServers() {
+    const list = document.getElementById('serverList');
+    document.getElementById('serverCount').textContent = servers.length;
+    if (!servers.length) {
+      list.innerHTML = '<div class="empty-state">No servers connected yet. Use a template or add a custom server below.</div>';
+      return;
+    }
+    list.innerHTML = servers.map(s => `
+      <div class="server-item">
+        <div class="info">
+          <div class="dot ${s.status === 'connected' ? '' : 'offline'}"></div>
+          <div>
+            <div class="name">${s.name}</div>
+            <div class="tools">${s.toolCount || 0} tools available</div>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn btn-ghost" onclick="testServer('${s.id}')">Test</button>
+          <button class="btn btn-danger" onclick="removeServer('${s.id}')">Remove</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  async function addServer() {
+    const name = document.getElementById('serverName').value.trim();
+    const type = document.getElementById('serverType').value;
+    const command = document.getElementById('serverCommand').value.trim();
+    if (!name || !command) { showToast('Please fill in name and command', 'error'); return; }
+
+    const envs = {};
+    document.querySelectorAll('.env-var-row').forEach(row => {
+      const k = row.querySelector('.env-key')?.value?.trim();
+      const v = row.querySelector('.env-val')?.value?.trim();
+      if (k) envs[k] = v;
+    });
+
+    try {
+      const r = await fetch(`/api/mcp/servers/${AGENT_ID}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, type, command, envs })
+      });
+      if (r.ok) {
+        showToast('Server connected', 'success');
+        loadServers();
+        clearForm();
+      } else {
+        showToast('Failed to connect server', 'error');
+      }
+    } catch (e) {
+      showToast('Connection error: ' + e.message, 'error');
+    }
+  }
+
+  async function removeServer(id) {
+    if (!confirm('Remove this server?')) return;
+    try {
+      await fetch(`/api/mcp/servers/${AGENT_ID}/${id}`, { method: 'DELETE' });
+      showToast('Server removed', 'success');
+      loadServers();
+    } catch { showToast('Remove failed', 'error'); }
+  }
+
+  async function testServer(id) {
+    try {
+      const r = await fetch(`/api/mcp/servers/${AGENT_ID}/${id}/test`, { method: 'POST' });
+      const data = await r.json();
+      showToast(data.ok ? 'Connection OK' : 'Connection failed', data.ok ? 'success' : 'error');
+    } catch { showToast('Test failed', 'error'); }
+  }
+
+  async function testConnection() {
+    showToast('Testing connection...', 'info');
+    showToast('Test endpoint not yet implemented', 'error');
+  }
+
+  function clearForm() {
+    document.getElementById('serverName').value = '';
+    document.getElementById('serverCommand').value = '';
+    document.getElementById('envVars').innerHTML = '';
+  }
+
+  document.getElementById('addEnvBtn').addEventListener('click', () => {
+    const row = document.createElement('div');
+    row.className = 'env-var-row';
+    row.innerHTML = '<input class="env-key" placeholder="KEY" /> <input class="env-val" placeholder="value" /> <button class="remove-var" onclick="this.parentElement.remove()">×</button>';
+    document.getElementById('envVars').appendChild(row);
+  });
+
+  function showToast(msg, type = 'info') {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = `toast ${type} show`;
+    setTimeout(() => t.classList.remove('show'), 3000);
+  }
+</script>
+</body>
+</html>

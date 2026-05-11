@@ -22,6 +22,10 @@ const path = require('path');
 const checkoutRoutes = require('./routes/checkout');
 const documentsRoutes = require('./routes/documents');
 const swarmRoutes = require('./routes/swarm');
+const channelRoutes = require('./routes/channels');
+const mcpRoutes = require('./mcp/routes');
+const observeRoutes = require('./observability/routes');
+const optimizationRoutes = require('./optimization/routes');
 const webhookRoutes = require('./routes/webhook');
 const chatRoutes = require('./routes/chat');  // Disabled for testing
 const agentRoutes = require('./routes/agent');
@@ -38,6 +42,9 @@ app.use('/webhook', webhookRoutes);         // ← raw body, before JSON parser
 app.use(express.json());                     // ← JSON parser for all other routes
 app.use(express.static(path.join(__dirname, '../frontend')));
 
+// Redirect /chat → /chat.html (chat page at /chat, not /chat.html)
+app.get('/chat', (req, res) => res.redirect('/chat.html'));
+
 // Serve index.html on root
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/index.html'));
@@ -49,8 +56,14 @@ app.use('/api/chat', chatRoutes);  // Disabled for testing
 app.use('/api', agentRoutes);
 app.use('/api/documents', documentsRoutes);
 app.use('/api/chat', swarmRoutes);
+app.use('/api/mcp', mcpRoutes);    // MCP server management (before swarm catch-all)
+app.use('/api', channelRoutes);     // webhook handlers for Twilio, Slack, etc.
 app.use('/api', swarmRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/observe', observeRoutes);  // observability dashboard API
+app.use('/api/optimization', optimizationRoutes);  // Phase 6 optimization engine
+const creditRoutes = require('./routes/creditRoutes');
+app.use('/api/credits', creditRoutes);
 
 // Health check
 app.get('/health', (req, res) => {
