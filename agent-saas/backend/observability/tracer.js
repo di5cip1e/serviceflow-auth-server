@@ -28,7 +28,7 @@ if (LANGFUSEConfigured) {
     const { LangfuseClient: LC } = require('@langfuse/client');
     const tracing = require('@langfuse/tracing');
     LangfuseClient = LC;
-    startActiveSpan = tracing.startActiveSpan.bind(tracing);
+    startActiveSpan = typeof tracing.startActiveSpan === 'function' ? tracing.startActiveSpan.bind(tracing) : null;
     tracingExports = tracing;
   } catch (e) {
     console.warn('[OBSERVE] Langfuse packages not available, using console tracing:', e.message);
