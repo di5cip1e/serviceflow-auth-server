@@ -34,7 +34,18 @@ db.serialize(() => {
     model_tier TEXT DEFAULT 'standard',
     monthly_cost_cents INTEGER DEFAULT 0,
     created_at TEXT DEFAULT CURRENT_TIMESTAMP,
-    updated_at TEXT DEFAULT CURRENT_TIMESTAMP
+    updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    plan_name TEXT DEFAULT 'value',
+    outcome_credits REAL DEFAULT 100,
+    outcome_credits_used REAL DEFAULT 0,
+    base_tokens_used INTEGER DEFAULT 0,
+    base_tokens INTEGER DEFAULT 20000,
+    slug TEXT,
+    session_key TEXT,
+    api_key TEXT,
+    agent_slug TEXT,
+    data_opt_out INTEGER DEFAULT 0,
+    customer_id TEXT
   )`);
 
   // Conversations table
@@ -169,6 +180,54 @@ db.serialize(() => {
     total_latency_ms INTEGER,
     overall_score REAL,
     metadata TEXT,
+    FOREIGN KEY (agent_id) REFERENCES agents(id)
+  )`);
+
+  // Customers table
+  db.run(`CREATE TABLE IF NOT EXISTS customers (
+    id TEXT PRIMARY KEY,
+    email TEXT UNIQUE NOT NULL,
+    stripe_customer_id TEXT,
+    stripe_subscription_id TEXT,
+    stripe_session_id TEXT,
+    plan TEXT,
+    status TEXT DEFAULT 'active',
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP
+  )`);
+
+  // API Keys table
+  db.run(`CREATE TABLE IF NOT EXISTS api_keys (
+    id TEXT PRIMARY KEY,
+    customer_id TEXT NOT NULL,
+    key_hash TEXT NOT NULL,
+    key_prefix TEXT NOT NULL,
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (customer_id) REFERENCES customers(id)
+  )`);
+
+  // Credit Transactions table
+  db.run(`CREATE TABLE IF NOT EXISTS credit_transactions (
+    id TEXT PRIMARY KEY,
+    agent_id TEXT NOT NULL,
+    type TEXT NOT NULL,
+    amount REAL NOT NULL,
+    balance_after REAL,
+    description TEXT,
+    reference_id TEXT,
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (agent_id) REFERENCES agents(id)
+  )`);
+
+  // Credit Purchases table
+  db.run(`CREATE TABLE IF NOT EXISTS credit_purchases (
+    id TEXT PRIMARY KEY,
+    agent_id TEXT NOT NULL,
+    pack_name TEXT,
+    credits_purchased REAL,
+    price_paid_cents INTEGER,
+    stripe_payment_id TEXT,
+    status TEXT DEFAULT 'pending',
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (agent_id) REFERENCES agents(id)
   )`);
 

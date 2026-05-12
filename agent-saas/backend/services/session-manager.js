@@ -1,149 +1,207 @@
 /**
  * Session Manager (CommonJS) - Per-customer OpenClaw agent session lifecycle
- * Called from provisioning pipeline after agent files are generated
  * 
- * SECURITY: All child_process calls use spawn() with array arguments (no shell)
- * to prevent command injection via user-controlled strings.
+ * Architecture: The gateway owns session lifecycle. We call:
+ *   openclaw agent --agent <slug> --session-id <key> --message <msg> --json
+ * 
+ * The gateway routes to the right agent session (or creates it on first use).
+ * No child processes are spawned by this module — all agent communication
+ * goes through the OpenClaw CLI which talks to the gateway.
  */
 
 const { spawn } = require('child_process');
-
 const db = require('../database');
 
+const GATEWAY_TOKEN = process.env.OPENCLAW_GATEWAY_TOKEN || '98f91ecf9750fcb40d71a9fd8de1f0c052f629301e8bc45b';
+
 /**
- * Generate a slug for the session key
+ * Generate a deterministic session key for an agent
+ * Format: agent:<slug>:main
  */
-function generateSessionKey(agentSlug) {
-  return `agent:${agentSlug}:${Date.now()}`;
+function generateSessionKey(slug) {
+  return `agent:${slug}:main`;
 }
 
 /**
- * Start a persistent OpenClaw agent session for a customer
- * Called AFTER agent files are generated and agent is in DB
+ * Get conversation history for an agent (last N messages)
+ */
+function getHistory(agentId, limit = 20) {
+  return new Promise((resolve, reject) => {
+    db.all(
+      `SELECT role, content FROM conversations WHERE agent_id = ? ORDER BY created_at DESC LIMIT ?`,
+      [agentId, limit],
+      (err, rows) => {
+        if (err) return reject(err);
+        resolve((rows || []).reverse()); // Oldest first
+      }
+    );
+  });
+}
+
+/**
+ * Store a message in conversation history
+ */
+function storeMessage(agentId, role, content) {
+  return new Promise((resolve, reject) => {
+    db.run(
+      `INSERT INTO conversations (agent_id, role, content) VALUES (?, ?, ?)`,
+      [agentId, role, content],
+      (err) => { if (err) return reject(err); resolve(); }
+    );
+  });
+}
+
+/**
+ * Start a persistent agent session for a customer.
+ * Stores the session key in the DB — the gateway creates the session
+ * on the first message sent to it (no process spawned here).
  * 
  * @param {string} agentId - The agent UUID from the DB
  * @returns {Promise<{sessionKey: string, agentDir: string}>}
  */
 async function startAgentSession(agentId) {
   return new Promise((resolve, reject) => {
-    db.get('SELECT slug, system_prompt FROM agents WHERE id = ?', [agentId], async (err, agent) => {
+    db.get('SELECT slug, agent_name FROM agents WHERE id = ?', [agentId], async (err, agent) => {
       if (err || !agent) {
         return reject(new Error('Agent not found: ' + (err?.message || agentId)));
       }
 
       const sessionKey = generateSessionKey(agent.slug);
       const agentDir = `/opt/agents/${agent.slug}`;
-      const prompt = agent.system_prompt || 'You are a helpful AI assistant.';
 
-      console.log('🚀 Spawning agent session:', sessionKey);
-
-      // SECURITY: Use spawn with array args — no shell, no injection risk
-      const child = spawn('openclaw', [
-        'run',
-        '--session-key', sessionKey,
-        '--prompt', prompt,
-        '--workspace', agentDir,
-        '--background'
-      ], { cwd: agentDir, detached: true });
-
-      let errorOutput = '';
-
-      child.on('error', (error) => {
-        console.error('❌ Failed to spawn agent session:', error.message);
-        return reject(new Error('Failed to spawn agent: ' + error.message));
-      });
-
-      child.on('close', (code) => {
-        if (code !== 0 && code !== null) {
-          console.error('⚠️ Agent process exited with code:', code, errorOutput);
-        }
-      });
-
-      child.stderr.on('data', (data) => {
-        errorOutput += data.toString();
-      });
-
-      // Store session key in DB
       db.run('UPDATE agents SET session_key = ? WHERE id = ?', [sessionKey, agentId], (updateErr) => {
         if (updateErr) {
-          console.error('⚠️ Agent spawned but could not store session key:', updateErr.message);
+          console.warn('⚠️ Could not store session_key:', updateErr.message);
         }
       });
 
-      console.log('✅ Agent session started:', sessionKey);
+      console.log('✅ Session key registered:', sessionKey);
       resolve({ sessionKey, agentDir });
     });
   });
 }
 
 /**
- * Send a message to an existing agent session
- * NOTE: sessions_send is an internal ACP CLI command — this requires the
- * OpenClaw gateway to be reachable at the configured ws:// host:port.
- * For external Node.js, messages should be routed via the OpenClaw HTTP/gateway API.
+ * Send a message to an existing agent session.
+ * Uses `openclaw agent --session-id <key> --message <msg> --json`.
+ * Conversation history is loaded and prepended as context.
+ * 
+ * @param {string} agentId - The agent UUID
+ * @param {string} message - The user's message
+ * @returns {Promise<{response: string, sessionKey: string}>}
  */
-async function sendToSession(sessionKey, message) {
+async function sendToSession(agentId, message) {
   return new Promise((resolve, reject) => {
-    // Use spawn with array args to avoid shell injection
-    const child = spawn('node', [
-      '-e',
-      `const { sessions_send } = require('/root/.openclaw/workspace/node_modules/openclaw');` +
-      `sessions_send('${sessionKey}', ${JSON.stringify(message)})` +
-      `.then(r => process.stdout.write(JSON.stringify({ok: true})) )` +
-      `.catch(e => process.stdout.write(JSON.stringify({ok: false, err: e.message})))`
-    ], { timeout: 30000 });
-
-    let output = '';
-
-    child.stdout.on('data', (data) => { output += data.toString(); });
-    child.stderr.on('data', (data) => { console.error('sessions_send stderr:', data.toString()); });
-
-    child.on('close', (code) => {
-      try {
-        const result = JSON.parse(output.trim());
-        if (result.ok) resolve(result.r);
-        else reject(new Error(result.err || 'sessions_send failed'));
-      } catch (e) {
-        reject(new Error('Invalid response from sessions_send: ' + output));
-      }
-    });
-
-    child.on('error', (error) => {
-      reject(new Error('sessions_send spawn failed: ' + error.message));
-    });
-  });
-}
-
-/**
- * Close an agent session (stop the subprocess)
- */
-async function closeSession(agentId) {
-  return new Promise((resolve, reject) => {
-    db.get('SELECT session_key FROM agents WHERE id = ?', [agentId], (err, row) => {
-      if (err || !row || !row.session_key) {
-        return resolve({ success: false, message: 'No session to close' });
+    db.get('SELECT slug, session_key FROM agents WHERE id = ?', [agentId], async (err, agent) => {
+      if (err || !agent) {
+        return reject(new Error('Agent not found: ' + (err?.message || agentId)));
       }
 
-      const sessionKey = row.session_key;
+      const sessionKey = agent.session_key || generateSessionKey(agent.slug);
 
-      // SECURITY: Use spawn with array args — no shell
-      const child = spawn('openclaw', ['sessions', 'stop', sessionKey]);
+      // Load conversation history for context
+      const history = await getHistory(agentId);
+      
+      // Build full prompt with history
+      let fullPrompt = '';
+      if (history.length > 0) {
+        fullPrompt += '[Conversation history]\n';
+        for (const h of history) {
+          fullPrompt += `${h.role === 'user' ? 'Customer' : 'Agent'}: ${h.content}\n`;
+        }
+        fullPrompt += `[End history]\n\nCustomer: ${message}\nAgent:`;
+      } else {
+        fullPrompt = message;
+      }
 
-      child.on('error', () => {}); // Ignore errors (session may already be gone)
+      // Store user message
+      await storeMessage(agentId, 'user', message);
 
-      child.on('close', () => {
-        // Clear session key regardless of whether stop succeeded
-        db.run('UPDATE agents SET session_key = NULL WHERE id = ?', [agentId], (updateErr) => {
-          if (updateErr) console.error('⚠️ Could not clear session_key:', updateErr.message);
-        });
-        resolve({ success: true, sessionKey });
+      // Call openclaw agent via gateway — array args, no shell injection risk
+      const child = spawn('openclaw', [
+        'agent',
+        '--agent', agent.slug,
+        '--session-id', sessionKey,
+        '--message', fullPrompt,
+        '--timeout', '120',
+        '--json'
+      ], { timeout: 130000 });
+
+      let stdout = '';
+      let stderr = '';
+
+      child.stdout.on('data', (data) => { stdout += data.toString(); });
+      child.stderr.on('data', (data) => { stderr += data.toString(); });
+
+      child.on('error', (error) => {
+        return reject(new Error('openclaw agent spawn failed: ' + error.message));
+      });
+
+      child.on('close', async (code) => {
+        if (code !== 0 && code !== null) {
+          console.warn('⚠️ openclaw agent exited code', code, stderr.slice(0, 200));
+        }
+
+        try {
+          // Parse JSON output — find the result text
+          const lines = stdout.trim().split('\n');
+          let responseText = '';
+
+          for (const line of lines) {
+            try {
+              const parsed = JSON.parse(line);
+              if (parsed?.result?.payloads?.[0]?.text) {
+                responseText = parsed.result.payloads[0].text;
+                break;
+              }
+            } catch {}
+          }
+
+          if (!responseText && stdout.trim()) {
+            const match = stdout.match(/"text":\s*"([^"]+(?:\\"[^"]*)*)"/);
+            if (match) responseText = match[1].replace(/\\n/g, '\n').replace(/\\"/g, '"');
+          }
+
+          if (!responseText) {
+            responseText = stdout.trim() || 'Agent responded without text.';
+          }
+
+          // Store agent response
+          await storeMessage(agentId, 'agent', responseText);
+
+          resolve({ response: responseText, sessionKey });
+        } catch (e) {
+          console.error('❌ Failed to parse agent response:', e.message);
+          console.error('Raw stdout:', stdout.slice(0, 500));
+          reject(new Error('Invalid response from agent: ' + e.message));
+        }
       });
     });
   });
 }
 
 /**
- * Check if an agent has an active session
+ * Close an agent session — clears session_key from DB.
+ * The gateway handles actual session cleanup.
+ */
+async function closeSession(agentId) {
+  return new Promise((resolve) => {
+    db.get('SELECT session_key FROM agents WHERE id = ?', [agentId], (err, row) => {
+      if (err || !row || !row.session_key) {
+        return resolve({ success: false, message: 'No session to close' });
+      }
+
+      db.run('UPDATE agents SET session_key = NULL, status = ? WHERE id = ?', ['inactive', agentId], (updateErr) => {
+        if (updateErr) console.error('⚠️ Could not clear session_key:', updateErr.message);
+      });
+
+      resolve({ success: true, sessionKey: row.session_key });
+    });
+  });
+}
+
+/**
+ * Check if an agent has a session key registered
  */
 async function hasActiveSession(agentId) {
   return new Promise((resolve) => {

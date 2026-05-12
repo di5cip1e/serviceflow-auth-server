@@ -45,8 +45,13 @@ app.use(express.static(path.join(__dirname, '../frontend')));
 // Redirect /chat → /chat.html (chat page at /chat, not /chat.html)
 app.get('/chat', (req, res) => res.redirect('/chat.html'));
 
-// Serve index.html on root
+// Serve landing.html on root (marketing page)
 app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/landing.html'));
+});
+
+// Onboarding form at /build
+app.get('/build', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 

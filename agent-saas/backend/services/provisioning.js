@@ -6,6 +6,8 @@ const { startAgentSession } = require('./session-manager');
 const { sendEmail } = require('./alerter');
 const https = require('https');
 
+const bcrypt = require('bcrypt');
+
 // Provision new customer and their agent after payment
 async function provisionCustomer(paymentData) {
   const {
@@ -70,7 +72,7 @@ async function provisionCustomer(paymentData) {
   // 4. Generate API key
   const apiKeyId = uuidv4();
   const apiKey = 'makr_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-  const keyHash = apiKey; // In production, hash this!
+  const keyHash = await bcrypt.hash(apiKey, 10);
   const keyPrefix = apiKey.substring(0, 12);
 
   const apiKeyInsert = new Promise((resolve, reject) => {
