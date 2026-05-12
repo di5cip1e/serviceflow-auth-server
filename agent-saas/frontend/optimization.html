@@ -128,8 +128,46 @@
     .proposal-header { flex-wrap: wrap; }
   }
 </style>
+
+.maikr-nav {
+  background: #161b22;
+  border-bottom: 1px solid #30363d;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  height: 52px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.maikr-logo { font-size: 17px; font-weight: 700; color: #2ECC71; text-decoration: none; letter-spacing: -0.5px; }
+.maikr-logo span { color: #fff; }
+.maikr-links { display: flex; gap: 4px; margin-left: 8px; }
+.maikr-links a { color: #8b949e; text-decoration: none; font-size: 13px; padding: 5px 10px; border-radius: 5px; transition: all 0.15s; }
+.maikr-links a:hover { color: #e6edf3; background: #30363d; }
+.maikr-links a.active { color: #2ECC71; }
+.maikr-spacer { flex: 1; }
+.maikr-status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #8b949e; }
+.maikr-status .dot { width: 7px; height: 7px; background: #2ECC71; border-radius: 50%; box-shadow: 0 0 5px #2ECC71; }
+
 </head>
 <body>
+
+<nav class="maikr-nav">
+  <a href="/" class="maikr-logo">M<span>.ai</span><span>.K.R</span></a>
+  <div class="maikr-links">
+    <a href="/command-center.html">Dashboard</a>
+    <a href="/swarm.html">Swarm</a>
+    <a href="/mcp.html">MCP</a>
+    <a href="/channels.html">Channels</a>
+    <a href="/optimization.html">Optimize</a>
+    <a href="/observe.html">Observe</a>
+  </div>
+  <div class="maikr-spacer"></div>
+  <div class="maikr-status"><span class="dot"></span>Online</div>
+</nav>
+
 <nav>
   <span class="logo">M.ai.K.R</span>
   <span class="sep">/</span>
