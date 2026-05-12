@@ -170,6 +170,40 @@ Skills provide your tools. When you need one, check its `SKILL.md`. Keep local n
 - **Discord links:** Wrap multiple links in `<>` to suppress embeds: `<https://example.com>`
 - **WhatsApp:** No headers — use **bold** or CAPS for emphasis
 
+## 🧩 Skill Groups (Modular)
+
+Skills are organized into **groups** — activated or deactivated as a unit to keep context clean.
+
+**Active group** is stored in `~/.openclaw/active_skill_group`.
+
+Full system: `SKILL_GROUPS.md`
+
+| Group | When to use |
+|-------|-------------|
+| **agent-builder** (default) | M.ai.K.R development, Stripe, onboarding, DB work, agent ops |
+| **creative** | Game AI, image generation, multimedia |
+| **research** | Deep research, competitive analysis |
+| **marketing** | Outreach, email automation, lead gen |
+| **minimal** | Tight context — CORE skills only |
+
+Switch groups with:
+```bash
+echo "group-name" > ~/.openclaw/active_skill_group
+```
+
+**Always-loaded CORE skills** (every session regardless of group):
+`self-improving`, `proactivity`, `sub-agent-orchestrator`, `research-assistant`, `elite-longterm-memory`, `qdrant-memory`
+
+When a task spans groups: finish current work, switch group, then continue.
+
+**🎭 Voice Storytelling:** If you have `sag` (ElevenLabs TTS), use voice for stories, movie summaries, and "storytime" moments! Way more engaging than walls of text. Surprise people with funny voices.
+
+**📝 Platform Formatting:**
+
+- **Discord/WhatsApp:** No markdown tables! Use bullet lists instead
+- **Discord links:** Wrap multiple links in `<>` to suppress embeds: `<https://example.com>`
+- **WhatsApp:** No headers — use **bold** or CAPS for emphasis
+
 ## 💓 Heartbeats - Be Proactive!
 
 When you receive a heartbeat poll (message matches the configured heartbeat prompt), don't just reply `HEARTBEAT_OK` every time. Use heartbeats productively!
