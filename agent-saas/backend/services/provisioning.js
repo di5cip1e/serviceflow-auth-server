@@ -1,4 +1,5 @@
 const { v4: uuidv4 } = require('uuid');
+const { PRICING } = require('../routes/checkout');
 const db = require('../database');
 const { generateAgentFiles } = require('./agent-generator');
 const { startAgentSession } = require('./session-manager');
@@ -56,9 +57,9 @@ async function provisionCustomer(paymentData) {
 
   const agentInsert = new Promise((resolve, reject) => {
     db.run(
-      `INSERT INTO agents (id, customer_id, agent_name, business_name, slug, industry, target_audience, tone, use_cases, system_prompt, stripe_session_id, plan, model_tier, monthly_cost_cents, status, data_opt_out)
+      `INSERT INTO agents (id, customer_id, agent_name, business_name, slug, industry, target_audience, tone, use_cases, system_prompt, stripe_session_id, plan, model_tier, monthly_cost_cents, base_tokens, outcome_credits, plan_name, status, data_opt_out)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'active', ?)`,
-      [agentId, customerId_db, agentName, businessName, slug, industry, targetAudience, tone, useCases, systemPrompt, paymentData.eventId, plan, modelTier, monthlyCostCents, paymentData.dataAgreement ? 0 : 1],
+      [agentId, customerId_db, agentName, businessName, slug, industry, targetAudience, tone, useCases, systemPrompt, paymentData.eventId, plan, modelTier, monthlyCostCents, paymentData.baseTokens || 20000, paymentData.outcomeCredits || 100, plan, paymentData.dataAgreement ? 0 : 1],
       function(err) {
         if (err) reject(err);
         else resolve();

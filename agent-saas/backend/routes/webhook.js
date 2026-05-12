@@ -3,6 +3,7 @@ const router = express.Router();
 const { v4: uuidv4 } = require('uuid');
 const db = require('../database');
 const { provisionCustomer } = require('../services/provisioning');
+const { PRICING } = require('./checkout');
 
 router.post('/', express.raw({ type: 'application/json' }), async (req, res) => {
   const sig = req.headers['stripe-signature'];
@@ -50,7 +51,9 @@ router.post('/', express.raw({ type: 'application/json' }), async (req, res) => 
       targetAudience: session.metadata?.targetAudience || 'general audience',
       tone: session.metadata?.tone || 'professional',
       useCases: session.metadata?.useCases || '',
-      plan: session.metadata?.skillLevel || 'basic',
+      plan: session.metadata?.skillLevel || 'value',
+      baseTokens: PRICING[session.metadata?.skillLevel]?.base_tokens || 20000,
+      outcomeCredits: PRICING[session.metadata?.skillLevel]?.outcome_credits || 100,
       modelTier: session.metadata?.modelTier || 'standard',
       dataAgreement: session.metadata?.dataAgreement === 'true' ? 1 : 0,
       customerId: session.customer,

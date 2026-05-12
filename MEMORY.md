@@ -20,7 +20,7 @@
 - **PM2:** maikr-backend + ollama-router running, systemd-enabled for reboot persistence
 
 ## Active Projects (Current)
-- **M.ai.K.R** (agent-saas/): ✅ Live at maikr.pro — tiered model system, SSL cert live, Stripe armed, webhook verified, `/health` endpoint live, **PM2 on systemd watchdog**, custom 502 page, P1 copy/design ready (hero rewrite, trust signals, competitive positioning, security headers full suite)
+- **M.ai.K.R** (agent-saas/): ✅ Live at maikr.pro — Phase 1 (agent gen + session) → Phase 2 (swarm routing) → Phase 3 (omnichannel webhooks) → Phase 4 (MCP tool servers). Tiered model, Stripe armed, Ollama routed, SSL cert live, PM2 on systemd watchdog, 502 page, security headers, P1 copy/design live.
 - **Agent Builder Dashboard**: Running at http://187.77.31.252:3000/wizard
 - **Kingdom Cards**: ~70% — Phaser 3 battle engine works, Fantasy/Medieval theme
 - **Ironveil**: Ready for Windows import (since March 23)
@@ -34,10 +34,11 @@
 3. **ClawHub**: 10 skills published, passive download potential
 
 ## Pending Actions (Human Required)
-- **M.ai.K.R frontend update**: Deploy new hero, trust section, pricing polish from team audit output (Pixel to build)
-- **Git push**: fc62070 still unpushed — retry
+- **M.ai.K.R first customer**: Backend fully wired — need real payment to trigger first agent spawn
+- **Git push**: fc62070 still unpushed (network timeout)
 - **Twilio**: Carrier routing fix for SMS alerts (email working via Mailgun aginstitute.tech)
 - **session-manager.js**: Uses `openclaw run` (doesn't exist) — per-customer OpenClaw agents won't start until rewritten
+- **MCP wire-up**: MCP tools need injection into swarm agent system prompts — LLM can't see MCP tools yet
 
 ## Critical OpenClaw Lessons (M.ai.K.R specific)
 1. Register agent: `openclaw agents add <slug> --workspace /opt/agents/<slug> --non-interactive`
@@ -46,18 +47,21 @@
 4. session_key format: `agent:<slug>:main`
 5. sessions_send() needs WebSocket ACP bridge — not callable from plain Node require()
 6. API key in auth-profiles.json takes precedence over secrets.json for OpenRouter
+7. Sub-agent write tool: content param is REQUIRED — empty string is valid, undefined causes tool-use failure
+8. Express route mounting: `app.use('/api/mcp', mcpRoutes)` NOT `app.use('/api', mcpRoutes)` when route paths start with `/templates` or `/servers`
 
 ## Key Technical Notes
 - **Stripe keys**: In agent-saas/backend/.env (sk_live_, pk_live_, rk_live_, webhook secret)
 - **Mailgun**: aginstitute.tech domain, API key in secrets.json
 - **Ollama**: llama3.2:3b installed (port 11434) — ollama-router.js routes simple→Ollama (free), complex→OpenRouter
 - **Workspace backup**: Daily 3am UTC cron (workspace-daily-backup, isolated session)
-- **Audit hook**: /root/.openclaw/workspace/scripts/audit_changes.js running
+- **Audit hook**: /root/.openclaw/workspace/scripts/audit_changes.js watching SOUL.md/AGENTS.md
 - **git-credentials**: Has 2 tokens, one with space prefix — needs cleanup
 - **SSL cert**: Let's Encrypt for maikr.pro, expires Aug 7 2026 — certbot auto-renewal enabled
-- **PM2**: maikr-backend running (pid 916002, 6h uptime, online)
-- **Audit hook**: /root/.openclaw/workspace/scripts/audit_changes.js watching SOUL.md/AGENTS.md
 - **DALL-E 3 v2**: Deprecated May 2026 — migrate to newer API version when needed
+- **MCP endpoints**: /api/mcp/templates, /api/mcp/servers/:agentId, /api/mcp/servers/:agentId/tools (Phase 4 live)
+- **MCP templates**: github, filesystem, notion, slack, aws-kb presets in registry
+- **Dashboard URLs**: maikr.pro/swarm.html (Phase 2), maikr.pro/channels.html (Phase 3), maikr.pro/mcp.html (Phase 4)
 
 ## What Makes Me Better
 - Memory dream transfer: weekly consolidation at 04:00 UTC
@@ -73,16 +77,8 @@
 - Session context is fresh each turn — don't assume state, verify it
 
 ---
-*Last consolidated: 2026-05-09 02:25 UTC*
-
-## May 10 Quick Notes
-- Workspace backup: c575570 (6 files, 222 insertions)
-- M.ai.K.R tiered model system live (Standard/Premium/Elite)
-- Workspace org complete: ~800MB freed, lore folders merged
-- PM2 crash lesson: maikr-backend needs systemd watchdog
-
-*Last consolidated: 2026-05-10 04:19 UTC*
-*Previous: 2026-05-08 04:00 UTC*
+*Last consolidated: 2026-05-11 04:04 UTC*
+*Previous: 2026-05-10 04:19 UTC*
 
 ---
 
@@ -174,3 +170,64 @@
 - **Security headers**: Full suite (CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy) added to nginx — zero to full suite (Flux)
 - **Visual design spec**: Trust badges, how it works flow, social proof placeholder, pricing card polish in warm green #2ECC71 (Mirren)
 - **PM2 crash lesson**: maikr-backend died at ~23:22 UTC with no auto-recovery. Fixed by manual restart. Now on systemd watchdog.
+
+### May 11: Phase 2 (Swarm) + Phase 3 (Channels) + Phase 4 (MCP) — All Complete
+- **Phase 2 Swarm**: stateMachine.js, intentClassifier.js (Ollama LLM), swarmRouter.js, routes/swarm.js, tierRouter.js — 5 sub-agents (support/sales/onboarding/general/admin) with keyword+LLM intent routing, verified at 0.95 confidence. swarm.html live.
+- **Phase 3 Omnichannel**: routes/channels.js + twilio.js (TwiML, 12s AbortSignal) + slack.js (signature verification, Block Kit) — webhook endpoints for SMS/WhatsApp and Slack. channels.html live.
+- **Phase 4 MCP**: mcp/client.js (JSON-RPC stdio, 30s timeout), mcp/registry.js (DB-backed per-agent configs, tool cache), mcp/routes.js (full CRUD + connect/disconnect/test/call). 5 templates (github/filesystem/notion/slack/aws-kb). /api/mcp/templates verified live.
+- **Sub-agent lessons**: Prism (CX card delivery) + Circuit (backend, correct on first try). Pixel write tool failed with `content: undefined` (must pass content string, not rely on implicit behavior). Always include exact file paths in prompts.
+- **Route mounting order lesson**: `app.use('/api/mcp', mcpRoutes)` not `app.use('/api', mcpRoutes)` when route paths start with `/templates` — more specific base path needed when routes don't have `/mcp/` prefix themselves.
+- **mcp.html**: Prism sub-agent failed to deliver (no output, tool-use issue). Built directly by Director — dark theme, 5 template cards, connected servers panel, custom server form with dynamic env vars, agent tool context view. Live at maikr.pro/mcp.html
+
+## May 11, 2026 — Major Session: Phases 6, 7, 8 Complete
+
+### Phase 6: Optimization Agent — COMPLETE
+- **Files**: `backend/services/optimizationEngine.js`, `backend/optimization/routes.js`, `frontend/optimization.html`
+- **DB table**: `optimization_proposals` (pending/applied/rejected status, rewrite, adjustment, priority, confidence, example_bad)
+- **API**: GET /pending, GET /history/:agentId, POST /:id/approve, POST /:id/reject, POST /run
+- **Rules**: MIN_CASES_TO_TRIGGER=2, FAITHFULNESS_THRESHOLD=0.6, RELEVANCY_THRESHOLD=0.5, 72h dedup
+- **Approval model**: Human-in-the-loop — all changes require explicit approval
+- **Nightly cron** (id: 38dc246a) at midnight UTC — announces results on Telegram
+- **Live at**: maikr.pro/optimization.html
+
+### Phase 7: Command Center UI — COMPLETE
+- **File**: `frontend/command-center.html` (23,850 bytes) — replaces old dashboard
+- **Sections**: maikr banner masthead, 4 workforce metrics, SVG swarm map (animated), activity feed, HITL approvals
+- **Redirect**: `dashboard.html` now instant-redirects to command-center.html
+- **Nav links**: observe.html + optimization.html updated with command-center nav
+- **maikr banner**: `frontend/assets/maikr-banner.jpg` (1280×698, uploaded by Derek)
+- **Avant Garde logo**: `frontend/assets/avant-garde-logo.jpg` (uploaded by Derek, used in "Powered by Avant Garde" footer)
+- Backend restart #49, maikr-backend PID 1898025
+
+### Phase 8: Economic Restructuring (Consumption Billing) — COMPLETE
+- **New pricing tiers**: Value $44.99 | Growth $99.99 | Scale $199.99 | Enterprise $499
+- **DB migration**: Added `base_tokens`, `base_tokens_used`, `outcome_credits`, `outcome_credits_used`, `plan_name` to agents table
+- **New tables**: `credit_transactions` (ledger), `credit_purchases`
+- **Files**: `backend/services/creditManager.js`, `backend/routes/creditRoutes.js`
+- **Token rates** (per 1K tokens): gpt-4.1-mini $0.15, gpt-5-mini $0.25, minimax-m2.7 $0.15, ollama free
+- **Outcome credit rates**: lead_qualified=2, appointment_booked=3, support_ticket_resolved=1, document_generated=1, escalation_resolved=1, rag_query=0.25, mcp_tool_call=0.5
+- **Credit packs**: Outcome 10 ($15), Growth 50 ($65), Scale 100 ($110)
+- **Provision flow updated**: webhook passes baseTokens + outcomeCredits from PRICING; provisioning.js inserts them
+- **swarm.js**: now calls `creditManager.deductTokenCost()` after each LLM call (async, non-blocking)
+- **Command Center credit panel**: live credit status cards with progress bars, color-coded (blue→yellow→red)
+- **API endpoints**: GET /api/credits/status/:agentId, GET /api/credits/transactions/:agentId, GET /api/credits/packs, POST /api/credits/deduct-outcome
+
+### Bug Fixes Applied Today
+- `tracer.js:OPENROUTOR_API_KEY` typo → `OPENROUTER_API_KEY`
+- `swarm.js`: removed unused `withTrace` import
+- `routes/creditRoutes.js`: auth middleware on all credit routes
+
+### Known Critical Issues (Not Yet Fixed)
+1. **session-manager.js uses `openclaw run`** (doesn't exist) — per-customer OpenClaw agents won't start until rewritten
+2. **MCP tools not injected into swarm agent system prompts** — LLM can't see MCP tools yet
+3. **provisioning.js**: `customer_id` column referenced but `customers` table may not exist; `data_opt_out` column may not exist on agents table
+4. **provisioning.js**: API key hash is plaintext — needs bcrypt hash before production
+5. **OUTCOME_RATES stores floats** (0.25, 0.5) but `outcome_credits` column is INTEGER — truncation will occur
+6. **creditManager.deductTokenCost**: TOKEN_RATES[$0.15/1K] produces fractional credits that get Math.round into the wrong column
+7. **RAG scoring fires async** after every response but not called in a way that blocks response — good, but outcome credit deduction for specific outcomes (lead_qualified, appointment_booked) is not yet wired into swarm flow
+
+### M.ai.K.R Full Stack Status
+- **Live**: maikr.pro (landing + checkout), /chat, /observe.html, /optimization.html, /command-center.html, /channels.html, /swarm.html, /mcp.html, /success.html, /error.html
+- **Backend restart #49**, PM2 PID 1898025, ollama-router PID 1348597 (38h uptime)
+- **Langfuse**: live at us.cloud.langfuse.com with sk-lf-2b146... credentials
+- **SSL**: Let's Encrypt cert for maikr.pro, expires Aug 7 2026

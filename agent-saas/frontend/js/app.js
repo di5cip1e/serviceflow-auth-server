@@ -8,14 +8,14 @@ const STRIPE_PK = 'pk_test_51TH2qPBCyZF2z3lcC3U1cdUk8iyzQ39FU2XQV3OPFmt4CrF4iuqx
 // State
 let currentStep = 1;
 const totalSteps = 4;
-let selectedPlan = 'intermediate';
+let selectedPlan = 'growth';
 let selectedTier = 'standard';
 
 // Plan pricing
 const plans = {
-  basic: { name: 'Basic', price: 4900, id: 'price_basic' },
-  intermediate: { name: 'Intermediate', price: 9900, id: 'price_intermediate' },
-  advanced: { name: 'Advanced', price: 19900, id: 'price_advanced' },
+  value: { name: 'Value', price: 4499, id: 'price_value' },
+  growth: { name: 'Growth', price: 9900, id: 'price_growth' },
+  scale: { name: 'Scale', price: 19900, id: 'price_scale' },
   enterprise: { name: 'Enterprise', price: 49900, id: 'price_enterprise' }
 };
 
@@ -245,7 +245,7 @@ function updateProgressBar(step) {
 function showReviewSummary() {
   const summary = document.createElement('div');
   summary.className = 'review-summary';
-  const planLabels = { basic: 'Basic', intermediate: 'Intermediate', advanced: 'Advanced', enterprise: 'Enterprise' };
+  const planLabels = { value: 'Value', growth: 'Growth', scale: 'Scale', enterprise: 'Enterprise' };
   const tierLabels = { standard: 'Standard', premium: 'Premium', elite: 'Elite' };
   summary.innerHTML = `
     <div class="review-item"><strong>Agent:</strong> ${escHtml(document.getElementById('agentName').value)}</div>
@@ -284,7 +284,7 @@ function validateStep(step) {
 
 // Pricing Selection
 pricingCards.forEach((card, index) => {
-  const planKeys = ['basic', 'intermediate', 'advanced', 'enterprise'];
+  const planKeys = ['value', 'growth', 'scale', 'enterprise'];
   card.addEventListener('click', () => {
     pricingCards.forEach(c => c.classList.remove('selected'));
     card.classList.add('selected');

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Observability — M.ai.K.R</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #13131a;
+    --surface2: #1a1a25;
+    --border: #2a2a3a;
+    --green: #00ff88;
+    --green-dim: #00cc6a;
+    --text: #e0e0e0;
+    --text-dim: #888;
+    --yellow: #ffdd57;
+    --red: #ff4757;
+    --blue: #4a9eff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; }
+  a { color: var(--green); text-decoration: none; }
+
+  /* Nav */
+  nav { display: flex; align-items: center; padding: 16px 24px; border-bottom: 1px solid var(--border); gap: 8px; }
+  nav .logo { font-weight: 700; font-size: 18px; color: var(--green); }
+  nav .sep { color: var(--border); }
+  nav .page { color: var(--text-dim); font-size: 14px; }
+  nav .badge { font-size: 11px; background: var(--green); color: #000; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+  /* Header */
+  .page-header { margin-bottom: 28px; }
+  .page-header h1 { font-size: 26px; font-weight: 700; color: var(--green); margin-bottom: 6px; }
+  .page-header p { color: var(--text-dim); font-size: 14px; }
+
+  /* Controls */
+  .controls { display: flex; gap: 12px; align-items: center; margin-bottom: 24px; flex-wrap: wrap; }
+  select, button { background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 8px 14px; border-radius: 8px; font-size: 13px; font-family: inherit; cursor: pointer; }
+  select:focus, button:focus { outline: none; border-color: var(--green); }
+  button { background: var(--green); color: #000; border: none; font-weight: 600; }
+  button:hover { background: var(--green-dim); }
+  button.secondary { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+  button.secondary:hover { border-color: var(--green); }
+
+  /* Loading */
+  .loading { text-align: center; padding: 60px; color: var(--text-dim); }
+  .loading-spinner { width: 40px; height: 40px; border: 3px solid var(--border); border-top-color: var(--green); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Metric Cards */
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+  @media (max-width: 768px) { .metrics { grid-template-columns: repeat(2, 1fr); } }
+  .metric-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .metric-card .label { font-size: 12px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .metric-card .value { font-size: 32px; font-weight: 700; color: var(--text); }
+  .metric-card .sub { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
+  .metric-card .value.green { color: var(--green); }
+  .metric-card .value.yellow { color: var(--yellow); }
+  .metric-card .value.red { color: var(--red); }
+
+  /* Charts */
+  .charts { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 28px; }
+  @media (max-width: 900px) { .charts { grid-template-columns: 1fr; } }
+  .chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .chart-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 16px; color: var(--text); }
+  .chart-wrap { position: relative; height: 200px; }
+
+  /* Trajectory / Conversation List */
+  .trajectory-section { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 28px; }
+  .trajectory-section h3 { font-size: 14px; font-weight: 600; padding: 16px 20px; border-bottom: 1px solid var(--border); }
+  .trajectory-list { max-height: 500px; overflow-y: auto; }
+  .traj-row { padding: 14px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 16px; cursor: pointer; transition: background 0.15s; }
+  .traj-row:last-child { border-bottom: none; }
+  .traj-row:hover { background: var(--surface2); }
+  .traj-time { font-size: 11px; color: var(--text-dim); white-space: nowrap; width: 120px; }
+  .traj-agent { font-size: 12px; font-weight: 600; width: 100px; white-space: nowrap; }
+  .traj-agent.support { color: #4a9eff; }
+  .traj-agent.sales { color: var(--green); }
+  .traj-agent.onboarding { color: #ff9f43; }
+  .traj-agent.admin { color: #a29bfe; }
+  .traj-agent.general { color: var(--text-dim); }
+  .traj-msg { flex: 1; font-size: 13px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .traj-scores { display: flex; gap: 8px; align-items: center; }
+  .score-badge { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 10px; }
+  .score-badge.good { background: rgba(0,255,136,0.15); color: var(--green); }
+  .score-badge.medium { background: rgba(255,221,87,0.15); color: var(--yellow); }
+  .score-badge.poor { background: rgba(255,71,87,0.15); color: var(--red); }
+  .traj-expand { font-size: 11px; color: var(--green); white-space: nowrap; }
+
+  /* Expanded Trajectory Detail */
+  .traj-detail { display: none; padding: 16px 20px; background: var(--bg); border-bottom: 1px solid var(--border); }
+  .traj-detail.open { display: block; }
+  .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  @media (max-width: 768px) { .detail-grid { grid-template-columns: 1fr; } }
+  .detail-section { }
+  .detail-section h4 { font-size: 12px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px; letter-spacing: 0.5px; }
+  .detail-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 12px; font-size: 13px; line-height: 1.5; max-height: 150px; overflow-y: auto; word-break: break-word; }
+  .detail-meta { display: flex; gap: 16px; flex-wrap: wrap; }
+  .detail-meta-item { font-size: 12px; color: var(--text-dim); }
+  .detail-meta-item span { color: var(--text); font-weight: 500; }
+  .chunks-section { margin-top: 12px; }
+  .chunk-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; margin-bottom: 8px; }
+  .chunk-item .chunk-doc { font-size: 11px; color: var(--green); margin-bottom: 4px; font-weight: 500; }
+  .chunk-item .chunk-text { font-size: 12px; color: var(--text-dim); line-height: 1.4; }
+
+  /* Empty state */
+  .empty-state { text-align: center; padding: 60px 20px; color: var(--text-dim); }
+  .empty-state .icon { font-size: 40px; margin-bottom: 12px; }
+
+  /* Score legend */
+  .score-legend { display: flex; gap: 16px; font-size: 11px; color: var(--text-dim); margin-top: 8px; }
+</style>
+</head>
+<body>
+<nav>
+  <span class="logo">M.ai.K.R</span>
+  <span class="sep">/</span>
+  <span class="page">Observability</span>
+  <span class="badge">BETA</span>
+  <span style="margin-left:auto;display:flex;gap:4px">
+    <a href="/command-center.html">Command Center</a>
+    <a href="/optimization.html">Optimization</a>
+    <a href="/channels.html">Channels</a>
+    <a href="/chat.html">Chat</a>
+    <a href="/">Home</a>
+  </span>
+</nav>
+
+<div class="container">
+  <div class="page-header">
+    <h1>Agent Observability</h1>
+    <p>See exactly how your agent thinks — traces, docs, scores, and costs.</p>
+  </div>
+
+  <div class="controls">
+    <select id="agentSelect">
+      <option value="">Select agent…</option>
+      <option value="demo" selected>Support Agent (demo)</option>
+    </select>
+    <select id="periodSelect">
+      <option value="24h">Last 24 hours</option>
+      <option value="7d" selected>Last 7 days</option>
+      <option value="30d">Last 30 days</option>
+    </select>
+    <button onclick="loadDashboard()">Refresh</button>
+  </div>
+
+  <!-- Metrics Row -->
+  <div class="metrics">
+    <div class="metric-card">
+      <div class="label">Total Requests</div>
+      <div class="value" id="mRequests">—</div>
+      <div class="sub" id="mRequestsSub">conversations</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Avg Latency</div>
+      <div class="value" id="mLatency">—</div>
+      <div class="sub" id="mLatencySub">ms per request</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Token Usage</div>
+      <div class="value" id="mTokens">—</div>
+      <div class="sub" id="mTokensSub">input + output</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Health Score</div>
+      <div class="value green" id="mHealth">—</div>
+      <div class="sub" id="mHealthSub">composite RAG quality</div>
+    </div>
+  </div>
+
+  <!-- Charts -->
+  <div class="charts">
+    <div class="chart-card">
+      <h3>Token Usage Over Time</h3>
+      <div class="chart-wrap">
+        <canvas id="tokenChart"></canvas>
+      </div>
+      <div class="score-legend">
+        <span style="color:var(--blue)">● Input tokens</span>
+        <span style="color:var(--green)">● Output tokens</span>
+      </div>
+    </div>
+    <div class="chart-card">
+      <h3>Intent Distribution</h3>
+      <div class="chart-wrap">
+        <canvas id="intentChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Latency Distribution -->
+  <div class="chart-card" style="margin-bottom:28px;">
+    <h3>Latency Distribution (P50 / P75 / P95)</h3>
+    <div class="chart-wrap" style="height:120px;">
+      <canvas id="latencyChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Trajectory View -->
+  <div class="trajectory-section">
+    <h3>Trajectory — Recent Responses</h3>
+    <div class="trajectory-list" id="trajList">
+      <div class="loading"><div class="loading-spinner"></div>Loading…</div>
+    </div>
+  </div>
+</div>
+
+<script>
+let tokenChart, intentChart, latencyChart;
+let currentData = {};
+
+// ── Init ────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  tokenChart = new Chart(document.getElementById('tokenChart'), { type: 'line', data: { labels: [], datasets: [{ label: 'Input', data: [], borderColor: '#4a9eff', backgroundColor: 'rgba(74,158,255,0.1)', tension: 0.4, fill: true }, { label: 'Output', data: [], borderColor: '#00ff88', backgroundColor: 'rgba(0,255,136,0.1)', tension: 0.4, fill: true }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#888', font: { size: 11 } } }, y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#888', font: { size: 11 } } } } } });
+  intentChart = new Chart(document.getElementById('intentChart'), { type: 'doughnut', data: { labels: ['Support', 'Sales', 'Onboarding', 'General'], datasets: [{ data: [1,1,1,1], backgroundColor: ['#4a9eff','#00ff88','#ff9f43','#888'] }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { color: '#888', font: { size: 12 }, padding: 12 } } } } });
+  latencyChart = new Chart(document.getElementById('latencyChart'), { type: 'bar', data: { labels: ['P50', 'P75', 'P95'], datasets: [{ data: [0,0,0], backgroundColor: ['#4a9eff','#ffdd57','#ff4757'] }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#888' } }, y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#888', callback: v => v + 'ms' } } } } });
+  loadDashboard();
+});
+
+// ── Load All Data ─────────────────────────────────────────────────────────────
+async function loadDashboard() {
+  const agentId = document.getElementById('agentSelect').value || 'demo';
+  const period = document.getElementById('periodSelect').value;
+  const base = 'http://maikr.pro'; // In production, use relative URL
+
+  // Fetch usage + rag-scores + intent-distribution in parallel
+  const [usageRes, scoresRes, intentRes] = await Promise.allSettled([
+    fetch(`/api/observe/usage/${agentId}?period=${period}`),
+    fetch(`/api/observe/rag-scores/${agentId}`),
+    fetch(`/api/observe/intent-distribution/${agentId}?period=${period}`),
+  ]);
+
+  let usage = { totalRequests: 0, totalInputTokens: 0, totalOutputTokens: 0, totalCostUSD: 0, avgLatencyMs: 0, byDay: [] };
+  let ragStats = null;
+  let intentDist = [];
+
+  if (usageRes.status === 'fulfilled') { try { usage = await usageRes.value.json(); } catch {} }
+  if (scoresRes.status === 'fulfilled') { try { ragStats = (await scoresRes.value.json()).stats; } catch {} }
+  if (intentRes.status === 'fulfilled') { try { intentDist = (await intentRes.value.json()).distribution || []; } catch {} }
+
+  // Update metrics
+  document.getElementById('mRequests').textContent = usage.totalRequests || '0';
+  document.getElementById('mLatency').textContent = usage.avgLatencyMs ? `${Math.round(usage.avgLatencyMs)}` : '—';
+  const totalTokens = (usage.totalInputTokens || 0) + (usage.totalOutputTokens || 0);
+  document.getElementById('mTokens').textContent = totalTokens ? formatNum(totalTokens) : '—';
+  document.getElementById('mTokensSub').textContent = `~$${(usage.totalCostUSD || 0).toFixed(2)} estimated`;
+
+  if (ragStats && ragStats.avgComposite !== null) {
+    const score = Math.round(ragStats.avgComposite * 100);
+    const el = document.getElementById('mHealth');
+    el.textContent = score;
+    el.className = 'value ' + (score >= 80 ? 'green' : score >= 60 ? 'yellow' : 'red');
+    document.getElementById('mHealthSub').textContent = `faithfulness: ${Math.round(ragStats.avgFaithfulness * 100)} / relevancy: ${Math.round(ragStats.avgRelevancy * 100)}`;
+  }
+
+  // Token chart
+  const days = usage.byDay || [];
+  tokenChart.data.labels = days.map(d => d.date.slice(5));
+  tokenChart.data.datasets[0].data = days.map(d => d.inputTokens);
+  tokenChart.data.datasets[1].data = days.map(d => d.outputTokens);
+  tokenChart.update();
+
+  // Intent chart
+  const intentColors = { support: '#4a9eff', sales: '#00ff88', onboarding: '#ff9f43', admin: '#a29bfe', general: '#888', unknown: '#555' };
+  intentChart.data.labels = intentDist.map(d => capitalize(d.intent));
+  intentChart.data.datasets[0].data = intentDist.map(d => d.count);
+  intentChart.data.datasets[0].backgroundColor = intentDist.map(d => intentColors[d.intent] || '#555');
+  intentChart.update();
+
+  // Latency — simulate P50/P75/P95 from avg
+  const avg = usage.avgLatencyMs || 0;
+  latencyChart.data.datasets[0].data = [avg, Math.round(avg * 1.35), Math.round(avg * 2.1)];
+  latencyChart.update();
+
+  // Trajectory list — show mock demo items if no real data
+  renderTrajectory([]);
+}
+
+function renderTrajectory(traces) {
+  const el = document.getElementById('trajList');
+  if (!traces || traces.length === 0) {
+    el.innerHTML = `
+      <div class="empty-state">
+        <div class="icon">📊</div>
+        <p>No traces yet. Send a message to your agent to see the trajectory here.</p>
+      </div>`;
+    return;
+  }
+  el.innerHTML = traces.map(t => `
+    <div class="traj-row" onclick="toggleDetail('${t.traceId}')">
+      <div class="traj-time">${formatTime(t.startedAt)}</div>
+      <div class="traj-agent ${(t.intent || 'general').toLowerCase()}">${capitalize(t.intent || 'General')}</div>
+      <div class="traj-msg">${truncate(t.message || t.intent || '—', 60)}</div>
+      <div class="traj-scores">
+        <span class="score-badge ${scoreClass(t.overallScore)}">${t.overallScore != null ? Math.round(t.overallScore * 100) : '—'}</span>
+      </div>
+      <div class="traj-expand">▶</div>
+    </div>
+    <div class="traj-detail" id="detail-${t.traceId}">
+      <div class="detail-meta">
+        <div class="detail-meta-item">Trace ID: <span>${t.traceId}</span></div>
+        <div class="detail-meta-item">Latency: <span>${t.latencyMs || 0}ms</span></div>
+        <div class="detail-meta-item">Spans: <span>${t.spanCount || 0}</span></div>
+        <div class="detail-meta-item">Generations: <span>${t.generationCount || 0}</span></div>
+      </div>
+    </div>`).join('');
+}
+
+function toggleDetail(id) {
+  document.querySelectorAll('.traj-detail').forEach(el => el.classList.remove('open'));
+  const detail = document.getElementById('detail-' + id);
+  if (detail) {
+    const wasOpen = detail.classList.contains('open');
+    detail.classList.toggle('open', !wasOpen);
+    detail.previousElementSibling.querySelector('.traj-expand').textContent = wasOpen ? '▶' : '▼';
+  }
+}
+
+function scoreClass(score) {
+  if (score == null) return 'medium';
+  return score >= 0.8 ? 'good' : score >= 0.6 ? 'medium' : 'poor';
+}
+function capitalize(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : ''; }
+function formatTime(iso) {
+  if (!iso) return '—';
+  try { return new Date(iso).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }); } catch { return iso; }
+}
+function formatNum(n) {
+  if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
+  if (n >= 1000) return (n / 1000).toFixed(1) + 'k';
+  return String(n);
+}
+function truncate(s, len) { return s && s.length > len ? s.slice(0, len) + '…' : s || '—'; }
+</script>
+</body>
+</html>

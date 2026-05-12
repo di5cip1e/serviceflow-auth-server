@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MAIKR Omnichannel Dashboard - Prism Mock</title>
+  <style>
+    :root{
+      --bg: #0a0a0f;
+      --card: #141720;
+      --text: #e6e6e6;
+      --muted: #aab0be;
+      --accent: #00ff88;
+      --grid: 12px;
+    }
+    *{box-sizing: border-box}
+    html,body{margin:0;padding:0;height:100%;background:var(--bg);color:var(--text);font-family:Arial, sans-serif}
+    .container{max-width:1200px;margin:0 auto;padding:20px}
+    h1{font-size:20px;margin:0 0 16px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+    .card{background:var(--card);border:1px solid #222;border-radius:12px;padding:14px}
+    .card h3{margin:0 0 8px;font-size:14px;letter-spacing:.4px}
+    .status{font-weight:bold;margin-bottom:6px}
+    .status.ok{color:#2bd36f}
+    .status.err{color:#ff6b6b}
+    .status.off{color:#9aa}
+    .row{display:flex;justify-content:space-between;gap:8px;margin:6px 0}
+    .label{font-size:12px;color:var(--muted)}
+    .value{font-variant-numeric: tabular-nums;}
+    .feed{max-height:180px;overflow:auto;border:1px solid #222;border-radius:8px;padding:8px;background:#0f111a}
+    .feed-item{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid #222}
+    .icon{width:22px;height:22px;border-radius:6px;background:#222;display:flex;align-items:center;justify-content:center;font-size:12px}
+    .timestamp{color:#9bd; font-size:12px}
+    .config{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .field{display:flex;flex-direction:column;gap:6px}
+    input{padding:8px;border-radius:6px;border:1px solid #333;background:#111;color:#ddd}
+    .copy{cursor:pointer;background:#222;border:1px solid #333;color:#ddd;border-radius:6px;padding:6px 8px;position:relative}
+    .tooltip{position:absolute;background:#222;color:#fff;padding:4px 8px;border-radius:4px;top:-28px;left:0;white-space:nowrap;display:none}
+    .copy.active .tooltip{display:block}
+    .switch{width:46px;height:26px;background:#333;border-radius:999px;position:relative;cursor:pointer;}
+    .switch .knob{position:absolute;top:3px;left:3px;width:20px;height:20px;background:white;border-radius:50%;transition:transform .2s}
+    .switch.on{background:#1f8f3b}
+    .switch.on .knob{transform: translateX(20px)}
+    @media (max-width:600px){
+      .config{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Maikr Phase 3 - Omnichannel Dashboard (Mock)</h1>
+    <div class="grid">
+      <!-- Channel Cards -->
+      <div class="card" id="twilio-sms">
+        <h3>Twilio SMS</h3>
+        <div class="status ok">Connected</div>
+        <div class="row"><span class="label">Last message</span><span class="value">2 mins ago</span></div>
+        <div class="row"><span class="label">Messages today</span><span class="value">47</span></div>
+        <div class="row"><span class="label">Channel</span><span class="value">Inbound</span></div>
+        <div class="row"><span class="label">Enabled</span><span class="value"><span class="switch on"><span class="knob"></span></span></span></div>
+      </div>
+      <div class="card" id="twilio-whatsapp">
+        <h3>Twilio WhatsApp</h3>
+        <div class="status ok">Connected</div>
+        <div class="row"><span class="label">Last message</span><span class="value">3 mins ago</span></div>
+        <div class="row"><span class="label">Messages today</span><span class="value">28</span></div>
+        <div class="row"><span class="label">Channel</span><span class="value">Inbound</span></div>
+        <div class="row"><span class="label">Enabled</span><span class="value"><span class="switch on"><span class="knob"></span></span></span></div>
+      </div>
+      <div class="card" id="slack">
+        <h3>Slack</h3>
+        <div class="status err">Disconnected</div>
+        <div class="row"><span class="label">Last message</span><span class="value">-</span></div>
+        <div class="row"><span class="label">Messages today</span><span class="value">0</span></div>
+        <div class="row"><span class="label">Channel</span><span class="value">Inbound</span></div>
+        <div class="row"><span class="label">Enabled</span><span class="value"><span class="switch off"><span class="knob"></span></span></span></div>
+      </div>
+    </div>
+    <h2 style="margin-top:20px;font-size:16px;">Recent Messages</h2>
+    <div class="feed" aria-label="recent-messages">
+      <div class="feed-item"><div class="icon">S</div><div><strong>Twilio SMS</strong> - Hi there! <span class="timestamp">2m</span></div></div>
+      <div class="feed-item"><div class="icon">W</div><div><strong>Twilio WhatsApp</strong> - Ready for batch send? <span class="timestamp">4m</span></div></div>
+      <div class="feed-item"><div class="icon">S</div><div><strong>Slack</strong> - New message in #dev <span class="timestamp">5m</span></div></div>
+      <div class="feed-item"><div class="icon">S</div><div><strong>Slack</strong> - Standup at 9 <span class="timestamp">9m</span></div></div>
+    </div>
+    <h2 style="margin-top:20px;font-size:16px;">Configuration</h2>
+    <div class="config" aria-label="config-panel">
+      <div class="field">
+        <label>Twilio SMS Webhook</label>
+        <input type="text" value="https://maikr.pro/api/webhooks/twilio" readonly />
+        <button class="copy" onclick="copyToClipboard('https://maikr.pro/api/webhooks/twilio', this)">Copy
+          <span class="tooltip">Copied!</span>
+        </button>
+      </div>
+      <div class="field">
+        <label>Slack Webhook</label>
+        <input type="text" value="https://maikr.pro/api/webhooks/slack" readonly />
+        <button class="copy" onclick="copyToClipboard('https://maikr.pro/api/webhooks/slack', this)">Copy
+          <span class="tooltip">Copied!</span>
+        </button>
+      </div>
+      <div class="field">
+        <label>Twilio SMS Token</label>
+        <input type="password" value="********" readonly />
+      </div>
+      <div class="field">
+        <label>Slack Token</label>
+        <input type="password" value="********" readonly />
+      </div>
+    </div>
+  </div>
+  <script>
+    function copyToClipboard(text, btn){
+      navigator.clipboard.writeText(text).then(()=>{
+        const tip = btn.querySelector('.tooltip');
+        tip.style.display='block';
+        setTimeout(()=>{tip.style.display='none';},1200);
+      });
+    }
+  </script>
+</body>
+</html>

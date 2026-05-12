@@ -4,10 +4,10 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 // Pricing tiers
 const PRICING = {
-  basic: { price: 4900, name: 'Basic Agent' },
-  intermediate: { price: 9900, name: 'Pro Agent' },
-  advanced: { price: 19900, name: 'Enterprise Agent' },
-  enterprise: { price: 49900, name: 'Custom Agent' }
+  value: { price: 4499, name: 'Value Agent', base_tokens: 20000, outcome_credits: 100 },
+  growth: { price: 9900, name: 'Growth Agent', base_tokens: 50000, outcome_credits: 500 },
+  scale: { price: 19900, name: 'Scale Agent', base_tokens: 200000, outcome_credits: 2000 },
+  enterprise: { price: 49900, name: 'Enterprise Agent', base_tokens: 1000000, outcome_credits: 10000 }
 };
 
 router.post('/', async (req, res) => {
