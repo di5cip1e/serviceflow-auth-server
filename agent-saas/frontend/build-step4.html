@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Choose Your Plan — M.ai.K.R</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+  <div class="page-wrapper">
+    <header class="main-header">
+      <a href="/" class="logo">
+        <span class="logo-text">M.ai.K.R</span>
+      </a>
+      <div class="step-indicator">Step 4 of 4</div>
+    </header>
+
+    <main class="form-container">
+      <div class="step-header">
+        <h2>Choose your plan</h2>
+        <p>Scale up or down anytime. No lock-in.</p>
+      </div>
+
+      <!-- Agent summary badge -->
+      <div class="agent-summary" id="agentSummary" style="display:none;"></div>
+
+      <form id="step4Form">
+        <!-- Plan Cards -->
+        <div class="plan-cards">
+          <div class="plan-card" data-plan="value" onclick="selectPlan('value')">
+            <div class="plan-header">
+              <h3>Value</h3>
+              <div class="plan-price">$45<span>/mo</span></div>
+            </div>
+            <ul class="plan-features">
+              <li>✅ Custom AI agent</li>
+              <li>✅ Chat interface</li>
+              <li>✅ 20,000 base tokens/mo</li>
+              <li>✅ 100 Outcome Credits</li>
+              <li>✅ Email alerts</li>
+            </ul>
+          </div>
+
+          <div class="plan-card selected" data-plan="growth" onclick="selectPlan('growth')">
+            <div class="plan-badge">Most Popular</div>
+            <div class="plan-header">
+              <h3>Growth</h3>
+              <div class="plan-price">$100<span>/mo</span></div>
+            </div>
+            <ul class="plan-features">
+              <li>✅ Everything in Value</li>
+              <li>✅ 50,000 base tokens/mo</li>
+              <li>✅ 500 Outcome Credits</li>
+              <li>✅ Brand memory</li>
+              <li>✅ Smart routing</li>
+            </ul>
+          </div>
+
+          <div class="plan-card" data-plan="scale" onclick="selectPlan('scale')">
+            <div class="plan-header">
+              <h3>Scale</h3>
+              <div class="plan-price">$200<span>/mo</span></div>
+            </div>
+            <ul class="plan-features">
+              <li>✅ Everything in Growth</li>
+              <li>✅ 200,000 base tokens/mo</li>
+              <li>✅ 2,000 Outcome Credits</li>
+              <li>✅ Multi-agent orchestration</li>
+              <li>✅ SLA guarantee</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Intelligence Tier -->
+        <div class="tier-section" id="tierSection" style="margin-top:24px;">
+          <label class="tier-label">Intelligence Tier <span style="font-weight:400;color:#94a3b8;font-size:13px;">(add-on)</span></label>
+          <div class="tier-options">
+            <label class="tier-option selected" onclick="selectTier('standard')">
+              <input type="radio" name="tier" value="standard" checked>
+              <div class="tier-content">
+                <div class="tier-name">Standard</div>
+                <div class="tier-desc">Fast, capable, always free</div>
+                <div class="tier-price">$0/mo</div>
+              </div>
+            </label>
+            <label class="tier-option" onclick="selectTier('premium')">
+              <input type="radio" name="tier" value="premium">
+              <div class="tier-content">
+                <div class="tier-name">Premium</div>
+                <div class="tier-desc">Enhanced reasoning</div>
+                <div class="tier-price">+$15/mo</div>
+              </div>
+            </label>
+            <label class="tier-option" onclick="selectTier('elite')">
+              <input type="radio" name="tier" value="elite">
+              <div class="tier-content">
+                <div class="tier-name">Elite</div>
+                <div class="tier-desc">Maximum capability</div>
+                <div class="tier-price">+$30/mo</div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="btn-group" style="margin-top:28px;">
+          <a href="/build/usecases" class="btn-secondary">← Back</a>
+          <button type="button" class="btn-primary btn-full" id="checkoutBtn" onclick="proceedToCheckout()">
+            Deploy My Agent →
+          </button>
+        </div>
+      </form>
+    </main>
+  </div>
+
+  <script>
+    const STRIPE_PK = 'pk_test_51TH2qPBCyZF2z3lcC3U1cdUk8iyzQ39FU2XQV3OPFmt4CrF4iuqxIqHrVfU0zW9LFdWHimdKQwrmQdS4eaBtjj8a00QCfkbEEd';
+    const stripe = Stripe(STRIPE_PK);
+
+    let selectedPlan = 'growth';
+    let selectedTier = 'standard';
+
+    const plans = {
+      value: { name: 'Value', price: 4499, priceId: 'price_value_id' },
+      growth: { name: 'Growth', price: 9900, priceId: 'price_growth_id' },
+      scale: { name: 'Scale', price: 19900, priceId: 'price_scale_id' }
+    };
+
+    const tierAddons = { standard: 0, premium: 1500, elite: 3000 };
+
+    function selectPlan(plan) {
+      selectedPlan = plan;
+      document.querySelectorAll('.plan-card').forEach(c => {
+        c.classList.toggle('selected', c.dataset.plan === plan);
+      });
+    }
+
+    function selectTier(tier) {
+      selectedTier = tier;
+      document.querySelectorAll('.tier-option').forEach(o => {
+        o.classList.toggle('selected', o.querySelector('input').value === tier);
+      });
+    }
+
+    function proceedToCheckout() {
+      const data = JSON.parse(localStorage.getItem('maikr_form') || '{}');
+      data.plan = selectedPlan;
+      data.tier = selectedTier;
+      data.tierAddOn = tierAddons[selectedTier];
+
+      // Show loading
+      const btn = document.getElementById('checkoutBtn');
+      btn.textContent = 'Redirecting...';
+      btn.disabled = true;
+
+      // Send to backend to create Stripe session
+      fetch('/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(r => r.json())
+      .then(d => {
+        if (d.url) {
+          localStorage.setItem('maikr_form', JSON.stringify(data));
+          stripe.redirectToCheckout({ sessionId: d.sessionId });
+        } else {
+          alert('Something went wrong. Please try again.');
+          btn.textContent = 'Deploy My Agent →';
+          btn.disabled = false;
+        }
+      })
+      .catch(() => {
+        alert('Connection error. Is the backend running?');
+        btn.textContent = 'Deploy My Agent →';
+        btn.disabled = false;
+      });
+    }
+
+    // Init: show agent name if saved
+    const saved = JSON.parse(localStorage.getItem('maikr_form') || '{}');
+    if (saved.agentName) {
+      const summary = document.getElementById('agentSummary');
+      summary.style.display = 'block';
+      summary.textContent = `Building: ${saved.agentName} — ${saved.businessName || ''}`;
+    }
+  </script>
+</body>
+</html>

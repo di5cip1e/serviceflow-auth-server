@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Use Cases — M.ai.K.R</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="page-wrapper">
+    <header class="main-header">
+      <a href="/" class="logo">
+        <span class="logo-text">M.ai.K.R</span>
+      </a>
+      <div class="step-indicator">Step 3 of 4</div>
+    </header>
+
+    <main class="form-container">
+      <div class="step-header">
+        <h2>What will your agent do?</h2>
+        <p>Select the primary ways your agent will interact with people.</p>
+      </div>
+
+      <form id="step3Form" novalidate>
+        <div class="checkbox-group">
+          <label class="checkbox-label"><input type="checkbox" name="useCase" value="support"> Customer Support — answer questions, resolve issues</label>
+          <label class="checkbox-label"><input type="checkbox" name="useCase" value="sales"> Sales &amp; Lead Qualification — qualify prospects, book demos</label>
+          <label class="checkbox-label"><input type="checkbox" name="useCase" value="onboarding"> User Onboarding — guide new users, tutorials</label>
+          <label class="checkbox-label"><input type="checkbox" name="useCase" value="faq"> FAQ &amp; Knowledge Base — answer common questions</label>
+          <label class="checkbox-label"><input type="checkbox" name="useCase" value="booking"> Appointment Booking — schedule meetings, reservations</label>
+          <label class="checkbox-label"><input type="checkbox" name="useCase" value="feedback"> Feedback Collection — surveys, NPS, reviews</label>
+        </div>
+        <div class="form-group" style="margin-top:16px;">
+          <label for="primaryUse">Primary use case</label>
+          <input type="text" id="primaryUse" placeholder="Describe the main job your agent will handle">
+        </div>
+        <div class="form-group">
+          <label for="forbidden">Topics to avoid (optional)</label>
+          <input type="text" id="forbidden" placeholder="e.g., Pricing negotiations, competitor comparisons">
+        </div>
+        <div class="btn-group">
+          <a href="/build/audience" class="btn-secondary">← Back</a>
+          <button type="submit" class="btn-primary">Continue →</button>
+        </div>
+      </form>
+    </main>
+  </div>
+
+  <script>
+    const saved = JSON.parse(localStorage.getItem('maikr_form') || '{}');
+    if (saved.useCases) {
+      saved.useCases.forEach(v => {
+        const cb = document.querySelector(`input[name="useCase"][value="${v}"]`);
+        if (cb) cb.checked = true;
+      });
+    }
+    if (saved.primaryUse) document.getElementById('primaryUse').value = saved.primaryUse;
+    if (saved.forbidden) document.getElementById('forbidden').value = saved.forbidden;
+
+    document.getElementById('step3Form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const useCases = [...document.querySelectorAll('input[name="useCase"]:checked')].map(c => c.value);
+      const form = {
+        useCases,
+        primaryUse: document.getElementById('primaryUse').value.trim(),
+        forbidden: document.getElementById('forbidden').value.trim()
+      };
+      localStorage.setItem('maikr_form', JSON.stringify({...saved, ...form}));
+      window.location.href = '/build/plan';
+    });
+  </script>
+</body>
+</html>

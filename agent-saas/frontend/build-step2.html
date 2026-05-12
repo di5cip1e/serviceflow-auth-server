@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audience & Tone — M.ai.K.R</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="page-wrapper">
+    <header class="main-header">
+      <a href="/" class="logo">
+        <span class="logo-text">M.ai.K.R</span>
+      </a>
+      <div class="step-indicator">Step 2 of 4</div>
+    </header>
+
+    <main class="form-container">
+      <div class="step-header">
+        <h2>Who is your audience?</h2>
+        <p>We'll tailor your agent's voice and responses to your ideal customer.</p>
+      </div>
+
+      <form id="step2Form" novalidate>
+        <div class="form-group">
+          <label for="audience">Primary audience</label>
+          <input type="text" id="audience" placeholder="e.g., Small business owners, ages 30-55">
+        </div>
+        <div class="form-group">
+          <label for="tone">Communication style</label>
+          <select id="tone">
+            <option value="formal">Formal — professional, precise</option>
+            <option value="informative" selected>Informative — clear, educational</option>
+            <option value="supportive">Supportive — warm, encouraging</option>
+            <option value="persuasive">Persuasive — compelling, action-oriented</option>
+            <option value="humorous">Humorous — playful, entertaining</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="responseLength">Typical response length</label>
+          <select id="responseLength">
+            <option value="concise">Concise — quick answers, fewer details</option>
+            <option value="balanced" selected>Balanced — moderate detail, clear</option>
+            <option value="comprehensive">Comprehensive — thorough, detailed</option>
+          </select>
+        </div>
+        <div class="btn-group">
+          <a href="/build" class="btn-secondary">← Back</a>
+          <button type="submit" class="btn-primary">Continue →</button>
+        </div>
+      </form>
+    </main>
+  </div>
+
+  <script>
+    const saved = JSON.parse(localStorage.getItem('maikr_form') || '{}');
+    if (saved.audience) document.getElementById('audience').value = saved.audience;
+    if (saved.tone) document.getElementById('tone').value = saved.tone;
+    if (saved.responseLength) document.getElementById('responseLength').value = saved.responseLength;
+
+    document.getElementById('step2Form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = {
+        audience: document.getElementById('audience').value.trim(),
+        tone: document.getElementById('tone').value,
+        responseLength: document.getElementById('responseLength').value
+      };
+      localStorage.setItem('maikr_form', JSON.stringify({...saved, ...form}));
+      window.location.href = '/build/usecases';
+    });
+  </script>
+</body>
+</html>

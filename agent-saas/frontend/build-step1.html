@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Build Your Agent — M.ai.K.R</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="page-wrapper">
+    <header class="main-header">
+      <a href="/" class="logo">
+        <span class="logo-text">M.ai.K.R</span>
+      </a>
+      <div class="step-indicator">Step 1 of 4</div>
+    </header>
+
+    <main class="form-container">
+      <div class="step-header">
+        <h2>Let's build your AI agent</h2>
+        <p>Start with the basics — tell us about your agent and your business.</p>
+      </div>
+
+      <form id="step1Form" novalidate>
+        <div class="form-group">
+          <label for="agentName">What should we call your agent?</label>
+          <input type="text" id="agentName" placeholder="e.g., Sarah, The Support Bot, Atlas" required>
+        </div>
+        <div class="form-group">
+          <label for="businessName">Business or brand name</label>
+          <input type="text" id="businessName" placeholder="Your business name" required>
+        </div>
+        <div class="form-group">
+          <label for="industry">Industry</label>
+          <select id="industry" required>
+            <option value="">Select your industry</option>
+            <option>Technology &amp; Software</option>
+            <option>Healthcare &amp; Wellness</option>
+            <option>Finance &amp; FinTech</option>
+            <option>E-commerce &amp; Retail</option>
+            <option>Marketing &amp; Advertising</option>
+            <option>Real Estate</option>
+            <option>Legal &amp; Compliance</option>
+            <option>Education &amp; EdTech</option>
+            <option>Travel &amp; Hospitality</option>
+            <option>Food &amp; Beverage</option>
+            <option>Professional Services</option>
+            <option>Media &amp; Entertainment</option>
+            <option>Non-profit &amp; Social Impact</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="personality">Agent personality</label>
+          <select id="personality">
+            <option value="professional">Professional &amp; Businesslike</option>
+            <option value="friendly" selected>Friendly &amp; Approachable</option>
+            <option value="casual">Casual &amp; Conversational</option>
+            <option value="authoritative">Authoritative &amp; Expert</option>
+            <option value="playful">Playful &amp; Witty</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-primary btn-full">Continue →</button>
+      </form>
+    </main>
+  </div>
+
+  <script>
+    // Load saved data
+    const saved = JSON.parse(localStorage.getItem('maikr_form') || '{}');
+    if (saved.agentName) document.getElementById('agentName').value = saved.agentName;
+    if (saved.businessName) document.getElementById('businessName').value = saved.businessName;
+    if (saved.industry) document.getElementById('industry').value = saved.industry;
+    if (saved.personality) document.getElementById('personality').value = saved.personality;
+
+    document.getElementById('step1Form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = {
+        agentName: document.getElementById('agentName').value.trim(),
+        businessName: document.getElementById('businessName').value.trim(),
+        industry: document.getElementById('industry').value,
+        personality: document.getElementById('personality').value
+      };
+      if (!form.agentName || !form.businessName || !form.industry) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+      localStorage.setItem('maikr_form', JSON.stringify({...saved, ...form}));
+      window.location.href = '/build/audience';
+    });
+  </script>
+</body>
+</html>

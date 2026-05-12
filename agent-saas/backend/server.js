@@ -50,9 +50,18 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/landing.html'));
 });
 
-// Onboarding form at /build
+// Onboarding flow — separate pages per step
 app.get('/build', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/index.html'));
+  res.sendFile(path.join(__dirname, '../frontend/build-step1.html'));
+});
+app.get('/build/audience', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build-step2.html'));
+});
+app.get('/build/usecases', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build-step3.html'));
+});
+app.get('/build/plan', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build-step4.html'));
 });
 
 // Routes — webhook already mounted above (before express.json) for signature verification
