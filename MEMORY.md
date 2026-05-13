@@ -218,16 +218,41 @@
 - `routes/creditRoutes.js`: auth middleware on all credit routes
 
 ### Known Critical Issues (Not Yet Fixed)
-1. **session-manager.js uses `openclaw run`** (doesn't exist) — per-customer OpenClaw agents won't start until rewritten
-2. **MCP tools not injected into swarm agent system prompts** — LLM can't see MCP tools yet
-3. **provisioning.js**: `customer_id` column referenced but `customers` table may not exist; `data_opt_out` column may not exist on agents table
-4. **provisioning.js**: API key hash is plaintext — needs bcrypt hash before production
-5. **OUTCOME_RATES stores floats** (0.25, 0.5) but `outcome_credits` column is INTEGER — truncation will occur
-6. **creditManager.deductTokenCost**: TOKEN_RATES[$0.15/1K] produces fractional credits that get Math.round into the wrong column
-7. **RAG scoring fires async** after every response but not called in a way that blocks response — good, but outcome credit deduction for specific outcomes (lead_qualified, appointment_booked) is not yet wired into swarm flow
+1. ~~session-manager.js uses `openclaw run`~~ ✅ FIXED May 11 — now uses `openclaw agent --agent <slug> --session-id <key> --message <msg> --json`
+2. ~~MCP tools not injected into swarm agent system prompts~~ ✅ FIXED May 11 — `buildMCPToolsDescription()` in swarm.js injects tools into system prompt
+3. ~~provisioning.js: missing DB columns/tables~~ ✅ FIXED May 11 — customers, api_keys, credit_transactions, credit_purchases tables created; agents table extended
+4. ~~provisioning.js: plaintext API keys~~ ✅ FIXED May 11 — now hashes with bcrypt before storing
+5. ~~outcome_credits INTEGER truncation~~ ✅ FIXED May 11 — column changed to REAL
+6. **provisioning INSERT bug**: VALUES had 18 `?` but 19 cols — critical-fixes subagent fixed columns but VALUES had 17 `?` then 18 `?` then 19 `?` — fixed May 12 by manually correcting to 17 `?` before 'active' + 1 after = 19 total
+7. **Welcome email failing 403**: Mailgun aginstitute.tech domain — likely domain verification not complete
+8. **Auth system**: No user login — chat.html is open to anyone with agent ID + API key. No dashboard login page yet.
+9. **Outcome credits for lead_qualified/appointment_booked**: Not yet wired into swarm flow — no automatic credit deduction on specific outcomes
+
+### May 11-12 Session: Professional Redesign + Critical Fixes
+
+**Landing page redesign:**
+- New marketing landing page (landing.html) at `/` — hero, features, pricing, social proof, dark theme, Inter font
+- 4-step form split into separate pages: `/build` → `/build/audience` → `/build/usecases` → `/build/plan`
+- LocalStorage persists form data between steps
+- Landing page nav stripped clean — only essential links, Login button added
+- Privacy + Terms pages added (maikr.pro/privacy.html, /terms.html)
+- Premium CSS polish: step indicators with navy/glow, card shadows, refined input focus states
+- Express static `index.html` removed (was overriding landing page via express.static — caused 3hr debug)
+
+**Backend critical fixes:**
+- bcrypt module installed (`npm install bcrypt`) — backend was crashing without it
+- session-manager.js rewritten: `openclaw agent --agent <slug> --session-id <key> --message <msg> --json`
+- API keys hashed with bcrypt in provisioning
+- provisioning INSERT fixed: VALUES placeholders now match 19 columns exactly
+- DB: customers, api_keys, credit_transactions, credit_purchases tables added; agents table extended
+
+**Git history:**
+- git filter-branch ran May 11 to remove 645MB of large files (ironveil, PixelForge)
+- Commits: a89d91b (Phases 1-8), 8c6df17 (fix index.html override), c0138d0 (provisioning INSERT), a2460a4 (login nav)
 
 ### M.ai.K.R Full Stack Status
-- **Live**: maikr.pro (landing + checkout), /chat, /observe.html, /optimization.html, /command-center.html, /channels.html, /swarm.html, /mcp.html, /success.html, /error.html
-- **Backend restart #49**, PM2 PID 1898025, ollama-router PID 1348597 (38h uptime)
-- **Langfuse**: live at us.cloud.langfuse.com with sk-lf-2b146... credentials
+- **Live**: maikr.pro/ (landing), /build/* (4-step form), /chat.html, /observe.html, /optimization.html, /command-center.html, /channels.html, /swarm.html, /mcp.html, /privacy.html, /terms.html
+- **Backend restarts**: ~24 restarts (bcrypt crash, index.html debug, provisioning fixes)
+- **Langfuse**: live at us.cloud.langfuse.com
 - **SSL**: Let's Encrypt cert for maikr.pro, expires Aug 7 2026
+- **Test agent**: TestBot4 spawned (agent:test-company-4-mp1zl4e6:main), chat API verified working
