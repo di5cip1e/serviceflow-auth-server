@@ -1,3 +1,4 @@
+
 /**
  * Observability Routes — GET /api/observe/*
  * Serves trace data, token usage stats, and RAG quality scores
@@ -5,6 +6,16 @@
  */
 const express = require('express');
 const router = express.Router();
+
+// GET /api/observe/summary — overview of all traces
+router.get('/summary', (req, res) => {
+  const { getRecentTraces } = require('./tracer');
+  const traces = getRecentTraces(null, 100);
+  const totalTraces = traces.length;
+  const avgScore = totalTraces > 0 ? traces.reduce((sum, t) => sum + (t.overallScore || 0), 0) / totalTraces : 0;
+  res.json({ totalTraces, avgScore: avgScore.toFixed(2), recentTraces: traces.slice(0, 5) });
+});
+
 const db = require('../database');
 const { getRecentTraces, getTrace } = require('./tracer');
 

@@ -70,6 +70,7 @@ app.use('/api/chat', chatRoutes);  // Disabled for testing
 app.use('/api', agentRoutes);
 app.use('/api/documents', documentsRoutes);
 app.use('/api/chat', swarmRoutes);
+app.use('/api/swarm', swarmRoutes);
 app.use('/api/mcp', mcpRoutes);    // MCP server management (before swarm catch-all)
 app.use('/api', channelRoutes);     // webhook handlers for Twilio, Slack, etc.
 app.use('/api', swarmRoutes);

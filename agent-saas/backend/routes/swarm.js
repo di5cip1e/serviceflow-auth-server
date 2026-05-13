@@ -1,4 +1,4 @@
-/**
+ /**
  * Swarm Chat Route — POST /api/chat/swarm
  * Main entry point for the multi-agent swarm system.
  * Replaces the single-agent /api/chat endpoint.
@@ -78,6 +78,34 @@ function buildMCPToolsDescription(agentId) {
    POST /api/chat/swarm
    Body: { agentId, message, conversationId? }
 ───────────────────────────────────────────── */
+// Swarm status endpoints
+router.get('/status', (req, res) => {
+  res.json({
+    status: 'active',
+    agents: { support: 'idle', sales: 'idle', onboarding: 'idle', general: 'idle', admin: 'idle' },
+    totalConversations: 0,
+    uptime: Math.floor(process.uptime())
+  });
+});
+
+router.get('/routing-log', (req, res) => {
+  try {
+    const { getRecentTraces } = require('../observability/tracer');
+    const traces = getRecentTraces(null, 50);
+    const routingLog = traces.map(t => ({
+      traceId: t.traceId,
+      intent: t.intent || 'unknown',
+      agent: t.agentId || 'unrouted',
+      startedAt: t.startedAt,
+      score: t.overallScore
+    }));
+    res.json({ count: routingLog.length, entries: routingLog });
+  } catch(e) {
+    res.json({ count: 0, entries: [], note: 'tracer not available' });
+  }
+});
+
+
 router.post('/', async (req, res) => {
   const { agentId, agent_id, message, conversationId } = req.body;
   if ((!agentId && !agent_id) || !message) {
