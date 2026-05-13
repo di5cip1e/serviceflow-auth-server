@@ -231,6 +231,39 @@ db.serialize(() => {
     FOREIGN KEY (agent_id) REFERENCES agents(id)
   )`);
 
+  // ── Users table ──────────────────────────────────────────────────────────────
+  db.run(`CREATE TABLE IF NOT EXISTS users (
+    id TEXT PRIMARY KEY,
+    email TEXT UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    name TEXT,
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT DEFAULT CURRENT_TIMESTAMP
+  )`);
+
+  // Sessions table (for connect-sqlite3 session store)
+  db.run(`CREATE TABLE IF NOT EXISTS sessions (
+    sid TEXT PRIMARY KEY,
+    sess TEXT NOT NULL,
+    expired TEXT NOT NULL
+  )`);
+
+  // Helper: add column if it doesn't exist (SQLite has no IF NOT EXISTS for ADD COLUMN)
+  function addColumnIfMissing(table, column, type, cb) {
+    db.all(`PRAGMA table_info(${table})`, [], (err, cols) => {
+      if (err) return cb(err);
+      if (!cols.some(c => c.name === column)) {
+        db.run(`ALTER TABLE ${table} ADD COLUMN ${column} ${type}`, cb);
+      } else {
+        cb(null);
+      }
+    });
+  }
+
+  // Migration: add user_id to existing tables
+  addColumnIfMissing('customers', 'user_id', 'TEXT', () => {});
+  addColumnIfMissing('api_keys', 'user_id', 'TEXT', () => {});
+
   // Create indexes for common queries
   db.run(`CREATE INDEX IF NOT EXISTS idx_conversations_agent ON conversations(agent_id, created_at DESC)`);
   db.run(`CREATE INDEX IF NOT EXISTS idx_token_usage_agent ON token_usage(agent_id, created_at DESC)`);

@@ -5,26 +5,16 @@ Implement complete auth system + guided onboarding for maikr.pro so paying custo
 
 ## Completed
 - [x] Design phase — AUTH-DESIGN.md created — 2026-05-13
+- [x] Task 1 — Database Migration — Users & Sessions Tables — 2026-05-13
 
 ## Up Next
 
-### Task 1: Database Migration — Users & Sessions Tables
-- **Files:** `backend/database.js`
-- **What:** Add `users` table, `sessions` table, add `user_id` FK to `customers` and `api_keys` tables
-- **Success:** `node -e "const db=require('./backend/database'); console.log('DB ready')"` runs without error
-- **Depends on:** none
-- **Key details:**
-  - users: id (TEXT PK), email (UNIQUE), password_hash, name, created_at, updated_at
-  - sessions: sid (TEXT PK), sess (TEXT), expired (TEXT) — for connect-sqlite3
-  - Migration: ALTER TABLE customers ADD COLUMN user_id TEXT
-  - Migration: ALTER TABLE api_keys ADD COLUMN user_id TEXT
-  - Use IF NOT EXISTS for idempotency
-
 ### Task 2: Auth Middleware & Session Setup
+- **Status:** [ ]
 - **Files:** `backend/middleware/auth.js` (NEW), `backend/server.js`
 - **What:** Install express-session + connect-sqlite3, create auth middleware, wire into server
 - **Success:** Server starts, session middleware active, `req.session` available in routes
-- **Depends on:** Task 1
+- **Depends on:** Task 1 ✅
 - **Key details:**
   - `npm install express-session connect-sqlite3`
   - auth.js exports: `requireAuth` (redirects to /login if no session), `requireApiAuth` (for API routes)
@@ -32,6 +22,7 @@ Implement complete auth system + guided onboarding for maikr.pro so paying custo
   - Apply requireAuth to all /dashboard, /chat.html, /observe.html, /swarm.html, /channels.html, /mcp.html, /optimization.html, /settings.html
 
 ### Task 3: Auth Routes — Login, Register, Logout
+- **Status:** [ ]
 - **Files:** `backend/routes/auth.js` (NEW)
 - **What:** POST /api/auth/register, POST /api/auth/login, POST /api/auth/logout, POST /api/auth/change-password
 - **Success:** Can register via curl, login, access protected route, logout
@@ -44,6 +35,7 @@ Implement complete auth system + guided onboarding for maikr.pro so paying custo
   - Rate limiting: use express-rate-limit, 5 attempts per 15 min on login/register
 
 ### Task 4: Frontend — Login & Register Pages
+- **Status:** [ ]
 - **Files:** `frontend/login.html` (NEW), `frontend/register.html` (NEW), `frontend/css/auth.css` (NEW)
 - **What:** Professional login/register pages matching maikr.pro dark theme
 - **Success:** Pages render, forms submit to auth routes, errors display inline
@@ -57,6 +49,7 @@ Implement complete auth system + guided onboarding for maikr.pro so paying custo
   - "Already have an account? Log in" / "New? Create account" cross-links
 
 ### Task 5: Frontend — Settings Page & Success Page Update
+- **Status:** [ ]
 - **Files:** `frontend/settings.html` (NEW), `frontend/success.html` (MODIFY)
 - **What:** Account settings page + update success page to show credentials
 - **Success:** Settings page accessible when logged in, success page shows temp password + dashboard link
@@ -67,6 +60,7 @@ Implement complete auth system + guided onboarding for maikr.pro so paying custo
   - Simpler approach: success page shows "Set your password" form that creates the user account
 
 ### Task 6: Checkout Flow — Link User Account
+- **Status:** [ ]
 - **Files:** `backend/routes/checkout.js` (MODIFY), `backend/services/provisioning.js` (MODIFY)
 - **What:** After Stripe payment, create user account + link to customer record
 - **Success:** Full flow: register → build → pay → agent created + user linked → auto-login → dashboard
@@ -78,6 +72,7 @@ Implement complete auth system + guided onboarding for maikr.pro so paying custo
   - Success page: if logged in, redirect to dashboard; if guest, show "Check your email" message
 
 ### Task 7: Protect All Existing Pages
+- **Status:** [ ]
 - **Files:** `backend/server.js` (MODIFY), all protected frontend pages
 - **What:** Add auth check to all existing pages, update nav links
 - **Success:** Unauthenticated access to any protected page redirects to /login
@@ -89,6 +84,7 @@ Implement complete auth system + guided onboarding for maikr.pro so paying custo
   - API routes (chat API) use X-API-Key auth (unchanged)
 
 ### Task 8: End-to-End Testing & Polish
+- **Status:** [ ]
 - **Files:** All of the above
 - **What:** Full flow testing, fix bugs, edge cases
 - **Success:** Complete register → build → pay → use flow works without errors
@@ -105,9 +101,9 @@ Implement complete auth system + guided onboarding for maikr.pro so paying custo
 
 ## Dependencies Graph
 ```
-Task 1 (DB) → Task 2 (Middleware) → Task 3 (Auth Routes) → Task 4 (Login UI)
-                                                    → Task 5 (Settings/Success)
-                                                    → Task 6 (Checkout Link)
-                                          Task 2 → Task 7 (Protect Pages)
-                                          All  → Task 8 (E2E Test)
+Task 1 (DB) ✅ → Task 2 (Middleware) → Task 3 (Auth Routes) → Task 4 (Login UI)
+                                                          → Task 5 (Settings/Success)
+                                                          → Task 6 (Checkout Link)
+                                            Task 2 → Task 7 (Protect Pages)
+                                            All   → Task 8 (E2E Test)
 ```
