@@ -57,7 +57,8 @@ router.post('/', express.raw({ type: 'application/json' }), async (req, res) => 
       modelTier: session.metadata?.modelTier || 'standard',
       dataAgreement: session.metadata?.dataAgreement === 'true' ? 1 : 0,
       customerId: session.customer,
-      subscriptionId: session.subscription
+      subscriptionId: session.subscription,
+      userId: session.metadata?.user_id || null
     };
 
     // Call provisioning service

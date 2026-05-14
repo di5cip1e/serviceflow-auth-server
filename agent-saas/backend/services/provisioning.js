@@ -46,8 +46,22 @@ async function provisionCustomer(paymentData) {
     .replace(/-+/g, '-')
     + '-' + Date.now().toString(36);
 
+  // 2b. If Stripe session has user_id, link it to the customer record
+  if (paymentData.userId) {
+    await new Promise((resolve, reject) => {
+      db.run(
+        'UPDATE customers SET user_id = ? WHERE id = ?',
+        [paymentData.userId, customerId_db],
+        function(err) {
+          if (err) reject(err);
+          else resolve();
+        }
+      );
+    });
+    console.log(`🔗 Linked customer ${customerId_db} to user ${paymentData.userId}`);
+  }
+
   // 3. Create agent
-  const agentId = uuidv4();
   const systemPrompt = generateSystemPrompt({
     agentName, businessName, industry, targetAudience, tone, useCases
   });

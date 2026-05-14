@@ -28,6 +28,18 @@ router.post('/', async (req, res) => {
     const tier = req.body.plan || skillLevel || 'basic';
     const pricing = PRICING[tier] || PRICING.basic;
 
+    // Build Stripe metadata — include user_id if logged in (links payment to user account)
+    const stripeMetadata = {
+      industry,
+      targetAudience,
+      tone,
+      agentName,
+      businessName
+    };
+    if (req.session && req.session.userId) {
+      stripeMetadata.user_id = req.session.userId;
+    }
+
     // Create Stripe Checkout Session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -62,13 +74,7 @@ router.post('/', async (req, res) => {
       mode: 'subscription',
       success_url: `http://maikr.pro/success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: 'http://maikr.pro/',
-      metadata: {
-        industry,
-        targetAudience,
-        tone,
-        agentName,
-        businessName
-      }
+      metadata: stripeMetadata
     });
 
     res.json({ 

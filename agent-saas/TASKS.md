@@ -64,7 +64,7 @@ Implement complete auth system + guided onboarding for maikr.pro so paying custo
   - Simpler approach: success page shows "Set your password" form that creates the user account
 
 ### Task 6: Checkout Flow — Link User Account
-- **Status:** [ ]
+- **Status:** [x] — 2026-05-14
 - **Files:** `backend/routes/checkout.js` (MODIFY), `backend/services/provisioning.js` (MODIFY)
 - **What:** After Stripe payment, create user account + link to customer record
 - **Success:** Full flow: register → build → pay → agent created + user linked → auto-login → dashboard
