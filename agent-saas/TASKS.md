@@ -7,6 +7,7 @@ Implement complete auth system + guided onboarding for maikr.pro so paying custo
 - [x] Design phase — AUTH-DESIGN.md created — 2026-05-13
 - [x] Task 1 — Database Migration — Users & Sessions Tables — 2026-05-13
 - [x] Task 2 — Auth Middleware & Session Setup — 2026-05-13
+- [x] Task 3 — Auth Routes (register, login, logout, change-password) — 2026-05-14
 
 ## Up Next
 
@@ -23,7 +24,7 @@ Implement complete auth system + guided onboarding for maikr.pro so paying custo
   - Apply requireAuth to all /dashboard, /chat.html, /observe.html, /swarm.html, /channels.html, /mcp.html, /optimization.html, /settings.html
 
 ### Task 3: Auth Routes — Login, Register, Logout
-- **Status:** [ ]
+- **Status:** [x] — 2026-05-14
 - **Files:** `backend/routes/auth.js` (NEW)
 - **What:** POST /api/auth/register, POST /api/auth/login, POST /api/auth/logout, POST /api/auth/change-password
 - **Success:** Can register via curl, login, access protected route, logout
@@ -102,7 +103,7 @@ Implement complete auth system + guided onboarding for maikr.pro so paying custo
 
 ## Dependencies Graph
 ```
-Task 1 (DB) ✅ → Task 2 (Middleware) ✅ → Task 3 (Auth Routes) → Task 4 (Login UI)
+Task 1 (DB) ✅ → Task 2 (Middleware) ✅ → Task 3 (Auth Routes) ✅ → Task 4 (Login UI)
                                                           → Task 5 (Settings/Success)
                                                           → Task 6 (Checkout Link)
                                             Task 2 → Task 7 (Protect Pages)

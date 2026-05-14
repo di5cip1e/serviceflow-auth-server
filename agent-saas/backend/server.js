@@ -70,6 +70,10 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/landing.html'));
 });
 
+// Auth routes (public — before requireAuth middleware)
+const authRoutes = require('./routes/auth');
+app.use('/api/auth', authRoutes);
+
 // Onboarding flow — separate steps (public)
 app.get('/build', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/build-step1.html'));
