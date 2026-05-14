@@ -108,9 +108,9 @@ Implement complete auth system + guided onboarding for maikr.pro so paying custo
 
 ## Dependencies Graph
 ```
-Task 1 (DB) ✅ → Task 2 (Middleware) ✅ → Task 3 (Auth Routes) ✅ → Task 4 (Login UI)
-                                                          → Task 5 (Settings/Success)
-                                                          → Task 6 (Checkout Link)
-                                            Task 2 → Task 7 (Protect Pages)
-                                            All   → Task 8 (E2E Test)
+Task 1 (DB) ✅ → Task 2 (Middleware) ✅ → Task 3 (Auth Routes) ✅ → Task 4 (Login UI) ✅
+                                                          → Task 5 (Settings/Success) ✅
+                                                          → Task 6 (Checkout Link) ✅
+                                            Task 2 → Task 7 (Protect Pages) ✅
+                                            All   → Task 8 (E2E Test) ✅
 ```
