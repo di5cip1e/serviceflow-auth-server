@@ -6,11 +6,12 @@ Implement complete auth system + guided onboarding for maikr.pro so paying custo
 ## Completed
 - [x] Design phase — AUTH-DESIGN.md created — 2026-05-13
 - [x] Task 1 — Database Migration — Users & Sessions Tables — 2026-05-13
+- [x] Task 2 — Auth Middleware & Session Setup — 2026-05-13
 
 ## Up Next
 
 ### Task 2: Auth Middleware & Session Setup
-- **Status:** [ ]
+- **Status:** [x] — 2026-05-13
 - **Files:** `backend/middleware/auth.js` (NEW), `backend/server.js`
 - **What:** Install express-session + connect-sqlite3, create auth middleware, wire into server
 - **Success:** Server starts, session middleware active, `req.session` available in routes
@@ -101,7 +102,7 @@ Implement complete auth system + guided onboarding for maikr.pro so paying custo
 
 ## Dependencies Graph
 ```
-Task 1 (DB) ✅ → Task 2 (Middleware) → Task 3 (Auth Routes) → Task 4 (Login UI)
+Task 1 (DB) ✅ → Task 2 (Middleware) ✅ → Task 3 (Auth Routes) → Task 4 (Login UI)
                                                           → Task 5 (Settings/Success)
                                                           → Task 6 (Checkout Link)
                                             Task 2 → Task 7 (Protect Pages)

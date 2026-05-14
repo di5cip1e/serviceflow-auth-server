@@ -19,6 +19,9 @@ try {
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const session = require('express-session');
+const SQLiteStore = require('connect-sqlite3')(session);
+const { requireAuth, setUserLocals } = require('./middleware/auth');
 const checkoutRoutes = require('./routes/checkout');
 const documentsRoutes = require('./routes/documents');
 const swarmRoutes = require('./routes/swarm');
@@ -42,6 +45,23 @@ app.use('/webhook', webhookRoutes);         // ← raw body, before JSON parser
 app.use(express.json());                     // ← JSON parser for all other routes
 app.use(express.static(path.join(__dirname, '../frontend')));
 
+// Session middleware
+app.use(session({
+  store: new SQLiteStore({ db: 'sessions.db', dir: __dirname + '/data' }),
+  secret: process.env.SESSION_SECRET || 'maikr-secret-change-in-prod',
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+    maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+  }
+}));
+
+// Set user locals for templates
+app.use(setUserLocals);
+
 // Redirect /chat → /chat.html (chat page at /chat, not /chat.html)
 app.get('/chat', (req, res) => res.redirect('/chat.html'));
 
@@ -50,7 +70,7 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/landing.html'));
 });
 
-// Onboarding flow — separate pages per step
+// Onboarding flow — separate steps (public)
 app.get('/build', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/build-step1.html'));
 });
@@ -62,6 +82,33 @@ app.get('/build/usecases', (req, res) => {
 });
 app.get('/build/plan', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/build-step4.html'));
+});
+
+// ── Protected page routes (require session) ──────────────────────────────────
+// These serve the SPA/frontend files; API routes use X-API-Key auth below
+app.get('/dashboard', requireAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/command-center.html'));
+});
+app.get('/chat.html', requireAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/chat.html'));
+});
+app.get('/observe.html', requireAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/observe.html'));
+});
+app.get('/swarm.html', requireAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/swarm.html'));
+});
+app.get('/channels.html', requireAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/channels.html'));
+});
+app.get('/mcp.html', requireAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/mcp.html'));
+});
+app.get('/optimization.html', requireAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/optimization.html'));
+});
+app.get('/settings.html', requireAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/settings.html'));
 });
 
 // Routes — webhook already mounted above (before express.json) for signature verification
