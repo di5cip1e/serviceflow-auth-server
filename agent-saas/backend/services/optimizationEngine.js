@@ -84,7 +84,7 @@ function analyzeUserCorrections(since) {
        WHERE c.created_at >= ?
          AND c.role = 'user'
          AND LENGTH(c.content) < 100
-         AND c.content IN ('no','No','NO','wrong','Wrong','not right',"that's wrong","that's not right","nope","Nope')
+         AND LOWER(c.content) IN ('no','wrong','not right','that''s wrong','that''s not right','nope')
        ORDER BY c.created_at DESC`,
       [since],
       (err, rows) => {
