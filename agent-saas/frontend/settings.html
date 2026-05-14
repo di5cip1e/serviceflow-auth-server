@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Settings — M.ai.K.R</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/auth.css">
+  <style>
+    .settings-wrapper {
+      flex: 1;
+      padding: 40px 20px;
+      max-width: 640px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .settings-card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+    .settings-card h2 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #e6edf3;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .profile-field {
+      margin-bottom: 16px;
+    }
+    .profile-field label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      color: #8b949e;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+    .profile-field .value {
+      font-size: 15px;
+      color: #e6edf3;
+      padding: 10px 14px;
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+    }
+    .logout-btn {
+      width: 100%;
+      padding: 12px;
+      background: transparent;
+      color: #ff6b6b;
+      border: 1px solid #ff6b6b;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: inherit;
+      margin-top: 6px;
+    }
+    .logout-btn:hover {
+      background: rgba(255, 107, 107, 0.1);
+    }
+    .danger-card {
+      border-color: #ff6b6b40;
+    }
+    .danger-card h2 {
+      color: #ff6b6b;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="maikr-nav">
+  <a href="/" class="maikr-logo">M<span>.ai</span><span>.K.R</span></a>
+  <div class="maikr-links">
+    <a href="/command-center.html">Dashboard</a>
+    <a href="/settings.html" class="active">Settings</a>
+  </div>
+  <div class="maikr-spacer"></div>
+  <div class="maikr-status" id="navStatus"><span class="dot"></span>Online</div>
+</nav>
+
+<div class="settings-wrapper">
+
+  <!-- Profile Section -->
+  <div class="settings-card">
+    <h2>👤 Profile</h2>
+    <div class="profile-field">
+      <label>Display Name</label>
+      <div class="value" id="displayName">Loading…</div>
+    </div>
+    <div class="profile-field">
+      <label>Email</label>
+      <div class="value" id="displayEmail">Loading…</div>
+    </div>
+  </div>
+
+  <!-- Change Password Section -->
+  <div class="settings-card">
+    <h2>🔒 Change Password</h2>
+    <div id="pwSuccess" class="success-message"></div>
+    <div id="pwError" class="form-error"></div>
+    <form id="changePasswordForm" class="auth-form" novalidate>
+      <div class="form-group">
+        <label for="currentPassword">Current Password</label>
+        <input type="password" id="currentPassword" name="currentPassword" placeholder="Enter current password" required autocomplete="current-password">
+        <div id="currentPasswordError" class="error-message"></div>
+      </div>
+      <div class="form-group">
+        <label for="newPassword">New Password</label>
+        <input type="password" id="newPassword" name="newPassword" placeholder="Min 8 characters" required autocomplete="new-password">
+        <div id="newPasswordError" class="error-message"></div>
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm New Password</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter new password" required autocomplete="new-password">
+        <div id="confirmPasswordError" class="error-message"></div>
+      </div>
+      <button type="submit" id="pwSubmitBtn" class="btn-auth">Update Password</button>
+    </form>
+  </div>
+
+  <!-- Danger Zone -->
+  <div class="settings-card danger-card">
+    <h2>⚠️ Danger Zone</h2>
+    <button type="button" class="logout-btn" id="logoutBtn">Log Out</button>
+  </div>
+
+</div>
+
+<script>
+  // Load user profile
+  fetch('/api/auth/me', { credentials: 'include' })
+    .then(function(res) {
+      if (res.status === 401) {
+        window.location.href = '/login.html';
+        return;
+      }
+      return res.json();
+    })
+    .then(function(data) {
+      if (data && data.user) {
+        document.getElementById('displayName').textContent = data.user.name || '—';
+        document.getElementById('displayEmail').textContent = data.user.email || '—';
+      }
+    })
+    .catch(function() {
+      // If /api/auth/me fails, redirect to login
+      window.location.href = '/login.html';
+    });
+
+  // Change Password
+  var pwForm = document.getElementById('changePasswordForm');
+  var pwError = document.getElementById('pwError');
+  var pwSuccess = document.getElementById('pwSuccess');
+  var pwSubmitBtn = document.getElementById('pwSubmitBtn');
+
+  function clearPwErrors() {
+    pwError.textContent = '';
+    pwError.classList.remove('visible');
+    pwSuccess.textContent = '';
+    pwSuccess.classList.remove('visible');
+    document.querySelectorAll('#changePasswordForm .input-error').forEach(function(el) { el.classList.remove('input-error'); });
+    document.querySelectorAll('#changePasswordForm .error-message').forEach(function(el) { el.classList.remove('visible'); });
+  }
+
+  function showPwFieldError(fieldId, message) {
+    document.getElementById(fieldId).classList.add('input-error');
+    var el = document.getElementById(fieldId + 'Error');
+    el.textContent = message;
+    el.classList.add('visible');
+  }
+
+  pwForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    clearPwErrors();
+
+    var currentPw = document.getElementById('currentPassword').value;
+    var newPw = document.getElementById('newPassword').value;
+    var confirmPw = document.getElementById('confirmPassword').value;
+    var valid = true;
+
+    if (!currentPw) {
+      showPwFieldError('currentPassword', 'Current password is required.');
+      valid = false;
+    }
+    if (!newPw || newPw.length < 8) {
+      showPwFieldError('newPassword', 'New password must be at least 8 characters.');
+      valid = false;
+    }
+    if (newPw !== confirmPw) {
+      showPwFieldError('confirmPassword', 'Passwords do not match.');
+      valid = false;
+    }
+
+    if (!valid) return;
+
+    pwSubmitBtn.disabled = true;
+    pwSubmitBtn.textContent = 'Updating…';
+
+    fetch('/api/auth/change-password', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ currentPassword: currentPw, newPassword: newPw })
+    })
+    .then(function(res) {
+      return res.json().then(function(data) {
+        if (res.ok) {
+          pwSuccess.textContent = 'Password updated successfully.';
+          pwSuccess.classList.add('visible');
+          pwForm.reset();
+        } else {
+          pwError.textContent = data.error || 'Failed to change password. Please try again.';
+          pwError.classList.add('visible');
+        }
+        pwSubmitBtn.disabled = false;
+        pwSubmitBtn.textContent = 'Update Password';
+      });
+    })
+    .catch(function() {
+      pwError.textContent = 'Something went wrong. Please try again.';
+      pwError.classList.add('visible');
+      pwSubmitBtn.disabled = false;
+      pwSubmitBtn.textContent = 'Update Password';
+    });
+  });
+
+  // Logout
+  document.getElementById('logoutBtn').addEventListener('click', function() {
+    fetch('/api/auth/logout', {
+      method: 'POST',
+      credentials: 'include'
+    })
+    .then(function() {
+      window.location.href = '/login.html';
+    })
+    .catch(function() {
+      window.location.href = '/login.html';
+    });
+  });
+</script>
+</body>
+</html>

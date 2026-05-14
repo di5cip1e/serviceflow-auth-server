@@ -4,52 +4,356 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Payment Successful - M.ai.K.R</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/auth.css">
   <style>
-    body { background: #0a0a0a; color: #fff; font-family: 'Courier New', monospace; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }
-    .success-container { text-align: center; max-width: 600px; padding: 40px; background: #111; border: 2px solid #00ff41; border-radius: 16px; box-shadow: 0 0 30px #00ff4180; }
-    .checkmark { font-size: 64px; margin-bottom: 20px; }
-    h1 { color: #00ff41; margin-bottom: 10px; }
-    .subtitle { color: #888; margin-bottom: 30px; }
-    .agent-url { background: #0a0a0a; border: 1px solid #00ff41; padding: 20px; border-radius: 12px; margin: 30px 0; }
-    .agent-url label { display: block; color: #888; margin-bottom: 10px; }
-    .agent-url input { width: 100%; padding: 12px; background: #111; border: 1px solid #333; border-radius: 8px; color: #00ff41; font-family: monospace; text-align: center; }
-    .btn { display: inline-block; padding: 14px 30px; background: #00ff41; color: #0a0a0a; text-decoration: none; border-radius: 8px; font-weight: bold; margin-top: 20px; }
-    .btn:hover { box-shadow: 0 0 20px #00ff4180; }
+    .success-wrapper {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    .success-container {
+      text-align: center;
+      max-width: 520px;
+      padding: 40px 32px;
+      background: #161b22;
+      border: 2px solid #2ECC71;
+      border-radius: 16px;
+      box-shadow: 0 0 30px rgba(46, 204, 113, 0.2);
+      width: 100%;
+    }
+    .checkmark { font-size: 48px; margin-bottom: 16px; }
+    .success-container h1 {
+      color: #2ECC71;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+    .subtitle { color: #8b949e; font-size: 14px; margin-bottom: 24px; }
+    .agent-url {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      padding: 16px;
+      border-radius: 10px;
+      margin: 20px 0;
+      text-align: left;
+    }
+    .agent-url label {
+      display: block;
+      color: #8b949e;
+      font-size: 12px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .agent-url input {
+      width: 100%;
+      padding: 10px 14px;
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      color: #2ECC71;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: #2ECC71;
+      color: #0a0a0a;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 15px;
+      margin-top: 16px;
+      transition: all 0.15s;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .btn:hover { background: #27ae60; box-shadow: 0 0 20px rgba(46, 204, 113, 0.3); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* Account creation section */
+    .account-section {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid #30363d;
+      text-align: left;
+    }
+    .account-section h2 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #e6edf3;
+      margin-bottom: 6px;
+    }
+    .account-section .hint {
+      color: #8b949e;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+    .account-form .form-group {
+      margin-bottom: 14px;
+    }
+    .account-form label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: #c9d1d9;
+      margin-bottom: 6px;
+    }
+    .account-form input {
+      width: 100%;
+      padding: 10px 14px;
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      color: #e6edf3;
+      font-size: 14px;
+      font-family: inherit;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      outline: none;
+    }
+    .account-form input::placeholder { color: #484f58; }
+    .account-form input:focus {
+      border-color: #2ECC71;
+      box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.15);
+    }
+    .account-form .error-message {
+      color: #ff6b6b;
+      font-size: 12px;
+      margin-top: 4px;
+      display: none;
+    }
+    .account-form .error-message.visible { display: block; }
+    .account-form input.input-error {
+      border-color: #ff6b6b;
+      box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.15);
+    }
+    .form-error-banner {
+      background: rgba(255, 107, 107, 0.1);
+      border: 1px solid rgba(255, 107, 107, 0.3);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #ff6b6b;
+      font-size: 13px;
+      margin-bottom: 16px;
+      display: none;
+    }
+    .form-error-banner.visible { display: block; }
+    .form-success-banner {
+      background: rgba(46, 204, 113, 0.1);
+      border: 1px solid rgba(46, 204, 113, 0.3);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #2ECC71;
+      font-size: 13px;
+      margin-bottom: 16px;
+      display: none;
+    }
+    .form-success-banner.visible { display: block; }
+
+    /* Logged-in state */
+    .logged-in-section {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid #30363d;
+      text-align: center;
+    }
+    .logged-in-section p {
+      color: #8b949e;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .hidden { display: none; }
   </style>
 </head>
 <body>
+
+<nav class="maikr-nav">
+  <a href="/" class="maikr-logo">M<span>.ai</span><span>.K.R</span></a>
+  <div class="maikr-links">
+    <a href="/">Home</a>
+  </div>
+  <div class="maikr-spacer"></div>
+</nav>
+
+<div class="success-wrapper">
   <div class="success-container">
     <div class="checkmark">✅</div>
     <h1>Payment Successful!</h1>
     <p class="subtitle">Your custom AI agent is being created</p>
-    
+
     <div class="agent-url">
       <label>Your Agent Chat URL:</label>
-      <input type="text" id="agentUrl" readonly>
+      <input type="text" id="agentUrl" readonly placeholder="Loading…">
     </div>
-    
-    <p style="color:#666; font-size:14px;">Your agent will be ready in a few minutes. We've sent a confirmation email with your details.</p>
-    
-    <a href="#" class="btn" id="chatBtn">Start Chatting →</a>
-  </div>
 
-  <script>
-    // Get session_id from URL and fetch agent details
-    const params = new URLSearchParams(window.location.search);
-    const sessionId = params.get('session_id');
-    
-    if (sessionId) {
-      fetch('https://maikr.pro/api/get-agent?session_id=' + sessionId)
-        .then(r => r.json())
-        .then(data => {
-          if (data.agentUrl) {
-            document.getElementById('agentUrl').value = data.agentUrl;
-            document.getElementById('chatBtn').href = data.agentUrl;
+    <p style="color:#8b949e; font-size:13px;">Your agent will be ready in a few minutes. We've sent a confirmation email with your details.</p>
+
+    <a href="#" class="btn" id="chatBtn">Start Chatting →</a>
+
+    <!-- Shown when user IS logged in -->
+    <div id="loggedInSection" class="logged-in-section hidden">
+      <p>Your account is ready. Go to your dashboard to manage your agent.</p>
+      <a href="/dashboard" class="btn">Go to Dashboard →</a>
+    </div>
+
+    <!-- Shown when user is NOT logged in (guest checkout) -->
+    <div id="guestSection" class="account-section hidden">
+      <h2>Create Your Account</h2>
+      <p class="hint">Set up a password to access your agent dashboard anytime.</p>
+
+      <div id="registerError" class="form-error-banner"></div>
+      <div id="registerSuccess" class="form-success-banner"></div>
+
+      <form id="registerForm" class="account-form" novalidate>
+        <div class="form-group">
+          <label for="regName">Name</label>
+          <input type="text" id="regName" name="name" placeholder="Your name" autocomplete="name">
+          <div id="regNameError" class="error-message"></div>
+        </div>
+        <div class="form-group">
+          <label for="regEmail">Email</label>
+          <input type="email" id="regEmail" name="email" placeholder="you@example.com" autocomplete="email">
+          <div id="regEmailError" class="error-message"></div>
+        </div>
+        <div class="form-group">
+          <label for="regPassword">Password</label>
+          <input type="password" id="regPassword" name="password" placeholder="Min 8 characters" autocomplete="new-password">
+          <div id="regPasswordError" class="error-message"></div>
+        </div>
+        <button type="submit" id="registerBtn" class="btn" style="width:100%;">Create Account & Go to Dashboard</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Get session_id from URL and fetch agent details
+  var params = new URLSearchParams(window.location.search);
+  var sessionId = params.get('session_id');
+
+  if (sessionId) {
+    fetch('https://maikr.pro/api/get-agent?session_id=' + sessionId)
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data.agentUrl) {
+          document.getElementById('agentUrl').value = data.agentUrl;
+          document.getElementById('chatBtn').href = data.agentUrl;
+        }
+      })
+      .catch(function(err) { console.error(err); });
+  }
+
+  // Check if user is already logged in
+  var loggedInSection = document.getElementById('loggedInSection');
+  var guestSection = document.getElementById('guestSection');
+
+  fetch('/api/auth/me', { credentials: 'include' })
+    .then(function(res) {
+      if (res.ok) {
+        // User is logged in — show dashboard link, hide register form
+        loggedInSection.classList.remove('hidden');
+        guestSection.classList.add('hidden');
+      } else {
+        // Guest checkout — show register form
+        loggedInSection.classList.add('hidden');
+        guestSection.classList.remove('hidden');
+      }
+    })
+    .catch(function() {
+      // Assume guest on error
+      loggedInSection.classList.add('hidden');
+      guestSection.classList.remove('hidden');
+    });
+
+  // Guest registration form
+  var registerForm = document.getElementById('registerForm');
+  if (registerForm) {
+    registerForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('registerError').classList.remove('visible');
+      document.getElementById('registerSuccess').classList.remove('visible');
+      document.querySelectorAll('#registerForm .input-error').forEach(function(el) { el.classList.remove('input-error'); });
+      document.querySelectorAll('#registerForm .error-message').forEach(function(el) { el.classList.remove('visible'); });
+
+      var name = document.getElementById('regName').value.trim();
+      var email = document.getElementById('regEmail').value.trim();
+      var password = document.getElementById('regPassword').value;
+      var valid = true;
+
+      if (!name) {
+        document.getElementById('regName').classList.add('input-error');
+        var el = document.getElementById('regNameError');
+        el.textContent = 'Name is required.';
+        el.classList.add('visible');
+        valid = false;
+      }
+
+      if (!email) {
+        document.getElementById('regEmail').classList.add('input-error');
+        var el = document.getElementById('regEmailError');
+        el.textContent = 'Email is required.';
+        el.classList.add('visible');
+        valid = false;
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        document.getElementById('regEmail').classList.add('input-error');
+        var el = document.getElementById('regEmailError');
+        el.textContent = 'Please enter a valid email address.';
+        el.classList.add('visible');
+        valid = false;
+      }
+
+      if (!password || password.length < 8) {
+        document.getElementById('regPassword').classList.add('input-error');
+        var el = document.getElementById('regPasswordError');
+        el.textContent = 'Password must be at least 8 characters.';
+        el.classList.add('visible');
+        valid = false;
+      }
+
+      if (!valid) return;
+
+      var registerBtn = document.getElementById('registerBtn');
+      registerBtn.disabled = true;
+      registerBtn.textContent = 'Creating Account…';
+
+      fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ name: name, email: email, password: password })
+      })
+      .then(function(res) {
+        return res.json().then(function(data) {
+          if (res.ok) {
+            document.getElementById('registerSuccess').textContent = 'Account created! Redirecting to dashboard…';
+            document.getElementById('registerSuccess').classList.add('visible');
+            setTimeout(function() {
+              window.location.href = '/dashboard';
+            }, 1500);
+          } else {
+            document.getElementById('registerError').textContent = data.error || 'Registration failed. Please try again.';
+            document.getElementById('registerError').classList.add('visible');
+            registerBtn.disabled = false;
+            registerBtn.textContent = 'Create Account & Go to Dashboard';
           }
-        })
-        .catch(err => console.error(err));
-    }
-  </script>
+        });
+      })
+      .catch(function() {
+        document.getElementById('registerError').textContent = 'Something went wrong. Please try again.';
+        document.getElementById('registerError').classList.add('visible');
+        registerBtn.disabled = false;
+        registerBtn.textContent = 'Create Account & Go to Dashboard';
+      });
+    });
+  }
+</script>
 </body>
 </html>
