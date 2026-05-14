@@ -43,7 +43,9 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use('/webhook', webhookRoutes);         // ← raw body, before JSON parser
 app.use(express.json());                     // ← JSON parser for all other routes
-app.use(express.static(path.join(__dirname, '../frontend')));
+app.use(express.static(path.join(__dirname, '../frontend/css'), { maxAge: '1d' }));
+app.use(express.static(path.join(__dirname, '../frontend/js'), { maxAge: '1d' }));
+app.use(express.static(path.join(__dirname, '../frontend/assets'), { maxAge: '1d' }));
 
 // Session middleware
 app.use(session({
@@ -86,6 +88,14 @@ app.get('/build/usecases', (req, res) => {
 });
 app.get('/build/plan', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/build-step4.html'));
+});
+
+// ── Public auth pages ──────────────────────────────────────────────────────
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/login.html'));
+});
+app.get('/register', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/register.html'));
 });
 
 // ── Protected page routes (require session) ──────────────────────────────────

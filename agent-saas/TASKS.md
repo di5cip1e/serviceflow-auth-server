@@ -10,6 +10,8 @@ Implement complete auth system + guided onboarding for maikr.pro so paying custo
 - [x] Task 3 — Auth Routes (register, login, logout, change-password) — 2026-05-14
 - [x] Task 4 — Login & Register UI Pages — 2026-05-14
 - [x] Task 5 — Settings Page & Success Page Update — 2026-05-14
+- [x] Task 6 — Checkout Integration — 2026-05-14
+- [x] Task 7 — Protect All Pages + Nav Updates — 2026-05-14
 
 ## Up Next
 
@@ -76,7 +78,7 @@ Implement complete auth system + guided onboarding for maikr.pro so paying custo
   - Success page: if logged in, redirect to dashboard; if guest, show "Check your email" message
 
 ### Task 7: Protect All Existing Pages
-- **Status:** [ ]
+- **Status:** [x] — 2026-05-14
 - **Files:** `backend/server.js` (MODIFY), all protected frontend pages
 - **What:** Add auth check to all existing pages, update nav links
 - **Success:** Unauthenticated access to any protected page redirects to /login
