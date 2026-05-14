@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log In — M.ai.K.R</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+<nav class="maikr-nav">
+  <a href="/" class="maikr-logo">M<span>.ai</span><span>.K.R</span></a>
+  <div class="maikr-links">
+    <a href="/">Home</a>
+  </div>
+  <div class="maikr-spacer"></div>
+</nav>
+
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <h1>Welcome back to M.ai.K.R</h1>
+    <p class="subtitle">Log in to access your agent dashboard.</p>
+
+    <div id="formError" class="form-error"></div>
+
+    <form id="loginForm" class="auth-form" novalidate>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email">
+        <div id="emailError" class="error-message"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="current-password">
+        <div id="passwordError" class="error-message"></div>
+      </div>
+
+      <button type="submit" id="submitBtn" class="btn-auth">Log In</button>
+    </form>
+
+    <div class="auth-footer">
+      Don't have an account? <a href="/register.html">Create one</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // If already logged in, redirect to dashboard
+  fetch('/api/auth/me', { credentials: 'include' })
+    .then(function(res) {
+      if (res.ok) {
+        window.location.href = '/dashboard';
+      }
+    })
+    .catch(function() { /* not logged in — stay on page */ });
+
+  var form = document.getElementById('loginForm');
+  var formError = document.getElementById('formError');
+  var submitBtn = document.getElementById('submitBtn');
+
+  function showFieldError(fieldId, message) {
+    document.getElementById(fieldId).classList.add('input-error');
+    var el = document.getElementById(fieldId + 'Error');
+    el.textContent = message;
+    el.classList.add('visible');
+  }
+
+  function clearErrors() {
+    formError.textContent = '';
+    formError.classList.remove('visible');
+    document.querySelectorAll('.input-error').forEach(function(el) { el.classList.remove('input-error'); });
+    document.querySelectorAll('.error-message').forEach(function(el) { el.classList.remove('visible'); });
+  }
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    clearErrors();
+
+    var email = document.getElementById('email').value.trim();
+    var password = document.getElementById('password').value;
+    var valid = true;
+
+    if (!email) {
+      showFieldError('email', 'Email is required.');
+      valid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showFieldError('email', 'Please enter a valid email address.');
+      valid = false;
+    }
+
+    if (!password) {
+      showFieldError('password', 'Password is required.');
+      valid = false;
+    }
+
+    if (!valid) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Logging in…';
+
+    fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ email: email, password: password })
+    })
+    .then(function(res) {
+      return res.json().then(function(data) {
+        if (res.ok) {
+          window.location.href = '/dashboard';
+        } else {
+          formError.textContent = data.error || 'Login failed. Please try again.';
+          formError.classList.add('visible');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Log In';
+        }
+      });
+    })
+    .catch(function() {
+      formError.textContent = 'Something went wrong. Please try again.';
+      formError.classList.add('visible');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Log In';
+    });
+  });
+</script>
+</body>
+</html>

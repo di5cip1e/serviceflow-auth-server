@@ -37,7 +37,7 @@ Implement complete auth system + guided onboarding for maikr.pro so paying custo
   - Rate limiting: use express-rate-limit, 5 attempts per 15 min on login/register
 
 ### Task 4: Frontend — Login & Register Pages
-- **Status:** [ ]
+- **Status:** [x] — 2026-05-14
 - **Files:** `frontend/login.html` (NEW), `frontend/register.html` (NEW), `frontend/css/auth.css` (NEW)
 - **What:** Professional login/register pages matching maikr.pro dark theme
 - **Success:** Pages render, forms submit to auth routes, errors display inline
