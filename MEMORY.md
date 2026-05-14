@@ -12,15 +12,15 @@
 - Prioritize efficiency: shorter responses, fewer tool calls, no redundant reads
 
 ## Critical Runtime Info
-- **Model:** openrouter/minimax/minimax-m2.7 (set 2026-05-06)
-- **Current time:** Sunday May 10, 2026 04:00 UTC
+- **Model:** openrouter/owl-alpha (free, 1M+ context, set 2026-05-13)
+- **Current time:** Thursday May 14, 2026 04:00 UTC
 - **Context:** ~50k tokens — healthy
 - **MEMORY.md target:** Keep under 50KB
 - **Heartbeat:** every 2 hours
 - **PM2:** maikr-backend + ollama-router running, systemd-enabled for reboot persistence
 
 ## Active Projects (Current)
-- **M.ai.K.R** (agent-saas/): ✅ Live at maikr.pro — Phase 1 (agent gen + session) → Phase 2 (swarm routing) → Phase 3 (omnichannel webhooks) → Phase 4 (MCP tool servers). Tiered model, Stripe armed, Ollama routed, SSL cert live, PM2 on systemd watchdog, 502 page, security headers, P1 copy/design live.
+- **M.ai.K.R** (agent-saas/): ✅ Live at maikr.pro — Phases 1-4 complete + Phase 6 (optimization) + Phase 7 (command center) + Phase 8 (consumption billing). Auth & onboarding system complete (May 14). All pages protected, session-based auth, rate limiting, checkout integration. 9 commits.
 - **Agent Builder Dashboard**: Running at http://187.77.31.252:3000/wizard
 - **Kingdom Cards**: ~70% — Phaser 3 battle engine works, Fantasy/Medieval theme
 - **Ironveil**: Ready for Windows import (since March 23)
@@ -85,8 +85,35 @@
 - Workspace organization: Clean structure maintained
 - Forgeai.sbs: Briefly down (000) then recovered to 301 (normal)
 
-*Last consolidated: 2026-05-13 04:19 UTC*
-*Previous: 2026-05-10 04:19 UTC*
+*Last consolidated: 2026-05-14 04:00 UTC*
+*Previous: 2026-05-13 04:19 UTC*
+
+### May 13-14: Audit Fixes + Auth & Onboarding System
+
+**Audit findings and fixes:**
+- PM2 was EMPTY — backend running as raw process. Fixed: backend now under PM2 with auto-restart
+- Gateway also put under PM2 with auto-restart
+- Nightly optimization cron in ERROR — SQL syntax bug in optimizationEngine.js (mixed quotes in IN clause). Fixed with LOWER() + proper escaping
+- Model `openrouter/owl-alpha` was rejected — not in `agents.defaults.models` registry. Added registry entry. Now active: free, 1M+ context, native tool use
+
+**Auth & Onboarding System (COMPLETE — 8 tasks, 9 commits):**
+- Session-based auth: email + password, bcrypt (cost 10), express-session + connect-sqlite3
+- Routes: /api/auth/register, /login, /logout, /change-password, /me
+- Rate limiting: 5 attempts per 15 min on login/register
+- Frontend: /login, /register, /settings pages with dark theme
+- Success page: guest account creation form after Stripe payment
+- Checkout integration: user_id passed in Stripe metadata, linked on payment
+- All protected pages (dashboard, chat, observe, swarm, channels, mcp, optimization, settings) redirect to /login without session
+- Nav updated: "Log out" in protected pages, "Sign Up" + "Login" on landing
+- Files created: backend/middleware/auth.js, backend/routes/auth.js, frontend/login.html, frontend/register.html, frontend/settings.html, frontend/css/auth.css
+- TASKS.md in agent-saas/ tracks all 8 tasks complete
+- Task Decomposer Skill created: skills/task-decomposer/SKILL.md
+
+**Subagent execution pattern (lesson learned):**
+- Frontend-only tasks work well in subagents (no port conflicts)
+- Backend tasks that need PM2 restart tend to time out — handle directly in main session
+- strategy: spawn subagents for frontend, handle backend changes directly
+- Always read TASKS.md at start of each session for continuity
 
 ---
 
@@ -233,8 +260,9 @@
 5. ~~outcome_credits INTEGER truncation~~ ✅ FIXED May 11 — column changed to REAL
 6. **provisioning INSERT bug**: VALUES had 18 `?` but 19 cols — critical-fixes subagent fixed columns but VALUES had 17 `?` then 18 `?` then 19 `?` — fixed May 12 by manually correcting to 17 `?` before 'active' + 1 after = 19 total
 7. **Welcome email failing 403**: Mailgun aginstitute.tech domain — likely domain verification not complete
-8. **Auth system**: No user login — chat.html is open to anyone with agent ID + API key. No dashboard login page yet.
-9. **Outcome credits for lead_qualified/appointment_booked**: Not yet wired into swarm flow — no automatic credit deduction on specific outcomes
+8. ~~Auth system: No user login~~ ✅ FIXED May 14 — complete session-based auth system
+9. **Outcome credits for lead_qualified/appointment_booked**: Not yet wired into swarm flow
+10. **Nightly optimization cron**: SQL fix applied — waiting for next midnight run to verify
 
 ### May 11-12 Session: Professional Redesign + Critical Fixes
 
