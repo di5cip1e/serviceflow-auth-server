@@ -85,8 +85,15 @@
 - Workspace organization: Clean structure maintained
 - Forgeai.sbs: Briefly down (000) then recovered to 301 (normal)
 
-*Last consolidated: 2026-05-14 04:00 UTC*
-*Previous: 2026-05-13 04:19 UTC*
+*Last consolidated: 2026-05-15 04:03 UTC*
+*Previous: 2026-05-14 04:00 UTC*
+
+### May 15: Derek Reports maikr.pro Issues + Test Account
+- /command-center.html was 404 — only /dashboard route existed. Fixed with redirect.
+- Created test account: derek@test.maikr.pro / testpass123
+- Created test agent: test-agent-980b0fe6 (TestBot, Growth plan)
+- Derek reported "a lot of problems" — waiting for detailed report
+- Lesson: need to add redirect routes for all old .html URLs that now have clean routes
 
 ### May 13-14: Audit Fixes + Auth & Onboarding System
 

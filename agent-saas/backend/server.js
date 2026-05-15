@@ -103,6 +103,9 @@ app.get('/register', (req, res) => {
 app.get('/dashboard', requireAuth, (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/command-center.html'));
 });
+app.get('/command-center.html', requireAuth, (req, res) => {
+  res.redirect('/dashboard');
+});
 app.get('/chat.html', requireAuth, (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/chat.html'));
 });
