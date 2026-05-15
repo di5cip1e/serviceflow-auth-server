@@ -46,6 +46,7 @@ app.use(express.json());                     // ← JSON parser for all other ro
 app.use(express.static(path.join(__dirname, '../frontend/css'), { maxAge: '1d' }));
 app.use(express.static(path.join(__dirname, '../frontend/js'), { maxAge: '1d' }));
 app.use(express.static(path.join(__dirname, '../frontend/assets'), { maxAge: '1d' }));
+app.use(express.static(path.join(__dirname, '../frontend'), { maxAge: '1d' }));
 
 // Session middleware
 app.use(session({
