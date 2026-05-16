@@ -85,8 +85,45 @@
 - Workspace organization: Clean structure maintained
 - Forgeai.sbs: Briefly down (000) then recovered to 301 (normal)
 
-*Last consolidated: 2026-05-15 04:03 UTC*
-*Previous: 2026-05-14 04:00 UTC*
+*Last consolidated: 2026-05-16 04:00 UTC*
+*Previous: 2026-05-15 04:03 UTC*
+
+## May 15-16, 2026 — Testing Overhaul + Mailgun Fix
+
+### Test Suite Created
+- TEST_PLAN.md: 14-section test plan (public pages, auth, protected pages, agent API, chat/swarm, MCP, channels, credits, observability, optimization, admin, documents, checkout, security)
+- test-runner.js v4: automated runner with full metrics (response times, pass rates, section breakdowns, JSON reports)
+- 350 tests across 5 beta accounts — 100% pass rate
+- Reports saved to agent-saas/test-results/
+- Run: `cd agent-saas/backend && node test-runner.js`
+
+### 5 Beta Accounts
+- beta-alpha@maikr.pro (Growth, Technology)
+- beta-bravo@maikr.pro (Value, Health & Wellness)
+- beta-charlie@maikr.pro (Growth, Home Services)
+- beta-delta@maikr.pro (Scale, Education)
+- beta-echo@maikr.pro (Value, E-Commerce)
+- All password: beta1234!
+
+### Mailgun Issue
+- Old API key flagged as "exposed" by Mailgun — account-level block
+- New API key generated and stored in secrets.json
+- Waiting on Mailgun support to resolve account block
+- secrets.json secured: 600 permissions, gitignored
+
+### Backend Fixes
+- Added express.static for frontend directory (privacy.html, terms.html, success.html now served)
+- Increased auth rate limit 5→20 per 15min for testing
+- Fixed HTTP/2 status line parsing (regex didn't match HTTP/2 without minor version)
+
+### Security
+- secrets.json: chmod 600, added to .gitignore in both workspace and .openclaw
+- Never log, print, or echo API keys in chat
+
+### Project Status (May 16)
+- M.ai.K.R fully built and tested, ready for first real customer
+- Mailgun email sending blocked pending support response
+- Derek pivoting to new side project — maikr.pro on back burner
 
 ### May 15: Derek Reports maikr.pro Issues + Test Account
 - /command-center.html was 404 — only /dashboard route existed. Fixed with redirect.
