@@ -43,12 +43,8 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use('/webhook', webhookRoutes);         // ← raw body, before JSON parser
 app.use(express.json());                     // ← JSON parser for all other routes
-app.use(express.static(path.join(__dirname, '../frontend/css'), { maxAge: '1d' }));
-app.use(express.static(path.join(__dirname, '../frontend/js'), { maxAge: '1d' }));
-app.use(express.static(path.join(__dirname, '../frontend/assets'), { maxAge: '1d' }));
-app.use(express.static(path.join(__dirname, '../frontend'), { maxAge: '1d' }));
 
-// Session middleware
+// Session middleware — must be before auth checks and static file serving
 app.use(session({
   store: new SQLiteStore({ db: 'sessions.db', dir: __dirname + '/data' }),
   secret: process.env.SESSION_SECRET || 'maikr-secret-change-in-prod',
@@ -64,6 +60,24 @@ app.use(session({
 
 // Set user locals for templates
 app.use(setUserLocals);
+
+// Block direct static access to protected HTML pages
+// These must go through the explicit protected routes below
+const protectedFiles = new Set([
+  'chat.html', 'observe.html', 'swarm.html', 'channels.html',
+  'mcp.html', 'optimization.html', 'settings.html', 'command-center.html',
+  'deploy.html', 'admin.html', 'dashboard.html'
+]);
+app.use(function(req, res, next) {
+  // Check if request is for a protected HTML file (direct .html access)
+  var pathParts = req.path.split('/');
+  var fileName = pathParts[pathParts.length - 1];
+  if (protectedFiles.has(fileName)) {
+    // Run requireAuth — redirect to login if not authenticated
+    return requireAuth(req, res, next);
+  }
+  next();
+});
 
 // Redirect /chat → /chat.html (chat page at /chat, not /chat.html)
 app.get('/chat', (req, res) => res.redirect('/chat.html'));
@@ -116,6 +130,10 @@ app.get('/observe.html', requireAuth, (req, res) => {
 app.get('/swarm.html', requireAuth, (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/swarm.html'));
 });
+app.get('/deploy.html', requireAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/deploy.html'));
+});
+
 app.get('/channels.html', requireAuth, (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/channels.html'));
 });
@@ -131,19 +149,45 @@ app.get('/settings.html', requireAuth, (req, res) => {
 
 // Routes — webhook already mounted above (before express.json) for signature verification
 app.use('/create-checkout-session', checkoutRoutes);
-app.use('/api/chat', chatRoutes);  // Disabled for testing
+app.use('/api/chat', swarmRoutes);  // Swarm chat (mounted first to handle /api/chat/swarm)
+app.use('/api/chat', chatRoutes);  // Single-agent chat fallback
+app.use('/api/swarm', swarmRoutes);  // Also mount at /api/swarm for direct access
 app.use('/api', agentRoutes);
 app.use('/api/documents', documentsRoutes);
-app.use('/api/chat', swarmRoutes);
-app.use('/api/swarm', swarmRoutes);
 app.use('/api/mcp', mcpRoutes);    // MCP server management (before swarm catch-all)
 app.use('/api', channelRoutes);     // webhook handlers for Twilio, Slack, etc.
-app.use('/api', swarmRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/observe', observeRoutes);  // observability dashboard API
 app.use('/api/optimization', optimizationRoutes);  // Phase 6 optimization engine
 const creditRoutes = require('./routes/creditRoutes');
 app.use('/api/credits', creditRoutes);
+const revenueRoutes = require('./routes/revenue');
+app.use('/api/revenue', revenueRoutes);
+
+// Static file serving — AFTER session and protected routes
+// Only serve files that are NOT protected HTML pages
+const protectedPages = new Set([
+  'chat.html', 'observe.html', 'swarm.html', 'channels.html',
+  'mcp.html', 'optimization.html', 'settings.html', 'command-center.html',
+  'deploy.html', 'admin.html', 'dashboard.html'
+]);
+
+// Serve CSS, JS, and assets statically (no auth needed)
+app.use('/css', express.static(path.join(__dirname, '../frontend/css'), { maxAge: '1d' }));
+app.use('/js', express.static(path.join(__dirname, '../frontend/js'), { maxAge: '1d' }));
+app.use('/assets', express.static(path.join(__dirname, '../frontend/assets'), { maxAge: '1d' }));
+
+// Serve other frontend files, but block protected HTML pages
+app.use(express.static(path.join(__dirname, '../frontend'), {
+  maxAge: '1d',
+  index: false,
+  setHeaders: function(res, filePath) {
+    // Prevent caching of HTML files
+    if (filePath.endsWith('.html')) {
+      res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
+    }
+  }
+}));
 
 // Health check
 app.get('/health', (req, res) => {
