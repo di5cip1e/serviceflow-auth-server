@@ -8,175 +8,127 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0A0A0F;
-  --surface: #1A1A2E;
-  --surface2: #2D2D44;
-  --border: #2D2D44;
-  --green: #C0A060;
-  --green-dim: #804020;
-  --text: #F0F0F0;
-  --text-dim: #808080;
-  --blue: #0040A0;
-  --blue-light: #0060D0;
-  --yellow: #C0A060;
-  --red: #E74C3C;
-  --orange: #C0A060;
-  --plasma: #00C0FF;
-  --amber: #C0A060;
+  --bg: #0A0A0F; --surface: #1A1A2E; --surface2: #2D2D44; --border: #2D2D44;
+  --green: #C0A060; --green-dim: #804020; --text: #F0F0F0; --text-dim: #808080;
+  --blue: #0040A0; --blue-light: #0060D0; --yellow: #C0A060; --red: #E74C3C;
+  --orange: #C0A060; --plasma: #00C0FF; --amber: #C0A060;
   --amber-dim: rgba(192,160,96,0.15);
 }
-
 body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; }
 
-.maikr-nav {
-  display: flex; align-items: center; padding: 16px 24px;
-  border-bottom: 1px solid var(--border); gap: 8px;
-  background: var(--surface); position: sticky; top: 0; z-index: 100;
-}
+.maikr-nav { display: flex; align-items: center; padding: 16px 24px; border-bottom: 1px solid var(--border); gap: 8px; background: var(--surface); position: sticky; top: 0; z-index: 100; }
 .maikr-nav .logo { font-weight: 700; font-size: 18px; color: var(--green); }
 .maikr-nav .sep { color: var(--border); }
-.maikr-nav .page { color: var(--text-dim); font-size: 14px; }
 .maikr-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; padding: 6px 12px; border-radius: 6px; transition: all 0.2s; }
 .maikr-nav a:hover { color: var(--text); background: var(--surface2); }
-.maikr-nav .badge { font-size: 11px; background: var(--green); color: #000; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
+.maikr-nav .active { color: var(--green); }
 
 .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
 
-/* Stats Row */
-.stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 24px; }
-.stat-card {
-  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
-  padding: 20px; text-align: center;
-}
-.stat-card .value { font-size: 32px; font-weight: 700; color: var(--green); }
-.stat-card .label { font-size: 12px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+/* Stats */
+.stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+.stat-card .value { font-size: 28px; font-weight: 700; color: var(--green); }
+.stat-card .label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
 
 /* Search Section */
-.search-section {
-  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
-  padding: 24px; margin-bottom: 24px;
-}
+.search-section { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
 .search-section h2 { margin: 0 0 8px 0; font-size: 18px; }
 .search-section p { color: var(--text-dim); font-size: 14px; margin: 0 0 16px 0; }
-.search-btn {
-  background: var(--green); color: #000; border: none; padding: 12px 24px;
-  border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer;
-  transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
-}
+.search-btn { background: var(--green); color: #000; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
 .search-btn:hover { background: var(--plasma); }
 .search-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-.search-btn .spinner {
-  display: none; width: 16px; height: 16px; border: 2px solid rgba(0,0,0,0.3);
-  border-top-color: #000; border-radius: 50%; animation: spin 0.8s linear infinite;
-}
+.search-btn .spinner { display: none; width: 16px; height: 16px; border: 2px solid rgba(0,0,0,0.3); border-top-color: #000; border-radius: 50%; animation: spin 0.8s linear infinite; }
 .search-btn.loading .spinner { display: inline-block; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* Filter Tabs */
-.filter-tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
-.filter-tab {
-  background: var(--surface); border: 1px solid var(--border); color: var(--text-dim);
-  padding: 8px 16px; border-radius: 20px; font-size: 13px; cursor: pointer;
-  transition: all 0.2s;
-}
+.filter-tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
+.filter-tab { background: var(--surface); border: 1px solid var(--border); color: var(--text-dim); padding: 8px 16px; border-radius: 20px; font-size: 13px; cursor: pointer; transition: all 0.2s; }
 .filter-tab.active { background: var(--green); color: #000; border-color: var(--green); }
 .filter-tab:hover:not(.active) { border-color: var(--green); color: var(--text); }
+.export-btns { margin-left: auto; display: flex; gap: 8px; }
+.export-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 8px 14px; border-radius: 8px; font-size: 12px; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+.export-btn:hover { border-color: var(--green); }
+.export-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
 /* Leads Table */
 .leads-table { width: 100%; border-collapse: collapse; }
-.leads-table th {
-  text-align: left; padding: 12px 16px; font-size: 12px; text-transform: uppercase;
-  letter-spacing: 0.5px; color: var(--text-dim); border-bottom: 1px solid var(--border);
-  background: var(--surface);
-}
-.leads-table td {
-  padding: 16px; border-bottom: 1px solid var(--border); font-size: 14px;
-  vertical-align: top;
-}
-.leads-table tr:hover { background: var(--surface); }
+.leads-table th { text-align: left; padding: 12px 16px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-dim); border-bottom: 1px solid var(--border); background: var(--surface); }
+.leads-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 14px; vertical-align: middle; }
+.leads-table tr:hover { background: rgba(192,160,96,0.05); }
+.leads-table tr.clickable { cursor: pointer; }
 .leads-table .company { font-weight: 600; color: var(--text); }
 .leads-table .contact { color: var(--text-dim); font-size: 13px; }
 .leads-table .title { color: var(--plasma); font-size: 12px; }
 
 /* Score Badge */
-.score-badge {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 40px; height: 40px; border-radius: 50%; font-weight: 700; font-size: 14px;
-}
-.score-high { background: rgba(192,160,96,0.2); color: var(--green); border: 2px solid var(--green); }
-.score-mid { background: rgba(0,64,160,0.2); color: var(--blue-light); border: 2px solid var(--blue); }
-.score-low { background: rgba(231,76,60,0.2); color: var(--red); border: 2px solid var(--red); }
+.score-badge { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; font-weight: 700; font-size: 13px; }
+.score-high { background: rgba(192,160,96,0.15); color: var(--green); border: 2px solid var(--green); }
+.score-mid { background: rgba(0,64,160,0.15); color: var(--blue-light); border: 2px solid var(--blue); }
+.score-low { background: rgba(231,76,60,0.15); color: var(--red); border: 2px solid var(--red); }
 
 /* Status Badge */
-.status-badge {
-  display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 11px;
-  font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
-}
-.status-new { background: rgba(192,160,96,0.15); color: var(--green); }
-.status-contacted { background: rgba(0,64,160,0.15); color: var(--blue-light); }
-.status-converted { background: rgba(0,192,255,0.15); color: var(--plasma); }
-.status-rejected { background: rgba(231,76,60,0.15); color: var(--red); }
-
-/* Actions */
-.actions { display: flex; gap: 8px; }
-.action-btn {
-  background: var(--surface2); border: 1px solid var(--border); color: var(--text);
-  padding: 6px 12px; border-radius: 6px; font-size: 12px; cursor: pointer;
-  transition: all 0.2s;
-}
-.action-btn:hover { border-color: var(--green); }
-.action-btn.danger:hover { border-color: var(--red); color: var(--red); }
-
-/* Outreach Draft */
-.outreach-draft {
-  background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
-  padding: 12px; font-size: 13px; color: var(--text-dim); line-height: 1.5;
-  max-width: 300px; white-space: pre-wrap; word-break: break-word;
-}
+.status-badge { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; transition: all 0.2s; }
+.status-new { background: rgba(192,160,96,0.12); color: var(--green); }
+.status-contacted { background: rgba(0,64,160,0.12); color: var(--blue-light); }
+.status-qualified { background: rgba(0,192,255,0.12); color: var(--plasma); }
+.status-converted { background: rgba(0,192,255,0.2); color: var(--plasma); }
+.status-rejected { background: rgba(231,76,60,0.12); color: var(--red); }
+.status-badge:hover { filter: brightness(1.3); }
 
 /* Empty State */
-.empty-state {
-  text-align: center; padding: 60px 20px; color: var(--text-dim);
-}
+.empty-state { text-align: center; padding: 60px 20px; color: var(--text-dim); }
 .empty-state .icon { font-size: 48px; margin-bottom: 16px; }
 .empty-state h3 { color: var(--text); margin: 0 0 8px 0; }
 .empty-state p { margin: 0; font-size: 14px; }
 
 /* Upgrade Banner */
-.upgrade-banner {
-  background: linear-gradient(135deg, var(--amber-dim), rgba(0,64,160,0.15));
-  border: 1px solid var(--amber); border-radius: 12px; padding: 24px;
-  text-align: center; margin-bottom: 24px;
-}
+.upgrade-banner { background: linear-gradient(135deg, var(--amber-dim), rgba(0,64,160,0.15)); border: 1px solid var(--amber); border-radius: 12px; padding: 24px; text-align: center; margin-bottom: 24px; }
 .upgrade-banner h3 { margin: 0 0 8px 0; color: var(--amber); }
 .upgrade-banner p { color: var(--text-dim); margin: 0 0 16px 0; font-size: 14px; }
-.upgrade-btn {
-  background: var(--amber); color: #000; border: none; padding: 10px 20px;
-  border-radius: 8px; font-weight: 600; cursor: pointer; text-decoration: none;
-  display: inline-block;
-}
+.upgrade-btn { background: var(--amber); color: #000; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; }
 
-/* Export Button */
-.export-btn {
-  background: var(--surface2); border: 1px solid var(--border); color: var(--text);
-  padding: 8px 16px; border-radius: 8px; font-size: 13px; cursor: pointer;
-  transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px;
-}
-.export-btn:hover { border-color: var(--green); }
+/* Modal Overlay */
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center; }
+.modal-overlay.open { display: flex; }
+.modal { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; width: 90%; max-width: 600px; max-height: 85vh; overflow-y: auto; }
+.modal-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid var(--border); }
+.modal-header h3 { margin: 0; font-size: 18px; }
+.modal-close { background: none; border: none; color: var(--text-dim); font-size: 24px; cursor: pointer; padding: 0; line-height: 1; }
+.modal-close:hover { color: var(--text); }
+.modal-body { padding: 24px; }
+.modal-footer { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; border-top: 1px solid var(--border); }
+
+/* Detail Fields */
+.detail-field { margin-bottom: 16px; }
+.detail-field label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-dim); margin-bottom: 6px; }
+.detail-field .value { font-size: 14px; color: var(--text); }
+.detail-field .value a { color: var(--blue-light); text-decoration: none; }
+.detail-field .value a:hover { text-decoration: underline; }
+.detail-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* Status Dropdown */
+.status-select { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 8px 12px; border-radius: 8px; font-size: 13px; cursor: pointer; }
+.status-select:focus { outline: none; border-color: var(--green); }
+
+/* Notes Textarea */
+.notes-textarea { width: 100%; background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 10px 12px; border-radius: 8px; font-size: 13px; font-family: inherit; resize: vertical; min-height: 80px; box-sizing: border-box; }
+.notes-textarea:focus { outline: none; border-color: var(--green); }
+
+/* Outreach Preview */
+.outreach-preview { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 16px; font-size: 13px; line-height: 1.6; color: var(--text-dim); white-space: pre-wrap; word-break: break-word; }
 
 /* Toast */
-.toast {
-  position: fixed; bottom: 24px; right: 24px; background: var(--surface);
-  border: 1px solid var(--green); border-radius: 8px; padding: 12px 20px;
-  font-size: 14px; color: var(--text); z-index: 1000;
-  transform: translateY(100px); opacity: 0; transition: all 0.3s;
-}
+.toast { position: fixed; bottom: 24px; right: 24px; background: var(--surface); border: 1px solid var(--green); border-radius: 8px; padding: 12px 20px; font-size: 14px; color: var(--text); z-index: 2000; transform: translateY(100px); opacity: 0; transition: all 0.3s; }
 .toast.show { transform: translateY(0); opacity: 1; }
 
-/* Responsive */
 @media (max-width: 768px) {
   .leads-table { display: block; overflow-x: auto; }
   .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .detail-row { grid-template-columns: 1fr; }
+  .export-btns { margin-left: 0; width: 100%; margin-top: 8px; }
+  .filter-tabs { flex-direction: column; align-items: stretch; }
 }
 </style>
 </head>
@@ -191,17 +143,34 @@ body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-ser
   <a href="/channels.html">Channels</a>
   <a href="/optimization.html">Optimize</a>
   <a href="/observe.html">Observe</a>
-  <a href="/leads.html" style="color:var(--green);">Leads</a>
+  <a href="/leads.html" class="active">Leads</a>
   <div style="flex:1"></div>
   <a href="/settings.html">Settings</a>
   <a href="/api/auth/logout">Log out</a>
 </nav>
 
 <div class="container" id="app">
-  <!-- Loading -->
-  <div id="loading" style="text-align:center;padding:60px;color:var(--text-dim);">
-    <div class="spinner" style="display:inline-block;width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin 0.8s linear infinite;"></div>
+  <div style="text-align:center;padding:60px;color:var(--text-dim);">
+    <div style="display:inline-block;width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin 0.8s linear infinite;"></div>
     <p>Loading leads...</p>
+  </div>
+</div>
+
+<!-- Lead Detail Modal -->
+<div class="modal-overlay" id="leadModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modalTitle">Lead Details</h3>
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-footer">
+      <button class="export-btn" style="color:var(--red);border-color:var(--red);" id="modalDeleteBtn">🗑 Delete</button>
+      <div style="display:flex;gap:8px;">
+        <button class="export-btn" onclick="closeModal()">Cancel</button>
+        <button class="search-btn" id="modalSaveBtn" style="padding:8px 16px;font-size:13px;">Save Changes</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -212,14 +181,13 @@ const API = '/api/leads';
 let currentAgentId = null;
 let currentFilter = 'all';
 let allLeads = [];
+let currentLead = null;
 
-// Get agent ID from URL or session
 function getAgentId() {
   const params = new URLSearchParams(window.location.search);
   return params.get('agent') || localStorage.getItem('maikr_active_agent') || 'default';
 }
 
-// Show toast notification
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
@@ -227,66 +195,160 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 3000);
 }
 
-// Get score badge class
 function scoreClass(score) {
   if (score >= 70) return 'score-high';
   if (score >= 40) return 'score-mid';
   return 'score-low';
 }
 
-// Render the full page
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Modal ────────────────────────────────────────────────────────────────────
+
+function openLeadModal(lead) {
+  currentLead = lead;
+  document.getElementById('modalTitle').textContent = lead.company_name || 'Lead Details';
+  
+  const sourceLink = lead.source_url 
+    ? `<a href="${escapeHtml(lead.source_url)}" target="_blank">${new URL(lead.source_url).hostname.replace('www.','')}</a>` 
+    : '-';
+  const linkedinLink = lead.linkedin_url 
+    ? `<a href="${escapeHtml(lead.linkedin_url)}" target="_blank">LinkedIn →</a>` 
+    : '-';
+  
+  document.getElementById('modalBody').innerHTML = `
+    <div class="detail-row">
+      <div class="detail-field">
+        <label>Company</label>
+        <div class="value">${escapeHtml(lead.company_name)}</div>
+      </div>
+      <div class="detail-field">
+        <label>Score</label>
+        <div class="value"><span class="score-badge ${scoreClass(lead.lead_score)}">${lead.lead_score || '-'}</span></div>
+      </div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-field">
+        <label>Contact</label>
+        <div class="value">${escapeHtml(lead.contact_name || '-')}${lead.title ? '<br><span style="color:var(--plasma);font-size:12px;">' + escapeHtml(lead.title) + '</span>' : ''}</div>
+      </div>
+      <div class="detail-field">
+        <label>Email</label>
+        <div class="value">${lead.email ? `<a href="mailto:${escapeHtml(lead.email)}">${escapeHtml(lead.email)}</a>` : '-'}</div>
+      </div>
+    </div>
+    <div class="detail-row">
+      <div class="detail-field">
+        <label>Source</label>
+        <div class="value">${sourceLink}</div>
+      </div>
+      <div class="detail-field">
+        <label>LinkedIn</label>
+        <div class="value">${linkedinLink}</div>
+      </div>
+    </div>
+    <div class="detail-field">
+      <label>Status</label>
+      <select class="status-select" id="modalStatus" style="width:100%;">
+        <option value="new" ${lead.status==='new'?'selected':''}>🟡 New</option>
+        <option value="contacted" ${lead.status==='contacted'?'selected':''}>🔵 Contacted</option>
+        <option value="qualified" ${lead.status==='qualified'?'selected':''}>🟣 Qualified</option>
+        <option value="converted" ${lead.status==='converted'?'selected':''}>✅ Converted</option>
+        <option value="rejected" ${lead.status==='rejected'?'selected':''}>🔴 Rejected</option>
+      </select>
+    </div>
+    <div class="detail-field">
+      <label>Notes</label>
+      <textarea class="notes-textarea" id="modalNotes" placeholder="Add notes about this lead...">${escapeHtml(lead.notes || '')}</textarea>
+    </div>
+    ${lead.outreach_draft ? `
+    <div class="detail-field">
+      <label>Outreach Draft</label>
+      <div class="outreach-preview">${escapeHtml(lead.outreach_draft)}</div>
+    </div>` : ''}
+    <div class="detail-field">
+      <label>Found</label>
+      <div class="value" style="font-size:12px;">${lead.found_at || '-'}</div>
+    </div>
+  `;
+  
+  document.getElementById('modalSaveBtn').onclick = saveLeadChanges;
+  document.getElementById('modalDeleteBtn').onclick = () => { deleteLead(lead.id); closeModal(); };
+  
+  document.getElementById('leadModal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('leadModal').classList.remove('open');
+  currentLead = null;
+}
+
+async function saveLeadChanges() {
+  if (!currentLead) return;
+  const status = document.getElementById('modalStatus').value;
+  const notes = document.getElementById('modalNotes').value;
+  
+  try {
+    await fetch(`${API}/status/${currentLead.id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status, notes })
+    });
+    showToast('Lead updated!');
+    closeModal();
+    loadLeads();
+  } catch (err) {
+    showToast('Update failed');
+  }
+}
+
+// Close modal on overlay click
+document.getElementById('leadModal').addEventListener('click', (e) => {
+  if (e.target.id === 'leadModal') closeModal();
+});
+
+// ── Render ───────────────────────────────────────────────────────────────────
+
 function renderPage(agentId, stats, leads) {
   const app = document.getElementById('app');
-  
   const totalLeads = stats?.total || 0;
   const newLeads = stats?.new_count || 0;
   const contacted = stats?.contacted_count || 0;
+  const qualified = stats?.qualified_count || 0;
   const converted = stats?.converted_count || 0;
   const avgScore = stats?.avg_score || 0;
 
   app.innerHTML = `
     <div class="stats-row">
-      <div class="stat-card">
-        <div class="value">${totalLeads}</div>
-        <div class="label">Total Leads</div>
-      </div>
-      <div class="stat-card">
-        <div class="value" style="color:var(--green);">${newLeads}</div>
-        <div class="label">New</div>
-      </div>
-      <div class="stat-card">
-        <div class="value" style="color:var(--blue-light);">${contacted}</div>
-        <div class="label">Contacted</div>
-      </div>
-      <div class="stat-card">
-        <div class="value" style="color:var(--plasma);">${converted}</div>
-        <div class="label">Converted</div>
-      </div>
-      <div class="stat-card">
-        <div class="value" style="color:var(--amber);">${avgScore}</div>
-        <div class="label">Avg Score</div>
-      </div>
+      <div class="stat-card"><div class="value">${totalLeads}</div><div class="label">Total Leads</div></div>
+      <div class="stat-card"><div class="value" style="color:var(--green);">${newLeads}</div><div class="label">New</div></div>
+      <div class="stat-card"><div class="value" style="color:var(--blue-light);">${contacted}</div><div class="label">Contacted</div></div>
+      <div class="stat-card"><div class="value" style="color:var(--plasma);">${converted}</div><div class="label">Converted</div></div>
+      <div class="stat-card"><div class="value" style="color:var(--amber);">${avgScore}</div><div class="label">Avg Score</div></div>
     </div>
 
     <div class="search-section">
       <h2>🔍 AI Lead Finder</h2>
-      <p>Your agent will search the web for companies and contacts that match your target profile. Leads are scored by fit and include personalized outreach drafts.</p>
-      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
-        <button class="search-btn" id="searchBtn" onclick="runSearch()">
-          <span class="spinner"></span>
-          <span class="btn-text">🔎 Find New Leads</span>
-        </button>
-        <button class="export-btn" onclick="exportCSV()" ${totalLeads === 0 ? 'disabled' : ''}>
-          📥 Export CSV
-        </button>
-      </div>
+      <p>Your agent searches the web for companies and contacts that match your target profile. Leads are scored by fit and include personalized outreach drafts.</p>
+      <button class="search-btn" id="searchBtn" onclick="runSearch()">
+        <span class="spinner"></span>
+        <span class="btn-text">🔎 Find New Leads</span>
+      </button>
     </div>
 
     <div class="filter-tabs">
       <div class="filter-tab ${currentFilter === 'all' ? 'active' : ''}" onclick="setFilter('all')">All (${totalLeads})</div>
       <div class="filter-tab ${currentFilter === 'new' ? 'active' : ''}" onclick="setFilter('new')">New (${newLeads})</div>
       <div class="filter-tab ${currentFilter === 'contacted' ? 'active' : ''}" onclick="setFilter('contacted')">Contacted (${contacted})</div>
+      <div class="filter-tab ${currentFilter === 'qualified' ? 'active' : ''}" onclick="setFilter('qualified')">Qualified (${qualified})</div>
       <div class="filter-tab ${currentFilter === 'converted' ? 'active' : ''}" onclick="setFilter('converted')">Converted (${converted})</div>
+      <div class="export-btns">
+        <button class="export-btn" onclick="exportCSV()" ${totalLeads === 0 ? 'disabled' : ''}>📄 CSV</button>
+        <button class="export-btn" onclick="exportPDF()" ${totalLeads === 0 ? 'disabled' : ''}>📕 PDF</button>
+      </div>
     </div>
 
     ${leads.length === 0 ? `
@@ -302,15 +364,14 @@ function renderPage(agentId, stats, leads) {
             <th>Score</th>
             <th>Company</th>
             <th>Contact</th>
-            <th>Source</th>
-            <th>Outreach Draft</th>
+            <th>Email</th>
             <th>Status</th>
-            <th>Actions</th>
+            <th>Found</th>
           </tr>
         </thead>
         <tbody>
           ${leads.map(lead => `
-            <tr>
+            <tr class="clickable" onclick='openLeadModal(${JSON.stringify(lead).replace(/'/g, "&#39;")})'>
               <td><span class="score-badge ${scoreClass(lead.lead_score)}">${lead.lead_score || '-'}</span></td>
               <td>
                 <div class="company">${escapeHtml(lead.company_name)}</div>
@@ -318,23 +379,11 @@ function renderPage(agentId, stats, leads) {
               </td>
               <td>
                 <div class="contact">${escapeHtml(lead.contact_name || '-')}</div>
-                ${lead.email ? `<div style="font-size:12px;color:var(--plasma);">${escapeHtml(lead.email)}</div>` : ''}
-                ${lead.linkedin_url ? `<a href="${escapeHtml(lead.linkedin_url)}" target="_blank" style="font-size:12px;color:var(--blue-light);">LinkedIn →</a>` : ''}
+                ${lead.linkedin_url ? `<a href="${escapeHtml(lead.linkedin_url)}" target="_blank" style="font-size:12px;color:var(--blue-light);" onclick="event.stopPropagation();">LinkedIn →</a>` : ''}
               </td>
-              <td>
-                ${lead.source_url ? `<a href="${escapeHtml(lead.source_url)}" target="_blank" style="font-size:12px;color:var(--text-dim);">${new URL(lead.source_url).hostname.replace('www.','')}</a>` : '-'}
-              </td>
-              <td>
-                ${lead.outreach_draft ? `<div class="outreach-draft">${escapeHtml(lead.outreach_draft)}</div>` : '-'}
-              </td>
+              <td style="font-size:13px;color:var(--text-dim);">${lead.email ? `<a href="mailto:${escapeHtml(lead.email)}" style="color:var(--plasma);" onclick="event.stopPropagation();">${escapeHtml(lead.email)}</a>` : '-'}</td>
               <td><span class="status-badge status-${lead.status || 'new'}">${lead.status || 'new'}</span></td>
-              <td>
-                <div class="actions">
-                  ${lead.status === 'new' ? `<button class="action-btn" onclick="updateStatus('${lead.id}', 'contacted')">✓ Contacted</button>` : ''}
-                  ${lead.status !== 'converted' ? `<button class="action-btn" onclick="updateStatus('${lead.id}', 'converted')">💰 Won</button>` : ''}
-                  <button class="action-btn danger" onclick="deleteLead('${lead.id}')">✕</button>
-                </div>
-              </td>
+              <td style="font-size:12px;color:var(--text-dim);">${lead.found_at ? lead.found_at.split('T')[0] : '-'}</td>
             </tr>
           `).join('')}
         </tbody>
@@ -343,10 +392,8 @@ function renderPage(agentId, stats, leads) {
   `;
 }
 
-// Render upgrade required page
 function renderUpgrade() {
-  const app = document.getElementById('app');
-  app.innerHTML = `
+  document.getElementById('app').innerHTML = `
     <div class="upgrade-banner">
       <h3>🔒 Lead Generation — Growth Plan Feature</h3>
       <p>AI-powered lead finding is available on the Growth plan and above. Upgrade to unlock:</p>
@@ -354,57 +401,43 @@ function renderUpgrade() {
         <li>Daily automated lead searches</li>
         <li>AI-scored prospects matched to your ICP</li>
         <li>Personalized outreach drafts</li>
-        <li>One-click CSV export</li>
+        <li>CSV & PDF export</li>
       </ul>
       <a href="/build/plan" class="upgrade-btn">Upgrade to Growth — $99.99/mo</a>
     </div>
   `;
 }
 
-// Escape HTML
-function escapeHtml(str) {
-  if (!str) return '';
-  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
+// ── Actions ──────────────────────────────────────────────────────────────────
 
-// Set filter
 function setFilter(filter) {
   currentFilter = filter;
   const filtered = filter === 'all' ? allLeads : allLeads.filter(l => l.status === filter);
   renderPage(currentAgentId, null, filtered);
 }
 
-// Run lead search
 async function runSearch() {
   const btn = document.getElementById('searchBtn');
   btn.classList.add('loading');
   btn.disabled = true;
-  
   try {
     const res = await fetch(`${API}/${currentAgentId}/search`, { method: 'POST' });
     const data = await res.json();
-    
     if (data.error) {
-      if (data.upgradeUrl) {
-        renderUpgrade();
-        return;
-      }
+      if (data.upgradeUrl) { renderUpgrade(); return; }
       showToast('Error: ' + data.error);
       return;
     }
-    
     showToast(`Found ${data.saved} new leads!`);
-    loadLeads(); // Reload
+    loadLeads();
   } catch (err) {
     showToast('Search failed. Please try again.');
-    console.error(err);
   } finally {
     btn.classList.remove('loading');
     btn.disabled = false;
   }
 }
 
-// Update lead status
 async function updateStatus(leadId, status) {
   try {
     await fetch(`${API}/status/${leadId}`, {
@@ -414,63 +447,39 @@ async function updateStatus(leadId, status) {
     });
     showToast('Updated!');
     loadLeads();
-  } catch (err) {
-    showToast('Update failed');
-  }
+  } catch (err) { showToast('Update failed'); }
 }
 
-// Delete lead
 async function deleteLead(leadId) {
   if (!confirm('Delete this lead?')) return;
   try {
     await fetch(`${API}/${leadId}`, { method: 'DELETE' });
     showToast('Deleted');
     loadLeads();
-  } catch (err) {
-    showToast('Delete failed');
-  }
+  } catch (err) { showToast('Delete failed'); }
 }
 
-// Export CSV
-function exportCSV() {
-  window.location.href = `${API}/export/${currentAgentId}`;
-}
+function exportCSV() { window.location.href = `${API}/export/${currentAgentId}`; }
+function exportPDF() { window.location.href = `${API}/export/${currentAgentId}?format=pdf`; }
 
-// Load leads and stats
 async function loadLeads() {
   currentAgentId = getAgentId();
-  
   try {
     const [leadsRes, statsRes] = await Promise.all([
       fetch(`${API}/${currentAgentId}`),
       fetch(`${API}/stats/${currentAgentId}`)
     ]);
-    
     const leadsData = await leadsRes.json();
     const statsData = await statsRes.json();
-    
-    if (leadsData.error && leadsData.error.includes('upgrade')) {
-      renderUpgrade();
-      return;
-    }
-    
+    if (leadsData.error && leadsData.error.includes('upgrade')) { renderUpgrade(); return; }
     allLeads = leadsData.leads || [];
-    const stats = statsData.stats || {};
-    
-    renderPage(currentAgentId, stats, allLeads);
+    renderPage(currentAgentId, statsData.stats || {}, allLeads);
   } catch (err) {
     console.error('Load leads error:', err);
-    document.getElementById('app').innerHTML = `
-      <div class="empty-state">
-        <div class="icon">⚠️</div>
-        <h3>Failed to load leads</h3>
-        <p>Please refresh the page or try again later.</p>
-      </div>
-    `;
+    document.getElementById('app').innerHTML = `<div class="empty-state"><div class="icon">⚠️</div><h3>Failed to load leads</h3><p>Please refresh the page.</p></div>`;
   }
 }
 
-// Init
 loadLeads();
 </script>
 </body>

@@ -159,7 +159,7 @@ function getLeads(agentId, status = null, limit = 50) {
  */
 function updateLeadStatus(leadId, status, notes = null) {
   return new Promise((resolve, reject) => {
-    const contactedAt = status === 'contacted' ? `datetime('now')` : null;
+    const contactedAt = (status === 'contacted' || status === 'qualified' || status === 'converted') ? `datetime('now')` : null;
     db.run(
       `UPDATE leads SET status = ?, notes = COALESCE(?, notes) ${contactedAt ? ', contacted_at = datetime(\'now\')' : ''} WHERE id = ?`,
       [status, notes, leadId],
