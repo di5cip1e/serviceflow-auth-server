@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lead Generation | M.ai.K.R</title>
+<link rel="stylesheet" href="css/styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0A0A0F;
+  --surface: #1A1A2E;
+  --surface2: #2D2D44;
+  --border: #2D2D44;
+  --green: #C0A060;
+  --green-dim: #804020;
+  --text: #F0F0F0;
+  --text-dim: #808080;
+  --blue: #0040A0;
+  --blue-light: #0060D0;
+  --yellow: #C0A060;
+  --red: #E74C3C;
+  --orange: #C0A060;
+  --plasma: #00C0FF;
+  --amber: #C0A060;
+  --amber-dim: rgba(192,160,96,0.15);
+}
+
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; }
+
+.maikr-nav {
+  display: flex; align-items: center; padding: 16px 24px;
+  border-bottom: 1px solid var(--border); gap: 8px;
+  background: var(--surface); position: sticky; top: 0; z-index: 100;
+}
+.maikr-nav .logo { font-weight: 700; font-size: 18px; color: var(--green); }
+.maikr-nav .sep { color: var(--border); }
+.maikr-nav .page { color: var(--text-dim); font-size: 14px; }
+.maikr-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; padding: 6px 12px; border-radius: 6px; transition: all 0.2s; }
+.maikr-nav a:hover { color: var(--text); background: var(--surface2); }
+.maikr-nav .badge { font-size: 11px; background: var(--green); color: #000; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+/* Stats Row */
+.stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.stat-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  padding: 20px; text-align: center;
+}
+.stat-card .value { font-size: 32px; font-weight: 700; color: var(--green); }
+.stat-card .label { font-size: 12px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+
+/* Search Section */
+.search-section {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  padding: 24px; margin-bottom: 24px;
+}
+.search-section h2 { margin: 0 0 8px 0; font-size: 18px; }
+.search-section p { color: var(--text-dim); font-size: 14px; margin: 0 0 16px 0; }
+.search-btn {
+  background: var(--green); color: #000; border: none; padding: 12px 24px;
+  border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer;
+  transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+}
+.search-btn:hover { background: var(--plasma); }
+.search-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.search-btn .spinner {
+  display: none; width: 16px; height: 16px; border: 2px solid rgba(0,0,0,0.3);
+  border-top-color: #000; border-radius: 50%; animation: spin 0.8s linear infinite;
+}
+.search-btn.loading .spinner { display: inline-block; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Filter Tabs */
+.filter-tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.filter-tab {
+  background: var(--surface); border: 1px solid var(--border); color: var(--text-dim);
+  padding: 8px 16px; border-radius: 20px; font-size: 13px; cursor: pointer;
+  transition: all 0.2s;
+}
+.filter-tab.active { background: var(--green); color: #000; border-color: var(--green); }
+.filter-tab:hover:not(.active) { border-color: var(--green); color: var(--text); }
+
+/* Leads Table */
+.leads-table { width: 100%; border-collapse: collapse; }
+.leads-table th {
+  text-align: left; padding: 12px 16px; font-size: 12px; text-transform: uppercase;
+  letter-spacing: 0.5px; color: var(--text-dim); border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+.leads-table td {
+  padding: 16px; border-bottom: 1px solid var(--border); font-size: 14px;
+  vertical-align: top;
+}
+.leads-table tr:hover { background: var(--surface); }
+.leads-table .company { font-weight: 600; color: var(--text); }
+.leads-table .contact { color: var(--text-dim); font-size: 13px; }
+.leads-table .title { color: var(--plasma); font-size: 12px; }
+
+/* Score Badge */
+.score-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 50%; font-weight: 700; font-size: 14px;
+}
+.score-high { background: rgba(192,160,96,0.2); color: var(--green); border: 2px solid var(--green); }
+.score-mid { background: rgba(0,64,160,0.2); color: var(--blue-light); border: 2px solid var(--blue); }
+.score-low { background: rgba(231,76,60,0.2); color: var(--red); border: 2px solid var(--red); }
+
+/* Status Badge */
+.status-badge {
+  display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 11px;
+  font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.status-new { background: rgba(192,160,96,0.15); color: var(--green); }
+.status-contacted { background: rgba(0,64,160,0.15); color: var(--blue-light); }
+.status-converted { background: rgba(0,192,255,0.15); color: var(--plasma); }
+.status-rejected { background: rgba(231,76,60,0.15); color: var(--red); }
+
+/* Actions */
+.actions { display: flex; gap: 8px; }
+.action-btn {
+  background: var(--surface2); border: 1px solid var(--border); color: var(--text);
+  padding: 6px 12px; border-radius: 6px; font-size: 12px; cursor: pointer;
+  transition: all 0.2s;
+}
+.action-btn:hover { border-color: var(--green); }
+.action-btn.danger:hover { border-color: var(--red); color: var(--red); }
+
+/* Outreach Draft */
+.outreach-draft {
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+  padding: 12px; font-size: 13px; color: var(--text-dim); line-height: 1.5;
+  max-width: 300px; white-space: pre-wrap; word-break: break-word;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center; padding: 60px 20px; color: var(--text-dim);
+}
+.empty-state .icon { font-size: 48px; margin-bottom: 16px; }
+.empty-state h3 { color: var(--text); margin: 0 0 8px 0; }
+.empty-state p { margin: 0; font-size: 14px; }
+
+/* Upgrade Banner */
+.upgrade-banner {
+  background: linear-gradient(135deg, var(--amber-dim), rgba(0,64,160,0.15));
+  border: 1px solid var(--amber); border-radius: 12px; padding: 24px;
+  text-align: center; margin-bottom: 24px;
+}
+.upgrade-banner h3 { margin: 0 0 8px 0; color: var(--amber); }
+.upgrade-banner p { color: var(--text-dim); margin: 0 0 16px 0; font-size: 14px; }
+.upgrade-btn {
+  background: var(--amber); color: #000; border: none; padding: 10px 20px;
+  border-radius: 8px; font-weight: 600; cursor: pointer; text-decoration: none;
+  display: inline-block;
+}
+
+/* Export Button */
+.export-btn {
+  background: var(--surface2); border: 1px solid var(--border); color: var(--text);
+  padding: 8px 16px; border-radius: 8px; font-size: 13px; cursor: pointer;
+  transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px;
+}
+.export-btn:hover { border-color: var(--green); }
+
+/* Toast */
+.toast {
+  position: fixed; bottom: 24px; right: 24px; background: var(--surface);
+  border: 1px solid var(--green); border-radius: 8px; padding: 12px 20px;
+  font-size: 14px; color: var(--text); z-index: 1000;
+  transform: translateY(100px); opacity: 0; transition: all 0.3s;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .leads-table { display: block; overflow-x: auto; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<nav class="maikr-nav">
+  <span class="logo">M.ai.K.R</span>
+  <span class="sep">›</span>
+  <a href="/command-center.html">Dashboard</a>
+  <a href="/swarm.html">Swarm</a>
+  <a href="/mcp.html">MCP</a>
+  <a href="/channels.html">Channels</a>
+  <a href="/optimization.html">Optimize</a>
+  <a href="/observe.html">Observe</a>
+  <a href="/leads.html" style="color:var(--green);">Leads</a>
+  <div style="flex:1"></div>
+  <a href="/settings.html">Settings</a>
+  <a href="/api/auth/logout">Log out</a>
+</nav>
+
+<div class="container" id="app">
+  <!-- Loading -->
+  <div id="loading" style="text-align:center;padding:60px;color:var(--text-dim);">
+    <div class="spinner" style="display:inline-block;width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin 0.8s linear infinite;"></div>
+    <p>Loading leads...</p>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const API = '/api/leads';
+let currentAgentId = null;
+let currentFilter = 'all';
+let allLeads = [];
+
+// Get agent ID from URL or session
+function getAgentId() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('agent') || localStorage.getItem('maikr_active_agent') || 'default';
+}
+
+// Show toast notification
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// Get score badge class
+function scoreClass(score) {
+  if (score >= 70) return 'score-high';
+  if (score >= 40) return 'score-mid';
+  return 'score-low';
+}
+
+// Render the full page
+function renderPage(agentId, stats, leads) {
+  const app = document.getElementById('app');
+  
+  const totalLeads = stats?.total || 0;
+  const newLeads = stats?.new_count || 0;
+  const contacted = stats?.contacted_count || 0;
+  const converted = stats?.converted_count || 0;
+  const avgScore = stats?.avg_score || 0;
+
+  app.innerHTML = `
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="value">${totalLeads}</div>
+        <div class="label">Total Leads</div>
+      </div>
+      <div class="stat-card">
+        <div class="value" style="color:var(--green);">${newLeads}</div>
+        <div class="label">New</div>
+      </div>
+      <div class="stat-card">
+        <div class="value" style="color:var(--blue-light);">${contacted}</div>
+        <div class="label">Contacted</div>
+      </div>
+      <div class="stat-card">
+        <div class="value" style="color:var(--plasma);">${converted}</div>
+        <div class="label">Converted</div>
+      </div>
+      <div class="stat-card">
+        <div class="value" style="color:var(--amber);">${avgScore}</div>
+        <div class="label">Avg Score</div>
+      </div>
+    </div>
+
+    <div class="search-section">
+      <h2>🔍 AI Lead Finder</h2>
+      <p>Your agent will search the web for companies and contacts that match your target profile. Leads are scored by fit and include personalized outreach drafts.</p>
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+        <button class="search-btn" id="searchBtn" onclick="runSearch()">
+          <span class="spinner"></span>
+          <span class="btn-text">🔎 Find New Leads</span>
+        </button>
+        <button class="export-btn" onclick="exportCSV()" ${totalLeads === 0 ? 'disabled' : ''}>
+          📥 Export CSV
+        </button>
+      </div>
+    </div>
+
+    <div class="filter-tabs">
+      <div class="filter-tab ${currentFilter === 'all' ? 'active' : ''}" onclick="setFilter('all')">All (${totalLeads})</div>
+      <div class="filter-tab ${currentFilter === 'new' ? 'active' : ''}" onclick="setFilter('new')">New (${newLeads})</div>
+      <div class="filter-tab ${currentFilter === 'contacted' ? 'active' : ''}" onclick="setFilter('contacted')">Contacted (${contacted})</div>
+      <div class="filter-tab ${currentFilter === 'converted' ? 'active' : ''}" onclick="setFilter('converted')">Converted (${converted})</div>
+    </div>
+
+    ${leads.length === 0 ? `
+      <div class="empty-state">
+        <div class="icon">🎯</div>
+        <h3>No leads yet</h3>
+        <p>Click "Find New Leads" to have your AI agent search for prospects that match your business.</p>
+      </div>
+    ` : `
+      <table class="leads-table">
+        <thead>
+          <tr>
+            <th>Score</th>
+            <th>Company</th>
+            <th>Contact</th>
+            <th>Source</th>
+            <th>Outreach Draft</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${leads.map(lead => `
+            <tr>
+              <td><span class="score-badge ${scoreClass(lead.lead_score)}">${lead.lead_score || '-'}</span></td>
+              <td>
+                <div class="company">${escapeHtml(lead.company_name)}</div>
+                ${lead.title ? `<div class="title">${escapeHtml(lead.title)}</div>` : ''}
+              </td>
+              <td>
+                <div class="contact">${escapeHtml(lead.contact_name || '-')}</div>
+                ${lead.email ? `<div style="font-size:12px;color:var(--plasma);">${escapeHtml(lead.email)}</div>` : ''}
+                ${lead.linkedin_url ? `<a href="${escapeHtml(lead.linkedin_url)}" target="_blank" style="font-size:12px;color:var(--blue-light);">LinkedIn →</a>` : ''}
+              </td>
+              <td>
+                ${lead.source_url ? `<a href="${escapeHtml(lead.source_url)}" target="_blank" style="font-size:12px;color:var(--text-dim);">${new URL(lead.source_url).hostname.replace('www.','')}</a>` : '-'}
+              </td>
+              <td>
+                ${lead.outreach_draft ? `<div class="outreach-draft">${escapeHtml(lead.outreach_draft)}</div>` : '-'}
+              </td>
+              <td><span class="status-badge status-${lead.status || 'new'}">${lead.status || 'new'}</span></td>
+              <td>
+                <div class="actions">
+                  ${lead.status === 'new' ? `<button class="action-btn" onclick="updateStatus('${lead.id}', 'contacted')">✓ Contacted</button>` : ''}
+                  ${lead.status !== 'converted' ? `<button class="action-btn" onclick="updateStatus('${lead.id}', 'converted')">💰 Won</button>` : ''}
+                  <button class="action-btn danger" onclick="deleteLead('${lead.id}')">✕</button>
+                </div>
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `}
+  `;
+}
+
+// Render upgrade required page
+function renderUpgrade() {
+  const app = document.getElementById('app');
+  app.innerHTML = `
+    <div class="upgrade-banner">
+      <h3>🔒 Lead Generation — Growth Plan Feature</h3>
+      <p>AI-powered lead finding is available on the Growth plan and above. Upgrade to unlock:</p>
+      <ul style="text-align:left;max-width:400px;margin:0 auto 16px;color:var(--text-dim);font-size:14px;">
+        <li>Daily automated lead searches</li>
+        <li>AI-scored prospects matched to your ICP</li>
+        <li>Personalized outreach drafts</li>
+        <li>One-click CSV export</li>
+      </ul>
+      <a href="/build/plan" class="upgrade-btn">Upgrade to Growth — $99.99/mo</a>
+    </div>
+  `;
+}
+
+// Escape HTML
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// Set filter
+function setFilter(filter) {
+  currentFilter = filter;
+  const filtered = filter === 'all' ? allLeads : allLeads.filter(l => l.status === filter);
+  renderPage(currentAgentId, null, filtered);
+}
+
+// Run lead search
+async function runSearch() {
+  const btn = document.getElementById('searchBtn');
+  btn.classList.add('loading');
+  btn.disabled = true;
+  
+  try {
+    const res = await fetch(`${API}/${currentAgentId}/search`, { method: 'POST' });
+    const data = await res.json();
+    
+    if (data.error) {
+      if (data.upgradeUrl) {
+        renderUpgrade();
+        return;
+      }
+      showToast('Error: ' + data.error);
+      return;
+    }
+    
+    showToast(`Found ${data.saved} new leads!`);
+    loadLeads(); // Reload
+  } catch (err) {
+    showToast('Search failed. Please try again.');
+    console.error(err);
+  } finally {
+    btn.classList.remove('loading');
+    btn.disabled = false;
+  }
+}
+
+// Update lead status
+async function updateStatus(leadId, status) {
+  try {
+    await fetch(`${API}/status/${leadId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status })
+    });
+    showToast('Updated!');
+    loadLeads();
+  } catch (err) {
+    showToast('Update failed');
+  }
+}
+
+// Delete lead
+async function deleteLead(leadId) {
+  if (!confirm('Delete this lead?')) return;
+  try {
+    await fetch(`${API}/${leadId}`, { method: 'DELETE' });
+    showToast('Deleted');
+    loadLeads();
+  } catch (err) {
+    showToast('Delete failed');
+  }
+}
+
+// Export CSV
+function exportCSV() {
+  window.location.href = `${API}/export/${currentAgentId}`;
+}
+
+// Load leads and stats
+async function loadLeads() {
+  currentAgentId = getAgentId();
+  
+  try {
+    const [leadsRes, statsRes] = await Promise.all([
+      fetch(`${API}/${currentAgentId}`),
+      fetch(`${API}/stats/${currentAgentId}`)
+    ]);
+    
+    const leadsData = await leadsRes.json();
+    const statsData = await statsRes.json();
+    
+    if (leadsData.error && leadsData.error.includes('upgrade')) {
+      renderUpgrade();
+      return;
+    }
+    
+    allLeads = leadsData.leads || [];
+    const stats = statsData.stats || {};
+    
+    renderPage(currentAgentId, stats, allLeads);
+  } catch (err) {
+    console.error('Load leads error:', err);
+    document.getElementById('app').innerHTML = `
+      <div class="empty-state">
+        <div class="icon">⚠️</div>
+        <h3>Failed to load leads</h3>
+        <p>Please refresh the page or try again later.</p>
+      </div>
+    `;
+  }
+}
+
+// Init
+loadLeads();
+</script>
+</body>
+</html>

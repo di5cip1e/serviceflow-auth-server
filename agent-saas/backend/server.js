@@ -164,12 +164,16 @@ app.use('/api/credits', creditRoutes);
 const revenueRoutes = require('./routes/revenue');
 app.use('/api/revenue', revenueRoutes);
 
+// Lead Generation routes (Phase 9)
+const leadsRoutes = require('./routes/leads');
+app.use('/api/leads', leadsRoutes);
+
 // Static file serving — AFTER session and protected routes
 // Only serve files that are NOT protected HTML pages
 const protectedPages = new Set([
   'chat.html', 'observe.html', 'swarm.html', 'channels.html',
   'mcp.html', 'optimization.html', 'settings.html', 'command-center.html',
-  'deploy.html', 'admin.html', 'dashboard.html'
+  'deploy.html', 'admin.html', 'dashboard.html', 'leads.html'
 ]);
 
 // Serve CSS, JS, and assets statically (no auth needed)
@@ -178,6 +182,7 @@ app.use('/js', express.static(path.join(__dirname, '../frontend/js'), { maxAge: 
 app.use('/assets', express.static(path.join(__dirname, '../frontend/assets'), { maxAge: '1d' }));
 
 // Serve other frontend files, but block protected HTML pages
+// Note: leads.html is in the protected set above
 app.use(express.static(path.join(__dirname, '../frontend'), {
   maxAge: '1d',
   index: false,

@@ -318,6 +318,27 @@ db.serialize(() => {
   )`);
   db.run(`CREATE INDEX IF NOT EXISTS idx_email_log_customer ON email_log(customer_id, email_type)`);
 
+  // Leads table (Phase 9 — Lead Generation)
+  db.run(`CREATE TABLE IF NOT EXISTS leads (
+    id TEXT PRIMARY KEY,
+    agent_id TEXT NOT NULL,
+    company_name TEXT,
+    contact_name TEXT,
+    title TEXT,
+    email TEXT,
+    linkedin_url TEXT,
+    source_url TEXT,
+    lead_score INTEGER DEFAULT 0,
+    outreach_draft TEXT,
+    status TEXT DEFAULT 'new',
+    found_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    contacted_at TEXT,
+    notes TEXT,
+    FOREIGN KEY (agent_id) REFERENCES agents(id)
+  )`);
+  db.run(`CREATE INDEX IF NOT EXISTS idx_leads_agent ON leads(agent_id, lead_score DESC)`);
+  db.run(`CREATE INDEX IF NOT EXISTS idx_leads_status ON leads(agent_id, status)`);
+
   // Create indexes for common queries
   db.run(`CREATE INDEX IF NOT EXISTS idx_conversations_agent ON conversations(agent_id, created_at DESC)`);
   db.run(`CREATE INDEX IF NOT EXISTS idx_token_usage_agent ON token_usage(agent_id, created_at DESC)`);
