@@ -24,7 +24,7 @@ These skills are so lightweight/multi-use they load in every session:
 **Description:** Building and operating the M.ai.K.R agent SaaS platform
 **Active by default**
 
-Skills (23):
+Skills (25):
 - ai-agent-builder
 - analytics
 - automation-workflows
@@ -48,6 +48,8 @@ Skills (23):
 - saas-billing-system
 - saas-revenue-tracker
 - openclaw-money-maker
+- seo-meta-optimizer
+- accessibility-check
 
 ---
 
@@ -119,6 +121,8 @@ Skills: (none beyond CORE)
 | saas-billing-system | agent-builder |
 | saas-revenue-tracker | agent-builder |
 | openclaw-money-maker | agent-builder |
+| seo-meta-optimizer | agent-builder |
+| accessibility-check | agent-builder |
 | business-doc-generator | research |
 | best-image-generation | creative |
 | email-automation | marketing |

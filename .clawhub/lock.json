@@ -104,6 +104,14 @@
     "saas-revenue-tracker": {
       "version": "1.0.0",
       "installedAt": 1778938337440
+    },
+    "accessibility-check": {
+      "version": "1.0.0",
+      "installedAt": 1779283062170
+    },
+    "seo-meta-optimizer": {
+      "version": "1.0.0",
+      "installedAt": 1779283062196
     }
   }
 }

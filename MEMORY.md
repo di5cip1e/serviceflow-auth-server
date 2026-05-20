@@ -13,7 +13,7 @@
 
 ## Critical Runtime Info
 - **Model:** openrouter/owl-alpha (free, 1M+ context, set 2026-05-13)
-- **Current time:** Sunday May 17, 2026 04:00 UTC
+- **Current time:** Wednesday May 20, 2026 04:00 UTC
 - **Context:** ~50k tokens — healthy
 - **MEMORY.md target:** Keep under 50KB
 - **Heartbeat:** every 2 hours
@@ -102,8 +102,8 @@
 - Workspace organization: Clean structure maintained
 - Forgeai.sbs: Briefly down (000) then recovered to 301 (normal)
 
-*Last consolidated: 2026-05-19 04:00 UTC*
-*Previous: 2026-05-15 04:03 UTC*
+*Last consolidated: 2026-05-20 04:00 UTC*
+*Previous: 2026-05-19 04:00 UTC*
 
 ## May 15-16, 2026 — Testing Overhaul + Mailgun Fix
 
@@ -347,7 +347,7 @@
 - git filter-branch ran May 11 to remove 645MB of large files (ironveil, PixelForge)
 - Commits: a89d91b (Phases 1-8), 8c6df17 (fix index.html override), c0138d0 (provisioning INSERT), a2460a4 (login nav)
 
-### May 18-19, 2026 — Frontend Audit + Auth Fix
+### May 18-20, 2026 — Frontend Audit + Auth Fix + Build Flow Fix
 
 **Full frontend audit completed** (6 areas: performance, mobile, SEO, accessibility, build flow, protected pages). Report: `audit-full-report.md`
 
@@ -357,15 +357,27 @@
 - All 9 protected pages now 302 redirect to `/login` for unauthenticated users
 - Commit: fce4aba
 
+**Fix #2 — Build flow Stripe checkout (DEPLOYED May 20):**
+- `build-step4.html` was missing `<script src="https://js.stripe.com/v3/">` — `Stripe()` was undefined, causing silent JS error on "Deploy My Agent" click
+- `checkout.js` had temporal dead zone bug — `session.customer_email` referenced before `const session = await stripe.checkout.sessions.create()` completed. Fixed to use `req.body.email`
+- Verified end-to-end: POST `/create-checkout-session` returns valid Stripe session URL
+- Commit: 7fcd098
+
+**Fix #3 — 5 Broken Cron Jobs (DEPLOYED May 19-20):**
+- All 5 cron jobs (workspace-daily-backup, nightly-optimization, daily-revenue-snapshot, webhook-retry, onboarding-emails) were failing with `ERR_MODULE_NOT_FOUND` after OpenClaw v2026.5.12 update
+- Root cause: isolated agentTurn sessions can't resolve OpenClaw internal modules post-update
+- Fix: converted all to `sessionTarget: "main"` with `systemEvent` payloads
+- Also fixed DB schema issues: missing `retry_count`/`stripe_event_id`/`processed_at`/`error` columns on `webhook_events`; missing `monthly_cost_cents`/`updated_at` on `customers`; `amount_cents`→`price_paid_cents` column name mismatch in revenue-snapshot; `c.agent_name`→`a.agent_name` in onboarding-scheduler
+
 **Known issues still pending:**
-- Build flow "Continue →" button doesn't advance on click (critical — blocks conversion funnel)
 - No Open Graph / Twitter Card / JSON-LD structured data
 - No `<main>` or `<header>` landmarks, no skip link
 - H1 heading missing spaces: "Your AI teamnever sleeps"
+- GitHub large file warning: `spr_jack_player_sheet_final.png` (66MB) in design-refs — not blocking yet but will fail on future pushes if >100MB
 
 ### M.ai.K.R Full Stack Status
 - **Live**: maikr.pro/ (landing), /build/* (4-step form), /chat.html, /observe.html, /optimization.html, /command-center.html, /channels.html, /swarm.html, /mcp.html, /privacy.html, /terms.html
-- **Backend restarts**: ~24 restarts (bcrypt crash, index.html debug, provisioning fixes)
+- **Backend restarts**: ~30 restarts (bcrypt crash, index.html debug, provisioning fixes, swarm.js syntax fix, checkout fix)
 - **Langfuse**: live at us.cloud.langfuse.com
 - **SSL**: Let's Encrypt cert for maikr.pro, expires Aug 7 2026
 - **Test agent**: TestBot4 spawned (agent:test-company-4-mp1zl4e6:main), chat API verified working
