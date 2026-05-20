@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
     } = req.body;
 
     const tier = req.body.plan || skillLevel || 'basic';
-    const pricing = PRICING[tier] || PRICING.basic;
+    const pricing = PRICING[tier] || PRICING.value;
 
     // Build Stripe metadata — include user_id if logged in (links payment to user account)
     const stripeMetadata = {
@@ -71,10 +71,20 @@ router.post('/', async (req, res) => {
           quantity: 1
         }
       ],
+      automatic_tax: { enabled: true },
+      billing_address_collection: 'required',
+      phone_number_collection: { enabled: true },
+      allow_promotion_codes: true,
+      tax_id_collection: { enabled: true },
+      customer_email: req.body.email || undefined,
+      client_reference_id: req.session?.userId || undefined,
       mode: 'subscription',
-      success_url: `http://maikr.pro/success.html?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: 'http://maikr.pro/',
-      metadata: stripeMetadata
+      success_url: `https://maikr.pro/success.html?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: 'https://maikr.pro/',
+      metadata: stripeMetadata,
+      subscription_data: {
+        metadata: stripeMetadata
+      }
     });
 
     res.json({ 
