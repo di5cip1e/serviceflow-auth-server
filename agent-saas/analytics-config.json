@@ -1,0 +1,6 @@
+{
+  "provider": "umami",
+  "site_id": "YOUR_SITE_ID_HERE",
+  "enabled": false,
+  "note": "Set enabled to true and add your Umami cloud site ID to start tracking. Get one at https://cloud.umami.is"
+}

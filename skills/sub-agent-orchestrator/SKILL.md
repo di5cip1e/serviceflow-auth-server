@@ -64,9 +64,12 @@ sessions_spawn({
   Success: [what success looks like]`,
   label: "agent-name-task",
   timeoutSeconds: 300,  // DEFAULT - always set this
-  runtime: "subagent"
+  runtime: "subagent",
+  model: "openrouter/owl-alpha"  // Always use the Director's model
 })
 ```
+
+**IMPORTANT: Always pass `model: "openrouter/owl-alpha"` to sub-agents.** The default model (gpt-oss-120b:free) has poor tool-use reliability and will fail on file edits.
 
 ### Parallel Execution
 

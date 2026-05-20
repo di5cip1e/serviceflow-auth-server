@@ -5,76 +5,162 @@ const db = require('../database');
 const { provisionCustomer } = require('../services/provisioning');
 const { PRICING } = require('./checkout');
 
+// Process a checkout.session.completed event
+async function processCheckoutSession(session, event) {
+  const existing = await new Promise((resolve) => {
+    db.get('SELECT id FROM customers WHERE stripe_session_id = ? LIMIT 1', [session.id], (err, row) => resolve(row));
+  });
+  if (existing) {
+    console.log('⏭️  Already processed session:', session.id);
+    return { duplicate: true };
+  }
+
+  const paymentData = {
+    eventId: event.id,
+    sessionId: session.id,
+    email: session.customer_email,
+    agentName: session.metadata?.agentName || 'Unnamed Agent',
+    businessName: session.metadata?.businessName || 'Unknown Business',
+    industry: session.metadata?.industry || 'general',
+    targetAudience: session.metadata?.targetAudience || 'general audience',
+    tone: session.metadata?.tone || 'professional',
+    useCases: session.metadata?.useCases || '',
+    plan: session.metadata?.skillLevel || 'value',
+    baseTokens: PRICING[session.metadata?.skillLevel]?.base_tokens || 20000,
+    outcomeCredits: PRICING[session.metadata?.skillLevel]?.outcome_credits || 100,
+    modelTier: session.metadata?.modelTier || 'standard',
+    dataAgreement: session.metadata?.dataAgreement === 'true' ? 1 : 0,
+    customerId: session.customer,
+    subscriptionId: session.subscription,
+    userId: session.metadata?.user_id || null
+  };
+
+  const result = await provisionCustomer(paymentData);
+  console.log('🤖 Agent provisioned:', result.agentId);
+  return result;
+}
+
+// POST /webhook — Stripe webhook endpoint
 router.post('/', express.raw({ type: 'application/json' }), async (req, res) => {
   const sig = req.headers['stripe-signature'];
   let event;
 
   try {
     event = require('stripe')(process.env.STRIPE_SECRET_KEY).webhooks.constructEvent(
-      req.body, 
-      sig, 
+      req.body,
+      sig,
       process.env.STRIPE_WEBHOOK_SECRET
     );
   } catch (err) {
-    console.error('❌ Webhook signature verification failed:', err.message);
+    console.error('❌ Webhook signature failed:', err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
-  if (event.type === 'checkout.session.completed') {
-    const session = event.data.object;
-    
-    console.log('✅ Payment received:', session.id);
-    console.log('Customer:', session.customer_email);
+  const eventId = event.id;
 
-    // Idempotency check: has this Stripe event already been processed?
-    // If the customer already exists with this session_id, skip provisioning.
-    const existingCustomer = await new Promise((resolve) => {
-      db.get(
-        'SELECT id FROM customers WHERE stripe_session_id = ? LIMIT 1',
-        [session.id],
-        (err, row) => resolve(row)
+  // Check if event already processed
+  const existingEvent = await new Promise((resolve) => {
+    db.get('SELECT id, status FROM webhook_events WHERE stripe_event_id = ?', [eventId], (err, row) => resolve(row));
+  });
+
+  if (existingEvent && existingEvent.status === 'completed') {
+    console.log('⏭️  Event already processed:', eventId);
+    return res.json({ received: true, duplicate: true });
+  }
+
+  // Insert event record
+  if (!existingEvent) {
+    await new Promise((resolve, reject) => {
+      db.run(
+        'INSERT INTO webhook_events (id, stripe_event_id, event_type, status, payload) VALUES (?, ?, ?, ?, ?)',
+        [uuidv4(), eventId, event.type, 'processing', JSON.stringify(event.data.object).substring(0, 4000)],
+        (err) => { if (err) reject(err); else resolve(); }
       );
     });
-    if (existingCustomer) {
-      console.log('⏭️  Webhook already processed (idempotency hit) — skipping duplicate for event:', event.id);
-      return res.json({ received: true, duplicate: true });
-    }
+  }
 
-    // Prepare payment data for provisioning
-    const paymentData = {
-      eventId: event.id,
-      sessionId: session.id,
-      email: session.customer_email,
-      agentName: session.metadata?.agentName || 'Unnamed Agent',
-      businessName: session.metadata?.businessName || 'Unknown Business',
-      industry: session.metadata?.industry || 'general',
-      targetAudience: session.metadata?.targetAudience || 'general audience',
-      tone: session.metadata?.tone || 'professional',
-      useCases: session.metadata?.useCases || '',
-      plan: session.metadata?.skillLevel || 'value',
-      baseTokens: PRICING[session.metadata?.skillLevel]?.base_tokens || 20000,
-      outcomeCredits: PRICING[session.metadata?.skillLevel]?.outcome_credits || 100,
-      modelTier: session.metadata?.modelTier || 'standard',
-      dataAgreement: session.metadata?.dataAgreement === 'true' ? 1 : 0,
-      customerId: session.customer,
-      subscriptionId: session.subscription,
-      userId: session.metadata?.user_id || null
-    };
+  // Process checkout.session.completed
+  if (event.type === 'checkout.session.completed') {
+    const session = event.data.object;
+    console.log('✅ Payment received:', session.id, 'Email:', session.customer_email);
 
-    // Call provisioning service
     try {
-      const result = await provisionCustomer(paymentData);
-      console.log('🤖 Agent provisioned:', result.agentId);
-      console.log('🔗 Access URL:', result.chatUrl);
-      console.log('📧 API Key:', result.apiKey);
+      const result = await processCheckoutSession(session, event);
+
+      await new Promise((resolve, reject) => {
+        db.run(
+          'UPDATE webhook_events SET status = ?, processed_at = CURRENT_TIMESTAMP WHERE stripe_event_id = ?',
+          ['completed', eventId],
+          (err) => { if (err) reject(err); else resolve(); }
+        );
+      });
+
+      return res.json({ received: true, ...result });
     } catch (err) {
       console.error('❌ Provisioning failed:', err.message);
-      // Return 200 so Stripe doesn't retry permanent failures
-      // Only return non-200 for truly irrecoverable errors if needed
+
+      await new Promise((resolve, reject) => {
+        db.run(
+          'UPDATE webhook_events SET status = ?, error = ?, retry_count = retry_count + 1 WHERE stripe_event_id = ?',
+          ['failed', err.message.substring(0, 500), eventId],
+          (err) => { if (err) reject(err); else resolve(); }
+        );
+      });
+
+      return res.json({ received: true, error: 'provisioning_failed', willRetry: true });
+    }
+  } else {
+    // Non-checkout events — just acknowledge
+    await new Promise((resolve, reject) => {
+      db.run(
+        'UPDATE webhook_events SET status = ?, processed_at = CURRENT_TIMESTAMP WHERE stripe_event_id = ?',
+        ['completed', eventId],
+        (err) => { if (err) reject(err); else resolve(); }
+      );
+    });
+    return res.json({ received: true });
+  }
+});
+
+// GET /webhook/retry — manually trigger retry of failed events
+router.get('/retry', async (req, res) => {
+  const failed = await new Promise((resolve, reject) => {
+    db.all(
+      "SELECT * FROM webhook_events WHERE status = 'failed' AND retry_count < 5 ORDER BY created_at ASC LIMIT 10",
+      [],
+      (err, rows) => { if (err) reject(err); else resolve(rows || []); }
+    );
+  });
+
+  const results = [];
+  for (const evt of failed) {
+    try {
+      const payload = JSON.parse(evt.payload);
+      if (evt.event_type === 'checkout.session.completed') {
+        const fakeEvent = { id: evt.stripe_event_id, type: evt.event_type, data: { object: payload } };
+        const result = await processCheckoutSession(payload, fakeEvent);
+        await new Promise((resolve, reject) => {
+          db.run(
+            'UPDATE webhook_events SET status = ?, processed_at = CURRENT_TIMESTAMP WHERE stripe_event_id = ?',
+            ['completed', evt.stripe_event_id],
+            (err) => { if (err) reject(err); else resolve(); }
+          );
+        });
+        results.push({ eventId: evt.stripe_event_id, status: 'completed', agentId: result.agentId });
+      }
+    } catch (err) {
+      await new Promise((resolve, reject) => {
+        db.run(
+          'UPDATE webhook_events SET error = ?, retry_count = retry_count + 1 WHERE stripe_event_id = ?',
+          [err.message.substring(0, 500), evt.stripe_event_id],
+          (err2) => { if (err2) reject(err2); else resolve(); }
+        );
+      });
+      results.push({ eventId: evt.stripe_event_id, status: 'failed', error: err.message });
     }
   }
 
-  res.json({ received: true });
+  res.json({ success: true, retried: results.length, results });
 });
 
 module.exports = router;

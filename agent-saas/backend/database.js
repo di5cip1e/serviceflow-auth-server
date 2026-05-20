@@ -264,6 +264,60 @@ db.serialize(() => {
   addColumnIfMissing('customers', 'user_id', 'TEXT', () => {});
   addColumnIfMissing('api_keys', 'user_id', 'TEXT', () => {});
 
+  // Revenue snapshots (daily MRR tracking)
+  db.run(`CREATE TABLE IF NOT EXISTS revenue_snapshots (
+    id TEXT PRIMARY KEY,
+    snapshot_date TEXT NOT NULL,
+    total_customers INTEGER DEFAULT 0,
+    active_customers INTEGER DEFAULT 0,
+    cancelled_customers INTEGER DEFAULT 0,
+    mrr_cents INTEGER DEFAULT 0,
+    new_customers_1d INTEGER DEFAULT 0,
+    churned_1d INTEGER DEFAULT 0,
+    credit_revenue_cents INTEGER DEFAULT 0,
+    credit_purchases INTEGER DEFAULT 0,
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP
+  )`);
+  db.run(`CREATE INDEX IF NOT EXISTS idx_revenue_snapshots_date ON revenue_snapshots(snapshot_date)`);
+
+  // Password reset tokens
+  db.run(`CREATE TABLE IF NOT EXISTS password_reset_tokens (
+    id TEXT PRIMARY KEY,
+    user_id TEXT NOT NULL,
+    token_hash TEXT NOT NULL,
+    expires_at TEXT NOT NULL,
+    used INTEGER DEFAULT 0,
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+  )`);
+  db.run(`CREATE INDEX IF NOT EXISTS idx_reset_tokens ON password_reset_tokens(token_hash)`);
+
+  // Agent-channel mapping (which agent is connected to which channel)
+  db.run(`CREATE TABLE IF NOT EXISTS agent_channels (
+    id TEXT PRIMARY KEY,
+    agent_id TEXT NOT NULL,
+    channel_type TEXT NOT NULL,
+    channel_id TEXT NOT NULL,
+    channel_name TEXT,
+    config TEXT,
+    status TEXT DEFAULT 'active',
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (agent_id) REFERENCES agents(id)
+  )`);
+  db.run(`CREATE INDEX IF NOT EXISTS idx_agent_channels ON agent_channels(agent_id, channel_type)`);
+
+  // Email log table (for onboarding drip campaign)
+  db.run(`CREATE TABLE IF NOT EXISTS email_log (
+    id TEXT PRIMARY KEY,
+    customer_id TEXT NOT NULL,
+    email_type TEXT NOT NULL,
+    sent_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    success INTEGER DEFAULT 0,
+    error TEXT,
+    FOREIGN KEY (customer_id) REFERENCES customers(id)
+  )`);
+  db.run(`CREATE INDEX IF NOT EXISTS idx_email_log_customer ON email_log(customer_id, email_type)`);
+
   // Create indexes for common queries
   db.run(`CREATE INDEX IF NOT EXISTS idx_conversations_agent ON conversations(agent_id, created_at DESC)`);
   db.run(`CREATE INDEX IF NOT EXISTS idx_token_usage_agent ON token_usage(agent_id, created_at DESC)`);

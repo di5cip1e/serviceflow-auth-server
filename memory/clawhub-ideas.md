@@ -1,21 +1,30 @@
-# ClawHub Skill Ideas — 2026-05-11
+# ClawHub Ideas — Morning Meeting Prep
+**Date:** 2026-05-16 13:24 UTC
+**Rotation:** CLAWHUB_SKILLS_SCAN
 
-## 3 Skills Worth Exploring for M.ai.K.R
+## 3 Skills Worth Watching
 
-### 1. email-outreach-automation
-- **What it does:** Cold email outreach pipeline with multi-step sequences, reply tracking, bounce handling, and campaign analytics. 4 production-ready n8n workflows.
-- **Why useful:** M.ai.K.R needs client outreach. Could integrate into M.ai.K.R as a built-in feature for the outreach phase, or use it to automate Derek's own outreach for new customers.
-- **Link:** clawhub.ai/email-outreach-automation
+### 1. saas-billing-system (sunshine-del-ux)
+- **What:** Comprehensive SaaS billing — subscriptions, usage-based billing, invoicing, Stripe, dunning, proration
+- **Why useful:** M.ai.K.R already has consumption billing (Phase 8), but this skill could inform improvements — especially dunning (failed payment recovery) which we don't have yet. Could reduce churn.
+- **Relevance:** Direct M.ai.K.R overlap. Worth studying their approach.
 
-### 2. saas-billing-system
-- **What it does:** Subscription + usage-based billing with Stripe, invoicing, dunning, proration. Could extend or replace parts of our existing Stripe checkout.
-- **Why useful:** M.ai.K.R billing is basic right now. This could add usage-based tiers, automatic upgrades/downgrades, invoice generation — making the product more enterprise-ready.
-- **Link:** clawhub.ai/saas-billing-system
+### 2. saas-revenue-tracker (juniorxcoder)
+- **What:** Track MRR growth, customer metrics, profitability. Monitor $1000+ MRR targets.
+- **Why useful:** Derek's revenue priority #1 is M.ai.K.R first payment. This skill could help set up proper revenue tracking dashboard once we have customers.
+- **Relevance:** Post-revenue tool — useful once first customers are live.
 
-### 3. agent-payments
-- **What it does:** Agent payment infrastructure for multi-agent systems — splitting payments, agent wallets, pay-per-use.
-- **Why useful:** Directly relevant to M.ai.K.R's architecture. Could power per-agent billing or be the foundation for the agent payment system mentioned in Phase 5 notes.
-- **Link:** clawhub.ai/agent-payments
+### 3. openclaw-money-maker (xungh-art)
+- **What:** Complete guide to making money with OpenClaw — platforms, strategies, workflows, automation. Updated today (May 16).
+- **Why useful:** Freshly updated. Could have new ideas for monetizing the agent system or finding beta customers.
+- **Relevance:** Strategic — aligns with Derek's revenue focus.
 
----
-_Retrieved: 2026-05-11 10:24 UTC (pre-meeting prep scan)_
+## My Published Skills (unchanged)
+All 5 skills at v1.0.0, last updated May 11:
+- n8n-workflow-builder
+- client-outreach-automator
+- business-doc-generator
+- meeting-intelligence
+- director-content-repurposer
+
+No new downloads/stars visible via CLI.

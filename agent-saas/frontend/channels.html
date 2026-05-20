@@ -5,14 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Omnichannel Channels — M.ai.K.R</title>
   <style>
-    :root{
-      --bg: #0a0a0f;
-      --card: #141720;
-      --text: #e6e6e6;
-      --muted: #aab0be;
-      --accent: #2ECC71;
-      --grid: 12px;
-    }
+    :root {
+  --bg: #0A0A0F;
+  --surface: #1A1A2E;
+  --surface2: #2D2D44;
+  --border: #2D2D44;
+  --green: #C0A060;
+  --green-dim: #804020;
+  --text: #F0F0F0;
+  --text-dim: #808080;
+  --blue: #0040A0;
+  --blue-light: #0060D0;
+  --yellow: #C0A060;
+  --red: #E74C3C;
+  --orange: #C0A060;
+  --plasma: #00C0FF;
+  --amber: #C0A060;
+  --amber-dim: rgba(192,160,96,0.15);
+}
     *{box-sizing: border-box}
     html,body{margin:0;padding:0;height:100%;background:var(--bg);color:var(--text);font-family:Arial, sans-serif}
     .container{max-width:1200px;margin:0 auto;padding:20px}
@@ -59,15 +69,15 @@
   top: 0;
   z-index: 100;
 }
-.maikr-logo { font-size: 17px; font-weight: 700; color: #2ECC71; text-decoration: none; letter-spacing: -0.5px; }
+.maikr-logo { font-size: 17px; font-weight: 700; color: #C0A060; text-decoration: none; letter-spacing: -0.5px; }
 .maikr-logo span { color: #fff; }
 .maikr-links { display: flex; gap: 4px; margin-left: 8px; }
 .maikr-links a { color: #8b949e; text-decoration: none; font-size: 13px; padding: 5px 10px; border-radius: 5px; transition: all 0.15s; }
 .maikr-links a:hover { color: #e6edf3; background: #30363d; }
-.maikr-links a.active { color: #2ECC71; }
+.maikr-links a.active { color: #C0A060; }
 .maikr-spacer { flex: 1; }
 .maikr-status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #8b949e; }
-.maikr-status .dot { width: 7px; height: 7px; background: #2ECC71; border-radius: 50%; box-shadow: 0 0 5px #2ECC71; }
+.maikr-status .dot { width: 7px; height: 7px; background: #C0A060; border-radius: 50%; box-shadow: 0 0 5px #C0A060; }
 </style>
 
 </head>
@@ -116,6 +126,14 @@
         <div class="row"><span class="label">Channel</span><span class="value">Inbound</span></div>
         <div class="row"><span class="label">Enabled</span><span class="value"><span class="switch off"><span class="knob"></span></span></span></div>
       </div>
+      <div class="card" id="telegram">
+        <h3>Telegram</h3>
+        <div class="status off">Not Configured</div>
+        <div class="row"><span class="label">Last message</span><span class="value">-</span></div>
+        <div class="row"><span class="label">Messages today</span><span class="value">0</span></div>
+        <div class="row"><span class="label">Channel</span><span class="value">Inbound</span></div>
+        <div class="row"><span class="label">Enabled</span><span class="value"><span class="switch off"><span class="knob"></span></span></span></div>
+      </div>
     </div>
     <h2 style="margin-top:20px;font-size:16px;">Recent Messages</h2>
     <div class="feed" aria-label="recent-messages">
@@ -148,6 +166,20 @@
         <label>Slack Token</label>
         <input type="password" value="********" readonly />
       </div>
+      <div class="field">
+        <label>Telegram Bot Token</label>
+        <input type="password" id="telegram-token" placeholder="Enter bot token from @BotFather" />
+        <button class="copy" onclick="setupTelegram()">Setup Webhook
+          <span class="tooltip">Configured!</span>
+        </button>
+      </div>
+      <div class="field">
+        <label>Telegram Webhook URL</label>
+        <input type="text" value="https://maikr.pro/api/webhooks/telegram/{agentId}" readonly />
+        <button class="copy" onclick="copyToClipboard('https://maikr.pro/api/webhooks/telegram/{agentId}', this)">Copy
+          <span class="tooltip">Copied!</span>
+        </button>
+      </div>
     </div>
   </div>
   <script>
@@ -157,6 +189,27 @@
         tip.style.display='block';
         setTimeout(()=>{tip.style.display='none';},1200);
       });
+    }
+    async function setupTelegram(){
+      const token = document.getElementById('telegram-token').value.trim();
+      if(!token){ alert('Please enter a Telegram bot token'); return; }
+      const agentId = new URLSearchParams(window.location.search).get('agent') || '';
+      const webhookUrl = `https://maikr.pro/api/webhooks/telegram/${agentId}`;
+      try {
+        const res = await fetch(`/api/webhooks/telegram/setup?token=${encodeURIComponent(token)}&url=${encodeURIComponent(webhookUrl)}`);
+        const data = await res.json();
+        if(data.ok) {
+          const btn = document.querySelector('#telegram-token + .copy');
+          const tip = btn.querySelector('.tooltip');
+          tip.textContent = 'Webhook set!';
+          tip.style.display = 'block';
+          setTimeout(()=>{tip.style.display='none';},2000);
+        } else {
+          alert('Failed: ' + (data.description || 'Unknown error'));
+        }
+      } catch(e) {
+        alert('Error: ' + e.message);
+      }
     }
   </script>
 </body>

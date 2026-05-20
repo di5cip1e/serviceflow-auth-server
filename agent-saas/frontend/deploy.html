@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deploy | M.ai.K.R</title>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="YOUR_SITE_ID_HERE" id="umami-script"></script>
+<script src="/js/analytics.js"></script>
+<link rel="stylesheet" href="css/styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0A0A0F;
+  --surface: #1A1A2E;
+  --surface2: #2D2D44;
+  --border: #2D2D44;
+  --green: #C0A060;
+  --green-dim: #804020;
+  --text: #F0F0F0;
+  --text-dim: #808080;
+  --blue: #0040A0;
+  --blue-light: #0060D0;
+  --yellow: #C0A060;
+  --red: #E74C3C;
+  --orange: #C0A060;
+  --plasma: #00C0FF;
+  --amber: #C0A060;
+  --amber-dim: rgba(192,160,96,0.15);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height:100vh; }
+a { color: var(--green); text-decoration: none; }
+a:hover { color: #fff; }
+
+.maikr-nav {
+  background: #161b22; border-bottom: 1px solid #30363d;
+  padding: 0 24px; display: flex; align-items: center; gap: 24px; height: 52px;
+}
+.maikr-logo { font-size: 17px; font-weight: 700; color: #C0A060; text-decoration: none; letter-spacing: -0.5px; }
+.maikr-logo span { color: #fff; }
+.maikr-links { display: flex; gap: 4px; margin-left: 8px; }
+.maikr-links a { color: #8b949e; text-decoration: none; font-size: 13px; padding: 5px 10px; border-radius: 5px; transition: all 0.15s; }
+.maikr-links a:hover { color: #e6edf3; background: #30363d; }
+.maikr-links a.active { color: #C0A060; }
+.maikr-spacer { flex: 1; }
+.maikr-status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #8b949e; }
+.maikr-status .dot { width: 7px; height: 7px; background: #C0A060; border-radius: 50%; box-shadow: 0 0 5px #C0A060; }
+.logout-link { background: none; border: none; color: #8b949e; font-size: 13px; font-family: inherit; cursor: pointer; padding: 5px 10px; border-radius: 5px; }
+.logout-link:hover { color: #e6edf3; background: #30363d; }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+
+.page-header { margin-bottom: 40px; }
+.page-header h1 { font-size: 28px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+.page-header p { color: var(--text-dim); font-size: 15px; }
+
+/* Deploy grid */
+.deploy-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 40px; }
+
+.deploy-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  padding: 28px; transition: all 0.2s;
+}
+.deploy-card:hover { border-color: var(--blue); }
+.deploy-card-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+.deploy-card-icon {
+  width: 44px; height: 44px; background: var(--amber-dim); border: 1px solid rgba(192,160,96,0.2);
+  border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px;
+}
+.deploy-card h3 { font-size: 17px; font-weight: 700; color: #fff; }
+.deploy-card p { color: var(--text-dim); font-size: 14px; line-height: 1.5; margin-bottom: 18px; }
+
+/* Code blocks */
+.code-block {
+  background: #0A0A0F; border: 1px solid var(--border); border-radius: 8px;
+  padding: 14px 16px; font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 12px; line-height: 1.6; color: #C0C0C0; overflow-x: auto; white-space: pre-wrap;
+  word-break: break-all; position: relative; margin-bottom: 12px;
+}
+.code-block .tag { color: #C0A060; }
+.code-block .attr { color: #00C0FF; }
+.code-block .val { color: #2ECC71; }
+.code-block .comment { color: #606080; }
+
+.copy-btn {
+  position: absolute; top: 8px; right: 8px; background: var(--surface2); border: 1px solid var(--border);
+  color: var(--text-dim); font-size: 11px; padding: 4px 10px; border-radius: 5px; cursor: pointer;
+  font-family: 'Inter', sans-serif; transition: all 0.15s;
+}
+.copy-btn:hover { color: #fff; border-color: var(--blue); }
+.copy-btn.copied { color: #2ECC71; border-color: #2ECC71; }
+
+/* Steps */
+.steps { list-style: none; margin-bottom: 16px; }
+.steps li {
+  display: flex; gap: 12px; padding: 8px 0; color: var(--text-dim); font-size: 13px; line-height: 1.5;
+  border-bottom: 1px solid rgba(45,45,68,0.5);
+}
+.steps li:last-child { border-bottom: none; }
+.steps li .num {
+  width: 22px; height: 22px; background: var(--amber-dim); border: 1px solid rgba(192,160,96,0.3);
+  border-radius: 5px; display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: var(--amber); flex-shrink: 0; margin-top: 1px;
+}
+
+/* Direct link box */
+.link-box {
+  background: #0A0A0F; border: 1px solid var(--border); border-radius: 8px;
+  padding: 12px 14px; display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+}
+.link-box input {
+  flex: 1; background: none; border: none; color: #C0A060; font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; outline: none;
+}
+.link-box .copy-btn { position: static; }
+
+/* Status badge */
+.status-badge {
+  display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px;
+  border-radius: 9999px; font-size: 12px; font-weight: 600;
+}
+.status-badge.connected { background: rgba(46,204,113,0.12); color: #2ECC71; border: 1px solid rgba(46,204,113,0.3); }
+.status-badge.pending { background: rgba(192,160,96,0.12); color: #C0A060; border: 1px solid rgba(192,160,96,0.3); }
+
+@media (max-width: 768px) {
+  .deploy-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="maikr-nav">
+  <a href="/" class="maikr-logo">M<span>.ai</span><span>.K.R</span></a>
+  <div class="maikr-links">
+    <a href="/build-step1.html">Builder</a>
+    <a href="/command-center.html">Dashboard</a>
+    <a href="/deploy.html" class="active">Deploy</a>
+    <a href="/chat.html">Chat</a>
+  </div>
+  <div class="maikr-spacer"></div>
+  <div class="maikr-status"><span class="dot"></span>Online</div>
+  <form action="/api/auth/logout" method="POST" style="display:inline"><button type="submit" class="logout-link">Log out</button></form>
+</nav>
+
+<div class="container">
+
+  <div class="page-header">
+    <h1>🚀 Deploy Your Agent</h1>
+    <p>Get your AI agent in front of customers in minutes. Choose a deployment method below.</p>
+  </div>
+
+  <div class="deploy-grid">
+
+    <!-- Web Chat Widget -->
+    <div class="deploy-card">
+      <div class="deploy-card-header">
+        <div class="deploy-card-icon">💬</div>
+        <div>
+          <h3>Web Chat Widget</h3>
+          <span class="status-badge pending" id="webchat-status">Not deployed</span>
+        </div>
+      </div>
+      <p>Add a chat bubble to any website. Customers click it and talk to your agent instantly. Just paste this code before <code>&lt;/body&gt;</code>:</p>
+      
+      <div class="code-block" id="webchat-code">
+<span class="comment">&lt;!-- M.ai.K.R Chat Widget --&gt;</span>
+<span class="tag">&lt;script&gt;</span>
+  <span class="attr">window</span>.<span class="val">maikrConfig</span> = {
+    <span class="attr">agentId</span>: <span class="val">'YOUR_AGENT_ID'</span>,
+    <span class="attr">position</span>: <span class="val">'right'</span>,
+    <span class="attr">primaryColor</span>: <span class="val">'#C0A060'</span>
+  };
+<span class="tag">&lt;/script&gt;</span>
+<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="val">"https://maikr.pro/js/widget.js"</span>&gt;<span class="tag">&lt;/script&gt;</span></div>
+      <button class="copy-btn" onclick="copyCode('webchat-code', this)">Copy</button>
+      
+      <ul class="steps">
+        <li><span class="num">1</span>Paste the code into your website's HTML before <code>&lt;/body&gt;</code></li>
+        <li><span class="num">2</span>Replace <code>YOUR_AGENT_ID</code> with your agent ID (found in Dashboard)</li>
+        <li><span class="num">3</span>Save and refresh — the chat bubble appears automatically</li>
+      </ul>
+    </div>
+
+    <!-- Direct Link -->
+    <div class="deploy-card">
+      <div class="deploy-card-header">
+        <div class="deploy-card-icon">🔗</div>
+        <div>
+          <h3>Direct Link</h3>
+          <span class="status-badge connected">Ready</span>
+        </div>
+      </div>
+      <p>Share a direct link to your agent's chat page. No setup needed — works instantly.</p>
+      
+      <div class="link-box">
+        <input type="text" id="direct-link" value="https://maikr.pro/chat.html?agent=YOUR_AGENT_ID" readonly>
+        <button class="copy-btn" onclick="copyLink('direct-link', this)">Copy</button>
+      </div>
+      
+      <ul class="steps">
+        <li><span class="num">1</span>Copy the link above</li>
+        <li><span class="num">2</span>Replace <code>YOUR_AGENT_ID</code> with your agent ID</li>
+        <li><span class="num">3</span>Share via email, social media, or messaging</li>
+      </ul>
+    </div>
+
+    <!-- Phone / Twilio -->
+    <div class="deploy-card">
+      <div class="deploy-card-header">
+        <div class="deploy-card-icon">📞</div>
+        <div>
+          <h3>Phone & SMS</h3>
+          <span class="status-badge pending" id="phone-status">Not connected</span>
+        </div>
+      </div>
+      <p>Connect a Twilio phone number so customers can call or text your agent. Works with any US/CA number.</p>
+      
+      <ul class="steps">
+        <li><span class="num">1</span>Sign up at <a href="https://twilio.com" target="_blank">twilio.com</a> (free trial)</li>
+        <li><span class="num">2</span>Buy a phone number in Twilio console</li>
+        <li><span class="num">3</span>Go to <a href="/channels.html">Channels</a> → Twilio and enter your credentials</li>
+        <li><span class="num">4</span>Set webhook URL to: <code>https://maikr.pro/api/webhooks/twilio</code></li>
+      </ul>
+      
+      <a href="/channels.html" class="btn-connect" style="display:inline-block;margin-top:8px;padding:8px 16px;background:var(--amber-dim);color:var(--amber);border:1px solid rgba(192,160,96,0.3);border-radius:6px;font-size:13px;font-weight:600;text-decoration:none;">Open Channels →</a>
+    </div>
+
+    <!-- Telegram -->
+    <div class="deploy-card">
+      <div class="deploy-card-header">
+        <div class="deploy-card-icon">✈️</div>
+        <div>
+          <h3>Telegram Bot</h3>
+          <span class="status-badge pending" id="telegram-status">Not connected</span>
+        </div>
+      </div>
+      <p>Deploy your agent as a Telegram bot. Customers message your bot directly — your agent responds.</p>
+      
+      <ul class="steps">
+        <li><span class="num">1</span>Open Telegram, search for <strong>@BotFather</strong></li>
+        <li><span class="num">2</span>Send <code>/newbot</code> and follow the prompts</li>
+        <li><span class="num">3</span>Copy the bot token BotFather gives you</li>
+        <li><span class="num">4</span>Go to <a href="/channels.html">Channels</a> → Telegram and paste your token</li>
+        <li><span class="num">5</span>Click "Setup Webhook" — done! Your bot is live</li>
+      </ul>
+      
+      <a href="/channels.html" class="btn-connect" style="display:inline-block;margin-top:8px;padding:8px 16px;background:var(--amber-dim);color:var(--amber);border:1px solid rgba(192,160,96,0.3);border-radius:6px;font-size:13px;font-weight:600;text-decoration:none;">Open Channels →</a>
+    </div>
+
+  </div>
+
+  <!-- Agent ID helper -->
+  <div class="deploy-card" style="max-width: 600px;">
+    <div class="deploy-card-header">
+      <div class="deploy-card-icon">🆔</div>
+      <h3>Your Agent ID</h3>
+    </div>
+    <p>Use this agent ID in any of the deployment methods above:</p>
+    <div class="link-box">
+      <input type="text" id="agent-id" value="YOUR_AGENT_ID" readonly style="color:#C0A060;font-family:'JetBrains Mono',monospace;font-size:13px;">
+      <button class="copy-btn" onclick="copyLink('agent-id', this)">Copy</button>
+    </div>
+    <p style="font-size:12px;color:#606080;margin-top:8px;">💡 Replace "YOUR_AGENT_ID" in the snippets above with this value. You can also find it in your <a href="/command-center.html" style="color:#C0A060;">Dashboard</a>.</p>
+  </div>
+
+</div>
+
+<script>
+function copyCode(elementId, btn) {
+  var el = document.getElementById(elementId);
+  var text = el.textContent;
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+function copyLink(elementId, btn) {
+  var el = document.getElementById(elementId);
+  navigator.clipboard.writeText(el.value).then(function() {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(function() { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+// Check auth
+fetch('/api/auth/me', { credentials: 'include' })
+  .then(function(res) {
+    if (!res.ok) window.location.href = '/login.html';
+    return res.json();
+  })
+  .then(function(data) {
+    if (data && data.user) {
+      // Could populate agent ID here if available via API
+    }
+  })
+  .catch(function() { window.location.href = '/login.html'; });
+</script>
+</body>
+</html>

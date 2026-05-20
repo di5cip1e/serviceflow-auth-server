@@ -8,18 +8,23 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
   :root {
-    --bg: #0a0a0f;
-    --surface: #13131a;
-    --surface2: #1a1a25;
-    --border: #2a2a3a;
-    --green: #00ff88;
-    --green-dim: #00cc6a;
-    --text: #e0e0e0;
-    --text-dim: #888;
-    --yellow: #ffdd57;
-    --red: #ff4757;
-    --blue: #4a9eff;
-  }
+  --bg: #0A0A0F;
+  --surface: #1A1A2E;
+  --surface2: #2D2D44;
+  --border: #2D2D44;
+  --green: #C0A060;
+  --green-dim: #804020;
+  --text: #F0F0F0;
+  --text-dim: #808080;
+  --blue: #0040A0;
+  --blue-light: #0060D0;
+  --yellow: #C0A060;
+  --red: #E74C3C;
+  --orange: #C0A060;
+  --plasma: #00C0FF;
+  --amber: #C0A060;
+  --amber-dim: rgba(192,160,96,0.15);
+}
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; }
   a { color: var(--green); text-decoration: none; }
@@ -129,15 +134,15 @@
   top: 0;
   z-index: 100;
 }
-.maikr-logo { font-size: 17px; font-weight: 700; color: #2ECC71; text-decoration: none; letter-spacing: -0.5px; }
+.maikr-logo { font-size: 17px; font-weight: 700; color: #C0A060; text-decoration: none; letter-spacing: -0.5px; }
 .maikr-logo span { color: #fff; }
 .maikr-links { display: flex; gap: 4px; margin-left: 8px; }
 .maikr-links a { color: #8b949e; text-decoration: none; font-size: 13px; padding: 5px 10px; border-radius: 5px; transition: all 0.15s; }
 .maikr-links a:hover { color: #e6edf3; background: #30363d; }
-.maikr-links a.active { color: #2ECC71; }
+.maikr-links a.active { color: #C0A060; }
 .maikr-spacer { flex: 1; }
 .maikr-status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #8b949e; }
-.maikr-status .dot { width: 7px; height: 7px; background: #2ECC71; border-radius: 50%; box-shadow: 0 0 5px #2ECC71; }
+.maikr-status .dot { width: 7px; height: 7px; background: #C0A060; border-radius: 50%; box-shadow: 0 0 5px #C0A060; }
 </style>
 
 </head>
@@ -167,6 +172,7 @@
     <a href="/command-center.html">Command Center</a>
     <a href="/optimization.html">Optimization</a>
     <a href="/channels.html">Channels</a>
+    <a href="/deploy.html">Deploy</a>
     <a href="/chat.html">Chat</a>
     <a href="/">Home</a>
   </span>
@@ -258,8 +264,8 @@ let currentData = {};
 
 // ── Init ────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  tokenChart = new Chart(document.getElementById('tokenChart'), { type: 'line', data: { labels: [], datasets: [{ label: 'Input', data: [], borderColor: '#4a9eff', backgroundColor: 'rgba(74,158,255,0.1)', tension: 0.4, fill: true }, { label: 'Output', data: [], borderColor: '#00ff88', backgroundColor: 'rgba(0,255,136,0.1)', tension: 0.4, fill: true }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#888', font: { size: 11 } } }, y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#888', font: { size: 11 } } } } } });
-  intentChart = new Chart(document.getElementById('intentChart'), { type: 'doughnut', data: { labels: ['Support', 'Sales', 'Onboarding', 'General'], datasets: [{ data: [1,1,1,1], backgroundColor: ['#4a9eff','#00ff88','#ff9f43','#888'] }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { color: '#888', font: { size: 12 }, padding: 12 } } } } });
+  tokenChart = new Chart(document.getElementById('tokenChart'), { type: 'line', data: { labels: [], datasets: [{ label: 'Input', data: [], borderColor: '#4a9eff', backgroundColor: 'rgba(74,158,255,0.1)', tension: 0.4, fill: true }, { label: 'Output', data: [], borderColor: '#C0A060', backgroundColor: 'rgba(0,255,136,0.1)', tension: 0.4, fill: true }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#888', font: { size: 11 } } }, y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#888', font: { size: 11 } } } } } });
+  intentChart = new Chart(document.getElementById('intentChart'), { type: 'doughnut', data: { labels: ['Support', 'Sales', 'Onboarding', 'General'], datasets: [{ data: [1,1,1,1], backgroundColor: ['#4a9eff','#C0A060','#ff9f43','#888'] }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { color: '#888', font: { size: 12 }, padding: 12 } } } } });
   latencyChart = new Chart(document.getElementById('latencyChart'), { type: 'bar', data: { labels: ['P50', 'P75', 'P95'], datasets: [{ data: [0,0,0], backgroundColor: ['#4a9eff','#ffdd57','#ff4757'] }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#888' } }, y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#888', callback: v => v + 'ms' } } } } });
   loadDashboard();
 });
@@ -308,7 +314,7 @@ async function loadDashboard() {
   tokenChart.update();
 
   // Intent chart
-  const intentColors = { support: '#4a9eff', sales: '#00ff88', onboarding: '#ff9f43', admin: '#a29bfe', general: '#888', unknown: '#555' };
+  const intentColors = { support: '#4a9eff', sales: '#C0A060', onboarding: '#ff9f43', admin: '#a29bfe', general: '#888', unknown: '#555' };
   intentChart.data.labels = intentDist.map(d => capitalize(d.intent));
   intentChart.data.datasets[0].data = intentDist.map(d => d.count);
   intentChart.data.datasets[0].backgroundColor = intentDist.map(d => intentColors[d.intent] || '#555');

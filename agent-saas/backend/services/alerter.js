@@ -5,6 +5,38 @@ const SECRETS_PATH = '/root/.openclaw/secrets.json';
 let secrets = {};
 try { secrets = require(SECRETS_PATH); } catch(e) { secrets = {}; }
 
+// Resend API integration
+async function sendViaResend(to, subject, text, html) {
+  if (!secrets.RESEND_API_KEY) {
+    return { success: false, error: 'RESEND_API_KEY not configured' };
+  }
+  try {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${secrets.RESEND_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        from: secrets.RESEND_FROM || 'M.ai.K.R <noreply@maikr.pro>',
+        to: [to],
+        subject: subject,
+        text: text,
+        html: html || undefined
+      })
+    });
+    const json = await res.json();
+    if (!res.ok) {
+      console.error('Resend API error:', res.status, json);
+      return { success: false, error: json.message || 'Resend API error', status: res.status };
+    }
+    return { success: true, messageId: json.id };
+  } catch (e) {
+    console.error('Resend send error:', e.message);
+    return { success: false, error: e.message };
+  }
+}
+
 module.exports = {
   isSuppressed(agentSettings) {
     // Simple stub: check DND window in agentSettings (expects dnd_start_time/dnd_end_time and dnd_days)
@@ -31,8 +63,15 @@ module.exports = {
     return false;
   },
 
-  async sendEmail(to, subject, body) {
-    // Mailgun support
+  async sendEmail(to, subject, body, htmlBody) {
+    // 1. Try Resend first (preferred provider)
+    if (secrets.RESEND_API_KEY) {
+      const resendResult = await sendViaResend(to, subject, body, htmlBody);
+      if (resendResult.success) return resendResult;
+      console.error('Resend failed, trying fallback:', resendResult.error);
+    }
+
+    // 2. Fallback: Mailgun
     if (secrets.MAILGUN_API_KEY) {
       try {
         const domain = secrets.MAILGUN_DOMAIN || (secrets.MAILGUN_FROM || secrets.SENDGRID_FROM || secrets.SMTP_FROM || '').split('@')[1];
@@ -46,6 +85,7 @@ module.exports = {
         params.append('to', to);
         params.append('subject', subject);
         params.append('text', body);
+        if (htmlBody) params.append('html', htmlBody);
         const res = await fetch(url, {
           method: 'POST',
           headers: {
@@ -54,6 +94,9 @@ module.exports = {
           body: params
         });
         const json = await res.text();
+        if (!res.ok) {
+          console.error('Mailgun API error:', res.status, json);
+        }
         return { success: res.ok, status: res.status, resp: json };
       } catch (e) {
         console.error('Mailgun send error', e.message);

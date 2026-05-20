@@ -13,7 +13,7 @@
 
 ## Critical Runtime Info
 - **Model:** openrouter/owl-alpha (free, 1M+ context, set 2026-05-13)
-- **Current time:** Thursday May 14, 2026 04:00 UTC
+- **Current time:** Sunday May 17, 2026 04:00 UTC
 - **Context:** ~50k tokens — healthy
 - **MEMORY.md target:** Keep under 50KB
 - **Heartbeat:** every 2 hours
@@ -21,6 +21,9 @@
 
 ## Active Projects (Current)
 - **M.ai.K.R** (agent-saas/): ✅ Live at maikr.pro — Phases 1-4 complete + Phase 6 (optimization) + Phase 7 (command center) + Phase 8 (consumption billing). Auth & onboarding system complete (May 14). All pages protected, session-based auth, rate limiting, checkout integration. 9 commits.
+  - **May 15-16:** Test suite (350 tests, 100% pass), 5 beta accounts, analytics, Stripe best practices, Chart.js dashboards, email drip campaign, revenue tracking
+  - **May 16:** Resend email integrated (replaced Mailgun), Telegram + omnichannel DB mapping, password reset flow, webhook retry + idempotency, usage billing enforcement
+  - **May 17:** Complete website redesign — new dark premium design system based on Avant Garde brand images. All 20+ pages updated. New palette: amber/gold accents, electric blue CTAs, Orbitron + Inter fonts. `css/dark-premium.css` (22KB design system). Subagent lesson: owl-alpha fails on file-write tasks, do directly in main session.
 - **Agent Builder Dashboard**: Running at http://187.77.31.252:3000/wizard
 - **Kingdom Cards**: ~70% — Phaser 3 battle engine works, Fantasy/Medieval theme
 - **Ironveil**: Ready for Windows import (since March 23)
@@ -52,8 +55,14 @@
 
 ## Key Technical Notes
 - **Stripe keys**: In agent-saas/backend/.env (sk_live_, pk_live_, rk_live_, webhook secret)
-- **Mailgun**: aginstitute.tech domain, API key in secrets.json
+- **Email**: Resend (replaced Mailgun which was blocked for exposed credentials). API key in secrets.json. Mailgun kept as fallback.
 - **Ollama**: llama3.2:3b installed (port 11434) — ollama-router.js routes simple→Ollama (free), complex→OpenRouter
+- **Omnichannel**: Telegram webhook handler at `/api/webhooks/telegram/:agentId`, Twilio SMS/WhatsApp, Slack events API. DB mapping via `agent_channels` table.
+- **Password Reset**: Token-based flow (bcrypt, 1hr expiry, single-use), emails via Resend
+- **Webhook Retry**: `webhook_events` table, auto-retry every 15min (up to 5x), idempotency via duplicate detection
+- **Usage Enforcement**: `checkAgentLimits()` blocks chat at 0 tokens/credits, warnings at 10%/20%
+- **DNS**: maikr.pro A record → 187.77.31.252 (Hostinger parking IP is 2.57.91.91 — don't point there)
+- **Server**: Hostinger VPS, nginx reverse proxy → Express backend on port 3001
 - **Workspace backup**: Daily 3am UTC cron (workspace-daily-backup, isolated session)
 - **Audit hook**: /root/.openclaw/workspace/scripts/audit_changes.js watching SOUL.md/AGENTS.md
 - **git-credentials**: Has 2 tokens, one with space prefix — needs cleanup
@@ -62,6 +71,14 @@
 - **MCP endpoints**: /api/mcp/templates, /api/mcp/servers/:agentId, /api/mcp/servers/:agentId/tools (Phase 4 live)
 - **MCP templates**: github, filesystem, notion, slack, aws-kb presets in registry
 - **Dashboard URLs**: maikr.pro/swarm.html (Phase 2), maikr.pro/channels.html (Phase 3), maikr.pro/mcp.html (Phase 4)
+
+## M.ai.K.R Design System (May 2027)
+- **Palette:** Void #0A0A0F, Gunmetal #1A1A2E, Steel #2D2D44, Amber #C0A060, Copper #804020, Electric Blue #0040A0, Plasma #00C0FF
+- **Fonts:** Orbitron (headings/logo), Inter (body), JetBrains Mono (code)
+- **Style:** Dark premium, military-tech meets luxury, warm metallics, glow effects
+- **CSS:** `frontend/css/dark-premium.css` — complete design system
+- **Reference:** Brand images in `/root/.openclaw/workspace/design-refs/For open claw/`
+- **Lesson:** Replaced all generic green (#2ECC71) with amber/blue palette from actual brand assets
 
 ## What Makes Me Better
 - Memory dream transfer: weekly consolidation at 04:00 UTC
@@ -85,7 +102,7 @@
 - Workspace organization: Clean structure maintained
 - Forgeai.sbs: Briefly down (000) then recovered to 301 (normal)
 
-*Last consolidated: 2026-05-16 04:00 UTC*
+*Last consolidated: 2026-05-19 04:00 UTC*
 *Previous: 2026-05-15 04:03 UTC*
 
 ## May 15-16, 2026 — Testing Overhaul + Mailgun Fix
@@ -329,6 +346,22 @@
 **Git history:**
 - git filter-branch ran May 11 to remove 645MB of large files (ironveil, PixelForge)
 - Commits: a89d91b (Phases 1-8), 8c6df17 (fix index.html override), c0138d0 (provisioning INSERT), a2460a4 (login nav)
+
+### May 18-19, 2026 — Frontend Audit + Auth Fix
+
+**Full frontend audit completed** (6 areas: performance, mobile, SEO, accessibility, build flow, protected pages). Report: `audit-full-report.md`
+
+**Fix #1 — Server-side auth redirect (DEPLOYED):**
+- `express.static` was serving protected HTML files before session middleware
+- Fixed by moving session before static, adding protected-file middleware, moving static after routes
+- All 9 protected pages now 302 redirect to `/login` for unauthenticated users
+- Commit: fce4aba
+
+**Known issues still pending:**
+- Build flow "Continue →" button doesn't advance on click (critical — blocks conversion funnel)
+- No Open Graph / Twitter Card / JSON-LD structured data
+- No `<main>` or `<header>` landmarks, no skip link
+- H1 heading missing spaces: "Your AI teamnever sleeps"
 
 ### M.ai.K.R Full Stack Status
 - **Live**: maikr.pro/ (landing), /build/* (4-step form), /chat.html, /observe.html, /optimization.html, /command-center.html, /channels.html, /swarm.html, /mcp.html, /privacy.html, /terms.html

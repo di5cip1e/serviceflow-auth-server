@@ -62,9 +62,23 @@ router.get('/', (req, res) => {
 });
 
 async function resolveAgentByPhone(phone) {
-  // TODO: query agents DB for phone number mapping
-  // For now, use environment default
-  return process.env.DEFAULT_TWILIO_AGENT_ID || null;
+  const db = require('../database');
+  // Strip whatsapp: prefix for lookup
+  const cleanPhone = String(phone).replace('whatsapp:', '');
+  return new Promise((resolve, reject) => {
+    db.get(
+      `SELECT agent_id FROM agent_channels 
+       WHERE channel_type IN ('sms','whatsapp') 
+         AND channel_id = ? 
+         AND status = 'active' 
+       LIMIT 1`,
+      [cleanPhone],
+      (err, row) => {
+        if (err) return resolve(null);
+        resolve(row?.agent_id || process.env.DEFAULT_TWILIO_AGENT_ID || null);
+      }
+    );
+  });
 }
 
 async function callSwarmAgent(agentId, message, conversationId) {

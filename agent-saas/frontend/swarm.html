@@ -6,21 +6,23 @@
   <title>Swarm Control — M.ai.K.R</title>
   <style>
     :root {
-      --bg: #0a0a0f;
-      --surface: #13131a;
-      --surface2: #1a1a24;
-      --border: #2a2a3a;
-      --text: #e0e0e8;
-      --muted: #6b6b80;
-      --matrix: #00ff88;
-      --matrix-dim: #00cc6a;
-      --support: #ef4444;
-      --sales: #3b82f6;
-      --onboarding: #8b5cf6;
-      --admin: #f59e0b;
-      --general: #2ECC71;
-      --accent: #2ECC71;
-    }
+  --bg: #0A0A0F;
+  --surface: #1A1A2E;
+  --surface2: #2D2D44;
+  --border: #2D2D44;
+  --green: #C0A060;
+  --green-dim: #804020;
+  --text: #F0F0F0;
+  --text-dim: #808080;
+  --blue: #0040A0;
+  --blue-light: #0060D0;
+  --yellow: #C0A060;
+  --red: #E74C3C;
+  --orange: #C0A060;
+  --plasma: #00C0FF;
+  --amber: #C0A060;
+  --amber-dim: rgba(192,160,96,0.15);
+}
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: var(--bg); color: var(--text); font-family: 'Courier New', monospace; min-height: 100vh; }
     .container { max-width: 1400px; margin: 0 auto; padding: 24px; }
@@ -120,15 +122,15 @@
   top: 0;
   z-index: 100;
 }
-.maikr-logo { font-size: 17px; font-weight: 700; color: #2ECC71; text-decoration: none; letter-spacing: -0.5px; }
+.maikr-logo { font-size: 17px; font-weight: 700; color: #C0A060; text-decoration: none; letter-spacing: -0.5px; }
 .maikr-logo span { color: #fff; }
 .maikr-links { display: flex; gap: 4px; margin-left: 8px; }
 .maikr-links a { color: #8b949e; text-decoration: none; font-size: 13px; padding: 5px 10px; border-radius: 5px; transition: all 0.15s; }
 .maikr-links a:hover { color: #e6edf3; background: #30363d; }
-.maikr-links a.active { color: #2ECC71; }
+.maikr-links a.active { color: #C0A060; }
 .maikr-spacer { flex: 1; }
 .maikr-status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #8b949e; }
-.maikr-status .dot { width: 7px; height: 7px; background: #2ECC71; border-radius: 50%; box-shadow: 0 0 5px #2ECC71; }
+.maikr-status .dot { width: 7px; height: 7px; background: #C0A060; border-radius: 50%; box-shadow: 0 0 5px #C0A060; }
 </style>
 
 </head>
@@ -197,7 +199,7 @@
       <div class="panel-body">
         <div class="chat-box" id="chat-box">
           <div style="color:var(--muted);font-size:13px;text-align:center;padding:40px">
-            Select an agent above and send a message to begin.
+            Agent selected. Type a message and press Send to begin.
           </div>
         </div>
         <div class="chat-input-row">
@@ -255,19 +257,20 @@ const AGENTS = [
   { state: 'SALES',       emoji: '💼', name: 'Sales Agent',       color: '#3b82f6', scopes: ['plan questions','upgrades','comparisons','trial info','pricing'] },
   { state: 'ONBOARDING', emoji: '🚀', name: 'Onboarding Agent',  color: '#8b5cf6', scopes: ['new user setup','first agent creation','feature tour','getting started'] },
   { state: 'ADMIN',      emoji: '⚙️', name: 'Admin Agent',       color: '#f59e0b', scopes: ['agent config','billing','API keys','webhooks','settings'] },
-  { state: 'GENERAL',    emoji: '🤖', name: 'AI Assistant',      color: '#2ECC71', scopes: ['general chat','questions','explanations','casual conversation'] },
+  { state: 'GENERAL',    emoji: '🤖', name: 'AI Assistant',      color: '#C0A060', scopes: ['general chat','questions','explanations','casual conversation'] },
 ];
 
 let currentConversationId = 'swarm_demo_' + Math.random().toString(36).slice(2,8);
 let messageCount = 0;
 let totalConfidence = 0;
 let currentState = 'ROUTING';
+let selectedAgentId = '';
 
 // Build agent cards
 const agentCardsEl = document.getElementById('agent-cards');
 AGENTS.forEach(a => {
   agentCardsEl.innerHTML += `
-    <div class="agent-card" id="card-${a.state}">
+    <div class="agent-card" id="card-${a.state}" onclick="selectAgent('${a.state}', '${a.emoji} ${a.name}')" style="cursor:pointer">
       <div class="agent-top">
         <span class="agent-emoji">${a.emoji}</span>
         <span class="agent-name">${a.name}</span>
@@ -300,19 +303,19 @@ async function checkBackend() {
 checkBackend();
 setInterval(checkBackend, 30000);
 
-// Load agents for chat
-async function loadAgents() {
-  try {
-    const r = await fetch(`${API}/api/admin/agents`);
-    const agents = await r.json();
-    const sel = document.getElementById('chat-agent');
-    sel.innerHTML = '<option value="">Select Agent ID…</option>';
-    (Array.isArray(agents) ? agents : []).forEach(a => {
-      sel.innerHTML += `<option value="${a.id}">${a.name || a.id} (${a.model_tier || 'standard'})</option>`;
-    });
-  } catch {}
+// Load agents for chat dropdown
+function loadAgentDropdown() {
+  const sel = document.getElementById('chat-agent');
+  sel.innerHTML = '<option value="">Select an agent…</option>';
+  AGENTS.forEach(a => {
+    sel.innerHTML += `<option value="${a.state}">${a.emoji} ${a.name}</option>`;
+  });
+  // Auto-select GENERAL so user can chat immediately
+  sel.value = 'GENERAL';
+  selectedAgentId = 'GENERAL';
+  setActiveState('GENERAL');
 }
-loadAgents();
+loadAgentDropdown();
 
 // Route test
 async function testRoute() {
@@ -409,11 +412,33 @@ async function override(state) {
   } catch(e) { alert('Override failed: ' + e.message); }
 }
 
+// Select agent from card click
+function selectAgent(state, label) {
+  selectedAgentId = state;
+  // Update dropdown
+  const sel = document.getElementById('chat-agent');
+  sel.innerHTML = '<option value="">Select Agent ID…</option>';
+  AGENTS.forEach(a => {
+    const opt = document.createElement('option');
+    opt.value = a.state;
+    opt.textContent = a.emoji + ' ' + a.name;
+    if (a.state === state) opt.selected = true;
+    sel.appendChild(opt);
+  });
+  // Highlight card
+  AGENTS.forEach(a => {
+    document.getElementById('card-' + a.state).classList.toggle('active', a.state === state);
+  });
+  document.getElementById('active-agent').textContent = state;
+  // Focus chat input
+  document.getElementById('chat-input').focus();
+}
+
 // Send chat message
 async function sendChat() {
-  const agentId = document.getElementById('chat-agent').value;
+  const agentId = selectedAgentId || document.getElementById('chat-agent').value;
   const msg = document.getElementById('chat-input').value.trim();
-  if (!agentId) { alert('Select an agent first'); return; }
+  if (!agentId) { alert('Click an agent card above or select one from the dropdown first'); return; }
   if (!msg) return;
   const btn = document.getElementById('send-btn');
   btn.disabled = true;

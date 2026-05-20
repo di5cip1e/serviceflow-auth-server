@@ -222,3 +222,110 @@ router.get('/me', requireAuth, (req, res) => {
 });
 
 module.exports = router;
+
+// ── POST /api/auth/forgot-password ──────────────────────────────────────────
+router.post('/forgot-password', authLimiter, async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email) return res.status(400).json({ error: 'Email required' });
+
+    const user = await new Promise((resolve, reject) => {
+      db.get('SELECT id, email, name FROM users WHERE email = ?', [email], (err, row) => {
+        if (err) reject(err); else resolve(row);
+      });
+    });
+
+    // Always return success (don't reveal if email exists)
+    if (!user) {
+      return res.json({ success: true, message: 'If an account exists, a reset email has been sent.' });
+    }
+
+    // Generate token
+    const token = crypto.randomBytes(32).toString('hex');
+    const tokenHash = await bcrypt.hash(token, 10);
+    const expiresAt = new Date(Date.now() + 3600000).toISOString();
+
+    // Store token
+    await new Promise((resolve, reject) => {
+      db.run(
+        'INSERT INTO password_reset_tokens (id, user_id, token_hash, expires_at) VALUES (?, ?, ?, ?)',
+        [require('uuid').v4(), user.id, tokenHash, expiresAt],
+        (err) => { if (err) reject(err); else resolve(); }
+      );
+    });
+
+    // Send reset email via Resend
+    const resetUrl = `https://maikr.pro/reset-password.html?token=${token}&user=${user.id}`;
+    const { sendEmail } = require('../services/alerter');
+    await sendEmail(user.email, 'Reset Your M.ai.K.R Password',
+      `Hi ${user.name || 'there'},
+
+Click this link to reset your password:
+${resetUrl}
+
+This link expires in 1 hour.
+
+If you didn't request this, ignore this email.`,
+      `<h2>Reset Your Password</h2><p>Hi ${user.name || 'there'},</p><p>Click below to reset your password:</p><a href="${resetUrl}" style="display:inline-block;background:#2ECC71;color:#000;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;">Reset Password</a><p style="color:#888;font-size:14px;">This link expires in 1 hour. If you didn't request this, ignore this email.</p>`
+    );
+
+    res.json({ success: true, message: 'If an account exists, a reset email has been sent.' });
+  } catch (err) {
+    console.error('Forgot password error:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// ── POST /api/auth/reset-password ───────────────────────────────────────────
+router.post('/reset-password', authLimiter, async (req, res) => {
+  try {
+    const { token, user_id, new_password } = req.body;
+    if (!token || !user_id || !new_password) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+    if (new_password.length < 8) {
+      return res.status(400).json({ error: 'Password must be at least 8 characters' });
+    }
+
+    // Find valid token
+    const resetToken = await new Promise((resolve, reject) => {
+      db.get(
+        'SELECT * FROM password_reset_tokens WHERE user_id = ? AND used = 0 AND expires_at > datetime("now") ORDER BY created_at DESC LIMIT 1',
+        [user_id],
+        (err, row) => { if (err) reject(err); else resolve(row); }
+      );
+    });
+
+    if (!resetToken) {
+      return res.status(400).json({ error: 'Invalid or expired reset link' });
+    }
+
+    // Verify token hash
+    const valid = await bcrypt.compare(token, resetToken.token_hash);
+    if (!valid) {
+      return res.status(400).json({ error: 'Invalid or expired reset link' });
+    }
+
+    // Update password
+    const passwordHash = await bcrypt.hash(new_password, 10);
+    await new Promise((resolve, reject) => {
+      db.run('UPDATE users SET password_hash = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?',
+        [passwordHash, user_id],
+        (err) => { if (err) reject(err); else resolve(); }
+      );
+    });
+
+    // Mark token as used
+    await new Promise((resolve, reject) => {
+      db.run('UPDATE password_reset_tokens SET used = 1 WHERE id = ?',
+        [resetToken.id],
+        (err) => { if (err) reject(err); else resolve(); }
+      );
+    });
+
+    res.json({ success: true, message: 'Password reset successfully. You can now log in.' });
+  } catch (err) {
+    console.error('Reset password error:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});

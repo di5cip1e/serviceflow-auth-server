@@ -96,6 +96,14 @@
     "modular-skill-groups": {
       "version": "1.0.0",
       "installedAt": 1778607004975
+    },
+    "openclaw-money-maker": {
+      "version": "1.0.0",
+      "installedAt": 1778938337425
+    },
+    "saas-revenue-tracker": {
+      "version": "1.0.0",
+      "installedAt": 1778938337440
     }
   }
 }

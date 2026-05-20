@@ -4,6 +4,7 @@ const db = require('../database');
 const { generateAgentFiles } = require('./agent-generator');
 const { startAgentSession } = require('./session-manager');
 const { sendEmail } = require('./alerter');
+const { getWelcomeEmailHTML, getWelcomeEmailPlain } = require('./emails');
 const https = require('https');
 
 const bcrypt = require('bcrypt');
@@ -122,18 +123,22 @@ async function provisionCustomer(paymentData) {
   // Wait for all inserts
   await Promise.all([customerInsert, agentInsert, apiKeyInsert]);
 
-  // 7. Send welcome email via Mailgun
-  const welcomeEmail = generateWelcomeEmail({
-    email,
+  // 7. Send welcome email via Mailgun (HTML + plain text)
+  const emailData = {
     agentName,
     businessName,
     dashboardUrl: `https://maikr.pro/dashboard.html?agent=${agentId}&key=${apiKey}`,
     chatUrl: `https://maikr.pro/chat.html?agent=${agentId}`,
     apiKey
-  });
+  };
+  const htmlBody = getWelcomeEmailHTML(emailData);
+  const plainBody = getWelcomeEmailPlain(emailData);
   try {
-    const emailResult = await sendEmail(email, welcomeEmail.subject, welcomeEmail.body);
+    const emailResult = await sendEmail(email, `Welcome to M.ai.K.R, ${agentName}!`, plainBody, htmlBody);
     console.log('📧 Welcome email sent:', emailResult.success ? 'OK' : 'FAILED', emailResult.status || emailResult.error);
+    if (!emailResult.success && emailResult.resp) {
+      console.error('📧 Mailgun response:', emailResult.resp);
+    }
   } catch(e) {
     console.error('📧 Welcome email failed:', e.message);
   }

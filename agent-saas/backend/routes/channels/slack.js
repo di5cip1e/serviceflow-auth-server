@@ -116,8 +116,21 @@ router.post('/commands', async (req, res) => {
 });
 
 async function resolveSlackTeamAgent(teamId) {
-  // TODO: team_id → agent_id mapping in DB
-  return process.env.DEFAULT_SLACK_AGENT_ID || null;
+  const db = require('../database');
+  return new Promise((resolve, reject) => {
+    db.get(
+      `SELECT agent_id FROM agent_channels 
+       WHERE channel_type = 'slack' 
+         AND channel_id = ? 
+         AND status = 'active' 
+       LIMIT 1`,
+      [teamId],
+      (err, row) => {
+        if (err) return resolve(null);
+        resolve(row?.agent_id || process.env.DEFAULT_SLACK_AGENT_ID || null);
+      }
+    );
+  });
 }
 
 async function postSlackMessage(channel, text, threadTs) {

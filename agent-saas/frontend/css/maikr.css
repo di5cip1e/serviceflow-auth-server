@@ -1,17 +1,17 @@
 :root {
-  /* Colors */
-  --navy: #1e3a5f;
-  --slate: #64748b;
-  --forest: #166534;
-  --white: #ffffff;
-  --light-gray: #f8fafc;
-  --orange: #f97316;
-  --orange-hover: #ea580c;
-  --border: #e2e8f0;
-  --text-main: #1e293b;
-  --text-muted: #475569;
-  --dark-bg: #0f172a;
-  --dark-sidebar: #1e293b;
+  /* Colors — Dark Premium Palette */
+  --navy: #0A0A0F;
+  --slate: #2D2D44;
+  --forest: #C0A060;
+  --white: #F0F0F0;
+  --light-gray: #1A1A2E;
+  --orange: #C0A060;
+  --orange-hover: #804020;
+  --border: #2D2D44;
+  --text-main: #F0F0F0;
+  --text-muted: #808080;
+  --dark-bg: #0A0A0F;
+  --dark-sidebar: #1A1A2E;
 
   /* Fonts */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;

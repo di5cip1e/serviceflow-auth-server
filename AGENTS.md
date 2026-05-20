@@ -328,6 +328,7 @@ This is a starting point. Add your own conventions, style, and rules as you figu
 - Offload research, exploration, and parallel analysis to subagents
 - For complex problems, throw more compute at it via subagents
 - One task per subagent for focused execution
+- **ALWAYS pass `model: "openrouter/owl-alpha"` to `sessions_spawn()`** — the default model (gpt-oss-120b:free) has poor tool-use reliability and will fail on file edits. The Director's model (owl-alpha) handles tool use correctly.
 
 ### 3. Self-Improvement Loop
 - After ANY correction from the user: update memory/lessons.md with the pattern

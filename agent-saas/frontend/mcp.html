@@ -7,16 +7,23 @@
   <link rel="stylesheet" href="css/styles.css">
   <style>
     :root {
-      --bg: #0d1117;
-      --card: #161b22;
-      --border: #30363d;
-      --text: #e6edf3;
-      --muted: #8b949e;
-      --accent: #2ECC71;
-      --danger: #f85149;
-      --warn: #d29922;
-      --blue: #58a6ff;
-    }
+  --bg: #0A0A0F;
+  --surface: #1A1A2E;
+  --surface2: #2D2D44;
+  --border: #2D2D44;
+  --green: #C0A060;
+  --green-dim: #804020;
+  --text: #F0F0F0;
+  --text-dim: #808080;
+  --blue: #0040A0;
+  --blue-light: #0060D0;
+  --yellow: #C0A060;
+  --red: #E74C3C;
+  --orange: #C0A060;
+  --plasma: #00C0FF;
+  --amber: #C0A060;
+  --amber-dim: rgba(192,160,96,0.15);
+}
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       background: var(--bg);
@@ -222,15 +229,15 @@
   gap: 24px;
   height: 52px;
 }
-.maikr-logo { font-size: 17px; font-weight: 700; color: #2ECC71; text-decoration: none; letter-spacing: -0.5px; }
+.maikr-logo { font-size: 17px; font-weight: 700; color: #C0A060; text-decoration: none; letter-spacing: -0.5px; }
 .maikr-logo span { color: #fff; }
 .maikr-links { display: flex; gap: 4px; margin-left: 8px; }
 .maikr-links a { color: #8b949e; text-decoration: none; font-size: 13px; padding: 5px 10px; border-radius: 5px; transition: all 0.15s; }
 .maikr-links a:hover { color: #e6edf3; background: #30363d; }
-.maikr-links a.active { color: #2ECC71; }
+.maikr-links a.active { color: #C0A060; }
 .maikr-spacer { flex: 1; }
 .maikr-status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #8b949e; }
-.maikr-status .dot { width: 7px; height: 7px; background: #2ECC71; border-radius: 50%; box-shadow: 0 0 5px #2ECC71; }
+.maikr-status .dot { width: 7px; height: 7px; background: #C0A060; border-radius: 50%; box-shadow: 0 0 5px #C0A060; }
 </style>
 
 </head>
@@ -240,6 +247,7 @@
   <div class="maikr-links">
     <a href="/build-step1.html">Builder</a>
     <a href="/command-center.html">Dashboard</a>
+    <a href="/deploy.html">Deploy</a>
     <a href="/chat.html">Chat</a>
   </div>
   <div class="maikr-spacer"></div>

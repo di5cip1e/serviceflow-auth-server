@@ -106,7 +106,7 @@ router.get('/routing-log', (req, res) => {
 });
 
 
-router.post('/', async (req, res) => {
+async function handleSwarmChat(req, res) {
   const { agentId, agent_id, message, conversationId } = req.body;
   if ((!agentId && !agent_id) || !message) {
     return res.status(400).json({ error: 'agentId and message are required' });
@@ -138,6 +138,20 @@ router.post('/', async (req, res) => {
       );
     });
     if (!agent) return res.status(404).json({ error: 'Agent not found' });
+
+    // 2b. Check usage limits
+    const { checkAgentLimits, getUsageWarnings } = require('../services/creditManager');
+    const limitCheck = await checkAgentLimits(resolvedAgentId);
+    if (!limitCheck.allowed) {
+      return res.json({
+        success: false,
+        error: limitCheck.reason,
+        message: `Your agent has reached its ${limitCheck.reason === 'Token limit reached' ? 'token' : 'credit'} limit for this billing cycle. Please upgrade your plan to continue.`,
+        upgradeUrl: limitCheck.upgradeUrl,
+        remainingTokens: limitCheck.remainingTokens,
+        remainingCredits: limitCheck.remainingCredits,
+      });
+    }
 
     // 3. Build base system prompt: sub-agent role + agent's own prompt
     const baseSystemPrompt = agent.system_prompt
@@ -296,18 +310,24 @@ router.post('/', async (req, res) => {
       );
     }
 
-    // 11. Return response with routing metadata
+    // 11. Return response with routing metadata + usage warnings
+    const warnings = getUsageWarnings(limitCheck.remainingTokens, agent.base_tokens, limitCheck.remainingCredits, agent.outcome_credits);
     return res.json({
       response: aiResponse,
       routing: { state, intent, confidence, subAgent: SUB_AGENTS[state]?.name, emoji: SUB_AGENTS[state]?.emoji },
       trace: routingResult.trace,
+      usage: {
+        remainingTokens: limitCheck.remainingTokens,
+        remainingCredits: limitCheck.remainingCredits,
+        warnings,
+      },
     });
 
   } catch (err) {
     console.error('[SWARM] Error:', err);
     return res.status(500).json({ error: err.message });
   }
-});
+}
 
 /* ─────────────────────────────────────────────
    GET /api/chat/swarm/trace/:conversationId
@@ -333,6 +353,9 @@ router.post('/override', (req, res) => {
    Test routing without executing chat.
    Body: { message }
 ───────────────────────────────────────────── */
+router.post('/', handleSwarmChat);
+router.post('/swarm', handleSwarmChat);
+
 router.post('/route-test', async (req, res) => {
   const { message } = req.body;
   if (!message) return res.status(400).json({ error: 'message required' });

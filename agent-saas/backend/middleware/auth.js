@@ -12,8 +12,8 @@ function requireAuth(req, res, next) {
   if (req.session && req.session.userId) {
     return next();
   }
-  // API routes get 401, page routes get redirect
-  if (req.path.startsWith('/api/')) {
+  // API/fetch routes get 401, page routes get redirect
+  if (req.path.startsWith('/api/') || req.originalUrl.startsWith('/api/') || req.headers['x-requested-with'] === 'XMLHttpRequest' || (req.headers['accept'] && req.headers['accept'].includes('application/json'))) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
   res.redirect('/login');

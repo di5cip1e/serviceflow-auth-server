@@ -159,6 +159,45 @@ module.exports = {
   getCreditStatus,
   getTransactionHistory,
   addCreditPack,
+  checkAgentLimits,
+  getUsageWarnings,
   TOKEN_RATES,
   OUTCOME_RATES,
 };
+
+// ── Usage Enforcement ──────────────────────────────────────────────────────
+
+async function checkAgentLimits(agentId) {
+  const agent = await new Promise((resolve, reject) => {
+    db.get('SELECT base_tokens, base_tokens_used, outcome_credits, outcome_credits_used, plan_name, status FROM agents WHERE id = ?',
+      [agentId], (err, row) => { if (err) reject(err); else resolve(row); });
+  });
+
+  if (!agent) return { allowed: false, reason: 'Agent not found' };
+  if (agent.status !== 'active') return { allowed: false, reason: 'Agent is not active' };
+
+  const remainingTokens = (agent.base_tokens || 0) - (agent.base_tokens_used || 0);
+  const remainingCredits = (agent.outcome_credits || 0) - (agent.outcome_credits_used || 0);
+
+  if (remainingTokens <= 0) {
+    return { allowed: false, reason: 'Token limit reached', remainingTokens: 0, remainingCredits, upgradeUrl: 'https://maikr.pro/build/plan' };
+  }
+  if (remainingCredits <= 0) {
+    return { allowed: false, reason: 'Outcome credits exhausted', remainingTokens, remainingCredits: 0, upgradeUrl: 'https://maikr.pro/build/plan' };
+  }
+
+  return { allowed: true, remainingTokens, remainingCredits };
+}
+
+function getUsageWarnings(remainingTokens, totalTokens, remainingCredits, totalCredits) {
+  const warnings = [];
+  const tokenPct = totalTokens > 0 ? remainingTokens / totalTokens : 1;
+  const creditPct = totalCredits > 0 ? remainingCredits / totalCredits : 1;
+
+  if (tokenPct <= 0.1 && tokenPct > 0) warnings.push({ type: 'warning', message: '⚠️ Less than 10% of tokens remaining this month.' });
+  if (tokenPct <= 0) warnings.push({ type: 'error', message: '🚫 Token limit reached. Upgrade to continue.' });
+  if (creditPct <= 0.2 && creditPct > 0) warnings.push({ type: 'warning', message: '⚠️ Less than 20% of outcome credits remaining.' });
+  if (creditPct <= 0) warnings.push({ type: 'error', message: '🚫 Outcome credits exhausted. Purchase more to continue.' });
+
+  return warnings;
+}
