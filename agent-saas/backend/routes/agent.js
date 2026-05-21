@@ -146,4 +146,54 @@ router.post('/:agentId/appearance', async (req, res) => {
   }
 });
 
+// Update agent config (dashboard double-entry)
+router.post('/agent/:agentId/config', async (req, res) => {
+  const { agentId } = req.params;
+  const { agentName, businessName, industry, tone, systemPrompt, guardrails } = req.body;
+
+  if (!agentId) return res.json({ error: 'agentId required' });
+
+  try {
+    const updates = [];
+    const params = [];
+
+    if (agentName !== undefined) { updates.push('agent_name = ?'); params.push(agentName); }
+    if (businessName !== undefined) { updates.push('business_name = ?'); params.push(businessName); }
+    if (industry !== undefined) { updates.push('industry = ?'); params.push(industry); }
+    if (tone !== undefined) { updates.push('tone = ?'); params.push(tone); }
+    if (systemPrompt !== undefined) { updates.push('system_prompt = ?'); params.push(systemPrompt); }
+    if (guardrails !== undefined) {
+      updates.push('guardrails = ?'); params.push(JSON.stringify(guardrails));
+    }
+
+    if (updates.length > 0) {
+      updates.push('updated_at = CURRENT_TIMESTAMP');
+      params.push(agentId);
+      db.run(`UPDATE agents SET ${updates.join(', ')} WHERE id = ?`, params, function(err) {
+        if (err) return res.json({ error: err.message });
+        res.json({ success: true, changes: this.changes });
+      });
+    } else {
+      res.json({ success: true, message: 'No changes' });
+    }
+  } catch (err) {
+    res.json({ error: err.message });
+  }
+});
+
+// Get all agents for current user
+router.get('/agents', (req, res) => {
+  if (!req.session || !req.session.userId) {
+    return res.json({ error: 'Not authenticated' });
+  }
+  db.all(
+    'SELECT a.* FROM agents a JOIN customers c ON a.customer_id = c.id WHERE c.user_id = ? ORDER BY a.created_at DESC',
+    [req.session.userId],
+    (err, agents) => {
+      if (err) return res.json({ error: err.message });
+      res.json(agents || []);
+    }
+  );
+});
+
 module.exports = router;

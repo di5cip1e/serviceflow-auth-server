@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blueprint Marketplace | M.ai.K.R</title>
+<link rel="stylesheet" href="css/dark-premium.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0A0A0F; --surface: #1A1A2E; --surface2: #2D2D44; --border: #2D2D44;
+  --amber: #C0A060; --amber-dim: rgba(192,160,96,0.15);
+  --text: #F0F0F0; --text-dim: #808080;
+  --blue: #0040A0; --blue-light: #0060D0; --plasma: #00C0FF;
+  --red: #E74C3C; --green: #2ECC71;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; }
+
+/* NAV */
+.topnav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px; height: 52px; background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.topnav .logo { font-family: 'Orbitron', sans-serif; font-size: 16px; color: var(--amber); text-decoration: none; }
+.topnav .logo span { color: #fff; }
+.topnav-links { display: flex; gap: 4px; }
+.topnav-links a {
+  color: var(--text-dim); text-decoration: none; font-size: 12px; padding: 6px 12px;
+  border-radius: 6px; transition: all 0.15s;
+}
+.topnav-links a:hover { color: var(--text); background: var(--surface2); }
+.topnav-links a.active { color: var(--amber); background: var(--amber-dim); }
+.topnav-right { display: flex; align-items: center; gap: 12px; }
+.topnav-right .user-email { font-size: 12px; color: var(--text-dim); }
+.topnav-right .logout-btn {
+  font-size: 12px; color: var(--red); text-decoration: none;
+  padding: 4px 10px; border: 1px solid var(--red); border-radius: 4px;
+}
+
+/* HEADER */
+.marketplace-header {
+  padding: 40px 24px 24px; max-width: 1200px; margin: 0 auto;
+}
+.marketplace-header h1 {
+  font-size: 28px; font-weight: 700; margin-bottom: 8px;
+  background: linear-gradient(135deg, var(--amber), var(--plasma));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.marketplace-header p { color: var(--text-dim); font-size: 15px; max-width: 600px; }
+
+/* SEARCH & FILTERS */
+.filters-bar {
+  padding: 0 24px 24px; max-width: 1200px; margin: 0 auto;
+  display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+}
+.search-box {
+  flex: 1; min-width: 240px; position: relative;
+}
+.search-box input {
+  width: 100%; background: var(--surface); border: 1px solid var(--border);
+  color: var(--text); padding: 10px 14px 10px 38px; border-radius: 8px;
+  font-size: 14px; font-family: inherit; outline: none;
+}
+.search-box input:focus { border-color: var(--amber); }
+.search-box .search-icon {
+  position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+  color: var(--text-dim); font-size: 14px;
+}
+.filter-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.filter-chip {
+  padding: 6px 14px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 20px; font-size: 12px; color: var(--text-dim); cursor: pointer;
+  transition: all 0.15s;
+}
+.filter-chip:hover { border-color: var(--amber); color: var(--text); }
+.filter-chip.active { background: var(--amber-dim); border-color: var(--amber); color: var(--amber); }
+
+/* CATEGORIES */
+.categories {
+  padding: 0 24px 16px; max-width: 1200px; margin: 0 auto;
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+.cat-btn {
+  padding: 8px 16px; background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 8px; font-size: 13px; color: var(--text); cursor: pointer;
+  transition: all 0.15s; display: flex; align-items: center; gap: 6px;
+}
+.cat-btn:hover { border-color: var(--amber); }
+.cat-btn.active { background: var(--amber); color: #000; border-color: var(--amber); }
+
+/* GRID */
+.blueprint-grid {
+  padding: 0 24px 40px; max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;
+}
+
+/* CARD */
+.blueprint-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+  overflow: hidden; transition: all 0.2s; cursor: pointer;
+}
+.blueprint-card:hover {
+  border-color: var(--amber); transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(192,160,96,0.1);
+}
+.bp-card-header {
+  padding: 20px 20px 12px; display: flex; align-items: flex-start; gap: 14px;
+}
+.bp-icon {
+  width: 48px; height: 48px; border-radius: 12px; background: var(--surface2);
+  display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0;
+}
+.bp-icon.premium { background: linear-gradient(135deg, var(--amber-dim), rgba(0,192,255,0.1)); }
+.bp-card-title h3 { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
+.bp-card-title .bp-tag {
+  font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em;
+  padding: 2px 8px; border-radius: 10px; font-weight: 600;
+}
+.bp-tag.free { background: rgba(46,204,113,0.15); color: var(--green); }
+.bp-tag.premium { background: var(--amber-dim); color: var(--amber); }
+.bp-tag.new { background: rgba(0,192,255,0.15); color: var(--plasma); }
+.bp-card-body { padding: 0 20px 16px; }
+.bp-card-body p { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+.bp-card-meta {
+  padding: 12px 20px; border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.bp-stats { display: flex; gap: 14px; }
+.bp-stat { font-size: 11px; color: var(--text-dim); display: flex; align-items: center; gap: 4px; }
+.bp-use-btn {
+  padding: 6px 14px; background: var(--amber); color: #000; border: none;
+  border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;
+  transition: opacity 0.2s;
+}
+.bp-use-btn:hover { opacity: 0.85; }
+
+/* MODAL */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+  z-index: 1000; align-items: center; justify-content: center; padding: 24px;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+  max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto;
+}
+.modal-header {
+  padding: 24px 24px 16px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 16px;
+}
+.modal-header .bp-icon { width: 56px; height: 56px; font-size: 28px; }
+.modal-header h2 { font-size: 20px; font-weight: 700; }
+.modal-body { padding: 24px; }
+.modal-body h4 { font-size: 13px; font-weight: 600; color: var(--amber); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+.modal-body p { font-size: 14px; color: var(--text-dim); line-height: 1.6; margin-bottom: 16px; }
+.feature-list { list-style: none; margin-bottom: 16px; }
+.feature-list li {
+  padding: 8px 0; font-size: 13px; display: flex; align-items: center; gap: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.feature-list li .check { color: var(--green); }
+.modal-footer {
+  padding: 16px 24px; border-top: 1px solid var(--border);
+  display: flex; justify-content: flex-end; gap: 12px;
+}
+.modal-footer button {
+  padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;
+}
+.modal-footer .cancel-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--text); }
+.modal-footer .use-btn { background: var(--amber); border: none; color: #000; }
+.modal-close {
+  margin-left: auto; background: none; border: none; color: var(--text-dim);
+  font-size: 20px; cursor: pointer; padding: 4px;
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="/dashboard" class="logo">M.ai.K.R</a>
+  <div class="topnav-links">
+    <a href="/dashboard">Dashboard</a>
+    <a href="/blueprints.html" class="active">Blueprints</a>
+    <a href="/swarm.html">Swarm</a>
+    <a href="/channels.html">Channels</a>
+    <a href="/observe.html">Observe</a>
+    <a href="/mcp.html">MCP</a>
+  </div>
+  <div class="topnav-right">
+    <span class="user-email" id="userEmail">Loading...</span>
+    <a href="/api/auth/logout" class="logout-btn">Log out</a>
+  </div>
+</nav>
+
+<div class="marketplace-header">
+  <h1>📦 Blueprint Marketplace</h1>
+  <p>Pre-configured agent templates built by industry experts. Deploy a fully-trained agent in minutes, not hours.</p>
+</div>
+
+<div class="filters-bar">
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="Search blueprints..." oninput="filterBlueprints()">
+  </div>
+  <div class="filter-chips">
+    <span class="filter-chip active" data-filter="all" onclick="setFilter('all', this)">All</span>
+    <span class="filter-chip" data-filter="free" onclick="setFilter('free', this)">Free</span>
+    <span class="filter-chip" data-filter="premium" onclick="setFilter('premium', this)">Premium</span>
+    <span class="filter-chip" data-filter="new" onclick="setFilter('new', this)">New</span>
+  </div>
+</div>
+
+<div class="categories">
+  <button class="cat-btn active" data-cat="all" onclick="setCategory('all', this)">🏢 All Industries</button>
+  <button class="cat-btn" data-cat="ecommerce" onclick="setCategory('ecommerce', this)">🛒 E-Commerce</button>
+  <button class="cat-btn" data-cat="realestate" onclick="setCategory('realestate', this)">🏠 Real Estate</button>
+  <button class="cat-btn" data-cat="healthcare" onclick="setCategory('healthcare', this)">🏥 Healthcare</button>
+  <button class="cat-btn" data-cat="education" onclick="setCategory('education', this)">🎓 Education</button>
+  <button class="cat-btn" data-cat="homeservices" onclick="setCategory('homeservices', this)">🔧 Home Services</button>
+  <button class="cat-btn" data-cat="saas" onclick="setCategory('saas', this)">💻 SaaS</button>
+  <button class="cat-btn" data-cat="hospitality" onclick="setCategory('hospitality', this)">🏨 Hospitality</button>
+</div>
+
+<div class="blueprint-grid" id="blueprintGrid"></div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="bp-icon" id="modalIcon">🤖</div>
+      <div>
+        <h2 id="modalTitle">Blueprint Name</h2>
+        <span class="bp-tag free" id="modalTag">Free</span>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <h4>Description</h4>
+      <p id="modalDesc">Description goes here.</p>
+      <h4>What's Included</h4>
+      <ul class="feature-list" id="modalFeatures"></ul>
+      <h4>Configuration</h4>
+      <p id="modalConfig">Pre-configured settings.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+      <button class="use-btn" onclick="useBlueprint()">Use This Blueprint</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── BLUEPRINT DATA ──
+const blueprints = [
+  {
+    id: 'ecom-support',
+    name: 'E-Commerce Support Agent',
+    icon: '🛒',
+    category: 'ecommerce',
+    tag: 'free',
+    tagLabel: 'Free',
+    desc: 'Handles order tracking, returns, product questions, and shipping inquiries. Trained on common e-commerce workflows.',
+    features: ['Order status lookups', 'Return/exchange handling', 'Product recommendations', 'FAQ automation', 'Escalation for complex issues'],
+    config: 'Pre-loaded with e-commerce FAQ, return policy templates, and order lookup API integration. Tone: Friendly & Helpful.',
+    downloads: 1243,
+    rating: 4.8
+  },
+  {
+    id: 'realestate-lead',
+    name: 'Real Estate Lead Gen',
+    icon: '🏠',
+    category: 'realestate',
+    tag: 'premium',
+    tagLabel: 'Premium',
+    desc: 'Qualifies leads, schedules property viewings, answers listing questions, and nurtures prospects through the funnel.',
+    features: ['Lead qualification scoring', 'Viewing scheduler', 'Listing FAQ handler', 'Neighborhood info provider', 'Follow-up sequences'],
+    config: 'Includes MLS data integration hooks, lead scoring matrix, and CRM sync. Tone: Professional & Warm.',
+    downloads: 876,
+    rating: 4.9
+  },
+  {
+    id: 'healthcare-receptionist',
+    name: 'Healthcare Receptionist',
+    icon: '🏥',
+    category: 'healthcare',
+    tag: 'premium',
+    tagLabel: 'Premium',
+    desc: 'Manages appointment booking, patient intake forms, insurance verification FAQs, and HIPAA-compliant interactions.',
+    features: ['Appointment scheduling', 'Intake form guidance', 'Insurance FAQ', 'HIPAA guardrails built-in', 'Urgent escalation protocols'],
+    config: 'HIPAA guardrails pre-enabled. PII collection blocked. Medical advice disclaimers active. Tone: Caring & Professional.',
+    downloads: 654,
+    rating: 4.7
+  },
+  {
+    id: 'education-tutor',
+    name: 'Education Tutor & Advisor',
+    icon: '🎓',
+    category: 'education',
+    tag: 'free',
+    tagLabel: 'Free',
+    desc: 'Provides course information, assignment help, study tips, and enrollment guidance for educational institutions.',
+    features: ['Course catalog queries', 'Assignment guidance', 'Study resource recommendations', 'Enrollment FAQ', 'Progress check-ins'],
+    config: 'Loaded with Socratic teaching method. Never gives direct answers — guides students to discover. Tone: Encouraging & Patient.',
+    downloads: 2105,
+    rating: 4.6
+  },
+  {
+    id: 'home-services-dispatch',
+    name: 'Home Services Dispatcher',
+    icon: '🔧',
+    category: 'homeservices',
+    tag: 'new',
+    tagLabel: 'New',
+    desc: 'Schedules service calls, provides cost estimates, dispatches technicians, and handles emergency requests for plumbers, HVAC, and electricians.',
+    features: ['Service call scheduling', 'Cost estimation', 'Emergency triage', 'Technician dispatch logic', 'Follow-up reminders'],
+    config: 'Includes service area validation, emergency escalation, and cost estimation framework. Tone: Reliable & Efficient.',
+    downloads: 432,
+    rating: 4.5
+  },
+  {
+    id: 'saas-onboarding',
+    name: 'SaaS Onboarding Specialist',
+    icon: '💻',
+    category: 'saas',
+    tag: 'new',
+    tagLabel: 'New',
+    desc: 'Guides new users through product setup, answers feature questions, reduces churn with proactive check-ins, and handles upgrade inquiries.',
+    features: ['Product tour guidance', 'Feature explanations', 'Setup checklist tracking', 'Churn risk detection', 'Upgrade path recommendations'],
+    config: 'Integrates with common SaaS onboarding flows. Tracks user progress through setup checklist. Tone: Enthusiastic & Knowledgeable.',
+    downloads: 1567,
+    rating: 4.8
+  },
+  {
+    id: 'hospitality-concierge',
+    name: 'Hotel Concierge Bot',
+    icon: '🏨',
+    category: 'hospitality',
+    tag: 'free',
+    tagLabel: 'Free',
+    desc: 'Handles room service orders, local recommendations, booking modifications, and guest satisfaction follow-ups.',
+    features: ['Room service ordering', 'Local attraction recommendations', 'Booking modifications', 'Amenity information', 'Satisfaction surveys'],
+    config: 'Pre-loaded with hospitality best practices and local recommendation engine hooks. Tone: Warm & Attentive.',
+    downloads: 789,
+    rating: 4.4
+  },
+  {
+    id: 'lead-qualifier',
+    name: 'Universal Lead Qualifier',
+    icon: '🎯',
+    category: 'ecommerce',
+    tag: 'free',
+    tagLabel: 'Free',
+    desc: 'BANT-qualifies inbound leads, scores them, routes to sales, and nurtures cold prospects with automated follow-ups.',
+    features: ['BANT qualification', 'Lead scoring', 'Sales routing', 'Cold prospect nurturing', 'CRM integration'],
+    config: 'Works with any industry. Customizable qualification criteria. Tone: Consultative & Professional.',
+    downloads: 3210,
+    rating: 4.9
+  },
+  {
+    id: 'legal-intake',
+    name: 'Legal Intake Assistant',
+    icon: '⚖️',
+    category: 'homeservices',
+    tag: 'premium',
+    tagLabel: 'Premium',
+    desc: 'Conducts initial client intake, gathers case information, schedules consultations, and routes to the right attorney.',
+    features: ['Client intake forms', 'Case type classification', 'Attorney matching', 'Consultation scheduling', 'Conflict check'],
+    config: 'Legal advice guardrail pre-enabled. PII protection active. Tone: Professional & Confidential.',
+    downloads: 543,
+    rating: 4.6
+  }
+];
+
+// ── STATE ──
+let currentFilter = 'all';
+let currentCategory = 'all';
+let selectedBlueprint = null;
+
+// ── INIT ──
+(async () => {
+  try {
+    const r = await fetch('/api/auth/me');
+    const d = await r.json();
+    if (d.user) document.getElementById('userEmail').textContent = d.user.email;
+  } catch(e) {}
+  renderBlueprints();
+})();
+
+// ── RENDER ──
+function renderBlueprints() {
+  const grid = document.getElementById('blueprintGrid');
+  const search = document.getElementById('searchInput').value.toLowerCase();
+
+  const filtered = blueprints.filter(bp => {
+    if (currentFilter === 'free' && bp.tag !== 'free') return false;
+    if (currentFilter === 'premium' && bp.tag !== 'premium') return false;
+    if (currentFilter === 'new' && bp.tag !== 'new') return false;
+    if (currentCategory !== 'all' && bp.category !== currentCategory) return false;
+    if (search && !bp.name.toLowerCase().includes(search) && !bp.desc.toLowerCase().includes(search)) return false;
+    return true;
+  });
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--text-dim);">No blueprints match your filters. Try a different search.</div>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map(bp => `
+    <div class="blueprint-card" onclick="openModal('${bp.id}')">
+      <div class="bp-card-header">
+        <div class="bp-icon ${bp.tag === 'premium' ? 'premium' : ''}">${bp.icon}</div>
+        <div class="bp-card-title">
+          <h3>${bp.name}</h3>
+          <span class="bp-tag ${bp.tag}">${bp.tagLabel}</span>
+        </div>
+      </div>
+      <div class="bp-card-body">
+        <p>${bp.desc}</p>
+      </div>
+      <div class="bp-card-meta">
+        <div class="bp-stats">
+          <span class="bp-stat">⬇️ ${bp.downloads.toLocaleString()}</span>
+          <span class="bp-stat">⭐ ${bp.rating}</span>
+        </div>
+        <button class="bp-use-btn" onclick="event.stopPropagation();openModal('${bp.id}')">Use</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── FILTERS ──
+function setFilter(filter, el) {
+  currentFilter = filter;
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  renderBlueprints();
+}
+
+function setCategory(cat, el) {
+  currentCategory = cat;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  renderBlueprints();
+}
+
+function filterBlueprints() { renderBlueprints(); }
+
+// ── MODAL ──
+function openModal(id) {
+  const bp = blueprints.find(b => b.id === id);
+  if (!bp) return;
+  selectedBlueprint = bp;
+
+  document.getElementById('modalIcon').textContent = bp.icon;
+  document.getElementById('modalTitle').textContent = bp.name;
+  const tagEl = document.getElementById('modalTag');
+  tagEl.textContent = bp.tagLabel;
+  tagEl.className = 'bp-tag ' + bp.tag;
+  document.getElementById('modalDesc').textContent = bp.desc;
+  document.getElementById('modalFeatures').innerHTML = bp.features.map(f => `<li><span class="check">✓</span> ${f}</li>`).join('');
+  document.getElementById('modalConfig').textContent = bp.config;
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  selectedBlueprint = null;
+}
+
+function useBlueprint() {
+  if (!selectedBlueprint) return;
+  // Store selected blueprint and redirect to dashboard
+  localStorage.setItem('selectedBlueprint', JSON.stringify(selectedBlueprint));
+  window.location.href = '/dashboard?blueprint=' + selectedBlueprint.id;
+}
+</script>
+</body>
+</html>

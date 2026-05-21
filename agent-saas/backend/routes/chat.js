@@ -42,7 +42,7 @@ const { similaritySearch } = require('../services/vectorStore');
 const { getEmbedding } = require('../services/embeddingService');
 
 router.post('/', async (req, res) => {
-  const { agentId, agent_id, message } = req.body;
+  const { agentId, agent_id, message, sandbox, systemPrompt: sandboxPrompt, tone: sandboxTone } = req.body;
 
   if ((!agentId && !agent_id) || !message) {
     return res.status(400).json({ error: 'agentId and message are required' });
@@ -64,7 +64,14 @@ router.post('/', async (req, res) => {
       return res.status(404).json({ error: 'Agent not found' });
     }
 
-    const systemPrompt = row.system_prompt || 'You are a helpful AI assistant.';
+    // Sandbox mode: use provided system prompt for live preview
+    let systemPrompt = row.system_prompt || 'You are a helpful AI assistant.';
+    if (sandbox && sandboxPrompt) {
+      systemPrompt = sandboxPrompt;
+      if (sandboxTone) {
+        systemPrompt += `\n\nTone: ${sandboxTone}.`;
+      }
+    }
     const sessionKey = row.session_key;
 
     // RAG: retrieve relevant context from brand documents

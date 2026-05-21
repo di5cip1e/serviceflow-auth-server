@@ -1,1577 +1,679 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0;url=/command-center.html">
-  <title>Redirecting to Command Center…</title>
-  <style>body{background:#0a0a0f;display:flex;align-items:center;justify-content:center;height:100vh;font-family:Inter,sans-serif;color:#e0e0e0;flex-direction:column;gap:16px;}. Indicator{width:40px;height:40px;border:3px solid #2a2a3a;border-top-color:#00ff88;border-radius:50%;animation:spin 0.8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}p{color:#888;font-size:14px}a{color:#00ff88}</style>
-  <style>
-    .skip-link {
-      position: absolute; top: -100px; left: 0; z-index: 9999;
-      padding: 12px 24px; background: #C0A060; color: #0A0A0F;
-      font-weight: 700; font-size: 14px; text-decoration: none;
-      border-radius: 0 0 8px 0; transition: top 0.2s;
-    }
-    .skip-link:focus { top: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard | M.ai.K.R</title>
+<link rel="stylesheet" href="css/dark-premium.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0A0A0F; --surface: #1A1A2E; --surface2: #2D2D44; --border: #2D2D44;
+  --amber: #C0A060; --amber-dim: rgba(192,160,96,0.15);
+  --text: #F0F0F0; --text-dim: #808080;
+  --blue: #0040A0; --blue-light: #0060D0; --plasma: #00C0FF;
+  --red: #E74C3C; --green: #2ECC71;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; height: 100vh; overflow: hidden; }
+
+/* ── TOP NAV ── */
+.topnav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px; height: 52px; background: var(--surface);
+  border-bottom: 1px solid var(--border); flex-shrink: 0;
+}
+.topnav .logo { font-family: 'Orbitron', sans-serif; font-size: 16px; color: var(--amber); text-decoration: none; }
+.topnav .logo span { color: #fff; }
+.topnav-links { display: flex; gap: 4px; }
+.topnav-links a {
+  color: var(--text-dim); text-decoration: none; font-size: 12px; padding: 6px 12px;
+  border-radius: 6px; transition: all 0.15s;
+}
+.topnav-links a:hover { color: var(--text); background: var(--surface2); }
+.topnav-links a.active { color: var(--amber); background: var(--amber-dim); }
+.topnav-right { display: flex; align-items: center; gap: 12px; }
+.topnav-right .user-email { font-size: 12px; color: var(--text-dim); }
+.topnav-right .logout-btn {
+  font-size: 12px; color: var(--red); text-decoration: none;
+  padding: 4px 10px; border: 1px solid var(--red); border-radius: 4px;
+}
+
+/* ── DOUBLE-ENTRY LAYOUT ── */
+.double-entry {
+  display: flex; height: calc(100vh - 52px); overflow: hidden;
+}
+
+/* ── LEFT: CONFIG PANEL ── */
+.config-panel {
+  width: 420px; flex-shrink: 0; background: var(--surface);
+  border-right: 1px solid var(--border); display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.config-panel-header {
+  padding: 16px 20px; border-bottom: 1px solid var(--border); flex-shrink: 0;
+}
+.config-panel-header h1 { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+.config-panel-header p { font-size: 12px; color: var(--text-dim); }
+
+.config-tabs {
+  display: flex; border-bottom: 1px solid var(--border); flex-shrink: 0;
+}
+.config-tabs button {
+  flex: 1; padding: 10px 8px; background: none; border: none; color: var(--text-dim);
+  font-size: 11px; font-weight: 500; cursor: pointer; transition: all 0.15s;
+  border-bottom: 2px solid transparent; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.config-tabs button:hover { color: var(--text); }
+.config-tabs button.active { color: var(--amber); border-bottom-color: var(--amber); }
+
+.config-scroll { flex: 1; overflow-y: auto; padding: 20px; }
+
+.config-section { display: none; }
+.config-section.active { display: block; }
+
+.field { margin-bottom: 16px; }
+.field label {
+  display: block; font-size: 11px; font-weight: 600; color: var(--text-dim);
+  margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.field input, .field select, .field textarea {
+  width: 100%; background: var(--surface2); border: 1px solid var(--border);
+  color: var(--text); padding: 10px 14px; border-radius: 8px; font-size: 13px;
+  font-family: inherit; outline: none; transition: border-color 0.2s;
+}
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--amber); }
+.field textarea { resize: vertical; min-height: 80px; }
+.field .hint { font-size: 11px; color: var(--text-dim); margin-top: 4px; }
+
+/* Tone slider */
+.tone-slider { display: flex; align-items: center; gap: 12px; }
+.tone-slider input[type="range"] {
+  flex: 1; -webkit-appearance: none; height: 4px; background: var(--surface2);
+  border-radius: 2px; outline: none;
+}
+.tone-slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 16px; height: 16px; background: var(--amber);
+  border-radius: 50%; cursor: pointer;
+}
+.tone-slider .tone-label { font-size: 11px; color: var(--text-dim); width: 60px; text-align: right; }
+
+/* Knowledge source */
+.knowledge-source {
+  display: flex; gap: 8px; margin-bottom: 8px;
+}
+.knowledge-source input { flex: 1; }
+.knowledge-source button {
+  padding: 8px 14px; background: var(--amber); color: #000; border: none;
+  border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;
+  white-space: nowrap;
+}
+.knowledge-list { display: flex; flex-direction: column; gap: 6px; }
+.knowledge-item {
+  display: flex; align-items: center; gap: 8px; padding: 8px 12px;
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+  font-size: 12px;
+}
+.knowledge-item .k-icon { font-size: 14px; }
+.knowledge-item .k-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.knowledge-item .k-remove {
+  background: none; border: none; color: var(--red); cursor: pointer; font-size: 14px;
+  padding: 2px 4px;
+}
+
+/* Guardrail checkboxes */
+.guardrail-item {
+  display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px;
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+  margin-bottom: 8px; cursor: pointer; transition: border-color 0.15s;
+}
+.guardrail-item:hover { border-color: var(--amber); }
+.guardrail-item input[type="checkbox"] {
+  width: 16px; height: 16px; accent-color: var(--amber); margin-top: 2px; flex-shrink: 0;
+}
+.guardrail-item .gr-text { flex: 1; }
+.guardrail-item .gr-label { font-size: 13px; font-weight: 500; }
+.guardrail-item .gr-desc { font-size: 11px; color: var(--text-dim); margin-top: 2px; }
+
+/* Save bar */
+.save-bar {
+  padding: 14px 20px; border-top: 1px solid var(--border); background: var(--surface);
+  display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+}
+.save-bar .save-btn {
+  flex: 1; padding: 10px; background: var(--amber); color: #000; border: none;
+  border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;
+  transition: opacity 0.2s;
+}
+.save-bar .save-btn:hover { opacity: 0.9; }
+.save-bar .save-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.save-bar .status { font-size: 12px; color: var(--text-dim); }
+.save-bar .status.ok { color: var(--green); }
+
+/* ── RIGHT: LIVE SANDBOX ── */
+.sandbox-panel {
+  flex: 1; display: flex; flex-direction: column; overflow: hidden;
+  background: var(--bg);
+}
+.sandbox-header {
+  padding: 12px 20px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px; background: var(--surface);
+  flex-shrink: 0;
+}
+.sandbox-header .agent-badge {
+  display: flex; align-items: center; gap: 8px;
+}
+.sandbox-header .agent-badge .dot {
+  width: 8px; height: 8px; background: var(--green); border-radius: 50%;
+  box-shadow: 0 0 6px var(--green); animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
+}
+.sandbox-header .agent-badge span { font-size: 13px; font-weight: 600; }
+.sandbox-header .sandbox-label {
+  font-size: 11px; color: var(--plasma); background: rgba(0,192,255,0.1);
+  padding: 3px 8px; border-radius: 10px;
+}
+.sandbox-header .reset-btn {
+  margin-left: auto; font-size: 11px; color: var(--text-dim);
+  background: var(--surface2); border: 1px solid var(--border); padding: 4px 10px;
+  border-radius: 4px; cursor: pointer;
+}
+.sandbox-header .reset-btn:hover { color: var(--text); border-color: var(--text-dim); }
+
+/* Chat area */
+.sandbox-chat { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+.chat-msg { display: flex; gap: 10px; max-width: 85%; }
+.chat-msg.user { align-self: flex-end; flex-direction: row-reverse; }
+.chat-msg .avatar {
+  width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 14px;
+}
+.chat-msg.agent .avatar { background: var(--amber); }
+.chat-msg.user .avatar { background: var(--blue); }
+.chat-msg .bubble {
+  padding: 12px 16px; border-radius: 12px; font-size: 13px; line-height: 1.5;
+}
+.chat-msg.agent .bubble { background: var(--surface); border: 1px solid var(--border); border-top-left-radius: 4px; }
+.chat-msg.user .bubble { background: var(--blue); color: #fff; border-top-right-radius: 4px; }
+.chat-msg .typing { display: flex; gap: 4px; padding: 12px 16px; }
+.chat-msg .typing span {
+  width: 6px; height: 6px; background: var(--text-dim); border-radius: 50%;
+  animation: typing 1.2s infinite;
+}
+.chat-msg .typing span:nth-child(2) { animation-delay: 0.2s; }
+.chat-msg .typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typing {
+  0%, 100% { opacity: 0.3; } 50% { opacity: 1; }
+}
+
+/* Input area */
+.sandbox-input {
+  padding: 14px 20px; border-top: 1px solid var(--border); background: var(--surface);
+  display: flex; gap: 10px; flex-shrink: 0;
+}
+.sandbox-input input {
+  flex: 1; background: var(--surface2); border: 1px solid var(--border); color: var(--text);
+  padding: 10px 16px; border-radius: 8px; font-size: 13px; font-family: inherit;
+  outline: none; transition: border-color 0.2s;
+}
+.sandbox-input input:focus { border-color: var(--amber); }
+.sandbox-input button {
+  padding: 10px 20px; background: var(--amber); color: #000; border: none;
+  border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;
+  white-space: nowrap;
+}
+
+/* Empty state */
+.sandbox-empty {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 12px; color: var(--text-dim);
+}
+.sandbox-empty .icon { font-size: 48px; opacity: 0.3; }
+.sandbox-empty p { font-size: 14px; }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .double-entry { flex-direction: column; overflow-y: auto; height: auto; min-height: calc(100vh - 52px); }
+  .config-panel { width: 100%; border-right: none; border-bottom: 1px solid var(--border); }
+  .sandbox-panel { min-height: 400px; }
+}
 </style>
-  </head>
-<body>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
-  <div class="indicator"></div>
-  <p>M.ai.K.R Command Center <a href="/command-center.html">loading…</a></p>
-</body>
-</html>
-  <title>D.A.S.H.-Board | M.ai.K.R</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/maikr.css">
-  <style>
-    /* Dashboard-specific styles */
-    .dashboard-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    /* Dashboard Header */
-    .dashboard-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 30px;
-      background: var(--bg-card);
-      border: 2px solid var(--matrix-green);
-      border-radius: 16px;
-      margin-bottom: 30px;
-      box-shadow: 0 0 30px var(--matrix-green-glow);
-    }
-
-    .dashboard-header-left {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .agent-avatar {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      border: 2px solid var(--matrix-green);
-      object-fit: cover;
-      background: var(--bg-dark);
-    }
-
-    .agent-info h1 {
-      color: var(--matrix-green);
-      font-size: 28px;
-      margin-bottom: 5px;
-      text-shadow: 0 0 15px var(--matrix-green-glow);
-    }
-
-    .agent-info .business-name {
-      color: var(--text-secondary);
-      font-size: 14px;
-    }
-
-    .api-key-display {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 20px;
-      background: var(--bg-dark);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-    }
-
-    .api-key-display label {
-      color: var(--text-secondary);
-      font-size: 12px;
-      text-transform: uppercase;
-    }
-
-    .api-key-display code {
-      color: var(--matrix-green);
-      font-family: monospace;
-      font-size: 14px;
-    }
-
-    /* Tab Navigation */
-    .tab-nav {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
-    .tab-btn {
-      padding: 14px 28px;
-      background: var(--bg-card);
-      border: 2px solid var(--border-color);
-      border-radius: 8px;
-      color: var(--text-secondary);
-      font-family: var(--font-main);
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      font-size: 13px;
-    }
-
-    .tab-btn:hover {
-      border-color: var(--matrix-green);
-      color: var(--matrix-green);
-    }
-
-    .tab-btn.active {
-      background: var(--matrix-green);
-      color: var(--bg-dark);
-      border-color: var(--matrix-green);
-      box-shadow: 0 0 20px var(--matrix-green-glow);
-    }
-
-    /* Tab Content */
-    .tab-content {
-      display: none;
-      animation: fadeIn 0.3s ease;
-    }
-
-    .tab-content.active {
-      display: block;
-    }
-
-    /* Panels */
-    .dashboard-panel {
-      background: var(--bg-card);
-      border: 2px solid var(--matrix-green);
-      border-radius: 16px;
-      padding: 30px;
-      margin-bottom: 30px;
-    }
-
-    .panel-title {
-      color: var(--matrix-green);
-      font-size: 20px;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    /* Customization Engine */
-    .prompt-textarea {
-      width: 100%;
-      min-height: 300px;
-      padding: 20px;
-      background: var(--bg-dark);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      color: var(--text-primary);
-      font-family: var(--font-main);
-      font-size: 14px;
-      line-height: 1.6;
-      resize: vertical;
-    }
-
-    .prompt-textarea:focus {
-      outline: none;
-      border-color: var(--matrix-green);
-      box-shadow: 0 0 20px var(--matrix-green-glow);
-    }
-
-    .save-btn {
-      margin-top: 20px;
-      padding: 14px 40px;
-      background: var(--matrix-green);
-      color: var(--bg-dark);
-      border: none;
-      border-radius: 8px;
-      font-family: var(--font-main);
-      font-weight: bold;
-      font-size: 14px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .save-btn:hover {
-      box-shadow: 0 0 25px var(--matrix-green-glow);
-    }
-
-    .save-btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    /* Memory & Logs */
-    .search-bar {
-      display: flex;
-      gap: 15px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
-    .search-input {
-      flex: 1;
-      min-width: 200px;
-      padding: 14px 20px;
-      background: var(--bg-dark);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      color: var(--text-primary);
-      font-family: var(--font-main);
-    }
-
-    .search-input:focus {
-      outline: none;
-      border-color: var(--matrix-green);
-      box-shadow: 0 0 15px var(--matrix-green-glow);
-    }
-
-    .filter-select {
-      padding: 14px 20px;
-      background: var(--bg-dark);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      color: var(--text-primary);
-      font-family: var(--font-main);
-      min-width: 150px;
-    }
-
-    .filter-select:focus {
-      outline: none;
-      border-color: var(--matrix-green);
-    }
-
-    /* Conversation Table */
-    .conversation-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-
-    .conversation-table th,
-    .conversation-table td {
-      padding: 14px 16px;
-      text-align: left;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .conversation-table th {
-      color: var(--matrix-green);
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      background: var(--bg-dark);
-    }
-
-    .conversation-table td {
-      color: var(--text-primary);
-      font-size: 14px;
-    }
-
-    .conversation-table tr:hover {
-      background: var(--bg-card-hover);
-    }
-
-    .role-badge {
-      display: inline-block;
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: bold;
-      text-transform: uppercase;
-    }
-
-    .role-badge.user {
-      background: var(--matrix-green);
-      color: var(--bg-dark);
-    }
-
-    .role-badge.ai {
-      background: var(--bg-dark);
-      color: var(--matrix-green);
-      border: 1px solid var(--matrix-green);
-    }
-
-    .empty-state {
-      text-align: center;
-      padding: 60px 20px;
-      color: var(--text-secondary);
-    }
-
-    .empty-state p {
-      font-size: 16px;
-    }
-
-    /* Appearance Editor */
-    .appearance-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-    }
-
-    @media (max-width: 768px) {
-      .appearance-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .appearance-section {
-      padding: 20px;
-      background: var(--bg-dark);
-      border-radius: 12px;
-    }
-
-    .appearance-section h3 {
-      color: var(--matrix-green);
-      margin-bottom: 15px;
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .avatar-upload {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .avatar-preview {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 3px solid var(--matrix-green);
-      object-fit: cover;
-      background: var(--bg-card);
-    }
-
-    .avatar-input {
-      width: 100%;
-      padding: 12px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      color: var(--text-primary);
-      font-family: var(--font-main);
-    }
-
-    .color-picker-group {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .color-picker-group input[type="color"] {
-      width: 60px;
-      height: 60px;
-      border: 2px solid var(--border-color);
-      border-radius: 8px;
-      cursor: pointer;
-      background: transparent;
-    }
-
-    .color-picker-group input[type="color"]::-webkit-color-swatch-wrapper {
-      padding: 0;
-    }
-
-    .color-picker-group input[type="color"]::-webkit-color-swatch {
-      border: none;
-      border-radius: 6px;
-    }
-
-    .color-value {
-      color: var(--text-secondary);
-      font-family: monospace;
-      font-size: 14px;
-    }
-
-    /* Panel Subtitle */
-    .panel-subtitle {
-      color: var(--text-muted);
-      margin-bottom: 25px;
-      font-size: 15px;
-    }
-    
-    /* Form Sections */
-    .form-section {
-      margin-bottom: 25px;
-      padding: 20px;
-      background: var(--bg-dark);
-      border-radius: 10px;
-      border: 1px solid var(--border-light);
-    }
-    
-    .form-label {
-      display: block;
-      font-weight: 600;
-      font-size: 14px;
-      color: var(--text-dark);
-      margin-bottom: 10px;
-    }
-    
-    .form-input,
-    .form-select,
-    .form-textarea {
-      width: 100%;
-      padding: 14px 16px;
-      background: var(--bg-gray);
-      border: 1px solid var(--border-light);
-      border-radius: 8px;
-      color: var(--text-dark);
-      font-family: var(--font-initial);
-      font-size: 15px;
-      transition: all 0.2s ease;
-    }
-    
-    .form-input:focus,
-    .form-select:focus,
-    .form-textarea:focus {
-      outline: none;
-      border-color: var(--accent-orange);
-      box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
-    }
-    
-    .form-textarea {
-      min-height: 120px;
-      resize: vertical;
-    }
-    
-    .form-hint {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-top: 6px;
-    }
-    
-    /* Radio Group */
-    .radio-group {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    
-    .radio-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 14px 16px;
-      background: var(--bg-gray);
-      border: 1px solid var(--border-light);
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    
-    .radio-item:hover {
-      border-color: var(--accent-orange);
-      background: var(--bg-white);
-    }
-    
-    .radio-item input[type="radio"] {
-      margin-top: 3px;
-      accent-color: var(--accent-orange);
-    }
-    
-    .radio-label {
-      font-weight: 600;
-      font-size: 14px;
-      color: var(--text-dark);
-    }
-    
-    .radio-desc {
-      display: block;
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-    
-    /* Advanced Section */
-    .advanced--section {
-      margin-top: 30px;
-      border: 2px dashed var(--border-medium);
-      background: transparent;
-    }
-    
-    .advanced-section .form-label {
-      color: var(--primary-emphasis);
-    }
-    
-    /* Save button for appearance */
-    .appearance-save-btn {
-      margin-top: 30px;
-      padding: 14px 40px;
-      background: var(--matrix-green);
-      color: var(--bg-dark);
-      border: none;
-      border-radius: 8px;
-      font-family: var(--font-main);
-      font-weight: bold;
-      font-size: 14px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .appearance-save-btn:hover {
-      box-shadow: 0 0 25px var(--matrix-green-glow);
-    }
-
-    /* Success/Error Messages */
-    .message {
-      padding: 14px 20px;
-      border-radius: 8px;
-      margin-top: 15px;
-      font-size: 14px;
-      display: none;
-    }
-
-    .message.success {
-      display: block;
-      background: rgba(0, 255, 65, 0.1);
-      border: 1px solid var(--matrix-green);
-      color: var(--matrix-green);
-    }
-
-    .message.error {
-      display: block;
-      background: rgba(255, 0, 0, 0.1);
-      border: 1px solid #ff4444;
-      color: #ff4444;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .dashboard-header {
-        flex-direction: column;
-        gap: 20px;
-        text-align: center;
-      }
-
-      .dashboard-header-left {
-        flex-direction: column;
-      }
-
-      .tab-nav {
-        justify-content: center;
-      }
-
-      .tab-btn {
-        padding: 12px 20px;
-        font-size: 12px;
-      }
-
-      .conversation-table {
-        font-size: 12px;
-      }
-
-      .conversation-table th,
-      .conversation-table td {
-        padding: 10px 8px;
-      }
-    }
-
-    /* Loading State */
-    .loading {
-      opacity: 0.5;
-      pointer-events: none;
-    }
-
-    /* Scrollable table container */
-    .table-container {
-      overflow-x: auto;
-      margin-top: 20px;
-    }
-    
-    /* Toggle Switch */
-    .toggle-switch {
-      position: relative;
-      display: inline-block;
-      width: 56px;
-      height: 30px;
-    }
-    
-    .toggle-switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-    
-    .toggle-slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #ef4444;
-      transition: 0.3s;
-      border-radius: 30px;
-    }
-    
-    .toggle-slider:before {
-      position: absolute;
-      content: "";
-      height: 24px;
-      width: 24px;
-      left: 3px;
-      bottom: 3px;
-      background-color: white;
-      transition: 0.3s;
-      border-radius: 50%;
-    }
-    
-    .toggle-switch input:checked + .toggle-slider {
-      background-color: #10b981;
-    }
-    
-    .toggle-switch input:checked + .toggle-slider:before {
-      transform: translateX(26px);
-    }
-    
-    /* Alerts Grid */
-    .alerts-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      margin-bottom: 30px;
-    }
-    
-    .alert-toggle-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px;
-      background: #f1f5f9;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      transition: all 0.2s ease;
-    }
-    
-    .alert-toggle-item:hover {
-      background: #ffffff;
-      border-color: #f97316;
-    }
-    
-    .alert-toggle-info {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    
-    .alert-toggle-icon {
-      font-size: 24px;
-    }
-    
-    .alert-toggle-text strong {
-      display: block;
-      color: #1e293b;
-      font-size: 15px;
-      margin-bottom: 4px;
-    }
-    
-    .alert-toggle-text p {
-      color: #64748b;
-      font-size: 13px;
-      margin: 0;
-    }
-    
-    /* Advanced Alerts Section */
-    .advanced-alerts-section {
-      margin-top: 30px;
-      border: 2px dashed #cbd5e1;
-      border-radius: 12px;
-      overflow: hidden;
-    }
-    
-    .advanced-toggle-btn {
-      width: 100%;
-      padding: 18px 20px;
-      background: #f1f5f9;
-      border: none;
-      color: #1e293b;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: background 0.2s ease;
-    }
-    
-    .advanced-toggle-btn:hover {
-      background: #e2e8f0;
-    }
-    
-    .advanced-arrow {
-      transition: transform 0.2s ease;
-    }
-    
-    .advanced-content {
-      padding: 20px;
-      background: #ffffff;
-      border-top: 1px solid #e2e8f0;
-    }
-    
-    /* DND Grid */
-    .dnd-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-      gap: 10px;
-      margin-bottom: 15px;
-    }
-    
-    .dnd-time-row {
-      display: flex;
-      gap: 20px;
-    }
-    
-    .dnd-time-input {
-      flex: 1;
-    }
-    
-    .dnd-time-input label {
-      display: block;
-      font-size: 13px;
-      color: #64748b;
-      margin-bottom: 5px;
-    }
-    
-    .dnd-time-input input {
-      width: 100%;
-      padding: 12px;
-      background: #f1f5f9;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      color: #1e293b;
-      font-size: 15px;
-    }
-  </style>
 </head>
 <body>
-  <!-- Matrix Network Background -->
-  <canvas id="matrixCanvas"></canvas>
-  
-  <div class="dashboard-container">
-    <!-- Dashboard Header -->
-    <header class="dashboard-header">
-      <div class="dashboard-header-left">
-        <img src="img/default-avatar.png" alt="Agent Avatar" class="agent-avatar" id="headerAvatar">
-        <div class="agent-info">
-          <h1 id="agentName">Loading...</h1>
-          <div class="business-name" id="businessName">Loading...</div>
-        </div>
-      </div>
-      <div class="api-key-display">
-        <label>API Key:</label>
-        <code id="apiKey">Loading...</code>
-      </div>
-    </header>
 
-    <!-- Tab Navigation -->
-    <header role="banner"><nav class="tab-nav">
-      <button class="tab-btn active" data-tab="customization">Customization Engine</button>
-      <button class="tab-btn" data-tab="alerts">Real-Time Alerts</button>
-      <button class="tab-btn" data-tab="memory">Memory & Logs</button>
-      <button class="tab-btn" data-tab="appearance">Appearance Editor</button>
-    </nav></header><main id="main-content">
+<!-- TOP NAV -->
+<nav class="topnav">
+  <a href="/dashboard" class="logo">M.ai.K.R</a>
+  <div class="topnav-links">
+    <a href="/dashboard" class="active">Dashboard</a>
+    <a href="/swarm.html">Swarm</a>
+    <a href="/channels.html">Channels</a>
+    <a href="/observe.html">Observe</a>
+    <a href="/mcp.html">MCP</a>
+    <a href="/optimization.html">Optimize</a>
+  </div>
+  <div class="topnav-right">
+    <span class="user-email" id="userEmail">Loading...</span>
+    <a href="/api/auth/logout" class="logout-btn">Log out</a>
+  </div>
+</nav>
 
-    <!-- Tab 1: Customization Engine -->
-    <div class="tab-content active" id="tab-customization">
-      <div class="dashboard-panel">
-        <h2 class="panel-title">Configure Your Agent</h2>
-        <p class="panel-subtitle">Tell us about your business — we'll handle the AI setup automatically.</p>
-        
-        <!-- Business Description -->
-        <div class="form-section">
-          <label class="form-label">Describe Your Business</label>
-          <textarea class="form-textarea" id="businessDescription" placeholder="e.g., We are a family-owned HVAC company serving residential customers in the Chicago area. We offer AC repair, furnace installation, and annual maintenance plans..."></textarea>
+<!-- DOUBLE-ENTRY LAYOUT -->
+<div class="double-entry">
+
+  <!-- LEFT: CONFIG PANEL -->
+  <div class="config-panel">
+    <div class="config-panel-header">
+      <h1>⚙️ Agent Configuration</h1>
+      <p>Changes apply instantly to the sandbox →</p>
+    </div>
+
+    <div class="config-tabs">
+      <button class="active" onclick="switchTab('basics', this)">Basics</button>
+      <button onclick="switchTab('knowledge', this)">Knowledge</button>
+      <button onclick="switchTab('guardrails', this)">Guardrails</button>
+    </div>
+
+    <div class="config-scroll">
+      <!-- TAB: BASICS -->
+      <div class="config-section active" id="tab-basics">
+        <div class="field">
+          <label>Agent Name</label>
+          <input type="text" id="agentName" placeholder="e.g. Support Bot" oninput="debouncedSave()">
         </div>
-        
-        <!-- Website URL -->
-        <div class="form-section">
-          <label class="form-label">Your Website URL</label>
-          <input type="url" class="form-input" id="businessUrl" placeholder="https://yourbusiness.com">
-          <p class="form-hint">The AI will learn from your website to provide accurate responses.</p>
+        <div class="field">
+          <label>Business / Brand</label>
+          <input type="text" id="businessName" placeholder="e.g. Acme Inc." oninput="debouncedSave()">
         </div>
-        
-        <!-- Response Style -->
-        <div class="form-section">
-          <label class="form-label">Response Style</label>
-          <div class="radio-group">
-            <label class="radio-item">
-              <input type="radio" name="responseStyle" value="professional">
-              <span class="radio-label">Professional</span>
-              <span class="radio-desc">Polished, business-appropriate language</span>
-            </label>
-            <label class="radio-item">
-              <input type="radio" name="responseStyle" value="friendly" checked>
-              <span class="radio-label">Friendly</span>
-              <span class="radio-desc">Warm, approachable, conversational</span>
-            </label>
-            <label class="radio-item">
-              <input type="radio" name="responseStyle" value="casual">
-              <span class="radio-label">Casual</span>
-              <span class="radio-desc">Relaxed, informal, relaxed tone</span>
-            </label>
-          </div>
-        </div>
-        
-        <!-- Knowledge Level -->
-        <div class="form-section">
-          <label class="form-label">How Much Should the Agent Know?</label>
-          <div class="radio-group">
-            <label class="radio-item">
-              <input type="radio" name="knowledgeLevel" value="basic">
-              <span class="radio-label">Basic</span>
-              <span class="radio-desc">Answers common questions only</span>
-            </label>
-            <label class="radio-item">
-              <input type="radio" name="knowledgeLevel" value="intermediate" checked>
-              <span class="radio-label">Intermediate</span>
-              <span class="radio-desc">Handles most customer inquiries</span>
-            </label>
-            <label class="radio-item">
-              <input type="radio" name="knowledgeLevel" value="advanced">
-              <span class="radio-label">Advanced</span>
-              <span class="radio-desc">Full product/service expertise</span>
-            </label>
-          </div>
-        </div>
-        
-        <!-- Primary Function -->
-        <div class="form-section">
-          <label class="form-label">Primary Function</label>
-          <select class="form-select" id="primaryFunction">
-            <option value="support">Customer Support</option>
-            <option value="leads" selected>Lead Generation</option>
-            <option value="sales">Sales</option>
-            <option value="booking">Appointment Booking</option>
-            <option value="info">Information Only</option>
+        <div class="field">
+          <label>Industry</label>
+          <select id="industry" onchange="debouncedSave()">
+            <option value="">Select industry...</option>
+            <option value="ecommerce">E-Commerce</option>
+            <option value="real-estate">Real Estate</option>
+            <option value="healthcare">Healthcare</option>
+            <option value="education">Education</option>
+            <option value="home-services">Home Services</option>
+            <option value="saas">SaaS / Technology</option>
+            <option value="finance">Finance</option>
+            <option value="hospitality">Hospitality</option>
+            <option value="legal">Legal</option>
+            <option value="other">Other</option>
           </select>
         </div>
-        
-        <!-- Response Length -->
-        <div class="form-section">
-          <label class="form-label">Response Length</label>
-          <select class="form-select" id="responseLength">
-            <option value="short">Short</option>
-            <option value="medium" selected>Medium</option>
-            <option value="detailed">Detailed</option>
-          </select>
+        <div class="field">
+          <label>Tone of Voice</label>
+          <div class="tone-slider">
+            <input type="range" id="tone" min="1" max="5" value="3" oninput="updateToneLabel(); debouncedSave()">
+            <span class="tone-label" id="toneLabel">Balanced</span>
+          </div>
         </div>
-        
-        <!-- Custom Greeting -->
-        <div class="form-section">
-          <label class="form-label">Welcome Message</label>
-          <input type="text" class="form-input" id="greetingMessage" placeholder="Hi! How can I help you today?">
+        <div class="field">
+          <label>System Instructions</label>
+          <textarea id="systemPrompt" rows="4" placeholder="You are a helpful customer service agent for..." oninput="debouncedSave()"></textarea>
+          <p class="hint">This guides how your agent responds. Be specific about role, boundaries, and style.</p>
         </div>
-        
-        <!-- Advanced: System Prompt (editable) -->
-        <div class="form-section advanced-section">
-          <label class="form-label">Advanced: System Prompt</label>
-          <p class="form-hint">The AI prompt is automatically generated from your settings above. You can edit it directly if needed:</p>
-          <textarea class="prompt-textarea" id="systemPrompt" placeholder="Enter your AI agent's system prompt here..."></textarea>
+      </div>
+
+      <!-- TAB: KNOWLEDGE -->
+      <div class="config-section" id="tab-knowledge">
+        <div class="field">
+          <label>Website URL</label>
+          <div class="knowledge-source">
+            <input type="url" id="knowledgeUrl" placeholder="https://your-website.com">
+            <button onclick="addKnowledge('url')">Ingest</button>
+          </div>
+          <p class="hint">Agent will learn your brand voice and content from this URL.</p>
         </div>
-        
-        <button class="save-btn" id="savePromptBtn">Save All Changes</button>
-        <div class="message" id="promptMessage"></div>
+        <div class="field">
+          <label>Upload Document</label>
+          <div class="knowledge-source">
+            <input type="file" id="knowledgeFile" accept=".pdf,.txt,.md,.docx">
+            <button onclick="addKnowledge('file')">Upload</button>
+          </div>
+          <p class="hint">Supported: PDF, TXT, MD, DOCX (max 10MB).</p>
+        </div>
+        <div class="field">
+          <label>Google Drive Folder</label>
+          <div class="knowledge-source">
+            <input type="url" id="knowledgeDrive" placeholder="https://drive.google.com/drive/folders/...">
+            <button onclick="addKnowledge('drive')">Connect</button>
+          </div>
+          <p class="hint">Sync a folder for continuous knowledge updates.</p>
+        </div>
+        <div class="field">
+          <label>Knowledge Sources</label>
+          <div class="knowledge-list" id="knowledgeList">
+            <p class="hint" style="padding: 8px 0;">No sources added yet.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: GUARDRAILS -->
+      <div class="config-section" id="tab-guardrails">
+        <p class="hint" style="margin-bottom: 16px;">Set boundaries for your agent. These rules are enforced on every conversation.</p>
+
+        <label class="guardrail-item">
+          <input type="checkbox" id="gr-competitors" onchange="debouncedSave()">
+          <div class="gr-text">
+            <div class="gr-label">Never discuss competitors</div>
+            <div class="gr-desc">Agent will redirect conversations away from competitor products or services.</div>
+          </div>
+        </label>
+        <label class="guardrail-item">
+          <input type="checkbox" id="gr-discounts" onchange="debouncedSave()">
+          <div class="gr-text">
+            <div class="gr-label">No unauthorized discounts</div>
+            <div class="gr-desc">Agent cannot offer discounts, refunds, or pricing changes without escalation.</div>
+          </div>
+        </label>
+        <label class="guardrail-item">
+          <input type="checkbox" id="gr-frustrated" onchange="debouncedSave()">
+          <div class="gr-text">
+            <div class="gr-label">Escalate frustrated users</div>
+            <div class="gr-desc">Immediately flag and escalate if customer tone becomes angry or frustrated.</div>
+          </div>
+        </label>
+        <label class="guardrail-item">
+          <input type="checkbox" id="gr-pii" onchange="debouncedSave()">
+          <div class="gr-text">
+            <div class="gr-label">No PII collection</div>
+            <div class="gr-desc">Agent will not ask for or store sensitive personal information (SSN, credit cards, etc.).</div>
+          </div>
+        </label>
+        <label class="guardrail-item">
+          <input type="checkbox" id="gr-offtopic" onchange="debouncedSave()">
+          <div class="gr-text">
+            <div class="gr-label">Stay on topic</div>
+            <div class="gr-desc">Agent will politely redirect off-topic conversations back to business scope.</div>
+          </div>
+        </label>
+        <label class="guardrail-item">
+          <input type="checkbox" id="gr-medical" onchange="debouncedSave()">
+          <div class="gr-text">
+            <div class="gr-label">No medical/legal advice</div>
+            <div class="gr-desc">Agent will disclaim and escalate any requests for professional medical or legal advice.</div>
+          </div>
+        </label>
+        <label class="guardrail-item">
+          <input type="checkbox" id="gr-language" onchange="debouncedSave()">
+          <div class="gr-text">
+            <div class="gr-label">Language lock</div>
+            <div class="gr-desc">Agent will respond only in the configured language, even if user switches.</div>
+          </div>
+        </label>
       </div>
     </div>
 
-    <!-- Tab 2: Real-Time Alerts -->
-    <div class="tab-content" id="tab-alerts">
-      <div class="dashboard-panel">
-        <h2 class="panel-title">Real-Time Alerts</h2>
-        <p class="panel-subtitle">Get notified immediately when important events happen.</p>
-        
-        <!-- Toggle Switches for Alert Types -->
-        <div class="alerts-grid">
-          <div class="alert-toggle-item">
-            <div class="alert-toggle-info">
-              <span class="alert-toggle-icon">🚨</span>
-              <div class="alert-toggle-text">
-                <strong>Major Deal</strong>
-                <p>Customer ready to purchase or discusses pricing/budget</p>
-              </div>
-            </div>
-            <label class="toggle-switch">
-              <input type="checkbox" id="alertMajorDeal" checked>
-              <span class="toggle-slider"></span>
-            </label>
-          </div>
-          
-          <div class="alert-toggle-item">
-            <div class="alert-toggle-info">
-              <span class="alert-toggle-icon">😠</span>
-              <div class="alert-toggle-text">
-                <strong>Angry Customer</strong>
-                <p>Customer uses aggressive language or expresses frustration</p>
-              </div>
-            </div>
-            <label class="toggle-switch">
-              <input type="checkbox" id="alertAngryCustomer" checked>
-              <span class="toggle-slider"></span>
-            </label>
-          </div>
-          
-          <div class="alert-toggle-item">
-            <div class="alert-toggle-info">
-              <span class="alert-toggle-icon">🙋</span>
-              <div class="alert-toggle-text">
-                <strong>Human Needed</strong>
-                <p>Customer explicitly asks to speak with a person</p>
-              </div>
-            </div>
-            <label class="toggle-switch">
-              <input type="checkbox" id="alertHumanNeeded" checked>
-              <span class="toggle-slider"></span>
-            </label>
-          </div>
-          
-          <div class="alert-toggle-item">
-            <div class="alert-toggle-info">
-              <span class="alert-toggle-icon">⚖️</span>
-              <div class="alert-toggle-text">
-                <strong>Complaints</strong>
-                <p>Customer mentions legal issues or threatens bad reviews</p>
-              </div>
-            </div>
-            <label class="toggle-switch">
-              <input type="checkbox" id="alertComplaints" checked>
-              <span class="toggle-slider"></span>
-            </label>
-          </div>
-        </div>
-        
-        <!-- Notification Method -->
-        <div class="form-section">
-          <label class="form-label">How Would You Like to Be Notified?</label>
-          <select class="form-select" id="notificationMethod">
-            <option value="email" selected>Email</option>
-            <option value="sms">SMS (Text Message)</option>
-            <option value="both">Email + SMS</option>
-          </select>
-        </div>
-        
-        <!-- Contact Info -->
-        <div class="form-section" id="emailSection">
-          <label class="form-label">Email Address</label>
-          <input type="email" class="form-input" id="alertEmail" placeholder="you@yourbusiness.com">
-        </div>
-        
-        <div class="form-section" id="smsSection" style="display:none;">
-          <label class="form-label">Phone Number (for SMS)</label>
-          <input type="tel" class="form-input" id="alertPhone" placeholder="+1234567890">
-        </div>
-        
-        <!-- Do Not Disturb (Above Advanced) -->
-        <div class="form-section">
-          <label class="form-label">😴 Do Not Disturb</label>
-          <p class="form-hint">Schedule times when you don't want to receive alerts.</p>
-          <div class="dnd-grid">
-            <label class="checkbox-item">
-              <input type="checkbox" id="dndMonday"> Monday
-            </label>
-            <label class="checkbox-item">
-              <input type="checkbox" id="dndTuesday"> Tuesday
-            </label>
-            <label class="checkbox-item">
-              <input type="checkbox" id="dndWednesday"> Wednesday
-            </label>
-            <label class="checkbox-item">
-              <input type="checkbox" id="dndThursday"> Thursday
-            </label>
-            <label class="checkbox-item">
-              <input type="checkbox" id="dndFriday"> Friday
-            </label>
-            <label class="checkbox-item">
-              <input type="checkbox" id="dndSaturday"> Saturday
-            </label>
-            <label class="checkbox-item">
-              <input type="checkbox" id="dndSunday"> Sunday
-            </label>
-          </div>
-          <div class="dnd-time-row">
-            <div class="dnd-time-input">
-              <label>From</label>
-              <input type="time" id="dndStartTime" value="22:00">
-            </div>
-            <div class="dnd-time-input">
-              <label>To</label>
-              <input type="time" id="dndEndTime" value="08:00">
-            </div>
-          </div>
-        </div>
-        
-        <!-- Advanced Section (Collapsible) -->
-        <div class="advanced-alerts-section">
-          <button class="advanced-toggle-btn" id="advancedToggleBtn">
-            <span>⚙️ Advanced Options</span>
-            <span class="advanced-arrow">▼</span>
-          </button>
-          
-          <div class="advanced-content" id="advancedContent" style="display:none;">
-            <!-- Custom Triggers -->
-            <div class="form-section">
-              <label class="form-label">🔍 Custom Triggers</label>
-              <p class="form-hint">Add custom keywords or phrases that trigger alerts.</p>
-              <textarea class="form-textarea" id="customTriggers" placeholder="Enter keywords or phrases, one per line:
-e.g., ready to buy
-interested in enterprise
-can you give me a discount
-call me immediately"></textarea>
-            </div>
-            
-            <!-- Alert Thresholds -->
-            <div class="form-section">
-              <label class="form-label">📊 Alert Sensitivity</label>
-              <select class="form-select" id="alertSensitivity">
-                <option value="high" selected>High (More alerts)</option>
-                <option value="medium">Medium (Balanced)</option>
-                <option value="low">Low (Only critical alerts)</option>
-              </select>
-            </div>
-            
-            <!-- Data Collection Opt-Out -->
-            <div class="form-section">
-              <label class="form-label">📋 Data Usage</label>
-              <div style="display:flex;align-items:center;justify-content:space-between;padding:12px;background:#1e293b;border:1px solid #334155;border-radius:8px;">
-                <div>
-                  <div style="font-size:14px;color:#e2e8f0;font-weight:500;">Data Collection</div>
-                  <div style="font-size:12px;color:#64748b;margin-top:4px;">Help improve M.ai.K.R by sharing anonymized usage data (message counts, activity metrics). No private content is ever reviewed.</div>
-                </div>
-                <label class="toggle-switch">
-                  <input type="checkbox" id="dataOptOut" onchange="saveDataOptOut()">
-                  <span class="toggle-slider"></span>
-                </label>
-              </div>
-              <p class="form-hint" id="dataOptHint" style="margin-top:8px;"></p>
-            </div>
-          </div>
-        </div>
-        
-        <button class="save-btn" id="saveAlertsBtn">Save Alert Settings</button>
-        <div class="message" id="alertsMessage"></div>
-      </div>
-    </div>
-
-    <!-- Tab 3: Memory & Logs -->
-    <div class="tab-content" id="tab-memory">
-      <div class="dashboard-panel">
-        <h2 class="panel-title">Conversation History</h2>
-        
-        <div class="search-bar">
-          <input type="text" class="search-input" id="searchInput" placeholder="Search conversations...">
-          <select class="filter-select" id="roleFilter">
-            <option value="all">All Roles</option>
-            <option value="user">User</option>
-            <option value="ai">AI</option>
-          </select>
-        </div>
-
-        <div class="table-container">
-          <table class="conversation-table" id="conversationTable">
-            <thead>
-              <tr>
-                <th>Timestamp</th>
-                <th>Role</th>
-                <th>Message</th>
-              </tr>
-            </thead>
-            <tbody id="conversationBody">
-              <tr>
-                <td colspan="3" class="empty-state">
-                  <p>Loading conversations...</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- Tab 3: Appearance Editor -->
-    <div class="tab-content" id="tab-appearance">
-      <div class="dashboard-panel">
-        <h2 class="panel-title">Customize Appearance</h2>
-        
-        <div class="appearance-grid">
-          <div class="appearance-section">
-            <h3>Avatar</h3>
-            <div class="avatar-upload">
-              <img src="img/default-avatar.png" alt="Avatar Preview" class="avatar-preview" id="avatarPreview">
-              <input type="text" class="avatar-input" id="avatarInput" placeholder="Enter avatar URL...">
-            </div>
-          </div>
-
-          <div class="appearance-section">
-            <h3>Theme Color</h3>
-            <div class="color-picker-group">
-              <input type="color" id="themeColor" value="#00ff41">
-              <span class="color-value" id="colorValue">#00ff41</span>
-            </div>
-          </div>
-        </div>
-
-        <button class="appearance-save-btn" id="saveAppearanceBtn">Save Appearance</button>
-        <div class="message" id="appearanceMessage"></div>
-      </div>
+    <div class="save-bar">
+      <button class="save-btn" id="saveBtn" onclick="saveConfig()">Save Changes</button>
+      <span class="status" id="saveStatus"></span>
     </div>
   </div>
 
-  <script>
-    // Get agent ID from URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const agentId = urlParams.get('agent') || 'demo-agent';
-    const API_BASE = '';
+  <!-- RIGHT: LIVE SANDBOX -->
+  <div class="sandbox-panel">
+    <div class="sandbox-header">
+      <div class="agent-badge">
+        <div class="dot"></div>
+        <span id="sandboxAgentName">Live Sandbox</span>
+      </div>
+      <span class="sandbox-label">⚡ Real-time preview</span>
+      <button class="reset-btn" onclick="resetChat()">↻ Reset</button>
+    </div>
 
-    // DOM Elements
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabContents = document.querySelectorAll('.tab-content');
-    const agentNameEl = document.getElementById('agentName');
-    const businessNameEl = document.getElementById('businessName');
-    const apiKeyEl = document.getElementById('apiKey');
-    const headerAvatar = document.getElementById('headerAvatar');
-    const systemPromptEl = document.getElementById('systemPrompt');
-    const savePromptBtn = document.getElementById('savePromptBtn');
-    const promptMessage = document.getElementById('promptMessage');
-    const conversationBody = document.getElementById('conversationBody');
-    const searchInput = document.getElementById('searchInput');
-    const roleFilter = document.getElementById('roleFilter');
-    const avatarPreview = document.getElementById('avatarPreview');
-    const avatarInput = document.getElementById('avatarInput');
-    const themeColor = document.getElementById('themeColor');
-    const colorValue = document.getElementById('colorValue');
-    const saveAppearanceBtn = document.getElementById('saveAppearanceBtn');
-    const appearanceMessage = document.getElementById('appearanceMessage');
+    <div class="sandbox-chat" id="sandboxChat">
+      <div class="sandbox-empty" id="sandboxEmpty">
+        <div class="icon">💬</div>
+        <p>Test your agent in real-time</p>
+        <p style="font-size: 12px;">Changes to the config on the left are reflected here instantly.</p>
+      </div>
+    </div>
 
-    let allConversations = [];
+    <div class="sandbox-input">
+      <input type="text" id="sandboxInput" placeholder="Type a message to test your agent..." onkeydown="if(event.key==='Enter')sendSandboxMsg()">
+      <button onclick="sendSandboxMsg()">Send</button>
+    </div>
+  </div>
 
-    // Tab Navigation
-    tabBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const tabId = btn.dataset.tab;
-        
-        tabBtns.forEach(b => b.classList.remove('active'));
-        tabContents.forEach(c => c.classList.remove('active'));
-        
-        btn.classList.add('active');
-        document.getElementById(`tab-${tabId}`).classList.add('active');
-      });
+</div>
+
+<script>
+// ── STATE ──
+let currentAgentId = null;
+let saveTimeout = null;
+let knowledgeSources = [];
+
+// ── INIT ──
+(async () => {
+  // Load user info
+  try {
+    const r = await fetch('/api/auth/me');
+    const d = await r.json();
+    if (d.user) {
+      document.getElementById('userEmail').textContent = d.user.email;
+      // Load user's first agent
+      const ar = await fetch('/api/agents');
+      const agents = await ar.json();
+      if (agents && agents.length > 0) {
+        loadAgent(agents[0]);
+      }
+    }
+  } catch(e) { console.error('Init error:', e); }
+})();
+
+// ── LOAD AGENT ──
+function loadAgent(agent) {
+  currentAgentId = agent.id;
+  document.getElementById('agentName').value = agent.agent_name || '';
+  document.getElementById('businessName').value = agent.business_name || '';
+  document.getElementById('industry').value = agent.industry || '';
+  document.getElementById('systemPrompt').value = agent.system_prompt || '';
+  document.getElementById('sandboxAgentName').textContent = agent.agent_name || 'Live Sandbox';
+
+  // Tone
+  const toneMap = { 'very-casual': 1, 'casual': 2, 'balanced': 3, 'professional': 4, 'formal': 5 };
+  const toneVal = toneMap[agent.tone] || 3;
+  document.getElementById('tone').value = toneVal;
+  updateToneLabel();
+
+  // Guardrails
+  if (agent.guardrails) {
+    const gr = typeof agent.guardrails === 'string' ? JSON.parse(agent.guardrails) : agent.guardrails;
+    document.getElementById('gr-competitors').checked = !!gr.competitors;
+    document.getElementById('gr-discounts').checked = !!gr.discounts;
+    document.getElementById('gr-frustrated').checked = !!gr.frustrated;
+    document.getElementById('gr-pii').checked = !!gr.pii;
+    document.getElementById('gr-offtopic').checked = !!gr.offtopic;
+    document.getElementById('gr-medical').checked = !!gr.medical;
+    document.getElementById('gr-language').checked = !!gr.language;
+  }
+}
+
+// ── TABS ──
+function switchTab(tab, btn) {
+  document.querySelectorAll('.config-tabs button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.config-section').forEach(s => s.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+}
+
+// ── TONE LABEL ──
+function updateToneLabel() {
+  const labels = ['', 'Very Casual', 'Casual', 'Balanced', 'Professional', 'Formal'];
+  const val = parseInt(document.getElementById('tone').value);
+  document.getElementById('toneLabel').textContent = labels[val] || 'Balanced';
+}
+
+// ── SAVE ──
+function debouncedSave() {
+  clearTimeout(saveTimeout);
+  document.getElementById('saveStatus').textContent = 'Unsaved changes...';
+  document.getElementById('saveStatus').className = 'status';
+  saveTimeout = setTimeout(saveConfig, 1500);
+}
+
+async function saveConfig() {
+  if (!currentAgentId) return;
+  const btn = document.getElementById('saveBtn');
+  btn.disabled = true;
+  btn.textContent = 'Saving...';
+
+  const toneVals = ['', 'very-casual', 'casual', 'balanced', 'professional', 'formal'];
+  const data = {
+    agentName: document.getElementById('agentName').value,
+    businessName: document.getElementById('businessName').value,
+    industry: document.getElementById('industry').value,
+    tone: toneVals[parseInt(document.getElementById('tone').value)] || 'balanced',
+    systemPrompt: document.getElementById('systemPrompt').value,
+    guardrails: {
+      competitors: document.getElementById('gr-competitors').checked,
+      discounts: document.getElementById('gr-discounts').checked,
+      frustrated: document.getElementById('gr-frustrated').checked,
+      pii: document.getElementById('gr-pii').checked,
+      offtopic: document.getElementById('gr-offtopic').checked,
+      medical: document.getElementById('gr-medical').checked,
+      language: document.getElementById('gr-language').checked
+    }
+  };
+
+  try {
+    const r = await fetch('/api/agent/' + currentAgentId + '/config', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
     });
-
-    // Load Agent Info
-    async function loadAgentInfo() {
-      console.log('Loading agent:', agentId);
-      try {
-        const res = await fetch(`/api/agent-info?agentId=${agentId}`);
-        console.log('Response:', res.status);
-        const data = await res.json();
-        console.log('Data:', data);
-        
-        if (data.success) {
-          agentNameEl.textContent = data.agentName || 'M.ai.K.R Agent';
-          businessNameEl.textContent = data.businessName || 'My Business';
-          apiKeyEl.textContent = data.apiKey || 'No API Key';
-          systemPromptEl.value = data.systemPrompt || '';
-          
-          if (data.avatarUrl) {
-            headerAvatar.src = data.avatarUrl;
-            avatarPreview.src = data.avatarUrl;
-            avatarInput.value = data.avatarUrl;
-          }
-          
-          if (data.themeColor) {
-            themeColor.value = data.themeColor;
-            colorValue.textContent = data.themeColor;
-            document.documentElement.style.setProperty('--matrix-green', data.themeColor);
-          }
-          
-          // Data opt-out
-          const optOut = data.dataOptOut;
-          document.getElementById('dataOptOut').checked = optOut === 1;
-          document.getElementById('dataOptHint').textContent = optOut === 1
-            ? 'Data collection disabled. Thank you for opting out.'
-            : 'Data collection enabled. You can opt out at any time.';
-          document.getElementById('dataOptHint').style.color = optOut === 1 ? '#64748b' : '#22c55e';
-        } else {
-          console.error('Failed to load agent info:', data.error);
-        alert('Error loading agent: ' + (data.error || 'Unknown'));
-        }
-      } catch (err) {
-        console.error('Error loading agent info:', err);
-        alert('Network error: ' + err.message);
-      }
+    const d = await r.json();
+    if (d.success) {
+      document.getElementById('saveStatus').textContent = '✓ Saved';
+      document.getElementById('saveStatus').className = 'status ok';
+      document.getElementById('sandboxAgentName').textContent = data.agentName || 'Live Sandbox';
+    } else {
+      document.getElementById('saveStatus').textContent = 'Error: ' + (d.error || 'Unknown');
     }
+  } catch(e) {
+    document.getElementById('saveStatus').textContent = 'Network error';
+  }
+  btn.disabled = false;
+  btn.textContent = 'Save Changes';
+}
 
-    // Load Agent Memory/Conversations
-    async function loadAgentMemory() {
-      try {
-        const res = await fetch(`/api/agent-memory?agentId=${agentId}`);
-        const data = await res.json();
-        
-        if (data.success) {
-          allConversations = data.conversations || [];
-          renderConversations(allConversations);
-        }
-      } catch (err) {
-        console.error('Error loading memory:', err);
-        conversationBody.innerHTML = '<tr><td colspan="3" class="empty-state"><p>No conversations found</p></td></tr>';
-      }
-    }
+// ── KNOWLEDGE ──
+function addKnowledge(type) {
+  let name = '';
+  if (type === 'url') {
+    const url = document.getElementById('knowledgeUrl').value;
+    if (!url) return;
+    name = new URL(url).hostname;
+    document.getElementById('knowledgeUrl').value = '';
+  } else if (type === 'file') {
+    const file = document.getElementById('knowledgeFile').files[0];
+    if (!file) return;
+    name = file.name;
+  } else if (type === 'drive') {
+    const url = document.getElementById('knowledgeDrive').value;
+    if (!url) return;
+    name = 'Google Drive Folder';
+    document.getElementById('knowledgeDrive').value = '';
+  }
+  knowledgeSources.push({ type, name });
+  renderKnowledgeList();
+}
 
-    // Render Conversations Table
-    function renderConversations(conversations) {
-      if (!conversations || conversations.length === 0) {
-        conversationBody.innerHTML = '<tr><td colspan="3" class="empty-state"><p>No conversations yet</p></td></tr>';
-        return;
-      }
+function removeKnowledge(idx) {
+  knowledgeSources.splice(idx, 1);
+  renderKnowledgeList();
+}
 
-      conversationBody.innerHTML = conversations.map(conv => `
-        <tr>
-          <td>${new Date(conv.created_at).toLocaleString()}</td>
-          <td><span class="role-badge ${conv.role}">${conv.role}</span></td>
-          <td>${escapeHtml(conv.content)}</td>
-        </tr>
-      `).join('');
-    }
+function renderKnowledgeList() {
+  const el = document.getElementById('knowledgeList');
+  if (knowledgeSources.length === 0) {
+    el.innerHTML = '<p class="hint" style="padding: 8px 0;">No sources added yet.</p>';
+    return;
+  }
+  const icons = { url: '🌐', file: '📄', drive: '📁' };
+  el.innerHTML = knowledgeSources.map((k, i) => `
+    <div class="knowledge-item">
+      <span class="k-icon">${icons[k.type] || '📎'}</span>
+      <span class="k-name">${k.name}</span>
+      <button class="k-remove" onclick="removeKnowledge(${i})">✕</button>
+    </div>
+  `).join('');
+}
 
-    // Escape HTML to prevent XSS
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
-    }
+// ── SANDBOX CHAT ──
+async function sendSandboxMsg() {
+  const input = document.getElementById('sandboxInput');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
 
-    // Filter Conversations
-    function filterConversations() {
-      const searchTerm = searchInput.value.toLowerCase();
-      const role = roleFilter.value;
-      
-      let filtered = allConversations.filter(conv => {
-        const matchesSearch = conv.content.toLowerCase().includes(searchTerm);
-        const matchesRole = role === 'all' || conv.role === role;
-        return matchesSearch && matchesRole;
-      });
-      
-      renderConversations(filtered);
-    }
+  const chat = document.getElementById('sandboxChat');
+  document.getElementById('sandboxEmpty')?.remove();
 
-    searchInput.addEventListener('input', filterConversations);
-    roleFilter.addEventListener('change', filterConversations);
+  // User message
+  chat.innerHTML += `
+    <div class="chat-msg user">
+      <div class="avatar">👤</div>
+      <div class="bubble">${escHtml(text)}</div>
+    </div>`;
 
-    // Get form elements
-    const businessDescriptionEl = document.getElementById('businessDescription');
-    const businessUrlEl = document.getElementById('businessUrl');
-    const primaryFunctionEl = document.getElementById('primaryFunction');
-    const responseLengthEl = document.getElementById('responseLength');
-    const greetingMessageEl = document.getElementById('greetingMessage');
-    const responseStyleEls = document.getElementsByName('responseStyle');
-    const knowledgeLevelEls = document.getElementsByName('knowledgeLevel');
+  // Typing indicator
+  const typingId = 'typing-' + Date.now();
+  chat.innerHTML += `
+    <div class="chat-msg agent" id="${typingId}">
+      <div class="avatar">🤖</div>
+      <div class="typing"><span></span><span></span><span></span></div>
+    </div>`;
+  chat.scrollTop = chat.scrollHeight;
 
-    // Generate system prompt from form settings
-    function generateSystemPrompt() {
-      const businessDesc = businessDescriptionEl.value || 'a small business';
-      const businessUrl = businessUrlEl.value || '';
-      const primaryFunc = primaryFunctionEl.value;
-      const respLength = responseLengthEl.value;
-      const greeting = greetingMessageEl.value || 'Hi! How can I help you today?';
-      
-      let style = 'professional';
-      for (const r of responseStyleEls) {
-        if (r.checked) { style = r.value; }
-      }
-      
-      let knowledge = 'intermediate';
-      for (const k of knowledgeLevelEls) {
-        if (k.checked) { knowledge = k.value; }
-      }
-      
-      let styleInstructions = '';
-      if (style === 'professional') {
-        styleInstructions = 'Use polished, business-appropriate language. Be concise and formal.';
-      } else if (style === 'friendly') {
-        styleInstructions = 'Use warm, approachable language. Be conversational and personable.';
-      } else {
-        styleInstructions = 'Use relaxed, informal language. Be friendly but casual.';
-      }
-      
-      let knowledgeInstructions = '';
-      if (knowledge === 'basic') {
-        knowledgeInstructions = 'Provide simple answers to common questions. Keep responses brief.';
-      } else if (knowledge === 'intermediate') {
-        knowledgeInstructions = 'Handle most customer inquiries with helpful, detailed responses.';
-      } else {
-        knowledgeInstructions = 'Provide in-depth expertise on products, services, and complex inquiries.';
-      }
-      
-      let functionInstructions = '';
-      if (primaryFunc === 'support') {
-        functionInstructions = 'Focus on answering customer questions and resolving issues.';
-      } else if (primaryFunc === 'leads') {
-        functionInstructions = 'Qualify visitors, capture contact information (name, email, phone), and gather details about their needs.';
-      } else if (primaryFunc === 'sales') {
-        functionInstructions = 'Guide visitors through the sales process, recommend products/services, and close deals.';
-      } else if (primaryFunc === 'booking') {
-        functionInstructions = 'Help customers schedule appointments. Collect preferred date, time, and contact info.';
-      } else {
-        functionInstructions = 'Provide helpful information about the business and its services.';
-      }
-      
-      let lengthInstructions = '';
-      if (respLength === 'short') {
-        lengthInstructions = 'Keep responses under 2-3 sentences when possible.';
-      } else if (respLength === 'detailed') {
-        lengthInstructions = 'Provide thorough, comprehensive responses with relevant details.';
-      } else {
-        lengthInstructions = 'Balance detail with conciseness - typically 2-4 sentences.';
-      }
-      
-      let prompt = `You are a customer service AI assistant for: ${businessDesc}.\n\n`;
-      
-      if (businessUrl) {
-        prompt += `Your website is: ${businessUrl}\n`;
-        prompt += `You can reference information from this website to answer customer questions accurately.\n\n`;
-      }
-      
-      prompt += `Primary function: ${functionInstructions}\n\n`;
-      prompt += `Communication style: ${styleInstructions}\n\n`;
-      prompt += `Knowledge level: ${knowledgeInstructions}\n\n`;
-      prompt += `Response length: ${lengthInstructions}\n\n`;
-      prompt += `Always greet customers with: "${greeting}"\n\n`;
-      prompt += `If you don't know something, say so honestly. Never make up information.\n`;
-      prompt += `Always try to be helpful and guide the customer toward their goal.\n\n`;
-      
-      // ESCALATION RULES - These trigger notifications to the business owner
-      prompt += `=== ESCALATION RULES ===\n`;
-      prompt += `You must notify the human owner IMMEDIATELY when any of these occur:\n\n`;
-      prompt += `1. MAJOR DEAL: The customer expresses intent to purchase, asks about pricing tiers, mentions budget, or says they're ready to commit. Respond with [ESCALATE:MAJOR_DEAL] and summarize the opportunity.\n\n`;
-      prompt += `2. ANGRY/FRUSTRATED: The customer uses aggressive language, expresses frustration, writes in ALL CAPS repeatedly, or uses angry emojis. Respond with [ESCALATE:ANGRY_CUSTOMER] and do not attempt to resolve alone — request human support.\n\n`;
-      prompt += `3. HUMAN NEEDED: The customer explicitly asks to speak with a human, says "let me talk to someone", or indicates the issue is too complex. Respond with [ESCALATE:HUMAN_NEEDED] immediately.\n\n`;
-      prompt += `4. COMPLAINTS: The customer mentions legal issues, threats to leave reviews, or mentions contacting consumer protection agencies. Respond with [ESCALATE:COMPLAINT] immediately.\n\n`;
-      prompt += `When you escalate, briefly acknowledge the customer's concern, then include the escalation code. The system will notify the business owner via email/SMS.`;
-      
-      return prompt;
-    }
-
-    // Auto-update system prompt when form changes
-    function updateSystemPrompt() {
-      systemPromptEl.value = generateSystemPrompt();
-    }
-
-    // Add event listeners to form fields
-    businessDescriptionEl.addEventListener('input', updateSystemPrompt);
-    businessUrlEl.addEventListener('input', updateSystemPrompt);
-    primaryFunctionEl.addEventListener('change', updateSystemPrompt);
-    responseLengthEl.addEventListener('change', updateSystemPrompt);
-    greetingMessageEl.addEventListener('input', updateSystemPrompt);
-    responseStyleEls.forEach(r => r.addEventListener('change', updateSystemPrompt));
-    knowledgeLevelEls.forEach(k => k.addEventListener('change', updateSystemPrompt));
-
-    // Save System Prompt and Settings
-    savePromptBtn.addEventListener('click', async () => {
-      savePromptBtn.disabled = true;
-      savePromptBtn.textContent = 'Saving...';
-      
-      try {
-        const res = await fetch('/api/update-agent', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            agentId: agentId,
-            system_prompt: systemPromptEl.value,
-            business_description: businessDescriptionEl.value,
-            business_url: businessUrlEl.value,
-            primary_function: primaryFunctionEl.value,
-            response_length: responseLengthEl.value,
-            greeting_message: greetingMessageEl.value,
-            response_style: Array.from(responseStyleEls).find(r => r.checked)?.value || 'friendly',
-            knowledge_level: Array.from(knowledgeLevelEls).find(k => k.checked)?.value || 'intermediate'
-          })
-        });
-        
-        const data = await res.json();
-        
-        if (data.success) {
-          promptMessage.textContent = 'Settings saved successfully! Your agent is now customized.';
-          promptMessage.className = 'message success';
-        } else {
-          throw new Error(data.error);
-        }
-      } catch (err) {
-        promptMessage.textContent = 'Error saving: ' + err.message;
-        promptMessage.className = 'message error';
-      } finally {
-        savePromptBtn.disabled = false;
-        savePromptBtn.textContent = 'Save All Changes';
-      }
+  try {
+    const r = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: text,
+        agentId: currentAgentId,
+        sandbox: true,
+        systemPrompt: document.getElementById('systemPrompt').value,
+        tone: ['', 'very-casual', 'casual', 'balanced', 'professional', 'formal'][parseInt(document.getElementById('tone').value)] || 'balanced'
+      })
     });
+    const d = await r.json();
+    document.getElementById(typingId)?.remove();
+    chat.innerHTML += `
+      <div class="chat-msg agent">
+        <div class="avatar">🤖</div>
+        <div class="bubble">${escHtml(d.reply || d.error || 'No response')}</div>
+      </div>`;
+  } catch(e) {
+    document.getElementById(typingId)?.remove();
+    chat.innerHTML += `
+      <div class="chat-msg agent">
+        <div class="avatar">🤖</div>
+        <div class="bubble" style="border-color: var(--red);">Connection error. Is the backend running?</div>
+      </div>`;
+  }
+  chat.scrollTop = chat.scrollHeight;
+}
 
-    // Theme Color Change
-    themeColor.addEventListener('input', (e) => {
-      colorValue.textContent = e.target.value;
-      document.documentElement.style.setProperty('--matrix-green', e.target.value);
-    });
+function resetChat() {
+  document.getElementById('sandboxChat').innerHTML = `
+    <div class="sandbox-empty" id="sandboxEmpty">
+      <div class="icon">💬</div>
+      <p>Test your agent in real-time</p>
+      <p style="font-size: 12px;">Changes to the config on the left are reflected here instantly.</p>
+    </div>`;
+}
 
-    // Save Appearance
-    saveAppearanceBtn.addEventListener('click', async () => {
-      saveAppearanceBtn.disabled = true;
-      saveAppearanceBtn.textContent = 'Saving...';
-      
-      try {
-        const res = await fetch('/api/update-agent', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            agentId: agentId,
-            avatar_url: avatarInput.value,
-            theme_color: themeColor.value
-          })
-        });
-        
-        const data = await res.json();
-        
-        if (data.success) {
-          headerAvatar.src = avatarInput.value || 'img/default-avatar.png';
-          appearanceMessage.textContent = 'Appearance saved successfully!';
-          appearanceMessage.className = 'message success';
-        } else {
-          throw new Error(data.error);
-        }
-      } catch (err) {
-        appearanceMessage.textContent = 'Error saving: ' + err.message;
-        appearanceMessage.className = 'message error';
-      } finally {
-        saveAppearanceBtn.disabled = false;
-        saveAppearanceBtn.textContent = 'Save Appearance';
-      }
-    });
-
-    // Avatar URL Input
-    avatarInput.addEventListener('input', (e) => {
-      if (e.target.value) {
-        avatarPreview.src = e.target.value;
-      } else {
-        avatarPreview.src = 'img/default-avatar.png';
-      }
-    });
-
-    // ===== REAL-TIME ALERTS TAB =====
-    const advancedToggleBtn = document.getElementById('advancedToggleBtn');
-    const advancedContent = document.getElementById('advancedContent');
-    const notificationMethod = document.getElementById('notificationMethod');
-    const emailSection = document.getElementById('emailSection');
-    const smsSection = document.getElementById('smsSection');
-    const saveAlertsBtn = document.getElementById('saveAlertsBtn');
-    const alertsMessage = document.getElementById('alertsMessage');
-
-    // Toggle Advanced Section
-    if (advancedToggleBtn) {
-      advancedToggleBtn.addEventListener('click', () => {
-        if (advancedContent.style.display === 'none') {
-          advancedContent.style.display = 'block';
-          advancedToggleBtn.querySelector('.advanced-arrow').textContent = '▲';
-        } else {
-          advancedContent.style.display = 'none';
-          advancedToggleBtn.querySelector('.advanced-arrow').textContent = '▼';
-        }
-      });
-    }
-
-    // Show/hide SMS section based on notification method
-    if (notificationMethod) {
-      notificationMethod.addEventListener('change', (e) => {
-        const method = e.target.value;
-        if (method === 'email' || method === 'both') {
-          emailSection.style.display = 'block';
-        } else {
-          emailSection.style.display = 'none';
-        }
-        if (method === 'sms' || method === 'both') {
-          smsSection.style.display = 'block';
-        } else {
-          smsSection.style.display = 'none';
-        }
-      });
-    }
-
-    // Save Alert Settings
-    if (saveAlertsBtn) {
-      saveAlertsBtn.addEventListener('click', async () => {
-        saveAlertsBtn.disabled = true;
-        saveAlertsBtn.textContent = 'Saving...';
-        
-        try {
-          const alertSettings = {
-            alert_major_deal: document.getElementById('alertMajorDeal').checked,
-            alert_angry_customer: document.getElementById('alertAngryCustomer').checked,
-            alert_human_needed: document.getElementById('alertHumanNeeded').checked,
-            alert_complaints: document.getElementById('alertComplaints').checked,
-            notification_method: notificationMethod.value,
-            alert_email: document.getElementById('alertEmail').value,
-            alert_phone: document.getElementById('alertPhone').value,
-            dnd_days: [
-              document.getElementById('dndMonday').checked ? 'Monday' : null,
-              document.getElementById('dndTuesday').checked ? 'Tuesday' : null,
-              document.getElementById('dndWednesday').checked ? 'Wednesday' : null,
-              document.getElementById('dndThursday').checked ? 'Thursday' : null,
-              document.getElementById('dndFriday').checked ? 'Friday' : null,
-              document.getElementById('dndSaturday').checked ? 'Saturday' : null,
-              document.getElementById('dndSunday').checked ? 'Sunday' : null
-            ].filter(Boolean),
-            dnd_start_time: document.getElementById('dndStartTime').value,
-            dnd_end_time: document.getElementById('dndEndTime').value,
-            custom_triggers: document.getElementById('customTriggers').value,
-            alert_sensitivity: document.getElementById('alertSensitivity').value
-          };
-          
-          const res = await fetch('/api/update-agent', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              agentId: agentId,
-              alert_settings: JSON.stringify(alertSettings)
-            })
-          });
-          
-          const data = await res.json();
-          
-          if (data.success) {
-            alertsMessage.textContent = 'Alert settings saved! You will be notified when important events occur.';
-            alertsMessage.className = 'message success';
-          } else {
-            throw new Error(data.error);
-          }
-        } catch (err) {
-          alertsMessage.textContent = 'Error saving: ' + err.message;
-          alertsMessage.className = 'message error';
-        } finally {
-          saveAlertsBtn.disabled = false;
-          saveAlertsBtn.textContent = 'Save Alert Settings';
-        }
-      });
-    }
-
-    // Initialize Dashboard
-    loadAgentInfo();
-    loadAgentMemory();
-
-    // Data opt-out save
-    async function saveDataOptOut() {
-      const checked = document.getElementById('dataOptOut').checked;
-      const hint = document.getElementById('dataOptHint');
-      try {
-        await fetch(`/api/agent/${agentId}/data-opt-out`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ dataOptOut: checked ? 1 : 0 })
-        });
-        hint.textContent = checked
-          ? 'Data collection disabled. Thank you for opting out.'
-          : 'Data collection enabled. Thanks for helping us improve!';
-        hint.style.color = checked ? '#64748b' : '#22c55e';
-      } catch(e) {
-        hint.textContent = 'Failed to save. Please try again.';
-        hint.style.color = '#ef4444';
-      }
-    }
-  </script>
-</main></body>
+function escHtml(s) {
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+</script>
+</body>
 </html>
