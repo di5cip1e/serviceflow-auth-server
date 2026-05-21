@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Studio | M.ai.K.R</title>
+<link rel="stylesheet" href="css/styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0A0A0F; --surface: #1A1A2E; --surface2: #2D2D44; --border: #2D2D44;
+  --green: #C0A060; --text: #F0F0F0; --text-dim: #808080;
+  --blue-light: #0060D0; --plasma: #00C0FF; --amber: #C0A060; --red: #E74C3C;
+}
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; }
+
+.maikr-nav { display: flex; align-items: center; padding: 16px 24px; border-bottom: 1px solid var(--border); gap: 8px; background: var(--surface); position: sticky; top: 0; z-index: 100; }
+.maikr-nav .logo { font-weight: 700; font-size: 18px; color: var(--green); }
+.maikr-nav .sep { color: var(--border); }
+.maikr-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; padding: 6px 12px; border-radius: 6px; }
+.maikr-nav a:hover { color: var(--text); background: var(--surface2); }
+.maikr-nav a.active { color: var(--green); }
+
+.layout { display: flex; max-width: 1200px; margin: 0 auto; padding: 24px; gap: 24px; }
+.editor-panel { flex: 1; }
+.preview-panel { width: 320px; flex-shrink: 0; }
+
+.section { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+.section h2 { font-size: 16px; font-weight: 600; margin: 0 0 4px 0; }
+.section .subtitle { font-size: 13px; color: var(--text-dim); margin-bottom: 20px; }
+
+.field { margin-bottom: 16px; }
+.field label { display: block; font-size: 12px; font-weight: 500; color: var(--text-dim); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+.field input, .field select, .field textarea {
+  width: 100%; background: var(--surface2); border: 1px solid var(--border); color: var(--text);
+  padding: 10px 14px; border-radius: 8px; font-size: 14px; font-family: inherit; outline: none;
+  transition: border-color 0.2s;
+}
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--green); }
+.field textarea { resize: vertical; min-height: 80px; }
+
+/* Avatar upload */
+.avatar-upload { display: flex; align-items: center; gap: 16px; }
+.avatar-preview {
+  width: 64px; height: 64px; border-radius: 50%; background: var(--surface2);
+  border: 2px solid var(--border); display: flex; align-items: center; justify-content: center;
+  font-size: 28px; overflow: hidden; cursor: pointer; transition: border-color 0.2s;
+}
+.avatar-preview:hover { border-color: var(--green); }
+.avatar-preview img { width: 100%; height: 100%; object-fit: cover; }
+.avatar-actions { display: flex; flex-direction: column; gap: 6px; }
+.avatar-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 6px 12px; border-radius: 6px; font-size: 12px; cursor: pointer; }
+.avatar-btn:hover { border-color: var(--green); }
+
+/* Sliders */
+.slider-group { margin-bottom: 14px; }
+.slider-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.slider-label { font-size: 13px; font-weight: 500; }
+.slider-value { font-size: 12px; color: var(--green); font-weight: 600; min-width: 28px; text-align: right; }
+.slider-track { position: relative; height: 6px; background: var(--surface2); border-radius: 3px; }
+.slider-fill { height: 100%; background: var(--green); border-radius: 3px; transition: width 0.2s; }
+.slider-input { position: absolute; top: -7px; left: 0; width: 100%; height: 20px; opacity: 0; cursor: pointer; }
+.slider-ends { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-dim); margin-top: 4px; }
+
+/* Color pickers */
+.color-row { display: flex; gap: 12px; }
+.color-field { flex: 1; }
+.color-field input[type="color"] { width: 100%; height: 40px; padding: 2px; border-radius: 8px; cursor: pointer; }
+
+/* Preview card */
+.preview-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  padding: 20px; position: sticky; top: 80px;
+}
+.preview-card h3 { font-size: 13px; color: var(--text-dim); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; }
+.agent-preview-card {
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 20px;
+  text-align: center;
+}
+.agent-preview-avatar {
+  width: 56px; height: 56px; border-radius: 50%; margin: 0 auto 12px;
+  display: flex; align-items: center; justify-content: center; font-size: 24px;
+}
+.agent-preview-name { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+.agent-preview-meta { font-size: 12px; color: var(--text-dim); margin-bottom: 12px; }
+.agent-preview-tone {
+  display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 11px;
+  background: rgba(0,192,255,0.1); color: var(--plasma);
+}
+.preview-chat { margin-top: 16px; }
+.preview-msg { padding: 8px 12px; border-radius: 8px; font-size: 12px; margin-bottom: 6px; }
+.preview-msg.agent { background: var(--surface2); }
+.preview-msg.user { background: var(--blue-light); text-align: right; }
+
+/* Save bar */
+.save-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface);
+  border-top: 1px solid var(--border); padding: 12px 24px; display: flex;
+  justify-content: space-between; align-items: center; z-index: 100;
+}
+.save-status { font-size: 13px; color: var(--text-dim); }
+.save-status.saved { color: var(--green); }
+.save-btn { background: var(--green); color: #000; border: none; padding: 10px 24px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; }
+.save-btn:hover { background: var(--plasma); }
+.save-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+@media (max-width: 768px) {
+  .layout { flex-direction: column; padding: 16px; }
+  .preview-panel { width: 100%; order: -1; }
+  .preview-card { position: static; }
+}
+</style>
+</head>
+<body>
+
+<nav class="maikr-nav">
+  <span class="logo">M.ai.K.R</span>
+  <span class="sep">›</span>
+  <a href="/command-center.html">Dashboard</a>
+  <a href="/leads.html">Leads</a>
+  <a href="/analytics.html">Analytics</a>
+  <a href="/agent-studio.html" class="active">Studio</a>
+  <div style="flex:1"></div>
+  <a href="/settings.html">Settings</a>
+  <a href="/api/auth/logout">Log out</a>
+</nav>
+
+<div class="layout">
+  <div class="editor-panel">
+    <!-- Identity -->
+    <div class="section">
+      <h2>🤖 Agent Identity</h2>
+      <p class="subtitle">The basics — what's your agent called and what do they represent?</p>
+      <div class="avatar-upload">
+        <div class="avatar-preview" id="avatarPreview" onclick="document.getElementById('avatarInput').click()">🤖</div>
+        <div class="avatar-actions">
+          <input type="file" id="avatarInput" accept="image/*" style="display:none" onchange="handleAvatar(event)">
+          <button class="avatar-btn" onclick="document.getElementById('avatarInput').click()">📷 Upload Avatar</button>
+          <button class="avatar-btn" onclick="clearAvatar()">✕ Clear</button>
+        </div>
+      </div>
+      <div class="field" style="margin-top:16px;">
+        <label>Agent Name</label>
+        <input type="text" id="agentName" placeholder="e.g. SalesBot, Support Assistant">
+      </div>
+      <div class="field">
+        <label>Business Name</label>
+        <input type="text" id="businessName" placeholder="e.g. Acme Corp">
+      </div>
+      <div class="field">
+        <label>Industry</label>
+        <select id="industry">
+          <option value="">Select industry…</option>
+          <option value="Technology">Technology & Software</option>
+          <option value="Healthcare">Healthcare & Wellness</option>
+          <option value="Finance">Finance & Insurance</option>
+          <option value="E-commerce">E-Commerce & Retail</option>
+          <option value="Education">Education & Training</option>
+          <option value="Real Estate">Real Estate</option>
+          <option value="Home Services">Home Services</option>
+          <option value="Marketing">Marketing & Advertising</option>
+          <option value="Legal">Legal Services</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Personality -->
+    <div class="section">
+      <h2>🎭 Personality Traits</h2>
+      <p class="subtitle">Fine-tune how your agent communicates. Slide to adjust.</p>
+      <div id="sliders"></div>
+    </div>
+
+    <!-- Brand Colors -->
+    <div class="section">
+      <h2>🎨 Brand Colors</h2>
+      <p class="subtitle">Set your agent's visual identity.</p>
+      <div class="color-row">
+        <div class="color-field">
+          <label>Primary Color</label>
+          <input type="color" id="primaryColor" value="#C0A060" oninput="updatePreview()">
+        </div>
+        <div class="color-field">
+          <label>Accent Color</label>
+          <input type="color" id="accentColor" value="#00C0FF" oninput="updatePreview()">
+        </div>
+      </div>
+    </div>
+
+    <!-- Voice & Tone -->
+    <div class="section">
+      <h2>🗣 Voice & Tone</h2>
+      <p class="subtitle">Define how your agent sounds in conversations.</p>
+      <div class="field">
+        <label>Preset Tone</label>
+        <select id="presetTone" onchange="applyPresetTone()">
+          <option value="professional">Professional & Formal</option>
+          <option value="friendly">Friendly & Approachable</option>
+          <option value="technical">Technical & Precise</option>
+          <option value="empathetic">Empathetic & Caring</option>
+          <option value="sales">Sales-Focused & Persuasive</option>
+          <option value="custom">Custom (use sliders above)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Custom Tone Description</label>
+        <textarea id="customTone" placeholder="Describe your agent's voice in a few sentences…"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Preview -->
+  <div class="preview-panel">
+    <div class="preview-card">
+      <h3>Live Preview</h3>
+      <div class="agent-preview-card">
+        <div class="agent-preview-avatar" id="previewAvatar" style="background:var(--green);">🤖</div>
+        <div class="agent-preview-name" id="previewName">Your Agent</div>
+        <div class="agent-preview-meta" id="previewMeta">AI Assistant</div>
+        <span class="agent-preview-tone" id="previewTone">Professional</span>
+      </div>
+      <div class="preview-chat" id="previewChat">
+        <div class="preview-msg agent">Hello! How can I help you today?</div>
+        <div class="preview-msg user">I need help with my account.</div>
+        <div class="preview-msg agent">I'd be happy to assist you with that. Let me look into it right away.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Save bar -->
+<div class="save-bar">
+  <span class="save-status" id="saveStatus">Changes not saved</span>
+  <button class="save-btn" id="saveBtn" onclick="saveAll()">Save Changes</button>
+</div>
+
+<script>
+const API = '/api/agent';
+let agentId = null;
+let agentData = {};
+
+const personalitySliders = [
+  { id: 'professional_casual', label: 'Professional ↔ Casual', left: 'Professional', right: 'Casual' },
+  { id: 'formal_friendly', label: 'Formal ↔ Friendly', left: 'Formal', right: 'Friendly' },
+  { id: 'concise_detailed', label: 'Concise ↔ Detailed', left: 'Concise', right: 'Detailed' },
+  { id: 'serious_humorous', label: 'Serious ↔ Humorous', left: 'Serious', right: 'Humorous' },
+  { id: 'reserved_enthusiastic', label: 'Reserved ↔ Enthusiastic', left: 'Reserved', right: 'Enthusiastic' }
+];
+
+const tonePresets = {
+  professional: { professional_casual: 20, formal_friendly: 25, concise_detailed: 40, serious_humorous: 15, reserved_enthusiastic: 30 },
+  friendly: { professional_casual: 65, formal_friendly: 70, concise_detailed: 50, serious_humorous: 55, reserved_enthusiastic: 70 },
+  technical: { professional_casual: 15, formal_friendly: 20, concise_detailed: 70, serious_humorous: 10, reserved_enthusiastic: 25 },
+  empathetic: { professional_casual: 55, formal_friendly: 75, concise_detailed: 60, serious_humorous: 40, reserved_enthusiastic: 65 },
+  sales: { professional_casual: 45, formal_friendly: 60, concise_detailed: 35, serious_humorous: 50, reserved_enthusiastic: 80 }
+};
+
+function getAgentId() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('agent') || localStorage.getItem('maikr_active_agent') || 'default';
+}
+
+async function init() {
+  agentId = getAgentId();
+  
+  // Build sliders
+  const slidersHtml = personalitySliders.map(s => `
+    <div class="slider-group">
+      <div class="slider-header">
+        <span class="slider-label">${s.label}</span>
+        <span class="slider-value" id="val-${s.id}">50</span>
+      </div>
+      <div class="slider-track">
+        <div class="slider-fill" id="fill-${s.id}" style="width:50%"></div>
+        <input type="range" class="slider-input" id="${s.id}" min="0" max="100" value="50"
+          oninput="updateSlider('${s.id}', this.value)">
+      </div>
+      <div class="slider-ends"><span>${s.left}</span><span>${s.right}</span></div>
+    </div>`).join('');
+  document.getElementById('sliders').innerHTML = slidersHtml;
+  
+  // Load current settings
+  try {
+    const res = await fetch(`${API}/agent-info?agentId=${agentId}`);
+    const data = await res.json();
+    if (data.agentName) {
+      document.getElementById('agentName').value = data.agentName;
+      document.getElementById('businessName').value = data.businessName || '';
+      document.getElementById('industry').value = data.industry || '';
+      updatePreview();
+    }
+  } catch (err) { console.error('Load error:', err); }
+}
+
+function updateSlider(id, value) {
+  document.getElementById(`fill-${id}`).style.width = value + '%';
+  document.getElementById(`val-${id}`).textContent = value;
+  document.getElementById('saveStatus').textContent = 'Changes not saved';
+  document.getElementById('saveStatus').className = 'save-status';
+}
+
+function applyPresetTone() {
+  const preset = document.getElementById('presetTone').value;
+  if (preset === 'custom') return;
+  const values = tonePresets[preset];
+  if (!values) return;
+  Object.keys(values).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.value = values[id];
+      updateSlider(id, values[id]);
+    }
+  });
+}
+
+function handleAvatar(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const preview = document.getElementById('avatarPreview');
+    preview.innerHTML = `<img src="${e.target.result}" alt="Avatar">`;
+    updatePreview();
+  };
+  reader.readAsDataURL(file);
+}
+
+function clearAvatar() {
+  document.getElementById('avatarPreview').innerHTML = '🤖';
+  document.getElementById('avatarInput').value = '';
+  updatePreview();
+}
+
+function updatePreview() {
+  const name = document.getElementById('agentName').value || 'Your Agent';
+  const business = document.getElementById('businessName').value;
+  const primary = document.getElementById('primaryColor').value;
+  const accent = document.getElementById('accentColor').value;
+  
+  document.getElementById('previewName').textContent = name;
+  document.getElementById('previewMeta').textContent = business || 'AI Assistant';
+  document.getElementById('previewAvatar').style.background = primary;
+  document.getElementById('previewTone').style.color = accent;
+  document.getElementById('previewTone').style.background = accent + '20';
+  
+  document.getElementById('saveStatus').textContent = 'Changes not saved';
+  document.getElementById('saveStatus').className = 'save-status';
+}
+
+// Attach input listeners for preview
+['agentName', 'businessName', 'primaryColor', 'accentColor'].forEach(id => {
+  document.getElementById(id)?.addEventListener('input', updatePreview);
+});
+
+async function saveAll() {
+  const btn = document.getElementById('saveBtn');
+  const status = document.getElementById('saveStatus');
+  btn.disabled = true;
+  status.textContent = 'Saving…';
+  
+  const personality = {};
+  personalitySliders.forEach(s => {
+    personality[s.id] = parseInt(document.getElementById(s.id).value);
+  });
+  
+  const data = {
+    agentName: document.getElementById('agentName').value,
+    businessName: document.getElementById('businessName').value,
+    industry: document.getElementById('industry').value,
+    personality,
+    primaryColor: document.getElementById('primaryColor').value,
+    accentColor: document.getElementById('accentColor').value,
+    presetTone: document.getElementById('presetTone').value,
+    customTone: document.getElementById('customTone').value
+  };
+  
+  try {
+    const res = await fetch(`${API}/${agentId}/appearance`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    const result = await res.json();
+    if (result.success) {
+      status.textContent = '✓ Saved!';
+      status.className = 'save-status saved';
+    } else {
+      status.textContent = 'Save failed: ' + (result.error || 'Unknown error');
+    }
+  } catch (err) {
+    status.textContent = 'Save failed. Please try again.';
+  }
+  
+  btn.disabled = false;
+}
+
+// Auto-save on slider change (debounced)
+let saveTimeout;
+document.querySelectorAll('.slider-input').forEach(el => {
+  el.addEventListener('change', () => {
+    clearTimeout(saveTimeout);
+    saveTimeout = setTimeout(saveAll, 1500);
+  });
+});
+
+init();
+</script>
+</body>
+</html>

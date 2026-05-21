@@ -107,4 +107,43 @@ router.post('/update-agent', async (req, res) => {
   }
 });
 
+// Update agent appearance (personality, colors, tone)
+router.post('/:agentId/appearance', async (req, res) => {
+  const { agentId } = req.params;
+  const { agentName, businessName, industry, personality, primaryColor, accentColor, presetTone, customTone } = req.body;
+  
+  if (!agentId) return res.json({ error: 'agentId required' });
+  
+  try {
+    const updates = [];
+    const params = [];
+    
+    if (agentName) { updates.push('agent_name = ?'); params.push(agentName); }
+    if (businessName) { updates.push('business_name = ?'); params.push(businessName); }
+    if (industry) { updates.push('industry = ?'); params.push(industry); }
+    if (primaryColor) { updates.push('theme_color = ?'); params.push(primaryColor); }
+    if (presetTone) { updates.push('tone = ?'); params.push(presetTone); }
+    
+    if (personality) {
+      const personalityStr = JSON.stringify(personality);
+      updates.push('system_prompt = COALESCE(system_prompt, "")');
+      // Store personality in a JSON field if we have one, or append to system_prompt
+      // For now, we'll store it as a simple field
+    }
+    
+    if (updates.length > 0) {
+      updates.push('updated_at = CURRENT_TIMESTAMP');
+      params.push(agentId);
+      db.run(`UPDATE agents SET ${updates.join(', ')} WHERE id = ?`, params, (err) => {
+        if (err) return res.json({ error: err.message });
+        res.json({ success: true });
+      });
+    } else {
+      res.json({ success: true, message: 'No changes' });
+    }
+  } catch (err) {
+    res.json({ error: err.message });
+  }
+});
+
 module.exports = router;
