@@ -86,8 +86,11 @@
 - `backend/routes/channels.js` — Added /webhooks/event-status endpoint
 
 ### Task 9: Mobile Responsiveness
-**Status:** 🔲 Not Started (partially addressed in Tasks 2, 4, 5, 7)
-**Notes:** Each new page includes mobile-responsive styles. A full audit pass is still needed but the most critical pages (chat, analytics, studio, onboarding) are already mobile-friendly.
+**Status:** ✅ Complete
+**Started:** 2026-05-21 05:25 UTC
+**Completed:** 2026-05-21 05:35 UTC
+**Commit:** c3e530a
+**Notes:** Audited all 14 frontend pages. Added mobile breakpoints to build-step4, mcp, and settings (the 3 missing them). All pages now have viewport + media queries.
 
 ---
 
@@ -103,8 +106,8 @@
 | 6 | Analytics Dashboard | ✅ | 2d40207 |
 | 7 | Personality Editor | ✅ | 3648cfd |
 | 8 | Webhook UI | ✅ | d091220 |
-| 9 | Mobile Polish | 🔲 Partial | — |
+| 9 | Mobile Polish | ✅ | c3e530a |
 
-**Total: 8/9 complete, 1 partial**
+**Total: 9/9 complete ✅**
 **Time: ~1.5 hours of focused work**
 **Commits: 7 commits, all pushed to GitHub**
