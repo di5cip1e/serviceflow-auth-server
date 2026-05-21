@@ -13,17 +13,18 @@
 
 ## Critical Runtime Info
 - **Model:** openrouter/owl-alpha (free, 1M+ context, set 2026-05-13)
-- **Current time:** Wednesday May 20, 2026 04:00 UTC
+- **Current time:** Thursday May 21, 2026 18:41 UTC
 - **Context:** ~50k tokens — healthy
 - **MEMORY.md target:** Keep under 50KB
 - **Heartbeat:** every 2 hours
 - **PM2:** maikr-backend + ollama-router running, systemd-enabled for reboot persistence
 
 ## Active Projects (Current)
-- **M.ai.K.R** (agent-saas/): ✅ Live at maikr.pro — Phases 1-4 complete + Phase 6 (optimization) + Phase 7 (command center) + Phase 8 (consumption billing). Auth & onboarding system complete (May 14). All pages protected, session-based auth, rate limiting, checkout integration. 9 commits.
+- **M.ai.K.R** (agent-saas/): ✅ Live at maikr.pro — Phases 1-4 + Phase 6 (optimization) + Phase 7 (command center) + Phase 8 (consumption billing) + Phase B (UX Overhaul). Auth & onboarding system complete (May 14). All pages protected, session-based auth, rate limiting, checkout integration.
   - **May 15-16:** Test suite (350 tests, 100% pass), 5 beta accounts, analytics, Stripe best practices, Chart.js dashboards, email drip campaign, revenue tracking
   - **May 16:** Resend email integrated (replaced Mailgun), Telegram + omnichannel DB mapping, password reset flow, webhook retry + idempotency, usage billing enforcement
-  - **May 17:** Complete website redesign — new dark premium design system based on Avant Garde brand images. All 20+ pages updated. New palette: amber/gold accents, electric blue CTAs, Orbitron + Inter fonts. `css/dark-premium.css` (22KB design system). Subagent lesson: owl-alpha fails on file-write tasks, do directly in main session.
+  - **May 17:** Complete website redesign — new dark premium design system based on Avant Garde brand images. All 20+ pages updated. New palette: amber/gold accents, electric blue CTAs, Orbitron + Inter fonts. `css/dark-premium.css` (22KB design system).
+  - **May 21:** Phase B UX Overhaul complete — Double-Entry Dashboard (config + live sandbox), Blueprint Marketplace (9 industry templates), Workflow Canvas (linear + node views), Guardrail Matrix (7 checkbox boundaries). Backend: /api/agent/:id/config, /api/blueprints, sandbox chat mode. guardrails column + blueprints table added. Commit: be59789.
 - **Agent Builder Dashboard**: Running at http://187.77.31.252:3000/wizard
 - **Kingdom Cards**: ~70% — Phaser 3 battle engine works, Fantasy/Medieval theme
 - **Ironveil**: Ready for Windows import (since March 23)
@@ -102,8 +103,8 @@
 - Workspace organization: Clean structure maintained
 - Forgeai.sbs: Briefly down (000) then recovered to 301 (normal)
 
-*Last consolidated: 2026-05-21 04:12 UTC*
-*Previous: 2026-05-20 04:00 UTC*
+*Last consolidated: 2026-05-21 18:11 UTC*
+*Previous: 2026-05-21 04:12 UTC*
 
 ## May 21, 2026 — Major Feature Sprint (9 tasks, 1.5 hours)
 
@@ -406,3 +407,58 @@
 - **Langfuse**: live at us.cloud.langfuse.com
 - **SSL**: Let's Encrypt cert for maikr.pro, expires Aug 7 2026
 - **Test agent**: TestBot4 spawned (agent:test-company-4-mp1zl4e6:main), chat API verified working
+
+## May 21, 2026 — Product Blueprint Received
+
+Derek provided the definitive product blueprint for maikr.pro. Full doc: `agent-saas/docs/BLUEPRINT.md`
+
+**Key strategic direction:**
+- **UX:** Double-entry dashboard (config + live sandbox), blueprint marketplace, node-less workflow canvas
+- **Core:** One-click knowledge ingestion, guardrail matrix (checkboxes), agent-to-agent delegation, one-click omni-channel
+- **Competitive moat:** Cost transparency + spending caps, self-correction/loop detection, white-label/reseller tier
+- **Monetization:** Freemium (1 agent, low tokens) → Growth (SaaS, multi-channel, sub-agents) → Value markup (usage premium or BYOK + platform fee)
+- **Revenue vectors:** Subscriptions, premium templates, usage markup, white-label licensing, BYOK platform fees
+
+**Implementation phases:**
+- Phase A: Foundation (✅ complete)
+- Phase B: UX Overhaul (✅ complete — May 21)
+- Phase C: Competitive Moat (next — see below)
+- Phase D: Scale (white-label, premium templates, BYOK, omni-channel widgets)
+
+## Phase C — Competitive Moat (Next)
+
+From BLUEPRINT.md. 4 features to build:
+
+### C.1 — One-Click Knowledge Ingestion
+- URL scraper → chunking → embedding → vector store (already have vectorStore.js + embeddingService.js)
+- PDF upload → text extract → chunk → embed
+- Google Drive folder sync (OAuth)
+- UI: Knowledge tab in dashboard (already scaffolded, needs backend wiring)
+- DB: documents table (check if exists), document_chunks table
+
+### C.2 — Agent-to-Agent Delegation
+- Manager agent spawns/routes to specialized sub-agents
+- Visual hierarchy showing agent relationships in swarm.html
+- Backend: sub-agent registry, delegation routing in swarm.js
+- UI: Tree view in swarm.html showing manager → sub-agents
+
+### C.3 — Self-Correction & Loop Detection
+- Detect when agent is stuck in logic loop or hallucinating
+- Auto-intervention: reset context OR flag for human review
+- Backend: loop detection in chat.js (repeated similar responses, circular reasoning)
+- UI: Alert banner in observe.html, auto-pause toggle
+
+### C.4 — Usage Analytics Dashboard
+- Per-agent token usage, cost tracking, spending caps
+- Already have creditManager.js + creditRoutes.js — extend with analytics
+- UI: Enhanced analytics.html with per-agent breakdown, cap settings
+- Backend: spending cap enforcement in chat.js (block at cap)
+
+**Files to check before starting:**
+- `backend/services/vectorStore.js` — RAG already wired in chat.js
+- `backend/services/embeddingService.js` — embeddings available
+- `backend/routes/swarm.js` — delegation routing
+- `backend/routes/chat.js` — loop detection + cap enforcement
+- `frontend/swarm.html` — agent hierarchy UI
+- `frontend/analytics.html` — usage analytics UI
+- `frontend/observe.html` — self-correction alerts
