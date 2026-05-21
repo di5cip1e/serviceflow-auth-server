@@ -75,6 +75,13 @@
     .danger-card h2 {
       color: #ff6b6b;
     }
+
+    @media (max-width: 768px) {
+      .settings-grid { grid-template-columns: 1fr !important; }
+      .settings-form .form-row { flex-direction: column; }
+      .btn-group { flex-direction: column; }
+      .btn-group .btn { width: 100%; text-align: center; }
+    }
   </style>
 </head>
 <body>
