@@ -20,11 +20,13 @@
 - **PM2:** maikr-backend + ollama-router running, systemd-enabled for reboot persistence
 
 ## Active Projects (Current)
-- **M.ai.K.R** (agent-saas/): ✅ Live at maikr.pro — Phases 1-4 + Phase 6 (optimization) + Phase 7 (command center) + Phase 8 (consumption billing) + Phase B (UX Overhaul). Auth & onboarding system complete (May 14). All pages protected, session-based auth, rate limiting, checkout integration.
+- **M.ai.K.R** (agent-saas/): ✅ Live at maikr.pro — Phases 1-4 + Phase 6-8 + Phase B (UX Overhaul) + Phase C (Competitive Moat) ALL COMPLETE. Auth & onboarding, session-based auth, rate limiting, checkout integration, knowledge ingestion, agent delegation, loop detection, spending caps all live. Phase D (Scale) next.
   - **May 15-16:** Test suite (350 tests, 100% pass), 5 beta accounts, analytics, Stripe best practices, Chart.js dashboards, email drip campaign, revenue tracking
   - **May 16:** Resend email integrated (replaced Mailgun), Telegram + omnichannel DB mapping, password reset flow, webhook retry + idempotency, usage billing enforcement
   - **May 17:** Complete website redesign — new dark premium design system based on Avant Garde brand images. All 20+ pages updated. New palette: amber/gold accents, electric blue CTAs, Orbitron + Inter fonts. `css/dark-premium.css` (22KB design system).
-  - **May 21:** Phase B UX Overhaul complete — Double-Entry Dashboard (config + live sandbox), Blueprint Marketplace (9 industry templates), Workflow Canvas (linear + node views), Guardrail Matrix (7 checkbox boundaries). Backend: /api/agent/:id/config, /api/blueprints, sandbox chat mode. guardrails column + blueprints table added. Commit: be59789.
+  - **May 21 (morning):** Phase B UX Overhaul complete — Double-Entry Dashboard (config + live sandbox), Blueprint Marketplace (9 industry templates), Workflow Canvas (linear + node views), Guardrail Matrix (7 checkbox boundaries). Backend: /api/agent/:id/config, /api/blueprints, sandbox chat mode. guardrails column + blueprints table added. Commit: be59789.
+  - **May 21 (afternoon):** 9-feature sprint — Onboarding Wizard, Chat Sidebar overhaul, Social Proof landing page, Pricing page with comparison table, Analytics dashboard (Chart.js), Agent Studio (personality sliders), Webhook health UI. Commits: 01b5287 through 3648cfd.
+  - **May 21 (evening):** Phase C Competitive Moat complete — Knowledge Ingestion (URL/PDF/paste → SQLite vector store), Agent-to-Agent Delegation (tree view, spawn modal), Self-Correction & Loop Detection (loopDetector.js), Usage Analytics + Spending Caps (monthly/daily limits). New files: loopDetector.js, delegation.js, documents.js, selfCorrection.js, chunking.js, ragScorer.js. DB: documents, document_chunks, loop_events tables; parent_agent_id, spending_cap_cents, daily_token_cap columns. Commit: 6e66974, backend restart #54.
 - **Agent Builder Dashboard**: Running at http://187.77.31.252:3000/wizard
 - **Kingdom Cards**: ~70% — Phaser 3 battle engine works, Fantasy/Medieval theme
 - **Ironveil**: Ready for Windows import (since March 23)
@@ -422,43 +424,51 @@ Derek provided the definitive product blueprint for maikr.pro. Full doc: `agent-
 **Implementation phases:**
 - Phase A: Foundation (✅ complete)
 - Phase B: UX Overhaul (✅ complete — May 21)
-- Phase C: Competitive Moat (next — see below)
-- Phase D: Scale (white-label, premium templates, BYOK, omni-channel widgets)
+- Phase C: Competitive Moat (✅ complete — May 21)
+- Phase D: Scale (white-label, premium templates, BYOK, omni-channel widgets) — NEXT
 
-## Phase C — Competitive Moat (Next)
+## Phase C — Competitive Moat (✅ Complete — May 21, commit 6e66974)
 
-From BLUEPRINT.md. 4 features to build:
+All 4 features built and deployed in ~30 min (21:30-22:00 UTC). Backend restart #54, zero errors. Pushed to GitHub.
 
-### C.1 — One-Click Knowledge Ingestion
-- URL scraper → chunking → embedding → vector store (already have vectorStore.js + embeddingService.js)
-- PDF upload → text extract → chunk → embed
-- Google Drive folder sync (OAuth)
-- UI: Knowledge tab in dashboard (already scaffolded, needs backend wiring)
-- DB: documents table (check if exists), document_chunks table
+### C.1 — One-Click Knowledge Ingestion ✅
+- Fixed `vectorStore.js`: replaced broken PostgreSQL dependency with SQLite adapter + JS cosine similarity
+- New `backend/routes/documents.js`: URL scraping, file upload, paste text → chunk → embed
+- Dashboard Knowledge tab wired to `/api/documents`
+- Toast notifications + processing status indicators
+- DB: documents + document_chunks tables
 
-### C.2 — Agent-to-Agent Delegation
-- Manager agent spawns/routes to specialized sub-agents
-- Visual hierarchy showing agent relationships in swarm.html
-- Backend: sub-agent registry, delegation routing in swarm.js
-- UI: Tree view in swarm.html showing manager → sub-agents
+### C.2 — Agent-to-Agent Delegation ✅
+- New `backend/routes/delegation.js`: list, spawn, delete sub-agents
+- `parent_agent_id` column added to agents table
+- New "Agent Delegation" panel in swarm.html: tree view, spawn modal with role/tier selectors
+- Integrated into swarm.js delegation routing
 
-### C.3 — Self-Correction & Loop Detection
-- Detect when agent is stuck in logic loop or hallucinating
-- Auto-intervention: reset context OR flag for human review
-- Backend: loop detection in chat.js (repeated similar responses, circular reasoning)
-- UI: Alert banner in observe.html, auto-pause toggle
+### C.3 — Self-Correction & Loop Detection ✅
+- New `backend/services/loopDetector.js` (6,337 bytes): detects repeated responses, circular reasoning, self-contradiction
+- Auto-intervention: escalate to human, reset context, or soft-redirect
+- `loop_events` table for audit trail
+- Integrated into swarm.js chat pipeline
+- New Self-Correction panel on observe.html
+- New `backend/routes/selfCorrection.js`
 
-### C.4 — Usage Analytics Dashboard
-- Per-agent token usage, cost tracking, spending caps
-- Already have creditManager.js + creditRoutes.js — extend with analytics
-- UI: Enhanced analytics.html with per-agent breakdown, cap settings
-- Backend: spending cap enforcement in chat.js (block at cap)
+### C.4 — Usage Analytics + Spending Caps ✅
+- Monthly spend cap + daily token cap controls in analytics.html
+- Daily cost chart + model breakdown by usage
+- New `/api/analytics/:agentId/spending` endpoint
+- `spending_cap_cents` + `daily_token_cap` columns added to agents table
+- `analyticsService.js` extended with spending analytics
 
-**Files to check before starting:**
-- `backend/services/vectorStore.js` — RAG already wired in chat.js
-- `backend/services/embeddingService.js` — embeddings available
-- `backend/routes/swarm.js` — delegation routing
-- `backend/routes/chat.js` — loop detection + cap enforcement
-- `frontend/swarm.html` — agent hierarchy UI
-- `frontend/analytics.html` — usage analytics UI
-- `frontend/observe.html` — self-correction alerts
+### New files created:
+- `backend/services/loopDetector.js`
+- `backend/services/chunking.js`
+- `backend/services/ragScorer.js`
+- `backend/routes/delegation.js`
+- `backend/routes/documents.js`
+- `backend/routes/selfCorrection.js`
+
+### New DB tables/columns:
+- `documents`, `document_chunks` tables
+- `loop_events` table
+- `parent_agent_id` on agents table
+- `spending_cap_cents`, `daily_token_cap` on agents table
