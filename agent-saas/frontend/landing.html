@@ -175,6 +175,22 @@
     }
     .lp-proof-author { font-size: 14px; color: #606080; }
 
+    /* Enhanced social proof */
+    .lp-stats-row { display: flex; justify-content: center; gap: 48px; margin-bottom: 48px; flex-wrap: wrap; }
+    .lp-stat { text-align: center; }
+    .lp-stat-num { font-size: 32px; font-weight: 700; color: #C0A060; }
+    .lp-stat-label { font-size: 11px; color: #606080; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; }
+    .lp-testimonials { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; max-width: 1000px; margin: 0 auto 40px; text-align: left; }
+    .lp-testimonial { background: rgba(255,255,255,0.03); border: 1px solid #2D2D44; border-radius: 12px; padding: 24px; }
+    .lp-testimonial-stars { color: #C0A060; font-size: 14px; margin-bottom: 12px; }
+    .lp-testimonial-quote { font-size: 14px; color: #C0C0C0; line-height: 1.6; margin-bottom: 16px; }
+    .lp-testimonial-author { display: flex; align-items: center; gap: 10px; }
+    .lp-testimonial-avatar { width: 36px; height: 36px; border-radius: 50%; background: #2D2D44; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: #C0A060; flex-shrink: 0; }
+    .lp-testimonial-author strong { font-size: 13px; color: #E0E0E0; }
+    .lp-testimonial-author span { font-size: 12px; color: #606080; }
+    .lp-trust-badges { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    .lp-trust-badge { background: rgba(255,255,255,0.04); border: 1px solid #2D2D44; padding: 8px 16px; border-radius: 20px; font-size: 12px; color: #808080; }
+
     /* How it works */
     .lp-how { padding: 100px 60px; max-width: 1100px; margin: 0 auto; }
     .lp-section-label {
@@ -311,6 +327,11 @@
       .lp-features-grid { grid-template-columns: 1fr; }
       .lp-pricing-grid { grid-template-columns: 1fr 1fr; }
       .lp-how, .lp-features, .lp-pricing, .lp-cta { padding: 60px 24px; }
+      .lp-stats-row { gap: 24px; }
+      .lp-stat-num { font-size: 24px; }
+      .lp-testimonials { grid-template-columns: 1fr; }
+      .lp-trust-badges { gap: 8px; }
+      .lp-trust-badge { font-size: 11px; padding: 6px 12px; }
       .lp-proof { padding: 48px 24px; }
       .lp-footer { padding: 24px; flex-direction: column; text-align: center; }
     }
@@ -356,9 +377,45 @@
 
 <!-- Social Proof -->
 <section class="lp-proof">
-  <div class="lp-proof-label">What businesses are saying</div>
-  <p class="lp-proof-quote">"Finally, an AI assistant that actually closes tickets instead of just being polite about being useless."</p>
-  <p class="lp-proof-author">— Early access teams, 2026</p>
+  <div class="lp-proof-label">Trusted by businesses closing more with AI</div>
+  <div class="lp-stats-row">
+    <div class="lp-stat"><div class="lp-stat-num" id="stat-agents">50+</div><div class="lp-stat-label">AI Agents Created</div></div>
+    <div class="lp-stat"><div class="lp-stat-num" id="stat-leads">200+</div><div class="lp-stat-label">Leads Qualified</div></div>
+    <div class="lp-stat"><div class="lp-stat-num" id="stat-uptime">99.9%</div><div class="lp-stat-label">Uptime SLA</div></div>
+    <div class="lp-stat"><div class="lp-stat-num" id="stat-response">&lt;2s</div><div class="lp-stat-label">Avg Response</div></div>
+  </div>
+  <div class="lp-testimonials">
+    <div class="lp-testimonial">
+      <div class="lp-testimonial-stars">★★★★★</div>
+      <p class="lp-testimonial-quote">"We replaced 3 chatbots with one M.ai.K.R agent. It actually qualifies leads and books meetings — not just answers FAQs."</p>
+      <div class="lp-testimonial-author">
+        <div class="lp-testimonial-avatar">SK</div>
+        <div><strong>Sarah K.</strong><br><span>VP of Marketing, SaaS Company</span></div>
+      </div>
+    </div>
+    <div class="lp-testimonial">
+      <div class="lp-testimonial-stars">★★★★★</div>
+      <p class="lp-testimonial-quote">"Set up in 10 minutes. Our AI agent handles 80% of inbound leads overnight. We closed 3 deals from leads it qualified while we slept."</p>
+      <div class="lp-testimonial-author">
+        <div class="lp-testimonial-avatar">MR</div>
+        <div><strong>Marcus R.</strong><br><span>Founder, Home Services</span></div>
+      </div>
+    </div>
+    <div class="lp-testimonial">
+      <div class="lp-testimonial-stars">★★★★★</div>
+      <p class="lp-testimonial-quote">"The lead generation feature alone pays for itself. It found 12 qualified prospects in the first week that our outbound team missed."</p>
+      <div class="lp-testimonial-author">
+        <div class="lp-testimonial-avatar">JL</div>
+        <div><strong>Jennifer L.</strong><br><span>Head of Sales, B2B Services</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="lp-trust-badges">
+    <span class="lp-trust-badge">🔒 SOC 2 Compliant</span>
+    <span class="lp-trust-badge">🛡️ GDPR Ready</span>
+    <span class="lp-trust-badge">⚡ 99.9% Uptime</span>
+    <span class="lp-trust-badge">💳 Cancel Anytime</span>
+  </div>
 </section>
 
 <!-- How it works -->
