@@ -24,7 +24,7 @@ These skills are so lightweight/multi-use they load in every session:
 **Description:** Building and operating the M.ai.K.R agent SaaS platform
 **Active by default**
 
-Skills (25):
+Skills (28):
 - ai-agent-builder
 - analytics
 - automation-workflows
@@ -50,6 +50,9 @@ Skills (25):
 - openclaw-money-maker
 - seo-meta-optimizer
 - accessibility-check
+- lead-generation
+- ai-lead-generation-prospect-finder
+- apify-lead-generation
 
 ---
 
@@ -123,6 +126,9 @@ Skills: (none beyond CORE)
 | openclaw-money-maker | agent-builder |
 | seo-meta-optimizer | agent-builder |
 | accessibility-check | agent-builder |
+| lead-generation | agent-builder |
+| ai-lead-generation-prospect-finder | agent-builder |
+| apify-lead-generation | agent-builder |
 | business-doc-generator | research |
 | best-image-generation | creative |
 | email-automation | marketing |

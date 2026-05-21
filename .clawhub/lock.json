@@ -112,6 +112,18 @@
     "seo-meta-optimizer": {
       "version": "1.0.0",
       "installedAt": 1779283062196
+    },
+    "lead-generation": {
+      "version": "2.2.0",
+      "installedAt": 1779307606484
+    },
+    "ai-lead-generation-prospect-finder": {
+      "version": "1.0.0",
+      "installedAt": 1779307609231
+    },
+    "apify-lead-generation": {
+      "version": "1.0.1",
+      "installedAt": 1779307611752
     }
   }
 }
