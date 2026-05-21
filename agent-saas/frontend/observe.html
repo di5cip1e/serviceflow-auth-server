@@ -145,10 +145,20 @@
 .maikr-status .dot { width: 7px; height: 7px; background: #C0A060; border-radius: 50%; box-shadow: 0 0 5px #C0A060; }
 </style>
 
-</head>
+  <style>
+    .skip-link {
+      position: absolute; top: -100px; left: 0; z-index: 9999;
+      padding: 12px 24px; background: #C0A060; color: #0A0A0F;
+      font-weight: 700; font-size: 14px; text-decoration: none;
+      border-radius: 0 0 8px 0; transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; }
+</style>
+  </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<nav class="maikr-nav">
+<header role="banner"><nav class="maikr-nav">
   <a href="/" class="maikr-logo">M<span>.ai</span><span>.K.R</span></a>
   <div class="maikr-links">
     <a href="/command-center.html">Dashboard</a>
@@ -161,7 +171,7 @@
   <div class="maikr-spacer"></div>
   <div class="maikr-status"><span class="dot"></span>Online</div>
   <form action="/api/auth/logout" method="POST" style="display:inline"><button type="submit" class="logout-link">Log out</button></form>
-</nav>
+</nav></header>
 
 <nav>
   <span class="logo">M.ai.K.R</span>
@@ -179,7 +189,7 @@
 </nav>
 
 <div class="container">
-  <div class="page-header">
+  <main id="main-content"><div class="page-header">
     <h1>Agent Observability</h1>
     <p>See exactly how your agent thinks — traces, docs, scores, and costs.</p>
   </div>
@@ -385,5 +395,6 @@ function formatNum(n) {
 }
 function truncate(s, len) { return s && s.length > len ? s.slice(0, len) + '…' : s || '—'; }
 </script>
+</main>
 </body>
 </html>

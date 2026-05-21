@@ -246,9 +246,19 @@
     }
 </style>
 
-</head>
+  <style>
+    .skip-link {
+      position: absolute; top: -100px; left: 0; z-index: 9999;
+      padding: 12px 24px; background: #C0A060; color: #0A0A0F;
+      font-weight: 700; font-size: 14px; text-decoration: none;
+      border-radius: 0 0 8px 0; transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; }
+</style>
+  </head>
 <body>
-<nav class="maikr-nav">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+<header role="banner"><nav class="maikr-nav">
   <a href="/" class="maikr-logo">M<span>.ai</span><span>.K.R</span></a>
   <div class="maikr-links">
     <a href="/build-step1.html">Builder</a>
@@ -259,7 +269,7 @@
   <div class="maikr-spacer"></div>
   <div class="maikr-status"><span class="dot"></span>Online</div>
   <form action="/api/auth/logout" method="POST" style="display:inline"><button type="submit" class="logout-link">Log out</button></form>
-</nav>
+</nav></header>
 
 
 
@@ -275,7 +285,7 @@
   </div>
 </nav>
 
-<main>
+<main id="main-content">
   <h1>MCP Tool Servers</h1>
   <p class="subtitle">Connect AI models to GitHub, Notion, Slack, AWS, and more — with full tool injection into your agent swarm.</p>
 

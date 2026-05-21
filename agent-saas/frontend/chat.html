@@ -180,8 +180,18 @@ body { background: var(--bg); color: --text; font-family: 'Inter', -apple-system
   .quick-replies { overflow-x: auto; flex-wrap: nowrap; }
 }
 </style>
-</head>
+  <style>
+    .skip-link {
+      position: absolute; top: -100px; left: 0; z-index: 9999;
+      padding: 12px 24px; background: #C0A060; color: #0A0A0F;
+      font-weight: 700; font-size: 14px; text-decoration: none;
+      border-radius: 0 0 8px 0; transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; }
+</style>
+  </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <div class="app-layout">
   <!-- Sidebar -->
@@ -219,7 +229,7 @@ body { background: var(--bg); color: --text; font-family: 'Inter', -apple-system
   </aside>
 
   <!-- Chat Main -->
-  <main class="chat-main">
+  <main id="main-content" class="chat-main">
     <!-- Header -->
     <header class="chat-header">
       <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>

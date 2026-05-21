@@ -340,11 +340,21 @@
       .lp-hero-actions { flex-direction: column; }
     }
   </style>
-</head>
+  <style>
+    .skip-link {
+      position: absolute; top: -100px; left: 0; z-index: 9999;
+      padding: 12px 24px; background: #C0A060; color: #0A0A0F;
+      font-weight: 700; font-size: 14px; text-decoration: none;
+      border-radius: 0 0 8px 0; transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; }
+</style>
+  </head>
 <body>
+  <a href="#main" class="skip-link">Skip to main content</a>
 
 <!-- Nav -->
-<nav class="lp-nav" aria-label="Main navigation">
+<header role="banner"><nav class="lp-nav" aria-label="Main navigation">
   <a href="/" class="lp-nav-logo">M<span>.ai</span><span style="color:#fff">.K.R</span></a>
   <div class="lp-nav-links">
     <a href="#how">How it works</a>
@@ -353,7 +363,7 @@
     <a href="/login.html" class="lp-nav-login">Login</a>
     <a href="/register.html" class="lp-nav-cta">Sign Up</a>
   </div>
-</nav>
+</nav></header>
 
 <a href="#main" class="skip-link">Skip to content</a>
 <main id="main">
@@ -419,7 +429,7 @@
 </section>
 
 <!-- How it works -->
-<section class="lp-how" id="how">
+<section class="lp-how" id="how" role="region" aria-label="How it works">
   <div class="lp-section-label">How it works</div>
   <h2 class="lp-section-title">From signup to AI team<br>in under 5 minutes</h2>
   <p class="lp-section-sub">No engineers. No onboarding calls. Just tell us what you need.</p>
@@ -443,7 +453,7 @@
 </section>
 
 <!-- Features -->
-<section class="lp-features" id="features">
+<section class="lp-features" id="features" role="region" aria-label="Features">
   <div class="lp-features-inner">
     <div class="lp-section-label">Agent capabilities</div>
     <h2 class="lp-section-title">Built for real business workflows</h2>
@@ -477,7 +487,7 @@
 </section>
 
 <!-- Pricing -->
-<section class="lp-pricing" id="pricing">
+<section class="lp-pricing" id="pricing" role="region" aria-label="Pricing plans">
   <div class="lp-section-label">Simple pricing</div>
   <h2 class="lp-section-title">Pick your plan</h2>
   <p class="lp-section-sub">All plans include the agent builder, chat interface, and escalation system.</p>

@@ -355,8 +355,18 @@
     .refresh-btn:hover { background: #475569; }
   </style>
   <link rel="stylesheet" href="css/maikr.css">
-</head>
+  <style>
+    .skip-link {
+      position: absolute; top: -100px; left: 0; z-index: 9999;
+      padding: 12px 24px; background: #C0A060; color: #0A0A0F;
+      font-weight: 700; font-size: 14px; text-decoration: none;
+      border-radius: 0 0 8px 0; transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; }
+</style>
+  </head>
 <body class="maikr-dark">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <!-- Login screen -->
 <div id="loginScreen" style="display:flex;align-items:center;justify-content:center;min-height:100vh;background:#0f172a;">
@@ -401,7 +411,7 @@
 </aside>
 
 <!-- Main content -->
-<main class="main">
+<main id="main-content" class="main">
   <!-- Overview tab -->
   <div id="tab-overview" class="tab-content active">
 

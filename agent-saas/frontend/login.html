@@ -88,15 +88,25 @@
     .auth-footer a { color: #C0A060; font-weight: 600; }
     .auth-footer a:hover { color: #fff; }
   </style>
-</head>
+  <style>
+    .skip-link {
+      position: absolute; top: -100px; left: 0; z-index: 9999;
+      padding: 12px 24px; background: #C0A060; color: #0A0A0F;
+      font-weight: 700; font-size: 14px; text-decoration: none;
+      border-radius: 0 0 8px 0; transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; }
+</style>
+  </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<nav class="auth-nav">
+<header role="banner"><nav class="auth-nav">
   <a href="/" class="auth-nav-logo">M<span>.ai</span><span>.K.R</span></a>
   <div class="auth-nav-links"><a href="/">Home</a></div>
-</nav>
+</nav></header>
 
-<div class="auth-page">
+<main id="main-content"><div class="auth-page">
   <div class="auth-card">
     <h1>Welcome back to M.ai.K.R</h1>
     <p class="subtitle">Log in to access your agent dashboard.</p>
@@ -167,5 +177,6 @@
     .catch(function() { formError.textContent = 'Something went wrong.'; formError.classList.add('visible'); submitBtn.disabled = false; submitBtn.textContent = 'Log In'; });
   });
 </script>
+</main>
 </body>
 </html>

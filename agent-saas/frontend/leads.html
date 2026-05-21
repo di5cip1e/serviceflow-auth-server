@@ -131,10 +131,20 @@ body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-ser
   .filter-tabs { flex-direction: column; align-items: stretch; }
 }
 </style>
-</head>
+  <style>
+    .skip-link {
+      position: absolute; top: -100px; left: 0; z-index: 9999;
+      padding: 12px 24px; background: #C0A060; color: #0A0A0F;
+      font-weight: 700; font-size: 14px; text-decoration: none;
+      border-radius: 0 0 8px 0; transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; }
+</style>
+  </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<nav class="maikr-nav">
+<header role="banner"><nav class="maikr-nav">
   <span class="logo">M.ai.K.R</span>
   <span class="sep">›</span>
   <a href="/command-center.html">Dashboard</a>
@@ -147,7 +157,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-ser
   <div style="flex:1"></div>
   <a href="/settings.html">Settings</a>
   <a href="/api/auth/logout">Log out</a>
-</nav>
+</nav></header><main id="main-content">
 
 <div class="container" id="app">
   <div style="text-align:center;padding:60px;color:var(--text-dim);">
@@ -482,5 +492,5 @@ async function loadLeads() {
 
 loadLeads();
 </script>
-</body>
+</main></body>
 </html>

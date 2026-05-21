@@ -88,15 +88,25 @@
     .auth-nav-links a { color: var(--silver); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color var(--transition-fast); }
     .auth-nav-links a:hover { color: var(--white); }
   </style>
-</head>
+  <style>
+    .skip-link {
+      position: absolute; top: -100px; left: 0; z-index: 9999;
+      padding: 12px 24px; background: #C0A060; color: #0A0A0F;
+      font-weight: 700; font-size: 14px; text-decoration: none;
+      border-radius: 0 0 8px 0; transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; }
+</style>
+  </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<nav class="auth-nav">
+<header role="banner"><nav class="auth-nav">
   <a href="/" class="auth-nav-logo">M<span>.ai</span><span>.K.R</span></a>
   <div class="auth-nav-links"><a href="/">Home</a></div>
-</nav>
+</nav></header>
 
-<div class="auth-page">
+<main id="main-content"><div class="auth-page">
   <div class="auth-card">
     <h1>Create your M.ai.K.R account</h1>
     <p class="subtitle">Set up your account to start building AI agents.</p>
@@ -192,5 +202,6 @@
     });
   });
 </script>
+</main>
 </body>
 </html>

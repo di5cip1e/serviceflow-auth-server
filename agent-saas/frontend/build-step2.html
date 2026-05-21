@@ -31,10 +31,20 @@
 .maikr-status .dot { width: 7px; height: 7px; background: #C0A060; border-radius: 50%; box-shadow: 0 0 5px #C0A060; }
 }</style>
 
-</head>
+  <style>
+    .skip-link {
+      position: absolute; top: -100px; left: 0; z-index: 9999;
+      padding: 12px 24px; background: #C0A060; color: #0A0A0F;
+      font-weight: 700; font-size: 14px; text-decoration: none;
+      border-radius: 0 0 8px 0; transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; }
+</style>
+  </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<nav class="maikr-nav">
+<header role="banner"><nav class="maikr-nav">
   <a href="/" class="maikr-logo">M<span>.ai</span><span>.K.R</span></a>
   <div class="maikr-links">
     <a href="/build">Builder</a>
@@ -43,7 +53,7 @@
   </div>
   <div class="maikr-spacer"></div>
   <div class="maikr-status"><span class="dot"></span>Online</div>
-</nav>
+</nav></header>
 
   <div class="page-wrapper">
     <header class="main-header">
@@ -53,7 +63,7 @@
       <div class="step-indicator">Step 2 of 4</div>
     </header>
 
-    <main class="form-container">
+    <main id="main-content" class="form-container">
       <div class="step-header">
         <h2>Who is your audience?</h2>
         <p>We'll tailor your agent's voice and responses to your ideal customer.</p>

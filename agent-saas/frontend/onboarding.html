@@ -28,9 +28,19 @@
 .maikr-status .dot { width: 7px; height: 7px; background: #2ECC71; border-radius: 50%; box-shadow: 0 0 5px #2ECC71; }
 </style>
 
-</head>
+  <style>
+    .skip-link {
+      position: absolute; top: -100px; left: 0; z-index: 9999;
+      padding: 12px 24px; background: #C0A060; color: #0A0A0F;
+      font-weight: 700; font-size: 14px; text-decoration: none;
+      border-radius: 0 0 8px 0; transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; }
+</style>
+  </head>
 <body>
-<nav class="maikr-nav">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+<header role="banner"><nav class="maikr-nav">
   <a href="/" class="maikr-logo">M<span>.ai</span><span>.K.R</span></a>
   <div class="maikr-links">
     <a href="/build-step1.html">Builder</a>
@@ -39,7 +49,7 @@
   </div>
   <div class="maikr-spacer"></div>
   <div class="maikr-status"><span class="dot"></span>Online</div>
-</nav>
+</nav></header>
 
 
   <div class="page-wrapper">
@@ -79,7 +89,7 @@
     </div>
 
     <!-- Form Container -->
-    <main class="form-container">
+    <main id="main-content" class="form-container">
       <form id="agentForm" novalidate>
 
         <!-- STEP 1: Basic Info -->

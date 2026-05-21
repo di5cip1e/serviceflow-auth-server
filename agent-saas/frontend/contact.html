@@ -15,9 +15,19 @@
   </style>
 .maikr-nav{background:#161b22;border-bottom:1px solid #30363d;padding:0 24px;display:flex;align-items:center;gap:24px;height:52px}.maikr-logo{font-size:17px;font-weight:700;color:#C0A060;text-decoration:none;letter-spacing:-0.5px}.maikr-logo span{color:#fff}.maikr-links{display:flex;gap:4px;margin-left:8px}.maikr-links a{color:#8b949e;text-decoration:none;font-size:13px;padding:5px 10px;border-radius:5px;transition:all 0.15s}.maikr-links a:hover{color:#e6edf3;background:#30363d}.maikr-spacer{flex:1}.maikr-status{display:flex;align-items:center;gap:6px;font-size:12px;color:#8b949e}.maikr-status .dot{width:7px;height:7px;background:#C0A060;border-radius:50%;box-shadow:0 0 5px #C0A060}
 </style>
-</head>
+  <style>
+    .skip-link {
+      position: absolute; top: -100px; left: 0; z-index: 9999;
+      padding: 12px 24px; background: #C0A060; color: #0A0A0F;
+      font-weight: 700; font-size: 14px; text-decoration: none;
+      border-radius: 0 0 8px 0; transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; }
+</style>
+  </head>
 <body>
-<nav class="maikr-nav">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+<header role="banner"><nav class="maikr-nav">
   <a href="/" class="maikr-logo">M<span>.ai</span><span>.K.R</span></a>
   <div class="maikr-links">
     <a href="/build-step1.html">Builder</a>
@@ -26,12 +36,12 @@
   </div>
   <div class="maikr-spacer"></div>
   <div class="maikr-status"><span class="dot"></span>Online</div>
-</nav>
+</nav></header><main id="main-content">
 <div class="contact-container">
   <h1>Get in touch</h1>
   <p>Questions about M.ai.K.R? Want a custom agent setup? We'd love to hear from you.</p>
   <p>Email us at:<br><a href="mailto:derekbrooks@aginstitute.tech" class="email">derekbrooks@aginstitute.tech</a></p>
   <p style="margin-top:24px;font-size:14px;">We typically respond within 24 hours.</p>
 </div>
-</body>
+</main></body>
 </html>
