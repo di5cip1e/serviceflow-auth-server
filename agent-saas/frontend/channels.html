@@ -135,6 +135,32 @@
         <div class="row"><span class="label">Enabled</span><span class="value"><span class="switch off"><span class="knob"></span></span></span></div>
       </div>
     </div>
+    <!-- Webhook Status -->
+    <h2 style="margin-top:20px;font-size:16px;">Webhook Health</h2>
+    <div class="grid" id="webhook-status-grid" style="margin-bottom:16px;">
+      <div class="card" id="webhook-twilio">
+        <h3>📱 Twilio Webhook</h3>
+        <div class="status ok" id="twilio-webhook-status">Checking…</div>
+        <div class="row"><span class="label">Endpoint</span><span class="value" style="font-size:11px;">/api/webhooks/twilio</span></div>
+        <div class="row"><span class="label">Failed events</span><span class="value" id="twilio-failed">0</span></div>
+        <div class="row"><span class="label">Last delivery</span><span class="value" id="twilio-last">—</span></div>
+      </div>
+      <div class="card" id="webhook-slack">
+        <h3>💼 Slack Webhook</h3>
+        <div class="status ok" id="slack-webhook-status">Checking…</div>
+        <div class="row"><span class="label">Endpoint</span><span class="value" style="font-size:11px;">/api/webhooks/slack</span></div>
+        <div class="row"><span class="label">Failed events</span><span class="value" id="slack-failed">0</span></div>
+        <div class="row"><span class="label">Last delivery</span><span class="value" id="slack-last">—</span></div>
+      </div>
+      <div class="card" id="webhook-telegram">
+        <h3>✈️ Telegram Webhook</h3>
+        <div class="status off" id="telegram-webhook-status">Checking…</div>
+        <div class="row"><span class="label">Endpoint</span><span class="value" style="font-size:11px;">/api/webhooks/telegram</span></div>
+        <div class="row"><span class="label">Failed events</span><span class="value" id="telegram-failed">0</span></div>
+        <div class="row"><span class="label">Last delivery</span><span class="value" id="telegram-last">—</span></div>
+      </div>
+    </div>
+
     <h2 style="margin-top:20px;font-size:16px;">Recent Messages</h2>
     <div class="feed" aria-label="recent-messages">
       <div class="feed-item"><div class="icon">S</div><div><strong>Twilio SMS</strong> - Hi there! <span class="timestamp">2m</span></div></div>
@@ -190,6 +216,38 @@
         setTimeout(()=>{tip.style.display='none';},1200);
       });
     }
+    // Load webhook status
+    async function loadWebhookStatus() {
+      try {
+        const res = await fetch('/api/webhooks/event-status');
+        const data = await res.json();
+        
+        // Update each channel card
+        ['twilio', 'slack', 'telegram'].forEach(ch => {
+          const statusEl = document.getElementById(`${ch}-webhook-status`);
+          const failedEl = document.getElementById(`${ch}-failed`);
+          const lastEl = document.getElementById(`${ch}-last`);
+          if (statusEl) {
+            if (data.failed > 0) {
+              statusEl.textContent = `${data.failed} failed`;
+              statusEl.className = 'status err';
+            } else if (data.delivered > 0) {
+              statusEl.textContent = 'Healthy';
+              statusEl.className = 'status ok';
+            } else {
+              statusEl.textContent = 'No events yet';
+              statusEl.className = 'status off';
+            }
+          }
+          if (failedEl) failedEl.textContent = data.failed || 0;
+          if (lastEl) lastEl.textContent = data.lastDelivery ? new Date(data.lastDelivery).toLocaleString() : '—';
+        });
+      } catch(e) { console.error('Webhook status error:', e); }
+    }
+    loadWebhookStatus();
+    // Refresh every 30s
+    setInterval(loadWebhookStatus, 30000);
+
     async function setupTelegram(){
       const token = document.getElementById('telegram-token').value.trim();
       if(!token){ alert('Please enter a Telegram bot token'); return; }

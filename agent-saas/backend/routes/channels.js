@@ -103,4 +103,23 @@ router.get('/webhooks/status', (req, res) => {
   });
 });
 
+// Webhook event status (failed events, last delivery)
+router.get('/webhooks/event-status', (req, res) => {
+  const db = require('../database');
+  db.all(`SELECT 
+    SUM(CASE WHEN status = 'failed' THEN 1 ELSE 0 END) as failed,
+    SUM(CASE WHEN status = 'delivered' THEN 1 ELSE 0 END) as delivered,
+    SUM(CASE WHEN status = 'pending' THEN 1 ELSE 0 END) as pending,
+    MAX(CASE WHEN status = 'delivered' THEN created_at END) as last_delivery
+  FROM webhook_events`, [], (err, row) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json({
+      failed: row?.failed || 0,
+      delivered: row?.delivered || 0,
+      pending: row?.pending || 0,
+      lastDelivery: row?.last_delivery || null
+    });
+  });
+});
+
 module.exports = router;
