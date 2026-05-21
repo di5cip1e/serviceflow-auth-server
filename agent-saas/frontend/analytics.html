@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analytics | M.ai.K.R</title>
+<link rel="stylesheet" href="css/styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #0A0A0F; --surface: #1A1A2E; --surface2: #2D2D44; --border: #2D2D44;
+  --green: #C0A060; --text: #F0F0F0; --text-dim: #808080;
+  --blue-light: #0060D0; --plasma: #00C0FF; --amber: #C0A060; --red: #E74C3C;
+}
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; }
+
+.maikr-nav { display: flex; align-items: center; padding: 16px 24px; border-bottom: 1px solid var(--border); gap: 8px; background: var(--surface); position: sticky; top: 0; z-index: 100; }
+.maikr-nav .logo { font-weight: 700; font-size: 18px; color: var(--green); }
+.maikr-nav .sep { color: var(--border); }
+.maikr-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; padding: 6px 12px; border-radius: 6px; transition: all 0.2s; }
+.maikr-nav a:hover { color: var(--text); background: var(--surface2); }
+.maikr-nav a.active { color: var(--green); }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+
+/* Period selector */
+.period-selector { display: flex; gap: 8px; margin-bottom: 24px; }
+.period-btn { background: var(--surface); border: 1px solid var(--border); color: var(--text-dim); padding: 8px 16px; border-radius: 8px; font-size: 13px; cursor: pointer; transition: all 0.2s; }
+.period-btn.active { background: var(--green); color: #000; border-color: var(--green); }
+.period-btn:hover:not(.active) { border-color: var(--green); }
+
+/* Stats grid */
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+.stat-card .stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-dim); margin-bottom: 8px; }
+.stat-card .stat-value { font-size: 28px; font-weight: 700; color: var(--green); }
+.stat-card .stat-sub { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
+
+/* Charts */
+.charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+.chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+.chart-card h3 { font-size: 14px; font-weight: 600; margin: 0 0 16px 0; color: var(--text-dim); }
+.chart-container { position: relative; height: 200px; }
+
+/* Credits */
+.credits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.credit-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+.credit-card h3 { font-size: 14px; font-weight: 600; margin: 0 0 12px 0; }
+.credit-bar { height: 8px; background: var(--surface2); border-radius: 4px; overflow: hidden; margin-bottom: 8px; }
+.credit-bar .fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; }
+.credit-bar .fill.green { background: var(--green); }
+.credit-bar .fill.blue { background: var(--blue-light); }
+.credit-bar .fill.yellow { background: var(--amber); }
+.credit-bar .fill.red { background: var(--red); }
+.credit-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-dim); }
+
+/* Lead status */
+.lead-status-grid { display: flex; gap: 12px; flex-wrap: wrap; }
+.lead-status-item { background: var(--surface2); border-radius: 8px; padding: 10px 16px; text-align: center; }
+.lead-status-item .count { font-size: 20px; font-weight: 700; }
+.lead-status-item .label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; }
+
+/* Empty state */
+.empty-state { text-align: center; padding: 60px 20px; color: var(--text-dim); }
+.empty-state .icon { font-size: 48px; margin-bottom: 16px; }
+
+@media (max-width: 768px) {
+  .charts-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<nav class="maikr-nav">
+  <span class="logo">M.ai.K.R</span>
+  <span class="sep">›</span>
+  <a href="/command-center.html">Dashboard</a>
+  <a href="/leads.html">Leads</a>
+  <a href="/analytics.html" class="active">Analytics</a>
+  <div style="flex:1"></div>
+  <a href="/settings.html">Settings</a>
+  <a href="/api/auth/logout">Log out</a>
+</nav>
+
+<div class="container" id="app">
+  <div style="text-align:center;padding:60px;color:var(--text-dim);">
+    <div style="display:inline-block;width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin 0.8s linear infinite;"></div>
+    <p>Loading analytics...</p>
+  </div>
+</div>
+
+<script>
+const API = '/api/analytics';
+let currentAgentId = null;
+let charts = {};
+
+function getAgentId() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('agent') || localStorage.getItem('maikr_active_agent') || 'default';
+}
+
+async function loadAnalytics(period = '30d') {
+  currentAgentId = getAgentId();
+  try {
+    const res = await fetch(`${API}/${currentAgentId}?period=${period}`);
+    const data = await res.json();
+    if (data.error) { showError(data.error); return; }
+    renderAnalytics(data.analytics);
+  } catch (err) {
+    showError('Failed to load analytics.');
+  }
+}
+
+function showError(msg) {
+  document.getElementById('app').innerHTML = `<div class="empty-state"><div class="icon">⚠️</div><h3>Error</h3><p>${msg}</p></div>`;
+}
+
+function renderAnalytics(data) {
+  const app = document.getElementById('app');
+  
+  const msgTotal = data.messages?.total || 0;
+  const msgAvg = data.messages?.avgPerDay || 0;
+  const leadsTotal = data.leads?.total || 0;
+  const leadsAvg = data.leads?.avgScore || 0;
+  const tokensTotal = data.usage?.tokens?.total || 0;
+  const cost = data.usage?.estimatedCost || 0;
+  const baseRemaining = data.usage?.credits?.baseRemaining || 0;
+  const baseTotal = data.usage?.credits?.baseTotal || 1;
+  const outcomeRemaining = data.usage?.credits?.outcomeRemaining || 0;
+  const outcomeTotal = data.usage?.credits?.outcomeTotal || 1;
+  const basePct = Math.round((1 - baseRemaining / baseTotal) * 100);
+  const outcomePct = Math.round((1 - outcomeRemaining / outcomeTotal) * 100);
+
+  app.innerHTML = `
+    <div class="period-selector">
+      <button class="period-btn ${data.period === 7 ? 'active' : ''}" onclick="loadAnalytics('7d')">7 Days</button>
+      <button class="period-btn ${data.period === 30 ? 'active' : ''}" onclick="loadAnalytics('30d')">30 Days</button>
+      <button class="period-btn ${data.period === 90 ? 'active' : ''}" onclick="loadAnalytics('90d')">90 Days</button>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Total Messages</div>
+        <div class="stat-value">${msgTotal.toLocaleString()}</div>
+        <div class="stat-sub">~${msgAvg}/day avg</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Leads Found</div>
+        <div class="stat-value" style="color:var(--plasma);">${leadsTotal}</div>
+        <div class="stat-sub">Avg score: ${leadsAvg}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Tokens Used</div>
+        <div class="stat-value" style="color:var(--blue-light);">${tokensTotal.toLocaleString()}</div>
+        <div class="stat-sub">Est. cost: $${cost.toFixed(2)}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Escalations</div>
+        <div class="stat-value" style="color:var(--amber);">${data.escalations?.total || 0}</div>
+        <div class="stat-sub">${data.escalations?.resolved || 0} resolved</div>
+      </div>
+    </div>
+
+    <div class="charts-grid">
+      <div class="chart-card">
+        <h3>📨 Messages per Day</h3>
+        <div class="chart-container"><canvas id="messagesChart"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <h3>🎯 Leads Found per Day</h3>
+        <div class="chart-container"><canvas id="leadsChart"></canvas></div>
+      </div>
+    </div>
+
+    <div class="credits-grid">
+      <div class="credit-card">
+        <h3>💬 Token Credits</h3>
+        <div class="credit-bar"><div class="fill ${basePct > 80 ? 'red' : basePct > 50 ? 'yellow' : 'green'}" style="width:${basePct}%"></div></div>
+        <div class="credit-label"><span>${baseRemaining.toLocaleString()} remaining</span><span>${baseTotal.toLocaleString()} total</span></div>
+      </div>
+      <div class="credit-card">
+        <h3>🏆 Outcome Credits</h3>
+        <div class="credit-bar"><div class="fill ${outcomePct > 80 ? 'red' : outcomePct > 50 ? 'yellow' : 'blue'}" style="width:${outcomePct}%"></div></div>
+        <div class="credit-label"><span>${outcomeRemaining.toLocaleString()} remaining</span><span>${outcomeTotal.toLocaleString()} total</span></div>
+      </div>
+    </div>
+
+    ${data.leads?.statuses?.length > 0 ? `
+    <div class="chart-card" style="margin-top:16px;">
+      <h3>📊 Lead Status Breakdown</h3>
+      <div class="lead-status-grid">
+        ${data.leads.statuses.map(s => `
+          <div class="lead-status-item">
+            <div class="count" style="color:var(--green);">${s.count}</div>
+            <div class="label">${s.status}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>` : ''}
+  `;
+
+  // Render charts
+  setTimeout(() => {
+    renderChart('messagesChart', data.messages?.perDay || [], '#C0A060');
+    renderChart('leadsChart', data.leads?.perDay || [], '#00C0FF');
+  }, 100);
+}
+
+function renderChart(canvasId, data, color) {
+  const ctx = document.getElementById(canvasId);
+  if (!ctx) return;
+  
+  if (charts[canvasId]) charts[canvasId].destroy();
+  
+  const labels = data.map(d => d.day.slice(5)); // MM-DD
+  const values = data.map(d => d.count);
+  
+  charts[canvasId] = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        data: values,
+        borderColor: color,
+        backgroundColor: color + '20',
+        fill: true,
+        tension: 0.4,
+        pointRadius: 0,
+        pointHoverRadius: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { color: '#2D2D44', drawBorder: false }, ticks: { color: '#808080', font: { size: 10 }, maxTicksLimit: 8 } },
+        y: { grid: { color: '#2D2D44', drawBorder: false }, ticks: { color: '#808080', font: { size: 10 }, beginAtZero: true } }
+      }
+    }
+  });
+}
+
+// Init
+loadAnalytics();
+</script>
+</body>
+</html>

@@ -172,12 +172,16 @@ app.use('/api/leads', leadsRoutes);
 const onboardingRoutes = require('./routes/onboarding');
 app.use('/api/onboarding', onboardingRoutes);
 
+// Analytics routes
+const analyticsRoutes = require('./routes/analytics');
+app.use('/api/analytics', analyticsRoutes);
+
 // Static file serving — AFTER session and protected routes
 // Only serve files that are NOT protected HTML pages
 const protectedPages = new Set([
   'chat.html', 'observe.html', 'swarm.html', 'channels.html',
   'mcp.html', 'optimization.html', 'settings.html', 'command-center.html',
-  'deploy.html', 'admin.html', 'dashboard.html', 'leads.html', 'onboarding-wizard.html'
+  'deploy.html', 'admin.html', 'dashboard.html', 'leads.html', 'onboarding-wizard.html', 'analytics.html'
 ]);
 
 // Serve CSS, JS, and assets statically (no auth needed)
