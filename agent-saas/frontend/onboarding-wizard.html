@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Setup Your Agent | M.ai.K.R</title>
+<link rel="stylesheet" href="css/styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0A0A0F; --surface: #1A1A2E; --surface2: #2D2D44; --border: #2D2D44;
+  --green: #C0A060; --text: #F0F0F0; --text-dim: #808080;
+  --blue-light: #0060D0; --plasma: #00C0FF; --amber: #C0A060;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; min-height: 100vh; }
+
+/* Progress Bar */
+.progress-bar { display: flex; justify-content: center; align-items: center; gap: 8px; padding: 24px; background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+.progress-step { display: flex; align-items: center; gap: 8px; }
+.progress-dot { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; border: 2px solid var(--border); color: var(--text-dim); transition: all 0.3s; }
+.progress-dot.active { border-color: var(--green); background: var(--green); color: #000; }
+.progress-dot.done { border-color: var(--green); background: var(--green); color: #000; }
+.progress-dot.done::after { content: '✓'; }
+.progress-dot.active::after { content: attr(data-num); }
+.progress-dot.done::after { content: '✓'; }
+.progress-label { font-size: 12px; color: var(--text-dim); white-space: nowrap; }
+.progress-label.active { color: var(--green); font-weight: 600; }
+.progress-connector { width: 40px; height: 2px; background: var(--border); flex-shrink: 0; }
+.progress-connector.done { background: var(--green); }
+
+/* Wizard Container */
+.wizard-container { max-width: 700px; margin: 40px auto; padding: 0 24px 60px; }
+.wizard-step { display: none; animation: fadeSlide 0.4s ease; }
+.wizard-step.active { display: block; }
+@keyframes fadeSlide { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Step Cards */
+.step-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; }
+.step-card h2 { margin: 0 0 8px 0; font-size: 22px; }
+.step-card .subtitle { color: var(--text-dim); font-size: 14px; margin-bottom: 24px; }
+
+/* Welcome Step */
+.welcome-hero { text-align: center; padding: 20px 0; }
+.welcome-hero .icon { font-size: 64px; margin-bottom: 16px; }
+.welcome-hero h1 { font-size: 28px; margin: 0 0 8px 0; }
+.welcome-hero .agent-name { color: var(--green); }
+.welcome-hero p { color: var(--text-dim); font-size: 15px; margin: 0 auto; max-width: 400px; }
+.provisioning-status { display: flex; align-items: center; gap: 12px; justify-content: center; padding: 16px; background: var(--surface2); border-radius: 12px; margin-top: 20px; }
+.provisioning-spinner { width: 20px; height: 20px; border: 2px solid var(--border); border-top-color: var(--green); border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Channel Cards */
+.channel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+.channel-card { background: var(--surface2); border: 2px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.2s; }
+.channel-card:hover { border-color: var(--green); background: rgba(192,160,96,0.08); }
+.channel-card.selected { border-color: var(--green); background: rgba(192,160,96,0.12); }
+.channel-card .icon { font-size: 28px; margin-bottom: 8px; }
+.channel-card .name { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+.channel-card .desc { font-size: 11px; color: var(--text-dim); }
+.channel-card.webchat { border-color: var(--plasma); }
+.channel-card.webchat .name { color: var(--plasma); }
+
+/* Chat Test */
+.chat-test-container { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.chat-messages { padding: 16px; max-height: 300px; overflow-y: auto; }
+.chat-message { display: flex; gap: 10px; margin-bottom: 12px; }
+.chat-message.user { flex-direction: row-reverse; }
+.chat-avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+.chat-message.agent .chat-avatar { background: var(--green); }
+.chat-message.user .chat-avatar { background: var(--blue-light); }
+.chat-bubble { padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.5; max-width: 80%; }
+.chat-message.agent .chat-bubble { background: var(--surface); border-bottom-left-radius: 4px; }
+.chat-message.user .chat-bubble { background: var(--blue-light); border-bottom-right-radius: 4px; }
+.chat-input-area { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--border); }
+.chat-input { flex: 1; background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 10px 14px; border-radius: 8px; font-size: 13px; }
+.chat-input:focus { outline: none; border-color: var(--green); }
+.chat-send-btn { background: var(--green); color: #000; border: none; padding: 10px 16px; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; }
+.chat-send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.typing-dots { display: flex; gap: 4px; padding: 10px 14px; }
+.typing-dots span { width: 6px; height: 6px; background: var(--text-dim); border-radius: 50%; animation: typing 1.2s infinite; }
+.typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+.typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typing { 0%, 60%, 100% { opacity: 0.3; } 30% { opacity: 1; } }
+
+/* Leads Step */
+.leads-placeholder { text-align: center; padding: 30px; }
+.leads-placeholder .icon { font-size: 40px; margin-bottom: 12px; }
+.leads-results { margin-top: 16px; }
+.lead-result-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+.lead-result-card .company { font-weight: 600; font-size: 14px; }
+.lead-result-card .contact { font-size: 12px; color: var(--text-dim); }
+.lead-result-card .score { font-size: 16px; font-weight: 700; color: var(--green); }
+
+/* Completion Step */
+.completion-hero { text-align: center; padding: 30px 0; }
+.completion-hero .icon { font-size: 72px; margin-bottom: 16px; }
+.completion-hero h1 { font-size: 28px; margin: 0 0 8px 0; }
+.completion-hero p { color: var(--text-dim); font-size: 15px; }
+.completion-summary { background: var(--surface2); border-radius: 12px; padding: 20px; margin: 20px 0; text-align: left; }
+.summary-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
+.summary-item:last-child { border-bottom: none; }
+.summary-item .check { color: var(--green); font-weight: 700; }
+
+/* Navigation */
+.wizard-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 24px; }
+.btn-skip { background: none; border: none; color: var(--text-dim); font-size: 13px; cursor: pointer; padding: 8px 16px; }
+.btn-skip:hover { color: var(--text); }
+.btn-next { background: var(--green); color: #000; border: none; padding: 12px 28px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.2s; }
+.btn-next:hover { background: var(--plasma); }
+.btn-next:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-back { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 12px 20px; border-radius: 8px; font-size: 13px; cursor: pointer; }
+.btn-back:hover { border-color: var(--green); }
+
+/* Confetti */
+.confetti-container { position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 9999; overflow: hidden; }
+.confetti { position: absolute; top: -20px; width: 10px; height: 10px; animation: confettiFall 3s linear forwards; }
+@keyframes confettiFall { to { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
+
+/* Upgrade prompt */
+.upgrade-prompt { background: linear-gradient(135deg, rgba(192,160,96,0.1), rgba(0,64,160,0.1)); border: 1px solid var(--amber); border-radius: 12px; padding: 20px; text-align: center; margin-top: 16px; }
+.upgrade-prompt .icon { font-size: 32px; margin-bottom: 8px; }
+.upgrade-prompt p { color: var(--text-dim); font-size: 13px; margin: 0 0 12px 0; }
+.upgrade-btn { background: var(--amber); color: #000; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; font-size: 13px; cursor: pointer; text-decoration: none; display: inline-block; }
+
+@media (max-width: 600px) {
+  .progress-label { display: none; }
+  .progress-connector { width: 20px; }
+  .channel-grid { grid-template-columns: 1fr 1fr; }
+  .wizard-container { padding: 0 16px 40px; }
+  .step-card { padding: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Wizard Content -->
+<div class="wizard-container" id="wizardContent">
+  <div style="text-align:center;padding:60px;color:var(--text-dim);">
+    <div style="display:inline-block;width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin 0.8s linear infinite;"></div>
+    <p>Loading your agent...</p>
+  </div>
+</div>
+
+<!-- Confetti -->
+<div class="confetti-container" id="confetti"></div>
+
+<script>
+const API = '/api/onboarding';
+const CHAT_API = '/api/chat';
+let agentId = null;
+let agentData = null;
+let currentStep = 0;
+let steps = [];
+
+// Get agent ID
+function getAgentId() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('agent') || localStorage.getItem('maikr_active_agent') || 'default';
+}
+
+// Initialize
+async function init() {
+  agentId = getAgentId();
+  try {
+    const res = await fetch(`${API}/${agentId}/status`);
+    const data = await res.json();
+    if (data.error) { showError(data.error); return; }
+    agentData = data.agent;
+    steps = data.steps;
+    currentStep = data.currentStep;
+    renderProgressBar();
+    showStep(currentStep);
+  } catch (err) {
+    showError('Failed to load agent. Please try again.');
+  }
+}
+
+function showError(msg) {
+  document.getElementById('wizardContent').innerHTML = `
+    <div class="step-card" style="text-align:center;">
+      <div style="font-size:48px;margin-bottom:16px;">⚠️</div>
+      <h2>Oops!</h2>
+      <p style="color:var(--text-dim);">${msg}</p>
+      <a href="/command-center.html" class="btn-next" style="display:inline-block;margin-top:16px;text-decoration:none;">Go to Dashboard</a>
+    </div>`;
+}
+
+// Render progress bar
+function renderProgressBar() {
+  const bar = document.getElementById('progressBar');
+  bar.innerHTML = steps.map((step, i) => {
+    let dotClass = '';
+    if (step.completed) dotClass = 'done';
+    else if (i === currentStep) dotClass = 'active';
+    const labelClass = i === currentStep ? 'active' : '';
+    const connector = i < steps.length - 1 ? `<div class="progress-connector ${step.completed ? 'done' : ''}"></div>` : '';
+    return `
+      <div class="progress-step">
+        <div class="progress-dot ${dotClass}" data-num="${i + 1}">${step.completed ? '✓' : i + 1}</div>
+        <span class="progress-label ${labelClass}">${step.label}</span>
+      </div>
+      ${connector}`;
+  }).join('');
+}
+
+// Show a specific step
+function showStep(index) {
+  currentStep = index;
+  renderProgressBar();
+  const content = document.getElementById('wizardContent');
+  
+  switch(index) {
+    case 0: renderWelcomeStep(content); break;
+    case 1: renderChannelStep(content); break;
+    case 2: renderChatStep(content); break;
+    case 3: renderLeadsStep(content); break;
+    case 4: renderCompletionStep(content); break;
+    default: renderWelcomeStep(content);
+  }
+}
+
+// ── Step 1: Welcome ─────────────────────────────────────────────────────────
+
+function renderWelcomeStep(container) {
+  container.innerHTML = `
+    <div class="wizard-step active">
+      <div class="welcome-hero">
+        <div class="icon">🎉</div>
+        <h1>Welcome to M.ai.K.R!</h1>
+        <p>Your AI agent <strong class="agent-name">${escapeHtml(agentData.name)}</strong> is being set up. Let's get you started in just a few steps.</p>
+      </div>
+      <div class="provisioning-status" id="provisioningStatus">
+        <div class="provisioning-spinner"></div>
+        <span>Creating your agent... This takes just a moment.</span>
+      </div>
+      <div style="display:none;" id="provisioningReady">
+        <div class="step-card" style="text-align:center;">
+          <div style="font-size:40px;margin-bottom:12px;">✅</div>
+          <h3 style="margin:0 0 8px 0;">Your agent is ready!</h3>
+          <p style="color:var(--text-dim);font-size:14px;">Your AI agent has been created and is ready to go. Click below to start setting things up.</p>
+        </div>
+        <div class="wizard-nav">
+          <div></div>
+          <button class="btn-next" onclick="nextStep()">Let's Go →</button>
+        </div>
+      </div>
+    </div>`;
+  
+  // Poll for provisioning
+  pollProvisioning();
+}
+
+async function pollProvisioning() {
+  try {
+    const res = await fetch(`${API}/${agentId}/provisioning`);
+    const data = await res.json();
+    if (data.ready) {
+      document.getElementById('provisioningStatus').style.display = 'none';
+      document.getElementById('provisioningReady').style.display = 'block';
+    } else {
+      setTimeout(pollProvisioning, 3000);
+    }
+  } catch (err) {
+    setTimeout(pollProvisioning, 5000);
+  }
+}
+
+// ── Step 2: Connect Channel ──────────────────────────────────────────────────
+
+function renderChannelStep(container) {
+  container.innerHTML = `
+    <div class="wizard-step active">
+      <div class="step-card">
+        <h2>📡 Connect a Channel</h2>
+        <p class="subtitle">Choose how your AI agent will talk to customers. You can always add more later.</p>
+        <div class="channel-grid">
+          <div class="channel-card webchat" onclick="selectChannel('webchat')" id="channel-webchat">
+            <div class="icon">💬</div>
+            <div class="name">Web Chat</div>
+            <div class="desc">Instant — works right now</div>
+          </div>
+          <div class="channel-card" onclick="selectChannel('telegram')" id="channel-telegram">
+            <div class="icon">✈️</div>
+            <div class="name">Telegram</div>
+            <div class="desc">Connect via bot</div>
+          </div>
+          <div class="channel-card" onclick="selectChannel('slack')" id="channel-slack">
+            <div class="icon">💼</div>
+            <div class="name">Slack</div>
+            <div class="desc">Team messaging</div>
+          </div>
+          <div class="channel-card" onclick="selectChannel('sms')" id="channel-sms">
+            <div class="icon">📱</div>
+            <div class="name">SMS</div>
+            <div class="desc">Text messaging</div>
+          </div>
+        </div>
+        <p style="font-size:12px;color:var(--text-dim);margin-top:12px;">💡 Web Chat is always available — no setup needed.</p>
+      </div>
+      <div class="wizard-nav">
+        <button class="btn-back" onclick="prevStep()">← Back</button>
+        <button class="btn-skip" onclick="skipStep()">Skip for now</button>
+        <button class="btn-next" onclick="nextStep()">Continue →</button>
+      </div>
+    </div>`;
+}
+
+function selectChannel(type) {
+  document.querySelectorAll('.channel-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById(`channel-${type}`).classList.add('selected');
+  localStorage.setItem(`maikr_channel_${agentId}`, type);
+}
+
+// ── Step 3: Test Chat ────────────────────────────────────────────────────────
+
+function renderChatStep(container) {
+  container.innerHTML = `
+    <div class="wizard-step active">
+      <div class="step-card">
+        <h2>💬 Test Your Agent</h2>
+        <p class="subtitle">Say hello to <strong>${escapeHtml(agentData.name)}</strong> and see how it responds.</p>
+        <div class="chat-test-container">
+          <div class="chat-messages" id="chatMessages">
+            <div class="chat-message agent">
+              <div class="chat-avatar">🤖</div>
+              <div class="chat-bubble">Hi there! I'm ${escapeHtml(agentData.name)}, your AI assistant for ${escapeHtml(agentData.businessName || agentData.industry || 'your business')}. How can I help you today?</div>
+            </div>
+          </div>
+          <div class="chat-input-area">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Type a message..." onkeypress="if(event.key==='Enter')sendChat()">
+            <button class="chat-send-btn" id="chatSendBtn" onclick="sendChat()">Send</button>
+          </div>
+        </div>
+      </div>
+      <div class="wizard-nav">
+        <button class="btn-back" onclick="prevStep()">← Back</button>
+        <button class="btn-skip" onclick="skipStep()">Skip</button>
+        <button class="btn-next" id="chatNextBtn" onclick="nextStep()" disabled>Looks Good! →</button>
+      </div>
+    </div>`;
+  document.getElementById('chatInput').focus();
+}
+
+async function sendChat() {
+  const input = document.getElementById('chatInput');
+  const btn = document.getElementById('chatSendBtn');
+  const msg = input.value.trim();
+  if (!msg) return;
+  
+  input.value = '';
+  btn.disabled = true;
+  
+  // Add user message
+  const messages = document.getElementById('chatMessages');
+  messages.innerHTML += `
+    <div class="chat-message user">
+      <div class="chat-avatar">👤</div>
+      <div class="chat-bubble">${escapeHtml(msg)}</div>
+    </div>`;
+  
+  // Show typing
+  messages.innerHTML += `
+    <div class="chat-message agent" id="typingIndicator">
+      <div class="chat-avatar">🤖</div>
+      <div class="typing-dots"><span></span><span></span><span></span></div>
+    </div>`;
+  messages.scrollTop = messages.scrollHeight;
+  
+  try {
+    const res = await fetch(CHAT_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ agentId, message: msg })
+    });
+    const data = await res.json();
+    
+    document.getElementById('typingIndicator').remove();
+    
+    const reply = data.reply || data.response || data.message || "I'm processing your request. This is a test response.";
+    messages.innerHTML += `
+      <div class="chat-message agent">
+        <div class="chat-avatar">🤖</div>
+        <div class="chat-bubble">${escapeHtml(reply)}</div>
+      </div>`;
+    messages.scrollTop = messages.scrollHeight;
+    
+    // Enable next button
+    document.getElementById('chatNextBtn').disabled = false;
+  } catch (err) {
+    document.getElementById('typingIndicator').remove();
+    messages.innerHTML += `
+      <div class="chat-message agent">
+        <div class="chat-avatar">🤖</div>
+        <div class="chat-bubble" style="color:var(--red);">Connection error. You can still continue.</div>
+      </div>`;
+    document.getElementById('chatNextBtn').disabled = false;
+  }
+  
+  btn.disabled = false;
+}
+
+// ── Step 4: Find Leads ───────────────────────────────────────────────────────
+
+function renderLeadsStep(container) {
+  const isEligible = ['growth','scale','enterprise'].includes((agentData.plan||'').toLowerCase().replace(/ \(beta\)/,'').trim());
+  
+  if (!isEligible) {
+    container.innerHTML = `
+      <div class="wizard-step active">
+        <div class="step-card">
+          <h2>🎯 Find Your First Leads</h2>
+          <p class="subtitle">AI-powered lead generation is available on Growth plan and above.</p>
+          <div class="upgrade-prompt">
+            <div class="icon">🔒</div>
+            <p>Upgrade to Growth ($99.99/mo) to unlock AI lead generation and more.</p>
+            <a href="/build/plan" class="upgrade-btn">Upgrade Now</a>
+          </div>
+        </div>
+        <div class="wizard-nav">
+          <button class="btn-back" onclick="prevStep()">← Back</button>
+          <button class="btn-skip" onclick="skipStep()">Skip</button>
+          <button class="btn-next" onclick="nextStep()">Continue →</button>
+        </div>
+      </div>`;
+    return;
+  }
+  
+  container.innerHTML = `
+    <div class="wizard-step active">
+      <div class="step-card">
+        <h2>🎯 Find Your First Leads</h2>
+        <p class="subtitle">Let your AI agent search for prospects that match your target profile.</p>
+        <div class="leads-placeholder" id="leadsPlaceholder">
+          <div class="icon">🔍</div>
+          <p style="color:var(--text-dim);">Click the button below to find your first leads.</p>
+          <button class="btn-next" id="findLeadsBtn" onclick="findLeads()">
+            <span id="findLeadsText">🔎 Find My Leads</span>
+          </button>
+        </div>
+        <div class="leads-results" id="leadsResults"></div>
+      </div>
+      <div class="wizard-nav">
+        <button class="btn-back" onclick="prevStep()">← Back</button>
+        <button class="btn-skip" onclick="skipStep()">Skip</button>
+        <button class="btn-next" id="leadsNextBtn" onclick="nextStep()" disabled>Continue →</button>
+      </div>
+    </div>`;
+}
+
+async function findLeads() {
+  const btn = document.getElementById('findLeadsBtn');
+  const text = document.getElementById('findLeadsText');
+  btn.disabled = true;
+  text.textContent = '⏳ Searching...';
+  
+  try {
+    const res = await fetch(`/api/leads/${agentId}/search`, { method: 'POST' });
+    const data = await res.json();
+    
+    if (data.error) {
+      document.getElementById('leadsPlaceholder').innerHTML = `<p style="color:var(--red);">Error: ${data.error}</p>`;
+      return;
+    }
+    
+    document.getElementById('leadsPlaceholder').style.display = 'none';
+    const results = document.getElementById('leadsResults');
+    results.innerHTML = `<p style="color:var(--green);margin-bottom:12px;">✅ Found ${data.saved} leads!</p>`;
+    
+    (data.leads || []).forEach(l => {
+      results.innerHTML += `
+        <div class="lead-result-card">
+          <div>
+            <div class="company">${escapeHtml(l.company_name)}</div>
+            <div class="contact">${escapeHtml(l.contact_name || '')} ${l.title ? '• ' + escapeHtml(l.title) : ''}</div>
+          </div>
+          <div class="score">${l.lead_score || '-'}</div>
+        </div>`;
+    });
+    
+    document.getElementById('leadsNextBtn').disabled = false;
+  } catch (err) {
+    document.getElementById('leadsPlaceholder').innerHTML = `<p style="color:var(--red);">Search failed. You can try again later.</p>`;
+    btn.disabled = false;
+    text.textContent = '🔎 Try Again';
+  }
+}
+
+// ── Step 5: Completion ───────────────────────────────────────────────────────
+
+function renderCompletionStep(container) {
+  container.innerHTML = `
+    <div class="wizard-step active">
+      <div class="completion-hero">
+        <div class="icon">🚀</div>
+        <h1>You're Live!</h1>
+        <p>Your AI agent is set up and ready to work for you.</p>
+      </div>
+      <div class="completion-summary">
+        <div class="summary-item"><span class="check">✓</span> Agent <strong>${escapeHtml(agentData.name)}</strong> created</div>
+        <div class="summary-item"><span class="check">✓</span> Industry: <strong>${escapeHtml(agentData.industry || 'Not set')}</strong></div>
+        <div class="summary-item"><span class="check">✓</span> Plan: <strong>${escapeHtml(agentData.plan || 'Value')}</strong></div>
+        <div class="summary-item"><span class="check">✓</span> Dashboard ready to use</div>
+      </div>
+      <div style="text-align:center;">
+        <a href="/command-center.html" class="btn-next" style="display:inline-block;text-decoration:none;padding:14px 32px;font-size:16px;">Go to Dashboard →</a>
+      </div>
+    </div>`;
+  
+  launchConfetti();
+}
+
+// ── Navigation ───────────────────────────────────────────────────────────────
+
+function nextStep() {
+  markStepComplete(currentStep);
+  if (currentStep < steps.length - 1) {
+    showStep(currentStep + 1);
+  }
+}
+
+function prevStep() {
+  if (currentStep > 0) showStep(currentStep - 1);
+}
+
+function skipStep() {
+  if (currentStep < steps.length - 1) {
+    showStep(currentStep + 1);
+  }
+}
+
+async function markStepComplete(stepIndex) {
+  const step = steps[stepIndex];
+  if (!step || step.completed) return;
+  try {
+    await fetch(`${API}/${agentId}/step/${step.id}/complete`, { method: 'POST' });
+    step.completed = true;
+  } catch (err) { /* silent */ }
+}
+
+// ── Confetti ─────────────────────────────────────────────────────────────────
+
+function launchConfetti() {
+  const container = document.getElementById('confetti');
+  const colors = ['#C0A060', '#00C0FF', '#0060D0', '#FFD700', '#FF6B6B', '#4ECDC4'];
+  for (let i = 0; i < 60; i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti';
+    el.style.left = Math.random() * 100 + '%';
+    el.style.background = colors[Math.floor(Math.random() * colors.length)];
+    el.style.animationDelay = Math.random() * 2 + 's';
+    el.style.animationDuration = (2 + Math.random() * 2) + 's';
+    el.style.width = (6 + Math.random() * 8) + 'px';
+    el.style.height = (6 + Math.random() * 8) + 'px';
+    container.appendChild(el);
+  }
+  setTimeout(() => container.innerHTML = '', 5000);
+}
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// Start
+init();
+</script>
+</body>
+</html>

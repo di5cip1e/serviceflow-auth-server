@@ -318,6 +318,16 @@ db.serialize(() => {
   )`);
   db.run(`CREATE INDEX IF NOT EXISTS idx_email_log_customer ON email_log(customer_id, email_type)`);
 
+  // Onboarding progress tracking
+  db.run(`CREATE TABLE IF NOT EXISTS onboarding_progress (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    agent_id TEXT NOT NULL,
+    step_id TEXT NOT NULL,
+    completed_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(agent_id, step_id),
+    FOREIGN KEY (agent_id) REFERENCES agents(id)
+  )`);
+
   // Leads table (Phase 9 — Lead Generation)
   db.run(`CREATE TABLE IF NOT EXISTS leads (
     id TEXT PRIMARY KEY,

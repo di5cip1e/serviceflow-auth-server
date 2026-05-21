@@ -198,10 +198,13 @@
 
     <a href="#" class="btn" id="chatBtn">Start Chatting →</a>
 
+    <a href="/onboarding-wizard.html" class="btn" id="setupBtn" style="background:var(--plasma,#00C0FF);margin-left:12px;">🚀 Set Up Your Agent</a>
+
     <!-- Shown when user IS logged in -->
     <div id="loggedInSection" class="logged-in-section hidden">
-      <p>Your account is ready. Go to your dashboard to manage your agent.</p>
-      <a href="/dashboard" class="btn">Go to Dashboard →</a>
+      <p>Your account is ready. Set up your agent or go to your dashboard.</p>
+      <a href="/onboarding-wizard.html" id="loggedInWizardLink" class="btn" style="background:var(--plasma,#00C0FF);">🚀 Set Up Your Agent</a>
+      <a href="/dashboard" class="btn" style="margin-left:12px;">Go to Dashboard →</a>
     </div>
 
     <!-- Shown when user is NOT logged in (guest checkout) -->
@@ -246,6 +249,11 @@
         if (data.agentUrl) {
           document.getElementById('agentUrl').value = data.agentUrl;
           document.getElementById('chatBtn').href = data.agentUrl;
+        }
+        if (data.agentId) {
+          var wizardUrl = '/onboarding-wizard.html?agent=' + data.agentId;
+          var setupBtn = document.getElementById('setupBtn');
+          if (setupBtn) setupBtn.href = wizardUrl;
         }
       })
       .catch(function(err) { console.error(err); });

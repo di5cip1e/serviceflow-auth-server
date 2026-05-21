@@ -17,6 +17,7 @@ router.get('/get-agent', async (req, res) => {
     if (agent) {
       res.json({
         success: true,
+        agentId: agent.id,
         agentUrl: 'http://maikr.pro/chat.html?agent=' + agent.id,
         agentName: agent.agent_name,
         businessName: agent.business_name
