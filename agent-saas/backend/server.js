@@ -187,6 +187,14 @@ app.use('/api/analytics', analyticsRoutes);
 const blueprintsRoutes = require('./routes/blueprints');
 app.use('/api/blueprints', blueprintsRoutes);
 
+// Delegation routes (C.2 Agent-to-Agent Delegation)
+const delegationRoutes = require('./routes/delegation');
+app.use('/api/delegation', delegationRoutes);
+
+// Self-Correction routes (C.3 Loop Detection)
+const selfCorrectionRoutes = require('./routes/selfCorrection');
+app.use('/api/self-correction', selfCorrectionRoutes);
+
 // Static file serving — AFTER session and protected routes
 // Only serve files that are NOT protected HTML pages
 const protectedPages = new Set([

@@ -44,4 +44,46 @@ router.get('/:agentId', requireAuth, async (req, res) => {
   }
 });
 
+// GET /api/analytics/:agentId/spending — Spending caps + cost breakdown
+router.get('/:agentId/spending', requireAuth, async (req, res) => {
+  try {
+    const { agentId } = req.params;
+    const hasAccess = await verifyAgentAccess(agentId, req.session.userId);
+    if (!hasAccess) return res.status(403).json({ error: 'Access denied' });
+    
+    const data = await analyticsService.getSpendingAnalytics(agentId);
+    res.json({ success: true, spending: data });
+  } catch (err) {
+    console.error('GET spending analytics error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// PUT /api/analytics/:agentId/spending-cap — Update spending cap
+router.put('/:agentId/spending-cap', requireAuth, async (req, res) => {
+  try {
+    const { agentId } = req.params;
+    const { spendingCapCents, dailyTokenCap } = req.body;
+    const hasAccess = await verifyAgentAccess(agentId, req.session.userId);
+    if (!hasAccess) return res.status(403).json({ error: 'Access denied' });
+
+    const updates = [];
+    const params = [];
+    if (spendingCapCents !== undefined) { updates.push('spending_cap_cents = ?'); params.push(spendingCapCents); }
+    if (dailyTokenCap !== undefined) { updates.push('daily_token_cap = ?'); params.push(dailyTokenCap); }
+    if (updates.length === 0) return res.status(400).json({ error: 'No fields to update' });
+
+    params.push(agentId);
+    await new Promise((resolve, reject) => {
+      db.run(`UPDATE agents SET ${updates.join(', ')} WHERE id = ?`, params, (err) => {
+        if (err) reject(err); else resolve();
+      });
+    });
+    res.json({ success: true });
+  } catch (err) {
+    console.error('PUT spending cap error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
 module.exports = router;

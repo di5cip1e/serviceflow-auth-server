@@ -103,6 +103,56 @@
     /* Full width panels */
     .full { grid-column: 1 / -1; }
 
+    /* Delegation Panel */
+    .delegation-tree { padding: 8px 0; }
+    .delegation-tree .tree-node { position: relative; }
+    .delegation-tree .tree-node.manager { margin-bottom: 12px; }
+    .delegation-tree .tree-node .node-card {
+      display: flex; align-items: center; gap: 10px; padding: 10px 14px;
+      background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
+      transition: border-color 0.2s;
+    }
+    .delegation-tree .tree-node .node-card:hover { border-color: var(--amber-dim); }
+    .delegation-tree .tree-node .node-dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+    }
+    .delegation-tree .node-dot.active { background: #C0A060; box-shadow: 0 0 6px #C0A060; }
+    .delegation-tree .node-dot.idle { background: #8b949e; }
+    .delegation-tree .node-dot.error { background: #E74C3C; }
+    .delegation-tree .node-info { flex: 1; min-width: 0; }
+    .delegation-tree .node-name { font-size: 13px; font-weight: bold; }
+    .delegation-tree .node-role { font-size: 11px; color: var(--text-dim); }
+    .delegation-tree .node-actions { display: flex; gap: 6px; }
+    .delegation-tree .btn-sm {
+      background: var(--surface2); border: 1px solid var(--border); color: var(--text-dim);
+      padding: 4px 10px; border-radius: 4px; cursor: pointer; font-family: inherit; font-size: 11px;
+    }
+    .delegation-tree .btn-sm:hover { border-color: var(--red); color: var(--red); }
+    .delegation-tree .sub-list { margin-left: 24px; padding-left: 16px; border-left: 2px solid var(--border); }
+    .delegation-tree .sub-list .tree-node { margin-top: 8px; }
+    .delegation-tree .sub-list .node-card { font-size: 12px; }
+
+    /* Spawn modal */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,0.7); align-items: center; justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+      padding: 24px; width: 420px; max-width: 95vw;
+    }
+    .modal h3 { font-size: 16px; margin-bottom: 16px; color: var(--amber); }
+    .modal label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); margin-bottom: 4px; }
+    .modal input, .modal select {
+      width: 100%; background: var(--bg); border: 1px solid var(--border); color: var(--text);
+      padding: 10px 12px; border-radius: 6px; font-family: inherit; font-size: 14px; margin-bottom: 14px;
+    }
+    .modal input:focus, .modal select:focus { outline: none; border-color: var(--amber); }
+    .modal .modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 4px; }
+    .modal .btn-cancel { background: var(--surface2); color: var(--text); border: 1px solid var(--border); padding: 10px 20px; border-radius: 6px; cursor: pointer; font-family: inherit; font-size: 13px; }
+    .modal .btn-create { background: var(--amber); color: var(--bg); border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-family: inherit; font-size: 13px; font-weight: bold; }
+
     @media (max-width: 900px) {
       .grid { grid-template-columns: 1fr; }
       .agent-cards { grid-template-columns: 1fr; }
@@ -255,6 +305,63 @@
           <div>Last intent: <span id="stat-intent" style="color:var(--text)">—</span></div>
         </div>
       </div>
+    </div>
+
+    <!-- Agent Delegation Panel -->
+    <div class="panel full">
+      <div class="panel-header">
+        <h2>Agent Delegation</h2>
+        <button class="btn" style="padding:6px 12px;font-size:11px" onclick="openSpawnModal()">+ Spawn Sub-Agent</button>
+      </div>
+      <div class="panel-body">
+        <div id="delegation-loading" style="color:var(--text-dim);font-size:13px;padding:8px 0">Loading agent hierarchy…</div>
+        <div class="delegation-tree" id="delegation-tree" style="display:none">
+          <div class="tree-node manager">
+            <div class="node-card">
+              <span class="node-dot active" id="manager-dot"></span>
+              <div class="node-info">
+                <div class="node-name" id="manager-name">Manager Agent</div>
+                <div class="node-role" id="manager-role">Orchestrator · Main entry point for all requests</div>
+              </div>
+              <span class="badge" id="sub-agent-count" style="font-size:11px">0 sub-agents</span>
+            </div>
+          </div>
+          <div class="sub-list" id="sub-agent-list"></div>
+        </div>
+        <div id="delegation-empty" style="display:none;color:var(--text-dim);font-size:13px;padding:16px 0">
+          No sub-agents spawned yet. Click <strong style="color:var(--amber)">+ Spawn Sub-Agent</strong> to create one.
+        </div>
+        <div id="delegation-error" style="display:none;color:var(--red);font-size:13px;padding:8px 0"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Spawn Sub-Agent Modal -->
+<div class="modal-overlay" id="spawn-modal">
+  <div class="modal">
+    <h3>🤖 Spawn Sub-Agent</h3>
+    <label for="spawn-name">Agent Name</label>
+    <input type="text" id="spawn-name" placeholder="e.g., Research Assistant">
+    <label for="spawn-role">Role</label>
+    <select id="spawn-role">
+      <option value="Support">Support</option>
+      <option value="Sales">Sales</option>
+      <option value="Researcher">Researcher</option>
+      <option value="Custom">Custom</option>
+    </select>
+    <label for="spawn-custom-role" id="spawn-custom-label" style="display:none">Custom Role Description</label>
+    <input type="text" id="spawn-custom-role" placeholder="Describe the custom role…" style="display:none">
+    <label for="spawn-tier">Model Tier</label>
+    <select id="spawn-tier">
+      <option value="basic">Basic</option>
+      <option value="standard" selected>Standard</option>
+      <option value="premium">Premium</option>
+      <option value="ultra">Ultra</option>
+    </select>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeSpawnModal()">Cancel</button>
+      <button class="btn-create" onclick="spawnSubAgent()">Create</button>
     </div>
   </div>
 </div>
@@ -512,6 +619,189 @@ function addChatMessage(text, role, routing) {
 function escapeHtml(t) {
   return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
+
+// ─── Agent Delegation ───────────────────────────────────────────────────
+
+// Determine manager agent ID from URL param, or fetch first agent from DB
+let managerAgentId = null;
+
+function getManagerAgentId() {
+  // Check URL params first
+  const params = new URLSearchParams(window.location.search);
+  const urlId = params.get('agentId');
+  if (urlId) return urlId;
+  // Fallback: use the chat-agent dropdown value
+  const sel = document.getElementById('chat-agent');
+  if (sel && sel.value) return sel.value;
+  return null;
+}
+
+// Load delegation data
+async function loadDelegationData() {
+  managerAgentId = getManagerAgentId();
+  const loadingEl = document.getElementById('delegation-loading');
+  const treeEl = document.getElementById('delegation-tree');
+  const emptyEl = document.getElementById('delegation-empty');
+  const errorEl = document.getElementById('delegation-error');
+
+  if (!managerAgentId) {
+    loadingEl.style.display = 'none';
+    emptyEl.innerHTML = 'Select an agent from the <strong>Live Swarm Chat</strong> dropdown above or add <code>?agentId=&lt;id&gt;</code> to the URL to manage delegation.';
+    emptyEl.style.display = 'block';
+    return;
+  }
+
+  try {
+    const r = await fetch(`${API}/api/delegation/${encodeURIComponent(managerAgentId)}`);
+    const d = await r.json();
+    const subs = d.subAgents || [];
+
+    loadingEl.style.display = 'none';
+
+    // Update manager name if we got data
+    const managerName = document.getElementById('manager-name');
+    if (managerName) managerName.textContent = managerAgentId;
+
+    // Update count badge
+    const countBadge = document.getElementById('sub-agent-count');
+    if (countBadge) countBadge.textContent = `${subs.length} sub-agent${subs.length !== 1 ? 's' : ''}`;
+
+    const subList = document.getElementById('sub-agent-list');
+    subList.innerHTML = '';
+
+    if (subs.length === 0) {
+      treeEl.style.display = 'none';
+      emptyEl.style.display = 'block';
+      return;
+    }
+
+    treeEl.style.display = 'block';
+    emptyEl.style.display = 'none';
+    errorEl.style.display = 'none';
+
+    subs.forEach(sub => {
+      const statusClass = sub.status === 'active' ? 'active' : (sub.status === 'error' ? 'error' : 'idle');
+      const div = document.createElement('div');
+      div.className = 'tree-node';
+      div.id = `sub-node-${sub.id}`;
+      div.innerHTML = `
+        <div class="node-card">
+          <span class="node-dot ${statusClass}"></span>
+          <div class="node-info">
+            <div class="node-name">${escapeHtml(sub.agent_name || sub.id)}</div>
+            <div class="node-role">${escapeHtml(sub.model_tier || 'standard')} · ${escapeHtml(sub.status || 'unknown')}</div>
+          </div>
+          <div class="node-actions">
+            <button class="btn-sm" onclick="removeSubAgent('${sub.id}', '${escapeJs(sub.agent_name || sub.id)}')" title="Remove">✕ Remove</button>
+          </div>
+        </div>`;
+      subList.appendChild(div);
+    });
+  } catch (e) {
+    loadingEl.style.display = 'none';
+    errorEl.textContent = `Error loading delegation data: ${e.message}`;
+    errorEl.style.display = 'block';
+  }
+}
+
+function escapeJs(t) {
+  return t.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+}
+
+// Spawn modal
+function openSpawnModal() {
+  if (!managerAgentId) {
+    alert('Select an agent first from the Live Swarm Chat dropdown, or add ?agentId=<id> to the URL.');
+    return;
+  }
+  document.getElementById('spawn-modal').classList.add('open');
+  document.getElementById('spawn-name').value = '';
+  document.getElementById('spawn-role').value = 'Support';
+  document.getElementById('spawn-tier').value = 'standard';
+  document.getElementById('spawn-custom-role').value = '';
+  document.getElementById('spawn-custom-role').style.display = 'none';
+  document.getElementById('spawn-custom-label').style.display = 'none';
+  document.getElementById('spawn-name').focus();
+}
+
+function closeSpawnModal() {
+  document.getElementById('spawn-modal').classList.remove('open');
+}
+
+// Toggle custom role input
+document.getElementById('spawn-role')?.addEventListener('change', function() {
+  const isCustom = this.value === 'Custom';
+  document.getElementById('spawn-custom-role').style.display = isCustom ? 'block' : 'none';
+  document.getElementById('spawn-custom-label').style.display = isCustom ? 'block' : 'none';
+});
+
+// Close modal on overlay click
+document.getElementById('spawn-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeSpawnModal();
+});
+
+// Spawn sub-agent
+async function spawnSubAgent() {
+  const name = document.getElementById('spawn-name').value.trim();
+  const roleSelect = document.getElementById('spawn-role').value;
+  const customRole = document.getElementById('spawn-custom-role').value.trim();
+  const tier = document.getElementById('spawn-tier').value;
+
+  if (!name) { alert('Please enter a name'); return; }
+  const role = roleSelect === 'Custom' ? customRole : roleSelect;
+  if (!role) { alert('Please enter a role'); return; }
+
+  const btn = document.querySelector('#spawn-modal .btn-create');
+  const originalText = btn.textContent;
+  btn.textContent = 'Creating…';
+  btn.disabled = true;
+
+  try {
+    const r = await fetch(`${API}/api/delegation/${encodeURIComponent(managerAgentId)}/spawn`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, role, model_tier: tier })
+    });
+    const d = await r.json();
+    if (d.error) throw new Error(d.error);
+
+    closeSpawnModal();
+    loadDelegationData(); // Refresh the tree
+  } catch (e) {
+    alert('Failed to spawn: ' + e.message);
+  }
+  btn.textContent = originalText;
+  btn.disabled = false;
+}
+
+// Remove sub-agent
+async function removeSubAgent(subId, subName) {
+  if (!confirm(`Remove sub-agent "${subName}"?`)) return;
+
+  try {
+    const r = await fetch(`${API}/api/delegation/${encodeURIComponent(managerAgentId)}/${encodeURIComponent(subId)}`, {
+      method: 'DELETE'
+    });
+    const d = await r.json();
+    if (d.error) throw new Error(d.error);
+
+    loadDelegationData(); // Refresh the tree
+  } catch (e) {
+    alert('Failed to remove: ' + e.message);
+  }
+}
+
+// Auto-reload delegation when chat agent changes
+document.getElementById('chat-agent').addEventListener('change', function() {
+  const newId = this.value;
+  if (newId && newId !== managerAgentId) {
+    managerAgentId = newId;
+    loadDelegationData();
+  }
+});
+
+// Load delegation data on page load
+loadDelegationData();
 </script>
 </main></body>
 </html>

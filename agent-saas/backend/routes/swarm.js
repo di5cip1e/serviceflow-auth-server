@@ -11,6 +11,7 @@ const mcpRegistry = require('../mcp/registry');
 const mcpClient = require('../mcp/client');
 const { startTrace, startSpan, scoreRAG } = require('../observability/tracer');
 const creditManager = require('../services/creditManager');
+const { shouldIntervene, getInterventionAction } = require('../services/loopDetector');
 
 const swarmRouter = new SwarmRouter();
 
@@ -139,7 +140,32 @@ async function handleSwarmChat(req, res) {
     });
     if (!agent) return res.status(404).json({ error: 'Agent not found' });
 
-    // 2b. Check usage limits
+    // 2b. Self-correction: check for loops before processing
+    const loopCheck = await shouldIntervene(history, resolvedAgentId);
+    if (loopCheck.shouldIntervene) {
+      const action = getInterventionAction(loopCheck.reason, loopCheck.type);
+      console.warn(`[LOOP DETECTED] ${loopCheck.type}: ${loopCheck.reason} → action: ${action}`);
+      if (action === 'escalate_human') {
+        const escalationMsg = 'I notice I might be going in circles here. Let me connect you with a human who can help better with this.';
+        const ts = new Date().toISOString();
+        db.run(`INSERT INTO conversations (agent_id, role, content, created_at) VALUES (?, 'user', ?, ?)`, [resolvedAgentId, message, ts]);
+        db.run(`INSERT INTO conversations (agent_id, role, content, created_at) VALUES (?, 'assistant', ?, ?)`, [resolvedAgentId, escalationMsg, ts]);
+        return res.json({
+          response: escalationMsg,
+          selfCorrection: { triggered: true, reason: loopCheck.reason, action, type: loopCheck.type },
+          routing: { state, intent: 'escalation', confidence: 1.0, subAgent: 'Admin', emoji: '⚠️' }
+        });
+      }
+      if (action === 'reset_context') {
+        history = history.slice(-2); // keep only last exchange
+      }
+      // soft_redirect: inject hint into system prompt
+      if (action === 'soft_redirect') {
+        baseSystemPrompt += '\n\n[SYSTEM NOTE: The conversation seems to be going in a circle. Redirect the user to a different approach or ask a clarifying question.]';
+      }
+    }
+
+    // 2c. Check usage limits
     const { checkAgentLimits, getUsageWarnings } = require('../services/creditManager');
     const limitCheck = await checkAgentLimits(resolvedAgentId);
     if (!limitCheck.allowed) {

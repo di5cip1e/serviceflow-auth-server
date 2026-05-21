@@ -209,7 +209,43 @@ function renderAnalytics(data) {
         `).join('')}
       </div>
     </div>` : ''}
+
+    <!-- Spending Controls -->
+    <div class="chart-card" style="margin-top:16px;">
+      <h3>💰 Spending Controls</h3>
+      <div id="spendingControls" style="display:flex;flex-direction:column;gap:16px;">
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <div>
+            <label style="font-size:11px;color:var(--text-dim);text-transform:uppercase;">Monthly Spend Cap ($)</label>
+            <input type="number" id="spendCapInput" min="0" step="5" placeholder="No limit"
+              style="background:var(--bg);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:6px;font-size:14px;width:160px;">
+          </div>
+          <div>
+            <label style="font-size:11px;color:var(--text-dim);text-transform:uppercase;">Daily Token Cap</label>
+            <input type="number" id="dailyCapInput" min="0" step="1000" placeholder="No limit"
+              style="background:var(--bg);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:6px;font-size:14px;width:160px;">
+          </div>
+          <div style="display:flex;align-items:flex-end;">
+            <button onclick="saveSpendingCaps()" style="background:var(--green);color:#000;border:none;padding:8px 16px;border-radius:6px;font-weight:600;cursor:pointer;">Save Caps</button>
+          </div>
+        </div>
+        <div id="capStatus" style="font-size:12px;color:var(--text-dim);"></div>
+      </div>
+    </div>
+
+    <!-- Cost Breakdown Chart -->
+    <div class="chart-card" style="margin-top:16px;">
+      <h3>📈 Daily Cost (30 days)</h3>
+      <div class="chart-container" style="height:250px;"><canvas id="costChart"></canvas></div>
+    </div>
+
+    <!-- Model Breakdown -->
+    <div class="chart-card" style="margin-top:16px;">
+      <h3>🤖 Model Usage</h3>
+      <div id="modelBreakdown" style="display:flex;flex-direction:column;gap:8px;"></div>
+    </div>
   `;
+
 
   // Render charts
   setTimeout(() => {
@@ -253,8 +289,101 @@ function renderChart(canvasId, data, color) {
   });
 }
 
+// Spending controls
+async function loadSpendingData() {
+  if (!currentAgentId) return;
+  try {
+    const res = await fetch(`/api/analytics/${currentAgentId}/spending`);
+    const data = await res.json();
+    if (!data.success) return;
+    const s = data.spending;
+
+    // Fill inputs
+    const spendInput = document.getElementById('spendCapInput');
+    const dailyInput = document.getElementById('dailyCapInput');
+    if (spendInput) spendInput.value = s.spendingCapCents ? (s.spendingCapCents / 100).toFixed(0) : '';
+    if (dailyInput) dailyInput.value = s.dailyTokenCap || '';
+
+    // Cap status
+    const capStatus = document.getElementById('capStatus');
+    if (capStatus) {
+      const parts = [];
+      if (s.spendingCapCents > 0) {
+        const used = s.totalCost30d;
+        const cap = s.spendingCapCents / 100;
+        const pct = Math.min(100, Math.round((used / cap) * 100));
+        parts.push(`Monthly: $${used.toFixed(2)} / $${cap.toFixed(0)} (${pct}%)`);
+      }
+      if (s.dailyTokenCap > 0) {
+        const used = s.todayTokens;
+        const cap = s.dailyTokenCap;
+        const pct = Math.min(100, Math.round((used / cap) * 100));
+        parts.push(`Daily tokens: ${used.toLocaleString()} / ${cap.toLocaleString()} (${pct}%)`);
+      }
+      capStatus.textContent = parts.length > 0 ? parts.join(' • ') : 'No spending caps set. Set limits to control costs.';
+    }
+
+    // Cost chart
+    if (s.dailyCosts && s.dailyCosts.length > 0) {
+      renderChart('costChart', s.dailyCosts.map(d => ({ day: d.day, count: Math.round((d.cost || 0) * 100) / 100 })), '#C0A060');
+    }
+
+    // Model breakdown
+    const modelDiv = document.getElementById('modelBreakdown');
+    if (modelDiv && s.modelBreakdown) {
+      modelDiv.innerHTML = s.modelBreakdown.map(m => `
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--surface2);border-radius:6px;">
+          <span style="font-size:13px;">${escapeHtml(m.model)}</span>
+          <span style="font-size:12px;color:var(--text-dim);">${m.tokens?.toLocaleString() || 0} tokens • ${m.calls} calls</span>
+        </div>
+      `).join('');
+    }
+  } catch (err) {
+    console.warn('Spending data load failed:', err);
+  }
+}
+
+async function saveSpendingCaps() {
+  const spendCap = document.getElementById('spendCapInput').value;
+  const dailyCap = document.getElementById('dailyCapInput').value;
+  try {
+    const res = await fetch(`/api/analytics/${currentAgentId}/spending-cap`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        spendingCapCents: spendCap ? Math.round(parseFloat(spendCap) * 100) : 0,
+        dailyTokenCap: dailyCap ? parseInt(dailyCap) : 0
+      })
+    });
+    const data = await res.json();
+    if (data.success) {
+      showToast('✅ Spending caps saved');
+      loadSpendingData();
+    } else {
+      showToast('❌ ' + (data.error || 'Failed to save'));
+    }
+  } catch (err) {
+    showToast('❌ Failed to save caps');
+  }
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+function showToast(msg) {
+  const toast = document.createElement('div');
+  toast.style.cssText = 'position:fixed;bottom:20px;right:20px;background:var(--surface);border:1px solid var(--border);color:var(--text);padding:12px 20px;border-radius:8px;font-size:13px;z-index:9999;animation:fadeIn 0.2s;';
+  toast.textContent = msg;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
+}
+
 // Init
 loadAnalytics();
+loadSpendingData();
 </script>
 </main></body>
 </html>

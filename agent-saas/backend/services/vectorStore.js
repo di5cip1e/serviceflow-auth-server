@@ -1,62 +1,121 @@
-const { Pool } = require('pg');
-const config = require('../config/rag');
+const db = require('../database');
 
-const pool = new Pool({
-  host: config.pg.host,
-  port: config.pg.port,
-  database: config.pg.database,
-  user: config.pg.user,
-  password: config.pg.password,
-  max: 10,
-});
-
-async function insertDocument(agentId, userId, name, sourceType, sourceUrl = null, fileSize = null) {
-  const result = await pool.query(
-    `INSERT INTO documents (agent_id, user_id, name, source_type, source_url, file_size) VALUES ($1,$2,$3,$4,$5,$6) RETURNING id, created_at`,
-    [agentId, userId, name, sourceType, sourceUrl, fileSize]
-  );
-  return result.rows[0];
+async function insertDocument(agentId, name, sourceType = 'doc', sourceUrl = null, fileSize = null) {
+  return new Promise((resolve, reject) => {
+    db.run(
+      `INSERT INTO rag_documents (agent_id, doc_name, doc_type, content, chunk_index) VALUES (?, ?, ?, ?, 0)`,
+      [agentId, name, sourceType, ''],
+      function(err) {
+        if (err) return reject(err);
+        resolve({ id: this.lastID, created_at: new Date().toISOString() });
+      }
+    );
+  });
 }
 
 async function insertChunk(docId, content, embedding, chunkIndex) {
-  await pool.query(
-    `INSERT INTO chunks (doc_id, content, embedding, chunk_index) VALUES ($1,$2,$3,$4)`,
-    [docId, content, JSON.stringify(embedding), chunkIndex]
-  );
+  return new Promise((resolve, reject) => {
+    // Get agent_id from rag_documents
+    db.get('SELECT agent_id FROM rag_documents WHERE id = ?', [docId], (err, row) => {
+      if (err) return reject(err);
+      const agentId = row ? row.agent_id : '';
+      db.run(
+        `INSERT INTO rag_embeddings (document_id, agent_id, chunk_text, embedding) VALUES (?, ?, ?, ?)`,
+        [docId, agentId, content, JSON.stringify(embedding)],
+        function(err) {
+          if (err) return reject(err);
+          resolve({ id: this.lastID });
+        }
+      );
+    });
+  });
+}
+
+// Cosine similarity between two vectors
+function cosineSimilarity(a, b) {
+  if (!a || !b || a.length !== b.length) return 0;
+  let dot = 0, normA = 0, normB = 0;
+  for (let i = 0; i < a.length; i++) {
+    dot += a[i] * b[i];
+    normA += a[i] * a[i];
+    normB += b[i] * b[i];
+  }
+  const denom = Math.sqrt(normA) * Math.sqrt(normB);
+  return denom === 0 ? 0 : dot / denom;
 }
 
 async function similaritySearch(queryEmbedding, agentId, topK = 5) {
-  const result = await pool.query(`
-    SELECT c.id, c.content, c.chunk_index, c.doc_id, d.name as doc_name,
-           1 - (c.embedding <=> $1::vector) AS similarity
-    FROM chunks c
-    JOIN documents d ON d.id = c.doc_id
-    WHERE d.agent_id = $2
-    ORDER BY c.embedding <=> $1::vector
-    LIMIT $3
-  `, [JSON.stringify(queryEmbedding), agentId, topK]);
-  return result.rows;
+  return new Promise((resolve, reject) => {
+    // Fetch all chunks for this agent, compute similarity in JS
+    db.all(
+      `SELECT re.id, re.chunk_text as content, re.embedding, re.document_id as doc_id, rd.doc_name
+       FROM rag_embeddings re
+       JOIN rag_documents rd ON rd.id = re.document_id
+       WHERE re.agent_id = ?`,
+      [agentId],
+      (err, rows) => {
+        if (err) return reject(err);
+        if (!rows || rows.length === 0) return resolve([]);
+
+        const scored = rows.map(row => {
+          let embedding = [];
+          try { embedding = JSON.parse(row.embedding); } catch {}
+          return {
+            id: row.id,
+            content: row.content,
+            doc_id: row.doc_id,
+            doc_name: row.doc_name,
+            similarity: cosineSimilarity(queryEmbedding, embedding)
+          };
+        });
+
+        scored.sort((a, b) => b.similarity - a.similarity);
+        resolve(scored.slice(0, topK));
+      }
+    );
+  });
 }
 
 async function deleteDocument(docId) {
-  await pool.query(`DELETE FROM documents WHERE id = $1`, [docId]);
+  return new Promise((resolve, reject) => {
+    // Delete embeddings first (no FK cascade in SQLite without pragma)
+    db.run('DELETE FROM rag_embeddings WHERE document_id = ?', [docId], (err) => {
+      if (err) return reject(err);
+      db.run('DELETE FROM rag_documents WHERE id = ?', [docId], (err) => {
+        if (err) return reject(err);
+        resolve();
+      });
+    });
+  });
 }
 
 async function listDocuments(agentId) {
-  const result = await pool.query(
-    `SELECT id, name, source_type, source_url, file_size, created_at,
-            (SELECT COUNT(*) FROM chunks WHERE doc_id = documents.id) as chunk_count
-     FROM documents WHERE agent_id = $1 ORDER BY created_at DESC`,
-    [agentId]
-  );
-  return result.rows;
+  return new Promise((resolve, reject) => {
+    db.all(
+      `SELECT rd.id, rd.doc_name as name, rd.doc_type as source_type, '' as source_url, 0 as file_size, rd.created_at,
+              (SELECT COUNT(*) FROM rag_embeddings WHERE document_id = rd.id) as chunk_count
+       FROM rag_documents rd
+       WHERE rd.agent_id = ? ORDER BY rd.created_at DESC`,
+      [agentId],
+      (err, rows) => {
+        if (err) return reject(err);
+        resolve(rows || []);
+      }
+    );
+  });
 }
 
 async function getChunksByDoc(docId) {
-  return (await pool.query(
-    `SELECT id, content, chunk_index, created_at FROM chunks WHERE doc_id = $1 ORDER BY chunk_index`,
-    [docId]
-  )).rows;
+  return new Promise((resolve, reject) => {
+    db.all(
+      `SELECT id, chunk_text as content, created_at FROM rag_embeddings WHERE document_id = ?`,
+      [docId],
+      (err, rows) => {
+        if (err) return reject(err);
+        resolve(rows || []);
+      }
+    );
+  });
 }
 
-module.exports = { pool, insertDocument, insertChunk, similaritySearch, deleteDocument, listDocuments, getChunksByDoc };
+module.exports = { insertDocument, insertChunk, similaritySearch, deleteDocument, listDocuments, getChunksByDoc };

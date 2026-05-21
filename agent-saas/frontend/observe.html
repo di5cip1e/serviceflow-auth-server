@@ -259,6 +259,14 @@
     </div>
   </div>
 
+  <!-- Self-Correction Alerts -->
+  <div class="chart-card" style="margin-bottom:28px;">
+    <h3>🔄 Self-Correction & Loop Detection</h3>
+    <div id="loopEvents">
+      <div style="color:var(--text-dim);font-size:13px;text-align:center;padding:20px;">No loop events detected — agent is running clean.</div>
+    </div>
+  </div>
+
   <!-- Trajectory View -->
   <div class="trajectory-section">
     <h3>Trajectory — Recent Responses</h3>
@@ -286,11 +294,12 @@ async function loadDashboard() {
   const period = document.getElementById('periodSelect').value;
   const base = 'http://maikr.pro'; // In production, use relative URL
 
-  // Fetch usage + rag-scores + intent-distribution in parallel
-  const [usageRes, scoresRes, intentRes] = await Promise.allSettled([
+  // Fetch usage + rag-scores + intent-distribution + loop events in parallel
+  const [usageRes, scoresRes, intentRes, loopRes] = await Promise.allSettled([
     fetch(`/api/observe/usage/${agentId}?period=${period}`),
     fetch(`/api/observe/rag-scores/${agentId}`),
     fetch(`/api/observe/intent-distribution/${agentId}?period=${period}`),
+    fetch(`/api/self-correction/events/${agentId}`),
   ]);
 
   let usage = { totalRequests: 0, totalInputTokens: 0, totalOutputTokens: 0, totalCostUSD: 0, avgLatencyMs: 0, byDay: [] };

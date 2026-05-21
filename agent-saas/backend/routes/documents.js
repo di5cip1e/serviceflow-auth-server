@@ -7,11 +7,25 @@ const { getEmbedding, embedChunks } = require('../services/embeddingService');
 
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 * 1024 * 1024 } });
 
-// POST /api/documents/upload
+// Helper: chunk + embed + store for a given text
+async function ingestText(text, agentId, name, sourceType, sourceUrl, fileSize) {
+  const chunks = chunkText(text);
+  const doc = await insertDocument(agentId, name, sourceType);
+  for (let i = 0; i < chunks.length; i += 20) {
+    const batch = chunks.slice(i, i + 20);
+    const embeddings = await embedChunks(batch);
+    for (let j = 0; j < batch.length; j++) {
+      await insertChunk(doc.id, batch[j], embeddings[j], i + j);
+    }
+  }
+  return { documentId: doc.id, chunkCount: chunks.length };
+}
+
+// POST /api/documents/upload — file upload (PDF, TXT, MD, DOCX)
 router.post('/upload', upload.single('file'), async (req, res) => {
   try {
-    const { agentId, userId } = req.body;
-    if (!agentId || !userId) return res.status(400).json({ error: 'agentId and userId required' });
+    const { agentId } = req.body;
+    if (!agentId) return res.status(400).json({ error: 'agentId required' });
     if (!req.file) return res.status(400).json({ error: 'No file provided' });
 
     let text = '';
@@ -22,30 +36,21 @@ router.post('/upload', upload.single('file'), async (req, res) => {
     }
     if (!text.trim()) return res.status(400).json({ error: 'Could not extract text from file' });
 
-    const chunks = chunkText(text);
-    const doc = await insertDocument(agentId, userId, req.file.originalname, 'doc', null, req.file.size);
-
-    for (let i = 0; i < chunks.length; i += 20) {
-      const batch = chunks.slice(i, i + 20);
-      const embeddings = await embedChunks(batch);
-      for (let j = 0; j < batch.length; j++) {
-        await insertChunk(doc.id, batch[j], embeddings[j], i + j);
-      }
-    }
-    res.json({ success: true, documentId: doc.id, chunkCount: chunks.length });
+    const result = await ingestText(text, agentId, req.file.originalname, 'doc', null, req.file.size);
+    res.json({ success: true, ...result });
   } catch (err) {
     console.error('Document upload error:', err);
     res.status(500).json({ error: err.message });
   }
 });
 
-// POST /api/documents/upload-url
+// POST /api/documents/upload-url — scrape website URL
 router.post('/upload-url', async (req, res) => {
   try {
-    const { agentId, userId, url, name } = req.body;
-    if (!agentId || !userId || !url) return res.status(400).json({ error: 'agentId, userId, and url required' });
+    const { agentId, url, name } = req.body;
+    if (!agentId || !url) return res.status(400).json({ error: 'agentId and url required' });
 
-    const response = await fetch(url, { headers: { 'User-Agent': 'M.ai.K.R/1.0' } });
+    const response = await fetch(url, { headers: { 'User-Agent': 'M.ai.K.R/1.0' }, signal: AbortSignal.timeout(15000) });
     if (!response.ok) return res.status(400).json({ error: `Failed to fetch URL: ${response.status}` });
 
     const contentType = response.headers.get('content-type') || '';
@@ -54,52 +59,34 @@ router.post('/upload-url', async (req, res) => {
       const html = await response.text();
       text = html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 50000);
     } else {
-      text = await response.text();
+      text = (await response.text()).trim().slice(0, 50000);
     }
     if (!text.trim()) return res.status(400).json({ error: 'No text content found at URL' });
 
-    const chunks = chunkText(text);
     const docName = name || new URL(url).hostname;
-    const doc = await insertDocument(agentId, userId, docName, 'url', url, text.length);
-
-    for (let i = 0; i < chunks.length; i += 20) {
-      const batch = chunks.slice(i, i + 20);
-      const embeddings = await embedChunks(batch);
-      for (let j = 0; j < batch.length; j++) {
-        await insertChunk(doc.id, batch[j], embeddings[j], i + j);
-      }
-    }
-    res.json({ success: true, documentId: doc.id, chunkCount: chunks.length });
+    const result = await ingestText(text, agentId, docName, 'url', url, text.length);
+    res.json({ success: true, ...result });
   } catch (err) {
     console.error('URL embed error:', err);
     res.status(500).json({ error: err.message });
   }
 });
 
-// POST /api/documents/upload-text
+// POST /api/documents/upload-text — paste text directly
 router.post('/upload-text', async (req, res) => {
   try {
-    const { agentId, userId, name, content } = req.body;
-    if (!agentId || !userId || !content) return res.status(400).json({ error: 'agentId, userId, and content required' });
+    const { agentId, name, content } = req.body;
+    if (!agentId || !content) return res.status(400).json({ error: 'agentId and content required' });
 
-    const chunks = chunkText(content);
-    const doc = await insertDocument(agentId, userId, name || 'Pasted Text', 'text', null, content.length);
-
-    for (let i = 0; i < chunks.length; i += 20) {
-      const batch = chunks.slice(i, i + 20);
-      const embeddings = await embedChunks(batch);
-      for (let j = 0; j < batch.length; j++) {
-        await insertChunk(doc.id, batch[j], embeddings[j], i + j);
-      }
-    }
-    res.json({ success: true, documentId: doc.id, chunkCount: chunks.length });
+    const result = await ingestText(content, agentId, name || 'Pasted Text', 'text', null, content.length);
+    res.json({ success: true, ...result });
   } catch (err) {
     console.error('Text upload error:', err);
     res.status(500).json({ error: err.message });
   }
 });
 
-// GET /api/documents
+// GET /api/documents — list all documents for an agent
 router.get('/', async (req, res) => {
   try {
     const { agentId } = req.query;
@@ -110,7 +97,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// DELETE /api/documents/:id
+// DELETE /api/documents/:id — delete a document and its embeddings
 router.delete('/:id', async (req, res) => {
   try {
     await deleteDocument(req.params.id);

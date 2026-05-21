@@ -234,6 +234,32 @@ body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-ser
 .sandbox-empty p { font-size: 14px; }
 }
 
+/* Toast notifications */
+.toast-container {
+  position: fixed; bottom: 24px; right: 24px; z-index: 10000;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.toast {
+  padding: 12px 18px; border-radius: 8px; font-size: 13px; font-weight: 500;
+  background: var(--surface); border: 1px solid var(--border); color: var(--text);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4); animation: toastIn 0.3s ease;
+  max-width: 360px; line-height: 1.4;
+}
+.toast.success { border-color: var(--green); }
+.toast.error { border-color: var(--red); }
+.toast.removing { animation: toastOut 0.3s ease forwards; }
+@keyframes toastIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes toastOut { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(12px); } }
+
+/* Knowledge status */
+.k-status {
+  font-size: 11px; padding: 4px 0; min-height: 18px; margin-top: 2px;
+  transition: opacity 0.3s;
+}
+.k-status.processing { color: var(--amber); }
+.k-status.done { color: var(--green); }
+.k-status.error { color: var(--red); }
+
 /* Responsive */
 @media (max-width: 900px) {
   .double-entry { flex-direction: column; overflow-y: auto; height: auto; min-height: calc(100vh - 52px); }
@@ -327,6 +353,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-ser
             <button onclick="addKnowledge('url')">Ingest</button>
           </div>
           <p class="hint">Agent will learn your brand voice and content from this URL.</p>
+          <div class="k-status" id="kUrlStatus"></div>
         </div>
         <div class="field">
           <label>Upload Document</label>
@@ -335,6 +362,7 @@ body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-ser
             <button onclick="addKnowledge('file')">Upload</button>
           </div>
           <p class="hint">Supported: PDF, TXT, MD, DOCX (max 10MB).</p>
+          <div class="k-status" id="kFileStatus"></div>
         </div>
         <div class="field">
           <label>Google Drive Folder</label>
@@ -460,6 +488,7 @@ let knowledgeSources = [];
       const agents = await ar.json();
       if (agents && agents.length > 0) {
         loadAgent(agents[0]);
+        loadKnowledgeList();
       }
     }
   } catch(e) { console.error('Init error:', e); }
@@ -473,6 +502,7 @@ function loadAgent(agent) {
   document.getElementById('industry').value = agent.industry || '';
   document.getElementById('systemPrompt').value = agent.system_prompt || '';
   document.getElementById('sandboxAgentName').textContent = agent.agent_name || 'Live Sandbox';
+  loadKnowledgeList();
 
   // Tone
   const toneMap = { 'very-casual': 1, 'casual': 2, 'balanced': 3, 'professional': 4, 'formal': 5 };
@@ -563,45 +593,150 @@ async function saveConfig() {
 
 // ── KNOWLEDGE ──
 function addKnowledge(type) {
-  let name = '';
   if (type === 'url') {
-    const url = document.getElementById('knowledgeUrl').value;
-    if (!url) return;
-    name = new URL(url).hostname;
-    document.getElementById('knowledgeUrl').value = '';
+    const urlInput = document.getElementById('knowledgeUrl');
+    const url = urlInput.value.trim();
+    if (!url) return alert('Please enter a URL');
+    ingestUrl(url);
   } else if (type === 'file') {
-    const file = document.getElementById('knowledgeFile').files[0];
-    if (!file) return;
-    name = file.name;
+    const fileInput = document.getElementById('knowledgeFile');
+    if (!fileInput.files.length) return alert('Please select a file');
+    ingestFile();
   } else if (type === 'drive') {
-    const url = document.getElementById('knowledgeDrive').value;
-    if (!url) return;
-    name = 'Google Drive Folder';
-    document.getElementById('knowledgeDrive').value = '';
+    const url = document.getElementById('knowledgeDrive').value.trim();
+    if (!url) return alert('Please enter a Google Drive folder URL');
+    showToast('Google Drive integration coming soon', 'error');
   }
-  knowledgeSources.push({ type, name });
-  renderKnowledgeList();
 }
 
-function removeKnowledge(idx) {
-  knowledgeSources.splice(idx, 1);
-  renderKnowledgeList();
+// ── URL INGESTION ──
+async function ingestUrl(url) {
+  const statusEl = document.getElementById('kUrlStatus');
+  const inputEl = document.getElementById('knowledgeUrl');
+  if (!currentAgentId) return showToast('No agent loaded', 'error');
+
+  statusEl.textContent = '⏳ Processing URL…';
+  statusEl.className = 'k-status processing';
+  try {
+    const resp = await fetch('/api/documents/upload-url', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ agentId: currentAgentId, url })
+    });
+    const data = await resp.json();
+    if (data.success) {
+      statusEl.textContent = `✅ Ingested ${data.chunkCount} chunks`;
+      statusEl.className = 'k-status done';
+      showToast(`✅ Ingested ${data.chunkCount} chunks from ${url}`);
+      inputEl.value = '';
+      loadKnowledgeList();
+    } else {
+      statusEl.textContent = '❌ ' + (data.error || 'Unknown error');
+      statusEl.className = 'k-status error';
+      showToast('❌ ' + (data.error || 'Failed to ingest URL'), 'error');
+    }
+  } catch (e) {
+    statusEl.textContent = '❌ Network error';
+    statusEl.className = 'k-status error';
+    showToast('❌ Network error while ingesting URL', 'error');
+  }
 }
 
-function renderKnowledgeList() {
-  const el = document.getElementById('knowledgeList');
-  if (knowledgeSources.length === 0) {
-    el.innerHTML = '<p class="hint" style="padding: 8px 0;">No sources added yet.</p>';
-    return;
+// ── FILE UPLOAD ──
+async function ingestFile() {
+  const inputEl = document.getElementById('knowledgeFile');
+  const statusEl = document.getElementById('kFileStatus');
+  if (!currentAgentId) return showToast('No agent loaded', 'error');
+  if (!inputEl.files.length) return alert('Please select a file');
+
+  statusEl.textContent = '⏳ Uploading & processing…';
+  statusEl.className = 'k-status processing';
+
+  const formData = new FormData();
+  formData.append('agentId', currentAgentId);
+  formData.append('file', inputEl.files[0]);
+
+  try {
+    const resp = await fetch('/api/documents/upload', { method: 'POST', body: formData });
+    const data = await resp.json();
+    if (data.success) {
+      statusEl.textContent = `✅ Ingested ${data.chunkCount} chunks`;
+      statusEl.className = 'k-status done';
+      showToast(`✅ Ingested ${data.chunkCount} chunks from ${inputEl.files[0].name}`);
+      inputEl.value = '';
+      loadKnowledgeList();
+    } else {
+      statusEl.textContent = '❌ ' + (data.error || 'Unknown error');
+      statusEl.className = 'k-status error';
+      showToast('❌ ' + (data.error || 'Failed to upload file'), 'error');
+    }
+  } catch (e) {
+    statusEl.textContent = '❌ Network error';
+    statusEl.className = 'k-status error';
+    showToast('❌ Network error while uploading file', 'error');
   }
-  const icons = { url: '🌐', file: '📄', drive: '📁' };
-  el.innerHTML = knowledgeSources.map((k, i) => `
-    <div class="knowledge-item">
-      <span class="k-icon">${icons[k.type] || '📎'}</span>
-      <span class="k-name">${k.name}</span>
-      <button class="k-remove" onclick="removeKnowledge(${i})">✕</button>
-    </div>
-  `).join('');
+}
+
+// ── LOAD KNOWLEDGE LIST ──
+async function loadKnowledgeList() {
+  if (!currentAgentId) return;
+  const list = document.getElementById('knowledgeList');
+  try {
+    const resp = await fetch('/api/documents?agentId=' + currentAgentId);
+    const data = await resp.json();
+    if (!data.documents || data.documents.length === 0) {
+      list.innerHTML = '<p class="hint" style="padding: 8px 0;">No sources added yet.</p>';
+      return;
+    }
+    list.innerHTML = data.documents.map(d => {
+      const icon = d.source_type === 'url' ? '🌐' : d.source_type === 'doc' ? '📄' : '📝';
+      return `
+        <div class="knowledge-item">
+          <span class="k-icon">${icon}</span>
+          <span class="k-name">${escHtml(d.name)}</span>
+          <span class="k-count">${d.chunk_count || 0} chunks</span>
+          <button class="k-remove" onclick="deleteDocument(${d.id})">✕</button>
+        </div>`;
+    }).join('');
+  } catch (e) {
+    list.innerHTML = '<p class="hint" style="padding: 8px 0; color: var(--red);">Failed to load knowledge sources.</p>';
+  }
+}
+
+// ── DELETE DOCUMENT ──
+async function deleteDocument(docId) {
+  if (!confirm('Remove this knowledge source?')) return;
+  try {
+    const resp = await fetch('/api/documents/' + docId, { method: 'DELETE' });
+    const data = await resp.json();
+    if (data.success) {
+      showToast('🗑️ Knowledge source removed');
+      loadKnowledgeList();
+    } else {
+      showToast('❌ ' + (data.error || 'Failed to delete'), 'error');
+    }
+  } catch (e) {
+    showToast('❌ Network error while deleting', 'error');
+  }
+}
+
+// ── TOAST NOTIFICATIONS ──
+function showToast(message, type) {
+  let container = document.getElementById('toastContainer');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'toastContainer';
+    container.className = 'toast-container';
+    document.body.appendChild(container);
+  }
+  const toast = document.createElement('div');
+  toast.className = 'toast' + (type === 'error' ? ' error' : ' success');
+  toast.textContent = message;
+  container.appendChild(toast);
+  setTimeout(() => {
+    toast.classList.add('removing');
+    setTimeout(() => toast.remove(), 300);
+  }, 4000);
 }
 
 // ── SANDBOX CHAT ──

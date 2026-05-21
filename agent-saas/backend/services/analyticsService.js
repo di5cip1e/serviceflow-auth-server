@@ -159,4 +159,68 @@ function fillMissingDays(data, days) {
   return result;
 }
 
-module.exports = { getAgentAnalytics };
+/**
+ * Get per-agent cost breakdown and spending cap status
+ */
+async function getSpendingAnalytics(agentId) {
+  // Daily cost breakdown for last 30 days
+  const dailyCosts = await new Promise((resolve) => {
+    db.all(
+      `SELECT date(created_at) as day,
+              SUM(input_tokens + output_tokens) as tokens,
+              SUM(CASE
+                WHEN model LIKE '%gpt-4.1-mini%' THEN (input_tokens * 0.00000015 + output_tokens * 0.0000006)
+                WHEN model LIKE '%gpt-5-mini%' THEN (input_tokens * 0.00000025 + output_tokens * 0.000001)
+                WHEN model LIKE '%minimax%' THEN (input_tokens * 0.00000015 + output_tokens * 0.00000015)
+                ELSE 0
+              END) as cost
+       FROM token_usage WHERE agent_id = ? AND created_at >= datetime('now', '-30 days')
+       GROUP BY date(created_at) ORDER BY day ASC`,
+      [agentId],
+      (err, rows) => resolve(rows || [])
+    );
+  });
+
+  // Model breakdown
+  const modelBreakdown = await new Promise((resolve) => {
+    db.all(
+      `SELECT model, SUM(input_tokens + output_tokens) as tokens,
+              COUNT(*) as calls
+       FROM token_usage WHERE agent_id = ? AND created_at >= datetime('now', '-30 days')
+       GROUP BY model ORDER BY tokens DESC`,
+      [agentId],
+      (err, rows) => resolve(rows || [])
+    );
+  });
+
+  // Spending cap from agent settings
+  const agent = await new Promise((resolve) => {
+    db.get(
+      `SELECT base_tokens, base_tokens_used, outcome_credits, outcome_credits_used,
+              spending_cap_cents, daily_token_cap FROM agents WHERE id = ?`,
+      [agentId],
+      (err, row) => resolve(row || {})
+    );
+  });
+
+  const totalCost30d = dailyCosts.reduce((s, d) => s + (d.cost || 0), 0);
+  const todayKey = new Date().toISOString().split('T')[0];
+  const todayCost = dailyCosts.find(d => d.day === todayKey)?.cost || 0;
+  const todayTokens = dailyCosts.find(d => d.day === todayKey)?.tokens || 0;
+
+  return {
+    dailyCosts,
+    modelBreakdown,
+    totalCost30d: Math.round(totalCost30d * 100) / 100,
+    todayCost: Math.round(todayCost * 100) / 100,
+    todayTokens,
+    spendingCapCents: agent.spending_cap_cents || 0,
+    dailyTokenCap: agent.daily_token_cap || 0,
+    baseTokensTotal: agent.base_tokens || 0,
+    baseTokensUsed: agent.base_tokens_used || 0,
+    outcomeCreditsTotal: agent.outcome_credits || 0,
+    outcomeCreditsUsed: agent.outcome_credits_used || 0,
+  };
+}
+
+module.exports = { getAgentAnalytics, getSpendingAnalytics };
