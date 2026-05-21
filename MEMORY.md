@@ -102,8 +102,33 @@
 - Workspace organization: Clean structure maintained
 - Forgeai.sbs: Briefly down (000) then recovered to 301 (normal)
 
-*Last consolidated: 2026-05-20 04:00 UTC*
-*Previous: 2026-05-19 04:00 UTC*
+*Last consolidated: 2026-05-21 04:12 UTC*
+*Previous: 2026-05-20 04:00 UTC*
+
+## May 21, 2026 — Major Feature Sprint (9 tasks, 1.5 hours)
+
+### Completed Features
+1. **Onboarding Wizard** (`/onboarding-wizard.html`) — 5-step post-payment guided setup
+2. **Chat Overhaul** (`/chat.html`) — Sidebar layout, agent card, modern bubbles, quick replies
+3. **Email Verified** — Resend API working, welcome emails configured
+4. **Social Proof** — Stats row, 3 testimonials, trust badges on landing page
+5. **Pricing Page** — Feature comparison table, 5 FAQ items, trust row
+6. **Analytics Dashboard** (`/analytics.html`) — Chart.js charts, credit bars, period filtering
+7. **Agent Studio** (`/agent-studio.html`) — Personality sliders, brand colors, live preview
+8. **Webhook UI** — Health cards on channels page, auto-refresh
+
+### New API Routes
+- `/api/onboarding` — Wizard status and step tracking
+- `/api/analytics` — Agent analytics with period filtering
+- `/api/agent/:id/appearance` — Personality and brand updates
+- `/api/webhooks/event-status` — Webhook health metrics
+
+### Key Technical Notes
+- Backend restart #36, all pages responding 200
+- Workspace backup cron running (3am UTC)
+- Sub-agents: research sub-agents didn't save output (timed out or file path issues) — do research directly in main session next time
+- `agentId` field added to `get-agent` API response for wizard routing
+- `onboarding_progress` table added to database
 
 ## May 15-16, 2026 — Testing Overhaul + Mailgun Fix
 
