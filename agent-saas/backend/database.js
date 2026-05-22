@@ -264,6 +264,79 @@ db.serialize(() => {
   addColumnIfMissing('customers', 'user_id', 'TEXT', () => {});
   addColumnIfMissing('api_keys', 'user_id', 'TEXT', () => {});
 
+  // ── Phase D: White-Label ──────────────────────────────────────────────────
+  addColumnIfMissing('customers', 'whitelabel_enabled', 'INTEGER DEFAULT 0', () => {});
+  addColumnIfMissing('customers', 'whitelabel_brand_name', 'TEXT', () => {});
+  addColumnIfMissing('customers', 'whitelabel_logo_url', 'TEXT', () => {});
+  addColumnIfMissing('customers', 'whitelabel_primary_color', 'TEXT', () => {});
+  addColumnIfMissing('customers', 'whitelabel_accent_color', 'TEXT', () => {});
+  addColumnIfMissing('customers', 'whitelabel_domain', 'TEXT', () => {});
+  addColumnIfMissing('customers', 'whitelabel_footer_text', 'TEXT', () => {});
+  addColumnIfMissing('customers', 'plan', 'TEXT DEFAULT "growth"', () => {});
+
+  // ── Phase D: Templates Marketplace ─────────────────────────────────────────
+  db.run(`CREATE TABLE IF NOT EXISTS templates (
+    id TEXT PRIMARY KEY,
+    name TEXT NOT NULL,
+    slug TEXT UNIQUE NOT NULL,
+    description TEXT,
+    category TEXT NOT NULL,
+    industry TEXT,
+    thumbnail_url TEXT,
+    price_cents INTEGER DEFAULT 0,
+    is_premium INTEGER DEFAULT 0,
+    rating REAL DEFAULT 0,
+    downloads INTEGER DEFAULT 0,
+    config TEXT NOT NULL,
+    guardrails TEXT,
+    system_prompt TEXT,
+    sample_prompts TEXT,
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    updated_at TEXT DEFAULT CURRENT_TIMESTAMP
+  )`);
+  db.run(`CREATE INDEX IF NOT EXISTS idx_templates_category ON templates(category)`);
+  db.run(`CREATE INDEX IF NOT EXISTS idx_templates_industry ON templates(industry)`);
+
+  // Track which templates a customer has purchased/unlocked
+  db.run(`CREATE TABLE IF NOT EXISTS customer_templates (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    customer_id TEXT NOT NULL,
+    template_id TEXT NOT NULL,
+    unlocked_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(customer_id, template_id),
+    FOREIGN KEY (customer_id) REFERENCES customers(id),
+    FOREIGN KEY (template_id) REFERENCES templates(id)
+  )`);
+
+  // ── Phase D: BYOK (Bring Your Own Key) ─────────────────────────────────────
+  db.run(`CREATE TABLE IF NOT EXISTS customer_api_keys (
+    id TEXT PRIMARY KEY,
+    customer_id TEXT NOT NULL,
+    provider TEXT NOT NULL,
+    key_encrypted TEXT NOT NULL,
+    key_prefix TEXT NOT NULL,
+    is_active INTEGER DEFAULT 1,
+    platform_fee_percent REAL DEFAULT 5.0,
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    last_used_at TEXT,
+    FOREIGN KEY (customer_id) REFERENCES customers(id)
+  )`);
+  addColumnIfMissing('customers', 'byok_enabled', 'INTEGER DEFAULT 0', () => {});
+  addColumnIfMissing('agents', 'customer_api_key_id', 'TEXT', () => {});
+
+  // ── Phase D: Template purchases ────────────────────────────────────────────
+  db.run(`CREATE TABLE IF NOT EXISTS template_purchases (
+    id TEXT PRIMARY KEY,
+    customer_id TEXT NOT NULL,
+    template_id TEXT NOT NULL,
+    price_paid_cents INTEGER NOT NULL,
+    stripe_payment_id TEXT,
+    status TEXT DEFAULT 'completed',
+    purchased_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (customer_id) REFERENCES customers(id),
+    FOREIGN KEY (template_id) REFERENCES templates(id)
+  )`);
+
   // Revenue snapshots (daily MRR tracking)
   db.run(`CREATE TABLE IF NOT EXISTS revenue_snapshots (
     id TEXT PRIMARY KEY,
@@ -348,6 +421,20 @@ db.serialize(() => {
   )`);
   db.run(`CREATE INDEX IF NOT EXISTS idx_leads_agent ON leads(agent_id, lead_score DESC)`);
   db.run(`CREATE INDEX IF NOT EXISTS idx_leads_status ON leads(agent_id, status)`);
+
+  // ── Phase D: Widget tracking ──────────────────────────────────────────────
+  db.run(`CREATE TABLE IF NOT EXISTS agent_widgets (
+    id TEXT PRIMARY KEY,
+    agent_id TEXT NOT NULL,
+    widget_type TEXT NOT NULL,
+    embed_code TEXT NOT NULL,
+    config TEXT DEFAULT '{}',
+    placement TEXT DEFAULT 'inline',
+    status TEXT DEFAULT 'active',
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (agent_id) REFERENCES agents(id)
+  )`);
+  db.run(`CREATE INDEX IF NOT EXISTS idx_agent_widgets ON agent_widgets(agent_id, widget_type)`);
 
   // Create indexes for common queries
   db.run(`CREATE INDEX IF NOT EXISTS idx_conversations_agent ON conversations(agent_id, created_at DESC)`);

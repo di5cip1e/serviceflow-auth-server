@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Omni-Channel Widgets — M.ai.K.R</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .wg-container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+    .wg-header { margin-bottom: 32px; }
+    .wg-header h1 { font-size: 28px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+    .wg-header p { color: var(--text-muted); font-size: 15px; line-height: 1.6; }
+    .wg-card { background: var(--bg-white); border: 1px solid var(--border-medium); border-radius: 12px; padding: 28px; margin-bottom: 20px; }
+    .wg-card h2 { font-size: 18px; font-weight: 600; color: var(--text-dark); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+    .wg-form-group { margin-bottom: 16px; }
+    .wg-form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--text-body); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .wg-form-group select, .wg-form-group input[type="text"] { width: 100%; padding: 10px 14px; border: 1px solid var(--border-medium); border-radius: 8px; font-size: 14px; font-family: inherit; color: var(--text-dark); background: var(--bg-light); }
+    .wg-form-group select:focus, .wg-form-group input:focus { outline: none; border-color: var(--brand-green); }
+    .wg-type-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-bottom: 20px; }
+    .wg-type-card { border: 2px solid var(--border-medium); border-radius: 10px; padding: 16px; cursor: pointer; transition: all 0.15s; text-align: center; }
+    .wg-type-card:hover { border-color: var(--brand-green); background: #f0fdf4; }
+    .wg-type-card.selected { border-color: var(--brand-green); background: #f0fdf4; box-shadow: 0 0 0 3px rgba(16,185,129,0.15); }
+    .wg-type-icon { font-size: 32px; margin-bottom: 8px; }
+    .wg-type-name { font-size: 14px; font-weight: 600; color: var(--text-dark); }
+    .wg-type-desc { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+    .wg-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; border: none; font-family: inherit; transition: all 0.15s; }
+    .wg-btn-primary { background: var(--brand-green); color: white; }
+    .wg-btn-primary:hover { background: var(--brand-green-hover); }
+    .wg-btn-secondary { background: var(--bg-light); color: var(--text-body); border: 1px solid var(--border-medium); }
+    .wg-embed-code { background: #0f172a; color: #e2e8f0; padding: 16px; border-radius: 8px; font-family: 'Monaco', 'Consolas', monospace; font-size: 12px; line-height: 1.6; white-space: pre-wrap; word-break: break-all; margin-top: 12px; position: relative; }
+    .wg-copy-btn { position: absolute; top: 8px; right: 8px; padding: 6px 12px; background: var(--brand-green); color: white; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: var(--font-main); }
+    .wg-copy-btn:hover { background: var(--brand-green-hover); }
+    .wg-widget-list { list-style: none; padding: 0; }
+    .wg-widget-item { display: flex; align-items: flex-start; justify-content: space-between; padding: 16px; border: 1px solid var(--border-medium); border-radius: 8px; margin-bottom: 10px; }
+    .wg-widget-info h3 { font-size: 15px; font-weight: 600; color: var(--text-dark); }
+    .wg-widget-info p { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+    .wg-widget-meta { display: flex; gap: 16px; margin-top: 8px; font-size: 12px; color: var(--text-muted); }
+    .wg-widget-actions { display: flex; gap: 8px; flex-shrink: 0; }
+    .wg-toast { position: fixed; bottom: 24px; right: 24px; padding: 14px 20px; background: var(--text-dark); color: white; border-radius: 8px; font-size: 14px; font-weight: 500; box-shadow: var(--shadow-lg); transform: translateY(100px); opacity: 0; transition: all 0.3s; z-index: 1000; }
+    .wg-toast.show { transform: translateY(0); opacity: 1; }
+    .wg-preview-box { background: var(--bg-light); border: 1px dashed var(--border-medium); border-radius: 8px; padding: 20px; margin-top: 12px; text-align: center; color: var(--text-muted); }
+    .wg-status-badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+    .wg-status-active { background: #dcfce7; color: #166534; }
+    .wg-channel-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 16px 0; }
+    .wg-channel-stat { text-align: center; padding: 16px; background: var(--bg-light); border-radius: 8px; }
+    .wg-channel-stat .icon { font-size: 24px; margin-bottom: 6px; }
+    .wg-channel-stat .label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    .wg-channel-stat .value { font-size: 20px; font-weight: 700; color: var(--text-dark); }
+  </style>
+</head>
+<body>
+  <nav style="background:var(--bg-white);border-bottom:1px solid var(--border-medium);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:56px;">
+    <a href="/command-center.html" style="text-decoration:none;font-size:18px;font-weight:700;color:var(--text-dark);">⚡ M.ai.K.R</a>
+    <div style="display:flex;gap:16px;align-items:center;">
+      <a href="/command-center.html" style="text-decoration:none;color:var(--text-muted);font-size:14px;">Dashboard</a>
+      <a href="/agents.html" style="text-decoration:none;color:var(--text-muted);font-size:14px;">Agents</a>
+      <a href="/channels.html" style="text-decoration:none;color:var(--text-muted);font-size:14px;">Channels</a>
+      <a href="/settings.html" style="text-decoration:none;color:var(--text-muted);font-size:14px;">Settings</a>
+      <button onclick="logout()" class="logout-link">Log out</button>
+    </div>
+  </nav>
+
+  <div class="wg-container">
+    <div class="wg-header">
+      <h1>📡 One-Click Omni-Channel Widgets</h1>
+      <p>Deploy your AI agent anywhere — website chat bubble, inline embed, WhatsApp button, or full-page chat. Copy-paste one line of code.</p>
+    </div>
+
+    <!-- Channel Stats Overview -->
+    <div class="wg-card">
+      <h2>📊 Channel Overview</h2>
+      <div class="wg-channel-grid">
+        <div class="wg-channel-stat">
+          <div class="icon">💬</div>
+          <div class="label">Website</div>
+          <div class="value" id="wg-count-web">0</div>
+        </div>
+        <div class="wg-channel-stat">
+          <div class="icon">📱</div>
+          <div class="label">WhatsApp</div>
+          <div class="value" id="wg-count-wa">0</div>
+        </div>
+        <div class="wg-channel-stat">
+          <div class="icon">📱</div>
+          <div class="label">SMS</div>
+          <div class="value" id="wg-count-sms">0</div>
+        </div>
+        <div class="wg-channel-stat">
+          <div class="icon">🖥️</div>
+          <div class="label">Full Page</div>
+          <div class="value" id="wg-count-full">0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Widget -->
+    <div class="wg-card">
+      <h2>➕ Create New Widget</h2>
+      <div class="wg-form-group">
+        <label>Select Agent</label>
+        <select id="wg-agent">
+          <option value="">Loading agents...</option>
+        </select>
+      </div>
+      <div class="wg-form-group">
+        <label>Widget Type</label>
+        <div class="wg-type-grid">
+          <div class="wg-type-card selected" onclick="selectType('chat-bubble', this)">
+            <div class="wg-type-icon">💬</div>
+            <div class="wg-type-name">Chat Bubble</div>
+            <div class="wg-type-desc">Floating button that opens a chat</div>
+          </div>
+          <div class="wg-type-card" onclick="selectType('inline-chat', this)">
+            <div class="wg-type-icon">📦</div>
+            <div class="wg-type-name">Inline Chat</div>
+            <div class="wg-type-desc">Embedded directly in page content</div>
+          </div>
+          <div class="wg-type-card" onclick="selectType('full-page', this)">
+            <div class="wg-type-icon">🖥️</div>
+            <div class="wg-type-name">Full Page</div>
+            <div class="wg-type-desc">Embed as a full-page iframe</div>
+          </div>
+          <div class="wg-type-card" onclick="selectType('whatsapp-button', this)">
+            <div class="wg-type-icon">📱</div>
+            <div class="wg-type-name">WhatsApp</div>
+            <div class="wg-type-desc">Chat via WhatsApp Business</div>
+          </div>
+          <div class="wg-type-card" onclick="selectType('sms-widget', this)">
+            <div class="wg-type-icon">📨</div>
+            <div class="wg-type-name">SMS Button</div>
+            <div class="wg-type-desc">Float a text-us button</div>
+          </div>
+        </div>
+      </div>
+      <button class="wg-btn wg-btn-primary" onclick="createWidget()">🚀 Generate Widget</button>
+
+      <div id="wg-embed-section" style="display:none;">
+        <h3 style="font-size:15px;font-weight:600;margin:20px 0 8px;">Embed Code</h3>
+        <p style="font-size:13px;color:var(--text-muted);margin-bottom:8px;">Paste this into your website's HTML, just before the closing <code>&lt;/body&gt;</code> tag:</p>
+        <div class="wg-embed-code" id="wg-embed-code">
+          <button class="wg-copy-btn" onclick="copyEmbed()">📋 Copy</button>
+          <code id="wg-code-text"></code>
+        </div>
+      </div>
+    </div>
+
+    <!-- Widget List -->
+    <div class="wg-card">
+      <h2>📋 Active Widgets</h2>
+      <ul class="wg-widget-list" id="wg-list">
+        <li style="text-align:center;padding:20px;color:var(--text-muted);">Loading widgets...</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wg-toast" id="wg-toast"></div>
+
+  <script>
+    let selectedType = 'chat-bubble';
+    let availableAgents = [];
+    let allWidgets = [];
+
+    // Load agents
+    fetch('/api/widgets/agents/list', { credentials: 'include' })
+      .then(r => r.json())
+      .then(data => {
+        availableAgents = data || [];
+        const sel = document.getElementById('wg-agent');
+        if (availableAgents.length === 0) {
+          sel.innerHTML = '<option value="">No agents — create one first</option>';
+        } else {
+          sel.innerHTML = availableAgents.map(a => `<option value="${a.id}">${a.agent_name} (${a.id})</option>`).join('');
+        }
+      }).catch(() => { document.getElementById('wg-agent').innerHTML = '<option value="">Failed to load agents</option>'; });
+
+    // Load widgets
+    fetch('/api/widgets', { credentials: 'include' })
+      .then(r => r.json())
+      .then(data => {
+        allWidgets = data || [];
+        renderWidgets(data || []);
+        updateStats(data || []);
+      }).catch(() => {
+        document.getElementById('wg-list').innerHTML = '<li style="text-align:center;padding:20px;color:var(--text-muted);">Failed to load widgets</li>';
+      });
+
+    function renderWidgets(widgets) {
+      const list = document.getElementById('wg-list');
+      if (widgets.length === 0) {
+        list.innerHTML = '<li style="text-align:center;padding:32px;color:var(--text-muted);">No widgets yet. Create one above! ↗️</li>';
+        return;
+      }
+      list.innerHTML = widgets.map(w => {
+        const typeIcon = w.widget_type === 'chat-bubble' ? '💬' : w.widget_type === 'inline-chat' ? '📦' : w.widget_type === 'full-page' ? '🖥️' : w.widget_type === 'whatsapp-button' ? '📱' : '📨';
+        return `
+          <li class="wg-widget-item">
+            <div class="wg-widget-info">
+              <h3>${typeIcon} ${w.widget_type.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())} — ${w.agent_name || w.agent_id}</h3>
+              <p style="font-size:12px;font-family:monospace;color:var(--text-muted);margin-top:4px;">${w.embed_code?.substring(0, 80)}...</p>
+              <div class="wg-widget-meta">
+                <span>Created: ${new Date(w.created_at).toLocaleDateString()}</span>
+                <span>Status: <span class="wg-status-badge ${w.status === 'active' ? 'wg-status-active' : ''}">● ${w.status}</span></span>
+              </div>
+            </div>
+            <div class="wg-widget-actions">
+              <button class="wg-btn wg-btn-secondary" onclick="showEmbed('${w.embed_code?.replace(/'/g, "\\'")}')">📋 Code</button>
+              <button class="wg-btn wg-btn-primary" style="background:#fee2e2;color:#dc2626;" onclick="deleteWidget('${w.id}')">🗑️</button>
+            </div>
+          </li>`;
+      }).join('');
+    }
+
+    function updateStats(widgets) {
+      const counts = { 'chat-bubble': 0, 'inline-chat': 0, 'full-page': 0, 'whatsapp-button': 0, 'sms-widget': 0 };
+      widgets.forEach(w => { if (counts[w.widget_type] !== undefined) counts[w.widget_type]++; });
+      document.getElementById('wg-count-web').textContent = (counts['chat-bubble'] + counts['inline-chat']);
+      document.getElementById('wg-count-wa').textContent = counts['whatsapp-button'];
+      document.getElementById('wg-count-sms').textContent = counts['sms-widget'];
+      document.getElementById('wg-count-full').textContent = counts['full-page'];
+    }
+
+    function selectType(type, el) {
+      selectedType = type;
+      document.querySelectorAll('.wg-type-card').forEach(c => c.classList.remove('selected'));
+      el.classList.add('selected');
+    }
+
+    function createWidget() {
+      const agentId = document.getElementById('wg-agent').value;
+      if (!agentId) { showToast('Please select an agent', true); return; }
+
+      fetch('/api/widgets', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ agentId, widgetType: selectedType, placement: selectedType === 'inline-chat' ? 'inline' : 'floating' })
+      })
+        .then(r => r.json())
+        .then(data => {
+          if (data.error) { showToast(data.error, true); return; }
+          showToast('✅ Widget created successfully!');
+          document.getElementById('wg-embed-section').style.display = 'block';
+          document.getElementById('wg-code-text').textContent = data.embedCode;
+          document.getElementById('wg-embed-code').scrollIntoView({ behavior: 'smooth' });
+          setTimeout(() => location.reload(), 3000);
+        })
+        .catch(() => showToast('Failed to create widget', true));
+    }
+
+    function showEmbed(code) {
+      document.getElementById('wg-embed-section').style.display = 'block';
+      document.getElementById('wg-code-text').textContent = code;
+      document.getElementById('wg-embed-code').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function copyEmbed() {
+      const code = document.getElementById('wg-code-text').textContent;
+      navigator.clipboard.writeText(code).then(() => showToast('📋 Copied to clipboard!'));
+    }
+
+    function deleteWidget(id) {
+      if (!confirm('Remove this widget? The embed code will stop working.')) return;
+      fetch('/api/widgets/' + id, { method: 'DELETE', credentials: 'include' })
+        .then(r => r.json())
+        .then(data => {
+          if (data.error) { showToast(data.error, true); return; }
+          showToast('✅ Widget removed');
+          setTimeout(() => location.reload(), 800);
+        })
+        .catch(() => showToast('Failed to remove widget', true));
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('wg-toast');
+      t.textContent = msg;
+      t.className = 'wg-toast show';
+      setTimeout(() => t.className = 'wg-toast', 3000);
+    }
+
+    function logout() {
+      fetch('/api/auth/logout', { method: 'POST', credentials: 'include' }).then(() => window.location.href = '/login');
+    }
+  </script>
+</body>
+</html>

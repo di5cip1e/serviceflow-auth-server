@@ -130,6 +130,18 @@ app.get('/blueprints.html', requireAuth, (req, res) => {
 app.get('/workflow-canvas.html', requireAuth, (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/workflow-canvas.html'));
 });
+app.get('/whitelabel.html', requireAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/whitelabel.html'));
+});
+app.get('/templates.html', requireAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/templates.html'));
+});
+app.get('/byok.html', requireAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/byok.html'));
+});
+app.get('/widgets.html', requireAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/widgets.html'));
+});
 app.get('/chat.html', requireAuth, (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/chat.html'));
 });
@@ -187,6 +199,22 @@ app.use('/api/analytics', analyticsRoutes);
 const blueprintsRoutes = require('./routes/blueprints');
 app.use('/api/blueprints', blueprintsRoutes);
 
+// White-label routes (D.1)
+const whitelabelRoutes = require('./routes/whitelabel');
+app.use('/api/whitelabel', whitelabelRoutes);
+
+// Template Marketplace routes (D.2)
+const templatesRoutes = require('./routes/templates');
+app.use('/api/templates', templatesRoutes);
+
+// BYOK routes (D.3)
+const byokRoutes = require('./routes/byok');
+app.use('/api/byok', byokRoutes);
+
+// Widget routes (D.4)
+const widgetsRoutes = require('./routes/widgets');
+app.use('/api/widgets', widgetsRoutes);
+
 // Delegation routes (C.2 Agent-to-Agent Delegation)
 const delegationRoutes = require('./routes/delegation');
 app.use('/api/delegation', delegationRoutes);
@@ -200,7 +228,7 @@ app.use('/api/self-correction', selfCorrectionRoutes);
 const protectedPages = new Set([
   'chat.html', 'observe.html', 'swarm.html', 'channels.html',
   'mcp.html', 'optimization.html', 'settings.html', 'command-center.html',
-  'deploy.html', 'admin.html', 'dashboard.html', 'leads.html', 'onboarding-wizard.html', 'analytics.html', 'agent-studio.html', 'blueprints.html', 'workflow-canvas.html'
+  'deploy.html', 'admin.html', 'dashboard.html', 'leads.html', 'onboarding-wizard.html', 'analytics.html', 'agent-studio.html', 'blueprints.html', 'workflow-canvas.html', 'whitelabel.html', 'templates.html', 'byok.html', 'widgets.html'
 ]);
 
 // Serve CSS, JS, and assets statically (no auth needed)

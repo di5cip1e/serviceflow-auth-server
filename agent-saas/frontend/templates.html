@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Template Marketplace — M.ai.K.R</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .tm-container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+    .tm-header { margin-bottom: 32px; }
+    .tm-header h1 { font-size: 28px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+    .tm-header p { color: var(--text-muted); font-size: 15px; }
+    .tm-filters { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .tm-filter { padding: 8px 16px; border-radius: 20px; border: 1px solid var(--border-medium); background: var(--bg-white); font-size: 13px; font-weight: 500; color: var(--text-body); cursor: pointer; transition: all 0.15s; font-family: inherit; }
+    .tm-filter:hover { border-color: var(--brand-green); color: var(--brand-green); }
+    .tm-filter.active { background: var(--brand-green); color: white; border-color: var(--brand-green); }
+    .tm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+    .tm-card { background: var(--bg-white); border: 1px solid var(--border-medium); border-radius: 12px; overflow: hidden; transition: box-shadow 0.2s, transform 0.2s; }
+    .tm-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+    .tm-card-thumb { height: 140px; background: linear-gradient(135deg, #0f172a, #1e293b); display: flex; align-items: center; justify-content: center; color: white; font-size: 40px; position: relative; }
+    .tm-card-thumb .tm-premium-badge { position: absolute; top: 12px; right: 12px; background: var(--accent-orange); color: white; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+    .tm-card-thumb .tm-free-badge { position: absolute; top: 12px; right: 12px; background: var(--brand-green); color: white; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; }
+    .tm-card-body { padding: 20px; }
+    .tm-card-category { font-size: 11px; font-weight: 600; color: var(--brand-green); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+    .tm-card-name { font-size: 17px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+    .tm-card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 14px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .tm-card-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; padding-top: 12px; border-top: 1px solid var(--border-light); }
+    .tm-card-rating { display: flex; align-items: center; gap: 4px; font-size: 13px; color: var(--text-body); }
+    .tm-card-rating .star { color: var(--accent-orange); }
+    .tm-card-downloads { font-size: 12px; color: var(--text-muted); }
+    .tm-card-price { font-size: 18px; font-weight: 700; color: var(--text-dark); }
+    .tm-card-price .free { color: var(--brand-green); }
+    .tm-card-actions { display: flex; gap: 8px; }
+    .tm-btn { flex: 1; padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.15s; font-family: inherit; border: none; text-align: center; }
+    .tm-btn-primary { background: var(--brand-green); color: white; }
+    .tm-btn-primary:hover { background: var(--brand-green-hover); }
+    .tm-btn-secondary { background: var(--bg-light); color: var(--text-body); border: 1px solid var(--border-medium); }
+    .tm-btn-secondary:hover { background: var(--border-light); }
+    .tm-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .tm-locked { position: absolute; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; color: white; font-size: 14px; font-weight: 600; gap: 6px; }
+    .tm-toast { position: fixed; bottom: 24px; right: 24px; padding: 14px 20px; background: var(--text-dark); color: white; border-radius: 8px; font-size: 14px; font-weight: 500; box-shadow: var(--shadow-lg); transform: translateY(100px); opacity: 0; transition: all 0.3s; z-index: 1000; }
+    .tm-toast.show { transform: translateY(0); opacity: 1; }
+    .tm-empty { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+    .tm-empty-icon { font-size: 48px; margin-bottom: 16px; }
+    .tm-mine-section { margin-top: 48px; }
+    .tm-mine-section h2 { font-size: 20px; font-weight: 700; color: var(--text-dark); margin-bottom: 20px; }
+    .tm-applied-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+    .tm-tag { display: inline-block; padding: 2px 8px; background: #f1f5f9; border-radius: 12px; font-size: 11px; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+  <nav style="background:var(--bg-white);border-bottom:1px solid var(--border-medium);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:56px;">
+    <a href="/command-center.html" style="text-decoration:none;font-size:18px;font-weight:700;color:var(--text-dark);">⚡ M.ai.K.R</a>
+    <div style="display:flex;gap:16px;align-items:center;">
+      <a href="/command-center.html" style="text-decoration:none;color:var(--text-muted);font-size:14px;">Dashboard</a>
+      <a href="/agents.html" style="text-decoration:none;color:var(--text-muted);font-size:14px;">Agents</a>
+      <a href="/templates.html" style="text-decoration:none;color:var(--brand-green);font-size:14px;font-weight:600;">Templates</a>
+      <a href="/settings.html" style="text-decoration:none;color:var(--text-muted);font-size:14px;">Settings</a>
+      <button onclick="logout()" class="logout-link">Log out</button>
+    </div>
+  </nav>
+
+  <div class="tm-container">
+    <div class="tm-header">
+      <h1>📦 Template Marketplace</h1>
+      <p>Pre-built agent templates by industry. Apply in one click and customize to your needs.</p>
+    </div>
+
+    <div class="tm-filters">
+      <button class="tm-filter active" onclick="filterTemplates('all', this)">All Templates</button>
+      <button class="tm-filter" onclick="filterTemplates('Support', this)">🛎️ Support</button>
+      <button class="tm-filter" onclick="filterTemplates('Sales', this)">💰 Sales</button>
+      <button class="tm-filter" onclick="filterTemplates('Operations', this)">⚙️ Operations</button>
+      <button class="tm-filter" onclick="filterTemplates('Onboarding', this)">🚀 Onboarding</button>
+      <button class="tm-filter" onclick="filterTemplates('Hospitality', this)">🏨 Hospitality</button>
+      <button class="tm-filter" onclick="filterTemplates('free', this)">✨ Free Only</button>
+    </div>
+
+    <div class="tm-grid" id="tm-grid">
+      <div class="tm-empty"><div class="tm-empty-icon">⏳</div><p>Loading templates...</p></div>
+    </div>
+
+    <!-- My Templates Section -->
+    <div class="tm-mine-section" id="tm-mine-section" style="display:none;">
+      <h2>🔓 My Unlocked Templates</h2>
+      <div class="tm-grid" id="tm-mine-grid"></div>
+    </div>
+  </div>
+
+  <!-- Template Detail Modal -->
+  <div id="tm-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:1000;align-items:center;justify-content:center;">
+    <div style="background:var(--bg-white);border-radius:16px;max-width:560px;width:90%;max-height:80vh;overflow-y:auto;padding:32px;position:relative;">
+      <button onclick="closeModal()" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--text-muted);">✕</button>
+      <div id="tm-modal-content"></div>
+    </div>
+  </div>
+
+  <div class="tm-toast" id="tm-toast"></div>
+
+  <script>
+    let allTemplates = [];
+    let myTemplates = [];
+
+    // Load templates
+    fetch('/api/templates', { credentials: 'include' })
+      .then(r => r.json())
+      .then(data => {
+        allTemplates = data || [];
+        renderTemplates(allTemplates);
+      })
+      .catch(() => {
+        document.getElementById('tm-grid').innerHTML = '<div class="tm-empty"><div class="tm-empty-icon">❌</div><p>Failed to load templates</p></div>';
+      });
+
+    // Load my templates
+    fetch('/api/templates/mine/list', { credentials: 'include' })
+      .then(r => r.json())
+      .then(data => {
+        myTemplates = data || [];
+        if (myTemplates.length > 0) {
+          document.getElementById('tm-mine-section').style.display = 'block';
+          renderMyTemplates();
+        }
+      }).catch(() => {});
+
+    const categoryIcons = {
+      'Support': '🛎️', 'Sales': '💰', 'Operations': '⚙️', 'Onboarding': '🚀', 'Hospitality': '🏨', 'Healthcare': '🏥', 'Technology': '💻', 'E-Commerce': '🛒', 'default': '🤖'
+    };
+
+    function renderTemplates(list) {
+      const grid = document.getElementById('tm-grid');
+      if (list.length === 0) {
+        grid.innerHTML = '<div class="tm-empty"><div class="tm-empty-icon">🔍</div><p>No templates found for this filter</p></div>';
+        return;
+      }
+      grid.innerHTML = list.map(t => {
+        const icon = categoryIcons[t.category] || categoryIcons.default;
+        const isUnlocked = myTemplates.some(mt => mt.id === t.id);
+        return `
+          <div class="tm-card" data-id="${t.id}" data-category="${t.category}" data-premium="${t.is_premium}">
+            <div class="tm-card-thumb" style="position:relative;">
+              ${icon}
+              ${t.is_premium ? '<span class="tm-premium-badge">PRO</span>' : '<span class="tm-free-badge">FREE</span>'}
+              ${t.is_premium && !isUnlocked ? '<div class="tm-locked">🔒 Premium</div>' : ''}
+            </div>
+            <div class="tm-card-body">
+              <div class="tm-card-category">${t.category}${t.industry ? ' · ' + t.industry : ''}</div>
+              <div class="tm-card-name">${t.name}</div>
+              <div class="tm-card-desc">${t.description || ''}</div>
+              <div class="tm-card-meta">
+                <div class="tm-card-rating">${t.rating ? '<span class="star">★</span> ' + t.rating.toFixed(1) : ''}</div>
+                <div class="tm-card-downloads">${(t.downloads || 0).toLocaleString()} uses</div>
+              </div>
+              <div class="tm-card-actions">
+                ${isUnlocked || !t.is_premium
+                  ? `<button class="tm-btn tm-btn-primary" onclick="useTemplate('${t.id}', '${t.name.replace(/'/g, "\\'")}')">⚡ Use This Template</button>`
+                  : `<button class="tm-btn tm-btn-primary" onclick="purchaseTemplate('${t.id}', ${t.price_cents})">🔓 Unlock $${(t.price_cents/100).toFixed(0)}</button>`
+                }
+                <button class="tm-btn tm-btn-secondary" onclick="viewTemplate('${t.id}')">👁️ Details</button>
+              </div>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    function renderMyTemplates() {
+      const grid = document.getElementById('tm-mine-grid');
+      grid.innerHTML = myTemplates.map(t => `
+        <div class="tm-card">
+          <div class="tm-card-body">
+            <div class="tm-card-category">${t.category || 'Template'}</div>
+            <div class="tm-card-name">${t.name}</div>
+            <div style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">Unlocked ${new Date(t.unlocked_at).toLocaleDateString()}</div>
+            <div class="tm-card-actions">
+              <button class="tm-btn tm-btn-primary" onclick="useTemplate('${t.id}', '${t.name.replace(/'/g, "\\'")}')">⚡ Use Template</button>
+            </div>
+          </div>
+        </div>`).join('');
+    }
+
+    function filterTemplates(filter, btn) {
+      document.querySelectorAll('.tm-filter').forEach(f => f.classList.remove('active'));
+      btn.classList.add('active');
+
+      let filtered;
+      if (filter === 'all') filtered = allTemplates;
+      else if (filter === 'free') filtered = allTemplates.filter(t => !t.is_premium);
+      else filtered = allTemplates.filter(t => t.category === filter);
+      renderTemplates(filtered);
+    }
+
+    async function viewTemplate(id) {
+      const res = await fetch('/api/templates/' + id, { credentials: 'include' });
+      const t = await res.json();
+      if (t.error) { showToast(t.error, true); return; }
+      const modal = document.getElementById('tm-modal');
+      document.getElementById('tm-modal-content').innerHTML = `
+        <div style="font-size:48px;margin-bottom:16px;">${categoryIcons[t.category] || categoryIcons.default}</div>
+        <div class="tm-card-category">${t.category}${t.industry ? ' · ' + t.industry : ''}</div>
+        <h2 style="font-size:24px;font-weight:700;color:var(--text-dark);margin:8px 0 16px;">${t.name}</h2>
+        <p style="color:var(--body-text);line-height:1.7;margin-bottom:20px;font-size:15px;">${t.description || ''}</p>
+        <div style="display:flex;gap:20px;margin-bottom:20px;padding:16px;background:var(--bg-light);border-radius:8px;">
+          <div><div style="font-size:12px;color:var(--text-muted);">Rating</div><div style="font-weight:600;">${t.rating ? '★ ' + t.rating.toFixed(1) : 'New'}</div></div>
+          <div><div style="font-size:12px;color:var(--text-muted);">Uses</div><div style="font-weight:600;">${(t.downloads||0).toLocaleString()}</div></div>
+          <div><div style="font-size:12px;color:var(--text-muted);">Price</div><div style="font-weight:600;color:var(--brand-green);">${t.price_cents > 0 ? '$' + (t.price_cents/100).toFixed(0) : 'FREE'}</div></div>
+          <div><div style="font-size:12px;color:var(--text-muted);">Industry</div><div style="font-weight:600;">${t.industry || 'Any'}</div></div>
+        </div>
+        ${t.guardrails ? `<div style="margin-bottom:20px;"><h3 style="font-size:14px;font-weight:600;margin-bottom:8px;">Guardrails</h3><div class="tm-applied-tags">${(Array.isArray(t.guardrails) ? t.guardrails : []).map(g => '<span class="tm-tag">' + g.replace(/_/g, ' ') + '</span>').join('')}</div></div>` : ''}
+        <div style="display:flex;gap:8px;">
+          ${t.unlocked || !t.is_premium
+            ? `<button class="tm-btn tm-btn-primary" style="flex:2;" onclick="useTemplate('${t.id}','${t.name.replace(/'/g, "\\'")}');closeModal();">⚡ Use This Template</button>`
+            : `<button class="tm-btn tm-btn-primary" style="flex:2;" onclick="purchaseTemplate('${t.id}',${t.price_cents});closeModal();">🔓 Unlock $${(t.price_cents/100).toFixed(0)}</button>`
+          }
+        </div>`;
+      modal.style.display = 'flex';
+    }
+
+    function closeModal() { document.getElementById('tm-modal').style.display = 'none'; }
+
+    function purchaseTemplate(id, priceCents) {
+      if (priceCents === 0) return;
+      fetch('/api/templates/' + id + '/purchase', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({}) })
+        .then(r => r.json())
+        .then(data => {
+          if (data.error) { showToast(data.error, true); return; }
+          showToast('✅ Template unlocked: ' + (data.templateName || ''));
+          setTimeout(() => location.reload(), 1000);
+        })
+        .catch(() => showToast('Purchase failed', true));
+    }
+
+    function useTemplate(id, name) {
+      // In production, this would show a modal to pick which agent to apply to
+      const agentId = prompt('Enter Agent ID to apply "' + name + '" template to:\n\n(You can find Agent IDs in your Dashboard)');
+      if (!agentId) return;
+      fetch('/api/templates/' + id + '/apply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ agentId })
+      })
+        .then(r => r.json())
+        .then(data => {
+          if (data.error) { showToast(data.error, true); return; }
+          showToast('✅ Template "' + name + '" applied to agent!');
+        })
+        .catch(() => showToast('Failed to apply template', true));
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('tm-toast');
+      t.textContent = msg;
+      t.className = 'tm-toast show';
+      setTimeout(() => t.className = 'tm-toast', 3000);
+    }
+
+    function logout() {
+      fetch('/api/auth/logout', { method: 'POST', credentials: 'include' }).then(() => window.location.href = '/login');
+    }
+  </script>
+</body>
+</html>

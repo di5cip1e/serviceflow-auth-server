@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bring Your Own Key — M.ai.K.R</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .byok-container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+    .byok-header { margin-bottom: 32px; }
+    .byok-header h1 { font-size: 28px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+    .byok-header p { color: var(--text-muted); font-size: 15px; line-height: 1.6; }
+    .byok-card { background: var(--bg-white); border: 1px solid var(--border-medium); border-radius: 12px; padding: 28px; margin-bottom: 20px; }
+    .byok-card h2 { font-size: 18px; font-weight: 600; color: var(--text-dark); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+    .byok-info-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 16px; margin-bottom: 20px; }
+    .byok-info-box h3 { font-size: 14px; font-weight: 600; color: #1d4ed8; margin-bottom: 6px; }
+    .byok-info-box p { font-size: 13px; color: #1e40af; line-height: 1.6; }
+    .byok-info-box ul { margin: 8px 0 0 20px; font-size: 13px; color: #1e40af; }
+    .byok-info-box li { margin-bottom: 4px; }
+    .byok-form-group { margin-bottom: 16px; }
+    .byok-form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--text-body); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .byok-form-group select, .byok-form-group input[type="text"], .byok-form-group input[type="password"], .byok-form-group input[type="number"] {
+      width: 100%; padding: 10px 14px; border: 1px solid var(--border-medium); border-radius: 8px;
+      font-size: 14px; font-family: inherit; color: var(--text-dark); background: var(--bg-light);
+    }
+    .byok-form-group select:focus, .byok-form-group input:focus { outline: none; border-color: var(--brand-green); box-shadow: 0 0 0 3px rgba(16,185,129,0.1); }
+    .byok-key-list { list-style: none; padding: 0; }
+    .byok-key-item { display: flex; align-items: center; justify-content: space-between; padding: 16px; border: 1px solid var(--border-medium); border-radius: 8px; margin-bottom: 10px; }
+    .byok-key-info { display: flex; align-items: center; gap: 12px; }
+    .byok-key-icon { width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    .byok-key-icon.openai { background: #f0fdf4; color: #166534; }
+    .byok-key-icon.anthropic { background: #fef3c7; color: #92400e; }
+    .byok-key-icon.google { background: #eff6ff; color: #1d4ed8; }
+    .byok-key-icon.other { background: #f1f5f9; color: #475569; }
+    .byok-key-name { font-size: 14px; font-weight: 600; color: var(--text-dark); }
+    .byok-key-meta { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+    .byok-key-actions { display: flex; gap: 8px; align-items: center; }
+    .byok-btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; border: none; font-family: inherit; transition: all 0.15s; }
+    .byok-btn-primary { background: var(--brand-green); color: white; }
+    .byok-btn-primary:hover { background: var(--brand-green-hover); }
+    .byok-btn-danger { background: #fee2e2; color: #dc2626; }
+    .byok-btn-danger:hover { background: #fecaca; }
+    .byok-btn-secondary { background: var(--bg-light); color: var(--text-body); border: 1px solid var(--border-medium); }
+    .byok-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+    .byok-badge-active { background: #dcfce7; color: #166534; }
+    .byok-badge-inactive { background: #fee2e2; color: #991b1b; }
+    .byok-empty { text-align: center; padding: 40px; color: var(--text-muted); }
+    .byok-empty-icon { font-size: 40px; margin-bottom: 12px; }
+    .byok-fee-row { display: flex; align-items: center; gap: 12px; margin-top: 8px; }
+    .byok-fee-row input[type="range"] { flex: 1; }
+    .byok-fee-value { font-size: 14px; font-weight: 600; color: var(--text-dark); min-width: 40px; text-align: right; }
+    .byok-toast { position: fixed; bottom: 24px; right: 24px; padding: 14px 20px; background: var(--text-dark); color: white; border-radius: 8px; font-size: 14px; font-weight: 500; box-shadow: var(--shadow-lg); transform: translateY(100px); opacity: 0; transition: all 0.3s; z-index: 1000; }
+    .byok-toast.show { transform: translateY(0); opacity: 1; }
+    .byok-toggle { display: flex; align-items: center; justify-content: space-between; }
+    .byok-switch { position: relative; width: 48px; height: 26px; flex-shrink: 0; }
+    .byok-switch input { opacity: 0; width: 0; height: 0; }
+    .byok-slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: var(--border-medium); border-radius: 26px; transition: 0.3s; }
+    .byok-slider:before { content: ""; position: absolute; height: 20px; width: 20px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: 0.3s; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+    .byok-switch input:checked + .byok-slider { background: var(--brand-green); }
+    .byok-switch input:checked + .byok-slider:before { transform: translateX(22px); }
+  </style>
+</head>
+<body>
+  <nav style="background:var(--bg-white);border-bottom:1px solid var(--border-medium);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:56px;">
+    <a href="/command-center.html" style="text-decoration:none;font-size:18px;font-weight:700;color:var(--text-dark);">⚡ M.ai.K.R</a>
+    <div style="display:flex;gap:16px;align-items:center;">
+      <a href="/command-center.html" style="text-decoration:none;color:var(--text-muted);font-size:14px;">Dashboard</a>
+      <a href="/agents.html" style="text-decoration:none;color:var(--text-muted);font-size:14px;">Agents</a>
+      <a href="/settings.html" style="text-decoration:none;color:var(--text-muted);font-size:14px;">Settings</a>
+      <button onclick="logout()" class="logout-link">Log out</button>
+    </div>
+  </nav>
+
+  <div class="byok-container">
+    <div class="byok-header">
+      <h1>🔑 Bring Your Own Key (BYOK)</h1>
+      <p>Use your own API keys from OpenAI, Anthropic, Google, or any provider. You pay the provider directly + a small platform fee to us. Save money at scale.</p>
+    </div>
+
+    <!-- Info Box -->
+    <div class="byok-info-box">
+      <h3>💡 How BYOK Works</h3>
+      <ul>
+        <li>Add your API key from any supported provider</li>
+        <li>We route agent requests through your key</li>
+        <li>Pay your provider's rates + our platform fee (configurable, 0-10%)</li>
+        <li>Toggle between our managed service and your key anytime</li>
+        <li>Keys are encrypted at rest and never exposed in the dashboard</li>
+      </ul>
+    </div>
+
+    <!-- Toggle -->
+    <div class="byok-card">
+      <div class="byok-toggle">
+        <div>
+          <h2 style="margin-bottom:4px;">Enable BYOK Mode</h2>
+            <p style="font-size:14px;color:var(--text-muted);">Route AI requests through your own API keys</p>
+        </div>
+        <label class="byok-switch">
+          <input type="checkbox" id="byok-enabled" onchange="toggleBYOK()">
+          <span class="byok-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Add Key -->
+    <div class="byok-card">
+      <h2>➕ Add API Key</h2>
+      <div class="byok-form-group">
+        <label>Provider</label>
+        <select id="byok-provider">
+          <option value="openai">OpenAI (GPT-4, GPT-4o, etc.)</option>
+          <option value="anthropic">Anthropic (Claude 3.5, Claude 4, etc.)</option>
+          <option value="google">Google (Gemini Pro, Gemini Ultra)</option>
+          <option value="openrouter">OpenRouter (Multi-model)</option>
+          <option value="other">Other Provider</option>
+        </select>
+      </div>
+      <div class="byok-form-group">
+        <label>API Key</label>
+        <input type="password" id="byok-api-key" placeholder="sk-...">
+      </div>
+      <div class="byok-fee-row">
+        <label style="font-size:13px;color:var(--text-body);">Platform Fee:</label>
+        <input type="range" id="byok-fee" min="0" max="10" step="0.5" value="5" oninput="document.getElementById('byok-fee-val').textContent=this.value+'%'">
+        <span class="byok-fee-value" id="byok-fee-val">5%</span>
+      </div>
+      <button class="byok-btn byok-btn-primary" onclick="addKey()" style="margin-top:16px;">🔐 Save Key Securely</button>
+    </div>
+
+    <!-- Existing Keys -->
+    <div class="byok-card">
+      <h2>🗝️ Your API Keys</h2>
+      <ul class="byok-key-list" id="byok-key-list">
+        <li class="byok-empty"><div class="byok-empty-icon">🔑</div><p>Loading your keys...</p></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="byok-toast" id="byok-toast"></div>
+
+  <script>
+    let byokData = { enabled: false, keys: [] };
+
+    fetch('/api/byok', { credentials: 'include' })
+      .then(r => r.json())
+      .then(data => {
+        byokData = data;
+        document.getElementById('byok-enabled').checked = data.enabled;
+        renderKeys(data.keys || []);
+      })
+      .catch(() => showToast('Failed to load BYOK settings', true));
+
+    function renderKeys(keys) {
+      const list = document.getElementById('byok-key-list');
+      if (keys.length === 0) {
+        list.innerHTML = '<li class="byok-empty"><div class="byok-empty-icon">🔑</div><p>No API keys added yet. Add one above to get started.</p></li>';
+        return;
+      }
+      list.innerHTML = keys.map(k => {
+        const iconClass = k.provider === 'openai' ? 'openai' : k.provider === 'anthropic' ? 'anthropic' : k.provider === 'google' ? 'google' : 'other';
+        const icon = k.provider === 'openai' ? '🟢' : k.provider === 'anthropic' ? '🟠' : k.provider === 'google' ? '🔵' : '⚙️';
+        return `
+          <li class="byok-key-item">
+            <div class="byok-key-info">
+              <div class="byok-key-icon ${iconClass}">${icon}</div>
+              <div>
+                <div class="byok-key-name">${k.provider.toUpperCase()} — ${k.key_prefix}</div>
+                <div class="byok-key-meta">Added ${new Date(k.created_at).toLocaleDateString()} · Fee: ${k.platform_fee_percent}% · Last used: ${k.last_used_at ? new Date(k.last_used_at).toLocaleDateString() : 'Never'}</div>
+              </div>
+            </div>
+            <div class="byok-key-actions">
+              <span class="byok-badge ${k.is_active ? 'byok-badge-active' : 'byok-badge-inactive'}">${k.is_active ? '● Active' : '○ Inactive'}</span>
+              <button class="byok-btn byok-btn-danger" onclick="deleteKey('${k.id}')">🗑️</button>
+            </div>
+          </li>`;
+      }).join('');
+    }
+
+    function addKey() {
+      const provider = document.getElementById('byok-provider').value;
+      const apiKey = document.getElementById('byok-api-key').value.trim();
+      const fee = parseFloat(document.getElementById('byok-fee').value);
+      if (!apiKey) { showToast('Please enter an API key', true); return; }
+
+      fetch('/api/byok/keys', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ provider, apiKey, platformFeePercent: fee })
+      })
+        .then(r => r.json())
+        .then(data => {
+          if (data.error) { showToast(data.error, true); return; }
+          showToast('✅ API key added successfully!');
+          document.getElementById('byok-api-key').value = '';
+          setTimeout(() => location.reload(), 1000);
+        })
+        .catch(() => showToast('Failed to add key', true));
+    }
+
+    function deleteKey(id) {
+      if (!confirm('Remove this API key? Agents using it will fall back to our managed service.')) return;
+      fetch('/api/byok/keys/' + id, { method: 'DELETE', credentials: 'include' })
+        .then(r => r.json())
+        .then(data => {
+          if (data.error) { showToast(data.error, true); return; }
+          showToast('✅ Key removed');
+          setTimeout(() => location.reload(), 800);
+        })
+        .catch(() => showToast('Failed to remove key', true));
+    }
+
+    function toggleBYOK() {
+      const enabled = document.getElementById('byok-enabled').checked;
+      if (enabled && byokData.keys.length === 0) {
+        showToast('Add an API key first before enabling BYOK', true);
+        document.getElementById('byok-enabled').checked = false;
+        return;
+      }
+      byokData.enabled = enabled;
+      showToast(enabled ? '✅ BYOK enabled — using your keys' : '○ BYOK disabled — using managed service');
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('byok-toast');
+      t.textContent = msg;
+      t.className = 'byok-toast show';
+      setTimeout(() => t.className = 'byok-toast', 3000);
+    }
+
+    function logout() {
+      fetch('/api/auth/logout', { method: 'POST', credentials: 'include' }).then(() => window.location.href = '/login');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>White-Label Settings — M.ai.K.R</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .wl-container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+    .wl-header { margin-bottom: 32px; }
+    .wl-header h1 { font-size: 28px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+    .wl-header p { color: var(--text-muted); font-size: 15px; }
+    .wl-card { background: var(--bg-white); border: 1px solid var(--border-medium); border-radius: 12px; padding: 28px; margin-bottom: 20px; }
+    .wl-card h2 { font-size: 18px; font-weight: 600; color: var(--text-dark); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .wl-form-group { margin-bottom: 18px; }
+    .wl-form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--text-body); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .wl-form-group input[type="text"], .wl-form-group input[type="url"] { width: 100%; padding: 10px 14px; border: 1px solid var(--border-medium); border-radius: 8px; font-size: 14px; font-family: inherit; color: var(--text-dark); background: var(--bg-light); transition: border-color 0.15s; }
+    .wl-form-group input:focus { outline: none; border-color: var(--brand-green); box-shadow: 0 0 0 3px rgba(16,185,129,0.1); }
+    .wl-color-row { display: flex; gap: 16px; }
+    .wl-color-row .wl-form-group { flex: 1; }
+    .wl-color-row input[type="color"] { width: 100%; height: 42px; border: 1px solid var(--border-medium); border-radius: 8px; cursor: pointer; padding: 2px; }
+    .wl-toggle { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--border-light); }
+    .wl-toggle:last-child { border-bottom: none; }
+    .wl-toggle-info h3 { font-size: 15px; font-weight: 600; color: var(--text-dark); }
+    .wl-toggle-info p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+    .wl-switch { position: relative; width: 48px; height: 26px; flex-shrink: 0; }
+    .wl-switch input { opacity: 0; width: 0; height: 0; }
+    .wl-slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: var(--border-medium); border-radius: 26px; transition: 0.3s; }
+    .wl-slider:before { content: ""; position: absolute; height: 20px; width: 20px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: 0.3s; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+    .wl-switch input:checked + .wl-slider { background: var(--brand-green); }
+    .wl-switch input:checked + .wl-slider:before { transform: translateX(22px); }
+    .wl-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: var(--brand-green); color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.15s; font-family: inherit; }
+    .wl-btn:hover { background: var(--brand-green-hover); }
+    .wl-btn-secondary { background: var(--bg-light); color: var(--text-body); border: 1px solid var(--border-medium); }
+    .wl-btn-secondary:hover { background: var(--border-light); }
+    .wl-preview { background: #1a1a2e; border-radius: 12px; padding: 24px; margin-top: 16px; }
+    .wl-preview-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .wl-preview-logo { width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; color: white; }
+    .wl-preview-brand { font-size: 18px; font-weight: 700; color: white; }
+    .wl-preview-tag { font-size: 11px; color: #8b949e; margin-top: 2px; }
+    .wl-preview-body { background: #0f172a; border-radius: 8px; padding: 16px; }
+    .wl-preview-body p { color: #c9d1d9; font-size: 13px; line-height: 1.6; }
+    .wl-preview-btn { display: inline-block; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 600; margin-top: 12px; color: white; }
+    .wl-toast { position: fixed; bottom: 24px; right: 24px; padding: 14px 20px; background: var(--text-dark); color: white; border-radius: 8px; font-size: 14px; font-weight: 500; box-shadow: var(--shadow-lg); transform: translateY(100px); opacity: 0; transition: all 0.3s; z-index: 1000; }
+    .wl-toast.show { transform: translateY(0); opacity: 1; }
+    .wl-toast.error { background: #dc2626; }
+    .wl-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: #dbeafe; color: #1d4ed8; border-radius: 20px; font-size: 12px; font-weight: 600; }
+    .wl-domain-status { display: flex; align-items: center; gap: 8px; margin-top: 8px; font-size: 13px; }
+    .wl-domain-status .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--brand-green); }
+    .wl-domain-status .dot.pending { background: var(--accent-orange); }
+  </style>
+</head>
+<body>
+  <nav style="background:var(--bg-white);border-bottom:1px solid var(--border-medium);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:56px;">
+    <a href="/command-center.html" style="text-decoration:none;font-size:18px;font-weight:700;color:var(--text-dark);">⚡ M.ai.K.R</a>
+    <div style="display:flex;gap:16px;align-items:center;">
+      <a href="/command-center.html" style="text-decoration:none;color:var(--text-muted);font-size:14px;">Dashboard</a>
+      <a href="/agents.html" style="text-decoration:none;color:var(--text-muted);font-size:14px;">Agents</a>
+      <a href="/settings.html" style="text-decoration:none;color:var(--text-muted);font-size:14px;">Settings</a>
+      <button onclick="logout()" class="logout-link">Log out</button>
+    </div>
+  </nav>
+
+  <div class="wl-container">
+    <div class="wl-header">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+        <h1>🏷️ White-Label Settings</h1>
+        <span class="wl-badge" id="wl-status-badge">Checking...</span>
+      </div>
+      <p>Rebrand the dashboard with your own logo, colors, and domain. Perfect for agencies and resellers.</p>
+    </div>
+
+    <!-- Toggle -->
+    <div class="wl-card">
+      <div class="wl-toggle">
+        <div class="wl-toggle-info">
+          <h3>Enable White-Label Mode</h3>
+          <p>Replace M.ai.K.R branding with your own across the dashboard</p>
+        </div>
+        <label class="wl-switch">
+          <input type="checkbox" id="wl-enabled" onchange="toggleWhiteLabel()">
+          <span class="wl-slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Branding -->
+    <div class="wl-card" id="wl-branding-card">
+      <h2>🎨 Branding</h2>
+      <div class="wl-form-group">
+        <label>Brand Name</label>
+        <input type="text" id="wl-brand-name" placeholder="Your Company Name" value="">
+      </div>
+      <div class="wl-form-group">
+        <label>Logo URL</label>
+        <input type="url" id="wl-logo-url" placeholder="https://your-domain.com/logo.png" value="">
+      </div>
+      <div class="wl-color-row">
+        <div class="wl-form-group">
+          <label>Primary Color</label>
+          <input type="color" id="wl-primary-color" value="#C0A060">
+        </div>
+        <div class="wl-form-group">
+          <label>Accent Color</label>
+          <input type="color" id="wl-accent-color" value="#0040A0">
+        </div>
+      </div>
+      <div class="wl-form-group">
+        <label>Custom Domain (optional)</label>
+        <input type="text" id="wl-domain" placeholder="dashboard.your-domain.com" value="">
+        <div class="wl-domain-status" id="wl-domain-status"></div>
+      </div>
+      <div class="wl-form-group">
+        <label>Footer Text</label>
+        <input type="text" id="wl-footer-text" placeholder="Powered by Your Company" value="">
+      </div>
+    </div>
+
+    <!-- Preview -->
+    <div class="wl-card">
+      <h2>👁️ Live Preview</h2>
+      <div class="wl-preview" id="wl-preview">
+        <div class="wl-preview-header">
+          <div class="wl-preview-logo" id="wl-preview-logo" style="background:#C0A060;">M</div>
+          <div>
+            <div class="wl-preview-brand" id="wl-preview-brand">M.ai.K.R</div>
+            <div class="wl-preview-tag">AI Agent Platform</div>
+          </div>
+        </div>
+        <div class="wl-preview-body">
+          <p>Your customers will see your brand instead of M.ai.K.R. The dashboard, agent chat, and all customer-facing pages will use your logo, colors, and domain.</p>
+          <div class="wl-preview-btn" id="wl-preview-btn" style="background:#C0A060;">Get Started</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div style="display:flex;gap:12px;margin-top:8px;">
+      <button class="wl-btn" onclick="saveWhiteLabel()">💾 Save Settings</button>
+      <button class="wl-btn wl-btn-secondary" onclick="resetWhiteLabel()">↩️ Reset to Default</button>
+    </div>
+  </div>
+
+  <div class="wl-toast" id="wl-toast"></div>
+
+  <script>
+    let wlConfig = { enabled: false };
+
+    // Load current config
+    fetch('/api/whitelabel', { credentials: 'include' })
+      .then(r => r.json())
+      .then(data => {
+        wlConfig = data;
+        document.getElementById('wl-enabled').checked = data.enabled;
+        document.getElementById('wl-brand-name').value = data.brandName || '';
+        document.getElementById('wl-logo-url').value = data.logoUrl || '';
+        document.getElementById('wl-primary-color').value = data.primaryColor || '#C0A060';
+        document.getElementById('wl-accent-color').value = data.accentColor || '#0040A0';
+        document.getElementById('wl-domain').value = data.domain || '';
+        document.getElementById('wl-footer-text').value = data.footerText || '';
+        updateBadge();
+        updatePreview();
+      })
+      .catch(() => { showToast('Failed to load settings', true); });
+
+    function updateBadge() {
+      const badge = document.getElementById('wl-status-badge');
+      if (wlConfig.enabled) {
+        badge.textContent = '● Active';
+        badge.style.background = '#dcfce7';
+        badge.style.color = '#166534';
+      } else {
+        badge.textContent = '○ Inactive';
+        badge.style.background = '#f1f5f9';
+        badge.style.color = '#64748b';
+      }
+    }
+
+    function updatePreview() {
+      const brand = document.getElementById('wl-brand-name').value || 'M.ai.K.R';
+      const primary = document.getElementById('wl-primary-color').value;
+      const accent = document.getElementById('wl-accent-color').value;
+      const logoUrl = document.getElementById('wl-logo-url').value;
+
+      document.getElementById('wl-preview-brand').textContent = brand;
+      const logoEl = document.getElementById('wl-preview-logo');
+      logoEl.style.background = primary;
+      logoEl.textContent = brand.charAt(0).toUpperCase();
+      if (logoUrl) {
+        logoEl.innerHTML = `<img src="${logoUrl}" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">`;
+      }
+      document.getElementById('wl-preview-btn').style.background = primary;
+    }
+
+    // Live preview updates
+    ['wl-brand-name', 'wl-logo-url', 'wl-primary-color', 'wl-accent-color'].forEach(id => {
+      document.getElementById(id).addEventListener('input', updatePreview);
+    });
+
+    function toggleWhiteLabel() {
+      wlConfig.enabled = document.getElementById('wl-enabled').checked;
+      updateBadge();
+    }
+
+    function saveWhiteLabel() {
+      const body = {
+        brandName: document.getElementById('wl-brand-name').value,
+        logoUrl: document.getElementById('wl-logo-url').value,
+        primaryColor: document.getElementById('wl-primary-color').value,
+        accentColor: document.getElementById('wl-accent-color').value,
+        domain: document.getElementById('wl-domain').value,
+        footerText: document.getElementById('wl-footer-text').value
+      };
+
+      fetch('/api/whitelabel', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify(body)
+      })
+        .then(r => r.json())
+        .then(data => {
+          if (data.error) { showToast(data.error, true); return; }
+          showToast('✅ White-label settings saved!');
+          wlConfig.enabled = true;
+          updateBadge();
+        })
+        .catch(() => showToast('Failed to save', true));
+    }
+
+    function resetWhiteLabel() {
+      fetch('/api/whitelabel', { method: 'DELETE', credentials: 'include' })
+        .then(r => r.json())
+        .then(data => {
+          if (data.error) { showToast(data.error, true); return; }
+          document.getElementById('wl-enabled').checked = false;
+          document.getElementById('wl-brand-name').value = '';
+          document.getElementById('wl-logo-url').value = '';
+          document.getElementById('wl-primary-color').value = '#C0A060';
+          document.getElementById('wl-accent-color').value = '#0040A0';
+          document.getElementById('wl-domain').value = '';
+          document.getElementById('wl-footer-text').value = '';
+          wlConfig.enabled = false;
+          updateBadge();
+          updatePreview();
+          showToast('✅ Reset to default branding');
+        })
+        .catch(() => showToast('Failed to reset', true));
+    }
+
+    function showToast(msg, isError) {
+      const t = document.getElementById('wl-toast');
+      t.textContent = msg;
+      t.className = 'wl-toast show' + (isError ? ' error' : '');
+      setTimeout(() => t.className = 'wl-toast', 3000);
+    }
+
+    function logout() {
+      fetch('/api/auth/logout', { method: 'POST', credentials: 'include' })
+        .then(() => window.location.href = '/login');
+    }
+  </script>
+</body>
+</html>
