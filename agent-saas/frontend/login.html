@@ -138,7 +138,7 @@
 
 <script>
   fetch('/api/auth/me', { credentials: 'include' })
-    .then(function(res) { if (res.ok) window.location.href = '/dashboard'; })
+    .then(function(res) { if (res.ok) { var r = localStorage.getItem('maikr_redirect_after_register') || '/command-center.html'; localStorage.removeItem('maikr_redirect_after_register'); window.location.href = r; } })
     .catch(function() {});
 
   var form = document.getElementById('loginForm');

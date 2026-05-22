@@ -68,6 +68,7 @@ router.post('/register', authLimiter, async (req, res) => {
 
     // Auto-login: set session
     req.session.userId = userId;
+    req.session.userEmail = normalizedEmail;
 
     return res.status(201).json({
       success: true,
@@ -117,6 +118,7 @@ router.post('/login', authLimiter, async (req, res) => {
 
     // Set session
     req.session.userId = user.id;
+    req.session.userEmail = user.email;
 
     return res.json({
       success: true,

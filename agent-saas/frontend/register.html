@@ -185,7 +185,12 @@
     })
     .then(function(res) {
       return res.json().then(function(data) {
-        if (res.ok) { window.location.href = '/dashboard'; }
+        if (res.ok) {
+          // Check for redirect after register
+          var redirect = localStorage.getItem('maikr_redirect_after_register') || '/command-center.html';
+          localStorage.removeItem('maikr_redirect_after_register');
+          window.location.href = redirect;
+        }
         else {
           formError.textContent = data.error || 'Registration failed. Please try again.';
           formError.classList.add('visible');

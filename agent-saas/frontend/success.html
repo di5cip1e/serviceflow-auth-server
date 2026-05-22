@@ -214,7 +214,7 @@
     <div id="loggedInSection" class="logged-in-section hidden">
       <p>Your account is ready. Set up your agent or go to your dashboard.</p>
       <a href="/onboarding-wizard.html" id="loggedInWizardLink" class="btn" style="background:var(--plasma,#00C0FF);">🚀 Set Up Your Agent</a>
-      <a href="/dashboard" class="btn" style="margin-left:12px;">Go to Dashboard →</a>
+      <a href="/command-center.html" class="btn" style="margin-left:12px;">Go to Dashboard →</a>
     </div>
 
     <!-- Shown when user is NOT logged in (guest checkout) -->
@@ -253,7 +253,7 @@
   var sessionId = params.get('session_id');
 
   if (sessionId) {
-    fetch('https://maikr.pro/api/get-agent?session_id=' + sessionId)
+    fetch('/api/get-agent?session_id=' + sessionId)
       .then(function(r) { return r.json(); })
       .then(function(data) {
         if (data.agentUrl) {
@@ -354,7 +354,7 @@
             document.getElementById('registerSuccess').textContent = 'Account created! Redirecting to dashboard…';
             document.getElementById('registerSuccess').classList.add('visible');
             setTimeout(function() {
-              window.location.href = '/dashboard';
+              window.location.href = '/command-center.html';
             }, 1500);
           } else {
             document.getElementById('registerError').textContent = data.error || 'Registration failed. Please try again.';

@@ -2,6 +2,15 @@ const express = require('express');
 const router = express.Router();
 const db = require('../database');
 const { updateAgentSystemPrompt, updateAgentAppearance } = require('../services/provisioning');
+const { requireAuth } = require('../middleware/auth');
+
+// GET /api/config — Public config (Stripe PK, auth status)
+router.get('/config', (req, res) => {
+  res.json({
+    stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY || '',
+    isLoggedIn: !!(req.session && req.session.userId)
+  });
+});
 
 // Get agent by session ID (for success page)
 router.get('/get-agent', async (req, res) => {
@@ -18,7 +27,7 @@ router.get('/get-agent', async (req, res) => {
       res.json({
         success: true,
         agentId: agent.id,
-        agentUrl: 'http://maikr.pro/chat.html?agent=' + agent.id,
+        agentUrl: '/chat.html?agent=' + agent.id,
         agentName: agent.agent_name,
         businessName: agent.business_name
       });
@@ -181,7 +190,66 @@ router.post('/agent/:agentId/config', async (req, res) => {
   }
 });
 
-// Get all agents for current user
+// POST /api/agents/create — Create agent directly (free tier / post-checkout)
+router.post('/create', requireAuth, async (req, res) => {
+  try {
+    const { agentName, businessName, industry, targetAudience, tone, useCases, plan, modelTier } = req.body;
+    if (!agentName) return res.status(400).json({ error: 'Agent name is required' });
+
+    const { v4: uuidv4 } = require('uuid');
+    const db = require('../database');
+
+    // Find or create customer for this user
+    let customerId = null;
+    const customer = await new Promise((resolve) => {
+      db.get('SELECT id FROM customers WHERE user_id = ? LIMIT 1', [req.session.userId], (err, row) => resolve(row));
+    });
+    if (customer) {
+      customerId = customer.id;
+    } else {
+      customerId = uuidv4();
+      await new Promise((resolve, reject) => {
+        db.run(
+          'INSERT INTO customers (id, user_id, email, plan, status) VALUES (?, ?, ?, ?, ?)',
+          [customerId, req.session.userId, req.session.userEmail || '', 'free', 'active'],
+          (err) => { if (err) reject(err); else resolve(); }
+        );
+      });
+    }
+
+    const agentId = uuidv4();
+    const slug = (businessName || agentName).toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-') + '-' + Date.now().toString(36);
+    const systemPrompt = `You are ${agentName}, a ${tone || 'professional'} AI agent for ${businessName || 'a business'} in the ${industry || 'general'} industry. ${(targetAudience ? `Your target audience is ${targetAudience}.` : '')} ${(useCases ? `Your primary tasks: ${useCases}` : '')}`;
+
+    await new Promise((resolve, reject) => {
+      db.run(
+        `INSERT INTO agents (id, customer_id, agent_name, business_name, slug, industry, target_audience, tone, use_cases, system_prompt, plan, model_tier, base_tokens, outcome_credits, plan_name, status)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'active')`,
+        [agentId, customerId, agentName, businessName || '', slug, industry || 'general', targetAudience || '', tone || 'professional', useCases || '', systemPrompt, plan || 'free', modelTier || 'standard', 5000, 10, plan || 'free'],
+        (err) => { if (err) reject(err); else resolve(); }
+      );
+    });
+
+    res.json({ success: true, agentId, agentName, message: 'Agent created successfully' });
+  } catch (err) {
+    console.error('Create agent error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET /api/agents/mine — Get all agents for current user
+router.get('/mine', requireAuth, (req, res) => {
+  db.all(
+    'SELECT a.* FROM agents a JOIN customers c ON a.customer_id = c.id WHERE c.user_id = ? ORDER BY a.created_at DESC',
+    [req.session.userId],
+    (err, agents) => {
+      if (err) return res.json({ error: err.message });
+      res.json(agents || []);
+    }
+  );
+});
+
+// Get all agents for current user (admin)
 router.get('/agents', (req, res) => {
   if (!req.session || !req.session.userId) {
     return res.json({ error: 'Not authenticated' });

@@ -7,98 +7,132 @@
   <meta name="description" content="M.ai.K.R — AI agent teams that qualify leads, answer customers, and close tickets 24/7.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://maikr.pro/build-step4">
-  <script src="https://js.stripe.com/v3/"></script>
   <link rel="stylesheet" href="css/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-.maikr-nav {
-  background: #161b22;
-  border-bottom: 1px solid #30363d;
-  padding: 0 24px;
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  height: 52px;
-}
-.maikr-logo { font-size: 17px; font-weight: 700; color: #C0A060; text-decoration: none; letter-spacing: -0.5px; }
-.maikr-logo span { color: #fff; }
-.maikr-links { display: flex; gap: 4px; margin-left: 8px; }
-.maikr-links a { color: #8b949e; text-decoration: none; font-size: 13px; padding: 5px 10px; border-radius: 5px; transition: all 0.15s; }
-.maikr-links a:hover { color: #e6edf3; background: #30363d; }
-.maikr-links a.active { color: #C0A060; }
-.maikr-spacer { flex: 1; }
-
-    /* Mobile */
-    @media (max-width: 768px) {
-      .plan-cards { grid-template-columns: 1fr !important; }
-      .comparison-table-wrapper { font-size: 11px; }
-      .comparison-table th, .comparison-table td { padding: 6px 8px; }
-      .faq-item { padding: 12px; }
-      .btn-group { flex-direction: column; }
-      .btn-group .btn { width: 100%; text-align: center; }
-      .tier-options { grid-template-columns: 1fr; }
-      .trust-row { gap: 8px; font-size: 11px; }
-    }
-.maikr-status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #8b949e; }
-.maikr-status .dot { width: 7px; height: 7px; background: #C0A060; border-radius: 50%; box-shadow: 0 0 5px #C0A060; }
-}</style>
-
   <style>
-    .skip-link {
-      position: absolute; top: -100px; left: 0; z-index: 9999;
-      padding: 12px 24px; background: #C0A060; color: #0A0A0F;
-      font-weight: 700; font-size: 14px; text-decoration: none;
-      border-radius: 0 0 8px 0; transition: top 0.2s;
-    }
+    :root { --brand-green: #10b981; --brand-green-hover: #059669; --primary-navy: #0f172a; --primary-slate: #334155; --bg-light: #f8fafc; --bg-white: #ffffff; --text-dark: #0f172a; --text-body: #334155; --text-muted: #64748b; --accent-orange: #f97316; --border-light: #f1f5f9; --border-medium: #e2e8f0; --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05); --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1); --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1); --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-main); background: var(--bg-light); color: var(--text-body); min-height: 100vh; line-height: 1.6; }
+    .skip-link { position: absolute; top: -100px; left: 0; z-index: 9999; padding: 12px 24px; background: var(--brand-green); color: #fff; font-weight: 700; font-size: 14px; text-decoration: none; border-radius: 0 0 8px 0; transition: top 0.2s; }
     .skip-link:focus { top: 0; }
-</style>
-  </head>
+    .maikr-nav { background: var(--bg-white); border-bottom: 1px solid var(--border-medium); padding: 0 24px; display: flex; align-items: center; gap: 24px; height: 56px; }
+    .maikr-logo { font-size: 18px; font-weight: 700; color: var(--text-dark); text-decoration: none; }
+    .maikr-links { display: flex; gap: 4px; margin-left: 8px; }
+    .maikr-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; padding: 6px 12px; border-radius: 6px; transition: all 0.15s; }
+    .maikr-links a:hover { color: var(--text-dark); background: var(--bg-light); }
+    .maikr-spacer { flex: 1; }
+    .maikr-status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-muted); }
+    .maikr-status .dot { width: 7px; height: 7px; background: var(--brand-green); border-radius: 50%; }
+    .page-wrapper { max-width: 900px; margin: 0 auto; padding: 32px 20px 60px; }
+    .step-indicator { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-muted); margin-bottom: 24px; }
+    .step-indicator .step-dots { display: flex; gap: 6px; }
+    .step-indicator .step-dots span { width: 8px; height: 8px; border-radius: 50%; background: var(--border-medium); }
+    .step-indicator .step-dots span.active { background: var(--brand-green); }
+    .step-indicator .step-dots span.done { background: var(--brand-green); opacity: 0.5; }
+    .form-container { background: var(--bg-white); border: 1px solid var(--border-medium); border-radius: 16px; padding: 32px; }
+    .step-header { margin-bottom: 28px; }
+    .step-header h2 { font-size: 24px; font-weight: 700; color: var(--text-dark); margin-bottom: 6px; }
+    .step-header p { color: var(--text-muted); font-size: 15px; }
+    .agent-summary { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 12px 16px; margin-bottom: 20px; font-size: 14px; color: #166534; }
+    .plan-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+    .plan-card { border: 2px solid var(--border-medium); border-radius: 12px; padding: 20px; cursor: pointer; transition: all 0.2s; position: relative; }
+    .plan-card:hover { border-color: var(--brand-green); box-shadow: var(--shadow-md); }
+    .plan-card.selected { border-color: var(--brand-green); background: #f0fdf4; }
+    .plan-card .plan-badge { position: absolute; top: -10px; right: 12px; background: var(--accent-orange); color: white; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 10px; }
+    .plan-card .plan-header { margin-bottom: 14px; }
+    .plan-card .plan-header h3 { font-size: 18px; font-weight: 700; color: var(--text-dark); }
+    .plan-card .plan-price { font-size: 28px; font-weight: 700; color: var(--text-dark); }
+    .plan-card .plan-price span { font-size: 14px; font-weight: 400; color: var(--text-muted); }
+    .plan-card .plan-features { list-style: none; padding: 0; }
+    .plan-card .plan-features li { font-size: 13px; color: var(--text-body); padding: 4px 0; }
+    .tier-section { margin-top: 24px; }
+    .tier-label { font-size: 14px; font-weight: 600; color: var(--text-dark); display: block; margin-bottom: 12px; }
+    .tier-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .tier-option { border: 2px solid var(--border-medium); border-radius: 10px; padding: 14px; cursor: pointer; transition: all 0.15s; }
+    .tier-option:hover { border-color: var(--brand-green); }
+    .tier-option.selected { border-color: var(--brand-green); background: #f0fdf4; }
+    .tier-option input { display: none; }
+    .tier-option .tier-name { font-size: 14px; font-weight: 600; color: var(--text-dark); }
+    .tier-option .tier-desc { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+    .tier-option .tier-price { font-size: 13px; font-weight: 600; color: var(--text-body); margin-top: 6px; }
+    .comparison-section { margin-top: 32px; }
+    .comparison-section h3 { font-size: 16px; font-weight: 600; color: var(--text-dark); margin-bottom: 16px; }
+    .comparison-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .comparison-table th, .comparison-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border-light); }
+    .comparison-table th { font-weight: 600; color: var(--text-dark); background: var(--bg-light); }
+    .comparison-table td { color: var(--text-body); }
+    .comparison-table tr:last-child td { border-bottom: none; }
+    .btn-group { display: flex; gap: 12px; margin-top: 28px; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; background: var(--brand-green); color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.15s; font-family: inherit; }
+    .btn-primary:hover { background: var(--brand-green-hover); }
+    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 8px; padding: 14px 24px; background: var(--bg-light); color: var(--text-body); border: 1px solid var(--border-medium); border-radius: 8px; font-size: 15px; font-weight: 500; text-decoration: none; cursor: pointer; transition: all 0.15s; font-family: inherit; }
+    .btn-secondary:hover { background: var(--border-light); }
+    .btn-full { width: 100%; justify-content: center; }
+    .error-banner { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; font-size: 14px; color: #dc2626; display: none; }
+    .error-banner.show { display: block; }
+    .loading-overlay { display: none; position: fixed; inset: 0; background: rgba(255,255,255,0.9); z-index: 9999; align-items: center; justify-content: center; flex-direction: column; gap: 16px; }
+    .loading-overlay.show { display: flex; }
+    .spinner { width: 40px; height: 40px; border: 3px solid var(--border-medium); border-top-color: var(--brand-green); border-radius: 50%; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-text { font-size: 15px; color: var(--text-body); font-weight: 500; }
+    .login-prompt { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 14px 18px; margin-bottom: 20px; font-size: 14px; color: #1e40af; }
+    .login-prompt a { color: #1d4ed8; font-weight: 600; }
+    @media (max-width: 768px) { .plan-cards { grid-template-columns: 1fr; } .tier-options { grid-template-columns: 1fr; } .btn-group { flex-direction: column; } .form-container { padding: 20px; } }
+  </style>
+</head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
-
-<header role="banner"><nav class="maikr-nav">
-  <a href="/" class="maikr-logo">M<span>.ai</span><span>.K.R</span></a>
-  <div class="maikr-links">
-    <a href="/build">Builder</a>
-    <a href="/command-center.html">Dashboard</a>
-    <a href="/chat.html">Chat</a>
-  </div>
-  <div class="maikr-spacer"></div>
-  <div class="maikr-status"><span class="dot"></span>Online</div>
-</nav></header>
+  <header role="banner"><nav class="maikr-nav">
+    <a href="/" class="maikr-logo">⚡ M.ai.K.R</a>
+    <div class="maikr-links">
+      <a href="/build">Builder</a>
+      <a href="/command-center.html">Dashboard</a>
+    </div>
+    <div class="maikr-spacer"></div>
+    <div class="maikr-status"><span class="dot"></span>Online</div>
+  </nav></header>
 
   <div class="page-wrapper">
-    <header class="main-header">
-      <a href="/" class="logo">
-        <span class="logo-text">M.ai.K.R</span>
-      </a>
-      <div class="step-indicator">Step 4 of 4</div>
-    </header>
+    <div class="step-indicator">
+      <div class="step-dots">
+        <span class="done"></span><span class="done"></span><span class="done"></span><span class="active"></span>
+      </div>
+      Step 4 of 4 — Choose your plan
+    </div>
 
-    <main id="main-content" class="form-container">
+    <div class="form-container">
       <div class="step-header">
         <h2>Choose your plan</h2>
-        <p>Scale up or down anytime. No lock-in.</p>
+        <p>Start free, upgrade anytime. No lock-in.</p>
       </div>
 
-      <!-- Agent summary badge -->
+      <!-- Login prompt for guests -->
+      <div class="login-prompt" id="loginPrompt" style="display:none;">
+        💡 <a href="/login?redirect=/build-step4.html">Log in</a> or <a href="/register?redirect=/build-step4.html">create an account</a> to save your agent and access the dashboard.
+      </div>
+
+      <!-- Error banner -->
+      <div class="error-banner" id="errorBanner"></div>
+
+      <!-- Agent summary -->
       <div class="agent-summary" id="agentSummary" style="display:none;"></div>
 
-      <form id="step4Form">
+      <form id="step4Form" novalidate>
         <!-- Plan Cards -->
         <div class="plan-cards">
-          <div class="plan-card" data-plan="value" onclick="selectPlan('value')">
+          <div class="plan-card" data-plan="free" onclick="selectPlan('free')">
             <div class="plan-header">
-              <h3>Value</h3>
-              <div class="plan-price">$45<span>/mo</span></div>
+              <h3>Free</h3>
+              <div class="plan-price">$0<span>/mo</span></div>
             </div>
             <ul class="plan-features">
-              <li>✅ Custom AI agent</li>
+              <li>✅ 1 AI agent</li>
               <li>✅ Chat interface</li>
-              <li>✅ 20,000 base tokens/mo</li>
-              <li>✅ 100 Outcome Credits</li>
-              <li>✅ Email alerts</li>
+              <li>✅ 5,000 tokens/mo</li>
+              <li>✅ 10 Outcome Credits</li>
+              <li>✅ Web chat channel</li>
             </ul>
           </div>
 
@@ -109,11 +143,11 @@
               <div class="plan-price">$100<span>/mo</span></div>
             </div>
             <ul class="plan-features">
-              <li>✅ Everything in Value</li>
-              <li>✅ 50,000 base tokens/mo</li>
+              <li>✅ Everything in Free</li>
+              <li>✅ 50,000 tokens/mo</li>
               <li>✅ 500 Outcome Credits</li>
-              <li>✅ Brand memory</li>
-              <li>✅ Smart routing</li>
+              <li>✅ Multi-channel (Telegram, SMS, Slack)</li>
+              <li>✅ Smart routing + sub-agents</li>
             </ul>
           </div>
 
@@ -124,7 +158,7 @@
             </div>
             <ul class="plan-features">
               <li>✅ Everything in Growth</li>
-              <li>✅ 200,000 base tokens/mo</li>
+              <li>✅ 200,000 tokens/mo</li>
               <li>✅ 2,000 Outcome Credits</li>
               <li>✅ Multi-agent orchestration</li>
               <li>✅ SLA guarantee</li>
@@ -133,144 +167,74 @@
         </div>
 
         <!-- Intelligence Tier -->
-        <div class="tier-section" id="tierSection" style="margin-top:24px;">
-          <label class="tier-label">Intelligence Tier <span style="font-weight:400;color:#94a3b8;font-size:13px;">(add-on)</span></label>
+        <div class="tier-section">
+          <label class="tier-label">Intelligence Tier <span style="font-weight:400;color:var(--text-muted);font-size:13px;">(optional add-on)</span></label>
           <div class="tier-options">
             <label class="tier-option selected" onclick="selectTier('standard')">
               <input type="radio" name="tier" value="standard" checked>
-              <div class="tier-content">
+              <div>
                 <div class="tier-name">Standard</div>
-                <div class="tier-desc">Fast, capable, always free</div>
-                <div class="tier-price">$0/mo</div>
+                <div class="tier-desc">GPT-4.1 Mini — Fast & capable</div>
+                <div class="tier-price">Included</div>
               </div>
             </label>
             <label class="tier-option" onclick="selectTier('premium')">
               <input type="radio" name="tier" value="premium">
-              <div class="tier-content">
+              <div>
                 <div class="tier-name">Premium</div>
-                <div class="tier-desc">Enhanced reasoning</div>
+                <div class="tier-desc">MiniMax M2.7 — Higher quality</div>
                 <div class="tier-price">+$15/mo</div>
               </div>
             </label>
             <label class="tier-option" onclick="selectTier('elite')">
               <input type="radio" name="tier" value="elite">
-              <div class="tier-content">
+              <div>
                 <div class="tier-name">Elite</div>
-                <div class="tier-desc">Maximum capability</div>
+                <div class="tier-desc">GPT-4.1 — Best reasoning</div>
                 <div class="tier-price">+$30/mo</div>
               </div>
             </label>
           </div>
         </div>
 
-        <!-- Feature Comparison -->
-        <div class="comparison-section" style="margin-top:32px;">
-          <h3 style="font-size:16px;font-weight:600;margin-bottom:16px;">Feature Comparison</h3>
-          <div class="comparison-table-wrapper" style="overflow-x:auto;">
-            <table class="comparison-table" style="width:100%;border-collapse:collapse;font-size:13px;">
-              <thead>
-                <tr style="border-bottom:2px solid var(--border);">
-                  <th style="text-align:left;padding:10px 12px;color:var(--text-dim);font-weight:500;">Feature</th>
-                  <th style="text-align:center;padding:10px 12px;color:var(--text-dim);font-weight:500;">Value</th>
-                  <th style="text-align:center;padding:10px 12px;color:var(--green);font-weight:600;">Growth ⭐</th>
-                  <th style="text-align:center;padding:10px 12px;color:var(--text-dim);font-weight:500;">Scale</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr style="border-bottom:1px solid var(--border);">
-                  <td style="padding:10px 12px;">AI Agent</td><td style="text-align:center;padding:10px 12px;color:var(--green);">✓</td><td style="text-align:center;padding:10px 12px;color:var(--green);">✓</td><td style="text-align:center;padding:10px 12px;color:var(--green);">✓</td>
-                </tr>
-                <tr style="border-bottom:1px solid var(--border);">
-                  <td style="padding:10px 12px;">Chat Interface</td><td style="text-align:center;padding:10px 12px;color:var(--green);">✓</td><td style="text-align:center;padding:10px 12px;color:var(--green);">✓</td><td style="text-align:center;padding:10px 12px;color:var(--green);">✓</td>
-                </tr>
-                <tr style="border-bottom:1px solid var(--border);">
-                  <td style="padding:10px 12px;">Base Tokens</td><td style="text-align:center;padding:10px 12px;">20K</td><td style="text-align:center;padding:10px 12px;">50K</td><td style="text-align:center;padding:10px 12px;">200K</td>
-                </tr>
-                <tr style="border-bottom:1px solid var(--border);">
-                  <td style="padding:10px 12px;">Outcome Credits</td><td style="text-align:center;padding:10px 12px;">100</td><td style="text-align:center;padding:10px 12px;">500</td><td style="text-align:center;padding:10px 12px;">2,000</td>
-                </tr>
-                <tr style="border-bottom:1px solid var(--border);">
-                  <td style="padding:10px 12px;">AI Lead Generation</td><td style="text-align:center;padding:10px 12px;color:var(--text-dim);">—</td><td style="text-align:center;padding:10px 12px;color:var(--green);">✓</td><td style="text-align:center;padding:10px 12px;color:var(--green);">✓</td>
-                </tr>
-                <tr style="border-bottom:1px solid var(--border);">
-                  <td style="padding:10px 12px;">Brand Memory</td><td style="text-align:center;padding:10px 12px;color:var(--text-dim);">—</td><td style="text-align:center;padding:10px 12px;color:var(--green);">✓</td><td style="text-align:center;padding:10px 12px;color:var(--green);">✓</td>
-                </tr>
-                <tr style="border-bottom:1px solid var(--border);">
-                  <td style="padding:10px 12px;">Smart Routing</td><td style="text-align:center;padding:10px 12px;color:var(--text-dim);">—</td><td style="text-align:center;padding:10px 12px;color:var(--green);">✓</td><td style="text-align:center;padding:10px 12px;color:var(--green);">✓</td>
-                </tr>
-                <tr style="border-bottom:1px solid var(--border);">
-                  <td style="padding:10px 12px;">Multi-Agent Orchestration</td><td style="text-align:center;padding:10px 12px;color:var(--text-dim);">—</td><td style="text-align:center;padding:10px 12px;color:var(--text-dim);">—</td><td style="text-align:center;padding:10px 12px;color:var(--green);">✓</td>
-                </tr>
-                <tr style="border-bottom:1px solid var(--border);">
-                  <td style="padding:10px 12px;">SLA Guarantee</td><td style="text-align:center;padding:10px 12px;color:var(--text-dim);">—</td><td style="text-align:center;padding:10px 12px;color:var(--text-dim);">—</td><td style="text-align:center;padding:10px 12px;color:var(--green);">✓</td>
-                </tr>
-                <tr>
-                  <td style="padding:10px 12px;">Price</td><td style="text-align:center;padding:10px 12px;font-weight:600;">$45/mo</td><td style="text-align:center;padding:10px 12px;font-weight:600;color:var(--green);">$100/mo</td><td style="text-align:center;padding:10px 12px;font-weight:600;">$200/mo</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- FAQ -->
-        <div class="faq-section" style="margin-top:32px;">
-          <h3 style="font-size:16px;font-weight:600;margin-bottom:16px;">Frequently Asked Questions</h3>
-          <div class="faq-list">
-            <details class="faq-item" style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:8px;cursor:pointer;">
-              <summary style="font-weight:600;font-size:14px;list-style:none;display:flex;justify-content:space-between;align-items:center;">Can I upgrade or downgrade anytime? <span style="font-size:18px;">+</span></summary>
-              <p style="margin-top:12px;color:var(--text-dim);font-size:13px;line-height:1.6;">Yes! You can change your plan at any time. Upgrades take effect immediately. Downgrades apply at the next billing cycle. No lock-in, no contracts.</p>
-            </details>
-            <details class="faq-item" style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:8px;cursor:pointer;">
-              <summary style="font-weight:600;font-size:14px;list-style:none;display:flex;justify-content:space-between;align-items:center;">What are Outcome Credits? <span style="font-size:18px;">+</span></summary>
-              <p style="margin-top:12px;color:var(--text-dim);font-size:13px;line-height:1.6;">Outcome Credits are used when your agent completes valuable actions — qualifying a lead, booking an appointment, resolving a support ticket, etc. Each action costs a small number of credits.</p>
-            </details>
-            <details class="faq-item" style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:8px;cursor:pointer;">
-              <summary style="font-weight:600;font-size:14px;list-style:none;display:flex;justify-content:space-between;align-items:center;">How does AI Lead Generation work? <span style="font-size:18px;">+</span></summary>
-              <p style="margin-top:12px;color:var(--text-dim);font-size:13px;line-height:1.6;">Your AI agent searches the web daily for companies and contacts that match your target profile. It scores each lead by fit and generates a personalized outreach draft. Available on Growth and above.</p>
-            </details>
-            <details class="faq-item" style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:8px;cursor:pointer;">
-              <summary style="font-weight:600;font-size:14px;list-style:none;display:flex;justify-content:space-between;align-items:center;">What happens when I run out of tokens? <span style="font-size:18px;">+</span></summary>
-              <p style="margin-top:12px;color:var(--text-dim);font-size:13px;line-height:1.6;">Your agent will pause until the next billing cycle or you can purchase additional credit packs. We'll notify you when you're running low so you're never caught off guard.</p>
-            </details>
-            <details class="faq-item" style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:8px;cursor:pointer;">
-              <summary style="font-weight:600;font-size:14px;list-style:none;display:flex;justify-content:space-between;align-items:center;">Can I cancel anytime? <span style="font-size:18px;">+</span></summary>
-              <p style="margin-top:12px;color:var(--text-dim);font-size:13px;line-height:1.6;">Absolutely. No contracts, no cancellation fees. Your agent will remain active until the end of your current billing period.</p>
-            </details>
-          </div>
-        </div>
-
-        <!-- Trust -->
-        <div class="trust-row" style="display:flex;justify-content:center;gap:20px;margin-top:24px;flex-wrap:wrap;font-size:12px;color:var(--text-dim);">
-          <span>🔒 Secure payment</span>
-          <span>✓ No contracts</span>
-          <span>✓ Cancel anytime</span>
-          <span>⚡ Instant activation</span>
-        </div>
-
-        <div class="btn-group" style="margin-top:28px;">
-          <a href="/build/usecases" class="btn-secondary">← Back</a>
-          <button type="button" class="btn-primary btn-full" id="checkoutBtn" onclick="proceedToCheckout()">
-            Deploy My Agent →
+        <div class="btn-group">
+          <a href="/build-step3.html" class="btn-secondary">← Back</a>
+          <button type="submit" class="btn-primary btn-full" id="createBtn">
+            🚀 Create My Agent
           </button>
         </div>
       </form>
-    </main>
+    </div>
+  </div>
+
+  <!-- Loading overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner"></div>
+    <div class="loading-text" id="loadingText">Creating your agent...</div>
   </div>
 
   <script>
-    const STRIPE_PK = 'pk_test_51TH2qPBCyZF2z3lcC3U1cdUk8iyzQ39FU2XQV3OPFmt4CrF4iuqxIqHrVfU0zW9LFdWHimdKQwrmQdS4eaBtjj8a00QCfkbEEd';
-    const stripe = Stripe(STRIPE_PK);
-
     let selectedPlan = 'growth';
     let selectedTier = 'standard';
+    let isLoggedIn = false;
 
-    const plans = {
-      value: { name: 'Value', price: 4499, priceId: 'price_value_id' },
-      growth: { name: 'Growth', price: 9900, priceId: 'price_growth_id' },
-      scale: { name: 'Scale', price: 19900, priceId: 'price_scale_id' }
-    };
-
-    const tierAddons = { standard: 0, premium: 1500, elite: 3000 };
+    // Check auth status
+    fetch('/api/auth/me', { credentials: 'include' })
+      .then(r => {
+        if (r.ok) {
+          isLoggedIn = true;
+          return r.json();
+        }
+        return null;
+      })
+      .then(user => {
+        if (!isLoggedIn) {
+          document.getElementById('loginPrompt').style.display = 'block';
+        }
+      })
+      .catch(() => {
+        document.getElementById('loginPrompt').style.display = 'block';
+      });
 
     function selectPlan(plan) {
       selectedPlan = plan;
@@ -286,47 +250,90 @@
       });
     }
 
-    function proceedToCheckout() {
-      const data = JSON.parse(localStorage.getItem('maikr_form') || '{}');
-      data.plan = selectedPlan;
-      data.tier = selectedTier;
-      data.tierAddOn = tierAddons[selectedTier];
+    function showError(msg) {
+      const b = document.getElementById('errorBanner');
+      b.textContent = msg;
+      b.classList.add('show');
+    }
 
-      // Show loading
-      const btn = document.getElementById('checkoutBtn');
-      btn.textContent = 'Redirecting...';
+    function hideError() {
+      document.getElementById('errorBanner').classList.remove('show');
+    }
+
+    function showLoading(text) {
+      document.getElementById('loadingText').textContent = text || 'Processing...';
+      document.getElementById('loadingOverlay').classList.add('show');
+    }
+
+    function hideLoading() {
+      document.getElementById('loadingOverlay').classList.remove('show');
+    }
+
+    // Form submit handler
+    document.getElementById('step4Form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      hideError();
+
+      // Validate we have form data
+      const saved = JSON.parse(localStorage.getItem('maikr_form') || '{}');
+      if (!saved.agentName || !saved.businessName) {
+        showError('Missing agent information. Please go back and complete all steps.');
+        return;
+      }
+
+      const btn = document.getElementById('createBtn');
       btn.disabled = true;
+      showLoading('Creating your agent...');
 
-      // Send to backend to create Stripe session
-      fetch('/create-checkout-session', {
+      const data = {
+        ...saved,
+        plan: selectedPlan,
+        modelTier: selectedTier
+      };
+
+      // If not logged in, save form data and redirect to register
+      if (!isLoggedIn) {
+        localStorage.setItem('maikr_form', JSON.stringify(data));
+        localStorage.setItem('maikr_redirect_after_register', '/build-step4.html');
+        window.location.href = '/register?redirect=/build-step4.html';
+        return;
+      }
+
+      // Create agent via API
+      fetch('/api/agents/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify(data)
       })
-      .then(r => r.json())
+      .then(r => {
+        if (!r.ok) return r.json().then(d => { throw new Error(d.error || 'Server error'); });
+        return r.json();
+      })
       .then(d => {
-        if (d.url) {
-          localStorage.setItem('maikr_form', JSON.stringify(data));
-          stripe.redirectToCheckout({ sessionId: d.sessionId });
+        if (d.success) {
+          localStorage.removeItem('maikr_form');
+          localStorage.setItem('maikr_active_agent', d.agentId);
+          // Go to onboarding wizard
+          window.location.href = '/onboarding-wizard.html?agent=' + d.agentId;
         } else {
-          alert('Something went wrong. Please try again.');
-          btn.textContent = 'Deploy My Agent →';
-          btn.disabled = false;
+          throw new Error(d.error || 'Failed to create agent');
         }
       })
-      .catch(() => {
-        alert('Connection error. Is the backend running?');
-        btn.textContent = 'Deploy My Agent →';
+      .catch(err => {
+        hideLoading();
         btn.disabled = false;
+        showError('❌ ' + (err.message || 'Something went wrong. Please try again.'));
+        console.error('Create agent error:', err);
       });
-    }
+    });
 
     // Init: show agent name if saved
     const saved = JSON.parse(localStorage.getItem('maikr_form') || '{}');
     if (saved.agentName) {
       const summary = document.getElementById('agentSummary');
       summary.style.display = 'block';
-      summary.textContent = `Building: ${saved.agentName} — ${saved.businessName || ''}`;
+      summary.textContent = 'Building: ' + saved.agentName + (saved.businessName ? ' — ' + saved.businessName : '');
     }
   </script>
 </body>
