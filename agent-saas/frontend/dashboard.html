@@ -605,7 +605,7 @@ function addKnowledge(type) {
   } else if (type === 'drive') {
     const url = document.getElementById('knowledgeDrive').value.trim();
     if (!url) return alert('Please enter a Google Drive folder URL');
-    showToast('Google Drive integration coming soon', 'error');
+    showToast('Google Drive sync is available on Scale plan and above', 'info');
   }
 }
 
