@@ -54,7 +54,7 @@
     <a href="/command-center.html" style="text-decoration:none;font-size:18px;font-weight:700;color:var(--text-dark);">⚡ M.ai.K.R</a>
     <div style="display:flex;gap:16px;align-items:center;">
       <a href="/command-center.html" style="text-decoration:none;color:var(--text-muted);font-size:14px;">Dashboard</a>
-      <a href="/agents.html" style="text-decoration:none;color:var(--text-muted);font-size:14px;">Agents</a>
+      <a href="/command-center.html" style="text-decoration:none;color:var(--text-muted);font-size:14px;">Agents</a>
       <a href="/templates.html" style="text-decoration:none;color:var(--brand-green);font-size:14px;font-weight:600;">Templates</a>
       <a href="/settings.html" style="text-decoration:none;color:var(--text-muted);font-size:14px;">Settings</a>
       <button onclick="logout()" class="logout-link">Log out</button>
@@ -230,11 +230,39 @@
         .catch(() => showToast('Purchase failed', true));
     }
 
+    let currentTemplateId = null;
+    let currentTemplateName = '';
     function useTemplate(id, name) {
-      // In production, this would show a modal to pick which agent to apply to
-      const agentId = prompt('Enter Agent ID to apply "' + name + '" template to:\n\n(You can find Agent IDs in your Dashboard)');
-      if (!agentId) return;
-      fetch('/api/templates/' + id + '/apply', {
+      currentTemplateId = id;
+      currentTemplateName = name;
+      // Fetch user's agents
+      fetch('/api/widgets/agents/list', { credentials: 'include' })
+        .then(r => r.json())
+        .then(agents => {
+          const modal = document.getElementById('tm-modal');
+          const content = document.getElementById('tm-modal-content');
+          if (!agents || agents.length === 0) {
+            content.innerHTML = '<h2 style="font-size:20px;font-weight:700;margin-bottom:12px;">No Agents Found</h2><p style="color:var(--text-muted);margin-bottom:16px;">You need to create an agent first before applying a template.</p><a href="/command-center.html" class="tm-btn tm-btn-primary" style="text-decoration:none;">Go to Dashboard</a>';
+            modal.style.display = 'flex';
+            return;
+          }
+          content.innerHTML = `
+            <h2 style="font-size:20px;font-weight:700;margin-bottom:8px;">Apply "${name}"</h2>
+            <p style="color:var(--text-muted);font-size:14px;margin-bottom:16px;">Select an agent to apply this template to:</p>
+            <div style="display:flex;flex-direction:column;gap:8px;max-height:300px;overflow-y:auto;">
+              ${agents.map(a => `
+                <div onclick="applyToAgent('${a.id}')" style="display:flex;align-items:center;gap:12px;padding:12px 16px;border:1px solid var(--border-medium);border-radius:8px;cursor:pointer;transition:all 0.15s;" onmouseover="this.style.borderColor='var(--brand-green)';this.style.background='#f0fdf4'" onmouseout="this.style.borderColor='';this.style.background=''">
+                  <div style="width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,#0f172a,#1e293b);display:flex;align-items:center;justify-content:center;color:white;font-size:16px;">🤖</div>
+                  <div><div style="font-weight:600;font-size:14px;">${a.agent_name}</div><div style="font-size:12px;color:var(--text-muted);">${a.industry || 'No industry'} · ${a.status}</div></div>
+                </div>`).join('')}
+            </div>`;
+          modal.style.display = 'flex';
+        })
+        .catch(() => showToast('Failed to load agents', true));
+    }
+    function applyToAgent(agentId) {
+      if (!currentTemplateId) return;
+      fetch('/api/templates/' + currentTemplateId + '/apply', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -242,10 +270,11 @@
       })
         .then(r => r.json())
         .then(data => {
+          closeModal();
           if (data.error) { showToast(data.error, true); return; }
-          showToast('✅ Template "' + name + '" applied to agent!');
+          showToast('✅ Template "' + currentTemplateName + '" applied to agent!');
         })
-        .catch(() => showToast('Failed to apply template', true));
+        .catch(() => { closeModal(); showToast('Failed to apply template', true); });
     }
 
     function showToast(msg) {

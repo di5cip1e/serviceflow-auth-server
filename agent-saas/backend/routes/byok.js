@@ -25,21 +25,37 @@ function decrypt(data) {
   return decrypted;
 }
 
+// Helper: get or create customer row
+function getOrCreateCustomer(userId, callback) {
+  db.get('SELECT * FROM customers WHERE user_id = ?', [userId], (err, row) => {
+    if (err) return callback(err);
+    if (row) return callback(null, row);
+    const custId = require('crypto').randomUUID();
+    db.run('INSERT INTO customers (id, user_id, email, status) VALUES (?, ?, (SELECT email FROM users WHERE id = ?), ?)',
+      [custId, userId, userId, 'active'], function(err2) {
+        if (err2) return callback(err2);
+        db.get('SELECT * FROM customers WHERE id = ?', [custId], (err3, newRow) => {
+          callback(err3, newRow);
+        });
+      });
+  });
+}
+
 // Get BYOK status and keys
 router.get('/', (req, res) => {
   if (!req.session.userId) return res.json({ error: 'Unauthorized' });
 
-  db.get('SELECT byok_enabled FROM customers WHERE user_id = ?', [req.session.userId], (err, customer) => {
+  getOrCreateCustomer(req.session.userId, (err, customer) => {
     if (err) return res.json({ error: err.message });
 
     db.all(`SELECT id, provider, key_prefix, is_active, platform_fee_percent, created_at, last_used_at
             FROM customer_api_keys
-            WHERE customer_id = (SELECT id FROM customers WHERE user_id = ?)
+            WHERE customer_id = ?
             ORDER BY created_at DESC`,
-      [req.session.userId], (err2, keys) => {
+      [customer.id], (err2, keys) => {
         if (err2) return res.json({ error: err2.message });
         res.json({
-          enabled: !!customer?.byok_enabled,
+          enabled: !!customer.byok_enabled,
           platformFeePercent: 5.0,
           keys: keys || []
         });
@@ -58,7 +74,7 @@ router.post('/keys', (req, res) => {
   const keyPrefix = apiKey.slice(0, 8) + '...';
   const encrypted = encrypt(apiKey);
 
-  db.get('SELECT id FROM customers WHERE user_id = ?', [req.session.userId], (err, customer) => {
+  getOrCreateCustomer(req.session.userId, (err, customer) => {
     if (err) return res.json({ error: err.message });
     if (!customer) return res.json({ error: 'Customer not found' });
 

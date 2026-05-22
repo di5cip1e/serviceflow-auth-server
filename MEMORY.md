@@ -20,7 +20,7 @@
 - **PM2:** maikr-backend + ollama-router running, systemd-enabled for reboot persistence
 
 ## Active Projects (Current)
-- **M.ai.K.R** (agent-saas/): ✅ Live at maikr.pro — Phases 1-4 + Phase 6-8 + Phase B (UX Overhaul) + Phase C (Competitive Moat) ALL COMPLETE. Auth & onboarding, session-based auth, rate limiting, checkout integration, knowledge ingestion, agent delegation, loop detection, spending caps all live. Phase D (Scale) next.
+- **M.ai.K.R** (agent-saas/): ✅ Live at maikr.pro — Phases 1-4 + Phase 6-8 + Phase B (UX Overhaul) + Phase C (Competitive Moat) + Phase D (Scale) ALL COMPLETE. Auth & onboarding, session-based auth, rate limiting, checkout integration, knowledge ingestion, agent delegation, loop detection, spending caps all live. Phase D (Scale) next.
   - **May 15-16:** Test suite (350 tests, 100% pass), 5 beta accounts, analytics, Stripe best practices, Chart.js dashboards, email drip campaign, revenue tracking
   - **May 16:** Resend email integrated (replaced Mailgun), Telegram + omnichannel DB mapping, password reset flow, webhook retry + idempotency, usage billing enforcement
   - **May 17:** Complete website redesign — new dark premium design system based on Avant Garde brand images. All 20+ pages updated. New palette: amber/gold accents, electric blue CTAs, Orbitron + Inter fonts. `css/dark-premium.css` (22KB design system).

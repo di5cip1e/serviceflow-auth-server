@@ -144,8 +144,8 @@ router.post('/:id/purchase', (req, res) => {
         if (err2) return res.json({ error: err2.message });
         if (existing) return res.json({ success: true, alreadyUnlocked: true });
 
-        // Record purchase (in production, verify Stripe payment first)
-        db.get('SELECT id FROM customers WHERE user_id = ?', [req.session.userId], (err3, customer) => {
+        // Get or create customer, then record purchase
+        getOrCreateCustomer(req.session.userId, (err3, customer) => {
           if (err3) return res.json({ error: err3.message });
           if (!customer) return res.json({ error: 'Customer not found' });
 
@@ -156,7 +156,6 @@ router.post('/:id/purchase', (req, res) => {
               db.run('INSERT OR IGNORE INTO customer_templates (customer_id, template_id) VALUES (?, ?)',
                 [customer.id, tmpl.id], (err5) => {
                   if (err5) return res.json({ error: err5.message });
-                  // Increment download count
                   db.run('UPDATE templates SET downloads = downloads + 1 WHERE id = ?', [tmpl.id]);
                   res.json({ success: true, templateId: tmpl.id, templateName: tmpl.name });
                 });
@@ -224,6 +223,22 @@ router.get('/mine/list', (req, res) => {
 
 function safeParse(str) {
   try { return JSON.parse(str); } catch { return null; }
+}
+
+// Helper: get or create customer row
+function getOrCreateCustomer(userId, callback) {
+  db.get('SELECT * FROM customers WHERE user_id = ?', [userId], (err, row) => {
+    if (err) return callback(err);
+    if (row) return callback(null, row);
+    const custId = uuidv4();
+    db.run('INSERT INTO customers (id, user_id, email, status) VALUES (?, ?, (SELECT email FROM users WHERE id = ?), ?)',
+      [custId, userId, userId, 'active'], function(err2) {
+        if (err2) return callback(err2);
+        db.get('SELECT * FROM customers WHERE id = ?', [custId], (err3, newRow) => {
+          callback(err3, newRow);
+        });
+      });
+  });
 }
 
 module.exports = router;

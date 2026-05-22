@@ -367,7 +367,7 @@
 </div>
 
 <script>
-const API = 'https://maikr.pro'; // Change to http://127.0.0.1:3001 for local
+const API = window.location.origin;
 
 const AGENTS = [
   { state: 'SUPPORT',    emoji: '🎧', name: 'Support Agent',    color: '#ef4444', scopes: ['refunds','troubleshooting','account issues','FAQ','order status'] },

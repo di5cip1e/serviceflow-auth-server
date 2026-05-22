@@ -26,6 +26,22 @@ function generateEmbedCode(agentId, widgetType, config) {
   }
 }
 
+// Helper: get or create customer row
+function getOrCreateCustomer(userId, callback) {
+  db.get('SELECT * FROM customers WHERE user_id = ?', [userId], (err, row) => {
+    if (err) return callback(err);
+    if (row) return callback(null, row);
+    const custId = require('crypto').randomUUID();
+    db.run('INSERT INTO customers (id, user_id, email, status) VALUES (?, ?, (SELECT email FROM users WHERE id = ?), ?)',
+      [custId, userId, userId, 'active'], function(err2) {
+        if (err2) return callback(err2);
+        db.get('SELECT * FROM customers WHERE id = ?', [custId], (err3, newRow) => {
+          callback(err3, newRow);
+        });
+      });
+  });
+}
+
 // List all widgets for customer's agents
 router.get('/', (req, res) => {
   if (!req.session.userId) return res.json({ error: 'Unauthorized' });
@@ -54,6 +70,8 @@ router.post('/', (req, res) => {
           JOIN customers c ON a.customer_id = c.id
           WHERE a.id = ? AND c.user_id = ?`,
     [agentId, req.session.userId], (err, access) => {
+      if (err) return res.json({ error: err.message });
+      if (!access) return res.json({ error: 'Agent not found or unauthorized' });
       if (!access) return res.json({ error: 'Agent not found or unauthorized' });
 
       const widgetId = crypto.randomUUID();
