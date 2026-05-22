@@ -190,8 +190,8 @@ router.post('/agent/:agentId/config', async (req, res) => {
   }
 });
 
-// POST /api/agents/create — Create agent directly (free tier / post-checkout)
-router.post('/create', requireAuth, async (req, res) => {
+// POST /api/create-agent — Create agent directly (free tier / post-checkout)
+router.post('/create-agent', requireAuth, async (req, res) => {
   try {
     const { agentName, businessName, industry, targetAudience, tone, useCases, plan, modelTier } = req.body;
     if (!agentName) return res.status(400).json({ error: 'Agent name is required' });
@@ -237,8 +237,8 @@ router.post('/create', requireAuth, async (req, res) => {
   }
 });
 
-// GET /api/agents/mine — Get all agents for current user
-router.get('/mine', requireAuth, (req, res) => {
+// GET /api/my-agents — Get all agents for current user
+router.get('/my-agents', requireAuth, (req, res) => {
   db.all(
     'SELECT a.* FROM agents a JOIN customers c ON a.customer_id = c.id WHERE c.user_id = ? ORDER BY a.created_at DESC',
     [req.session.userId],
