@@ -33,6 +33,7 @@ const webhookRoutes = require('./routes/webhook');
 const chatRoutes = require('./routes/chat');  // Disabled for testing
 const agentRoutes = require('./routes/agent');
 const adminRoutes = require('./routes/admin');
+const escalationRoutes = require('./routes/escalations');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -222,6 +223,9 @@ app.use('/api/delegation', delegationRoutes);
 // Self-Correction routes (C.3 Loop Detection)
 const selfCorrectionRoutes = require('./routes/selfCorrection');
 app.use('/api/self-correction', selfCorrectionRoutes);
+
+// Escalation routes (HITL approvals)
+app.use('/api/escalations', escalationRoutes);
 
 // Static file serving — AFTER session and protected routes
 // Only serve files that are NOT protected HTML pages
