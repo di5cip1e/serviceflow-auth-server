@@ -12,6 +12,7 @@ const mcpClient = require('../mcp/client');
 const { startTrace, startSpan, scoreRAG } = require('../observability/tracer');
 const creditManager = require('../services/creditManager');
 const { shouldIntervene, getInterventionAction } = require('../services/loopDetector');
+const { getCachedHistory, setCachedHistory, invalidateHistory } = require('../services/cache');
 
 const swarmRouter = new SwarmRouter();
 
@@ -140,7 +141,28 @@ async function handleSwarmChat(req, res) {
     });
     if (!agent) return res.status(404).json({ error: 'Agent not found' });
 
-    // 2b. Self-correction: check for loops before processing
+    // 2a. Build base system prompt (needed for loop detection soft_redirect)
+    const baseSystemPrompt = agent.system_prompt
+      || 'You are a helpful AI assistant built on M.ai.K.R.';
+    let finalSystemPrompt = systemPrompt + '\n\n---\n' + baseSystemPrompt;
+
+    // 2b. Load conversation history (with LRU cache)
+    let history = getCachedHistory(resolvedAgentId);
+    if (!history) {
+      history = await new Promise((resolve) => {
+        db.all(
+          'SELECT role, content FROM conversations WHERE agent_id = ? ORDER BY created_at DESC LIMIT 40',
+          [resolvedAgentId],
+          (err, rows) => {
+            if (err || !rows) return resolve([]);
+            resolve(rows.filter(r => !r.content.startsWith('[ALERT:')).reverse());
+          }
+        );
+      });
+      setCachedHistory(resolvedAgentId, history);
+    }
+
+    // 2c. Self-correction: check for loops before processing
     const loopCheck = await shouldIntervene(history, resolvedAgentId);
     if (loopCheck.shouldIntervene) {
       const action = getInterventionAction(loopCheck.reason, loopCheck.type);
@@ -161,11 +183,11 @@ async function handleSwarmChat(req, res) {
       }
       // soft_redirect: inject hint into system prompt
       if (action === 'soft_redirect') {
-        baseSystemPrompt += '\n\n[SYSTEM NOTE: The conversation seems to be going in a circle. Redirect the user to a different approach or ask a clarifying question.]';
+        finalSystemPrompt += '\n\n[SYSTEM NOTE: The conversation seems to be going in a circle. Redirect the user to a different approach or ask a clarifying question.]';
       }
     }
 
-    // 2c. Check usage limits
+    // 2d. Check usage limits
     const { checkAgentLimits, getUsageWarnings } = require('../services/creditManager');
     const limitCheck = await checkAgentLimits(resolvedAgentId);
     if (!limitCheck.allowed) {
@@ -179,12 +201,7 @@ async function handleSwarmChat(req, res) {
       });
     }
 
-    // 3. Build base system prompt: sub-agent role + agent's own prompt
-    const baseSystemPrompt = agent.system_prompt
-      || 'You are a helpful AI assistant built on M.ai.K.R.';
-    const finalSystemPrompt = systemPrompt + '\n\n---\n' + baseSystemPrompt;
-
-    // 4. Add RAG context (span: rag_lookup)
+    // 3. Add RAG context (span: rag_lookup)
     let ragContext = '';
     const ragSpan = trace.startSpan('rag_lookup');
     let retrievedChunks = [];
@@ -204,33 +221,22 @@ async function handleSwarmChat(req, res) {
     }
     ragSpan.end();
 
-    // 5. Add MCP tools (if any are connected for this agent)
+    // 4. Add MCP tools (if any are connected for this agent)
     const mcpToolsDescription = buildMCPToolsDescription(resolvedAgentId);
     const fullSystemPrompt = finalSystemPrompt + ragContext + mcpToolsDescription;
 
-    // 6. Build conversation history
-    const history = await new Promise((resolve) => {
-      db.all(
-        'SELECT role, content FROM conversations WHERE agent_id = ? ORDER BY created_at DESC LIMIT 40',
-        [resolvedAgentId],
-        (err, rows) => {
-          if (err || !rows) return resolve([]);
-          resolve(rows.filter(r => !r.content.startsWith('[ALERT:')).reverse());
-        }
-      );
-    });
-
+    // 5. Build messages array from already-loaded history
     const messages = [
       { role: 'system', content: fullSystemPrompt },
       ...history.map(h => ({ role: h.role, content: h.content })),
       { role: 'user', content: message }
     ];
 
-    // 7. LLM call helper (with tracing + token tracking)
+    // 6. LLM call helper (with tracing + token tracking)
     const tier = agent.model_tier || 'standard';
     const { getModelForTier } = require('../orchestrator/tierRouter');
     const orModel = getModelForTier(tier).replace('openrouter/', '');
-    const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+    const OPENROUTER_API_KEY = require('../bootstrap').getSecret('OPENROUTER_API_KEY');
     const llmStartTime = Date.now();
 
     async function callLLM(msgs, iteration = 0) {
@@ -283,7 +289,7 @@ async function handleSwarmChat(req, res) {
       return data.choices[0].message.content;
     }
 
-    // 8. Tool-call loop: max 3 MCP tool calls per message
+    // 7. Tool-call loop: max 3 MCP tool calls per message
     let aiResponse = await callLLM(messages, 0);
     for (let iter = 0; iter < 3; iter++) {
       const toolCall = parseToolCall(aiResponse);
@@ -304,7 +310,7 @@ async function handleSwarmChat(req, res) {
       aiResponse = await callLLM(messages, iter + 1);
     }
 
-    // 8b. RAG scoring (async, don't block response)
+    // 7b. RAG scoring (async, don't block response)
     if (retrievedChunks.length > 0) {
       const ragScore = await scoreRAG(message, aiResponse, retrievedChunks, getModelForTier(tier));
       if (ragScore.composite !== null) {
@@ -317,17 +323,20 @@ async function handleSwarmChat(req, res) {
       }
     }
 
-    // 9. End the root trace
+    // 8. End the root trace
     trace.end();
 
-    // 9. Log conversation
+    // 8. Log conversation
     const ts = new Date().toISOString();
     db.run(`INSERT INTO conversations (agent_id, role, content, created_at) VALUES (?, 'user', ?, ?)`,
       [resolvedAgentId, message, ts]);
     db.run(`INSERT INTO conversations (agent_id, role, content, created_at) VALUES (?, 'assistant', ?, ?)`,
       [resolvedAgentId, aiResponse, ts]);
 
-    // 10. Check for escalation
+    // Invalidate conversation cache for this agent
+    invalidateHistory(resolvedAgentId);
+
+    // 9. Check for escalation
     const escalationMatch = aiResponse.match(/\[ESCALATE:(\w+)\]/);
     if (escalationMatch) {
       db.run(
@@ -336,7 +345,7 @@ async function handleSwarmChat(req, res) {
       );
     }
 
-    // 11. Return response with routing metadata + usage warnings
+    // 10. Return response with routing metadata + usage warnings
     const warnings = getUsageWarnings(limitCheck.remainingTokens, agent.base_tokens, limitCheck.remainingCredits, agent.outcome_credits);
     return res.json({
       response: aiResponse,

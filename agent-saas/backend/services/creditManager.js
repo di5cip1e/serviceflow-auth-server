@@ -58,37 +58,34 @@ function deductOutcomeCredit(agentId, outcomeType, referenceId = null) {
 function deductCredits(agentId, type, amount, description, referenceId) {
   const id = uuidv4().replace(/-/g, '').slice(0, 16);
   const ts = new Date().toISOString();
+  const absAmount = Math.abs(amount);
 
-  // Get current balance
-  const col = type === 'base_token' ? 'base_tokens_used' : 'outcome_credits_used';
-  db.get(`SELECT base_tokens, base_tokens_used, outcome_credits, outcome_credits_used FROM agents WHERE id = ?`,
-    [agentId], (e, row) => {
-      if (e || !row) { console.error('[CREDIT] Agent not found:', agentId); return null; }
+  // Use atomic UPDATE with WHERE clause to prevent TOCTOU race condition
+  const updateCol = type === 'base_token' ? 'base_tokens_used' : 'outcome_credits_used';
+  const limitCol = type === 'base_token' ? 'base_tokens' : 'outcome_credits';
 
-      let available, used;
-      if (type === 'base_token') {
-        available = row.base_tokens - row.base_tokens_used;
-      } else {
-        available = row.outcome_credits - row.outcome_credits_used;
-      }
+  // Atomic: only deduct if sufficient balance exists
+  const sql = `UPDATE agents SET ${updateCol} = ${updateCol} + ? WHERE id = ? AND (${limitCol} - ${updateCol}) >= ?`;
 
-      if (amount < 0 && available + amount < 0) {
-        // Overdraft — still deduct but flag it
-        console.warn(`[CREDIT] Overdraft for agent ${agentId}: ${type} by ${Math.abs(amount)}`);
-      }
-
-      // Record transaction
+  db.run(sql, [absAmount, agentId, absAmount], function(err) {
+    if (err) {
+      console.error('[CREDIT] Update error:', err.message);
+      return;
+    }
+    if (this.changes === 0) {
+      // Insufficient balance — do overdraft deduction and warn
+      db.run(`UPDATE agents SET ${updateCol} = ${updateCol} + ? WHERE id = ?`, [absAmount, agentId]);
+      console.warn(`[CREDIT] Overdraft for agent ${agentId}: ${type} by ${absAmount}`);
+    }
+    // Record transaction
+    db.get(`SELECT ${limitCol}, ${updateCol} FROM agents WHERE id = ?`, [agentId], (e, row) => {
+      if (e || !row) return;
+      const balance = row[limitCol] - row[updateCol];
       db.run(`INSERT INTO credit_transactions (id, agent_id, type, amount, balance_after, description, reference_id, created_at)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-        [id, agentId, type, amount, available + amount, description, referenceId, ts]);
-
-      // Update agent usage
-      const newUsed = type === 'base_token'
-        ? row.base_tokens_used + Math.abs(amount)
-        : row.outcome_credits_used + Math.abs(amount);
-      const updateCol = type === 'base_token' ? 'base_tokens_used' : 'outcome_credits_used';
-      db.run(`UPDATE agents SET ${updateCol} = ? WHERE id = ?`, [newUsed, agentId]);
+        [id, agentId, type, amount, balance, description, referenceId, ts]);
     });
+  });
 
   return null; // async; use callback pattern for sync return if needed
 }

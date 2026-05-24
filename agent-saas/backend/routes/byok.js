@@ -43,7 +43,7 @@ function getOrCreateCustomer(userId, callback) {
 
 // Get BYOK status and keys
 router.get('/', (req, res) => {
-  if (!req.session.userId) return res.json({ error: 'Unauthorized' });
+  if (!req.session.userId) return res.status(401).json({ error: 'Unauthorized' });
 
   getOrCreateCustomer(req.session.userId, (err, customer) => {
     if (err) return res.json({ error: err.message });
@@ -65,7 +65,7 @@ router.get('/', (req, res) => {
 
 // Add a new API key
 router.post('/keys', (req, res) => {
-  if (!req.session.userId) return res.json({ error: 'Unauthorized' });
+  if (!req.session.userId) return res.status(401).json({ error: 'Unauthorized' });
 
   const { provider, apiKey, platformFeePercent } = req.body;
   if (!provider || !apiKey) return res.json({ error: 'provider and apiKey required' });
@@ -100,7 +100,7 @@ router.post('/keys', (req, res) => {
 
 // Delete an API key
 router.delete('/keys/:id', (req, res) => {
-  if (!req.session.userId) return res.json({ error: 'Unauthorized' });
+  if (!req.session.userId) return res.status(401).json({ error: 'Unauthorized' });
 
   db.run(`DELETE FROM customer_api_keys
           WHERE id = ? AND customer_id = (SELECT id FROM customers WHERE user_id = ?)`,
@@ -122,7 +122,7 @@ router.delete('/keys/:id', (req, res) => {
 
 // Toggle key active/inactive
 router.patch('/keys/:id', (req, res) => {
-  if (!req.session.userId) return res.json({ error: 'Unauthorized' });
+  if (!req.session.userId) return res.status(401).json({ error: 'Unauthorized' });
   const { isActive } = req.body;
 
   db.run(`UPDATE customer_api_keys SET is_active = ?
@@ -137,7 +137,7 @@ router.patch('/keys/:id', (req, res) => {
 // Get decrypted key for internal use (only called by backend services)
 router.get('/keys/:id/decrypt', (req, res) => {
   // This should only be called internally — not exposed to frontend
-  if (!req.session.userId) return res.json({ error: 'Unauthorized' });
+  if (!req.session.userId) return res.status(401).json({ error: 'Unauthorized' });
 
   db.get(`SELECT key_encrypted, provider FROM customer_api_keys
           WHERE id = ? AND customer_id = (SELECT id FROM customers WHERE user_id = ?) AND is_active = 1`,

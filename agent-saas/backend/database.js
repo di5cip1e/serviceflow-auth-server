@@ -261,18 +261,18 @@ db.serialize(() => {
   }
 
   // Migration: add user_id to existing tables
-  addColumnIfMissing('customers', 'user_id', 'TEXT', () => {});
-  addColumnIfMissing('api_keys', 'user_id', 'TEXT', () => {});
+  addColumnIfMissing('customers', 'user_id', 'TEXT', (err) => { if (err) console.error('[DB MIGRATION] Failed to add user_id to customers:', err.message); });
+  addColumnIfMissing('api_keys', 'user_id', 'TEXT', (err) => { if (err) console.error('[DB MIGRATION] Failed to add user_id to api_keys:', err.message); });
 
   // ── Phase D: White-Label ──────────────────────────────────────────────────
-  addColumnIfMissing('customers', 'whitelabel_enabled', 'INTEGER DEFAULT 0', () => {});
-  addColumnIfMissing('customers', 'whitelabel_brand_name', 'TEXT', () => {});
-  addColumnIfMissing('customers', 'whitelabel_logo_url', 'TEXT', () => {});
-  addColumnIfMissing('customers', 'whitelabel_primary_color', 'TEXT', () => {});
-  addColumnIfMissing('customers', 'whitelabel_accent_color', 'TEXT', () => {});
-  addColumnIfMissing('customers', 'whitelabel_domain', 'TEXT', () => {});
-  addColumnIfMissing('customers', 'whitelabel_footer_text', 'TEXT', () => {});
-  addColumnIfMissing('customers', 'plan', 'TEXT DEFAULT "growth"', () => {});
+  addColumnIfMissing('customers', 'whitelabel_enabled', 'INTEGER DEFAULT 0', (err) => { if (err) console.error('[DB MIGRATION] Failed to add whitelabel_enabled:', err.message); });
+  addColumnIfMissing('customers', 'whitelabel_brand_name', 'TEXT', (err) => { if (err) console.error('[DB MIGRATION] Failed to add whitelabel_brand_name:', err.message); });
+  addColumnIfMissing('customers', 'whitelabel_logo_url', 'TEXT', (err) => { if (err) console.error('[DB MIGRATION] Failed to add whitelabel_logo_url:', err.message); });
+  addColumnIfMissing('customers', 'whitelabel_primary_color', 'TEXT', (err) => { if (err) console.error('[DB MIGRATION] Failed to add whitelabel_primary_color:', err.message); });
+  addColumnIfMissing('customers', 'whitelabel_accent_color', 'TEXT', (err) => { if (err) console.error('[DB MIGRATION] Failed to add whitelabel_accent_color:', err.message); });
+  addColumnIfMissing('customers', 'whitelabel_domain', 'TEXT', (err) => { if (err) console.error('[DB MIGRATION] Failed to add whitelabel_domain:', err.message); });
+  addColumnIfMissing('customers', 'whitelabel_footer_text', 'TEXT', (err) => { if (err) console.error('[DB MIGRATION] Failed to add whitelabel_footer_text:', err.message); });
+  addColumnIfMissing('customers', 'plan', 'TEXT DEFAULT "growth"', (err) => { if (err) console.error('[DB MIGRATION] Failed to add plan:', err.message); });
 
   // ── Phase D: Templates Marketplace ─────────────────────────────────────────
   db.run(`CREATE TABLE IF NOT EXISTS templates (
@@ -321,8 +321,8 @@ db.serialize(() => {
     last_used_at TEXT,
     FOREIGN KEY (customer_id) REFERENCES customers(id)
   )`);
-  addColumnIfMissing('customers', 'byok_enabled', 'INTEGER DEFAULT 0', () => {});
-  addColumnIfMissing('agents', 'customer_api_key_id', 'TEXT', () => {});
+  addColumnIfMissing('customers', 'byok_enabled', 'INTEGER DEFAULT 0', (err) => { if (err) console.error('[DB MIGRATION] Failed to add byok_enabled:', err.message); });
+  addColumnIfMissing('agents', 'customer_api_key_id', 'TEXT', (err) => { if (err) console.error('[DB MIGRATION] Failed to add customer_api_key_id:', err.message); });
 
   // ── Phase D: Template purchases ────────────────────────────────────────────
   db.run(`CREATE TABLE IF NOT EXISTS template_purchases (
@@ -438,6 +438,7 @@ db.serialize(() => {
 
   // Create indexes for common queries
   db.run(`CREATE INDEX IF NOT EXISTS idx_conversations_agent ON conversations(agent_id, created_at DESC)`);
+  db.run(`CREATE INDEX IF NOT EXISTS idx_conversations_created_at ON conversations(created_at)`);
   db.run(`CREATE INDEX IF NOT EXISTS idx_token_usage_agent ON token_usage(agent_id, created_at DESC)`);
   db.run(`CREATE INDEX IF NOT EXISTS idx_rag_scores_agent ON rag_scores(agent_id, created_at DESC)`);
   db.run(`CREATE INDEX IF NOT EXISTS idx_traces_agent ON traces(agent_id, started_at DESC)`);

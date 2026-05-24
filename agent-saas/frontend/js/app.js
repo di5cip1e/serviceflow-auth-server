@@ -19,6 +19,44 @@ const plans = {
   enterprise: { name: 'Enterprise', price: 49900, id: 'price_enterprise' }
 };
 
+// ── LocalStorage persistence for build flow ────────────────────────────────
+const BUILD_DATA_KEY = 'maikr_build_data';
+
+function saveBuildData() {
+  const data = {
+    agentName: document.getElementById('agentName')?.value || '',
+    businessName: document.getElementById('businessName')?.value || '',
+    industry: document.getElementById('industry')?.value || '',
+    targetAudience: document.getElementById('targetAudience')?.value || '',
+    tone: document.getElementById('tone')?.value || '',
+    useCases: document.getElementById('useCases')?.value || '',
+    selectedPlan,
+    selectedTier,
+  };
+  localStorage.setItem(BUILD_DATA_KEY, JSON.stringify(data));
+}
+
+function loadBuildData() {
+  try {
+    const raw = localStorage.getItem(BUILD_DATA_KEY);
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    const setVal = (id, val) => { const el = document.getElementById(id); if (el && val) el.value = val; };
+    setVal('agentName', data.agentName);
+    setVal('businessName', data.businessName);
+    setVal('industry', data.industry);
+    setVal('targetAudience', data.targetAudience);
+    setVal('tone', data.tone);
+    setVal('useCases', data.useCases);
+    if (data.selectedPlan) selectedPlan = data.selectedPlan;
+    if (data.selectedTier) selectedTier = data.selectedTier;
+  } catch (e) { /* ignore parse errors */ }
+}
+
+function clearBuildData() {
+  localStorage.removeItem(BUILD_DATA_KEY);
+}
+
 // DOM Elements
 const form = document.getElementById('agentForm');
 const prevBtn = document.getElementById('prevBtn');
@@ -53,11 +91,21 @@ function initMatrixCanvas() {
       drops[i]++;
     }
   }
-  setInterval(draw, 50);
+  let animId;
+  function loop() {
+    draw();
+    animId = requestAnimationFrame(loop);
+  }
+  animId = requestAnimationFrame(loop);
   window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
   });
+}
+
+function hideTerms() {
+  const modal = document.getElementById('termsModal');
+  if (modal) modal.style.display = 'none';
 }
 
 // Tech Stack Click Handlers
@@ -185,6 +233,8 @@ function navigateToStep(step) {
   currentStep = step;
   window.location.hash = 'step-' + step;
   renderStep(step);
+  // Persist form data on each step change
+  try { saveBuildData(); } catch(e) {}
   document.querySelector('.form-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
@@ -320,6 +370,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMatrixCanvas();
   initTechStack();
   initChatDemo();
+  loadBuildData(); // restore saved form data
   const initialStep = window.location.hash.startsWith('#step-') ? parseInt(window.location.hash.replace('#step-', '')) : 1;
   currentStep = initialStep;
   renderStep(initialStep);

@@ -21,7 +21,7 @@ function getOrCreateCustomer(userId, callback) {
 
 // Get white-label config for current customer
 router.get('/', (req, res) => {
-  if (!req.session.userId) return res.json({ error: 'Unauthorized' });
+  if (!req.session.userId) return res.status(401).json({ error: 'Unauthorized' });
 
   getOrCreateCustomer(req.session.userId, (err, customer) => {
     if (err) return res.json({ error: err.message });
@@ -39,7 +39,7 @@ router.get('/', (req, res) => {
 
 // Update white-label config
 router.put('/', (req, res) => {
-  if (!req.session.userId) return res.json({ error: 'Unauthorized' });
+  if (!req.session.userId) return res.status(401).json({ error: 'Unauthorized' });
   const { brandName, logoUrl, primaryColor, accentColor, domain, footerText } = req.body;
 
   getOrCreateCustomer(req.session.userId, (err, customer) => {
@@ -64,7 +64,7 @@ router.put('/', (req, res) => {
 
 // Disable white-label
 router.delete('/', (req, res) => {
-  if (!req.session.userId) return res.json({ error: 'Unauthorized' });
+  if (!req.session.userId) return res.status(401).json({ error: 'Unauthorized' });
 
   db.run(`UPDATE customers SET whitelabel_enabled = 0 WHERE user_id = ?`,
     [req.session.userId], function (err) {

@@ -11,6 +11,7 @@
  */
 const express = require('express');
 const router = express.Router();
+const { requireAuth } = require('../middleware/auth');
 
 const twilioHandler = require('./channels/twilio');
 const slackHandler = require('./channels/slack');
@@ -28,9 +29,10 @@ router.use('/webhooks/telegram', telegramHandler);
 
 // ── Channel Management API ──────────────────────────────────────
 const db = require('../database');
+// Note: requireAuth already imported above
 
 // GET /api/channels/:agentId — list all channels for an agent
-router.get('/channels/:agentId', async (req, res) => {
+router.get('/channels/:agentId', requireAuth, async (req, res) => {
   try {
     const channels = await new Promise((resolve, reject) => {
       db.all(
@@ -49,7 +51,7 @@ router.get('/channels/:agentId', async (req, res) => {
 });
 
 // POST /api/channels — connect a channel to an agent
-router.post('/channels', async (req, res) => {
+router.post('/channels', requireAuth, async (req, res) => {
   try {
     const { agent_id, channel_type, channel_id, channel_name, config } = req.body;
     if (!agent_id || !channel_type || !channel_id) {
@@ -73,7 +75,7 @@ router.post('/channels', async (req, res) => {
 });
 
 // DELETE /api/channels/:id — disconnect a channel
-router.delete('/channels/:id', async (req, res) => {
+router.delete('/channels/:id', requireAuth, async (req, res) => {
   try {
     await new Promise((resolve, reject) => {
       db.run('UPDATE agent_channels SET status = ? WHERE id = ?', ['inactive', req.params.id], (err) => {

@@ -7,6 +7,27 @@ const { requireAuth } = require('../middleware/auth');
 
 const router = express.Router();
 
+// ── Per-email rate limiter for password reset ───────────────────────────────
+const resetAttemptTracker = new Map(); // email -> lastRequestTimestamp
+function rateLimitReset(req, res, next) {
+  const email = (req.body.email || '').toLowerCase().trim();
+  if (!email) return next();
+  const now = Date.now();
+  const lastRequest = resetAttemptTracker.get(email) || 0;
+  if (now - lastRequest < 60000) {
+    return res.status(429).json({ error: 'Please wait 60 seconds before requesting another reset.' });
+  }
+  resetAttemptTracker.set(email, now);
+  // Cleanup old entries every 100 requests
+  if (resetAttemptTracker.size > 1000) {
+    const cutoff = now - 3600000;
+    for (const [k, v] of resetAttemptTracker) {
+      if (v < cutoff) resetAttemptTracker.delete(k);
+    }
+  }
+  next();
+}
+
 // ── Rate limiters ────────────────────────────────────────────────────────────
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -226,7 +247,7 @@ router.get('/me', requireAuth, (req, res) => {
 module.exports = router;
 
 // ── POST /api/auth/forgot-password ──────────────────────────────────────────
-router.post('/forgot-password', authLimiter, async (req, res) => {
+router.post('/forgot-password', authLimiter, rateLimitReset, async (req, res) => {
   try {
     const { email } = req.body;
     if (!email) return res.status(400).json({ error: 'Email required' });

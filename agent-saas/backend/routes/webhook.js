@@ -4,6 +4,8 @@ const { v4: uuidv4 } = require('uuid');
 const db = require('../database');
 const { provisionCustomer } = require('../services/provisioning');
 const { PRICING } = require('./checkout');
+const { getSecret } = require('../bootstrap');
+const stripe = require('stripe')(getSecret('STRIPE_SECRET_KEY'));
 
 // Process a checkout.session.completed event
 async function processCheckoutSession(session, event) {
@@ -15,10 +17,16 @@ async function processCheckoutSession(session, event) {
     return { duplicate: true };
   }
 
+  const email = session.customer_email || session.customer_details?.email;
+  if (!email) {
+    console.error('⏭️ No email in session:', session.id);
+    return res.status(200).json({ received: true, skipped: true, reason: 'no_email' });
+  }
+
   const paymentData = {
     eventId: event.id,
     sessionId: session.id,
-    email: session.customer_email,
+    email: email,
     agentName: session.metadata?.agentName || 'Unnamed Agent',
     businessName: session.metadata?.businessName || 'Unknown Business',
     industry: session.metadata?.industry || 'general',
@@ -46,10 +54,10 @@ router.post('/', express.raw({ type: 'application/json' }), async (req, res) => 
   let event;
 
   try {
-    event = require('stripe')(process.env.STRIPE_SECRET_KEY).webhooks.constructEvent(
+    event = stripe.webhooks.constructEvent(
       req.body,
       sig,
-      process.env.STRIPE_WEBHOOK_SECRET
+      getSecret('STRIPE_WEBHOOK_SECRET')
     );
   } catch (err) {
     console.error('❌ Webhook signature failed:', err.message);
@@ -65,6 +73,8 @@ router.post('/', express.raw({ type: 'application/json' }), async (req, res) => 
 
   if (existingEvent && existingEvent.status === 'completed') {
     console.log('⏭️  Event already processed:', eventId);
+    // Update timestamp for idempotency tracking
+    db.run('UPDATE webhook_events SET processed_at = CURRENT_TIMESTAMP WHERE stripe_event_id = ?', [eventId]);
     return res.json({ received: true, duplicate: true });
   }
 
@@ -137,6 +147,19 @@ router.get('/retry', async (req, res) => {
     try {
       const payload = JSON.parse(evt.payload);
       if (evt.event_type === 'checkout.session.completed') {
+        // Check if customer already exists for this session (prevent duplicates on retry)
+        const existingCustomer = await new Promise((resolve) => {
+          db.get('SELECT id FROM customers WHERE stripe_session_id = ? LIMIT 1', [payload.id], (err, row) => resolve(row));
+        });
+        if (existingCustomer) {
+          console.log('⏭️  Customer already exists for session, marking event completed:', evt.stripe_event_id);
+          await new Promise((resolve, reject) => {
+            db.run('UPDATE webhook_events SET status = ?, processed_at = CURRENT_TIMESTAMP WHERE stripe_event_id = ?',
+              ['completed', evt.stripe_event_id], (err) => { if (err) reject(err); else resolve(); });
+          });
+          results.push({ eventId: evt.stripe_event_id, status: 'skipped', reason: 'customer_exists' });
+          continue;
+        }
         const fakeEvent = { id: evt.stripe_event_id, type: evt.event_type, data: { object: payload } };
         const result = await processCheckoutSession(payload, fakeEvent);
         await new Promise((resolve, reject) => {

@@ -26,19 +26,9 @@ async function provisionCustomer(paymentData) {
 
   console.log('🔄 Starting provisioning for:', email);
 
-  // 1. Create customer
+  // Generate IDs upfront
   const customerId_db = uuidv4();
-  const customerInsert = new Promise((resolve, reject) => {
-    db.run(
-      `INSERT INTO customers (id, email, stripe_customer_id, stripe_subscription_id, stripe_session_id, plan, status)
-       VALUES (?, ?, ?, ?, ?, ?, 'active')`,
-      [customerId_db, email, customerId, subscriptionId, paymentData.sessionId, plan],
-      function(err) {
-        if (err) reject(err);
-        else resolve(this.lastID);
-      }
-    );
-  });
+  const agentId = uuidv4();
 
   // 2. Generate slug for agent URL
   const slug = (businessName || agentName)
@@ -47,42 +37,15 @@ async function provisionCustomer(paymentData) {
     .replace(/-+/g, '-')
     + '-' + Date.now().toString(36);
 
-  // 2b. If Stripe session has user_id, link it to the customer record
-  if (paymentData.userId) {
-    await new Promise((resolve, reject) => {
-      db.run(
-        'UPDATE customers SET user_id = ? WHERE id = ?',
-        [paymentData.userId, customerId_db],
-        function(err) {
-          if (err) reject(err);
-          else resolve();
-        }
-      );
-    });
-    console.log(`🔗 Linked customer ${customerId_db} to user ${paymentData.userId}`);
-  }
-
-  // 3. Create agent
+  // 3. Build system prompt
   const systemPrompt = generateSystemPrompt({
     agentName, businessName, industry, targetAudience, tone, useCases
   });
 
-  // Map tier to Derek's monthly cost
+  // Map tier to monthly cost
   const TIER_COSTS = { standard: 0, premium: 1500, elite: 3000 };
   const modelTier = paymentData.modelTier || 'standard';
   const monthlyCostCents = TIER_COSTS[modelTier] || 0;
-
-  const agentInsert = new Promise((resolve, reject) => {
-    db.run(
-      `INSERT INTO agents (id, customer_id, agent_name, business_name, slug, industry, target_audience, tone, use_cases, system_prompt, stripe_session_id, plan, model_tier, monthly_cost_cents, base_tokens, outcome_credits, plan_name, status, data_opt_out)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'active', ?)`,
-      [agentId, customerId_db, agentName, businessName, slug, industry, targetAudience, tone, useCases, systemPrompt, paymentData.sessionId || paymentData.eventId, plan, modelTier, monthlyCostCents, paymentData.baseTokens || 20000, paymentData.outcomeCredits || 100, plan, paymentData.dataAgreement ? 0 : 1],
-      function(err) {
-        if (err) reject(err);
-        else resolve();
-      }
-    );
-  });
 
   // 4. Generate API key
   const apiKeyId = uuidv4();
@@ -90,40 +53,73 @@ async function provisionCustomer(paymentData) {
   const keyHash = await bcrypt.hash(apiKey, 10);
   const keyPrefix = apiKey.substring(0, 12);
 
-  const apiKeyInsert = new Promise((resolve, reject) => {
-    db.run(
-      `INSERT INTO api_keys (id, customer_id, key_hash, key_prefix)
-       VALUES (?, ?, ?, ?)`,
-      [apiKeyId, customerId_db, keyHash, keyPrefix],
-      function(err) {
-        if (err) reject(err);
-        else resolve();
-      }
-    );
+  // 5. Run all DB inserts in a transaction
+  await new Promise((resolve, reject) => {
+    db.run('BEGIN TRANSACTION', (err) => {
+      if (err) return reject(err);
+
+      // 5a. Insert customer
+      db.run(
+        `INSERT INTO customers (id, email, stripe_customer_id, stripe_subscription_id, stripe_session_id, plan, status)
+         VALUES (?, ?, ?, ?, ?, ?, 'active')`,
+        [customerId_db, email, customerId, subscriptionId, paymentData.sessionId, plan],
+        (err) => {
+          if (err) return reject(err);
+
+          // Link user_id if present
+          const linkUser = () => {
+            if (paymentData.userId) {
+              db.run('UPDATE customers SET user_id = ? WHERE id = ?', [paymentData.userId, customerId_db], (e) => {
+                if (!e) console.log(`🔗 Linked customer ${customerId_db} to user ${paymentData.userId}`);
+              });
+            }
+          };
+
+          // 5b. Insert agent
+          db.run(
+            `INSERT INTO agents (id, customer_id, agent_name, business_name, slug, industry, target_audience, tone, use_cases, system_prompt, stripe_session_id, plan, model_tier, monthly_cost_cents, base_tokens, outcome_credits, plan_name, status, data_opt_out)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'active', ?)`,
+            [agentId, customerId_db, agentName, businessName, slug, industry, targetAudience, tone, useCases, systemPrompt, paymentData.sessionId || paymentData.eventId, plan, modelTier, monthlyCostCents, paymentData.baseTokens || 20000, paymentData.outcomeCredits || 100, plan, paymentData.dataAgreement ? 0 : 1],
+            function(err) {
+              if (err) return reject(err);
+
+              // 5c. Insert API key
+              db.run(
+                `INSERT INTO api_keys (id, customer_id, key_hash, key_prefix) VALUES (?, ?, ?, ?)`,
+                [apiKeyId, customerId_db, keyHash, keyPrefix],
+                (err2) => {
+                  if (err2) return reject(err2);
+                  linkUser();
+                  db.run('COMMIT', (commitErr) => {
+                    if (commitErr) {
+                      db.run('ROLLBACK');
+                      return reject(commitErr);
+                    }
+                    resolve();
+                  });
+                }
+              );
+            }
+          );
+        }
+      );
+    });
   });
 
-  // 5. Generate OpenClaw agent config files (SOUL.md, AGENTS.md, USER.md, etc.)
+  // 6. Generate OpenClaw agent config files
   const agentFilesResult = generateAgentFiles({
-    slug,
-    businessName,
-    industry,
-    tone,
+    slug, businessName, industry, tone,
     useCases: useCases ? useCases.split(',').map(s => s.trim()) : [],
-    businessDetails: targetAudience,
-    plan
+    businessDetails: targetAudience, plan
   });
 
-  // 6. Start persistent OpenClaw agent session
-  let sessionKey = null;
+  // 7. Start persistent OpenClaw agent session
   const sessionStartResult = await startAgentSession(agentId).catch(err => {
     console.warn('⚠️ Could not start agent session:', err.message);
     return { sessionKey: null };
   });
 
-  // Wait for all inserts
-  await Promise.all([customerInsert, agentInsert, apiKeyInsert]);
-
-  // 7. Send welcome email via Mailgun (HTML + plain text)
+  // 7. Send welcome email with retry (up to 3 attempts)
   const emailData = {
     agentName,
     businessName,
@@ -133,14 +129,23 @@ async function provisionCustomer(paymentData) {
   };
   const htmlBody = getWelcomeEmailHTML(emailData);
   const plainBody = getWelcomeEmailPlain(emailData);
-  try {
-    const emailResult = await sendEmail(email, `Welcome to M.ai.K.R, ${agentName}!`, plainBody, htmlBody);
-    console.log('📧 Welcome email sent:', emailResult.success ? 'OK' : 'FAILED', emailResult.status || emailResult.error);
-    if (!emailResult.success && emailResult.resp) {
-      console.error('📧 Mailgun response:', emailResult.resp);
+  let emailSent = false;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      const emailResult = await sendEmail(email, `Welcome to M.ai.K.R, ${agentName}!`, plainBody, htmlBody);
+      if (emailResult.success) {
+        console.log('📧 Welcome email sent: OK');
+        emailSent = true;
+        break;
+      }
+      console.warn(`📧 Email attempt ${attempt + 1} failed:`, emailResult.error || emailResult.status);
+    } catch(e) {
+      console.warn(`📧 Email attempt ${attempt + 1} error:`, e.message);
     }
-  } catch(e) {
-    console.error('📧 Welcome email failed:', e.message);
+    if (attempt < 2) await new Promise(r => setTimeout(r, 1000 * (attempt + 1)));
+  }
+  if (!emailSent) {
+    console.error('📧 Welcome email failed after 3 attempts for:', email);
   }
   console.log('🔗 Dashboard URL:', `http://maikr.pro/dashboard.html?agent=${agentId}&key=${apiKey}`);
 

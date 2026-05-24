@@ -25,7 +25,7 @@
   /* Neutrals */
   --white: #F0F0F0;
   --silver: #C0C0C0;
-  --smoke: #808080;
+  --smoke: #909090;
   --muted: #606080;
 
   /* Semantic */
@@ -1079,6 +1079,19 @@ select:hover {
   to { transform: rotate(360deg); }
 }
 
+/* === Screen Reader Only === */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* === Divider === */
 .divider {
   height: 1px;
@@ -1088,4 +1101,28 @@ select:hover {
 
 .divider-amber {
   background: linear-gradient(90deg, transparent, var(--amber), transparent);
+}
+
+/* === Mobile Responsive === */
+@media (max-width: 768px) {
+  :root { --space-lg: 16px; --space-xl: 24px; --space-2xl: 32px; }
+  body { font-size: 15px; }
+  nav, .lp-nav, .nav { padding: 0 20px !important; }
+  .sidebar { position: fixed; transform: translateX(-100%); z-index: 100; width: 85vw; max-width: 320px; }
+  .sidebar.open { transform: translateX(0); }
+  .lp-hero { padding: 40px 16px; }
+  .lp-hero h1 { font-size: 28px; }
+  .lp-section { padding: 40px 16px; }
+  .lp-pricing-grid { grid-template-columns: 1fr !important; }
+  .lp-features-grid { grid-template-columns: 1fr !important; }
+  .chat-messages { padding: 12px; }
+  .chat-input-area { padding: 8px 12px; }
+  .app-layout { flex-direction: column; }
+  table { display: block; overflow-x: auto; }
+}
+
+@media (max-width: 480px) {
+  .lp-hero h1 { font-size: 22px; }
+  .lp-cta { padding: 20px 12px; }
+  input, textarea, select { font-size: 16px; } /* prevent iOS zoom */
 }

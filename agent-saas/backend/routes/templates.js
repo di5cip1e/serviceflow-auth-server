@@ -97,7 +97,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   db.get('SELECT * FROM templates WHERE id = ? OR slug = ?', [req.params.id, req.params.id], (err, row) => {
     if (err) return res.json({ error: err.message });
-    if (!row) return res.json({ error: 'Not found' });
+    if (!row) return res.status(404).json({ error: 'Not found' });
 
     // Check if customer has unlocked
     let unlocked = row.price_cents === 0;
@@ -129,11 +129,11 @@ router.get('/:id', (req, res) => {
 
 // Purchase a premium template (via Stripe — simplified as direct unlock for now)
 router.post('/:id/purchase', (req, res) => {
-  if (!req.session.userId) return res.json({ error: 'Unauthorized' });
+  if (!req.session.userId) return res.status(401).json({ error: 'Unauthorized' });
 
   db.get('SELECT id, price_cents, name FROM templates WHERE id = ? OR slug = ?', [req.params.id, req.params.id], (err, tmpl) => {
     if (err) return res.json({ error: err.message });
-    if (!tmpl) return res.json({ error: 'Template not found' });
+    if (!tmpl) return res.status(404).json({ error: 'Template not found' });
     if (tmpl.price_cents === 0) return res.json({ error: 'This template is free — use it directly' });
 
     // Check if already purchased
@@ -147,7 +147,7 @@ router.post('/:id/purchase', (req, res) => {
         // Get or create customer, then record purchase
         getOrCreateCustomer(req.session.userId, (err3, customer) => {
           if (err3) return res.json({ error: err3.message });
-          if (!customer) return res.json({ error: 'Customer not found' });
+          if (!customer) return res.status(404).json({ error: 'Customer not found' });
 
           const purchaseId = uuidv4();
           db.run('INSERT INTO template_purchases (id, customer_id, template_id, price_paid_cents, status) VALUES (?, ?, ?, ?, ?)',
@@ -167,13 +167,13 @@ router.post('/:id/purchase', (req, res) => {
 
 // Apply template to an agent
 router.post('/:id/apply', (req, res) => {
-  if (!req.session.userId) return res.json({ error: 'Unauthorized' });
+  if (!req.session.userId) return res.status(401).json({ error: 'Unauthorized' });
   const { agentId } = req.body;
   if (!agentId) return res.json({ error: 'agentId required' });
 
   db.get('SELECT * FROM templates WHERE id = ? OR slug = ?', [req.params.id, req.params.id], (err, tmpl) => {
     if (err) return res.json({ error: err.message });
-    if (!tmpl) return res.json({ error: 'Template not found' });
+    if (!tmpl) return res.status(404).json({ error: 'Template not found' });
 
     // Verify unlocked
     db.get(`SELECT 1 FROM customer_templates ct
@@ -207,7 +207,7 @@ router.post('/:id/apply', (req, res) => {
 
 // Get customer's unlocked templates
 router.get('/mine/list', (req, res) => {
-  if (!req.session.userId) return res.json({ error: 'Unauthorized' });
+  if (!req.session.userId) return res.status(401).json({ error: 'Unauthorized' });
 
   db.all(`SELECT t.id, t.name, t.slug, t.category, t.industry, t.price_cents, t.is_premium, ct.unlocked_at
           FROM customer_templates ct

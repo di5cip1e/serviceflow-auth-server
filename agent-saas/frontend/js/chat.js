@@ -1,6 +1,6 @@
 // ===== Agent Chat Frontend =====
 
-const API_BASE = 'http://187.77.31.252:3001';
+const API_BASE = '';
 
 // Get agent ID from URL
 const urlParams = new URLSearchParams(window.location.search);
@@ -90,7 +90,7 @@ async function sendMessage() {
 
   addMessage(message, true);
   messageInput.value = '';
-  
+  messageInput.style.height = 'auto';
   sendBtn.disabled = true;
   showTyping();
 
@@ -101,21 +101,28 @@ async function sendMessage() {
       body: JSON.stringify({ agent_id: agentId, message })
     });
 
+    if (!response.ok) {
+      throw new Error(`Server error: ${response.status}`);
+    }
+
     const result = await response.json();
 
     hideTyping();
 
     if (result.response) {
       addMessage(result.response, false);
+    } else if (result.error) {
+      addMessage('⚠️ ' + result.error, false);
     } else {
-      addMessage('Error: ' + (result.error || 'Unknown error'), false);
+      addMessage('No response from agent. Please try again.', false);
     }
   } catch (error) {
     hideTyping();
-    addMessage('Connection error. Please try again.', false);
+    addMessage('🔌 Connection lost. Please check your internet and try again.', false);
     console.error('Chat error:', error);
   } finally {
     sendBtn.disabled = false;
+    messageInput.focus();
   }
 }
 

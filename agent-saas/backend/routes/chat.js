@@ -4,10 +4,10 @@ const OpenAI = require('openai');
 const db = require('../database');
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
+  apiKey: require('../bootstrap').getSecret('OPENAI_API_KEY')
 });
 
-const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+const OPENROUTER_API_KEY = require('../bootstrap').getSecret('OPENROUTER_API_KEY');
 
 // ✅ ENFORCED FREE MODELS — M.ai.K.R only uses free models
 // Users cannot use paid models — billing stays with the platform

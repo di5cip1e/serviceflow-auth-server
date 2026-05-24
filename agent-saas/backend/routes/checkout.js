@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const { getSecret } = require('../bootstrap');
+const stripe = require('stripe')(getSecret('STRIPE_SECRET_KEY'));
 
 // Pricing tiers
 const PRICING = {

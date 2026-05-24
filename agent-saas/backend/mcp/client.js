@@ -4,11 +4,17 @@ class MCPClient {
   constructor() {
     this.processes = new Map(); // serverName -> { proc, pending: Map(id->{resolve,reject}), counter: 0 }
     this.cachedTools = new Map(); // serverName -> tools array
+    this.maxServers = 5;
   }
 
   async connect(serverName, command, args = [], env = {}) {
     if (this.processes.has(serverName)) {
       await this.disconnect(serverName);
+    }
+
+    // Prevent resource exhaustion
+    if (this.processes.size >= this.maxServers) {
+      throw new Error(`Maximum MCP server connections (${this.maxServers}) reached. Disconnect a server before adding a new one.`);
     }
 
     const spawnEnv = { ...process.env, ...env };
@@ -55,9 +61,31 @@ class MCPClient {
 
     proc.on('close', (code) => {
       console.log(`[MCP][${serverName}] process exited with code ${code}`);
-      this.processes.delete(serverName);
-      this.cachedTools.delete(serverName);
+      // Attempt reconnect if not intentionally disconnected
+      if (this.processes.has(serverName)) {
+        const state = this.processes.get(serverName);
+        if (!state.intentionalDisconnect && (state.reconnectAttempts || 0) < 3) {
+          state.reconnectAttempts = (state.reconnectAttempts || 0) + 1;
+          const delay = 1000 * Math.pow(2, state.reconnectAttempts - 1);
+          console.log(`[MCP][${serverName}] Reconnecting in ${delay}ms (attempt ${state.reconnectAttempts})`);
+          setTimeout(() => {
+            if (state.lastCommand && state.lastEnv) {
+              this.connect(serverName, state.lastCommand, state.lastArgs || [], state.lastEnv)
+                .catch(e => console.error(`[MCP][${serverName}] Reconnect failed:`, e.message));
+            }
+          }, delay);
+        } else {
+          this.processes.delete(serverName);
+          this.cachedTools.delete(serverName);
+        }
+      }
     });
+
+    // Store for reconnect
+    serverState.intentionalDisconnect = false;
+    serverState.lastCommand = command;
+    serverState.lastArgs = args;
+    serverState.lastEnv = env;
 
     // 1. Initialize
     const initResult = await this.sendRequest(serverName, 'initialize', {
@@ -126,6 +154,7 @@ class MCPClient {
   async disconnect(serverName) {
     const server = this.processes.get(serverName);
     if (server) {
+      server.intentionalDisconnect = true;
       server.proc.kill();
       this.processes.delete(serverName);
       this.cachedTools.delete(serverName);

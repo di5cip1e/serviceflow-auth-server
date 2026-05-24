@@ -15,7 +15,7 @@ router.get('/config', (req, res) => {
 // Get agent by session ID (for success page)
 router.get('/get-agent', async (req, res) => {
   const { session_id } = req.query;
-  if (!session_id) return res.json({ error: 'No session_id' });
+  if (!session_id) return res.status(400).json({ error: 'No session_id' });
   
   db.get(`SELECT a.* FROM agents a JOIN customers c ON a.customer_id = c.id WHERE c.stripe_session_id = ?`, [session_id], (err, agent) => {
     if (err) {
@@ -40,7 +40,7 @@ router.get('/get-agent', async (req, res) => {
 // Get agent info (for chat page)
 router.get('/agent-info', async (req, res) => {
   const { agentId } = req.query;
-  if (!agentId) return res.json({ error: 'No agentId' });
+  if (!agentId) return res.status(400).json({ error: 'No agentId' });
   
   db.get('SELECT * FROM agents WHERE id = ?', [agentId], (err, agent) => {
     if (err) {
@@ -73,10 +73,10 @@ router.get('/agent-info', async (req, res) => {
 // Get agent memory/logs (includes data_opt_out for dashboard toggle state)
 router.get('/agent-memory', async (req, res) => {
   const { agentId } = req.query;
-  if (!agentId) return res.json({ error: 'No agentId' });
+  if (!agentId) return res.status(400).json({ error: 'No agentId' });
   
   db.get('SELECT data_opt_out FROM agents WHERE id = ?', [agentId], (err, row) => {
-    if (err || !row) return res.json({ error: 'Agent not found' });
+    if (err || !row) return res.status(404).json({ error: 'Agent not found' });
     db.all('SELECT role, content, created_at FROM conversations WHERE agent_id = ? ORDER BY created_at DESC LIMIT 100', [agentId], (err2, conversations) => {
       if (err2) return res.json({ error: err2.message });
       res.json({ success: true, conversations: (conversations || []).reverse(), dataOptOut: row.data_opt_out });
@@ -95,10 +95,10 @@ router.post('/agent/:agentId/data-opt-out', (req, res) => {
 });
 
 // Update agent (system_prompt, avatar_url, theme_color)
-router.post('/update-agent', async (req, res) => {
+router.post('/update-agent', requireAuth, async (req, res) => {
   const { agentId, system_prompt, avatar_url, theme_color } = req.body;
   
-  if (!agentId) return res.json({ error: 'agentId required' });
+  if (!agentId) return res.status(400).json({ error: 'agentId required' });
   
   try {
     if (system_prompt) {
@@ -121,7 +121,7 @@ router.post('/:agentId/appearance', async (req, res) => {
   const { agentId } = req.params;
   const { agentName, businessName, industry, personality, primaryColor, accentColor, presetTone, customTone } = req.body;
   
-  if (!agentId) return res.json({ error: 'agentId required' });
+  if (!agentId) return res.status(400).json({ error: 'agentId required' });
   
   try {
     const updates = [];
@@ -156,11 +156,11 @@ router.post('/:agentId/appearance', async (req, res) => {
 });
 
 // Update agent config (dashboard double-entry)
-router.post('/agent/:agentId/config', async (req, res) => {
+router.post('/agent/:agentId/config', requireAuth, async (req, res) => {
   const { agentId } = req.params;
   const { agentName, businessName, industry, tone, systemPrompt, guardrails } = req.body;
 
-  if (!agentId) return res.json({ error: 'agentId required' });
+  if (!agentId) return res.status(400).json({ error: 'agentId required' });
 
   try {
     const updates = [];
@@ -252,7 +252,7 @@ router.get('/my-agents', requireAuth, (req, res) => {
 // Get all agents for current user (admin)
 router.get('/agents', (req, res) => {
   if (!req.session || !req.session.userId) {
-    return res.json({ error: 'Not authenticated' });
+    return res.status(401).json({ error: 'Not authenticated' });
   }
   db.all(
     'SELECT a.* FROM agents a JOIN customers c ON a.customer_id = c.id WHERE c.user_id = ? ORDER BY a.created_at DESC',

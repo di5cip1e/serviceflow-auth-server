@@ -81,8 +81,9 @@ function detectSelfContradiction(history) {
 
   // Simple heuristic: check for direct negation patterns
   const contradictionPatterns = [
-    [/yes,?/, /no,?/], [/is\b/, /is not\b/, /isn't\b/], [/can\b/, /cannot\b/, /can't\b/],
-    [/will\b/, /won't\b/, /will not\b/], [/should\b/, /shouldn't\b/, /should not\b/],
+    [/\byes\b/, /\bno\b/], [/\bis\b/, /\bis not\b/, /\bisn't\b/], [/\bcan\b/, /\bcannot\b/, /\bcan't\b/],
+    [/\bwill\b/, /\bwon't\b/, /\bwill not\b/], [/\bshould\b/, /\bshouldn't\b/, /\bshould not\b/],
+    [/\balways\b/, /\bnever\b/], [/\ball\b/, /\bnone\b/],
   ];
 
   for (const patterns of contradictionPatterns) {

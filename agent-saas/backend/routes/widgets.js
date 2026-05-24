@@ -44,7 +44,7 @@ function getOrCreateCustomer(userId, callback) {
 
 // List all widgets for customer's agents
 router.get('/', (req, res) => {
-  if (!req.session.userId) return res.json({ error: 'Unauthorized' });
+  if (!req.session.userId) return res.status(401).json({ error: 'Unauthorized' });
 
   db.all(`SELECT aw.id, aw.agent_id, aw.widget_type, aw.embed_code, aw.config, aw.placement, aw.status, aw.created_at,
                  a.agent_name
@@ -60,7 +60,7 @@ router.get('/', (req, res) => {
 
 // Create a new widget
 router.post('/', (req, res) => {
-  if (!req.session.userId) return res.json({ error: 'Unauthorized' });
+  if (!req.session.userId) return res.status(401).json({ error: 'Unauthorized' });
 
   const { agentId, widgetType, config, placement } = req.body;
   if (!agentId || !widgetType) return res.json({ error: 'agentId and widgetType required' });
@@ -96,7 +96,7 @@ router.post('/', (req, res) => {
 
 // Get a specific widget
 router.get('/:id', (req, res) => {
-  if (!req.session.userId) return res.json({ error: 'Unauthorized' });
+  if (!req.session.userId) return res.status(401).json({ error: 'Unauthorized' });
 
   db.get(`SELECT aw.*, a.agent_name
           FROM agent_widgets aw
@@ -122,7 +122,7 @@ router.get('/:id', (req, res) => {
 
 // Delete a widget
 router.delete('/:id', (req, res) => {
-  if (!req.session.userId) return res.json({ error: 'Unauthorized' });
+  if (!req.session.userId) return res.status(401).json({ error: 'Unauthorized' });
 
   db.run(`DELETE FROM agent_widgets
           WHERE id = ? AND agent_id IN (
@@ -138,7 +138,7 @@ router.delete('/:id', (req, res) => {
 
 // Get all agents available for widget creation
 router.get('/agents/list', (req, res) => {
-  if (!req.session.userId) return res.json({ error: 'Unauthorized' });
+  if (!req.session.userId) return res.status(401).json({ error: 'Unauthorized' });
 
   db.all(`SELECT a.id, a.agent_name, a.status, a.industry
           FROM agents a

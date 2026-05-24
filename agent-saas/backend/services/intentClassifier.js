@@ -141,15 +141,42 @@ Category (one word only):`;
     // Ollama not available or timed out — fall through
   }
 
-  // Fallback: OpenAI via OpenRouter
+  // Fallback: OpenRouter with a fast, cheap model
   try {
-    const { getEmbedding } = require('./embeddingService');
-    // Use a simple embedding-based approach as fallback
-    // In practice this would call a small classification model
-    return { intent: 'general', confidence: 0.5, method: 'llm_fallback' };
+    const { getSecret } = require('../bootstrap');
+    const apiKey = getSecret('OPENROUTER_API_KEY');
+    if (!apiKey) return { intent: 'general', confidence: 0.5, method: 'no_key' };
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 5000);
+    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`,
+        'HTTP-Referer': 'http://maikr.pro',
+        'X-Title': 'M.ai.K.R',
+      },
+      body: JSON.stringify({
+        model: 'openrouter/google/gemini-2.0-flash-lite-001',
+        messages: [{ role: 'user', content: prompt }],
+        max_tokens: 10,
+        temperature: 0.1,
+      }),
+      signal: controller.signal
+    });
+    clearTimeout(timeout);
+    if (response.ok) {
+      const data = await response.json();
+      const category = (data.choices[0].message.content || '').trim().toLowerCase();
+      const validIntents = ['support', 'sales', 'onboarding', 'admin', 'general'];
+      const matched = validIntents.find(i => category.includes(i)) || 'general';
+      return { intent: matched, confidence: 0.8, method: 'llm_or' };
+    }
   } catch (e) {
-    return { intent: 'general', confidence: 0.5, method: 'error' };
+    // OpenRouter not available
   }
+  return { intent: 'general', confidence: 0.5, method: 'llm_fallback' };
 }
 
 /**

@@ -14,7 +14,7 @@
   --red: #E74C3C;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: var(--bg); color: --text; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
 
 /* ── Layout ── */
 .app-layout { display: flex; flex: 1; overflow: hidden; }
@@ -257,7 +257,7 @@ body { background: var(--bg); color: --text; font-family: 'Inter', -apple-system
     </div>
 
     <!-- Messages -->
-    <div class="chat-messages" id="chatMessages"></div>
+    <div class="chat-messages" id="chatMessages" role="log" aria-live="polite" aria-label="Chat messages"></div>
 
     <!-- Quick Replies -->
     <div class="quick-replies" id="quickReplies"></div>
@@ -265,9 +265,10 @@ body { background: var(--bg); color: --text; font-family: 'Inter', -apple-system
     <!-- Input -->
     <div class="chat-input-area">
       <div class="chat-input-inner">
+        <label for="messageInput" class="sr-only">Type your message</label>
         <textarea id="messageInput" placeholder="Ask your agent anything…" rows="1"
           oninput="autoResize(this)" onkeydown="handleKeydown(event)"></textarea>
-        <button class="chat-send-btn" id="sendBtn" onclick="sendMessage()" disabled>➤</button>
+        <button class="chat-send-btn" id="sendBtn" onclick="sendMessage()" disabled aria-label="Send message">➤</button>
       </div>
     </div>
   </main>

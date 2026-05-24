@@ -1,20 +1,6 @@
 require('dotenv').config();
-const fs = require('fs');
-
-// Load additional secrets from ~/.openclaw/secrets.json into process.env BEFORE requiring routes
-// This ensures all keys are available even if .env is incomplete
-try {
-  const secrets = JSON.parse(fs.readFileSync('/root/.openclaw/secrets.json', 'utf8'));
-  if (secrets.openai_api_key && !process.env.OPENAI_API_KEY) process.env.OPENAI_API_KEY = secrets.openai_api_key;
-  if (secrets.STRIPE_SECRET_KEY && !process.env.STRIPE_SECRET_KEY) process.env.STRIPE_SECRET_KEY = secrets.STRIPE_SECRET_KEY;
-  if (secrets.STRIPE_PUBLISHABLE_KEY && !process.env.STRIPE_PUBLISHABLE_KEY) process.env.STRIPE_PUBLISHABLE_KEY = secrets.STRIPE_PUBLISHABLE_KEY;
-  if (secrets.STRIPE_RESTRICTED_KEY && !process.env.STRIPE_RESTRICTED_KEY) process.env.STRIPE_RESTRICTED_KEY = secrets.STRIPE_RESTRICTED_KEY;
-  if (secrets.MAILGUN_API_KEY && !process.env.MAILGUN_API_KEY) process.env.MAILGUN_API_KEY = secrets.MAILGUN_API_KEY;
-  if (secrets.MAILGUN_DOMAIN && !process.env.MAILGUN_DOMAIN) process.env.MAILGUN_DOMAIN = secrets.MAILGUN_DOMAIN;
-  if (secrets.MAILGUN_FROM && !process.env.MAILGUN_FROM) process.env.MAILGUN_FROM = secrets.MAILGUN_FROM;
-} catch (e) {
-  console.warn('Could not load secrets.json:', e.message);
-}
+const { getSecret, validate } = require('./bootstrap');
+validate();
 
 const express = require('express');
 const cors = require('cors');
@@ -41,14 +27,14 @@ const PORT = process.env.PORT || 3001;
 // Middleware order is CRITICAL:
 // 1. webhook MUST be first — it needs the RAW body for Stripe signature verification
 // 2. All other routes use express.json() — applied AFTER webhook so they get parsed body
-app.use(cors());
+app.use(cors({ origin: ['https://maikr.pro', 'http://localhost:3001'], credentials: true }));
 app.use('/webhook', webhookRoutes);         // ← raw body, before JSON parser
 app.use(express.json());                     // ← JSON parser for all other routes
 
 // Session middleware — must be before auth checks and static file serving
 app.use(session({
   store: new SQLiteStore({ db: 'sessions.db', dir: __dirname + '/data' }),
-  secret: process.env.SESSION_SECRET || 'maikr-secret-change-in-prod',
+  secret: getSecret('SESSION_SECRET') || 'maikr-secret-change-in-prod',
   resave: false,
   saveUninitialized: false,
   cookie: {
@@ -63,17 +49,13 @@ app.use(session({
 app.use(setUserLocals);
 
 // Block direct static access to protected HTML pages
-// These must go through the explicit protected routes below
-const protectedFiles = new Set([
-  'chat.html', 'observe.html', 'swarm.html', 'channels.html',
-  'mcp.html', 'optimization.html', 'settings.html', 'command-center.html',
-  'deploy.html', 'admin.html', 'dashboard.html'
-]);
+// Uses single source of truth from config/protected-pages.js
+const { PROTECTED_PAGES } = require('./config/protected-pages');
 app.use(function(req, res, next) {
   // Check if request is for a protected HTML file (direct .html access)
   var pathParts = req.path.split('/');
   var fileName = pathParts[pathParts.length - 1];
-  if (protectedFiles.has(fileName)) {
+  if (PROTECTED_PAGES.has(fileName)) {
     // Run requireAuth — redirect to login if not authenticated
     return requireAuth(req, res, next);
   }
@@ -228,13 +210,6 @@ app.use('/api/self-correction', selfCorrectionRoutes);
 app.use('/api/escalations', escalationRoutes);
 
 // Static file serving — AFTER session and protected routes
-// Only serve files that are NOT protected HTML pages
-const protectedPages = new Set([
-  'chat.html', 'observe.html', 'swarm.html', 'channels.html',
-  'mcp.html', 'optimization.html', 'settings.html', 'command-center.html',
-  'deploy.html', 'admin.html', 'dashboard.html', 'leads.html', 'onboarding-wizard.html', 'analytics.html', 'agent-studio.html', 'blueprints.html', 'workflow-canvas.html', 'whitelabel.html', 'templates.html', 'byok.html', 'widgets.html'
-]);
-
 // Serve CSS, JS, and assets statically (no auth needed)
 app.use('/css', express.static(path.join(__dirname, '../frontend/css'), { maxAge: '1d' }));
 app.use('/js', express.static(path.join(__dirname, '../frontend/js'), { maxAge: '1d' }));
@@ -252,6 +227,12 @@ app.use(express.static(path.join(__dirname, '../frontend'), {
     }
   }
 }));
+
+// ── Global Error Handler ────────────────────────────────────────────────────
+app.use((err, req, res, next) => {
+  console.error('[GLOBAL ERROR]', err);
+  res.status(err.status || 500).json({ error: err.message || 'Internal server error' });
+});
 
 // Health check
 app.get('/health', (req, res) => {
