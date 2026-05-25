@@ -1,22 +1,8 @@
-# Heartbeat State Template
-
-Use this file as the baseline for `~/self-improving/heartbeat-state.md`.
-It stores only lightweight run markers and maintenance notes.
-
-```markdown
-# Self-Improving Heartbeat State
-
-last_heartbeat_started_at: never
-last_reviewed_change_at: never
-last_heartbeat_result: never
+last_heartbeat_started_at: 2026-05-24T23:54:00Z
+last_reviewed_change_at: 2026-05-24T23:54:00Z
+last_heartbeat_result: HEARTBEAT_OK
 
 ## Last actions
-- none yet
-```
-
-## Rules
-
-- update `last_heartbeat_started_at` at the beginning of every heartbeat
-- update `last_reviewed_change_at` only after a clean review of changed files
-- keep `last_actions` short and factual
-- never turn this file into another memory log
+- 2026-05-24 23:54: Routine check — no self-improving file changes. Proactivity heartbeat.md empty. No new tasks in HEARTBEAT.md for this hour. Late night (UTC), quiet.
+- 2026-05-24 22:24: Routine check — no self-improving file changes. Session state unchanged. Sunday night, all quiet.
+- 2026-05-24 20:54: Routine check — no self-improving file changes since last review. Proactivity heartbeat.md empty. Session state unchanged. All stable.
