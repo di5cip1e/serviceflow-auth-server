@@ -2,808 +2,456 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Swarm Control — M.ai.K.R</title>
-  <style>
-    :root {
-  --bg: #0A0A0F;
-  --surface: #1A1A2E;
-  --surface2: #2D2D44;
-  --border: #2D2D44;
-  --green: #C0A060;
-  --green-dim: #804020;
-  --text: #F0F0F0;
-  --text-dim: #808080;
-  --blue: #0040A0;
-  --blue-light: #0060D0;
-  --yellow: #C0A060;
-  --red: #E74C3C;
-  --orange: #C0A060;
-  --plasma: #00C0FF;
-  --amber: #C0A060;
-  --amber-dim: rgba(192,160,96,0.15);
-}
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--bg); color: var(--text); font-family: 'Courier New', monospace; min-height: 100vh; }
-    .container { max-width: 1400px; margin: 0 auto; padding: 24px; }
-
-    .header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
-    .header h1 { font-size: 24px; color: var(--matrix); text-transform: uppercase; letter-spacing: 4px; }
-    .badge { background: var(--surface2); border: 1px solid var(--matrix-dim); color: var(--matrix); padding: 4px 12px; border-radius: 4px; font-size: 12px; }
-
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-    .panel-header { background: var(--surface2); padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
-    .panel-header h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); }
-    .panel-body { padding: 16px; }
-
-    /* Route Test */
-    .route-test-input { display: flex; gap: 8px; margin-bottom: 12px; }
-    .route-test-input input { flex: 1; background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 10px 14px; border-radius: 6px; font-family: inherit; font-size: 14px; }
-    .route-test-input input:focus { outline: none; border-color: var(--matrix-dim); }
-    .btn { background: var(--matrix-dim); color: var(--bg); border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-family: inherit; font-weight: bold; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
-    .btn:hover { background: var(--matrix); }
-    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
-
-    .route-result { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 12px; font-size: 13px; min-height: 80px; }
-    .route-result .state { font-size: 16px; font-weight: bold; margin-bottom: 4px; }
-    .route-result .meta { color: var(--muted); font-size: 12px; }
-    .route-result .emoji { font-size: 24px; margin-right: 8px; }
-
-    /* Live Chat */
-    .chat-box { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; height: 300px; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
-    .chat-message { padding: 8px 12px; border-radius: 8px; max-width: 80%; font-size: 14px; line-height: 1.5; }
-    .chat-message.user { background: var(--surface2); align-self: flex-end; border-bottom-right-radius: 2px; }
-    .chat-message.agent { background: var(--surface2); align-self: flex-start; border-bottom-left-radius: 2px; }
-    .chat-message .routing-badge { display: inline-block; font-size: 10px; padding: 2px 6px; border-radius: 3px; margin-bottom: 4px; }
-    .routing-SUPPORT .routing-badge { background: var(--support); }
-    .routing-SALES .routing-badge { background: var(--sales); }
-    .routing-ONBOARDING .routing-badge { background: var(--onboarding); }
-    .routing-ADMIN .routing-badge { background: var(--admin); }
-    .routing-GENERAL .routing-badge { background: var(--general); }
-
-    .chat-input-row { display: flex; gap: 8px; margin-top: 12px; }
-    .chat-input-row input { flex: 1; background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 10px 14px; border-radius: 6px; font-family: inherit; }
-    .chat-input-row input:focus { outline: none; border-color: var(--matrix-dim); }
-
-    /* Sub-Agent Cards */
-    .agent-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .agent-card { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 12px; transition: all 0.3s; }
-    .agent-card.active { border-color: var(--matrix); box-shadow: 0 0 12px rgba(0,255,136,0.15); }
-    .agent-card .agent-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
-    .agent-card .agent-emoji { font-size: 20px; }
-    .agent-card .agent-name { font-weight: bold; font-size: 13px; }
-    .agent-card .agent-state { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
-    .agent-card .agent-scopes { font-size: 11px; color: var(--muted); }
-    .agent-card .agent-scopes span { display: inline-block; background: var(--surface2); padding: 2px 6px; border-radius: 3px; margin: 2px; }
-
-    /* Trace Timeline */
-    .trace-timeline { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; max-height: 300px; overflow-y: auto; }
-    .trace-item { display: flex; gap: 12px; padding: 10px 12px; border-bottom: 1px solid var(--border); font-size: 12px; }
-    .trace-item:last-child { border-bottom: none; }
-    .trace-time { color: var(--muted); width: 70px; flex-shrink: 0; }
-    .trace-from, .trace-to { width: 100px; flex-shrink: 0; text-align: center; padding: 2px 6px; border-radius: 4px; font-size: 11px; }
-    .trace-from { color: var(--muted); }
-    .trace-arrow { color: var(--muted); width: 30px; text-align: center; flex-shrink: 0; }
-    .trace-to.SUPPORT { background: rgba(239,68,68,0.2); color: var(--support); }
-    .trace-to.SALES { background: rgba(59,130,246,0.2); color: var(--sales); }
-    .trace-to.ONBOARDING { background: rgba(139,92,246,0.2); color: var(--onboarding); }
-    .trace-to.ADMIN { background: rgba(245,158,11,0.2); color: var(--admin); }
-    .trace-to.GENERAL { background: rgba(46,204,113,0.2); color: var(--general); }
-    .trace-to.ROUTING { background: rgba(107,107,128,0.2); color: var(--muted); }
-    .trace-confidence { color: var(--muted); margin-left: auto; }
-    .trace-msg { color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 200px; }
-
-    /* Override Controls */
-    .override-controls { display: flex; flex-wrap: wrap; gap: 8px; }
-    .override-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 8px 14px; border-radius: 6px; cursor: pointer; font-family: inherit; font-size: 12px; }
-    .override-btn:hover { border-color: var(--matrix-dim); }
-    .override-btn.active { border-color: var(--matrix); background: rgba(0,255,136,0.1); }
-
-    /* Full width panels */
-    .full { grid-column: 1 / -1; }
-
-    /* Delegation Panel */
-    .delegation-tree { padding: 8px 0; }
-    .delegation-tree .tree-node { position: relative; }
-    .delegation-tree .tree-node.manager { margin-bottom: 12px; }
-    .delegation-tree .tree-node .node-card {
-      display: flex; align-items: center; gap: 10px; padding: 10px 14px;
-      background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
-      transition: border-color 0.2s;
-    }
-    .delegation-tree .tree-node .node-card:hover { border-color: var(--amber-dim); }
-    .delegation-tree .tree-node .node-dot {
-      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
-    }
-    .delegation-tree .node-dot.active { background: #C0A060; box-shadow: 0 0 6px #C0A060; }
-    .delegation-tree .node-dot.idle { background: #8b949e; }
-    .delegation-tree .node-dot.error { background: #E74C3C; }
-    .delegation-tree .node-info { flex: 1; min-width: 0; }
-    .delegation-tree .node-name { font-size: 13px; font-weight: bold; }
-    .delegation-tree .node-role { font-size: 11px; color: var(--text-dim); }
-    .delegation-tree .node-actions { display: flex; gap: 6px; }
-    .delegation-tree .btn-sm {
-      background: var(--surface2); border: 1px solid var(--border); color: var(--text-dim);
-      padding: 4px 10px; border-radius: 4px; cursor: pointer; font-family: inherit; font-size: 11px;
-    }
-    .delegation-tree .btn-sm:hover { border-color: var(--red); color: var(--red); }
-    .delegation-tree .sub-list { margin-left: 24px; padding-left: 16px; border-left: 2px solid var(--border); }
-    .delegation-tree .sub-list .tree-node { margin-top: 8px; }
-    .delegation-tree .sub-list .node-card { font-size: 12px; }
-
-    /* Spawn modal */
-    .modal-overlay {
-      display: none; position: fixed; inset: 0; z-index: 1000;
-      background: rgba(0,0,0,0.7); align-items: center; justify-content: center;
-    }
-    .modal-overlay.open { display: flex; }
-    .modal {
-      background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
-      padding: 24px; width: 420px; max-width: 95vw;
-    }
-    .modal h3 { font-size: 16px; margin-bottom: 16px; color: var(--amber); }
-    .modal label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); margin-bottom: 4px; }
-    .modal input, .modal select {
-      width: 100%; background: var(--bg); border: 1px solid var(--border); color: var(--text);
-      padding: 10px 12px; border-radius: 6px; font-family: inherit; font-size: 14px; margin-bottom: 14px;
-    }
-    .modal input:focus, .modal select:focus { outline: none; border-color: var(--amber); }
-    .modal .modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 4px; }
-    .modal .btn-cancel { background: var(--surface2); color: var(--text); border: 1px solid var(--border); padding: 10px 20px; border-radius: 6px; cursor: pointer; font-family: inherit; font-size: 13px; }
-    .modal .btn-create { background: var(--amber); color: var(--bg); border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-family: inherit; font-size: 13px; font-weight: bold; }
-
-    @media (max-width: 900px) {
-      .grid { grid-template-columns: 1fr; }
-      .agent-cards { grid-template-columns: 1fr; }
-    }
-  </style>
-
-<style>
-.maikr-nav {
-  background: #161b22;
-  border-bottom: 1px solid #30363d;
-  padding: 0 24px;
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  height: 52px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.maikr-logo { font-size: 17px; font-weight: 700; color: #C0A060; text-decoration: none; letter-spacing: -0.5px; }
-.maikr-logo span { color: #fff; }
-.maikr-links { display: flex; gap: 4px; margin-left: 8px; }
-.maikr-links a { color: #8b949e; text-decoration: none; font-size: 13px; padding: 5px 10px; border-radius: 5px; transition: all 0.15s; }
-.maikr-links a:hover { color: #e6edf3; background: #30363d; }
-.maikr-links a.active { color: #C0A060; }
-.maikr-spacer { flex: 1; }
-.maikr-status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #8b949e; }
-.maikr-status .dot { width: 7px; height: 7px; background: #C0A060; border-radius: 50%; box-shadow: 0 0 5px #C0A060; }
-</style>
-
-  <style>
-    .skip-link {
-      position: absolute; top: -100px; left: 0; z-index: 9999;
-      padding: 12px 24px; background: #C0A060; color: #0A0A0F;
-      font-weight: 700; font-size: 14px; text-decoration: none;
-      border-radius: 0 0 8px 0; transition: top 0.2s;
-    }
-    .skip-link:focus { top: 0; }
-</style>
-  </head>
+  <meta name="viewport" width="width=device-width, initial-scale=1.0">
+  <title>Swarm Management — M.ai.K.R</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/css/maikr-v3.css">
+</head>
 <body>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <a href="#main-content" class="skip-link" style="position:absolute;top:-100px;left:0;z-index:9999;padding:12px 24px;background:var(--amber);color:var(--bg);font-weight:700;font-size:14px;text-decoration:none;border-radius:0 0 8px 0;transition:top .2s;" onfocus="this.style.top=0" onblur="this.style.top='-100px'">Skip to main content</a>
 
-<header role="banner"><nav class="maikr-nav">
-  <a href="/" class="maikr-logo">M<span>.ai</span><span>.K.R</span></a>
-  <div class="maikr-links">
-    <a href="/command-center.html">Dashboard</a>
-    <a href="/swarm.html">Swarm</a>
-    <a href="/mcp.html">MCP</a>
-    <a href="/channels.html">Channels</a>
-    <a href="/optimization.html">Optimize</a>
-    <a href="/observe.html">Observe</a>
-  </div>
-  <div class="maikr-spacer"></div>
-  <div class="maikr-status"><span class="dot"></span>Online</div>
-  <form action="/api/auth/logout" method="POST" style="display:inline"><button type="submit" class="logout-link">Log out</button></form>
-</nav></header><main id="main-content">
-
-<div class="container">
-  <div class="header">
-    <h1>Swarm Control</h1>
-    <span class="badge" id="swarm-status">● Live</span>
-    <span class="badge" id="backend-status">● Connecting…</span>
-  </div>
-
-  <div class="grid">
-    <!-- Route Test Panel -->
-    <div class="panel">
-      <div class="panel-header">
-        <h2>Intent Routing Test</h2>
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <nav class="app-sidebar" role="navigation" aria-label="Main navigation">
+      <div class="app-sidebar-logo">M<span>.ai</span>.K<span>.R</span></div>
+      <div class="app-sidebar-nav">
+        <a href="/command-center.html"><span class="nav-icon">◈</span> Command Center</a>
+        <a href="/chat.html"><span class="nav-icon">💬</span> Chat</a>
+        <a href="/swarm.html" aria-current="page" class="active"><span class="nav-icon">⚡</span> Swarm</a>
+        <a href="/observe.html"><span class="nav-icon">👁</span> Observe</a>
+        <a href="/optimization.html"><span class="nav-icon">◎</span> Optimize</a>
+        <a href="/channels.html"><span class="nav-icon">📡</span> Channels</a>
+        <a href="/mcp.html"><span class="nav-icon">⬡</span> MCP</a>
+        <a href="/analytics.html"><span class="nav-icon">◇</span> Analytics</a>
+        <a href="/agent-studio.html"><span class="nav-icon">⬢</span> Studio</a>
+        <a href="/settings.html"><span class="nav-icon">⚙</span> Settings</a>
       </div>
-      <div class="panel-body">
-        <div class="route-test-input">
-          <input type="text" id="test-message" placeholder="Type a message to test routing…" value="help me refund my order">
-          <button class="btn" id="test-btn" onclick="testRoute()">Test</button>
-        </div>
-        <div class="route-result" id="route-result">
-          <span style="color:var(--muted)">Results will appear here…</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Sub-Agent Status -->
-    <div class="panel">
-      <div class="panel-header">
-        <h2>Sub-Agents</h2>
-        <span class="badge" id="active-agent">—</span>
-      </div>
-      <div class="panel-body">
-        <div class="agent-cards" id="agent-cards"></div>
-      </div>
-    </div>
-
-    <!-- Live Chat -->
-    <div class="panel full">
-      <div class="panel-header">
-        <h2>Live Swarm Chat</h2>
-        <div style="display:flex;gap:8px">
-          <select id="chat-agent" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:4px 8px;border-radius:4px;font-family:inherit;font-size:12px">
-            <option value="">Select Agent ID…</option>
-          </select>
-        </div>
-      </div>
-      <div class="panel-body">
-        <div class="chat-box" id="chat-box">
-          <div style="color:var(--muted);font-size:13px;text-align:center;padding:40px">
-            Agent selected. Type a message and press Send to begin.
+      <div class="app-sidebar-footer">
+        <div class="user-info">
+          <div class="avatar" id="user-avatar">U</div>
+          <div>
+            <div style="font-size:0.85rem;color:var(--text);font-weight:600;" id="user-name">Loading…</div>
+            <div style="font-size:0.72rem;color:var(--text-muted)" id="user-email">—</div>
           </div>
         </div>
-        <div class="chat-input-row">
-          <input type="text" id="chat-input" placeholder="Type your message…" onkeydown="if(event.key==='Enter')sendChat()">
-          <button class="btn" id="send-btn" onclick="sendChat()">Send</button>
+        <form action="/api/auth/logout" method="POST"><button type="submit" class="btn btn-ghost btn-sm" style="width:100%">Log out</button></form>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="app-main" id="main-content">
+      <!-- Header -->
+      <div class="page-header animate-in">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:var(--s4);">
+          <div>
+            <h1 style="font-size:2.2rem;">Swarm Management</h1>
+            <p class="text-muted" style="margin-top:var(--s2);max-width:600px;">Create, monitor, and manage your multi-agent workforce. Spawn sub-agents for specialized tasks and delegate work across your swarm.</p>
+          </div>
+          <div style="display:flex;gap:var(--s3);align-items:center;">
+            <span class badge badge-success" id="swarm-status"><span class="dot"></span>Live</span>
+            <button class="btn btn-amber" onclick="openSpawnModal()">+ Create Sub-Agent</button>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Trace Timeline -->
-    <div class="panel full">
-      <div class="panel-header">
-        <h2>Routing Trace</h2>
-        <button class="btn" style="padding:6px 12px;font-size:11px" onclick="clearTrace()">Clear</button>
-      </div>
-      <div class="panel-body">
-        <div class="trace-timeline" id="trace-timeline">
-          <div style="color:var(--muted);font-size:13px;text-align:center;padding:20px">No routing events yet.</div>
+      <!-- Stats Row -->
+      <div class="stat-grid animate-in stagger-1">
+        <div class="stat-card card">
+          <div class="stat-label">Active Agents</div>
+          <div class="stat-value" id="stat-active">0</div>
+          <div class="stat-change up"><span class="stat-icon">⚡</span> Running now</div>
+        </div>
+        <div class="stat-card card">
+          <div class="stat-label">Total Sub-Agents</div>
+          <div class="stat-value" id="stat-total">0</div>
+          <div class="stat-change"><span class="stat-icon">🕹</span> Spawned</div>
+        </div>
+        <div class="stat-card card">
+          <div class="stat-label">Token Usage</div>
+          <div class="stat-value" id="stat-tokens" style="font-size:1.4rem;">—</div>
+          <div class="stat-change"><span class="stat-icon">◈</span> This session</div>
+        </div>
+        <div class="stat-card card">
+          <div class="stat-label">Messages Routed</div>
+          <div class="stat-value" id="stat-messages">0</div>
+          <div class="stat-change up"><span class="stat-icon">↗</span> Total</div>
         </div>
       </div>
-    </div>
 
-    <!-- Manual Override -->
-    <div class="panel">
-      <div class="panel-header">
-        <h2>Manual Override</h2>
-      </div>
-      <div class="panel-body">
-        <div class="override-controls" id="override-controls"></div>
-      </div>
-    </div>
-
-    <!-- Stats -->
-    <div class="panel">
-      <div class="panel-header">
-        <h2>Session Stats</h2>
-      </div>
-      <div class="panel-body">
-        <div id="session-stats" style="font-size:13px;color:var(--muted);line-height:2">
-          <div>Messages routed: <span id="stat-messages" style="color:var(--text)">0</span></div>
-          <div>Avg confidence: <span id="stat-confidence" style="color:var(--text)">—</span></div>
-          <div>Active state: <span id="stat-state" style="color:var(--text)">ROUTING</span></div>
-          <div>Last intent: <span id="stat-intent" style="color:var(--text)">—</span></div>
+      <!-- Agent Cards Grid -->
+      <div class="animate-in stagger-2">
+        <div class="card-header" style="margin-bottom:var(--s4);">
+          <h3>Agent Fleet</h3>
+          <button class="btn btn-ghost btn-sm" onclick="loadAgents()">↻ Refresh</button>
+        </div>
+        <div class="grid-4" id="agent-grid">
+          <div class="card" style="text-align:center;padding:var(--s8);">
+            <div class="spinner spinner-lg" style="margin:0 auto;"></div>
+            <p class="text-muted text-sm" style="margin-top:var(--s3);">Loading agents…</p>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Agent Delegation Panel -->
-    <div class="panel full">
-      <div class="panel-header">
-        <h2>Agent Delegation</h2>
-        <button class="btn" style="padding:6px 12px;font-size:11px" onclick="openSpawnModal()">+ Spawn Sub-Agent</button>
+      <!-- Delegation Tree -->
+      <div class="card animate-in stagger-3" style="margin-top:var(--s6);">
+        <div class="card-header">
+          <h3>Agent Hierarchy</h3>
+          <span class="text-sm text-muted" id="tree-subcount">0 sub-agents</span>
+        </div>
+        <div id="delegation-tree-container">
+          <div style="display:flex;align-items:center;gap:var(--s3);padding:var(--s4);">
+            <div class="spinner"></div>
+            <span class="text-muted text-sm">Loading hierarchy…</span>
+          </div>
+        </div>
       </div>
-      <div class="panel-body">
-        <div id="delegation-loading" style="color:var(--text-dim);font-size:13px;padding:8px 0">Loading agent hierarchy…</div>
-        <div class="delegation-tree" id="delegation-tree" style="display:none">
-          <div class="tree-node manager">
-            <div class="node-card">
-              <span class="node-dot active" id="manager-dot"></span>
-              <div class="node-info">
-                <div class="node-name" id="manager-name">Manager Agent</div>
-                <div class="node-role" id="manager-role">Orchestrator · Main entry point for all requests</div>
-              </div>
-              <span class="badge" id="sub-agent-count" style="font-size:11px">0 sub-agents</span>
+
+      <!-- Delegation Panel -->
+      <div class="card animate-in stagger-4" style="margin-top:var(--s6);">
+        <div class="card-header">
+          <h3>Agent Delegation</h3>
+        </div>
+        <div class="grid-2" style="gap:var(--s6);">
+          <div>
+            <div class="form-group">
+              <label>Parent Agent</label>
+              <select id="delegation-parent">
+                <option value="">Select parent agent…</option>
+              </select>
             </div>
           </div>
-          <div class="sub-list" id="sub-agent-list"></div>
+          <div>
+            <div class="form-group">
+              <label>Child Role</label>
+              <select id="delegation-role">
+                <option value="support">Support</option>
+                <option value="sales">Sales</option>
+                <option value="onboarding">Onboarding</option>
+                <option value="general">General</option>
+                <option value="admin">Admin</option>
+              </select>
+            </div>
+          </div>
         </div>
-        <div id="delegation-empty" style="display:none;color:var(--text-dim);font-size:13px;padding:16px 0">
-          No sub-agents spawned yet. Click <strong style="color:var(--amber)">+ Spawn Sub-Agent</strong> to create one.
+        <div style="margin-top:var(--s4);">
+          <button class="btn btn-primary" onclick="delegateTask()">Delegate Task</button>
         </div>
-        <div id="delegation-error" style="display:none;color:var(--red);font-size:13px;padding:8px 0"></div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Spawn Modal -->
+  <div class="modal-overlay" id="spawn-modal">
+    <div class="modal">
+      <h2 style="margin-bottom:var(--s2);">⚡ Create Sub-Agent</h2>
+      <p class="text-muted" style="margin-bottom:var(--s6);">Spawn a new sub-agent to handle specialized tasks within your swarm.</p>
+      <div class="form-group">
+        <label>Agent Name <span class="form-label-req">*</span></label>
+        <input type="text" id="spawn-name" placeholder="e.g., Research Assistant">
+      </div>
+      <div class="form-group">
+        <label>Role <span class="form-label-req">*</span></label>
+        <select id="spawn-role">
+          <option value="support">Support</option>
+          <option value="sales">Sales</option>
+          <option value="onboarding">Onboarding</option>
+          <option value="general" selected>General</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Model Tier</label>
+        <select id="spawn-tier">
+          <option value="basic">Basic</option>
+          <option value="standard" selected>Standard</option>
+          <option value="premium">Premium</option>
+          <option value="ultra">Ultra</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Parent Agent</label>
+        <select id="spawn-parent">
+          <option value="">None (standalone)</option>
+        </select>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" onclick="closeSpawnModal()">Cancel</button>
+        <button class="btn btn-amber" id="spawn-submit" onclick="spawnAgent()">Create Agent</button>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Spawn Sub-Agent Modal -->
-<div class="modal-overlay" id="spawn-modal">
-  <div class="modal">
-    <h3>🤖 Spawn Sub-Agent</h3>
-    <label for="spawn-name">Agent Name</label>
-    <input type="text" id="spawn-name" placeholder="e.g., Research Assistant">
-    <label for="spawn-role">Role</label>
-    <select id="spawn-role">
-      <option value="Support">Support</option>
-      <option value="Sales">Sales</option>
-      <option value="Researcher">Researcher</option>
-      <option value="Custom">Custom</option>
-    </select>
-    <label for="spawn-custom-role" id="spawn-custom-label" style="display:none">Custom Role Description</label>
-    <input type="text" id="spawn-custom-role" placeholder="Describe the custom role…" style="display:none">
-    <label for="spawn-tier">Model Tier</label>
-    <select id="spawn-tier">
-      <option value="basic">Basic</option>
-      <option value="standard" selected>Standard</option>
-      <option value="premium">Premium</option>
-      <option value="ultra">Ultra</option>
-    </select>
-    <div class="modal-actions">
-      <button class="btn-cancel" onclick="closeSpawnModal()">Cancel</button>
-      <button class="btn-create" onclick="spawnSubAgent()">Create</button>
-    </div>
-  </div>
-</div>
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
 
-<script>
-const API = window.location.origin;
+  <script>
+  // ── Auth Check ──────────────────────────────────────────────────────────
+  (async function() {
+    try {
+      const r = await fetch('/api/auth/me', { credentials: 'include' });
+      if (r.status === 401) { window.location.href = '/login.html'; return; }
+      const d = await r.json();
+      document.getElementById('user-name').textContent = d.name || d.email || 'User';
+      document.getElementById('user-email').textContent = d.email || '';
+      document.getElementById('user-avatar').textContent = (d.name || d.email || 'U').charAt(0).toUpperCase();
+    } catch { window.location.href = '/login.html'; }
+  })();
 
-const AGENTS = [
-  { state: 'SUPPORT',    emoji: '🎧', name: 'Support Agent',    color: '#ef4444', scopes: ['refunds','troubleshooting','account issues','FAQ','order status'] },
-  { state: 'SALES',       emoji: '💼', name: 'Sales Agent',       color: '#3b82f6', scopes: ['plan questions','upgrades','comparisons','trial info','pricing'] },
-  { state: 'ONBOARDING', emoji: '🚀', name: 'Onboarding Agent',  color: '#8b5cf6', scopes: ['new user setup','first agent creation','feature tour','getting started'] },
-  { state: 'ADMIN',      emoji: '⚙️', name: 'Admin Agent',       color: '#f59e0b', scopes: ['agent config','billing','API keys','webhooks','settings'] },
-  { state: 'GENERAL',    emoji: '🤖', name: 'AI Assistant',      color: '#C0A060', scopes: ['general chat','questions','explanations','casual conversation'] },
-];
-
-let currentConversationId = 'swarm_demo_' + Math.random().toString(36).slice(2,8);
-let messageCount = 0;
-let totalConfidence = 0;
-let currentState = 'ROUTING';
-let selectedAgentId = '';
-
-// Build agent cards
-const agentCardsEl = document.getElementById('agent-cards');
-AGENTS.forEach(a => {
-  agentCardsEl.innerHTML += `
-    <div class="agent-card" id="card-${a.state}" onclick="selectAgent('${a.state}', '${a.emoji} ${a.name}')" style="cursor:pointer">
-      <div class="agent-top">
-        <span class="agent-emoji">${a.emoji}</span>
-        <span class="agent-name">${a.name}</span>
-      </div>
-      <div class="agent-state" id="state-${a.state}">idle</div>
-      <div class="agent-scopes" id="scopes-${a.state}">
-        ${a.scopes.map(s => `<span>${s}</span>`).join('')}
-      </div>
-    </div>`;
-});
-
-// Build override buttons
-const overrideEl = document.getElementById('override-controls');
-AGENTS.forEach(a => {
-  overrideEl.innerHTML += `<button class="override-btn" onclick="override('${a.state}')">${a.emoji} ${a.state}</button>`;
-});
-
-// Check backend health
-async function checkBackend() {
-  try {
-    const r = await fetch(`${API}/health`);
-    const d = await r.json();
-    document.getElementById('backend-status').textContent = '● Online';
-    document.getElementById('backend-status').style.color = 'var(--matrix)';
-  } catch {
-    document.getElementById('backend-status').textContent = '● Offline';
-    document.getElementById('backend-status').style.color = 'var(--support)';
+  // ── Toast ───────────────────────────────────────────────────────────────
+  function toast(msg, type = 'info') {
+    const c = document.getElementById('toast-container');
+    const t = document.createElement('div');
+    t.className = `toast toast-${type}`;
+    const icons = { success: '✓', error: '✕', warning: '⚠', info: 'ℹ' };
+    t.innerHTML = `<span class="toast-icon">${icons[type] || icons.info}</span><span>${msg}</span><button class="toast-close" onclick="this.parentElement.remove()">×</button>`;
+    c.appendChild(t);
+    setTimeout(() => t.remove(), 4000);
   }
-}
-checkBackend();
-setInterval(checkBackend, 30000);
 
-// Load agents for chat dropdown
-function loadAgentDropdown() {
-  const sel = document.getElementById('chat-agent');
-  sel.innerHTML = '<option value="">Select an agent…</option>';
-  AGENTS.forEach(a => {
-    sel.innerHTML += `<option value="${a.state}">${a.emoji} ${a.name}</option>`;
-  });
-  // Auto-select GENERAL so user can chat immediately
-  sel.value = 'GENERAL';
-  selectedAgentId = 'GENERAL';
-  setActiveState('GENERAL');
-}
-loadAgentDropdown();
+  // ── Load Agents ─────────────────────────────────────────────────────────
+  let agentsData = [];
 
-// Route test
-async function testRoute() {
-  const msg = document.getElementById('test-message').value.trim();
-  if (!msg) return;
-  const btn = document.getElementById('test-btn');
-  btn.disabled = true;
-  btn.textContent = '…';
-  try {
-    const r = await fetch(`${API}/api/route-test`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: msg })
-    });
-    const d = await r.json();
-    showRouteResult(d);
-    updateTrace(d.trace || []);
-    if (d.routing) {
-      setActiveState(d.routing.state);
-      currentState = d.routing.state;
-      document.getElementById('stat-state').textContent = d.routing.state;
-      document.getElementById('stat-intent').textContent = d.routing.intent;
+  async function loadAgents() {
+    const grid = document.getElementById('agent-grid');
+    grid.innerHTML = '<div class="card" style="text-align:center;padding:var(--s8);"><div class="spinner spinner-lg" style="margin:0 auto;"></div><p class="text-muted text-sm" style="margin-top:var(--s3);">Loading agents…</p></div>';
+
+    try {
+      const r = await fetch('/api/my-agents', { credentials: 'include' });
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      const d = await r.json();
+      agentsData = d.agents || d || [];
+      renderAgentCards(agentsData);
+      updateStats(agentsData);
+      populateParentSelects(agentsData);
+    } catch (e) {
+      // Show empty state with create prompt
+      grid.innerHTML = `
+        <div class="empty-state" style="grid-column:1/-1;">
+          <div class="icon">⚡</div>
+          <h3>No agents yet</h3>
+          <p>Create your first sub-agent to get started with swarm management.</p>
+          <button class="btn btn-amber" style="margin-top:var(--s4);" onclick="openSpawnModal()">+ Create Sub-Agent</button>
+        </div>`;
+      document.getElementById('stat-active').textContent = '0';
+      document.getElementById('stat-total').textContent = '0';
     }
-  } catch(e) {
-    document.getElementById('route-result').innerHTML = `<span style="color:var(--support)">Error: ${e.message}</span>`;
   }
-  btn.disabled = false;
-  btn.textContent = 'Test';
-}
 
-function showRouteResult(d) {
-  const r = d.routing;
-  if (!r) { document.getElementById('route-result').innerHTML = '<span style="color:var(--support)">No routing data</span>'; return; }
-  const color = { SUPPORT: 'var(--support)', SALES: 'var(--sales)', ONBOARDING: 'var(--onboarding)', ADMIN: 'var(--admin)', GENERAL: 'var(--general)' }[r.state] || 'var(--text)';
-  document.getElementById('route-result').innerHTML = `
-    <div class="state" style="color:${color}">${r.emoji} ${r.state}</div>
-    <div class="meta">intent: ${r.intent} · confidence: ${(r.confidence * 100).toFixed(0)}% · agent: ${r.subAgent}</div>
-    <div style="margin-top:8px;font-size:11px;color:var(--muted)">${r.systemPrompt ? r.systemPrompt.slice(0,120) + '…' : ''}</div>
-  `;
-}
-
-function setActiveState(state) {
-  AGENTS.forEach(a => {
-    const card = document.getElementById('card-' + a.state);
-    const stateEl = document.getElementById('state-' + a.state);
-    if (a.state === state) {
-      card.classList.add('active');
-      stateEl.textContent = 'active';
-      stateEl.style.color = a.color;
-    } else {
-      card.classList.remove('active');
-      stateEl.textContent = 'idle';
-      stateEl.style.color = '';
+  function renderAgentCards(agents) {
+    const grid = document.getElementById('agent-grid');
+    if (!agents.length) {
+      grid.innerHTML = `
+        <div class="empty-state" style="grid-column:1/-1;">
+          <div class="icon">⚡</div>
+          <h3>No agents yet</h3>
+          <p>Create your first sub-agent to get started.</p>
+        </div>`;
+      return;
     }
-  });
-  document.getElementById('active-agent').textContent = state;
-}
+    grid.innerHTML = agents.map((a, i) => {
+      const status = (a.status || 'idle').toLowerCase();
+      const statusClass = status === 'active' ? 'success' : status === 'error' ? 'error' : status === 'paused' ? 'warning' : 'neutral';
+      const tier = a.tier || a.model_tier || 'standard';
+      const tokens = a.token_usage || a.tokens || 0;
+      const role = a.role || 'general';
+      return `
+        <div class="card g-hover animate-in stagger-${Math.min(i+1,6)}">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:var(--s3);">
+            <div style="display:flex;align-items:center;gap:var(--s2);">
+              <span style="font-size:1.3rem;">${roleEmoji(role)}</span>
+              <div>
+                <div style="font-weight:600;color:var(--text);font-size:0.95rem;">${escapeHtml(a.name || a.id || 'Unnamed')}</div>
+                <div class="text-xs text-muted">${escapeHtml(role)} · ${escapeHtml(tier)}</div>
+              </div>
+            </div>
+            <span class="badge badge-${statusClass}"><span class="dot"></span>${status}</span>
+          </div>
+          <div class="kv-list" style="margin-bottom:var(--s4);">
+            <div class="kv-item"><span class="kv-key">Tokens</span><span class="kv-val font-mono">${formatNum(tokens)}</span></div>
+            <div class="kv-item"><span class="kv-key">Tier</span><span class="kv-val">${escapeHtml(tier)}</span></div>
+          </div>
+          <div style="display:flex;gap:var(--s2);">
+            <button class="btn btn-sm btn-ghost" onclick="viewAgentChat('${escapeJs(a.id || a.name)}')">Chat</button>
+            <button class="btn btn-sm btn-ghost" onclick="pauseAgent('${escapeJs(a.id || a.name)}')" title="Pause/Resume">⏸</button>
+            <button class="btn btn-sm btn-danger" onclick="deleteAgent('${escapeJs(a.id || a.name)}', '${escapeJs(a.name || 'agent')}')" title="Delete">✕</button>
+          </div>
+        </div>`;
+    }).join('');
+  }
 
-function updateTrace(trace) {
-  const el = document.getElementById('trace-timeline');
-  if (!trace || trace.length === 0) return;
-  el.innerHTML = trace.map(t => {
-    const time = new Date(t.timestamp).toLocaleTimeString();
-    const confPct = t.confidence ? (t.confidence * 100).toFixed(0) + '%' : '—';
-    const msg = t.messagePreview || '';
-    return `
-      <div class="trace-item">
-        <span class="trace-time">${time}</span>
-        <span class="trace-from">${t.from || '—'}</span>
-        <span class="trace-arrow">→</span>
-        <span class="trace-to ${t.to}">${t.to || '—'}</span>
-        <span class="trace-msg" title="${msg}">${msg}</span>
-        <span class="trace-confidence">${confPct}</span>
-      </div>`;
-  }).join('');
-}
+  function updateStats(agents) {
+    const active = agents.filter(a => (a.status || '').toLowerCase() === 'active').length;
+    document.getElementById('stat-active').textContent = active;
+    document.getElementById('stat-total').textContent = agents.length;
+    const totalTokens = agents.reduce((s, a) => s + (a.token_usage || a.tokens || 0), 0);
+    document.getElementById('stat-tokens').textContent = formatNum(totalTokens);
+  }
 
-function clearTrace() {
-  document.getElementById('trace-timeline').innerHTML = '<div style="color:var(--muted);font-size:13px;text-align:center;padding:20px">Cleared.</div>';
-}
+  function populateParentSelects(agents) {
+    const opts = agents.map(a => `<option value="${escapeJs(a.id || a.name)}">${escapeHtml(a.name || a.id)}</option>`).join('');
+    const base = '<option value="">None (standalone)</option>';
+    document.getElementById('spawn-parent').innerHTML = base + opts;
+    document.getElementById('delegation-parent').innerHTML = '<option value="">Select parent agent…</option>' + opts;
+  }
 
-// Override
-async function override(state) {
-  try {
-    await fetch(`${API}/api/chat/swarm/override`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ conversationId: currentConversationId, state })
-    });
-    setActiveState(state);
-    currentState = state;
-    document.getElementById('stat-state').textContent = state;
-    document.getElementById('stat-intent').textContent = 'manual_override';
-  } catch(e) { alert('Override failed: ' + e.message); }
-}
+  // ── Spawn Modal ─────────────────────────────────────────────────────────
+  function openSpawnModal() {
+    document.getElementById('spawn-modal').classList.add('open');
+    document.getElementById('spawn-name').value = '';
+    document.getElementById('spawn-role').value = 'general';
+    document.getElementById('spawn-tier').value = 'standard';
+    document.getElementById('spawn-name').focus();
+  }
 
-// Select agent from card click
-function selectAgent(state, label) {
-  selectedAgentId = state;
-  // Update dropdown
-  const sel = document.getElementById('chat-agent');
-  sel.innerHTML = '<option value="">Select Agent ID…</option>';
-  AGENTS.forEach(a => {
-    const opt = document.createElement('option');
-    opt.value = a.state;
-    opt.textContent = a.emoji + ' ' + a.name;
-    if (a.state === state) opt.selected = true;
-    sel.appendChild(opt);
-  });
-  // Highlight card
-  AGENTS.forEach(a => {
-    document.getElementById('card-' + a.state).classList.toggle('active', a.state === state);
-  });
-  document.getElementById('active-agent').textContent = state;
-  // Focus chat input
-  document.getElementById('chat-input').focus();
-}
+  function closeSpawnModal() {
+    document.getElementById('spawn-modal').classList.remove('open');
+  }
 
-// Send chat message
-async function sendChat() {
-  const agentId = selectedAgentId || document.getElementById('chat-agent').value;
-  const msg = document.getElementById('chat-input').value.trim();
-  if (!agentId) { alert('Click an agent card above or select one from the dropdown first'); return; }
-  if (!msg) return;
-  const btn = document.getElementById('send-btn');
-  btn.disabled = true;
+  document.getElementById('spawn-modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeSpawnModal(); });
 
-  // Add user message to chat
-  addChatMessage(msg, 'user');
+  async function spawnAgent() {
+    const name = document.getElementById('spawn-name').value.trim();
+    const role = document.getElementById('spawn-role').value;
+    const tier = document.getElementById('spawn-tier').value;
+    const parent = document.getElementById('spawn-parent').value;
 
-  try {
-    const r = await fetch(`${API}/api/chat/swarm`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ agentId, message: msg, conversationId: currentConversationId })
-    });
-    const d = await r.json();
-    if (d.error) throw new Error(d.error);
+    if (!name) { toast('Please enter an agent name', 'error'); return; }
 
-    // Add agent response with routing badge
-    addChatMessage(d.response, 'agent', d.routing);
+    const btn = document.getElementById('spawn-submit');
+    btn.textContent = 'Creating…';
+    btn.disabled = true;
 
-    // Update UI
-    if (d.routing) {
-      setActiveState(d.routing.state);
-      currentState = d.routing.state;
-      document.getElementById('stat-state').textContent = d.routing.state;
-      document.getElementById('stat-intent').textContent = d.routing.intent;
+    try {
+      const body = { name, role, tier };
+      if (parent) body.parentId = parent;
+
+      const r = await fetch('/api/delegation/spawn', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      const d = await r.json();
+      if (!r.ok) throw new Error(d.error || `HTTP ${r.status}`);
+
+      closeSpawnModal();
+      toast('Sub-agent created successfully', 'success');
+      loadAgents();
+      loadDelegationTree();
+    } catch (e) {
+      toast('Failed to create: ' + e.message, 'error');
     }
-    if (d.trace) updateTrace(d.trace);
+    btn.textContent = 'Create Agent';
+    btn.disabled = false;
+  }
 
-    // Stats
-    messageCount++;
-    if (d.routing && d.routing.confidence) {
-      totalConfidence += d.routing.confidence;
-      document.getElementById('stat-confidence').textContent = ((totalConfidence / messageCount) * 100).toFixed(0) + '%';
+  // ── Agent Actions ───────────────────────────────────────────────────────
+  async function viewAgentChat(id) {
+    window.location.href = `/chat.html?agentId=${encodeURIComponent(id)}`;
+  }
+
+  async function pauseAgent(id) {
+    try {
+      await fetch(`/api/my-agents/${encodeURIComponent(id)}/pause`, { method: 'POST', credentials: 'include' });
+      toast('Agent paused/resumed', 'info');
+      loadAgents();
+    } catch (e) { toast('Failed: ' + e.message, 'error'); }
+  }
+
+  async function deleteAgent(id, name) {
+    if (!confirm(`Delete agent "${name}"? This cannot be undone.`)) return;
+    try {
+      const r = await fetch(`/api/my-agents/${encodeURIComponent(id)}`, { method: 'DELETE', credentials: 'include' });
+      if (!r.ok) throw new Error('Delete failed');
+      toast('Agent deleted', 'success');
+      loadAgents();
+      loadDelegationTree();
+    } catch (e) { toast('Failed: ' + e.message, 'error'); }
+  }
+
+  async function delegateTask() {
+    const parent = document.getElementById('delegation-parent').value;
+    const role = document.getElementById('delegation-role').value;
+    if (!parent) { toast('Select a parent agent', 'error'); return; }
+    toast(`Delegating ${role} task to ${parent}…`, 'info');
+  }
+
+  // ── Delegation Tree ─────────────────────────────────────────────────────
+  async function loadDelegationTree() {
+    const container = document.getElementById('delegation-tree-container');
+    container.innerHTML = '<div style="display:flex;align-items:center;gap:var(--s3);padding:var(--s4);"><div class="spinner"></div><span class="text-muted text-sm">Loading hierarchy…</span></div>';
+
+    try {
+      const r = await fetch('/api/delegation/tree', { credentials: 'include' });
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      const d = await r.json();
+      const tree = d.tree || d || {};
+      renderDelegationTree(tree);
+    } catch (e) {
+      container.innerHTML = `
+        <div class="empty-state" style="padding:var(--s8);">
+          <div class="icon">🌐</div>
+          <p class="text-muted">No agent hierarchy yet. Create sub-agents to see the tree.</p>
+        </div>`;
     }
-    document.getElementById('stat-messages').textContent = messageCount;
-
-  } catch(e) {
-    addChatMessage('Error: ' + e.message, 'agent');
-  }
-  btn.disabled = false;
-  document.getElementById('chat-input').value = '';
-}
-
-function addChatMessage(text, role, routing) {
-  const box = document.getElementById('chat-box');
-  const div = document.createElement('div');
-  div.className = `chat-message ${role === 'user' ? 'user' : 'agent'}`;
-  if (routing) div.className += ` routing-${routing.state}`;
-
-  let badge = '';
-  if (routing) {
-    const colors = { SUPPORT: 'var(--support)', SALES: 'var(--sales)', ONBOARDING: 'var(--onboarding)', ADMIN: 'var(--admin)', GENERAL: 'var(--general)' };
-    const color = colors[routing.state] || 'var(--muted)';
-    badge = `<div class="routing-badge" style="background:${color}">${routing.emoji} ${routing.state} · ${(routing.confidence * 100).toFixed(0)}%</div>`;
-  }
-  div.innerHTML = badge + `<div>${escapeHtml(text)}</div>`;
-  box.appendChild(div);
-  box.scrollTop = box.scrollHeight;
-}
-
-function escapeHtml(t) {
-  return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-// ─── Agent Delegation ───────────────────────────────────────────────────
-
-// Determine manager agent ID from URL param, or fetch first agent from DB
-let managerAgentId = null;
-
-function getManagerAgentId() {
-  // Check URL params first
-  const params = new URLSearchParams(window.location.search);
-  const urlId = params.get('agentId');
-  if (urlId) return urlId;
-  // Fallback: use the chat-agent dropdown value
-  const sel = document.getElementById('chat-agent');
-  if (sel && sel.value) return sel.value;
-  return null;
-}
-
-// Load delegation data
-async function loadDelegationData() {
-  managerAgentId = getManagerAgentId();
-  const loadingEl = document.getElementById('delegation-loading');
-  const treeEl = document.getElementById('delegation-tree');
-  const emptyEl = document.getElementById('delegation-empty');
-  const errorEl = document.getElementById('delegation-error');
-
-  if (!managerAgentId) {
-    loadingEl.style.display = 'none';
-    emptyEl.innerHTML = 'Select an agent from the <strong>Live Swarm Chat</strong> dropdown above or add <code>?agentId=&lt;id&gt;</code> to the URL to manage delegation.';
-    emptyEl.style.display = 'block';
-    return;
   }
 
-  try {
-    const r = await fetch(`${API}/api/delegation/${encodeURIComponent(managerAgentId)}`);
-    const d = await r.json();
-    const subs = d.subAgents || [];
+  function renderDelegationTree(tree) {
+    const container = document.getElementById('delegation-tree-container');
+    const subs = tree.subAgents || tree.children || [];
+    document.getElementById('tree-subcount').textContent = `${subs.length} sub-agent${subs.length !== 1 ? 's' : ''}`;
 
-    loadingEl.style.display = 'none';
-
-    // Update manager name if we got data
-    const managerName = document.getElementById('manager-name');
-    if (managerName) managerName.textContent = managerAgentId;
-
-    // Update count badge
-    const countBadge = document.getElementById('sub-agent-count');
-    if (countBadge) countBadge.textContent = `${subs.length} sub-agent${subs.length !== 1 ? 's' : ''}`;
-
-    const subList = document.getElementById('sub-agent-list');
-    subList.innerHTML = '';
-
-    if (subs.length === 0) {
-      treeEl.style.display = 'none';
-      emptyEl.style.display = 'block';
+    if (!subs.length) {
+      container.innerHTML = `
+        <div class="empty-state" style="padding:var(--s8);">
+          <div class="icon">🌐</div>
+          <p class="text-muted">No sub-agents spawned yet.</p>
+        </div>`;
       return;
     }
 
-    treeEl.style.display = 'block';
-    emptyEl.style.display = 'none';
-    errorEl.style.display = 'none';
-
-    subs.forEach(sub => {
-      const statusClass = sub.status === 'active' ? 'active' : (sub.status === 'error' ? 'error' : 'idle');
-      const div = document.createElement('div');
-      div.className = 'tree-node';
-      div.id = `sub-node-${sub.id}`;
-      div.innerHTML = `
-        <div class="node-card">
-          <span class="node-dot ${statusClass}"></span>
-          <div class="node-info">
-            <div class="node-name">${escapeHtml(sub.agent_name || sub.id)}</div>
-            <div class="node-role">${escapeHtml(sub.model_tier || 'standard')} · ${escapeHtml(sub.status || 'unknown')}</div>
+    container.innerHTML = `
+      <div style="padding:var(--s4);">
+        <div style="display:flex;align-items:center;gap:var(--s3);padding:var(--s3) 0;margin-bottom:var(--s3);">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--amber);box-shadow:0 0 6px var(--amber);flex-shrink:0;"></span>
+          <div>
+            <div style="font-weight:600;font-size:0.9rem;color:var(--text);">${escapeHtml(tree.name || tree.id || 'Manager Agent')}</div>
+            <div class="text-xs text-muted">Orchestrator · Main entry point</div>
           </div>
-          <div class="node-actions">
-            <button class="btn-sm" onclick="removeSubAgent('${sub.id}', '${escapeJs(sub.agent_name || sub.id)}')" title="Remove">✕ Remove</button>
-          </div>
-        </div>`;
-      subList.appendChild(div);
-    });
-  } catch (e) {
-    loadingEl.style.display = 'none';
-    errorEl.textContent = `Error loading delegation data: ${e.message}`;
-    errorEl.style.display = 'block';
+        </div>
+        <div style="margin-left:20px;padding-left:16px;border-left:2px solid var(--border);">
+          ${subs.map(sub => `
+            <div style="margin-bottom:var(--s3);">
+              <div style="display:flex;align-items:center;gap:var(--s3);padding:var(--s3) var(--s4);background:var(--bg);border:1px solid var(--border);border-radius:var(--r2);">
+                <span style="width:8px;height:8px;border-radius:50%;background:${sub.status === 'active' ? 'var(--green)' : 'var(--text-muted)'};flex-shrink:0;"></span>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-weight:600;font-size:0.85rem;color:var(--text);">${escapeHtml(sub.name || sub.id)}</div>
+                  <div class="text-xs text-muted">${escapeHtml(sub.role || 'general')} · ${escapeHtml(sub.tier || sub.model_tier || 'standard')}</div>
+                </div>
+                <span class="badge badge-${sub.status === 'active' ? 'success' : 'neutral'}" style="font-size:0.65rem;">${sub.status || 'idle'}</span>
+              </div>
+            </div>`).join('')}
+        </div>
+      </div>`;
   }
-}
 
-function escapeJs(t) {
-  return t.replace(/'/g, "\\'").replace(/"/g, '&quot;');
-}
-
-// Spawn modal
-function openSpawnModal() {
-  if (!managerAgentId) {
-    alert('Select an agent first from the Live Swarm Chat dropdown, or add ?agentId=<id> to the URL.');
-    return;
+  // ── Helpers ─────────────────────────────────────────────────────────────
+  function roleEmoji(role) {
+    const m = { support: '🎧', sales: '💼', onboarding: '🚀', admin: '⚙️', general: '🤖' };
+    return m[(role||'').toLowerCase()] || '🤖';
   }
-  document.getElementById('spawn-modal').classList.add('open');
-  document.getElementById('spawn-name').value = '';
-  document.getElementById('spawn-role').value = 'Support';
-  document.getElementById('spawn-tier').value = 'standard';
-  document.getElementById('spawn-custom-role').value = '';
-  document.getElementById('spawn-custom-role').style.display = 'none';
-  document.getElementById('spawn-custom-label').style.display = 'none';
-  document.getElementById('spawn-name').focus();
-}
-
-function closeSpawnModal() {
-  document.getElementById('spawn-modal').classList.remove('open');
-}
-
-// Toggle custom role input
-document.getElementById('spawn-role')?.addEventListener('change', function() {
-  const isCustom = this.value === 'Custom';
-  document.getElementById('spawn-custom-role').style.display = isCustom ? 'block' : 'none';
-  document.getElementById('spawn-custom-label').style.display = isCustom ? 'block' : 'none';
-});
-
-// Close modal on overlay click
-document.getElementById('spawn-modal').addEventListener('click', function(e) {
-  if (e.target === this) closeSpawnModal();
-});
-
-// Spawn sub-agent
-async function spawnSubAgent() {
-  const name = document.getElementById('spawn-name').value.trim();
-  const roleSelect = document.getElementById('spawn-role').value;
-  const customRole = document.getElementById('spawn-custom-role').value.trim();
-  const tier = document.getElementById('spawn-tier').value;
-
-  if (!name) { alert('Please enter a name'); return; }
-  const role = roleSelect === 'Custom' ? customRole : roleSelect;
-  if (!role) { alert('Please enter a role'); return; }
-
-  const btn = document.querySelector('#spawn-modal .btn-create');
-  const originalText = btn.textContent;
-  btn.textContent = 'Creating…';
-  btn.disabled = true;
-
-  try {
-    const r = await fetch(`${API}/api/delegation/${encodeURIComponent(managerAgentId)}/spawn`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, role, model_tier: tier })
-    });
-    const d = await r.json();
-    if (d.error) throw new Error(d.error);
-
-    closeSpawnModal();
-    loadDelegationData(); // Refresh the tree
-  } catch (e) {
-    alert('Failed to spawn: ' + e.message);
+  function formatNum(n) {
+    if (!n) return '0';
+    if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
+    if (n >= 1000) return (n / 1000).toFixed(1) + 'k';
+    return String(n);
   }
-  btn.textContent = originalText;
-  btn.disabled = false;
-}
+  function escapeHtml(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  function escapeJs(s) { return String(s||'').replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
 
-// Remove sub-agent
-async function removeSubAgent(subId, subName) {
-  if (!confirm(`Remove sub-agent "${subName}"?`)) return;
-
-  try {
-    const r = await fetch(`${API}/api/delegation/${encodeURIComponent(managerAgentId)}/${encodeURIComponent(subId)}`, {
-      method: 'DELETE'
-    });
-    const d = await r.json();
-    if (d.error) throw new Error(d.error);
-
-    loadDelegationData(); // Refresh the tree
-  } catch (e) {
-    alert('Failed to remove: ' + e.message);
-  }
-}
-
-// Auto-reload delegation when chat agent changes
-document.getElementById('chat-agent').addEventListener('change', function() {
-  const newId = this.value;
-  if (newId && newId !== managerAgentId) {
-    managerAgentId = newId;
-    loadDelegationData();
-  }
-});
-
-// Load delegation data on page load
-loadDelegationData();
-</script>
-</main></body>
+  // ── Init ────────────────────────────────────────────────────────────────
+  loadAgents();
+  loadDelegationTree();
+  </script>
+</body>
 </html>
-<!-- channels.html generated mockup by Prism -->
-

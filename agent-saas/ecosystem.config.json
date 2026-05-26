@@ -1,0 +1,9 @@
+{
+  "apps": [{
+    "name": "maikr-backend",
+    "script": "./server.js",
+    "cwd": "/root/.openclaw/workspace/agent-saas/backend",
+    "max_restarts": 10,
+    "restart_delay": 5000
+  }]
+}

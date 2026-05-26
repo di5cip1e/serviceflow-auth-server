@@ -146,7 +146,8 @@ async function handleSwarmChat(req, res) {
       || 'You are a helpful AI assistant built on M.ai.K.R.';
     let finalSystemPrompt = systemPrompt + '\n\n---\n' + baseSystemPrompt;
 
-    // 2b. Load conversation history (with LRU cache)
+    // 2b. Load conversation history (with LRU cache) before loop detection
+    // IMPORTANT: history must be declared before shouldIntervene call
     let history = getCachedHistory(resolvedAgentId);
     if (!history) {
       history = await new Promise((resolve) => {

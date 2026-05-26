@@ -147,7 +147,7 @@ async function provisionCustomer(paymentData) {
   if (!emailSent) {
     console.error('📧 Welcome email failed after 3 attempts for:', email);
   }
-  console.log('🔗 Dashboard URL:', `http://maikr.pro/dashboard.html?agent=${agentId}&key=${apiKey}`);
+  console.log('🔗 Dashboard URL:', `https://maikr.pro/dashboard.html?agent=${agentId}&key=${apiKey}`);
 
   // Return provisioning results
   return {
@@ -158,8 +158,8 @@ async function provisionCustomer(paymentData) {
     customerEmail: email,
     agentId,
     agentSlug: slug,
-    dashboardUrl: `http://maikr.pro/dashboard.html?agent=${agentId}&key=${apiKey}`,
-    chatUrl: `http://maikr.pro/chat.html?agent=${agentId}`,
+    dashboardUrl: `https://maikr.pro/dashboard.html?agent=${agentId}&key=${apiKey}`,
+    chatUrl: `https://maikr.pro/chat.html?agent=${agentId}`,
     apiKey,
     plan,
     sessionKey: sessionStartResult?.sessionKey || null,

@@ -4,179 +4,111 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Log In — M.ai.K.R</title>
-  <meta name="description" content="M.ai.K.R — AI agent teams that qualify leads, answer customers, and close tickets 24/7.">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://maikr.pro/login">
-  <script defer src="https://cloud.umami.is/script.js" data-website-id="YOUR_SITE_ID_HERE" id="umami-script"></script>
-  <script src="/js/analytics.js"></script>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/maikr-v3.css">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      min-height: 100vh; background: #0A0A0F; color: #C0C0C0;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      line-height: 1.6; -webkit-font-smoothing: antialiased;
-    }
-    a { color: #C0A060; text-decoration: none; }
-    a:hover { color: #fff; }
-
-    .auth-nav {
-      position: fixed; top: 0; left: 0; right: 0; height: 64px;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 24px; background: rgba(10,10,15,0.92);
-      backdrop-filter: blur(16px); border-bottom: 1px solid #2D2D44; z-index: 100;
-    }
-    .auth-nav-logo { font-size: 20px; font-weight: 700; color: #fff; text-decoration: none; }
-    .auth-nav-logo span { color: #C0A060; }
-    .auth-nav-links a { color: #C0C0C0; text-decoration: none; font-size: 14px; font-weight: 500; }
-    .auth-nav-links a:hover { color: #fff; }
-
-    .auth-page {
-      min-height: 100vh; display: flex; align-items: center; justify-content: center;
-      padding: 80px 24px 40px; position: relative;
-    }
-    .auth-page::before {
-      content: ''; position: absolute; top: -20%; right: -10%;
-      width: 500px; height: 500px;
-      background: radial-gradient(ellipse at center, rgba(0,64,160,0.1) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .auth-card {
-      width: 100%; max-width: 420px;
-      background: linear-gradient(180deg, #1A1A2E 0%, rgba(10,10,15,0.9) 100%);
-      border: 1px solid #2D2D44; border-radius: 12px; padding: 40px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.4); position: relative; z-index: 1;
-    }
-    .auth-card h1 { font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 4px; }
-    .auth-card .subtitle { color: #808080; font-size: 14px; margin-bottom: 24px; }
-
-    .form-group { margin-bottom: 20px; }
-    .form-group label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 13px; color: #C0C0C0; }
-    .form-group input {
-      width: 100%; padding: 12px 16px; background: #0A0A0F; border: 1px solid #2D2D44;
-      border-radius: 8px; color: #fff; font-family: inherit; font-size: 14px;
-      transition: all 0.2s; outline: none;
-    }
-    .form-group input::placeholder { color: #606080; }
-    .form-group input:focus { border-color: #0040A0; box-shadow: 0 0 0 3px rgba(0,64,160,0.2); }
-    .form-group input.input-error { border-color: #E74C3C; }
-
-    .error-message { color: #E74C3C; font-size: 12px; margin-top: 4px; display: none; }
-    .error-message.visible { display: block; }
-    .form-error {
-      background: rgba(231,76,60,0.1); border: 1px solid rgba(231,76,60,0.3);
-      border-radius: 8px; padding: 12px; color: #E74C3C; font-size: 13px;
-      margin-bottom: 20px; display: none;
-    }
-    .form-error.visible { display: block; }
-
-    .btn-auth {
-      width: 100%; padding: 12px 24px;
-      background: linear-gradient(135deg, #0040A0, #0060D0);
-      color: #fff; border: none; border-radius: 8px; font-weight: 600; font-size: 15px;
-      font-family: inherit; cursor: pointer; transition: all 0.2s;
-      box-shadow: 0 2px 12px rgba(0,64,160,0.3);
-    }
-    .btn-auth:hover { box-shadow: 0 0 20px rgba(0,64,160,0.4); transform: translateY(-1px); }
-    .btn-auth:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-
-    .auth-footer {
-      text-align: center; margin-top: 20px; padding-top: 20px;
-      border-top: 1px solid #2D2D44; color: #808080; font-size: 13px;
-    }
-    .auth-footer a { color: #C0A060; font-weight: 600; }
-    .auth-footer a:hover { color: #fff; }
+    .auth-card { max-width: 420px; width: 100%; padding: var(--s8); }
+    .auth-card h1 { font-size: 1.5rem; margin-bottom: var(--s1); }
+    .auth-card .subtitle { color: var(--text-dim); font-size: 0.9rem; margin-bottom: var(--s8); }
+    .auth-footer { text-align: center; margin-top: var(--s6); font-size: 0.85rem; color: var(--text-dim); }
+    .auth-footer a { color: var(--amber); font-weight: 600; }
   </style>
-  <style>
-    .skip-link {
-      position: absolute; top: -100px; left: 0; z-index: 9999;
-      padding: 12px 24px; background: #C0A060; color: #0A0A0F;
-      font-weight: 700; font-size: 14px; text-decoration: none;
-      border-radius: 0 0 8px 0; transition: top 0.2s;
-    }
-    .skip-link:focus { top: 0; }
-</style>
-  </head>
+</head>
 <body>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <nav class="navbar">
+    <a href="/" class="navbar-logo">M<span>.ai</span><span>.K.R</span></a>
+    <div class="navbar-links">
+      <a href="/pricing.html">Pricing</a>
+      <a href="/register.html">Sign Up</a>
+    </div>
+  </nav>
 
-<header role="banner"><nav class="auth-nav">
-  <a href="/" class="auth-nav-logo">M<span>.ai</span><span>.K.R</span></a>
-  <div class="auth-nav-links"><a href="/">Home</a></div>
-</nav></header>
+  <div class="auth-page">
+    <div class="auth-card card animate-in">
+      <h1>Welcome Back</h1>
+      <p class="subtitle">Log in to manage your AI agents.</p>
 
-<main id="main-content"><div class="auth-page">
-  <div class="auth-card">
-    <h1>Welcome back to M.ai.K.R</h1>
-    <p class="subtitle">Log in to access your agent dashboard.</p>
+      <div id="loginError" class="alert alert-error hidden" style="margin-bottom:var(--s6)"></div>
 
-    <div id="formError" class="form-error"></div>
+      <form id="loginForm">
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="email" placeholder="you@company.com" required autocomplete="email">
+          <div id="emailError" class="form-error"></div>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="password" placeholder="Your password" required autocomplete="current-password">
+          <div id="passwordError" class="form-error"></div>
+        </div>
+        <button type="submit" class="btn btn-amber btn-lg" style="width:100%" id="loginBtn">Log In</button>
+      </form>
 
-    <form id="loginForm" novalidate>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email">
-        <div id="emailError" class="error-message"></div>
+      <div class="auth-footer" style="display:flex;justify-content:space-between;margin-top:var(--s4)">
+        <a href="/forgot-password.html">Forgot password?</a>
       </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="current-password">
-        <div id="passwordError" class="error-message"></div>
+      <div class="auth-footer">
+        Don't have an account? <a href="/register.html">Create one →</a>
       </div>
-      <div style="text-align:right;margin-bottom:16px;">
-        <a href="/forgot-password.html" style="font-size:13px;">Forgot password?</a>
-      </div>
-      <button type="submit" id="submitBtn" class="btn-auth">Log In</button>
-    </form>
-
-    <div class="auth-footer">
-      Don't have an account? <a href="/register.html">Create one</a>
     </div>
   </div>
-</div>
 
-<script>
-  fetch('/api/auth/me', { credentials: 'include' })
-    .then(function(res) { if (res.ok) { var r = localStorage.getItem('maikr_redirect_after_register') || '/command-center.html'; localStorage.removeItem('maikr_redirect_after_register'); window.location.href = r; } })
-    .catch(function() {});
+  <script>
+    // Parse redirect param
+    var params = new URLSearchParams(window.location.search);
+    var redirectTo = params.get('redirect') || '/command-center.html';
 
-  var form = document.getElementById('loginForm');
-  var formError = document.getElementById('formError');
-  var submitBtn = document.getElementById('submitBtn');
+    // Check for saved build data
+    var buildData = localStorage.getItem('maikrBuildData');
 
-  function showFieldError(fieldId, message) {
-    document.getElementById(fieldId).classList.add('input-error');
-    var el = document.getElementById(fieldId + 'Error');
-    el.textContent = message; el.classList.add('visible');
-  }
-  function clearErrors() {
-    formError.textContent = ''; formError.classList.remove('visible');
-    document.querySelectorAll('.input-error').forEach(function(el) { el.classList.remove('input-error'); });
-    document.querySelectorAll('.error-message').forEach(function(el) { el.classList.remove('visible'); });
-  }
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      var email = document.getElementById('email').value.trim();
+      var password = document.getElementById('password').value;
+      var err = document.getElementById('loginError');
+      err.classList.add('hidden');
+      document.getElementById('emailError').classList.remove('show');
+      document.getElementById('passwordError').classList.remove('show');
 
-  form.addEventListener('submit', function(e) {
-    e.preventDefault(); clearErrors();
-    var email = document.getElementById('email').value.trim();
-    var password = document.getElementById('password').value;
-    var valid = true;
-    if (!email) { showFieldError('email', 'Email is required.'); valid = false; }
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showFieldError('email', 'Please enter a valid email.'); valid = false; }
-    if (!password) { showFieldError('password', 'Password is required.'); valid = false; }
-    if (!valid) return;
-    submitBtn.disabled = true; submitBtn.textContent = 'Logging in…';
-    fetch('/api/auth/login', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      credentials: 'include', body: JSON.stringify({ email: email, password: password })
-    })
-    .then(function(res) { return res.json().then(function(data) {
-      if (res.ok) window.location.href = '/dashboard';
-      else { formError.textContent = data.error || 'Login failed.'; formError.classList.add('visible'); submitBtn.disabled = false; submitBtn.textContent = 'Log In'; }
-    }); })
-    .catch(function() { formError.textContent = 'Something went wrong.'; formError.classList.add('visible'); submitBtn.disabled = false; submitBtn.textContent = 'Log In'; });
-  });
-</script>
-</main>
+      var valid = true;
+      if (!email) { document.getElementById('emailError').classList.add('show'); document.getElementById('emailError').textContent = 'Email is required.'; valid = false; }
+      if (!password) { document.getElementById('passwordError').classList.add('show'); document.getElementById('passwordError').textContent = 'Password is required.'; valid = false; }
+      if (!valid) return;
+
+      var btn = document.getElementById('loginBtn');
+      btn.disabled = true;
+      btn.textContent = 'Logging in…';
+
+      try {
+        var res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({ email: email, password: password })
+        });
+        var data = await res.json();
+        if (res.ok) {
+          // If build data exists, redirect to build
+          if (buildData) {
+            window.location.href = '/build';
+          } else {
+            window.location.href = redirectTo;
+          }
+        } else {
+          err.textContent = data.error || 'Invalid email or password.';
+          err.classList.remove('hidden');
+          btn.disabled = false;
+          btn.textContent = 'Log In';
+        }
+      } catch(e) {
+        err.textContent = 'Connection error. Please try again.';
+        err.classList.remove('hidden');
+        btn.disabled = false;
+        btn.textContent = 'Log In';
+      }
+    });
+  </script>
 </body>
 </html>

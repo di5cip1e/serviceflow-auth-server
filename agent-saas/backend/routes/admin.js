@@ -11,8 +11,8 @@ const AUTHORIZED_SENDER_IDS = ['7709503599']; // Derek's Telegram ID
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD; // No fallback — server will refuse to start without it
 
 if (!ADMIN_PASSWORD) {
-  console.error('FATAL: ADMIN_PASSWORD env var is not set. Cannot start admin server.');
-  process.exit(1);
+  console.warn('[admin] ADMIN_PASSWORD env var is not set. Admin routes disabled.');
+  // Don't crash — admin routes will return 401 for all requests
 }
 
 // In-memory session token store (token → { createdAt, expiresAt })

@@ -24,17 +24,27 @@ function requireApiAuth(req, res, next) {
   if (!apiKey) {
     return res.status(401).json({ error: 'Missing API key' });
   }
-  // Check against api_keys table — match by prefix first, then verify hash
+  // Match by prefix first to narrow down, then verify full hash with bcrypt
+  const bcrypt = require('bcrypt');
   db.get(
     'SELECT * FROM api_keys WHERE key_prefix = ?',
-    [apiKey.substring(0, 8)],
-    (err, row) => {
+    [apiKey.substring(0, 12)],
+    async (err, row) => {
       if (err || !row) {
         return res.status(401).json({ error: 'Invalid API key' });
       }
-      // For API key auth, we trust the prefix match (full hash check done at creation)
-      req.apiKeyRow = row;
-      next();
+      // Verify full hash to prevent prefix-collision attacks
+      try {
+        const isValid = await bcrypt.compare(apiKey, row.key_hash);
+        if (!isValid) {
+          return res.status(401).json({ error: 'Invalid API key' });
+        }
+        req.apiKeyRow = row;
+        next();
+      } catch (hashErr) {
+        console.error('API key hash verification failed:', hashErr.message);
+        return res.status(500).json({ error: 'Authentication error' });
+      }
     }
   );
 }

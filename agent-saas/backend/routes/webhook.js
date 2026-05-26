@@ -20,7 +20,7 @@ async function processCheckoutSession(session, event) {
   const email = session.customer_email || session.customer_details?.email;
   if (!email) {
     console.error('⏭️ No email in session:', session.id);
-    return res.status(200).json({ received: true, skipped: true, reason: 'no_email' });
+    return { skipped: true, reason: 'no_email' };
   }
 
   const paymentData = {

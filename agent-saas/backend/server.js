@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({ path: '/root/.openclaw/workspace/agent-saas/backend/.env' });
 const { getSecret, validate } = require('./bootstrap');
 validate();
 
@@ -22,6 +22,7 @@ const adminRoutes = require('./routes/admin');
 const escalationRoutes = require('./routes/escalations');
 
 const app = express();
+app.set('trust proxy', 1);
 const PORT = process.env.PORT || 3001;
 
 // Middleware order is CRITICAL:
@@ -34,7 +35,7 @@ app.use(express.json());                     // ← JSON parser for all other ro
 // Session middleware — must be before auth checks and static file serving
 app.use(session({
   store: new SQLiteStore({ db: 'sessions.db', dir: __dirname + '/data' }),
-  secret: getSecret('SESSION_SECRET') || 'maikr-secret-change-in-prod',
+  secret: getSecret('SESSION_SECRET') || (() => { throw new Error('SESSION_SECRET is required. Set it in secrets.json.'); })(),
   resave: false,
   saveUninitialized: false,
   cookie: {
@@ -74,19 +75,14 @@ app.get('/', (req, res) => {
 const authRoutes = require('./routes/auth');
 app.use('/api/auth', authRoutes);
 
-// Onboarding flow — separate steps (public)
+// Onboarding flow — consolidated single-page build wizard
 app.get('/build', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/build-step1.html'));
+  res.sendFile(path.join(__dirname, '../frontend/build.html'));
 });
-app.get('/build/audience', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/build-step2.html'));
-});
-app.get('/build/usecases', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/build-step3.html'));
-});
-app.get('/build/plan', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/build-step4.html'));
-});
+// Legacy step routes redirect to /build
+app.get('/build/audience', (req, res) => res.redirect('/build'));
+app.get('/build/usecases', (req, res) => res.redirect('/build'));
+app.get('/build/plan', (req, res) => res.redirect('/build'));
 
 // ── Public auth pages ──────────────────────────────────────────────────────
 app.get('/login', (req, res) => {
@@ -150,9 +146,47 @@ app.get('/optimization.html', requireAuth, (req, res) => {
 app.get('/settings.html', requireAuth, (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/settings.html'));
 });
+app.get('/analytics.html', requireAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/analytics.html'));
+});
+app.get('/agent-studio.html', requireAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/agent-studio.html'));
+});
+app.get('/onboarding-wizard.html', requireAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/onboarding-wizard.html'));
+});
+app.get('/leads.html', requireAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/leads.html'));
+});
+app.get('/brand-assets.html', requireAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/brand-assets.html'));
+});
+// Public pages (no auth required)
+app.get('/pricing.html', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/pricing.html'));
+});
+app.get('/contact.html', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/contact.html'));
+});
+app.get('/forgot-password.html', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/forgot-password.html'));
+});
+app.get('/reset-password.html', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/reset-password.html'));
+});
+app.get('/success.html', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/success.html'));
+});
 
 // Routes — webhook already mounted above (before express.json) for signature verification
-app.use('/create-checkout-session', checkoutRoutes);
+// Rate limiter for checkout (prevent abuse)
+const rateLimit = require('express-rate-limit');
+const checkoutLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  message: { error: 'Too many checkout attempts. Please try again later.' }
+});
+app.use('/create-checkout-session', checkoutLimiter, checkoutRoutes);
 app.use('/api/chat', swarmRoutes);  // Swarm chat (mounted first to handle /api/chat/swarm)
 app.use('/api/chat', chatRoutes);  // Single-agent chat fallback
 app.use('/api/swarm', swarmRoutes);  // Also mount at /api/swarm for direct access
@@ -167,6 +201,8 @@ const creditRoutes = require('./routes/creditRoutes');
 app.use('/api/credits', creditRoutes);
 const revenueRoutes = require('./routes/revenue');
 app.use('/api/revenue', revenueRoutes);
+const billingRoutes = require('./routes/billing');
+app.use('/api/billing', billingRoutes);
 
 // Lead Generation routes (Phase 9)
 const leadsRoutes = require('./routes/leads');
@@ -234,15 +270,17 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).json({ error: err.message || 'Internal server error' });
 });
 
-// Health check
-app.get('/health', (req, res) => {
+// Health check (both /health and /api/health for monitoring compatibility)
+const healthResponse = (req, res) => {
   res.json({
     status: 'ok',
     timestamp: new Date().toISOString(),
     uptime: Math.floor(process.uptime()),
     memory: Math.round(process.memoryUsage().rss / 1024 / 1024)
   });
-});
+};
+app.get('/health', healthResponse);
+app.get('/api/health', healthResponse);
 
 app.listen(PORT, () => {
   console.log(`🚀 Agent SaaS Backend running on port ${PORT}`);

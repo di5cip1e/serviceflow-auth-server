@@ -1,4 +1,28 @@
-# Lessons from May 17, 2026
+# Lessons from May 17, 2026 (continued through May 25)
+
+## 6. API Route Mounting Confusion (May 22)
+**Problem:** When `agentRoutes` was remounted from `/api` to `/api/agents`, all existing endpoint paths shifted (`/api/config` → `/api/agents/config`), breaking every frontend call. Took several round-trips to realize the cascading path changes.
+**Lesson:** When mounting Express routers, never change the base path of an existing router without auditing EVERY route in it. Either keep the mount point consistent or create a NEW router for new endpoints. The cleanest fix was reverting to `/api` mount and adding new endpoints there directly.
+
+## 7. localStorage-Based Build Flow Fragility (May 22)
+**Problem:** The 4-step agent builder stored all form data in localStorage, which gets cleared when users clear browser data, switch devices, or open in incognito. Server-side persistence is needed.
+**Lesson:** Multi-step flows that span auth boundaries (user must register mid-flow) MUST persist state server-side (session + database). localStorage is fine for UX convenience but cannot be the sole storage for critical flow state. Use a `maikr_redirect_after_register` flag in localStorage as a bridge, but save the actual data to the server.
+
+## 8. Subagent Strategy Confirmed (May 22-24)
+**Observation:** Complex multi-file refactors (build-step4.html complete rewrite, auth flow fixes, command-center overhaul) all succeeded when done directly in the main session. Subagents continue to struggle with sequential file edits.
+**Reinforced Lesson:** Keep doing complex frontend/backend integration work in main session. Reserve subagents for research, audits, and parallel analysis — not for coordinated multi-file changes.
+
+## 9. Build Flow End-to-End Testing Required (May 22-23)
+**Problem:** Individual endpoints tested fine in isolation, but the full create-account → build-agent → deploy flow had gaps when tested end-to-end (e.g., redirect after registration didn't preserve the build state, success page pointed to wrong URL).
+**Lesson:** After fixing individual bugs, ALWAYS run the complete user journey end-to-end before declaring "fixed." Test: anonymous build → register mid-flow → return → finish → deploy → dashboard. Check every redirect.
+
+## 10. Self-Correction Loop Detection (May 21)
+**Derek's Insight:** Platforms should detect when an agent is stuck in a logic loop or repeatedly hallucinating, auto-intervene, reset context, or flag for human review.
+**Lesson for my own work:** When I find myself making the same type of edit repeatedly or going in circles, STOP. I'm likely stuck in a loop. Take a step back, re-read the problem, try a different approach, or ask Derek before pushing further.
+
+## 11. Agent-as-a-Service vs Chatbot Wrapper (May 24)
+**Derek's Insight:** maikr.pro users aren't getting actual OpenClaw agents — they're getting GPT chatbots behind a fancy dashboard. The real value is provisioning actual agent identities with their own memory, skills, and agency.
+**Lesson:** For AI platforms, the "agent" must have persistent memory and autonomous capabilities to justify pricing. A chatbot wrapper is not an AgentSaaS product. This is the core product thesis going forward.
 
 ## 1. Subagent File-Write Reliability
 **Problem:** Spawned 3 subagents (owl-alpha model) to parallelize frontend redesign — all 3 failed within 1 second. The model has poor tool use for file read/write operations.

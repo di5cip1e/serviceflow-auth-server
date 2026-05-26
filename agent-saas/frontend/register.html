@@ -4,209 +4,125 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Create Account — M.ai.K.R</title>
-  <meta name="description" content="M.ai.K.R — AI agent teams that qualify leads, answer customers, and close tickets 24/7.">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://maikr.pro/register">
-  <script defer src="https://cloud.umami.is/script.js" data-website-id="YOUR_SITE_ID_HERE" id="umami-script"></script>
-  <script src="/js/analytics.js"></script>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/dark-premium.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/maikr-v3.css">
   <style>
-    .auth-page {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--void);
-      padding: var(--space-lg);
-      position: relative;
-    }
-    .auth-page::before {
-      content: '';
-      position: absolute;
-      top: -20%; right: -10%;
-      width: 500px; height: 500px;
-      background: radial-gradient(ellipse at center, rgba(0,64,160,0.1) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .auth-card {
-      width: 100%; max-width: 420px;
-      background: linear-gradient(180deg, var(--gunmetal) 0%, rgba(10,10,15,0.9) 100%);
-      border: 1px solid var(--steel);
-      border-radius: var(--radius-lg);
-      padding: var(--space-2xl);
-      box-shadow: var(--shadow-card);
-      position: relative; z-index: 1;
-    }
-    .auth-card h1 { font-size: 1.5rem; font-weight: 700; color: var(--white); margin-bottom: var(--space-xs); }
-    .auth-card .subtitle { color: var(--smoke); font-size: 0.9375rem; margin-bottom: var(--space-xl); }
-    .auth-form .form-group { margin-bottom: var(--space-lg); }
-    .auth-form .form-group label { display: block; font-weight: 600; margin-bottom: var(--space-sm); font-size: 0.875rem; color: var(--silver); }
-    .auth-form input {
-      width: 100%; padding: 12px 16px;
-      background: var(--void); border: 1px solid var(--steel); border-radius: var(--radius-md);
-      color: var(--white); font-family: var(--font-main); font-size: 0.9375rem;
-      transition: all var(--transition-normal); outline: none;
-    }
-    .auth-form input::placeholder { color: var(--muted); }
-    .auth-form input:focus { border-color: var(--electric); box-shadow: 0 0 0 3px rgba(0,64,160,0.2); }
-    .auth-form input.input-error { border-color: var(--error); }
-    .error-message { color: var(--error); font-size: 0.8125rem; margin-top: var(--space-xs); display: none; }
-    .error-message.visible { display: block; }
-    .form-error {
-      background: rgba(231,76,60,0.1); border: 1px solid rgba(231,76,60,0.3);
-      border-radius: var(--radius-md); padding: var(--space-md); color: var(--error);
-      font-size: 0.875rem; margin-bottom: var(--space-lg); display: none;
-    }
-    .form-error.visible { display: block; }
-    .btn-auth {
-      width: 100%; padding: 12px 24px;
-      background: linear-gradient(135deg, var(--electric), var(--electric-light));
-      color: var(--white); border: none; border-radius: var(--radius-md);
-      font-weight: 600; font-size: 0.9375rem; font-family: var(--font-main);
-      cursor: pointer; transition: all var(--transition-normal);
-      box-shadow: 0 2px 12px rgba(0,64,160,0.3);
-    }
-    .btn-auth:hover { box-shadow: var(--shadow-glow-blue); transform: translateY(-1px); }
-    .btn-auth:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-    .auth-footer {
-      text-align: center; margin-top: var(--space-lg); padding-top: var(--space-lg);
-      border-top: 1px solid var(--steel); color: var(--smoke); font-size: 0.875rem;
-    }
+    .auth-card { max-width: 440px; width: 100%; padding: var(--s8); }
+    .auth-card h1 { font-size: 1.5rem; margin-bottom: var(--s1); }
+    .auth-card .subtitle { color: var(--text-dim); font-size: 0.9rem; margin-bottom: var(--s8); }
+    .auth-footer { text-align: center; margin-top: var(--s6); font-size: 0.85rem; color: var(--text-dim); }
     .auth-footer a { color: var(--amber); font-weight: 600; }
-    .auth-footer a:hover { color: var(--white); }
-    .auth-nav {
-      position: fixed; top: 0; left: 0; right: 0; height: 64px;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 var(--space-lg);
-      background: rgba(10,10,15,0.92); backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--steel); z-index: 100;
-    }
-    .auth-nav-logo { font-family: var(--font-accent); font-size: 1.25rem; font-weight: 700; color: var(--white); text-decoration: none; }
-    .auth-nav-logo span { color: var(--amber); }
-    .auth-nav-links a { color: var(--silver); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color var(--transition-fast); }
-    .auth-nav-links a:hover { color: var(--white); }
   </style>
-  <style>
-    .skip-link {
-      position: absolute; top: -100px; left: 0; z-index: 9999;
-      padding: 12px 24px; background: #C0A060; color: #0A0A0F;
-      font-weight: 700; font-size: 14px; text-decoration: none;
-      border-radius: 0 0 8px 0; transition: top 0.2s;
-    }
-    .skip-link:focus { top: 0; }
-</style>
-  </head>
+</head>
 <body>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <nav class="navbar">
+    <a href="/" class="navbar-logo">M<span>.ai</span><span>.K.R</span></a>
+    <div class="navbar-links">
+      <a href="/pricing.html">Pricing</a>
+      <a href="/login.html">Log In</a>
+    </div>
+  </nav>
 
-<header role="banner"><nav class="auth-nav">
-  <a href="/" class="auth-nav-logo">M<span>.ai</span><span>.K.R</span></a>
-  <div class="auth-nav-links"><a href="/">Home</a></div>
-</nav></header>
+  <div class="auth-page">
+    <div class="auth-card card animate-in">
+      <h1>Create Your Account</h1>
+      <p class="subtitle">Deploy your first AI agent in minutes.</p>
 
-<main id="main-content"><div class="auth-page">
-  <div class="auth-card">
-    <h1>Create your M.ai.K.R account</h1>
-    <p class="subtitle">Set up your account to start building AI agents.</p>
+      <div id="registerError" class="alert alert-error hidden" style="margin-bottom:var(--s6)"></div>
 
-    <div id="formError" class="form-error"></div>
+      <form id="registerForm" novalidate>
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="name" placeholder="Your name" required autocomplete="name">
+          <div id="nameError" class="form-error"></div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="email" placeholder="you@company.com" required autocomplete="email">
+          <div id="emailError" class="form-error"></div>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="password" placeholder="Min 8 characters" required minlength="8" autocomplete="new-password">
+          <div id="passwordError" class="form-error"></div>
+        </div>
+        <div class="form-group">
+          <label>Confirm Password</label>
+          <input type="password" id="confirmPassword" placeholder="Re-enter password" required autocomplete="new-password">
+          <div id="confirmError" class="form-error"></div>
+        </div>
+        <button type="submit" class="btn btn-amber btn-lg" style="width:100%" id="registerBtn">Create Account</button>
+      </form>
 
-    <form id="registerForm" class="auth-form" novalidate>
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" placeholder="Your name" required autocomplete="name">
-        <div id="nameError" class="error-message"></div>
+      <div class="auth-footer">
+        Already have an account? <a href="/login.html">Log in →</a>
       </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email">
-        <div id="emailError" class="error-message"></div>
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Min 8 characters" required autocomplete="new-password">
-        <div id="passwordError" class="error-message"></div>
-      </div>
-      <button type="submit" id="submitBtn" class="btn-auth">Create Account</button>
-    </form>
-
-    <div class="auth-footer">
-      Already have an account? <a href="/login.html">Log in</a>
     </div>
   </div>
-</div>
 
-<script>
-  var form = document.getElementById('registerForm');
-  var formError = document.getElementById('formError');
-  var submitBtn = document.getElementById('submitBtn');
+  <script>
+    var params = new URLSearchParams(window.location.search);
+    var redirectTo = params.get('redirect') || '/command-center.html';
 
-  function showFieldError(fieldId, message) {
-    document.getElementById(fieldId).classList.add('input-error');
-    var el = document.getElementById(fieldId + 'Error');
-    el.textContent = message;
-    el.classList.add('visible');
-  }
-
-  function clearErrors() {
-    formError.textContent = '';
-    formError.classList.remove('visible');
-    document.querySelectorAll('.input-error').forEach(function(el) { el.classList.remove('input-error'); });
-    document.querySelectorAll('.error-message').forEach(function(el) { el.classList.remove('visible'); });
-  }
-
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    clearErrors();
-
-    var name = document.getElementById('name').value.trim();
-    var email = document.getElementById('email').value.trim();
-    var password = document.getElementById('password').value;
-    var valid = true;
-
-    if (!name) { showFieldError('name', 'Name is required.'); valid = false; }
-    if (!email) { showFieldError('email', 'Email is required.'); valid = false; }
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showFieldError('email', 'Please enter a valid email address.'); valid = false; }
-    if (!password) { showFieldError('password', 'Password is required.'); valid = false; }
-    else if (password.length < 8) { showFieldError('password', 'Password must be at least 8 characters.'); valid = false; }
-
-    if (!valid) return;
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Creating account…';
-
-    fetch('/api/auth/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify({ name: name, email: email, password: password })
-    })
-    .then(function(res) {
-      return res.json().then(function(data) {
-        if (res.ok) {
-          // Check for redirect after register
-          var redirect = localStorage.getItem('maikr_redirect_after_register') || '/command-center.html';
-          localStorage.removeItem('maikr_redirect_after_register');
-          window.location.href = redirect;
-        }
-        else {
-          formError.textContent = data.error || 'Registration failed. Please try again.';
-          formError.classList.add('visible');
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Create Account';
-        }
+    document.getElementById('registerForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      var name = document.getElementById('name').value.trim();
+      var email = document.getElementById('email').value.trim();
+      var pw = document.getElementById('password').value;
+      var cp = document.getElementById('confirmPassword').value;
+      
+      document.getElementById('registerError').classList.add('hidden');
+      ['nameError','emailError','passwordError','confirmError'].forEach(function(id) {
+        document.getElementById(id).classList.remove('show');
       });
-    })
-    .catch(function() {
-      formError.textContent = 'Something went wrong. Please try again.';
-      formError.classList.add('visible');
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Create Account';
+
+      var valid = true;
+      if (!name) { showErr('nameError', 'Name is required.'); valid = false; }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showErr('emailError', 'Valid email required.'); valid = false; }
+      if (pw.length < 8) { showErr('passwordError', 'At least 8 characters.'); valid = false; }
+      if (pw !== cp) { showErr('confirmError', 'Passwords do not match.'); valid = false; }
+      if (!valid) return;
+
+      var btn = document.getElementById('registerBtn');
+      btn.disabled = true;
+      btn.textContent = 'Creating Account…';
+
+      try {
+        var res = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({ name: name, email: email, password: pw })
+        });
+        var data = await res.json();
+        if (res.ok) {
+          // Check for saved build data
+          var buildData = localStorage.getItem('maikrBuildData');
+          if (buildData) {
+            window.location.href = '/build';
+          } else {
+            window.location.href = redirectTo;
+          }
+        } else {
+          document.getElementById('registerError').textContent = data.error || 'Registration failed.';
+          document.getElementById('registerError').classList.remove('hidden');
+          btn.disabled = false;
+          btn.textContent = 'Create Account';
+        }
+      } catch(e) {
+        document.getElementById('registerError').textContent = 'Connection error. Please try again.';
+        document.getElementById('registerError').classList.remove('hidden');
+        btn.disabled = false;
+        btn.textContent = 'Create Account';
+      }
     });
-  });
-</script>
-</main>
+
+    function showErr(id, msg) {
+      document.getElementById(id).textContent = msg;
+      document.getElementById(id).classList.add('show');
+    }
+  </script>
 </body>
 </html>

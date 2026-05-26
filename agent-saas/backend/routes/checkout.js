@@ -5,6 +5,7 @@ const stripe = require('stripe')(getSecret('STRIPE_SECRET_KEY'));
 
 // Pricing tiers
 const PRICING = {
+  starter: { price: 0, name: 'Starter', base_tokens: 5000, outcome_credits: 10 },
   value: { price: 4499, name: 'Value Agent', base_tokens: 20000, outcome_credits: 100 },
   growth: { price: 9900, name: 'Growth Agent', base_tokens: 50000, outcome_credits: 500 },
   scale: { price: 19900, name: 'Scale Agent', base_tokens: 200000, outcome_credits: 2000 },

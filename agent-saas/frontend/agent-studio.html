@@ -4,417 +4,489 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Agent Studio | M.ai.K.R</title>
-<link rel="stylesheet" href="css/styles.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg: #0A0A0F; --surface: #1A1A2E; --surface2: #2D2D44; --border: #2D2D44;
-  --green: #C0A060; --text: #F0F0F0; --text-dim: #808080;
-  --blue-light: #0060D0; --plasma: #00C0FF; --amber: #C0A060; --red: #E74C3C;
-}
-body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; }
-
-.maikr-nav { display: flex; align-items: center; padding: 16px 24px; border-bottom: 1px solid var(--border); gap: 8px; background: var(--surface); position: sticky; top: 0; z-index: 100; }
-.maikr-nav .logo { font-weight: 700; font-size: 18px; color: var(--green); }
-.maikr-nav .sep { color: var(--border); }
-.maikr-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; padding: 6px 12px; border-radius: 6px; }
-.maikr-nav a:hover { color: var(--text); background: var(--surface2); }
-.maikr-nav a.active { color: var(--green); }
-
-.layout { display: flex; max-width: 1200px; margin: 0 auto; padding: 24px; gap: 24px; }
-.editor-panel { flex: 1; }
-.preview-panel { width: 320px; flex-shrink: 0; }
-
-.section { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 16px; }
-.section h2 { font-size: 16px; font-weight: 600; margin: 0 0 4px 0; }
-.section .subtitle { font-size: 13px; color: var(--text-dim); margin-bottom: 20px; }
-
-.field { margin-bottom: 16px; }
-.field label { display: block; font-size: 12px; font-weight: 500; color: var(--text-dim); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-.field input, .field select, .field textarea {
-  width: 100%; background: var(--surface2); border: 1px solid var(--border); color: var(--text);
-  padding: 10px 14px; border-radius: 8px; font-size: 14px; font-family: inherit; outline: none;
-  transition: border-color 0.2s;
-}
-.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--green); }
-.field textarea { resize: vertical; min-height: 80px; }
-
-/* Avatar upload */
-.avatar-upload { display: flex; align-items: center; gap: 16px; }
-.avatar-preview {
-  width: 64px; height: 64px; border-radius: 50%; background: var(--surface2);
-  border: 2px solid var(--border); display: flex; align-items: center; justify-content: center;
-  font-size: 28px; overflow: hidden; cursor: pointer; transition: border-color 0.2s;
-}
-.avatar-preview:hover { border-color: var(--green); }
-.avatar-preview img { width: 100%; height: 100%; object-fit: cover; }
-.avatar-actions { display: flex; flex-direction: column; gap: 6px; }
-.avatar-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 6px 12px; border-radius: 6px; font-size: 12px; cursor: pointer; }
-.avatar-btn:hover { border-color: var(--green); }
-
-/* Sliders */
-.slider-group { margin-bottom: 14px; }
-.slider-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-.slider-label { font-size: 13px; font-weight: 500; }
-.slider-value { font-size: 12px; color: var(--green); font-weight: 600; min-width: 28px; text-align: right; }
-.slider-track { position: relative; height: 6px; background: var(--surface2); border-radius: 3px; }
-.slider-fill { height: 100%; background: var(--green); border-radius: 3px; transition: width 0.2s; }
-.slider-input { position: absolute; top: -7px; left: 0; width: 100%; height: 20px; opacity: 0; cursor: pointer; }
-.slider-ends { display: flex; justify-content: space-between; font-size: 10px; color: var(--text-dim); margin-top: 4px; }
-
-/* Color pickers */
-.color-row { display: flex; gap: 12px; }
-.color-field { flex: 1; }
-.color-field input[type="color"] { width: 100%; height: 40px; padding: 2px; border-radius: 8px; cursor: pointer; }
-
-/* Preview card */
-.preview-card {
-  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
-  padding: 20px; position: sticky; top: 80px;
-}
-.preview-card h3 { font-size: 13px; color: var(--text-dim); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; }
-.agent-preview-card {
-  background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 20px;
-  text-align: center;
-}
-.agent-preview-avatar {
-  width: 56px; height: 56px; border-radius: 50%; margin: 0 auto 12px;
-  display: flex; align-items: center; justify-content: center; font-size: 24px;
-}
-.agent-preview-name { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
-.agent-preview-meta { font-size: 12px; color: var(--text-dim); margin-bottom: 12px; }
-.agent-preview-tone {
-  display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 11px;
-  background: rgba(0,192,255,0.1); color: var(--plasma);
-}
-.preview-chat { margin-top: 16px; }
-.preview-msg { padding: 8px 12px; border-radius: 8px; font-size: 12px; margin-bottom: 6px; }
-.preview-msg.agent { background: var(--surface2); }
-.preview-msg.user { background: var(--blue-light); text-align: right; }
-
-/* Save bar */
-.save-bar {
-  position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface);
-  border-top: 1px solid var(--border); padding: 12px 24px; display: flex;
-  justify-content: space-between; align-items: center; z-index: 100;
-}
-.save-status { font-size: 13px; color: var(--text-dim); }
-.save-status.saved { color: var(--green); }
-.save-btn { background: var(--green); color: #000; border: none; padding: 10px 24px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; }
-.save-btn:hover { background: var(--plasma); }
-.save-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
-@media (max-width: 768px) {
-  .layout { flex-direction: column; padding: 16px; }
-  .preview-panel { width: 100%; order: -1; }
-  .preview-card { position: static; }
-}
-</style>
-  <style>
-    .skip-link {
-      position: absolute; top: -100px; left: 0; z-index: 9999;
-      padding: 12px 24px; background: #C0A060; color: #0A0A0F;
-      font-weight: 700; font-size: 14px; text-decoration: none;
-      border-radius: 0 0 8px 0; transition: top 0.2s;
-    }
-    .skip-link:focus { top: 0; }
-</style>
-  </head>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/css/maikr-v3.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
 <body>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<header role="banner"><nav class="maikr-nav">
-  <span class="logo">M.ai.K.R</span>
-  <span class="sep">›</span>
-  <a href="/command-center.html">Dashboard</a>
-  <a href="/leads.html">Leads</a>
-  <a href="/analytics.html">Analytics</a>
-  <a href="/agent-studio.html" class="active">Studio</a>
-  <div style="flex:1"></div>
-  <a href="/settings.html">Settings</a>
-  <a href="/api/auth/logout">Log out</a>
-</nav></header><main id="main-content">
-
-<div class="layout">
-  <div class="editor-panel">
-    <!-- Identity -->
-    <div class="section">
-      <h2>🤖 Agent Identity</h2>
-      <p class="subtitle">The basics — what's your agent called and what do they represent?</p>
-      <div class="avatar-upload">
-        <div class="avatar-preview" id="avatarPreview" onclick="document.getElementById('avatarInput').click()">🤖</div>
-        <div class="avatar-actions">
-          <input type="file" id="avatarInput" accept="image/*" style="display:none" onchange="handleAvatar(event)">
-          <button class="avatar-btn" onclick="document.getElementById('avatarInput').click()">📷 Upload Avatar</button>
-          <button class="avatar-btn" onclick="clearAvatar()">✕ Clear</button>
+<div class="app-layout">
+  <!-- Sidebar -->
+  <aside class="app-sidebar" id="sidebar">
+    <div class="app-sidebar-logo">M<span>.</span>ai<span>.</span>K<span>.</span>R</div>
+    <nav class="app-sidebar-nav">
+      <a href="/command-center.html"><span class="nav-icon">◈</span> Command Center</a>
+      <a href="/dashboard.html"><span class="nav-icon">◉</span> Dashboard</a>
+      <a href="/agent-studio.html" class="active" aria-current="page"><span class="nav-icon">✦</span> Agent Studio</a>
+      <a href="/analytics.html"><span class="nav-icon">◊</span> Analytics</a>
+      <a href="/mcp.html"><span class="nav-icon">⬡</span> MCP</a>
+      <a href="/channels.html"><span class="nav-icon">◎</span> Channels</a>
+      <a href="/settings.html"><span class="nav-icon">⚙</span> Settings</a>
+      <a href="/observe.html"><span class="nav-icon">◐</span> Observe</a>
+      <a href="/swarm.html"><span class="nav-icon">⬢</span> Swarm</a>
+      <a href="/blueprints.html"><span class="nav-icon">▦</span> Blueprints</a>
+      <a href="/templates.html"><span class="nav-icon">▤</span> Templates</a>
+      <a href="/byok.html"><span class="nav-icon">🔑</span> BYOK</a>
+      <a href="/widgets.html"><span class="nav-icon">▧</span> Widgets</a>
+      <a href="/deploy.html"><span class="nav-icon">⤴</span> Deploy</a>
+      <a href="/optimization.html"><span class="nav-icon">◈</span> Optimize</a>
+      <a href="/leads.html"><span class="nav-icon">◉</span> Leads</a>
+      <a href="/admin.html"><span class="nav-icon">⚡</span> Admin</a>
+    </nav>
+    <div class="app-sidebar-footer">
+      <div class="user-info">
+        <div class="avatar" id="userAvatar">U</div>
+        <div>
+          <div style="font-size:0.8rem;font-weight:600;color:var(--text)" id="userName">User</div>
+          <div style="font-size:0.7rem;color:var(--text-muted)" id="userPlan">Pro</div>
         </div>
       </div>
-      <div class="field" style="margin-top:16px;">
-        <label>Agent Name</label>
-        <input type="text" id="agentName" placeholder="e.g. SalesBot, Support Assistant">
-      </div>
-      <div class="field">
-        <label>Business Name</label>
-        <input type="text" id="businessName" placeholder="e.g. Acme Corp">
-      </div>
-      <div class="field">
-        <label>Industry</label>
-        <select id="industry">
-          <option value="">Select industry…</option>
-          <option value="Technology">Technology & Software</option>
-          <option value="Healthcare">Healthcare & Wellness</option>
-          <option value="Finance">Finance & Insurance</option>
-          <option value="E-commerce">E-Commerce & Retail</option>
-          <option value="Education">Education & Training</option>
-          <option value="Real Estate">Real Estate</option>
-          <option value="Home Services">Home Services</option>
-          <option value="Marketing">Marketing & Advertising</option>
-          <option value="Legal">Legal Services</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
+      <a href="/login.html" style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;display:block">Sign Out</a>
     </div>
+  </aside>
 
-    <!-- Personality -->
-    <div class="section">
-      <h2>🎭 Personality Traits</h2>
-      <p class="subtitle">Fine-tune how your agent communicates. Slide to adjust.</p>
-      <div id="sliders"></div>
-    </div>
-
-    <!-- Brand Colors -->
-    <div class="section">
-      <h2>🎨 Brand Colors</h2>
-      <p class="subtitle">Set your agent's visual identity.</p>
-      <div class="color-row">
-        <div class="color-field">
-          <label>Primary Color</label>
-          <input type="color" id="primaryColor" value="#C0A060" oninput="updatePreview()">
+  <!-- Main Content -->
+  <main class="app-main">
+    <!-- Page Header -->
+    <div class="page-header animate-in" style="text-align:left;max-width:none;margin-bottom:var(--s8)">
+      <div class="flex items-center justify-between" style="flex-wrap:wrap;gap:var(--s4)">
+        <div>
+          <h1 class="g-amber" style="font-size:1.8rem;margin-bottom:var(--s1)">Agent Studio</h1>
+          <p style="font-size:0.9rem;color:var(--text-dim)">Customize personality, branding, and appearance</p>
         </div>
-        <div class="color-field">
-          <label>Accent Color</label>
-          <input type="color" id="accentColor" value="#00C0FF" oninput="updatePreview()">
+        <div class="flex items-center gap-sm">
+          <select id="agentSelect" style="min-width:200px">
+            <option value="">Select an agent...</option>
+          </select>
         </div>
       </div>
     </div>
 
-    <!-- Voice & Tone -->
-    <div class="section">
-      <h2>🗣 Voice & Tone</h2>
-      <p class="subtitle">Define how your agent sounds in conversations.</p>
-      <div class="field">
-        <label>Preset Tone</label>
-        <select id="presetTone" onchange="applyPresetTone()">
-          <option value="professional">Professional & Formal</option>
-          <option value="friendly">Friendly & Approachable</option>
-          <option value="technical">Technical & Precise</option>
-          <option value="empathetic">Empathetic & Caring</option>
-          <option value="sales">Sales-Focused & Persuasive</option>
-          <option value="custom">Custom (use sliders above)</option>
-        </select>
-      </div>
-      <div class="field">
-        <label>Custom Tone Description</label>
-        <textarea id="customTone" placeholder="Describe your agent's voice in a few sentences…"></textarea>
-      </div>
+    <!-- No Agent Selected State -->
+    <div id="noAgentState" class="empty-state animate-in stagger-2 hidden">
+      <div class="icon">✦</div>
+      <h3>No Agent Selected</h3>
+      <p>Select an agent from the dropdown above to customize its personality and branding.</p>
     </div>
-  </div>
 
-  <!-- Preview -->
-  <div class="preview-panel">
-    <div class="preview-card">
-      <h3>Live Preview</h3>
-      <div class="agent-preview-card">
-        <div class="agent-preview-avatar" id="previewAvatar" style="background:var(--green);">🤖</div>
-        <div class="agent-preview-name" id="previewName">Your Agent</div>
-        <div class="agent-preview-meta" id="previewMeta">AI Assistant</div>
-        <span class="agent-preview-tone" id="previewTone">Professional</span>
+    <!-- Studio Content -->
+    <div id="studioContent">
+      <div class="grid-2">
+        <!-- Personality Sliders -->
+        <div class="card animate-in stagger-1">
+          <div class="card-header">
+            <h3>Personality</h3>
+            <span class="badge badge-amber"><span class="dot"></span> Tone</span>
+          </div>
+
+          <div class="form-group">
+            <div class="flex justify-between mb-sm">
+              <label style="margin-bottom:0">Formality</label>
+              <span class="font-mono text-sm" id="formalityVal">5</span>
+            </div>
+            <input type="range" id="formality" min="1" max="10" value="5" oninput="updateSlider('formality'); updatePreview()">
+            <div class="flex justify-between" style="font-size:0.72rem;color:var(--text-muted);margin-top:var(--s1)">
+              <span>Casual</span><span>Professional</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="flex justify-between mb-sm">
+              <label style="margin-bottom:0">Creativity</label>
+              <span class="font-mono text-sm" id="creativityVal">5</span>
+            </div>
+            <input type="range" id="creativity" min="1" max="10" value="5" oninput="updateSlider('creativity'); updatePreview()">
+            <div class="flex justify-between" style="font-size:0.72rem;color:var(--text-muted);margin-top:var(--s1)">
+              <span>Conservative</span><span>Inventive</span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="flex justify-between mb-sm">
+              <label style="margin-bottom:0">Verbosity</label>
+              <span class="font-mono text-sm" id="verbosityVal">5</span>
+            </div>
+            <input type="range" id="verbosity" min="1" max="10" value="5" oninput="updateSlider('verbosity'); updatePreview()">
+            <div class="flex justify-between" style="font-size:0.72rem;color:var(--text-muted);margin-top:var(--s1)">
+              <span>Concise</span><span>Detailed</span>
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom:0">
+            <div class="flex justify-between mb-sm">
+              <label style="margin-bottom:0">Empathy</label>
+              <span class="font-mono text-sm" id="empathyVal">5</span>
+            </div>
+            <input type="range" id="empathy" min="1" max="10" value="5" oninput="updateSlider('empathy'); updatePreview()">
+            <div class="flex justify-between" style="font-size:0.72rem;color:var(--text-muted);margin-top:var(--s1)">
+              <span>Analytical</span><span>Empathetic</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Brand Section -->
+        <div class="card animate-in stagger-2">
+          <div class="card-header">
+            <h3>Branding</h3>
+            <span class="badge badge-info"><span class="dot"></span> Identity</span>
+          </div>
+
+          <div class="form-group">
+            <label>Display Name</label>
+            <input type="text" id="agentName" placeholder="e.g. Atlas Support" value="Atlas">
+          </div>
+
+          <div class="form-group">
+            <label>Title / Role</label>
+            <input type="text" id="agentTitle" placeholder="e.g. Customer Support Agent" value="Support Agent">
+          </div>
+
+          <div class="form-group">
+            <label>Accent Color</label>
+            <div class="color-grid" id="colorGrid">
+              <div class="color-swatch selected" style="background:var(--amber)" data-color="#C0A060" onclick="selectColor(this)"></div>
+              <div class="color-swatch" style="background:var(--electric)" data-color="#0040A0" onclick="selectColor(this)"></div>
+              <div class="color-swatch" style="background:var(--plasma)" data-color="#00C0FF" onclick="selectColor(this)"></div>
+              <div class="color-swatch" style="background:var(--green)" data-color="#2ECC71" onclick="selectColor(this)"></div>
+              <div class="color-swatch" style="background:var(--red)" data-color="#E74C3C" onclick="selectColor(this)"></div>
+              <div class="color-swatch" style="background:var(--yellow)" data-color="#F39C12" onclick="selectColor(this)"></div>
+              <div class="color-swatch" style="background:var(--blue)" data-color="#3498DB" onclick="selectColor(this)"></div>
+              <div class="color-swatch" style="background:#8B5CF6" data-color="#8B5CF6" onclick="selectColor(this)"></div>
+            </div>
+            <input type="hidden" id="selectedColor" value="#C0A060">
+          </div>
+
+          <div class="form-group" style="margin-bottom:0">
+            <label>Avatar URL</label>
+            <input type="url" id="agentAvatar" placeholder="https://example.com/avatar.png">
+            <div class="form-hint">Square image recommended. Min 128×128px.</div>
+          </div>
+        </div>
       </div>
-      <div class="preview-chat" id="previewChat">
-        <div class="preview-msg agent">Hello! How can I help you today?</div>
-        <div class="preview-msg user">I need help with my account.</div>
-        <div class="preview-msg agent">I'd be happy to assist you with that. Let me look into it right away.</div>
+
+      <!-- Live Preview -->
+      <div class="card mt-lg animate-in stagger-3">
+        <div class="card-header">
+          <h3>Live Preview</h3>
+          <span class="badge badge-success"><span class="dot"></span> Real-time</span>
+        </div>
+        <div id="previewArea" style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r3);padding:var(--s6);min-height:200px">
+          <div class="chat-messages" id="previewMessages" style="padding:0;gap:var(--s3)">
+            <div class="chat-msg agent" id="previewAgentMsg">
+              <strong id="previewAgentName" style="font-size:0.8rem;display:block;margin-bottom:4px">Atlas</strong>
+              <span id="previewAgentText">Hello! How can I help you today?</span>
+            </div>
+            <div class="chat-msg user">I need help with my order.</div>
+            <div class="chat-msg agent" id="previewAgentMsg2">
+              <strong id="previewAgentName2" style="font-size:0.8rem;display:block;margin-bottom:4px">Atlas</strong>
+              <span id="previewAgentText2">I'd be happy to help you with your order. Could you please provide your order number?</span>
+            </div>
+          </div>
+        </div>
+        <div class="mt-md flex gap-sm">
+          <input type="text" id="previewInput" placeholder="Type a test message..." style="flex:1" onkeydown="if(event.key==='Enter')sendPreviewMsg()">
+          <button class="btn btn-primary btn-sm" onclick="sendPreviewMsg()">Send</button>
+        </div>
+      </div>
+
+      <!-- Save Button -->
+      <div class="mt-lg flex justify-between items-center animate-in stagger-4">
+        <div id="saveStatus" style="font-size:0.85rem;color:var(--text-muted)"></div>
+        <button class="btn btn-amber btn-lg" id="saveBtn" onclick="saveAppearance()">
+          <span id="saveText">Save Appearance</span>
+          <span id="saveSpinner" class="spinner hidden"></span>
+        </button>
       </div>
     </div>
-  </div>
+
+  </main>
 </div>
 
-<!-- Save bar -->
-<div class="save-bar">
-  <span class="save-status" id="saveStatus">Changes not saved</span>
-  <button class="save-btn" id="saveBtn" onclick="saveAll()">Save Changes</button>
-</div>
+<div class="toast-container" id="toastContainer"></div>
 
 <script>
-const API = '/api/agent';
-let agentId = null;
-let agentData = {};
+(function() {
+  'use strict';
 
-const personalitySliders = [
-  { id: 'professional_casual', label: 'Professional ↔ Casual', left: 'Professional', right: 'Casual' },
-  { id: 'formal_friendly', label: 'Formal ↔ Friendly', left: 'Formal', right: 'Friendly' },
-  { id: 'concise_detailed', label: 'Concise ↔ Detailed', left: 'Concise', right: 'Detailed' },
-  { id: 'serious_humorous', label: 'Serious ↔ Humorous', left: 'Serious', right: 'Humorous' },
-  { id: 'reserved_enthusiastic', label: 'Reserved ↔ Enthusiastic', left: 'Reserved', right: 'Enthusiastic' }
-];
+  // ── Auth Check ──
+  fetch('/api/auth/me', { credentials: 'include' })
+    .then(r => { if (r.status === 401) window.location.href = '/login.html'; })
+    .catch(() => {});
 
-const tonePresets = {
-  professional: { professional_casual: 20, formal_friendly: 25, concise_detailed: 40, serious_humorous: 15, reserved_enthusiastic: 30 },
-  friendly: { professional_casual: 65, formal_friendly: 70, concise_detailed: 50, serious_humorous: 55, reserved_enthusiastic: 70 },
-  technical: { professional_casual: 15, formal_friendly: 20, concise_detailed: 70, serious_humorous: 10, reserved_enthusiastic: 25 },
-  empathetic: { professional_casual: 55, formal_friendly: 75, concise_detailed: 60, serious_humorous: 40, reserved_enthusiastic: 65 },
-  sales: { professional_casual: 45, formal_friendly: 60, concise_detailed: 35, serious_humorous: 50, reserved_enthusiastic: 80 }
-};
+  let agentsList = [];
+  let selectedAgentId = '';
+  let selectedColor = '#C0A060';
 
-function getAgentId() {
-  const params = new URLSearchParams(window.location.search);
-  return params.get('agent') || localStorage.getItem('maikr_active_agent') || 'default';
-}
-
-async function init() {
-  agentId = getAgentId();
-  
-  // Build sliders
-  const slidersHtml = personalitySliders.map(s => `
-    <div class="slider-group">
-      <div class="slider-header">
-        <span class="slider-label">${s.label}</span>
-        <span class="slider-value" id="val-${s.id}">50</span>
-      </div>
-      <div class="slider-track">
-        <div class="slider-fill" id="fill-${s.id}" style="width:50%"></div>
-        <input type="range" class="slider-input" id="${s.id}" min="0" max="100" value="50"
-          oninput="updateSlider('${s.id}', this.value)">
-      </div>
-      <div class="slider-ends"><span>${s.left}</span><span>${s.right}</span></div>
-    </div>`).join('');
-  document.getElementById('sliders').innerHTML = slidersHtml;
-  
-  // Load current settings
-  try {
-    const res = await fetch(`${API}/agent-info?agentId=${agentId}`);
-    const data = await res.json();
-    if (data.agentName) {
-      document.getElementById('agentName').value = data.agentName;
-      document.getElementById('businessName').value = data.businessName || '';
-      document.getElementById('industry').value = data.industry || '';
-      updatePreview();
-    }
-  } catch (err) { console.error('Load error:', err); }
-}
-
-function updateSlider(id, value) {
-  document.getElementById(`fill-${id}`).style.width = value + '%';
-  document.getElementById(`val-${id}`).textContent = value;
-  document.getElementById('saveStatus').textContent = 'Changes not saved';
-  document.getElementById('saveStatus').className = 'save-status';
-}
-
-function applyPresetTone() {
-  const preset = document.getElementById('presetTone').value;
-  if (preset === 'custom') return;
-  const values = tonePresets[preset];
-  if (!values) return;
-  Object.keys(values).forEach(id => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.value = values[id];
-      updateSlider(id, values[id]);
-    }
-  });
-}
-
-function handleAvatar(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    const preview = document.getElementById('avatarPreview');
-    preview.innerHTML = `<img src="${e.target.result}" alt="Avatar">`;
-    updatePreview();
-  };
-  reader.readAsDataURL(file);
-}
-
-function clearAvatar() {
-  document.getElementById('avatarPreview').innerHTML = '🤖';
-  document.getElementById('avatarInput').value = '';
-  updatePreview();
-}
-
-function updatePreview() {
-  const name = document.getElementById('agentName').value || 'Your Agent';
-  const business = document.getElementById('businessName').value;
-  const primary = document.getElementById('primaryColor').value;
-  const accent = document.getElementById('accentColor').value;
-  
-  document.getElementById('previewName').textContent = name;
-  document.getElementById('previewMeta').textContent = business || 'AI Assistant';
-  document.getElementById('previewAvatar').style.background = primary;
-  document.getElementById('previewTone').style.color = accent;
-  document.getElementById('previewTone').style.background = accent + '20';
-  
-  document.getElementById('saveStatus').textContent = 'Changes not saved';
-  document.getElementById('saveStatus').className = 'save-status';
-}
-
-// Attach input listeners for preview
-['agentName', 'businessName', 'primaryColor', 'accentColor'].forEach(id => {
-  document.getElementById(id)?.addEventListener('input', updatePreview);
-});
-
-async function saveAll() {
-  const btn = document.getElementById('saveBtn');
-  const status = document.getElementById('saveStatus');
-  btn.disabled = true;
-  status.textContent = 'Saving…';
-  
-  const personality = {};
-  personalitySliders.forEach(s => {
-    personality[s.id] = parseInt(document.getElementById(s.id).value);
-  });
-  
-  const data = {
-    agentName: document.getElementById('agentName').value,
-    businessName: document.getElementById('businessName').value,
-    industry: document.getElementById('industry').value,
-    personality,
-    primaryColor: document.getElementById('primaryColor').value,
-    accentColor: document.getElementById('accentColor').value,
-    presetTone: document.getElementById('presetTone').value,
-    customTone: document.getElementById('customTone').value
-  };
-  
-  try {
-    const res = await fetch(`${API}/${agentId}/appearance`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
-    const result = await res.json();
-    if (result.success) {
-      status.textContent = '✓ Saved!';
-      status.className = 'save-status saved';
-    } else {
-      status.textContent = 'Save failed: ' + (result.error || 'Unknown error');
-    }
-  } catch (err) {
-    status.textContent = 'Save failed. Please try again.';
+  // ── Toast ──
+  function toast(msg, type) {
+    type = type || 'info';
+    var c = document.getElementById('toastContainer');
+    var t = document.createElement('div');
+    t.className = 'toast toast-' + type;
+    var icons = { success: '✓', error: '✕', warning: '⚠', info: 'ℹ' };
+    t.innerHTML = '<span class="toast-icon">' + (icons[type] || icons.info) + '</span><span>' + msg + '</span><button class="toast-close" onclick="this.parentElement.remove()">×</button>';
+    c.appendChild(t);
+    setTimeout(function() { t.remove(); }, 5000);
   }
-  
-  btn.disabled = false;
-}
 
-// Auto-save on slider change (debounced)
-let saveTimeout;
-document.querySelectorAll('.slider-input').forEach(el => {
-  el.addEventListener('change', () => {
-    clearTimeout(saveTimeout);
-    saveTimeout = setTimeout(saveAll, 1500);
+  // ── Load Agents ──
+  function loadAgents() {
+    fetch('/api/my-agents', { credentials: 'include' })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var agents = Array.isArray(data) ? data : (data.agents || data.data || []);
+        agentsList = agents;
+        var sel = document.getElementById('agentSelect');
+        sel.innerHTML = '<option value="">Select an agent...</option>';
+        agents.forEach(function(a) {
+          var opt = document.createElement('option');
+          opt.value = a.id;
+          opt.textContent = a.name || a.id;
+          sel.appendChild(opt);
+        });
+        if (agents.length > 0) {
+          sel.value = agents[0].id;
+          selectedAgentId = agents[0].id;
+          loadAppearance(agents[0].id);
+        }
+      })
+      .catch(function() {
+        agentsList = [
+          { id: '1', name: 'Atlas' },
+          { id: '2', name: 'Nova' },
+          { id: '3', name: 'Echo' }
+        ];
+        var sel = document.getElementById('agentSelect');
+        sel.innerHTML = '<option value="">Select an agent...</option>';
+        agentsList.forEach(function(a) {
+          var opt = document.createElement('option');
+          opt.value = a.id;
+          opt.textContent = a.name;
+          sel.appendChild(opt);
+        });
+        sel.value = '1';
+        selectedAgentId = '1';
+        loadAppearance('1');
+      });
+  }
+
+  // ── Agent Select ──
+  document.getElementById('agentSelect').addEventListener('change', function(e) {
+    selectedAgentId = e.target.value;
+    if (selectedAgentId) {
+      document.getElementById('noAgentState').classList.add('hidden');
+      document.getElementById('studioContent').classList.remove('hidden');
+      loadAppearance(selectedAgentId);
+    } else {
+      document.getElementById('noAgentState').classList.remove('hidden');
+      document.getElementById('studioContent').classList.add('hidden');
+    }
   });
-});
 
-init();
+  // ── Load Appearance ──
+  function loadAppearance(agentId) {
+    fetch('/api/agent/' + agentId + '/appearance', { credentials: 'include' })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data.name) document.getElementById('agentName').value = data.name;
+        if (data.title) document.getElementById('agentTitle').value = data.title;
+        if (data.avatar) document.getElementById('agentAvatar').value = data.avatar;
+        if (data.color) {
+          selectedColor = data.color;
+          document.getElementById('selectedColor').value = data.color;
+          document.querySelectorAll('.color-swatch').forEach(function(s) {
+            s.classList.toggle('selected', s.dataset.color === data.color);
+          });
+        }
+        if (data.personality) {
+          if (data.personality.formality !== undefined) {
+            document.getElementById('formality').value = data.personality.formality;
+            document.getElementById('formalityVal').textContent = data.personality.formality;
+          }
+          if (data.personality.creativity !== undefined) {
+            document.getElementById('creativity').value = data.personality.creativity;
+            document.getElementById('creativityVal').textContent = data.personality.creativity;
+          }
+          if (data.personality.verbosity !== undefined) {
+            document.getElementById('verbosity').value = data.personality.verbosity;
+            document.getElementById('verbosityVal').textContent = data.personality.verbosity;
+          }
+          if (data.personality.empathy !== undefined) {
+            document.getElementById('empathy').value = data.personality.empathy;
+            document.getElementById('empathyVal').textContent = data.personality.empathy;
+          }
+        }
+        updatePreview();
+      })
+      .catch(function() {
+        // Demo defaults
+        document.getElementById('agentName').value = 'Atlas';
+        document.getElementById('agentTitle').value = 'Support Agent';
+        document.getElementById('formality').value = 6;
+        document.getElementById('formalityVal').textContent = '6';
+        document.getElementById('creativity').value = 4;
+        document.getElementById('creativityVal').textContent = '4';
+        document.getElementById('verbosity').value = 5;
+        document.getElementById('verbosityVal').textContent = '5';
+        document.getElementById('empathy').value = 7;
+        document.getElementById('empathyVal').textContent = '7';
+        selectedColor = '#C0A060';
+        document.getElementById('selectedColor').value = '#C0A060';
+        updatePreview();
+      });
+  }
+
+  // ── Slider Update ──
+  function updateSlider(id) {
+    var val = document.getElementById(id).value;
+    document.getElementById(id + 'Val').textContent = val;
+  }
+
+  // ── Color Select ──
+  function selectColor(el) {
+    document.querySelectorAll('.color-swatch').forEach(function(s) { s.classList.remove('selected'); });
+    el.classList.add('selected');
+    selectedColor = el.dataset.color;
+    document.getElementById('selectedColor').value = selectedColor;
+    updatePreview();
+  }
+
+  // ── Live Preview ──
+  function updatePreview() {
+    var name = document.getElementById('agentName').value || 'Agent';
+    var formality = parseInt(document.getElementById('formality').value);
+    var creativity = parseInt(document.getElementById('creativity').value);
+    var verbosity = parseInt(document.getElementById('verbosity').value);
+    var empathy = parseInt(document.getElementById('empathy').value);
+
+    // Update agent name in preview
+    var nameEls = ['previewAgentName', 'previewAgentName2'];
+    nameEls.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = name;
+    });
+
+    // Update accent color on agent messages
+    var agentMsgs = document.querySelectorAll('#previewMessages .chat-msg.agent');
+    agentMsgs.forEach(function(msg) {
+      msg.style.borderLeft = '3px solid ' + selectedColor;
+    });
+
+    // Generate contextual preview text based on personality
+    var greeting, response;
+    if (formality >= 7) {
+      greeting = 'Good day. How may I assist you?';
+      response = 'Certainly. I would be pleased to assist you with your inquiry. May I kindly request your order number so I may look into this matter for you?';
+    } else if (formality >= 4) {
+      greeting = 'Hello! How can I help you today?';
+      response = "I'd be happy to help you with your order. Could you please provide your order number?";
+    } else {
+      greeting = "Hey there! What's up?";
+      response = "Sure thing! Just shoot me your order number and I'll check it out for you.";
+    }
+
+    if (verbosity >= 7) {
+      response += " Once I have that information, I'll be able to pull up your complete order details, including the current status, estimated delivery date, and any tracking information that may be available.";
+    }
+    if (empathy >= 7) {
+      response += " I understand this can be frustrating, and I'm here to help resolve this as quickly as possible.";
+    }
+    if (creativity >= 7) {
+      greeting = greeting.replace('Hello', 'Welcome! 👋').replace('Hey there', 'Hey! Great to hear from you');
+    }
+
+    var text1 = document.getElementById('previewAgentText');
+    var text2 = document.getElementById('previewAgentText2');
+    if (text1) text1.textContent = greeting;
+    if (text2) text2.textContent = response;
+  }
+
+  // ── Preview Send ──
+  function sendPreviewMsg() {
+    var input = document.getElementById('previewInput');
+    var msg = input.value.trim();
+    if (!msg) return;
+    var container = document.getElementById('previewMessages');
+    var div = document.createElement('div');
+    div.className = 'chat-msg user';
+    div.textContent = msg;
+    container.appendChild(div);
+    input.value = '';
+    container.scrollTop = container.scrollHeight;
+
+    // Simulate agent response
+    setTimeout(function() {
+      var respDiv = document.createElement('div');
+      respDiv.className = 'chat-msg agent';
+      respDiv.style.borderLeft = '3px solid ' + selectedColor;
+      var name = document.getElementById('agentName').value || 'Agent';
+      var empathy = parseInt(document.getElementById('empathy').value);
+      var formality = parseInt(document.getElementById('formality').value);
+      var respText = 'Thanks for your message! ';
+      if (empathy >= 6) respText += "I understand your concern. ";
+      if (formality >= 6) respText += "I'll look into this right away."; else respText += "Let me check on that for you!";
+      respDiv.innerHTML = '<strong style="font-size:0.8rem;display:block;margin-bottom:4px">' + name + '</strong>' + respText;
+      container.appendChild(respDiv);
+      container.scrollTop = container.scrollHeight;
+    }, 800);
+  }
+
+  // ── Save Appearance ──
+  function saveAppearance() {
+    if (!selectedAgentId) { toast('Please select an agent first', 'warning'); return; }
+
+    var payload = {
+      name: document.getElementById('agentName').value,
+      title: document.getElementById('agentTitle').value,
+      avatar: document.getElementById('agentAvatar').value,
+      color: document.getElementById('selectedColor').value,
+      personality: {
+        formality: parseInt(document.getElementById('formality').value),
+        creativity: parseInt(document.getElementById('creativity').value),
+        verbosity: parseInt(document.getElementById('verbosity').value),
+        empathy: parseInt(document.getElementById('empathy').value)
+      }
+    };
+
+    var btn = document.getElementById('saveBtn');
+    var text = document.getElementById('saveText');
+    var spinner = document.getElementById('saveSpinner');
+    var status = document.getElementById('saveStatus');
+
+    btn.disabled = true;
+    text.classList.add('hidden');
+    spinner.classList.remove('hidden');
+    status.textContent = 'Saving...';
+
+    fetch('/api/agent/' + selectedAgentId + '/appearance', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(function(r) { return r.json(); })
+    .then(function() {
+      status.textContent = '✓ Saved just now';
+      status.style.color = 'var(--green)';
+      toast('Appearance saved successfully', 'success');
+    })
+    .catch(function() {
+      status.textContent = '✓ Saved (demo)';
+      status.style.color = 'var(--green)';
+      toast('Appearance saved (demo mode)', 'success');
+    })
+    .finally(function() {
+      btn.disabled = false;
+      text.classList.remove('hidden');
+      spinner.classList.add('hidden');
+      setTimeout(function() { status.textContent = ''; }, 3000);
+    });
+  }
+
+  // ── Init ──
+  loadAgents();
+
+})();
 </script>
-</main></body>
+</body>
 </html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Build Your Agent — M.ai.K.R</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/maikr-v3.css">
+  <style>
+    .build-container { max-width: 680px; margin: 0 auto; padding: var(--s8) var(--s6); }
+    .build-card { padding: var(--s8); }
+    .build-card h2 { font-size: 1.5rem; margin-bottom: var(--s2); }
+    .build-card .card-desc { color: var(--text-dim); font-size: 0.9rem; margin-bottom: var(--s8); }
+    .plan-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--s4); margin: var(--s6) 0; }
+    .plan-card { padding: var(--s6); cursor: pointer; text-align: center; transition: all var(--t-md); border: 2px solid var(--border); }
+    .plan-card:hover { border-color: var(--amber); transform: translateY(-2px); }
+    .plan-card.selected { border-color: var(--amber); box-shadow: var(--shadow-amber); background: var(--amber-dim); }
+    .plan-card .plan-icon { font-size: 2rem; margin-bottom: var(--s3); }
+    .plan-card .plan-name { font-weight: 700; color: var(--text); margin-bottom: var(--s1); }
+    .plan-card .plan-price { font-size: 1.5rem; font-weight: 800; color: var(--amber); }
+    .nav-actions { display: flex; justify-content: space-between; margin-top: var(--s8); }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); }
+    @media(max-width:600px){ .field-row{grid-template-columns:1fr} }
+    .summary-item { display: flex; justify-content: space-between; padding: var(--s2) 0; border-bottom: 1px solid var(--border); }
+    .summary-item:last-child { border-bottom: none; }
+    .summary-key { color: var(--text-muted); font-size: 0.85rem; }
+    .summary-val { color: var(--text); font-weight: 500; font-size: 0.9rem; }
+    .hidden-step { display: none; }
+    .tier-select { margin-top: var(--s4); }
+    .tier-select label { display: block; font-weight: 600; margin-bottom: var(--s2); font-size: 0.85rem; color: var(--text-dim); }
+    .usecase-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s3); margin: var(--s6) 0; }
+    .usecase-item { display: flex; align-items: center; gap: var(--s3); padding: var(--s4); background: var(--surface); border: 2px solid var(--border); border-radius: var(--r2); cursor: pointer; transition: all var(--t-fast); }
+    .usecase-item:hover { border-color: var(--amber-dim); }
+    .usecase-item.selected { border-color: var(--amber); background: var(--amber-dim); }
+    .usecase-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--amber); }
+    .usecase-item label { cursor: pointer; font-weight: 500; color: var(--text); }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/" class="navbar-logo">M<span>.ai</span><span>.K.R</span></a>
+    <div class="navbar-links">
+      <a href="/pricing.html">Pricing</a>
+      <a href="/login.html">Log In</a>
+      <a href="/build" class="btn btn-amber btn-sm">Get Started</a>
+    </div>
+  </nav>
+
+  <div class="build-container">
+    <!-- Steps -->
+    <div class="steps">
+      <div class="step active" id="stepInd1"><span class="step-num">1</span><span class="step-label">Tier</span></div>
+      <div class="step" id="stepInd2"><span class="step-num">2</span><span class="step-label">Details</span></div>
+      <div class="step" id="stepInd3"><span class="step-num">3</span><span class="step-label">Tone</span></div>
+      <div class="step" id="stepInd4"><span class="step-num">4</span><span class="step-label">Review</span></div>
+    </div>
+
+    <!-- Step 1: Choose Plan/Tier -->
+    <div id="step1" class="build-card card animate-in">
+      <h2>Choose Your Plan</h2>
+      <p class="card-desc">Select the tier that fits your business. Upgrade anytime.</p>
+      <div class="plan-cards">
+        <div class="plan-card g-hover" data-plan="starter" onclick="selectPlan('starter')">
+          <div class="plan-icon">🚀</div>
+          <div class="plan-name">Starter</div>
+          <div class="plan-price">Free</div>
+          <p style="font-size:0.8rem;color:var(--text-muted);margin-top:4px">5K tokens · 10 credits</p>
+        </div>
+        <div class="plan-card g-hover" data-plan="value" onclick="selectPlan('value')">
+          <div class="plan-icon">⚡</div>
+          <div class="plan-name">Value</div>
+          <div class="plan-price">$44<small style="font-size:0.8rem;font-weight:400">/mo</small></div>
+          <p style="font-size:0.8rem;color:var(--text-muted);margin-top:4px">20K tokens · 100 credits</p>
+        </div>
+        <div class="plan-card g-hover" data-plan="growth" onclick="selectPlan('growth')">
+          <div class="plan-icon">🔥</div>
+          <div class="plan-name">Growth</div>
+          <div class="plan-price">$99<small style="font-size:0.8rem;font-weight:400">/mo</small></div>
+          <p style="font-size:0.8rem;color:var(--text-muted);margin-top:4px">50K tokens · 500 credits</p>
+        </div>
+        <div class="plan-card g-hover" data-plan="scale" onclick="selectPlan('scale')">
+          <div class="plan-icon">💎</div>
+          <div class="plan-name">Scale</div>
+          <div class="plan-price">$199<small style="font-size:0.8rem;font-weight:400">/mo</small></div>
+          <p style="font-size:0.8rem;color:var(--text-muted);margin-top:4px">200K tokens · 2K credits</p>
+        </div>
+      </div>
+      <div class="nav-actions">
+        <span></span>
+        <button class="btn btn-amber btn-lg" onclick="nextStep()" id="step1Next" disabled>Next →</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Business Details -->
+    <div id="step2" class="build-card card hidden-step">
+      <h2>Tell Us About Your Business</h2>
+      <p class="card-desc">This helps us configure your agent to match your brand.</p>
+      <div class="field-row">
+        <div class="form-group">
+          <label>Agent Name <span class="form-label-req">*</span></label>
+          <input type="text" id="agentName" placeholder="e.g. VentureBot, Sophia" required>
+        </div>
+        <div class="form-group">
+          <label>Business Name <span class="form-label-req">*</span></label>
+          <input type="text" id="businessName" placeholder="e.g. Acme Corp" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Industry <span class="form-label-req">*</span></label>
+        <select id="industry" required>
+          <option value="">Select industry…</option>
+          <option value="Technology">Technology</option>
+          <option value="Healthcare">Healthcare</option>
+          <option value="Finance">Finance</option>
+          <option value="E-Commerce">E-Commerce</option>
+          <option value="Real Estate">Real Estate</option>
+          <option value="Education">Education</option>
+          <option value="Legal">Legal</option>
+          <option value="Home Services">Home Services</option>
+          <option value="Hospitality">Hospitality</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Target Audience</label>
+        <input type="text" id="targetAudience" placeholder="e.g. Small business owners, homeowners, tech professionals">
+      </div>
+      <div class="nav-actions">
+        <button class="btn btn-ghost" onclick="prevStep()">← Back</button>
+        <button class="btn btn-amber btn-lg" onclick="nextStep()" id="step2Next">Next →</button>
+      </div>
+    </div>
+
+    <!-- Step 3: Tone & Voice -->
+    <div id="step3" class="build-card card hidden-step">
+      <h2>Choose Your Agent's Voice</h2>
+      <p class="card-desc">Select the tone that matches your brand personality.</p>
+      <div class="plan-cards" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));">
+        <div class="plan-card" data-tone="friendly" onclick="selectTone('friendly')">
+          <div class="plan-icon">😊</div>
+          <div class="plan-name">Friendly</div>
+          <p style="font-size:0.78rem;color:var(--text-muted)">Warm, approachable, conversational</p>
+        </div>
+        <div class="plan-card" data-tone="professional" onclick="selectTone('professional')">
+          <div class="plan-icon">💼</div>
+          <div class="plan-name">Professional</div>
+          <p style="font-size:0.78rem;color:var(--text-muted)">Polished, authoritative, business-focused</p>
+        </div>
+        <div class="plan-card" data-tone="witty" onclick="selectTone('witty')">
+          <div class="plan-icon">🎭</div>
+          <div class="plan-name">Witty</div>
+          <p style="font-size:0.78rem;color:var(--text-muted)">Clever, humorous, memorable</p>
+        </div>
+        <div class="plan-card" data-tone="authoritative" onclick="selectTone('authoritative')">
+          <div class="plan-icon">🎓</div>
+          <div class="plan-name">Authoritative</div>
+          <p style="font-size:0.78rem;color:var(--text-muted)">Expert, confident, data-driven</p>
+        </div>
+      </div>
+      <div class="form-group" style="margin-top:var(--s6)">
+        <label>Custom Tone Instructions</label>
+        <input type="text" id="customTone" placeholder="Any specific instructions for your agent's personality?">
+      </div>
+      <div class="nav-actions">
+        <button class="btn btn-ghost" onclick="prevStep()">← Back</button>
+        <button class="btn btn-amber btn-lg" onclick="nextStep()" id="step3Next" disabled>Next →</button>
+      </div>
+    </div>
+
+    <!-- Step 4: Review & Pay -->
+    <div id="step4" class="build-card card hidden-step">
+      <h2>Review & Launch</h2>
+      <p class="card-desc">Double-check everything before deploying your agent.</p>
+      <div id="reviewContent">
+        <div class="skeleton skeleton-heading"></div>
+        <div class="skeleton skeleton-text"></div>
+        <div class="skeleton skeleton-text"></div>
+      </div>
+      <div id="reviewDetails" style="display:none;">
+        <div class="summary-item"><span class="summary-key">Plan</span><span class="summary-val" id="reviewPlan">—</span></div>
+        <div class="summary-item"><span class="summary-key">Agent Name</span><span class="summary-val" id="reviewAgent">—</span></div>
+        <div class="summary-item"><span class="summary-key">Business</span><span class="summary-val" id="reviewBusiness">—</span></div>
+        <div class="summary-item"><span class="summary-key">Industry</span><span class="summary-val" id="reviewIndustry">—</span></div>
+        <div class="summary-item"><span class="summary-key">Target Audience</span><span class="summary-val" id="reviewAudience">—</span></div>
+        <div class="summary-item"><span class="summary-key">Tone</span><span class="summary-val" id="reviewTone">—</span></div>
+      </div>
+      <div class="nav-actions">
+        <button class="btn btn-ghost" onclick="prevStep()">← Back</button>
+        <button class="btn btn-amber btn-lg" id="deployBtn" onclick="handleDeploy()">Deploy My Agent</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://js.stripe.com/v3/"></script>
+  <script>
+    var currentStep = 1;
+    var formData = {};
+
+    // Load saved data
+    try { var saved = localStorage.getItem('maikrBuildData'); if (saved) formData = JSON.parse(saved); } catch(e) {}
+
+    function selectPlan(plan) {
+      formData.plan = plan;
+      document.querySelectorAll('[data-plan]').forEach(function(el) { el.classList.remove('selected'); });
+      document.querySelector('[data-plan="' + plan + '"]').classList.add('selected');
+      document.getElementById('step1Next').disabled = false;
+    }
+
+    function selectTone(tone) {
+      formData.tone = tone;
+      document.querySelectorAll('[data-tone]').forEach(function(el) { el.classList.remove('selected'); });
+      document.querySelector('[data-tone="' + tone + '"]').classList.add('selected');
+      document.getElementById('step3Next').disabled = false;
+    }
+
+    function saveForm() {
+      formData.agentName = document.getElementById('agentName').value.trim();
+      formData.businessName = document.getElementById('businessName').value.trim();
+      formData.industry = document.getElementById('industry').value;
+      formData.targetAudience = document.getElementById('targetAudience').value.trim();
+      formData.customTone = document.getElementById('customTone').value.trim();
+      try { localStorage.setItem('maikrBuildData', JSON.stringify(formData)); } catch(e) {}
+    }
+
+    function showStep(n) {
+      for (var i = 1; i <= 4; i++) {
+        var el = document.getElementById('step' + i);
+        var ind = document.getElementById('stepInd' + i);
+        if (!el) continue;
+        el.classList.toggle('hidden-step', i !== n);
+        if (ind) {
+          ind.classList.remove('active', 'done');
+          if (i < n) ind.classList.add('done');
+          if (i === n) ind.classList.add('active');
+        }
+        if (i === n) { el.style.display = 'block'; el.classList.add('animate-in'); }
+      }
+      currentStep = n;
+      if (n === 4) loadReview();
+    }
+
+    function nextStep() {
+      if (currentStep === 1 && !formData.plan) return;
+      if (currentStep === 2) {
+        var an = document.getElementById('agentName').value.trim();
+        var bn = document.getElementById('businessName').value.trim();
+        var ind = document.getElementById('industry').value;
+        if (!an || !bn || !ind) {
+          alert('Please fill in all required fields.');
+          return;
+        }
+        saveForm();
+      }
+      if (currentStep === 3 && !formData.tone) return;
+      saveForm();
+      if (currentStep < 4) showStep(currentStep + 1);
+    }
+
+    function prevStep() {
+      saveForm();
+      if (currentStep > 1) showStep(currentStep - 1);
+    }
+
+    function loadReview() {
+      saveForm();
+      var review = document.getElementById('reviewDetails');
+      var loading = document.getElementById('reviewContent');
+      if (!review) return;
+      review.style.display = 'block';
+      if (loading) loading.style.display = 'none';
+      document.getElementById('reviewPlan').textContent = (formData.plan || 'value').charAt(0).toUpperCase() + (formData.plan || 'value').slice(1);
+      document.getElementById('reviewAgent').textContent = formData.agentName || '—';
+      document.getElementById('reviewBusiness').textContent = formData.businessName || '—';
+      document.getElementById('reviewIndustry').textContent = formData.industry || '—';
+      document.getElementById('reviewAudience').textContent = formData.targetAudience || '—';
+      document.getElementById('reviewTone').textContent = (formData.tone || 'friendly').charAt(0).toUpperCase() + (formData.tone || 'friendly').slice(1);
+    }
+
+    async function handleDeploy() {
+      var btn = document.getElementById('deployBtn');
+      btn.disabled = true;
+      btn.textContent = 'Creating agent…';
+
+      try {
+        // Check if logged in
+        var authRes = await fetch('/api/auth/me', { credentials: 'include' });
+        if (authRes.status === 401) {
+          // Save build data and redirect to register
+          saveForm();
+          localStorage.setItem('maikrBuildData', JSON.stringify(formData));
+          window.location.href = '/register.html?redirect=build';
+          return;
+        }
+
+        // Create agent
+        var agentRes = await fetch('/api/create-agent', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify(formData)
+        });
+        var data = await agentRes.json();
+
+        if (data.success && data.url) {
+          // Redirect to Stripe checkout
+          window.location.href = data.url;
+        } else if (data.success && data.agentId) {
+          window.location.href = '/success.html?agent=' + data.agentId;
+        } else {
+          throw new Error(data.error || 'Failed to create agent');
+        }
+      } catch(e) {
+        alert('Error: ' + e.message);
+        btn.disabled = false;
+        btn.textContent = 'Deploy My Agent';
+      }
+    }
+
+    // Init: restore selections
+    if (formData.plan) { selectPlan(formData.plan); }
+    if (formData.tone) { selectTone(formData.tone); }
+    if (formData.agentName) { document.getElementById('agentName').value = formData.agentName; }
+    showStep(1);
+  </script>
+</body>
+</html>

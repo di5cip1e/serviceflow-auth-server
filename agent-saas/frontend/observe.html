@@ -1,403 +1,438 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agent Observability — M.ai.K.R</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-<style>
-  :root {
-  --bg: #0A0A0F;
-  --surface: #1A1A2E;
-  --surface2: #2D2D44;
-  --border: #2D2D44;
-  --green: #C0A060;
-  --green-dim: #804020;
-  --text: #F0F0F0;
-  --text-dim: #808080;
-  --blue: #0040A0;
-  --blue-light: #0060D0;
-  --yellow: #C0A060;
-  --red: #E74C3C;
-  --orange: #C0A060;
-  --plasma: #00C0FF;
-  --amber: #C0A060;
-  --amber-dim: rgba(192,160,96,0.15);
-}
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; min-height: 100vh; }
-  a { color: var(--green); text-decoration: none; }
-
-  /* Nav */
-  nav { display: flex; align-items: center; padding: 16px 24px; border-bottom: 1px solid var(--border); gap: 8px; }
-  nav .logo { font-weight: 700; font-size: 18px; color: var(--green); }
-  nav .sep { color: var(--border); }
-  nav .page { color: var(--text-dim); font-size: 14px; }
-  nav .badge { font-size: 11px; background: var(--green); color: #000; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
-
-  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
-
-  /* Header */
-  .page-header { margin-bottom: 28px; }
-  .page-header h1 { font-size: 26px; font-weight: 700; color: var(--green); margin-bottom: 6px; }
-  .page-header p { color: var(--text-dim); font-size: 14px; }
-
-  /* Controls */
-  .controls { display: flex; gap: 12px; align-items: center; margin-bottom: 24px; flex-wrap: wrap; }
-  select, button { background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 8px 14px; border-radius: 8px; font-size: 13px; font-family: inherit; cursor: pointer; }
-  select:focus, button:focus { outline: none; border-color: var(--green); }
-  button { background: var(--green); color: #000; border: none; font-weight: 600; }
-  button:hover { background: var(--green-dim); }
-  button.secondary { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
-  button.secondary:hover { border-color: var(--green); }
-
-  /* Loading */
-  .loading { text-align: center; padding: 60px; color: var(--text-dim); }
-  .loading-spinner { width: 40px; height: 40px; border: 3px solid var(--border); border-top-color: var(--green); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  /* Metric Cards */
-  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
-  @media (max-width: 768px) { .metrics { grid-template-columns: repeat(2, 1fr); } }
-  .metric-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
-  .metric-card .label { font-size: 12px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
-  .metric-card .value { font-size: 32px; font-weight: 700; color: var(--text); }
-  .metric-card .sub { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
-  .metric-card .value.green { color: var(--green); }
-  .metric-card .value.yellow { color: var(--yellow); }
-  .metric-card .value.red { color: var(--red); }
-
-  /* Charts */
-  .charts { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 28px; }
-  @media (max-width: 900px) { .charts { grid-template-columns: 1fr; } }
-  .chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
-  .chart-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 16px; color: var(--text); }
-  .chart-wrap { position: relative; height: 200px; }
-
-  /* Trajectory / Conversation List */
-  .trajectory-section { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 28px; }
-  .trajectory-section h3 { font-size: 14px; font-weight: 600; padding: 16px 20px; border-bottom: 1px solid var(--border); }
-  .trajectory-list { max-height: 500px; overflow-y: auto; }
-  .traj-row { padding: 14px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 16px; cursor: pointer; transition: background 0.15s; }
-  .traj-row:last-child { border-bottom: none; }
-  .traj-row:hover { background: var(--surface2); }
-  .traj-time { font-size: 11px; color: var(--text-dim); white-space: nowrap; width: 120px; }
-  .traj-agent { font-size: 12px; font-weight: 600; width: 100px; white-space: nowrap; }
-  .traj-agent.support { color: #4a9eff; }
-  .traj-agent.sales { color: var(--green); }
-  .traj-agent.onboarding { color: #ff9f43; }
-  .traj-agent.admin { color: #a29bfe; }
-  .traj-agent.general { color: var(--text-dim); }
-  .traj-msg { flex: 1; font-size: 13px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .traj-scores { display: flex; gap: 8px; align-items: center; }
-  .score-badge { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 10px; }
-  .score-badge.good { background: rgba(0,255,136,0.15); color: var(--green); }
-  .score-badge.medium { background: rgba(255,221,87,0.15); color: var(--yellow); }
-  .score-badge.poor { background: rgba(255,71,87,0.15); color: var(--red); }
-  .traj-expand { font-size: 11px; color: var(--green); white-space: nowrap; }
-
-  /* Expanded Trajectory Detail */
-  .traj-detail { display: none; padding: 16px 20px; background: var(--bg); border-bottom: 1px solid var(--border); }
-  .traj-detail.open { display: block; }
-  .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-  @media (max-width: 768px) { .detail-grid { grid-template-columns: 1fr; } }
-  .detail-section { }
-  .detail-section h4 { font-size: 12px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px; letter-spacing: 0.5px; }
-  .detail-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 12px; font-size: 13px; line-height: 1.5; max-height: 150px; overflow-y: auto; word-break: break-word; }
-  .detail-meta { display: flex; gap: 16px; flex-wrap: wrap; }
-  .detail-meta-item { font-size: 12px; color: var(--text-dim); }
-  .detail-meta-item span { color: var(--text); font-weight: 500; }
-  .chunks-section { margin-top: 12px; }
-  .chunk-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 12px; margin-bottom: 8px; }
-  .chunk-item .chunk-doc { font-size: 11px; color: var(--green); margin-bottom: 4px; font-weight: 500; }
-  .chunk-item .chunk-text { font-size: 12px; color: var(--text-dim); line-height: 1.4; }
-
-  /* Empty state */
-  .empty-state { text-align: center; padding: 60px 20px; color: var(--text-dim); }
-  .empty-state .icon { font-size: 40px; margin-bottom: 12px; }
-
-  /* Score legend */
-  .score-legend { display: flex; gap: 16px; font-size: 11px; color: var(--text-dim); margin-top: 8px; }
-</style>
-
-<style>
-.maikr-nav {
-  background: #161b22;
-  border-bottom: 1px solid #30363d;
-  padding: 0 24px;
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  height: 52px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.maikr-logo { font-size: 17px; font-weight: 700; color: #C0A060; text-decoration: none; letter-spacing: -0.5px; }
-.maikr-logo span { color: #fff; }
-.maikr-links { display: flex; gap: 4px; margin-left: 8px; }
-.maikr-links a { color: #8b949e; text-decoration: none; font-size: 13px; padding: 5px 10px; border-radius: 5px; transition: all 0.15s; }
-.maikr-links a:hover { color: #e6edf3; background: #30363d; }
-.maikr-links a.active { color: #C0A060; }
-.maikr-spacer { flex: 1; }
-.maikr-status { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #8b949e; }
-.maikr-status .dot { width: 7px; height: 7px; background: #C0A060; border-radius: 50%; box-shadow: 0 0 5px #C0A060; }
-</style>
-
-  <style>
-    .skip-link {
-      position: absolute; top: -100px; left: 0; z-index: 9999;
-      padding: 12px 24px; background: #C0A060; color: #0A0A0F;
-      font-weight: 700; font-size: 14px; text-decoration: none;
-      border-radius: 0 0 8px 0; transition: top 0.2s;
-    }
-    .skip-link:focus { top: 0; }
-</style>
-  </head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Observability — M.ai.K.R</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/css/maikr-v3.css">
+</head>
 <body>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <a href="#main-content" class="skip-link" style="position:absolute;top:-100px;left:0;z-index:9999;padding:12px 24px;background:var(--amber);color:var(--bg);font-weight:700;font-size:14px;text-decoration:none;border-radius:0 0 8px 0;transition:top .2s;" onfocus="this.style.top=0" onblur="this.style.top='-100px'">Skip to main content</a>
 
-<header role="banner"><nav class="maikr-nav">
-  <a href="/" class="maikr-logo">M<span>.ai</span><span>.K.R</span></a>
-  <div class="maikr-links">
-    <a href="/command-center.html">Dashboard</a>
-    <a href="/swarm.html">Swarm</a>
-    <a href="/mcp.html">MCP</a>
-    <a href="/channels.html">Channels</a>
-    <a href="/optimization.html">Optimize</a>
-    <a href="/observe.html">Observe</a>
-  </div>
-  <div class="maikr-spacer"></div>
-  <div class="maikr-status"><span class="dot"></span>Online</div>
-  <form action="/api/auth/logout" method="POST" style="display:inline"><button type="submit" class="logout-link">Log out</button></form>
-</nav></header>
-
-  <span style="margin-left:auto;display:flex;gap:4px">
-    <a href="/command-center.html">Command Center</a>
-    <a href="/optimization.html">Optimization</a>
-    <a href="/channels.html">Channels</a>
-    <a href="/deploy.html">Deploy</a>
-    <a href="/chat.html">Chat</a>
-    <a href="/">Home</a>
-  </span>
-
-<div class="container">
-  <main id="main-content"><div class="page-header">
-    <h1>Agent Observability</h1>
-    <p>See exactly how your agent thinks — traces, docs, scores, and costs.</p>
-  </div>
-
-  <div class="controls">
-    <select id="agentSelect">
-      <option value="">Select agent…</option>
-      <option value="demo" selected>Support Agent (demo)</option>
-    </select>
-    <select id="periodSelect">
-      <option value="24h">Last 24 hours</option>
-      <option value="7d" selected>Last 7 days</option>
-      <option value="30d">Last 30 days</option>
-    </select>
-    <button onclick="loadDashboard()">Refresh</button>
-  </div>
-
-  <!-- Metrics Row -->
-  <div class="metrics">
-    <div class="metric-card">
-      <div class="label">Total Requests</div>
-      <div class="value" id="mRequests">—</div>
-      <div class="sub" id="mRequestsSub">conversations</div>
-    </div>
-    <div class="metric-card">
-      <div class="label">Avg Latency</div>
-      <div class="value" id="mLatency">—</div>
-      <div class="sub" id="mLatencySub">ms per request</div>
-    </div>
-    <div class="metric-card">
-      <div class="label">Token Usage</div>
-      <div class="value" id="mTokens">—</div>
-      <div class="sub" id="mTokensSub">input + output</div>
-    </div>
-    <div class="metric-card">
-      <div class="label">Health Score</div>
-      <div class="value green" id="mHealth">—</div>
-      <div class="sub" id="mHealthSub">composite RAG quality</div>
-    </div>
-  </div>
-
-  <!-- Charts -->
-  <div class="charts">
-    <div class="chart-card">
-      <h3>Token Usage Over Time</h3>
-      <div class="chart-wrap">
-        <canvas id="tokenChart"></canvas>
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <nav class="app-sidebar" role="navigation" aria-label="Main navigation">
+      <div class="app-sidebar-logo">M<span>.ai</span>.K<span>.R</span></div>
+      <div class="app-sidebar-nav">
+        <a href="/command-center.html"><span class="nav-icon">◈</span> Command Center</a>
+        <a href="/chat.html"><span class="nav-icon">💬</span> Chat</a>
+        <a href="/swarm.html"><span class="nav-icon">⚡</span> Swarm</a>
+        <a href="/observe.html" aria-current="page" class="active"><span class="nav-icon">👁</span> Observe</a>
+        <a href="/optimization.html"><span class="nav-icon">◎</span> Optimize</a>
+        <a href="/channels.html"><span class="nav-icon">📡</span> Channels</a>
+        <a href="/mcp.html"><span class="nav-icon">⬡</span> MCP</a>
+        <a href="/analytics.html"><span class="nav-icon">◇</span> Analytics</a>
+        <a href="/agent-studio.html"><span class="nav-icon">⬢</span> Studio</a>
+        <a href="/settings.html"><span class="nav-icon">⚙</span> Settings</a>
       </div>
-      <div class="score-legend">
-        <span style="color:var(--blue)">● Input tokens</span>
-        <span style="color:var(--green)">● Output tokens</span>
+      <div class="app-sidebar-footer">
+        <div class="user-info">
+          <div class="avatar" id="user-avatar">U</div>
+          <div>
+            <div style="font-size:0.85rem;color:var(--text);font-weight:600;" id="user-name">Loading…</div>
+            <div style="font-size:0.72rem;color:var(--text-muted)" id="user-email">—</div>
+          </div>
+        </div>
+        <form action="/api/auth/logout" method="POST"><button type="submit" class="btn btn-ghost btn-sm" style="width:100%">Log out</button></form>
       </div>
-    </div>
-    <div class="chart-card">
-      <h3>Intent Distribution</h3>
-      <div class="chart-wrap">
-        <canvas id="intentChart"></canvas>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="app-main" id="main-content">
+      <!-- Header -->
+      <div class="page-header animate-in">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:var(--s4);">
+          <div>
+            <h1 style="font-size:2.2rem;">Agent Observability</h1>
+            <p class="text-muted" style="margin-top:var(--s2);max-width:600px;">Monitor agent performance in real-time. Track conversations, detect loops, and review self-correction metrics.</p>
+          </div>
+          <span class="badge badge-success"><span class="dot"></span>Monitoring Active</span>
+        </div>
       </div>
-    </div>
+
+      <!-- Filters -->
+      <div class="card animate-in stagger-1" style="margin-bottom:var(--s6);">
+        <div class="grid-3" style="gap:var(--s4);">
+          <div class="form-group" style="margin-bottom:0;">
+            <label>Agent</label>
+            <select id="filter-agent">
+              <option value="">All agents</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label>Date Range</label>
+            <select id="filter-period">
+              <option value="1h">Last hour</option>
+              <option value="24h" selected>Last 24 hours</option>
+              <option value="7d">Last 7 days</option>
+              <option value="30d">Last 30 days</option>
+            </select>
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label>&nbsp;</label>
+            <button class="btn btn-primary" onclick="loadDashboard()" style="width:100%;">↻ Refresh</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Status + Stats -->
+      <div class="stat-grid animate-in stagger-2">
+        <div class="stat-card card">
+          <div class="stat-label">Total Requests</div>
+          <div class="stat-value" id="stat-requests">—</div>
+          <div class="stat-change"><span class="stat-icon">◈</span> In selected period</div>
+        </div>
+        <div class="stat-card card">
+          <div class="stat-label">Avg Response Time</div>
+          <div class="stat-value" id="stat-latency" style="font-size:1.6rem;">—</div>
+          <div class="stat-change" id="stat-latency-sub"><span class="stat-icon">⏱</span> ms per request</div>
+        </div>
+        <div class="stat-card card">
+          <div class="stat-label">Token Usage</div>
+          <div class="stat-value" id="stat-tokens" style="font-size:1.4rem;">—</div>
+          <div class="stat-change" id="stat-tokens-sub"><span class="stat-icon">◈</span> input + output</div>
+        </div>
+        <div class="stat-card card">
+          <div class="stat-label">Health Score</div>
+          <div class="stat-value" id="stat-health" style="color:var(--green);">—</div>
+          <div class="stat-change" id="stat-health-sub"><span class="stat-icon">♥</span> Composite quality</div>
+        </div>
+      </div>
+
+      <!-- Self-Correction Stats -->
+      <div class="card animate-in stagger-3" style="margin-top:var(--s6);">
+        <div class="card-header">
+          <h3>🔄 Self-Correction Stats</h3>
+          <span class="text-xs text-muted" id="correction-time-range">Last 24h</span>
+        </div>
+        <div class="stat-grid" style="grid-template-columns:repeat(4,1fr);gap:var(--s4);">
+          <div style="text-align:center;padding:var(--s4);">
+            <div style="font-size:1.8rem;font-weight:800;color:var(--text);font-family:var(--font-mono);" id="corrections-interventions">0</div>
+            <div class="text-xs text-muted" style="margin-top:var(--s2);">Interventions</div>
+          </div>
+          <div style="text-align:center;padding:var(--s4);">
+            <div style="font-size:1.8rem;font-weight:800;color:var(--yellow);font-family:var(--font-mono);" id="corrections-resets">0</div>
+            <div class="text-xs text-muted" style="margin-top:var(--s2);">Resets</div>
+          </div>
+          <div style="text-align:center;padding:var(--s4);">
+            <div style="font-size:1.8rem;font-weight:800;color:var(--red);font-family:var(--font-mono);" id="corrections-escalations">0</div>
+            <div class="text-xs text-muted" style="margin-top:var(--s2);">Escalations</div>
+          </div>
+          <div style="text-align:center;padding:var(--s4);">
+            <div style="font-size:1.8rem;font-weight:800;color:var(--green);font-family:var(--font-mono);" id="corrections-resolved">0</div>
+            <div class="text-xs text-muted" style="margin-top:var(--s2);">Auto-Resolved</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loop Detection -->
+      <div class="card animate-in stagger-4" style="margin-top:var(--s6);">
+        <div class="card-header">
+          <h3>🔍 Loop Detection</h3>
+          <button class="btn btn-ghost btn-sm" onclick="loadLoopEvents()">↻ Refresh</button>
+        </div>
+        <div id="loop-events-container">
+          <div style="display:flex;align-items:center;gap:var(--s3);padding:var(--s4);">
+            <div class="spinner"></div>
+            <span class="text-muted text-sm">Checking for loop events…</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Conversation Log -->
+      <div class="card animate-in stagger-4" style="margin-top:var(--s6);">
+        <div class="card-header">
+          <h3>💬 Conversation Log</h3>
+          <span class="text-xs text-muted" id="log-count">0 messages</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>Agent</th>
+                <th>User</th>
+                <th>Message</th>
+                <th>Intent</th>
+                <th>Latency</th>
+              </tr>
+            </thead>
+            <tbody id="conversation-log-body">
+              <tr>
+                <td colspan="6" style="text-align:center;padding:var(--s8);color:var(--text-muted);">
+                  <div class="spinner" style="margin:0 auto var(--s3);"></div>
+                  Loading conversations…
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Live Agent Status Cards -->
+      <div class="animate-in stagger-5" style="margin-top:var(--s6);">
+        <div class="card-header" style="margin-bottom:var(--s4);">
+          <h3>📡 Live Agent Status</h3>
+          <button class="btn btn-ghost btn-sm" onclick="pingAgents()">↻ Ping All</button>
+        </div>
+        <div class="grid-4" id="live-status-grid">
+          <div class="card" style="text-align:center;padding:var(--s8);">
+            <div class="spinner spinner-lg" style="margin:0 auto;"></div>
+            <p class="text-muted text-sm" style="margin-top:var(--s3);">Pinging agents…</p>
+          </div>
+        </div>
+      </div>
+    </main>
   </div>
 
-  <!-- Latency Distribution -->
-  <div class="chart-card" style="margin-bottom:28px;">
-    <h3>Latency Distribution (P50 / P75 / P95)</h3>
-    <div class="chart-wrap" style="height:120px;">
-      <canvas id="latencyChart"></canvas>
-    </div>
-  </div>
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
 
-  <!-- Self-Correction Alerts -->
-  <div class="chart-card" style="margin-bottom:28px;">
-    <h3>🔄 Self-Correction & Loop Detection</h3>
-    <div id="loopEvents">
-      <div style="color:var(--text-dim);font-size:13px;text-align:center;padding:20px;">No loop events detected — agent is running clean.</div>
-    </div>
-  </div>
+  <script>
+  // ── Auth Check ──────────────────────────────────────────────────────────
+  (async function() {
+    try {
+      const r = await fetch('/api/auth/me', { credentials: 'include' });
+      if (r.status === 401) { window.location.href = '/login.html'; return; }
+      const d = await r.json();
+      document.getElementById('user-name').textContent = d.name || d.email || 'User';
+      document.getElementById('user-email').textContent = d.email || '';
+      document.getElementById('user-avatar').textContent = (d.name || d.email || 'U').charAt(0).toUpperCase();
+    } catch { window.location.href = '/login.html'; }
+  })();
 
-  <!-- Trajectory View -->
-  <div class="trajectory-section">
-    <h3>Trajectory — Recent Responses</h3>
-    <div class="trajectory-list" id="trajList">
-      <div class="loading"><div class="loading-spinner"></div>Loading…</div>
-    </div>
-  </div>
-</div>
+  // ── Toast ───────────────────────────────────────────────────────────────
+  function toast(msg, type = 'info') {
+    const c = document.getElementById('toast-container');
+    const t = document.createElement('div');
+    t.className = `toast toast-${type}`;
+    const icons = { success: '✓', error: '✕', warning: '⚠', info: 'ℹ' };
+    t.innerHTML = `<span class="toast-icon">${icons[type] || icons.info}</span><span>${msg}</span><button class="toast-close" onclick="this.parentElement.remove()">×</button>`;
+    c.appendChild(t);
+    setTimeout(() => t.remove(), 4000);
+  }
 
-<script>
-let tokenChart, intentChart, latencyChart;
-let currentData = {};
+  // ── Load Dashboard ──────────────────────────────────────────────────────
+  async function loadDashboard() {
+    const agentId = document.getElementById('filter-agent').value;
+    const period = document.getElementById('filter-period').value;
+    const params = new URLSearchParams();
+    if (agentId) params.set('agentId', agentId);
+    params.set('period', period);
 
-// ── Init ────────────────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  tokenChart = new Chart(document.getElementById('tokenChart'), { type: 'line', data: { labels: [], datasets: [{ label: 'Input', data: [], borderColor: '#4a9eff', backgroundColor: 'rgba(74,158,255,0.1)', tension: 0.4, fill: true }, { label: 'Output', data: [], borderColor: '#C0A060', backgroundColor: 'rgba(0,255,136,0.1)', tension: 0.4, fill: true }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#888', font: { size: 11 } } }, y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#888', font: { size: 11 } } } } } });
-  intentChart = new Chart(document.getElementById('intentChart'), { type: 'doughnut', data: { labels: ['Support', 'Sales', 'Onboarding', 'General'], datasets: [{ data: [1,1,1,1], backgroundColor: ['#4a9eff','#C0A060','#ff9f43','#888'] }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { color: '#888', font: { size: 12 }, padding: 12 } } } } });
-  latencyChart = new Chart(document.getElementById('latencyChart'), { type: 'bar', data: { labels: ['P50', 'P75', 'P95'], datasets: [{ data: [0,0,0], backgroundColor: ['#4a9eff','#ffdd57','#ff4757'] }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#888' } }, y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#888', callback: v => v + 'ms' } } } } });
+    try {
+      const [usageRes, agentsRes] = await Promise.allSettled([
+        fetch(`/api/observe/usage?${params}`, { credentials: 'include' }),
+        fetch('/api/my-agents', { credentials: 'include' }),
+      ]);
+
+      // Usage stats
+      let usage = { totalRequests: 0, avgLatencyMs: 0, totalInputTokens: 0, totalOutputTokens: 0, healthScore: null };
+      if (usageRes.status === 'fulfilled') {
+        try { usage = (await usageRes.value.json()) || usage; } catch {}
+      }
+
+      document.getElementById('stat-requests').textContent = formatNum(usage.totalRequests || 0);
+      document.getElementById('stat-latency').textContent = usage.avgLatencyMs ? `${Math.round(usage.avgLatencyMs)}ms` : '—';
+      const totalTok = (usage.totalInputTokens || 0) + (usage.totalOutputTokens || 0);
+      document.getElementById('stat-tokens').textContent = formatNum(totalTok);
+      document.getElementById('stat-tokens-sub').textContent = `in: ${formatNum(usage.totalInputTokens || 0)} · out: ${formatNum(usage.totalOutputTokens || 0)}`;
+
+      if (usage.healthScore != null) {
+        const score = Math.round(usage.healthScore);
+        const el = document.getElementById('stat-health');
+        el.textContent = score;
+        el.className = 'stat-value ' + (score >= 80 ? '' : score >= 60 ? '' : '');
+        el.style.color = score >= 80 ? 'var(--green)' : score >= 60 ? 'var(--yellow)' : 'var(--red)';
+      } else {
+        document.getElementById('stat-health').textContent = '—';
+        document.getElementById('stat-health').style.color = 'var(--text)';
+      }
+
+      // Populate agent filter
+      if (agentsRes.status === 'fulfilled') {
+        try {
+          const d = await agentsRes.value.json();
+          const agents = d.agents || d || [];
+          const sel = document.getElementById('filter-agent');
+          const current = sel.value;
+          sel.innerHTML = '<option value="">All agents</option>' + agents.map(a =>
+            `<option value="${escapeJs(a.id || a.name)}" ${current === (a.id||a.name)?'selected':''}>${escapeHtml(a.name || a.id)}</option>`
+          ).join('');
+        } catch {}
+      }
+    } catch (e) { toast('Failed to load dashboard: ' + e.message, 'error'); }
+
+    loadLoopEvents();
+    loadConversationLog();
+    pingAgents();
+    loadSelfCorrectionStats();
+  }
+
+  // ── Self-Correction Stats ───────────────────────────────────────────────
+  async function loadSelfCorrectionStats() {
+    const agentId = document.getElementById('filter-agent').value;
+    try {
+      const params = new URLSearchParams();
+      if (agentId) params.set('agentId', agentId);
+      const r = await fetch(`/api/self-correction/stats?${params}`, { credentials: 'include' });
+      if (!r.ok) return;
+      const d = await r.json();
+      document.getElementById('corrections-interventions').textContent = d.interventions || 0;
+      document.getElementById('corrections-resets').textContent = d.resets || 0;
+      document.getElementById('corrections-escalations').textContent = d.escalations || 0;
+      document.getElementById('corrections-resolved').textContent = d.resolved || d.autoResolved || 0;
+    } catch {}
+  }
+
+  // ── Loop Detection ──────────────────────────────────────────────────────
+  async function loadLoopEvents() {
+    const container = document.getElementById('loop-events-container');
+    const agentId = document.getElementById('filter-agent').value;
+    try {
+      const params = new URLSearchParams();
+      if (agentId) params.set('agentId', agentId);
+      const r = await fetch(`/api/self-correction/events?${params}`, { credentials: 'include' });
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      const d = await r.json();
+      const events = d.events || [];
+
+      if (!events.length) {
+        container.innerHTML = `
+          <div class="empty-state" style="padding:var(--s8);">
+            <div class="icon" style="opacity:0.4;">✓</div>
+            <p class="text-muted">No loop events detected — agents are running clean.</p>
+          </div>`;
+        return;
+      }
+
+      container.innerHTML = events.map(ev => `
+        <div style="display:flex;align-items:flex-start;gap:var(--s3);padding:var(--s3) 0;border-bottom:1px solid var(--border);">
+          <span style="font-size:1rem;flex-shrink:0;">${ev.type === 'loop_detected' ? '🔄' : ev.type === 'escalation' ? '⬆' : '⚡'}</span>
+          <div style="flex:1;min-width:0;">
+            <div style="font-size:0.85rem;color:var(--text);">${escapeHtml(ev.description || ev.type)}</div>
+            <div class="text-xs text-muted" style="margin-top:2px;">${escapeHtml(ev.agentId || 'unknown')} · ${formatTime(ev.timestamp)}</div>
+          </div>
+          <span class="badge badge-${ev.type === 'loop_detected' ? 'warning' : ev.type === 'escalation' ? 'error' : 'info'}">${ev.type}</span>
+        </div>`).join('');
+    } catch (e) {
+      container.innerHTML = `<div class="empty-state" style="padding:var(--s6);"><p class="text-muted text-sm">Unable to load loop events.</p></div>`;
+    }
+  }
+
+  // ── Conversation Log ────────────────────────────────────────────────────
+  async function loadConversationLog() {
+    const agentId = document.getElementById('filter-agent').value;
+    const period = document.getElementById('filter-period').value;
+    const tbody = document.getElementById('conversation-log-body');
+
+    try {
+      const params = new URLSearchParams();
+      if (agentId) params.set('agentId', agentId);
+      params.set('period', period);
+      params.set('limit', '50');
+      const r = await fetch(`/api/observe/conversations?${params}`, { credentials: 'include' });
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      const d = await r.json();
+      const logs = d.conversations || d.messages || d || [];
+      document.getElementById('log-count').textContent = `${logs.length} messages`;
+
+      if (!logs.length) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:var(--s8);color:var(--text-muted);">No conversations found for the selected period.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = logs.map(l => `
+        <tr>
+          <td class="font-mono text-xs">${formatTime(l.timestamp || l.created_at)}</td>
+          <td>${escapeHtml(l.agentId || l.agent || '—')}</td>
+          <td>${escapeHtml(l.userId || l.user || '—')}</td>
+          <td class="truncate" style="max-width:250px;" title="${escapeHtml(l.message || l.content || '')}">${escapeHtml(truncate(l.message || l.content || '—', 60))}</td>
+          <td><span class="badge badge-info">${escapeHtml(l.intent || '—')}</span></td>
+          <td class="font-mono text-xs">${l.latencyMs || l.latency || '—'}${l.latencyMs ? 'ms' : ''}</td>
+        </tr>`).join('');
+    } catch (e) {
+      tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:var(--s8);color:var(--red);">Failed to load conversation log.</td></tr>`;
+    }
+  }
+
+  // ── Live Agent Status ───────────────────────────────────────────────────
+  async function pingAgents() {
+    const grid = document.getElementById('live-status-grid');
+    grid.innerHTML = '<div class="card" style="text-align:center;padding:var(--s8);"><div class="spinner spinner-lg" style="margin:0 auto;"></div><p class="text-muted text-sm" style="margin-top:var(--s3);">Pinging agents…</p></div>';
+
+    try {
+      const r = await fetch('/api/my-agents', { credentials: 'include' });
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      const d = await r.json();
+      const agents = d.agents || d || [];
+
+      if (!agents.length) {
+        grid.innerHTML = `
+          <div class="empty-state" style="grid-column:1/-1;padding:var(--s8);">
+            <div class="icon">📡</div>
+            <p class="text-muted">No agents to monitor. Create agents in the Swarm page.</p>
+          </div>`;
+        return;
+      }
+
+      // Ping each agent in parallel
+      const results = await Promise.allSettled(agents.map(async a => {
+        const t0 = Date.now();
+        try {
+          const pr = await fetch(`/api/my-agents/${encodeURIComponent(a.id || a.name)}/ping`, { credentials: 'include' });
+          const latency = Date.now() - t0;
+          const pd = await pr.json();
+          return { ...a, latency, online: true, status: pd.status || a.status || 'online' };
+        } catch {
+          return { ...a, latency: Date.now() - t0, online: false, status: 'offline' };
+        }
+      }));
+
+      const cards = results.map((r, i) => {
+        if (r.status === 'rejected') return '';
+        const a = r.value;
+        const isOnline = a.online;
+        const statusClass = isOnline ? 'success' : 'error';
+        const role = a.role || 'general';
+        const emojis = { support: '🎧', sales: '💼', onboarding: '🚀', admin: '⚙️', general: '🤖' };
+        return `
+          <div class="card g-hover" style="text-align:center;padding:var(--s5);">
+            <div style="font-size:1.5rem;margin-bottom:var(--s2);">${emojis[role.toLowerCase()] || '🤖'}</div>
+            <div style="font-weight:600;font-size:0.85rem;color:var(--text);">${escapeHtml(a.name || a.id)}</div>
+            <div style="margin:var(--s2) 0;">
+              <span class="badge badge-${statusClass}"><span class="dot"></span>${isOnline ? 'Online' : 'Offline'}</span>
+            </div>
+            <div class="font-mono text-xs text-muted">
+              ${isOnline ? `⚡ ${a.latency}ms` : '—'}
+            </div>
+          </div>`;
+      }).join('');
+
+      grid.innerHTML = cards || '<div class="empty-state" style="grid-column:1/-1;"><p class="text-muted">No agents available.</p></div>';
+    } catch (e) {
+      grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;padding:var(--s8);"><div class="icon">⚠</div><p class="text-muted">Failed to ping agents.</p></div>`;
+    }
+  }
+
+  // ── Helpers ─────────────────────────────────────────────────────────────
+  function formatNum(n) {
+    if (!n) return '0';
+    if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
+    if (n >= 1000) return (n / 1000).toFixed(1) + 'k';
+    return String(n);
+  }
+  function formatTime(iso) {
+    if (!iso) return '—';
+    try { return new Date(iso).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' }); } catch { return String(iso); }
+  }
+  function truncate(s, len) { return s && s.length > len ? s.slice(0, len) + '…' : s || '—'; }
+  function escapeHtml(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  function escapeJs(s) { return String(s||'').replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
+
+  // ── Init ────────────────────────────────────────────────────────────────
   loadDashboard();
-});
-
-// ── Load All Data ─────────────────────────────────────────────────────────────
-async function loadDashboard() {
-  const agentId = document.getElementById('agentSelect').value || 'demo';
-  const period = document.getElementById('periodSelect').value;
-  const base = 'http://maikr.pro'; // In production, use relative URL
-
-  // Fetch usage + rag-scores + intent-distribution + loop events in parallel
-  const [usageRes, scoresRes, intentRes, loopRes] = await Promise.allSettled([
-    fetch(`/api/observe/usage/${agentId}?period=${period}`),
-    fetch(`/api/observe/rag-scores/${agentId}`),
-    fetch(`/api/observe/intent-distribution/${agentId}?period=${period}`),
-    fetch(`/api/self-correction/events/${agentId}`),
-  ]);
-
-  let usage = { totalRequests: 0, totalInputTokens: 0, totalOutputTokens: 0, totalCostUSD: 0, avgLatencyMs: 0, byDay: [] };
-  let ragStats = null;
-  let intentDist = [];
-
-  if (usageRes.status === 'fulfilled') { try { usage = await usageRes.value.json(); } catch {} }
-  if (scoresRes.status === 'fulfilled') { try { ragStats = (await scoresRes.value.json()).stats; } catch {} }
-  if (intentRes.status === 'fulfilled') { try { intentDist = (await intentRes.value.json()).distribution || []; } catch {} }
-
-  // Update metrics
-  document.getElementById('mRequests').textContent = usage.totalRequests || '0';
-  document.getElementById('mLatency').textContent = usage.avgLatencyMs ? `${Math.round(usage.avgLatencyMs)}` : '—';
-  const totalTokens = (usage.totalInputTokens || 0) + (usage.totalOutputTokens || 0);
-  document.getElementById('mTokens').textContent = totalTokens ? formatNum(totalTokens) : '—';
-  document.getElementById('mTokensSub').textContent = `~$${(usage.totalCostUSD || 0).toFixed(2)} estimated`;
-
-  if (ragStats && ragStats.avgComposite !== null) {
-    const score = Math.round(ragStats.avgComposite * 100);
-    const el = document.getElementById('mHealth');
-    el.textContent = score;
-    el.className = 'value ' + (score >= 80 ? 'green' : score >= 60 ? 'yellow' : 'red');
-    document.getElementById('mHealthSub').textContent = `faithfulness: ${Math.round(ragStats.avgFaithfulness * 100)} / relevancy: ${Math.round(ragStats.avgRelevancy * 100)}`;
-  }
-
-  // Token chart
-  const days = usage.byDay || [];
-  tokenChart.data.labels = days.map(d => d.date.slice(5));
-  tokenChart.data.datasets[0].data = days.map(d => d.inputTokens);
-  tokenChart.data.datasets[1].data = days.map(d => d.outputTokens);
-  tokenChart.update();
-
-  // Intent chart
-  const intentColors = { support: '#4a9eff', sales: '#C0A060', onboarding: '#ff9f43', admin: '#a29bfe', general: '#888', unknown: '#555' };
-  intentChart.data.labels = intentDist.map(d => capitalize(d.intent));
-  intentChart.data.datasets[0].data = intentDist.map(d => d.count);
-  intentChart.data.datasets[0].backgroundColor = intentDist.map(d => intentColors[d.intent] || '#555');
-  intentChart.update();
-
-  // Latency — simulate P50/P75/P95 from avg
-  const avg = usage.avgLatencyMs || 0;
-  latencyChart.data.datasets[0].data = [avg, Math.round(avg * 1.35), Math.round(avg * 2.1)];
-  latencyChart.update();
-
-  // Trajectory list — show mock demo items if no real data
-  renderTrajectory([]);
-}
-
-function renderTrajectory(traces) {
-  const el = document.getElementById('trajList');
-  if (!traces || traces.length === 0) {
-    el.innerHTML = `
-      <div class="empty-state">
-        <div class="icon">📊</div>
-        <p>No traces yet. Send a message to your agent to see the trajectory here.</p>
-      </div>`;
-    return;
-  }
-  el.innerHTML = traces.map(t => `
-    <div class="traj-row" onclick="toggleDetail('${t.traceId}')">
-      <div class="traj-time">${formatTime(t.startedAt)}</div>
-      <div class="traj-agent ${(t.intent || 'general').toLowerCase()}">${capitalize(t.intent || 'General')}</div>
-      <div class="traj-msg">${truncate(t.message || t.intent || '—', 60)}</div>
-      <div class="traj-scores">
-        <span class="score-badge ${scoreClass(t.overallScore)}">${t.overallScore != null ? Math.round(t.overallScore * 100) : '—'}</span>
-      </div>
-      <div class="traj-expand">▶</div>
-    </div>
-    <div class="traj-detail" id="detail-${t.traceId}">
-      <div class="detail-meta">
-        <div class="detail-meta-item">Trace ID: <span>${t.traceId}</span></div>
-        <div class="detail-meta-item">Latency: <span>${t.latencyMs || 0}ms</span></div>
-        <div class="detail-meta-item">Spans: <span>${t.spanCount || 0}</span></div>
-        <div class="detail-meta-item">Generations: <span>${t.generationCount || 0}</span></div>
-      </div>
-    </div>`).join('');
-}
-
-function toggleDetail(id) {
-  document.querySelectorAll('.traj-detail').forEach(el => el.classList.remove('open'));
-  const detail = document.getElementById('detail-' + id);
-  if (detail) {
-    const wasOpen = detail.classList.contains('open');
-    detail.classList.toggle('open', !wasOpen);
-    detail.previousElementSibling.querySelector('.traj-expand').textContent = wasOpen ? '▶' : '▼';
-  }
-}
-
-function scoreClass(score) {
-  if (score == null) return 'medium';
-  return score >= 0.8 ? 'good' : score >= 0.6 ? 'medium' : 'poor';
-}
-function capitalize(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : ''; }
-function formatTime(iso) {
-  if (!iso) return '—';
-  try { return new Date(iso).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }); } catch { return iso; }
-}
-function formatNum(n) {
-  if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
-  if (n >= 1000) return (n / 1000).toFixed(1) + 'k';
-  return String(n);
-}
-function truncate(s, len) { return s && s.length > len ? s.slice(0, len) + '…' : s || '—'; }
-</script>
-</main>
+  </script>
 </body>
 </html>

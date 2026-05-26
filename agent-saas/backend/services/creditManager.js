@@ -73,9 +73,9 @@ function deductCredits(agentId, type, amount, description, referenceId) {
       return;
     }
     if (this.changes === 0) {
-      // Insufficient balance — do overdraft deduction and warn
-      db.run(`UPDATE agents SET ${updateCol} = ${updateCol} + ? WHERE id = ?`, [absAmount, agentId]);
-      console.warn(`[CREDIT] Overdraft for agent ${agentId}: ${type} by ${absAmount}`);
+      // Insufficient balance — do NOT allow overdraft
+      console.warn(`[CREDIT] Insufficient balance for agent ${agentId}: ${type} by ${absAmount}`);
+      return;
     }
     // Record transaction
     db.get(`SELECT ${limitCol}, ${updateCol} FROM agents WHERE id = ?`, [agentId], (e, row) => {

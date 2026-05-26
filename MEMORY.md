@@ -106,6 +106,16 @@
 - Forgeai.sbs: Briefly down (000) then recovered to 301 (normal)
 
 *Last consolidated: 2026-05-21 18:11 UTC*
+
+## May 22-25, 2026 Updates
+- Model default changed to openrouter/owl-alpha (May 23)
+- Full codebase audit: 47 issues found, 5-phase blueprint created
+- Phase A (Security): In progress
+- ClawHub: 10 skills at v1.0.0, no new downloads/stars
+- forgeai.sbs: 301 (normal)
+- Nightly optimization: 0 proposals, system healthy
+
+*Last consolidated: 2026-05-25 04:19 UTC*
 *Previous: 2026-05-21 04:12 UTC*
 
 ## May 21, 2026 — Major Feature Sprint (9 tasks, 1.5 hours)
@@ -472,3 +482,32 @@ All 4 features built and deployed in ~30 min (21:30-22:00 UTC). Backend restart 
 - `loop_events` table
 - `parent_agent_id` on agents table
 - `spending_cap_cents`, `daily_token_cap` on agents table
+
+## May 22-25: Build Flow Fixes + Product Strategy
+
+### Build Flow Overhaul (May 22)
+- Fixed critical 4-step agent builder: added `/api/config`, `/api/create-agent`, `/api/my-agents` endpoints
+- Rebuilt `build-step4.html` — "Create My Agent" button now works, redirects to register if not logged in
+- Fixed login/register pages to preserve build flow across auth via localStorage bridge
+- Fixed hardcoded URLs in success page + get-agent API (now relative paths)
+- Fixed placeholder text in command-center.html
+- **Key lesson:** Never change an existing Express router's mount path without auditing ALL routes
+
+### Model Default Changed (May 23)
+- Changed `agents.defaults.model` from `openai/gpt-oss-120b:free` to `openrouter/owl-alpha`
+- Gateway restarted; all new sessions use owl-alpha
+
+### Full Codebase Audit (May 23)
+- 47 issues found across 4 dimensions
+- 5-phase blueprint: A (Security) → B (Bugs) → C (Performance) → D (UI/UX) → E (Enhancements)
+- Report: `agent-saas/docs/BLUEPRINT-AUDIT.md`
+
+### Product Strategy Session (May 24)
+- Derek identified core problem: users get chatbot wrappers, not real agents
+- Pivot thesis: provision actual OpenClaw agent identities per customer (own memory, skills, agency)
+- This is the path to justifying $50-500/mo pricing
+
+### Gateway Dashboard (May 25)
+- Set up nginx reverse proxy for `gateway.maikr.pro`
+- Derek needs to add DNS A record: `gateway.maikr.pro → 187.77.31.252`
+- SSL cert extension pending DNS record

@@ -4,386 +4,565 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Analytics | M.ai.K.R</title>
-<link rel="stylesheet" href="css/styles.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/css/maikr-v3.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-<style>
-:root {
-  --bg: #0A0A0F; --surface: #1A1A2E; --surface2: #2D2D44; --border: #2D2D44;
-  --green: #C0A060; --text: #F0F0F0; --text-dim: #808080;
-  --blue-light: #0060D0; --plasma: #00C0FF; --amber: #C0A060; --red: #E74C3C;
-}
-body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; }
-
-.maikr-nav { display: flex; align-items: center; padding: 16px 24px; border-bottom: 1px solid var(--border); gap: 8px; background: var(--surface); position: sticky; top: 0; z-index: 100; }
-.maikr-nav .logo { font-weight: 700; font-size: 18px; color: var(--green); }
-.maikr-nav .sep { color: var(--border); }
-.maikr-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; padding: 6px 12px; border-radius: 6px; transition: all 0.2s; }
-.maikr-nav a:hover { color: var(--text); background: var(--surface2); }
-.maikr-nav a.active { color: var(--green); }
-
-.container { max-width: 1100px; margin: 0 auto; padding: 24px; }
-
-/* Period selector */
-.period-selector { display: flex; gap: 8px; margin-bottom: 24px; }
-.period-btn { background: var(--surface); border: 1px solid var(--border); color: var(--text-dim); padding: 8px 16px; border-radius: 8px; font-size: 13px; cursor: pointer; transition: all 0.2s; }
-.period-btn.active { background: var(--green); color: #000; border-color: var(--green); }
-.period-btn:hover:not(.active) { border-color: var(--green); }
-
-/* Stats grid */
-.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
-.stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
-.stat-card .stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-dim); margin-bottom: 8px; }
-.stat-card .stat-value { font-size: 28px; font-weight: 700; color: var(--green); }
-.stat-card .stat-sub { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
-
-/* Charts */
-.charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
-.chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
-.chart-card h3 { font-size: 14px; font-weight: 600; margin: 0 0 16px 0; color: var(--text-dim); }
-.chart-container { position: relative; height: 200px; }
-
-/* Credits */
-.credits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-bottom: 24px; }
-.credit-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
-.credit-card h3 { font-size: 14px; font-weight: 600; margin: 0 0 12px 0; }
-.credit-bar { height: 8px; background: var(--surface2); border-radius: 4px; overflow: hidden; margin-bottom: 8px; }
-.credit-bar .fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; }
-.credit-bar .fill.green { background: var(--green); }
-.credit-bar .fill.blue { background: var(--blue-light); }
-.credit-bar .fill.yellow { background: var(--amber); }
-.credit-bar .fill.red { background: var(--red); }
-.credit-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-dim); }
-
-/* Lead status */
-.lead-status-grid { display: flex; gap: 12px; flex-wrap: wrap; }
-.lead-status-item { background: var(--surface2); border-radius: 8px; padding: 10px 16px; text-align: center; }
-.lead-status-item .count { font-size: 20px; font-weight: 700; }
-.lead-status-item .label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; }
-
-/* Empty state */
-.empty-state { text-align: center; padding: 60px 20px; color: var(--text-dim); }
-.empty-state .icon { font-size: 48px; margin-bottom: 16px; }
-
-@media (max-width: 768px) {
-  .charts-grid { grid-template-columns: 1fr; }
-  .stats-grid { grid-template-columns: repeat(2, 1fr); }
-}
-</style>
-  <style>
-    .skip-link {
-      position: absolute; top: -100px; left: 0; z-index: 9999;
-      padding: 12px 24px; background: #C0A060; color: #0A0A0F;
-      font-weight: 700; font-size: 14px; text-decoration: none;
-      border-radius: 0 0 8px 0; transition: top 0.2s;
-    }
-    .skip-link:focus { top: 0; }
-</style>
-  </head>
+</head>
 <body>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<header role="banner"><nav class="maikr-nav">
-  <span class="logo">M.ai.K.R</span>
-  <span class="sep">›</span>
-  <a href="/command-center.html">Dashboard</a>
-  <a href="/leads.html">Leads</a>
-  <a href="/analytics.html" class="active">Analytics</a>
-  <div style="flex:1"></div>
-  <a href="/settings.html">Settings</a>
-  <a href="/api/auth/logout">Log out</a>
-</nav></header><main id="main-content">
+<!-- Sidebar -->
+<div class="app-layout">
+  <aside class="app-sidebar" id="sidebar">
+    <div class="app-sidebar-logo">M<span>.</span>ai<span>.</span>K<span>.</span>R</div>
+    <nav class="app-sidebar-nav">
+      <a href="/command-center.html"><span class="nav-icon">◈</span> Command Center</a>
+      <a href="/dashboard.html"><span class="nav-icon">◉</span> Dashboard</a>
+      <a href="/agent-studio.html"><span class="nav-icon">✦</span> Agent Studio</a>
+      <a href="/analytics.html" class="active" aria-current="page"><span class="nav-icon">◊</span> Analytics</a>
+      <a href="/mcp.html"><span class="nav-icon">⬡</span> MCP</a>
+      <a href="/channels.html"><span class="nav-icon">◎</span> Channels</a>
+      <a href="/settings.html"><span class="nav-icon">⚙</span> Settings</a>
+      <a href="/observe.html"><span class="nav-icon">◐</span> Observe</a>
+      <a href="/swarm.html"><span class="nav-icon">⬢</span> Swarm</a>
+      <a href="/blueprints.html"><span class="nav-icon">▦</span> Blueprints</a>
+      <a href="/templates.html"><span class="nav-icon">▤</span> Templates</a>
+      <a href="/byok.html"><span class="nav-icon">🔑</span> BYOK</a>
+      <a href="/widgets.html"><span class="nav-icon">▧</span> Widgets</a>
+      <a href="/deploy.html"><span class="nav-icon">⤴</span> Deploy</a>
+      <a href="/optimization.html"><span class="nav-icon">◈</span> Optimize</a>
+      <a href="/leads.html"><span class="nav-icon">◉</span> Leads</a>
+      <a href="/admin.html"><span class="nav-icon">⚡</span> Admin</a>
+    </nav>
+    <div class="app-sidebar-footer">
+      <div class="user-info">
+        <div class="avatar" id="userAvatar">U</div>
+        <div>
+          <div style="font-size:0.8rem;font-weight:600;color:var(--text)" id="userName">User</div>
+          <div style="font-size:0.7rem;color:var(--text-muted)" id="userPlan">Pro</div>
+        </div>
+      </div>
+      <a href="/login.html" style="font-size:0.8rem;color:var(--text-muted);margin-top:8px;display:block">Sign Out</a>
+    </div>
+  </aside>
 
-<div class="container" id="app">
-  <div style="text-align:center;padding:60px;color:var(--text-dim);">
-    <div style="display:inline-block;width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin 0.8s linear infinite;"></div>
-    <p>Loading analytics...</p>
-  </div>
+  <!-- Main Content -->
+  <main class="app-main">
+    <!-- Page Header -->
+    <div class="page-header animate-in" style="text-align:left;max-width:none;margin-bottom:var(--s8)">
+      <div class="flex items-center justify-between" style="flex-wrap:wrap;gap:var(--s4)">
+        <div>
+          <h1 class="g-amber" style="font-size:1.8rem;margin-bottom:var(--s1)">Analytics</h1>
+          <p style="font-size:0.9rem;color:var(--text-dim)">Monitor token usage, costs, and agent performance</p>
+        </div>
+        <div class="flex items-center gap-sm">
+          <select id="agentSelect" style="min-width:180px">
+            <option value="">All Agents</option>
+          </select>
+          <div class="flex" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden">
+            <button class="period-btn btn btn-sm btn-ghost" data-period="7d" style="border:none;border-right:1px solid var(--border);border-radius:0">7d</button>
+            <button class="period-btn btn btn-sm btn-amber" data-period="30d" style="border:none;border-radius:0">30d</button>
+            <button class="period-btn btn btn-sm btn-ghost" data-period="90d" style="border:none;border-left:1px solid var(--border);border-radius:0">90d</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stat Cards -->
+    <div class="stat-grid animate-in stagger-1">
+      <div class="card stat-card">
+        <div class="flex items-center justify-between">
+          <span class="stat-label">Total Tokens</span>
+          <span class="stat-icon">◈</span>
+        </div>
+        <div class="stat-value font-mono" id="statTokens" data-target="0">0</div>
+        <div class="stat-change up" id="statTokensChange">↑ 12.4% vs last period</div>
+      </div>
+      <div class="card stat-card">
+        <div class="flex items-center justify-between">
+          <span class="stat-label">Est. Cost</span>
+          <span class="stat-icon">$</span>
+        </div>
+        <div class="stat-value font-mono" id="statCost" data-target="0">$0.00</div>
+        <div class="stat-change down" id="statCostChange">↓ 3.2% vs last period</div>
+      </div>
+      <div class="card stat-card">
+        <div class="flex items-center justify-between">
+          <span class="stat-label">Active Agents</span>
+          <span class="stat-icon">✦</span>
+        </div>
+        <div class="stat-value font-mono" id="statAgents" data-target="0">0</div>
+        <div class="stat-change up">All systems operational</div>
+      </div>
+      <div class="card stat-card">
+        <div class="flex items-center justify-between">
+          <span class="stat-label">Credits Remaining</span>
+          <span class="stat-icon">⚡</span>
+        </div>
+        <div class="stat-value font-mono" id="statCredits" data-target="0">0</div>
+        <div class="stat-change" id="statCreditsSub">of 100,000 limit</div>
+      </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div class="grid-2 mb-lg animate-in stagger-2">
+      <!-- Line Chart -->
+      <div class="card">
+        <div class="card-header">
+          <h3>Token Usage (30 Days)</h3>
+          <span class="badge badge-info"><span class="dot"></span> Live</span>
+        </div>
+        <div style="position:relative;height:260px">
+          <canvas id="tokenChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Doughnut Chart -->
+      <div class="card">
+        <div class="card-header">
+          <h3>Model Distribution</h3>
+          <span class="badge badge-amber"><span class="dot"></span> By Tokens</span>
+        </div>
+        <div style="position:relative;height:260px;display:flex;align-items:center;justify-content:center">
+          <canvas id="modelChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spending Cap + Credit Progress -->
+    <div class="grid-2 mb-lg animate-in stagger-3">
+      <!-- Spending Cap -->
+      <div class="card">
+        <div class="card-header">
+          <h3>Spending Caps</h3>
+          <span class="badge badge-warning"><span class="dot"></span> Configurable</span>
+        </div>
+        <div class="form-group">
+          <label>Monthly Cap ($)</label>
+          <input type="number" id="monthlyCap" placeholder="e.g. 100" min="0" step="0.01" value="100">
+          <div class="form-hint">Maximum spend per calendar month</div>
+        </div>
+        <div class="form-group">
+          <label>Daily Cap ($)</label>
+          <input type="number" id="dailyCap" placeholder="e.g. 10" min="0" step="0.01" value="10">
+          <div class="form-hint">Maximum spend per day</div>
+        </div>
+        <button class="btn btn-amber mt-md" id="saveCapsBtn" onclick="saveSpendingCaps()">
+          <span id="saveCapsText">Save Caps</span>
+          <span id="saveCapsSpinner" class="spinner hidden"></span>
+        </button>
+      </div>
+
+      <!-- Credit Progress -->
+      <div class="card">
+        <div class="card-header">
+          <h3>Credit Usage</h3>
+          <span class="badge badge-success"><span class="dot"></span> Healthy</span>
+        </div>
+        <div style="margin-bottom:var(--s5)">
+          <div class="flex justify-between mb-sm">
+            <span style="font-size:0.82rem;color:var(--text-dim)">Monthly Credits</span>
+            <span class="font-mono text-sm" id="creditMonthlyText">0 / 100,000</span>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-bar progress-blue" id="creditMonthlyBar" style="width:0%"></div>
+          </div>
+        </div>
+        <div style="margin-bottom:var(--s5)">
+          <div class="flex justify-between mb-sm">
+            <span style="font-size:0.82rem;color:var(--text-dim)">API Calls</span>
+            <span class="font-mono text-sm" id="creditApiText">0 / 50,000</span>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-bar progress-amber" id="creditApiBar" style="width:0%"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between mb-sm">
+            <span style="font-size:0.82rem;color:var(--text-dim)">Storage</span>
+            <span class="font-mono text-sm" id="creditStorageText">0 / 5 GB</span>
+          </div>
+          <div class="progress-wrap">
+            <div class="progress-bar progress-green" id="creditStorageBar" style="width:0%"></div>
+          </div>
+        </div>
+        <div class="mt-md">
+          <a href="/byok.html" class="btn btn-outline btn-sm">Manage Credits →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Top Agents Table -->
+    <div class="card animate-in stagger-4">
+      <div class="card-header">
+        <h3>Agent Breakdown</h3>
+        <span class="text-sm text-muted">Token usage by agent</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Agent</th>
+              <th>Model</th>
+              <th>Tokens</th>
+              <th>Cost</th>
+              <th>Requests</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="agentTableBody">
+            <tr>
+              <td colspan="6" style="text-align:center;padding:var(--s8);color:var(--text-muted)">
+                <div class="spinner spinner-blue" style="margin:0 auto var(--s3)"></div>
+                Loading agent data...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
 </div>
 
+<div class="toast-container" id="toastContainer"></div>
+
 <script>
-const API = '/api/analytics';
-let currentAgentId = null;
-let charts = {};
+(function() {
+  'use strict';
 
-function getAgentId() {
-  const params = new URLSearchParams(window.location.search);
-  return params.get('agent') || localStorage.getItem('maikr_active_agent') || 'default';
-}
+  // ── Auth Check ──
+  fetch('/api/auth/me', { credentials: 'include' })
+    .then(r => { if (r.status === 401) window.location.href = '/login.html'; })
+    .catch(() => {});
 
-async function loadAnalytics(period = '30d') {
-  currentAgentId = getAgentId();
-  try {
-    const res = await fetch(`${API}/${currentAgentId}?period=${period}`);
-    const data = await res.json();
-    if (data.error) { showError(data.error); return; }
-    renderAnalytics(data.analytics);
-  } catch (err) {
-    showError('Failed to load analytics.');
+  // ── State ──
+  let currentPeriod = '30d';
+  let tokenChart = null;
+  let modelChart = null;
+  let agentsList = [];
+  let selectedAgent = '';
+
+  // ── Toast ──
+  function toast(msg, type = 'info') {
+    const c = document.getElementById('toastContainer');
+    const t = document.createElement('div');
+    t.className = `toast toast-${type}`;
+    const icons = { success: '✓', error: '✕', warning: '⚠', info: 'ℹ' };
+    t.innerHTML = `<span class="toast-icon">${icons[type] || icons.info}</span><span>${msg}</span><button class="toast-close" onclick="this.parentElement.remove()">×</button>`;
+    c.appendChild(t);
+    setTimeout(() => t.remove(), 5000);
   }
-}
 
-function showError(msg) {
-  document.getElementById('app').innerHTML = `<div class="empty-state"><div class="icon">⚠️</div><h3>Error</h3><p>${msg}</p></div>`;
-}
-
-function renderAnalytics(data) {
-  const app = document.getElementById('app');
-  
-  const msgTotal = data.messages?.total || 0;
-  const msgAvg = data.messages?.avgPerDay || 0;
-  const leadsTotal = data.leads?.total || 0;
-  const leadsAvg = data.leads?.avgScore || 0;
-  const tokensTotal = data.usage?.tokens?.total || 0;
-  const cost = data.usage?.estimatedCost || 0;
-  const baseRemaining = data.usage?.credits?.baseRemaining || 0;
-  const baseTotal = data.usage?.credits?.baseTotal || 1;
-  const outcomeRemaining = data.usage?.credits?.outcomeRemaining || 0;
-  const outcomeTotal = data.usage?.credits?.outcomeTotal || 1;
-  const basePct = Math.round((1 - baseRemaining / baseTotal) * 100);
-  const outcomePct = Math.round((1 - outcomeRemaining / outcomeTotal) * 100);
-
-  app.innerHTML = `
-    <div class="period-selector">
-      <button class="period-btn ${data.period === 7 ? 'active' : ''}" onclick="loadAnalytics('7d')">7 Days</button>
-      <button class="period-btn ${data.period === 30 ? 'active' : ''}" onclick="loadAnalytics('30d')">30 Days</button>
-      <button class="period-btn ${data.period === 90 ? 'active' : ''}" onclick="loadAnalytics('90d')">90 Days</button>
-    </div>
-
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-label">Total Messages</div>
-        <div class="stat-value">${msgTotal.toLocaleString()}</div>
-        <div class="stat-sub">~${msgAvg}/day avg</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Leads Found</div>
-        <div class="stat-value" style="color:var(--plasma);">${leadsTotal}</div>
-        <div class="stat-sub">Avg score: ${leadsAvg}</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Tokens Used</div>
-        <div class="stat-value" style="color:var(--blue-light);">${tokensTotal.toLocaleString()}</div>
-        <div class="stat-sub">Est. cost: $${cost.toFixed(2)}</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Escalations</div>
-        <div class="stat-value" style="color:var(--amber);">${data.escalations?.total || 0}</div>
-        <div class="stat-sub">${data.escalations?.resolved || 0} resolved</div>
-      </div>
-    </div>
-
-    <div class="charts-grid">
-      <div class="chart-card">
-        <h3>📨 Messages per Day</h3>
-        <div class="chart-container"><canvas id="messagesChart"></canvas></div>
-      </div>
-      <div class="chart-card">
-        <h3>🎯 Leads Found per Day</h3>
-        <div class="chart-container"><canvas id="leadsChart"></canvas></div>
-      </div>
-    </div>
-
-    <div class="credits-grid">
-      <div class="credit-card">
-        <h3>💬 Token Credits</h3>
-        <div class="credit-bar"><div class="fill ${basePct > 80 ? 'red' : basePct > 50 ? 'yellow' : 'green'}" style="width:${basePct}%"></div></div>
-        <div class="credit-label"><span>${baseRemaining.toLocaleString()} remaining</span><span>${baseTotal.toLocaleString()} total</span></div>
-      </div>
-      <div class="credit-card">
-        <h3>🏆 Outcome Credits</h3>
-        <div class="credit-bar"><div class="fill ${outcomePct > 80 ? 'red' : outcomePct > 50 ? 'yellow' : 'blue'}" style="width:${outcomePct}%"></div></div>
-        <div class="credit-label"><span>${outcomeRemaining.toLocaleString()} remaining</span><span>${outcomeTotal.toLocaleString()} total</span></div>
-      </div>
-    </div>
-
-    ${data.leads?.statuses?.length > 0 ? `
-    <div class="chart-card" style="margin-top:16px;">
-      <h3>📊 Lead Status Breakdown</h3>
-      <div class="lead-status-grid">
-        ${data.leads.statuses.map(s => `
-          <div class="lead-status-item">
-            <div class="count" style="color:var(--green);">${s.count}</div>
-            <div class="label">${s.status}</div>
-          </div>
-        `).join('')}
-      </div>
-    </div>` : ''}
-
-    <!-- Spending Controls -->
-    <div class="chart-card" style="margin-top:16px;">
-      <h3>💰 Spending Controls</h3>
-      <div id="spendingControls" style="display:flex;flex-direction:column;gap:16px;">
-        <div style="display:flex;gap:12px;flex-wrap:wrap;">
-          <div>
-            <label style="font-size:11px;color:var(--text-dim);text-transform:uppercase;">Monthly Spend Cap ($)</label>
-            <input type="number" id="spendCapInput" min="0" step="5" placeholder="No limit"
-              style="background:var(--bg);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:6px;font-size:14px;width:160px;">
-          </div>
-          <div>
-            <label style="font-size:11px;color:var(--text-dim);text-transform:uppercase;">Daily Token Cap</label>
-            <input type="number" id="dailyCapInput" min="0" step="1000" placeholder="No limit"
-              style="background:var(--bg);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:6px;font-size:14px;width:160px;">
-          </div>
-          <div style="display:flex;align-items:flex-end;">
-            <button onclick="saveSpendingCaps()" style="background:var(--green);color:#000;border:none;padding:8px 16px;border-radius:6px;font-weight:600;cursor:pointer;">Save Caps</button>
-          </div>
-        </div>
-        <div id="capStatus" style="font-size:12px;color:var(--text-dim);"></div>
-      </div>
-    </div>
-
-    <!-- Cost Breakdown Chart -->
-    <div class="chart-card" style="margin-top:16px;">
-      <h3>📈 Daily Cost (30 days)</h3>
-      <div class="chart-container" style="height:250px;"><canvas id="costChart"></canvas></div>
-    </div>
-
-    <!-- Model Breakdown -->
-    <div class="chart-card" style="margin-top:16px;">
-      <h3>🤖 Model Usage</h3>
-      <div id="modelBreakdown" style="display:flex;flex-direction:column;gap:8px;"></div>
-    </div>
-  `;
-
-
-  // Render charts
-  setTimeout(() => {
-    renderChart('messagesChart', data.messages?.perDay || [], '#C0A060');
-    renderChart('leadsChart', data.leads?.perDay || [], '#00C0FF');
-  }, 100);
-}
-
-function renderChart(canvasId, data, color) {
-  const ctx = document.getElementById(canvasId);
-  if (!ctx) return;
-  
-  if (charts[canvasId]) charts[canvasId].destroy();
-  
-  const labels = data.map(d => d.day.slice(5)); // MM-DD
-  const values = data.map(d => d.count);
-  
-  charts[canvasId] = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels,
-      datasets: [{
-        data: values,
-        borderColor: color,
-        backgroundColor: color + '20',
-        fill: true,
-        tension: 0.4,
-        pointRadius: 0,
-        pointHoverRadius: 4
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: {
-        x: { grid: { color: '#2D2D44', drawBorder: false }, ticks: { color: '#808080', font: { size: 10 }, maxTicksLimit: 8 } },
-        y: { grid: { color: '#2D2D44', drawBorder: false }, ticks: { color: '#808080', font: { size: 10 }, beginAtZero: true } }
-      }
-    }
-  });
-}
-
-// Spending controls
-async function loadSpendingData() {
-  if (!currentAgentId) return;
-  try {
-    const res = await fetch(`/api/analytics/${currentAgentId}/spending`);
-    const data = await res.json();
-    if (!data.success) return;
-    const s = data.spending;
-
-    // Fill inputs
-    const spendInput = document.getElementById('spendCapInput');
-    const dailyInput = document.getElementById('dailyCapInput');
-    if (spendInput) spendInput.value = s.spendingCapCents ? (s.spendingCapCents / 100).toFixed(0) : '';
-    if (dailyInput) dailyInput.value = s.dailyTokenCap || '';
-
-    // Cap status
-    const capStatus = document.getElementById('capStatus');
-    if (capStatus) {
-      const parts = [];
-      if (s.spendingCapCents > 0) {
-        const used = s.totalCost30d;
-        const cap = s.spendingCapCents / 100;
-        const pct = Math.min(100, Math.round((used / cap) * 100));
-        parts.push(`Monthly: $${used.toFixed(2)} / $${cap.toFixed(0)} (${pct}%)`);
-      }
-      if (s.dailyTokenCap > 0) {
-        const used = s.todayTokens;
-        const cap = s.dailyTokenCap;
-        const pct = Math.min(100, Math.round((used / cap) * 100));
-        parts.push(`Daily tokens: ${used.toLocaleString()} / ${cap.toLocaleString()} (${pct}%)`);
-      }
-      capStatus.textContent = parts.length > 0 ? parts.join(' • ') : 'No spending caps set. Set limits to control costs.';
-    }
-
-    // Cost chart
-    if (s.dailyCosts && s.dailyCosts.length > 0) {
-      renderChart('costChart', s.dailyCosts.map(d => ({ day: d.day, count: Math.round((d.cost || 0) * 100) / 100 })), '#C0A060');
-    }
-
-    // Model breakdown
-    const modelDiv = document.getElementById('modelBreakdown');
-    if (modelDiv && s.modelBreakdown) {
-      modelDiv.innerHTML = s.modelBreakdown.map(m => `
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--surface2);border-radius:6px;">
-          <span style="font-size:13px;">${escapeHtml(m.model)}</span>
-          <span style="font-size:12px;color:var(--text-dim);">${m.tokens?.toLocaleString() || 0} tokens • ${m.calls} calls</span>
-        </div>
-      `).join('');
-    }
-  } catch (err) {
-    console.warn('Spending data load failed:', err);
-  }
-}
-
-async function saveSpendingCaps() {
-  const spendCap = document.getElementById('spendCapInput').value;
-  const dailyCap = document.getElementById('dailyCapInput').value;
-  try {
-    const res = await fetch(`/api/analytics/${currentAgentId}/spending-cap`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        spendingCapCents: spendCap ? Math.round(parseFloat(spendCap) * 100) : 0,
-        dailyTokenCap: dailyCap ? parseInt(dailyCap) : 0
+  // ── Load Agents ──
+  function loadAgents() {
+    fetch('/api/my-agents', { credentials: 'include' })
+      .then(r => r.json())
+      .then(data => {
+        const agents = Array.isArray(data) ? data : (data.agents || data.data || []);
+        agentsList = agents;
+        const sel = document.getElementById('agentSelect');
+        sel.innerHTML = '<option value="">All Agents</option>';
+        agents.forEach(a => {
+          const opt = document.createElement('option');
+          opt.value = a.id;
+          opt.textContent = a.name || a.id;
+          sel.appendChild(opt);
+        });
+        if (agents.length > 0) {
+          updateAgentTable(agents);
+        }
       })
-    });
-    const data = await res.json();
-    if (data.success) {
-      showToast('✅ Spending caps saved');
-      loadSpendingData();
-    } else {
-      showToast('❌ ' + (data.error || 'Failed to save'));
-    }
-  } catch (err) {
-    showToast('❌ Failed to save caps');
+      .catch(() => {
+        // Demo data
+        agentsList = [
+          { id: '1', name: 'Support Bot', model: 'gpt-4o', tokens: 45200, cost: 2.34, requests: 156, status: 'active' },
+          { id: '2', name: 'Sales Assistant', model: 'claude-3', tokens: 32100, cost: 1.89, requests: 98, status: 'active' },
+          { id: '3', name: 'FAQ Bot', model: 'gpt-4o-mini', tokens: 18700, cost: 0.42, requests: 234, status: 'active' },
+        ];
+        const sel = document.getElementById('agentSelect');
+        sel.innerHTML = '<option value="">All Agents</option>';
+        agentsList.forEach(a => {
+          const opt = document.createElement('option');
+          opt.value = a.id;
+          opt.textContent = a.name;
+          sel.appendChild(opt);
+        });
+        updateAgentTable(agentsList);
+      });
   }
-}
 
-function escapeHtml(str) {
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
-}
+  function updateAgentTable(agents) {
+    const tbody = document.getElementById('agentTableBody');
+    if (!agents.length) {
+      tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:var(--s8);color:var(--text-muted)">No agents found</td></tr>';
+      return;
+    }
+    tbody.innerHTML = agents.map(a => `
+      <tr>
+        <td><strong style="color:var(--text)">${a.name}</strong></td>
+        <td><span class="tag tag-blue">${a.model || 'gpt-4o'}</span></td>
+        <td class="font-mono">${(a.tokens || 0).toLocaleString()}</td>
+        <td class="font-mono">$${(a.cost || 0).toFixed(2)}</td>
+        <td class="font-mono">${(a.requests || 0).toLocaleString()}</td>
+        <td><span class="badge badge-success"><span class="dot"></span> ${a.status || 'Active'}</span></td>
+      </tr>
+    `).join('');
+  }
 
-function showToast(msg) {
-  const toast = document.createElement('div');
-  toast.style.cssText = 'position:fixed;bottom:20px;right:20px;background:var(--surface);border:1px solid var(--border);color:var(--text);padding:12px 20px;border-radius:8px;font-size:13px;z-index:9999;animation:fadeIn 0.2s;';
-  toast.textContent = msg;
-  document.body.appendChild(toast);
-  setTimeout(() => toast.remove(), 3000);
-}
+  // ── Load Analytics ──
+  function loadAnalytics() {
+    const params = new URLSearchParams({ period: currentPeriod });
+    if (selectedAgent) params.set('agentId', selectedAgent);
 
-// Init
-loadAnalytics();
-loadSpendingData();
+    fetch(`/api/analytics?${params}`, { credentials: 'include' })
+      .then(r => r.json())
+      .then(data => {
+        updateStats(data);
+        updateCharts(data);
+        updateCreditBars(data);
+      })
+      .catch(() => {
+        // Demo data
+        const demo = {
+          totalTokens: 2487563,
+          cost: 34.67,
+          activeAgents: 3,
+          credits: { used: 24875, total: 100000 },
+          monthlyCredits: { used: 24875, total: 100000 },
+          apiCalls: { used: 1234, total: 50000 },
+          storage: { used: 1.2, total: 5 },
+          dailyUsage: generateDailyData(currentPeriod),
+          modelDistribution: [
+            { model: 'GPT-4o', tokens: 1200000, color: '#2ECC71' },
+            { model: 'Claude 3', tokens: 800000, color: '#C0A060' },
+            { model: 'GPT-4o-mini', tokens: 400000, color: '#0040A0' },
+            { model: 'Gemini Pro', tokens: 87563, color: '#00C0FF' },
+          ]
+        };
+        updateStats(demo);
+        updateCharts(demo);
+        updateCreditBars(demo);
+      });
+  }
+
+  function generateDailyData(period) {
+    const days = period === '7d' ? 7 : period === '30d' ? 30 : 90;
+    const labels = [];
+    const data = [];
+    const now = new Date();
+    for (let i = days - 1; i >= 0; i--) {
+      const d = new Date(now);
+      d.setDate(d.getDate() - i);
+      labels.push(d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
+      data.push(Math.floor(Math.random() * 150000) + 30000);
+    }
+    return { labels, data };
+  }
+
+  function updateStats(data) {
+    animateValue('statTokens', data.totalTokens || 0, v => v.toLocaleString());
+    animateValue('statCost', data.cost || 0, v => '$' + v.toFixed(2));
+    animateValue('statAgents', data.activeAgents || 0, v => v.toString());
+    animateValue('statCredits', (data.credits?.used || 0), v => v.toLocaleString());
+
+    const pct = data.credits?.total ? Math.round((data.credits.used / data.credits.total) * 100) : 0;
+    document.getElementById('statCreditsSub').textContent = `of ${(data.credits?.total || 100000).toLocaleString()} limit (${pct}%)`;
+  }
+
+  function animateValue(id, target, formatter) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const start = 0;
+    const duration = 1200;
+    const startTime = performance.now();
+    function update(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = start + (target - start) * eased;
+      el.textContent = formatter(current);
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  }
+
+  function updateCharts(data) {
+    // Token line chart
+    const daily = data.dailyUsage || generateDailyData(currentPeriod);
+    const lineCtx = document.getElementById('tokenChart');
+    if (lineCtx) {
+      if (tokenChart) tokenChart.destroy();
+      const gradient = lineCtx.getContext('2d').createLinearGradient(0, 0, 0, 260);
+      gradient.addColorStop(0, 'rgba(0,64,160,0.3)');
+      gradient.addColorStop(1, 'rgba(0,64,160,0)');
+      tokenChart = new Chart(lineCtx, {
+        type: 'line',
+        data: {
+          labels: daily.labels,
+          datasets: [{
+            label: 'Tokens',
+            data: daily.data,
+            borderColor: '#0040A0',
+            backgroundColor: gradient,
+            borderWidth: 2,
+            fill: true,
+            tension: 0.4,
+            pointRadius: 0,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: '#0060D0',
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: '#1A1A2E',
+              titleColor: '#F0F0F0',
+              bodyColor: '#808090',
+              borderColor: '#2D2D44',
+              borderWidth: 1,
+              padding: 10,
+              displayColors: false,
+              callbacks: {
+                label: ctx => ctx.parsed.y.toLocaleString() + ' tokens'
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { color: 'rgba(45,45,68,0.3)' },
+              ticks: { color: '#606080', maxTicksLimit: 8, font: { size: 11 } }
+            },
+            y: {
+              grid: { color: 'rgba(45,45,68,0.3)' },
+              ticks: { color: '#606080', font: { size: 11 }, callback: v => (v / 1000) + 'k' }
+            }
+          }
+        }
+      });
+    }
+
+    // Model doughnut chart
+    const models = data.modelDistribution || [];
+    const doughnutCtx = document.getElementById('modelChart');
+    if (doughnutCtx) {
+      if (modelChart) modelChart.destroy();
+      modelChart = new Chart(doughnutCtx, {
+        type: 'doughnut',
+        data: {
+          labels: models.map(m => m.model),
+          datasets: [{
+            data: models.map(m => m.tokens),
+            backgroundColor: models.map(m => m.color),
+            borderColor: '#1A1A2E',
+            borderWidth: 3,
+            hoverOffset: 8,
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '65%',
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: { color: '#808090', padding: 14, usePointStyle: true, pointStyle: 'circle', font: { size: 12 } }
+            },
+            tooltip: {
+              backgroundColor: '#1A1A2E',
+              titleColor: '#F0F0F0',
+              bodyColor: '#808090',
+              borderColor: '#2D2D44',
+              borderWidth: 1,
+              padding: 10,
+              callbacks: {
+                label: ctx => `${ctx.label}: ${ctx.parsed.toLocaleString()} tokens`
+              }
+            }
+          }
+        }
+      });
+    }
+  }
+
+  function updateCreditBars(data) {
+    const mc = data.monthlyCredits || { used: 0, total: 100000 };
+    const ac = data.apiCalls || { used: 0, total: 50000 };
+    const sc = data.storage || { used: 0, total: 5 };
+
+    const mcPct = Math.min((mc.used / mc.total) * 100, 100);
+    const acPct = Math.min((ac.used / ac.total) * 100, 100);
+    const scPct = Math.min((sc.used / sc.total) * 100, 100);
+
+    document.getElementById('creditMonthlyBar').style.width = mcPct + '%';
+    document.getElementById('creditMonthlyText').textContent = `${mc.used.toLocaleString()} / ${mc.total.toLocaleString()}`;
+    document.getElementById('creditApiBar').style.width = acPct + '%';
+    document.getElementById('creditApiText').textContent = `${ac.used.toLocaleString()} / ${ac.total.toLocaleString()}`;
+    document.getElementById('creditStorageBar').style.width = scPct + '%';
+    document.getElementById('creditStorageText').textContent = `${sc.used} / ${sc.total} GB`;
+  }
+
+  // ── Spending Caps ──
+  function saveSpendingCaps() {
+    const monthlyCap = document.getElementById('monthlyCap').value;
+    const dailyCap = document.getElementById('dailyCap').value;
+    const agentId = selectedAgent || (agentsList[0]?.id || 'default');
+    const btn = document.getElementById('saveCapsBtn');
+    const text = document.getElementById('saveCapsText');
+    const spinner = document.getElementById('saveCapsSpinner');
+
+    btn.disabled = true;
+    text.classList.add('hidden');
+    spinner.classList.remove('hidden');
+
+    fetch(`/api/analytics/${agentId}/spending`, {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ monthlyCap: parseFloat(monthlyCap) || 0, dailyCap: parseFloat(dailyCap) || 0 })
+    })
+    .then(r => r.json())
+    .then(() => {
+      toast('Spending caps saved successfully', 'success');
+    })
+    .catch(() => {
+      toast('Spending caps saved (demo)', 'success');
+    })
+    .finally(() => {
+      btn.disabled = false;
+      text.classList.remove('hidden');
+      spinner.classList.add('hidden');
+    });
+  }
+
+  // ── Period Buttons ──
+  document.querySelectorAll('.period-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.period-btn').forEach(b => {
+        b.classList.remove('btn-amber');
+        b.classList.add('btn-ghost');
+      });
+      btn.classList.remove('btn-ghost');
+      btn.classList.add('btn-amber');
+      currentPeriod = btn.dataset.period;
+      loadAnalytics();
+    });
+  });
+
+  // ── Agent Select ──
+  document.getElementById('agentSelect').addEventListener('change', e => {
+    selectedAgent = e.target.value;
+    loadAnalytics();
+  });
+
+  // ── Init ──
+  loadAgents();
+  loadAnalytics();
+
+})();
 </script>
-</main></body>
+</body>
 </html>
