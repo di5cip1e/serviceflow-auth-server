@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback — M.ai.K.R</title>
+  <link rel="stylesheet" href="/css/dark-premium.css">
+  <style>
+    .feedback-container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+    .feedback-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .feedback-header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.75rem;
+      color: #C0A060;
+      margin-bottom: 0.5rem;
+    }
+    .feedback-header p {
+      color: #94a3b8;
+      font-size: 0.95rem;
+    }
+    .form-section {
+      background: #1A1A2E;
+      border: 1px solid #2D2D44;
+      border-radius: 16px;
+      padding: 1.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .form-section h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .form-section h2 .icon {
+      font-size: 1.2rem;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      color: #94a3b8;
+      margin-bottom: 0.4rem;
+      font-weight: 500;
+    }
+    .form-group label .required {
+      color: #ef4444;
+      margin-left: 2px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: #0A0A0F;
+      border: 1px solid #2D2D44;
+      border-radius: 10px;
+      padding: 0.7rem 1rem;
+      color: #e2e8f0;
+      font-size: 0.9rem;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      box-sizing: border-box;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    .form-group select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+    }
+    .form-group select option {
+      background: #0A0A0F;
+      color: #e2e8f0;
+    }
+    .rating-stars {
+      display: flex;
+      gap: 0.35rem;
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+    .rating-stars .star {
+      color: #2D2D44;
+      transition: color 0.15s, transform 0.15s;
+      user-select: none;
+    }
+    .rating-stars .star:hover,
+    .rating-stars .star.active {
+      color: #f59e0b;
+      transform: scale(1.1);
+    }
+    .rating-value {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      margin-top: 0.35rem;
+    }
+    .submit-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 0.9rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+      margin-top: 0.5rem;
+    }
+    .submit-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+    .submit-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .submit-btn .spinner {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      vertical-align: middle;
+      margin-right: 0.5rem;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .alert {
+      padding: 0.85rem 1rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      display: none;
+    }
+    .alert.success {
+      display: block;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: #22c55e;
+    }
+    .alert.error {
+      display: block;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #ef4444;
+    }
+    .section-divider {
+      height: 1px;
+      background: #2D2D44;
+      margin: 0.5rem 0 1.25rem;
+    }
+    .bug-severity {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .severity-btn {
+      padding: 0.45rem 1rem;
+      border-radius: 8px;
+      border: 1px solid #2D2D44;
+      background: #0A0A0F;
+      color: #94a3b8;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .severity-btn:hover {
+      border-color: #3b82f6;
+      color: #e2e8f0;
+    }
+    .severity-btn.selected {
+      border-color: #3b82f6;
+      background: rgba(59, 130, 246, 0.15);
+      color: #3b82f6;
+    }
+    .severity-btn.selected.low {
+      border-color: #22c55e;
+      background: rgba(34, 197, 94, 0.15);
+      color: #22c55e;
+    }
+    .severity-btn.selected.medium {
+      border-color: #f59e0b;
+      background: rgba(245, 158, 11, 0.15);
+      color: #f59e0b;
+    }
+    .severity-btn.selected.high {
+      border-color: #ef4444;
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+    }
+    .severity-btn.selected.critical {
+      border-color: #dc2626;
+      background: rgba(220, 38, 38, 0.2);
+      color: #dc2626;
+    }
+  </style>
+</head>
+<body>
+  <div class="feedback-container">
+    <div class="feedback-header">
+      <h1>💬 Feedback</h1>
+      <p>Help us improve M.ai.K.R — share your thoughts, report bugs, or suggest features.</p>
+    </div>
+
+    <div id="alert" class="alert"></div>
+
+    <form id="feedbackForm" novalidate>
+      <!-- General Feedback -->
+      <div class="form-section">
+        <h2><span class="icon">⭐</span> General Feedback</h2>
+
+        <div class="form-group">
+          <label>Feedback Type <span class="required">*</span></label>
+          <select id="feedbackType" required>
+            <option value="">Select type...</option>
+            <option value="general">General Feedback</option>
+            <option value="feature">Feature Request</option>
+            <option value="bug">Bug Report</option>
+            <option value="ux">UX / Design</option>
+            <option value="performance">Performance</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" id="userName" placeholder="Optional — helps us follow up">
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="userEmail" placeholder="your@email.com — optional">
+        </div>
+
+        <div class="form-group">
+          <label>Overall Rating</label>
+          <div class="rating-stars" id="ratingStars" role="group" aria-label="Rating">
+            <span class="star" data-value="1">★</span>
+            <span class="star" data-value="2">★</span>
+            <span class="star" data-value="3">★</span>
+            <span class="star" data-value="4">★</span>
+            <span class="star" data-value="5">★</span>
+          </div>
+          <div class="rating-value" id="ratingValue">Click to rate</div>
+          <input type="hidden" id="rating" value="0">
+        </div>
+
+        <div class="form-group">
+          <label>Your Feedback <span class="required">*</span></label>
+          <textarea id="feedbackText" placeholder="Tell us what's on your mind..." required></textarea>
+        </div>
+      </div>
+
+      <!-- Bug Report Section -->
+      <div class="form-section" id="bugSection" style="display: none;">
+        <h2><span class="icon">🐛</span> Bug Details</h2>
+
+        <div class="form-group">
+          <label>Bug Title <span class="required">*</span></label>
+          <input type="text" id="bugTitle" placeholder="Short description of the bug">
+        </div>
+
+        <div class="form-group">
+          <label>Severity</label>
+          <div class="bug-severity" id="severityGroup">
+            <button type="button" class="severity-btn low" data-severity="low">🟢 Low</button>
+            <button type="button" class="severity-btn medium" data-severity="medium">🟡 Medium</button>
+            <button type="button" class="severity-btn high" data-severity="high">🟠 High</button>
+            <button type="button" class="severity-btn critical" data-severity="critical">🔴 Critical</button>
+          </div>
+          <input type="hidden" id="bugSeverity" value="">
+        </div>
+
+        <div class="form-group">
+          <label>Page / Feature</label>
+          <select id="bugPage">
+            <option value="">Select page...</option>
+            <option value="landing">Landing Page</option>
+            <option value="dashboard">Dashboard / Command Center</option>
+            <option value="chat">Chat Interface</option>
+            <option value="build">Agent Builder</option>
+            <option value="swarm">Swarm Management</option>
+            <option value="channels">Channels / Omnichannel</option>
+            <option value="mcp">MCP Integration</option>
+            <option value="analytics">Analytics</option>
+            <option value="pricing">Pricing Page</option>
+            <option value="auth">Login / Registration</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Steps to Reproduce</label>
+          <textarea id="bugSteps" placeholder="1. Go to...&#10;2. Click on...&#10;3. Expected: ...&#10;4. Actual: ..." rows="5"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Expected Behavior</label>
+          <textarea id="bugExpected" placeholder="What should have happened?" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Actual Behavior</label>
+          <textarea id="bugActual" placeholder="What actually happened?" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Browser / Device</label>
+          <input type="text" id="bugDevice" placeholder="e.g., Chrome 120 / iPhone 15 / Windows 11">
+        </div>
+
+        <div class="form-group">
+          <label>Screenshot URL (optional)</label>
+          <input type="url" id="bugScreenshot" placeholder="https://...">
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">
+        Send Feedback
+      </button>
+    </form>
+  </div>
+
+  <script>
+    // Rating stars
+    const stars = document.querySelectorAll('#ratingStars .star');
+    const ratingInput = document.getElementById('rating');
+    const ratingValue = document.getElementById('ratingValue');
+    const ratingLabels = ['', 'Poor', 'Fair', 'Good', 'Very Good', 'Excellent'];
+
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        const val = parseInt(star.dataset.value);
+        ratingInput.value = val;
+        ratingValue.textContent = ratingLabels[val];
+        stars.forEach(s => {
+          s.classList.toggle('active', parseInt(s.dataset.value) <= val);
+        });
+      });
+    });
+
+    // Feedback type toggle
+    const feedbackType = document.getElementById('feedbackType');
+    const bugSection = document.getElementById('bugSection');
+
+    feedbackType.addEventListener('change', () => {
+      const isBug = feedbackType.value === 'bug';
+      bugSection.style.display = isBug ? 'block' : 'none';
+      if (isBug) {
+        bugSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+
+    // Severity buttons
+    const severityBtns = document.querySelectorAll('.severity-btn');
+    const severityInput = document.getElementById('bugSeverity');
+
+    severityBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        severityBtns.forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        severityInput.value = btn.dataset.severity;
+      });
+    });
+
+    // Form submit
+    const form = document.getElementById('feedbackForm');
+    const alert = document.getElementById('alert');
+    const submitBtn = document.getElementById('submitBtn');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Validate
+      if (!feedbackType.value) {
+        showAlert('Please select a feedback type', 'error');
+        return;
+      }
+      if (!document.getElementById('feedbackText').value.trim()) {
+        showAlert('Please enter your feedback', 'error');
+        return;
+      }
+      if (feedbackType.value === 'bug' && !document.getElementById('bugTitle').value.trim()) {
+        showAlert('Please enter a bug title', 'error');
+        return;
+      }
+
+      // Build payload
+      const payload = {
+        type: feedbackType.value,
+        name: document.getElementById('userName').value.trim(),
+        email: document.getElementById('userEmail').value.trim(),
+        rating: parseInt(ratingInput.value),
+        feedback: document.getElementById('feedbackText').value.trim(),
+      };
+
+      if (feedbackType.value === 'bug') {
+        payload.bug = {
+          title: document.getElementById('bugTitle').value.trim(),
+          severity: severityInput.value || 'medium',
+          page: document.getElementById('bugPage').value,
+          steps: document.getElementById('bugSteps').value.trim(),
+          expected: document.getElementById('bugExpected').value.trim(),
+          actual: document.getElementById('bugActual').value.trim(),
+          device: document.getElementById('bugDevice').value.trim(),
+          screenshot: document.getElementById('bugScreenshot').value.trim(),
+        };
+      }
+
+      // Submit
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner"></span> Sending...';
+
+      try {
+        const res = await fetch('/api/feedback', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const data = await res.json();
+
+        if (res.ok) {
+          showAlert('✅ Thank you! Your feedback has been sent. We\'ll review it shortly.', 'success');
+          form.reset();
+          stars.forEach(s => s.classList.remove('active'));
+          severityBtns.forEach(b => b.classList.remove('selected'));
+          ratingValue.textContent = 'Click to rate';
+          bugSection.style.display = 'none';
+        } else {
+          showAlert(data.error || 'Failed to send feedback. Please try again.', 'error');
+        }
+      } catch (err) {
+        showAlert('Network error. Please try again.', 'error');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Feedback';
+      }
+    });
+
+    function showAlert(msg, type) {
+      alert.textContent = msg;
+      alert.className = 'alert ' + type;
+      alert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (type === 'success') {
+        setTimeout(() => { alert.className = 'alert'; }, 5000);
+      }
+    }
+  </script>
+</body>
+</html>

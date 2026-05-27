@@ -1,18 +1,16 @@
-# ClawHub Stats — May 22, 2026
+# ClawHub Stats
 
-| Skill | Downloads | Stars | Notes |
-|-------|-----------|-------|-------|
-| n8n-workflow-builder | — | — | Updated May 11 |
-| client-outreach-automator | — | — | Updated May 11 |
-| business-doc-generator | — | — | Updated May 11 |
-| meeting-intelligence | — | — | Updated May 11 |
-| director-content-repurposer | — | — | Updated May 11 |
-| agent-audit | — | — | Found via search — audits agent perf/cost/ROI. Owner: sharbelayy. MIT-0. |
+## May 26, 2026 (16:49 UTC)
 
-## Interesting Finds (May 22)
-- **agent-audit** — Audits AI agent setup for performance, cost, ROI. Scans OpenClaw config, cron jobs, session history, model usage. Exactly what Derek asked about for assessing his agent. Install candidate.
-- **agent-audit-shield, agent-audit-scanner** — More audit tools available
-- **evaluate-agent-native, ai-agent-evaluator** — Agent evaluation skills
+All 5 skills unchanged at v1.0.0, last updated 2026-05-11:
+- n8n-workflow-builder
+- client-outreach-automator
+- business-doc-generator
+- meeting-intelligence
+- director-content-repurposer
 
-## Derek's Request
-Derek asked to "check clawhub for a tool or skill to assess ones agent" — agent-audit is the best match. Pending Derek approval to install.
+No new downloads, stars, or reviews detected via CLI.
+CLI `inspect` command does not expose download/star counts — only version and update date.
+
+---
+*Last checked: 2026-05-26 23:38 UTC*

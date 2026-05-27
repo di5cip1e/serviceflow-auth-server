@@ -483,6 +483,12 @@ All 4 features built and deployed in ~30 min (21:30-22:00 UTC). Backend restart 
 - `parent_agent_id` on agents table
 - `spending_cap_cents`, `daily_token_cap` on agents table
 
+## May 26, 2026 — Cross-Bot Communication
+- **Rule:** Messages to Hermes MUST start with `@djinn_hermes_bot` — he can't see untagged messages
+- Derek's advice: be creative with communication methods (inline buttons, structured formats, etc.)
+- Saved rule to `memory/group-chat-rules.md`
+- Hermes is now part of the team — treat him as a collaborator
+
 ## May 22-25: Build Flow Fixes + Product Strategy
 
 ### Build Flow Overhaul (May 22)
@@ -511,3 +517,14 @@ All 4 features built and deployed in ~30 min (21:30-22:00 UTC). Backend restart 
 - Set up nginx reverse proxy for `gateway.maikr.pro`
 - Derek needs to add DNS A record: `gateway.maikr.pro → 187.77.31.252`
 - SSL cert extension pending DNS record
+
+## May 25, 2026 — Gateway Dashboard + Webhook Fix
+
+- Set up nginx reverse proxy for OpenClaw Gateway Dashboard at gateway.maikr.pro
+- Derek needs to add DNS A record: gateway.maikr.pro → 187.77.31.252 (Hostinger)
+- SSL cert extension pending DNS propagation
+- Fixed webhook retry cron noise: disabled delivery, now runs silently with alerts only on actual failures
+- Trimmed HEARTBEAT.md: removed stale Morning Meeting, Avant Garde phases
+
+*Last consolidated: 2026-05-26 04:00 UTC*
+*Previous: 2026-05-25 04:19 UTC*

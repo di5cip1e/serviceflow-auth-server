@@ -1,9 +1,0 @@
-export { GCPButton } from './GCPButton';
-export { GCPCard } from './GCPCard';
-export { GCPAvatar } from './GCPAvatar';
-export { GCPMoodSlider } from './GCPMoodSlider';
-export { GCPInput } from './GCPInput';
-export { GCPChip } from './GCPChip';
-export { GCPProgressBar } from './GCPProgressBar';
-export { GCPChart } from './GCPChart';
-export { GCPModal } from './GCPModal';

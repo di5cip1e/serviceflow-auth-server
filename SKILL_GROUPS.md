@@ -17,6 +17,8 @@ These skills are so lightweight/multi-use they load in every session:
 - `proactivity` — anticipation and follow-through
 - `sub-agent-orchestrator` — team coordination
 - `research-assistant` — web search and summarization
+- `qdrant-memory` — vector memory
+- `elite-longterm-memory` — memory consolidation
 
 ---
 
@@ -24,7 +26,7 @@ These skills are so lightweight/multi-use they load in every session:
 **Description:** Building and operating the M.ai.K.R agent SaaS platform
 **Active by default**
 
-Skills (28):
+Skills (20):
 - ai-agent-builder
 - analytics
 - automation-workflows
@@ -35,39 +37,31 @@ Skills (28):
 - email-automation
 - invoice-generator
 - javascript-skills
-- meeting-intelligence
 - node-connect
 - prisma
 - sql-toolkit
 - stripe-best-practices
-- task-queue
 - code-cog
 - file-organizer
 - data-analysis
 - data-visualization-2
-- saas-billing-system
 - saas-revenue-tracker
 - openclaw-money-maker
 - seo-meta-optimizer
 - accessibility-check
-- lead-generation
 - ai-lead-generation-prospect-finder
-- apify-lead-generation
 
 ---
 
 ## GROUP: creative
 **Description:** Game development, art direction, image generation, multimedia
 
-Skills (9):
+Skills (7):
 - game-ai
 - game-design-philosophy
 - image-cog
-- best-image-generation
 - react-native
 - video-frames
-- music_generate (tool)
-- image_generate (tool)
 - agent-browser-clawdbot
 
 ---
@@ -75,23 +69,20 @@ Skills (9):
 ## GROUP: research
 **Description:** Deep research, competitive analysis, web intelligence
 
-Skills (5):
+Skills (4):
 - cellcog
-- research-assistant
 - content-repurposer
 - business-doc-generator
-- web_fetch (tool)
 
 ---
 
 ## GROUP: marketing
 **Description:** Lead generation, outreach, email automation, social
 
-Skills (7):
+Skills (6):
 - client-outreach-automator
 - email-automation
 - content-repurposer
-- meeting-intelligence
 - invoice-generator
 - calendar-manager
 - openclaw-money-maker
@@ -110,10 +101,15 @@ Skills: (none beyond CORE)
 
 | Skill | Group |
 |-------|-------|
+| accessibility-check | agent-builder |
 | ai-agent-builder | agent-builder |
+| ai-lead-generation-prospect-finder | agent-builder |
+| agent-browser-clawdbot | creative |
 | analytics | agent-builder |
 | automation-workflows | agent-builder |
+| business-doc-generator | research |
 | calendar-manager | agent-builder |
+| cellcog | research |
 | client-onboarding-automator | agent-builder |
 | client-outreach-automator | marketing |
 | code-cog | agent-builder |
@@ -121,39 +117,28 @@ Skills: (none beyond CORE)
 | customer-onboarding-guider | agent-builder |
 | data-analysis | agent-builder |
 | data-visualization-2 | agent-builder |
-| saas-billing-system | agent-builder |
-| saas-revenue-tracker | agent-builder |
-| openclaw-money-maker | agent-builder |
-| seo-meta-optimizer | agent-builder |
-| accessibility-check | agent-builder |
-| lead-generation | agent-builder |
-| ai-lead-generation-prospect-finder | agent-builder |
-| apify-lead-generation | agent-builder |
-| business-doc-generator | research |
-| best-image-generation | creative |
+| director | agent-builder |
+| elite-longterm-memory | core |
 | email-automation | marketing |
-| elite-longterm-memory | core (always) |
 | file-organizer | agent-builder |
 | game-ai | creative |
 | game-design-philosophy | creative |
 | image-cog | creative |
 | invoice-generator | marketing |
 | javascript-skills | agent-builder |
-| meeting-intelligence | marketing |
-| mem-redis | core (always) |
-| music_generate | creative |
-| n8n-workflow-builder | agent-builder |
 | node-connect | agent-builder |
+| openclaw-money-maker | agent-builder |
 | prisma | agent-builder |
-| proactivity | core (always) |
-| qdrant-memory | core (always) |
+| proactivity | core |
+| qdrant-memory | core |
 | react-native | creative |
-| research-assistant | research |
-| self-improving | core (always) |
+| research-assistant | core |
+| saas-revenue-tracker | agent-builder |
+| self-improving | core |
+| seo-meta-optimizer | agent-builder |
 | sql-toolkit | agent-builder |
 | stripe-best-practices | agent-builder |
-| sub-agent-orchestrator | core (always) |
-| task-queue | agent-builder |
+| sub-agent-orchestrator | core |
 | video-frames | creative |
 
 ---

@@ -20,6 +20,7 @@ const chatRoutes = require('./routes/chat');  // Disabled for testing
 const agentRoutes = require('./routes/agent');
 const adminRoutes = require('./routes/admin');
 const escalationRoutes = require('./routes/escalations');
+const feedbackRoutes = require('./routes/feedback');
 
 const app = express();
 app.set('trust proxy', 1);
@@ -196,6 +197,7 @@ app.use('/api/mcp', mcpRoutes);    // MCP server management (before swarm catch-
 app.use('/api', channelRoutes);     // webhook handlers for Twilio, Slack, etc.
 app.use('/api/admin', adminRoutes);
 app.use('/api/observe', observeRoutes);  // observability dashboard API
+app.use('/api/feedback', feedbackRoutes);
 app.use('/api/optimization', optimizationRoutes);  // Phase 6 optimization engine
 const creditRoutes = require('./routes/creditRoutes');
 app.use('/api/credits', creditRoutes);
