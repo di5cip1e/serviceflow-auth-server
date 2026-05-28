@@ -13,4 +13,4 @@ No new downloads, stars, or reviews detected via CLI.
 CLI `inspect` command does not expose download/star counts — only version and update date.
 
 ---
-*Last checked: 2026-05-26 23:38 UTC*
+*Last checked: 2026-05-28 02:38 UTC*

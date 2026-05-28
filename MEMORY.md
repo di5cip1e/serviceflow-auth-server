@@ -526,5 +526,28 @@ All 4 features built and deployed in ~30 min (21:30-22:00 UTC). Backend restart 
 - Fixed webhook retry cron noise: disabled delivery, now runs silently with alerts only on actual failures
 - Trimmed HEARTBEAT.md: removed stale Morning Meeting, Avant Garde phases
 
-*Last consolidated: 2026-05-26 04:00 UTC*
-*Previous: 2026-05-25 04:19 UTC*
+*Last consolidated: 2026-05-27 04:00 UTC*
+*Previous: 2026-05-26 04:00 UTC*
+
+## May 26, 2026 — Disk Cleanup + Gemini Key Migration
+
+### Disk Cleanup (Option 4+)
+- Deleted: Pulse (1.6GB), Shadow Council (1.0GB), stale frontend/backend/agent-builder (~1.6GB), archive (308MB), design-refs (290MB), ironveil duplicates (331MB), cruft
+- Kept: agent-saas/ (263MB), ironveil/ (503MB merged), kingdom-cards/ (239MB), avant-garde/ (320KB)
+- Result: 6.7GB → 2.9GB (57% leaner)
+- Skills: 49→38 (deleted 11 redundant)
+- Webhook-retry cron silenced+disabled
+
+### Gemini Key Migration
+- Old Gemini key expired → memory search broke
+- New key stored in secrets.json, updated in 4 locations: secrets.json, auth-profiles.json, models.json, systemd env
+- **Root cause:** TWO gateway processes fighting on port 18789. Old PID held port with expired key; every systemctl restart spawned zombie that crashed. Fix: kill old process → fresh systemd start.
+- **Lesson:** Kill old gateway BEFORE updating config. One file, one restart.
+- Embedding cache cleared (466 entries) → re-indexing naturally
+- Memory search back ONLINE (gemini-embedding-001)
+
+### Gateway Status (May 26 end)
+- Running fresh with new Gemini key
+- Memory search: ONLINE
+- Workspace: 2.9GB (clean)
+- Model: openrouter/owl-alpha (default)

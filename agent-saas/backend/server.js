@@ -159,6 +159,9 @@ app.get('/onboarding-wizard.html', requireAuth, (req, res) => {
 app.get('/leads.html', requireAuth, (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/leads.html'));
 });
+app.get('/speed-to-lead.html', requireAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/speed-to-lead.html'));
+});
 app.get('/brand-assets.html', requireAuth, (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/brand-assets.html'));
 });
@@ -205,6 +208,10 @@ const revenueRoutes = require('./routes/revenue');
 app.use('/api/revenue', revenueRoutes);
 const billingRoutes = require('./routes/billing');
 app.use('/api/billing', billingRoutes);
+
+// Speed-to-Lead routes (instant lead response)
+const speedToLeadRoutes = require('./routes/speedToLead');
+app.use('/api/speed-to-lead', speedToLeadRoutes);
 
 // Lead Generation routes (Phase 9)
 const leadsRoutes = require('./routes/leads');

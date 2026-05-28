@@ -5,7 +5,8 @@ const PROTECTED_PAGES = new Set([
   'deploy.html', 'admin.html', 'dashboard.html',
   'leads.html', 'onboarding-wizard.html', 'analytics.html', 'agent-studio.html',
   'blueprints.html', 'workflow-canvas.html', 'whitelabel.html',
-  'templates.html', 'byok.html', 'widgets.html'
+  'templates.html', 'byok.html', 'widgets.html',
+  'speed-to-lead.html'
 ]);
 
 module.exports = { PROTECTED_PAGES };

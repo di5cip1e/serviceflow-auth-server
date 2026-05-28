@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Speed to Lead | M.ai.K.R</title>
+<link rel="stylesheet" href="css/styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0A0A0F; --surface: #1A1A2E; --surface2: #2D2D44; --border: #2D2D44;
+  --amber: #C0A060; --amber-dim: rgba(192,160,96,0.15);
+  --plasma: #00C0FF; --blue: #0040A0; --blue-light: #0060D0;
+  --green: #00C060; --red: #E74C3C; --orange: #E67E22; --text: #F0F0F0; --text-dim: #808080;
+}
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; }
+
+.maikr-nav { display: flex; align-items: center; padding: 16px 24px; border-bottom: 1px solid var(--border); gap: 8px; background: var(--surface); position: sticky; top: 0; z-index: 100; }
+.maikr-nav .logo { font-weight: 700; font-size: 18px; color: var(--amber); }
+.maikr-nav .sep { color: var(--border); }
+.maikr-nav a { color: var(--text-dim); text-decoration: none; font-size: 14px; padding: 6px 12px; border-radius: 6px; transition: all 0.2s; }
+.maikr-nav a:hover { color: var(--text); background: var(--surface2); }
+.maikr-nav a.active { color: var(--amber); }
+
+.container { max-width: 1280px; margin: 0 auto; padding: 24px; }
+
+/* ── Header ─────────────────────────────────────────────────── */
+.stl-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; gap: 16px; flex-wrap: wrap; }
+.stl-header h1 { margin: 0; font-size: 24px; color: var(--text); }
+.stl-header h1 span { color: var(--amber); }
+.stl-header p { margin: 4px 0 0; color: var(--text-dim); font-size: 14px; }
+.badge-live { display: inline-flex; align-items: center; gap: 6px; background: rgba(0,192,96,0.15); color: var(--green); border: 1px solid var(--green); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+.badge-live::before { content:''; width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+/* ── Quick Stats ────────────────────────────────────────────── */
+.qstats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.qstat { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; position: relative; overflow: hidden; }
+.qstat::after { content:''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+.qstat.amber::after { background: var(--amber); }
+.qstat.plasma::after { background: var(--plasma); }
+.qstat.green::after { background: var(--green); }
+.qstat.blue::after { background: var(--blue-light); }
+.qstat .value { font-size: 32px; font-weight: 700; line-height: 1; }
+.qstat.amber .value { color: var(--amber); }
+.qstat.plasma .value { color: var(--plasma); }
+.qstat.green .value { color: var(--green); }
+.qstat.blue .value { color: var(--blue-light); }
+.qstat .label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 8px; }
+.qstat .sub { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
+
+/* ── Main Layout ────────────────────────────────────────────── */
+.stl-layout { display: grid; grid-template-columns: 1fr 380px; gap: 24px; align-items: start; }
+@media (max-width: 1024px) { .stl-layout { grid-template-columns: 1fr; } }
+
+/* ── Lead Feed (Live) ───────────────────────────────────────── */
+.feed-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.feed-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.feed-header h3 { margin: 0; font-size: 16px; display: flex; align-items: center; gap: 8px; }
+.feed-tabs { display: flex; gap: 4px; }
+.feed-tab { background: transparent; border: 1px solid var(--border); color: var(--text-dim); padding: 6px 14px; border-radius: 6px; font-size: 12px; cursor: pointer; transition: all 0.2s; }
+.feed-tab.active { background: var(--amber); color: #000; border-color: var(--amber); }
+.lead-list { max-height: 600px; overflow-y: auto; }
+
+.lead-card { padding: 16px 20px; border-bottom: 1px solid var(--border); transition: background 0.2s; cursor: pointer; }
+.lead-card:hover { background: rgba(192,160,96,0.05); }
+.lead-card.new { border-left: 3px solid var(--amber); }
+.lead-card.contacted { border-left: 3px solid var(--blue-light); }
+.lead-card.booked { border-left: 3px solid var(--green); }
+.lead-card.converted { border-left: 3px solid var(--plasma); }
+.lead-card.rejected { border-left: 3px solid var(--red); opacity: 0.6; }
+
+.lead-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+.lead-name { font-weight: 600; font-size: 15px; }
+.lead-time { font-size: 11px; color: var(--text-dim); white-space: nowrap; }
+.lead-source { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; padding: 3px 8px; border-radius: 4px; background: var(--surface2); color: var(--text-dim); margin-bottom: 6px; }
+.source-google { color: #4285F4; }
+.source-meta { color: #1877F2; }
+.source-form { color: var(--amber); }
+.lead-fields { display: flex; flex-wrap: wrap; gap: 12px; font-size: 13px; color: var(--text-dim); }
+.lead-field { display: flex; align-items: center; gap: 4px; }
+.outreach-pills { display: flex; gap: 6px; margin-top: 8px; }
+.opill { font-size: 11px; padding: 3px 8px; border-radius: 10px; }
+.opill-sms-sent { background: rgba(0,64,160,0.15); color: var(--blue-light); }
+.opill-email-sent { background: rgba(0,192,255,0.15); color: var(--plasma); }
+.opill-sms-failed { background: rgba(231,76,60,0.15); color: var(--red); }
+.opill-email-failed { background: rgba(231,76,60,0.15); color: var(--red); }
+
+.empty-feed { text-align: center; padding: 60px 20px; color: var(--text-dim); }
+.empty-feed .icon { font-size: 48px; margin-bottom: 16px; }
+
+/* ── Right Panel ────────────────────────────────────────────── */
+.right-panel { display: flex; flex-direction: column; gap: 16px; }
+
+/* Config Card */
+.config-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+.config-card h3 { margin: 0 0 16px; font-size: 16px; display: flex; align-items: center; gap: 8px; }
+.config-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.config-row label { font-size: 13px; color: var(--text-dim); }
+.config-toggle { width: 44px; height: 24px; border-radius: 12px; background: var(--surface2); border: 2px solid var(--border); cursor: pointer; position: relative; transition: all 0.2s; }
+.config-toggle.on { background: var(--amber); border-color: var(--amber); }
+.config-toggle::after { content:''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--text); transition: all 0.2s; }
+.config-toggle.on::after { left: 22px; background: #000; }
+
+/* Source Integrations */
+.integrations-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+.integrations-card h3 { margin: 0 0 16px; font-size: 16px; }
+.integration-item { display: flex; align-items: center; gap: 12px; padding: 12px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; transition: border-color 0.2s; }
+.integration-item:hover { border-color: var(--amber); }
+.integration-item .icon { font-size: 24px; width: 36px; text-align: center; }
+.integration-item .info { flex: 1; }
+.integration-item .name { font-size: 13px; font-weight: 600; }
+.integration-item .desc { font-size: 11px; color: var(--text-dim); }
+.integration-item .status-badge { font-size: 11px; padding: 4px 10px; border-radius: 12px; }
+.connected { background: rgba(0,192,96,0.12); color: var(--green); }
+.disconnected { background: var(--surface2); color: var(--text-dim);}
+
+/* Recent Outreach Log */
+.outreach-log { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+.outreach-log h3 { margin: 0 0 16px; font-size: 16px; }
+.olog-item { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 12px; }
+.olog-item:last-child { border-bottom: none; }
+.olog-channel { font-weight: 700; font-size: 10px; text-transform: uppercase; padding: 2px 6px; border-radius: 4px; flex-shrink: 0; }
+.olog-sms { background: rgba(0,64,160,0.2); color: var(--blue-light); }
+.olog-email { background: rgba(0,192,255,0.2); color: var(--plasma); }
+.olog-recipient { color: var(--text); }
+.olog-time { color: var(--text-dim); margin-left: auto; white-space: nowrap; }
+
+/* Webhook URL Box */
+.webhook-box { background: var(--surface2); border-radius: 8px; padding: 12px; margin-top: 8px; }
+.webhook-url { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--amber); background: var(--bg); padding: 8px 10px; border-radius: 6px; word-break: break-all; margin-bottom: 8px; }
+.copy-btn { background: var(--amber); color: #000; border: none; padding: 6px 12px; border-radius: 6px; font-size: 11px; font-weight: 600; cursor: pointer; }
+.copy-btn:hover { background: var(--plasma); }
+
+/* ── Modal ──────────────────────────────────────────────────── */
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; align-items: center; justify-content: center; }
+.modal-overlay.open { display: flex; }
+.modal { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; width: 95%; max-width: 700px; max-height: 85vh; overflow-y: auto; }
+.modal-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid var(--border); }
+.modal-header h3 { margin: 0; }
+.modal-close { background: none; border: none; color: var(--text-dim); font-size: 28px; cursor: pointer; line-height: 1; padding: 0; }
+.modal-body { padding: 24px; }
+.modal-footer { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; border-top: 1px solid var(--border); gap: 12px; flex-wrap: wrap; }
+.modal-action { background: var(--amber); color: #000; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 13px; }
+.modal-action:hover { background: var(--plasma); }
+.modal-action.danger { background: rgba(231,76,60,0.2); color: var(--red); border: 1px solid var(--red); }
+.modal-action.danger:hover { background: var(--red); color: #fff; }
+.modal-action.secondary { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+
+.detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+.detail-field label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-dim); margin-bottom: 4px; }
+.detail-field .value { font-size: 14px; }
+.detail-field .value a { color: var(--plasma); text-decoration: none; }
+.outreach-history { margin-top: 16px; }
+.outreach-history h4 { font-size: 13px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; margin: 0 0 10px; }
+.oh-item { display: flex; gap: 12px; padding: 10px; background: var(--surface2); border-radius: 8px; margin-bottom: 6px; font-size: 13px; }
+.oh-channel { font-weight: 700; min-width: 50px; }
+.oh-body { flex: 1; color: var(--text-dim); }
+.oh-status { font-size: 11px; }
+.oh-time { color: var(--text-dim); font-size: 11px; }
+
+/* ── Live indicator animation ───────────────────────────────── */
+.live-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.live-dot.active { background: var(--green); animation: pulse 2s infinite; }
+.live-dot.inactive { background: var(--text-dim); }
+
+/* Toast */
+.toast { position: fixed; bottom: 24px; right: 24px; background: var(--surface); border: 1px solid var(--amber); border-radius: 8px; padding: 12px 20px; font-size: 14px; color: var(--text); z-index: 2000; transform: translateY(100px); opacity: 0; transition: all 0.3s; }
+.toast.show { transform: translateY(0); opacity: 1; }
+
+/* ── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--amber); }
+
+@media (max-width: 768px) {
+  .stl-layout { grid-template-columns: 1fr; }
+  .qstats { grid-template-columns: repeat(2, 1fr); }
+  .detail-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link" style="position:absolute;top:-100px;left:0;z-index:9999;padding:12px 24px;background:#C0A060;color:#0A0A0F;font-weight:700;text-decoration:none;border-radius:0 0 8px 0;" onfocus="this.style.top=0" onblur="this.style.top='-100px'">Skip to main content</a>
+
+<header role="banner"><nav class="maikr-nav">
+  <span class="logo">M.ai.K.R</span>
+  <span class="sep">›</span>
+  <a href="/command-center.html">Dashboard</a>
+  <a href="/speed-to-lead.html" class="active">Speed to Lead</a>
+  <a href="/leads.html">Lead Gen</a>
+  <a href="/swarm.html">Swarm</a>
+  <a href="/channels.html">Channels</a>
+  <a href="/observe.html">Observe</a>
+  <div style="flex:1"></div>
+  <a href="/settings.html">Settings</a>
+  <a href="/api/auth/logout">Log out</a>
+</nav></header>
+
+<main id="main-content">
+<div class="container">
+
+  <!-- Header -->
+  <div class="stl-header">
+    <div>
+      <h1>⚡ Speed to <span>Lead</span></h1>
+      <p>Instant AI outreach the moment a lead comes in — from any ad platform or form.</p>
+    </div>
+    <div id="liveBadge"></div>
+  </div>
+
+  <!-- Quick Stats -->
+  <div class="qstats" id="qstats">
+    <div class="qstat amber" id="stat-total"><div class="value">—</div><div class="label">Leads Today</div><div class="sub" id="stat-sources"></div></div>
+    <div class="qstat plasma" id="stat-pending"><div class="value">—</div><div class="label">Pending</div><div class="sub">Awaiting outreach</div></div>
+    <div class="qstat green" id="stat-avg"><div class="value">—</div><div class="label">Avg Response Time</div><div class="sub">First contact speed</div></div>
+    <div class="qstat blue" id="stat-rate"><div class="value">—</div><div class="label">Contact Rate</div><div class="sub">Successfully reached</div></div>
+  </div>
+
+  <!-- Main Layout -->
+  <div class="stl-layout">
+
+    <!-- Lead Feed -->
+    <div>
+      <div class="feed-panel">
+        <div class="feed-header">
+          <h3>📥 Live Lead Feed</h3>
+          <div class="feed-tabs">
+            <div class="feed-tab active" onclick="setFeedFilter('all')" data-filter="all">All</div>
+            <div class="feed-tab" onclick="setFeedFilter('new')" data-filter="new">New</div>
+            <div class="feed-tab" onclick="setFeedFilter('contacted')" data-filter="contacted">Contacted</div>
+            <div class="feed-tab" onclick="setFeedFilter('booked')" data-filter="booked">Booked</div>
+          </div>
+        </div>
+        <div class="lead-list" id="leadList">
+          <div style="text-align:center;padding:40px;color:var(--text-dim);">
+            <div style="display:inline-block;width:24px;height:24px;border:2px solid var(--border);border-top-color:var(--amber);border-radius:50%;animation:spin 0.8s linear infinite;"></div>
+            <p style="margin-top:12px;">Loading leads...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Panel -->
+    <div class="right-panel">
+
+      <!-- Config -->
+      <div class="config-card">
+        <h3>⚙️ Configuration</h3>
+        <div class="config-row">
+          <label>Speed-to-Lead Active</label>
+          <div class="config-toggle" id="toggleEnabled" onclick="toggleConfig('enabled')"></div>
+        </div>
+        <div class="config-row">
+          <label>Auto-SMS</label>
+          <div class="config-toggle on" id="toggleSMS" onclick="toggleConfig('auto_sms')"></div>
+        </div>
+        <div class="config-row">
+          <label>Auto-Email</label>
+          <div class="config-toggle on" id="toggleEmail" onclick="toggleConfig('auto_email')"></div>
+        </div>
+        <div class="config-row">
+          <label>Booking Flow</label>
+          <div class="config-toggle on" id="toggleBooking" onclick="toggleConfig('booking_enabled')"></div>
+        </div>
+        <div class="config-row">
+          <label>Quiet Hours</label>
+          <span style="font-size:13px;color:var(--text-dim);" id="quietHoursDisplay">22:00 – 08:00</span>
+        </div>
+        <div style="margin-top:16px;text-align:center;">
+          <button class="modal-action" style="width:100%;font-size:13px;" onclick="saveConfig()">Save Configuration</button>
+        </div>
+      </div>
+
+      <!-- Integrations -->
+      <div class="integrations-card">
+        <h3>🔗 Integrations</h3>
+        
+        <div class="integration-item">
+          <div class="icon">🔍</div>
+          <div class="info">
+            <div class="name">Google Ads</div>
+            <div class="desc">Lead form campaigns</div>
+          </div>
+          <span class="status-badge disconnected" id="status-google">Setup</span>
+        </div>
+
+        <div class="integration-item">
+          <div class="icon">📘</div>
+          <div class="info">
+            <div class="name">Meta Lead Ads</div>
+            <div class="desc">Facebook & Instagram</div>
+          </div>
+          <span class="status-badge disconnected" id="status-meta">Setup</span>
+        </div>
+
+        <div class="integration-item">
+          <div class="icon">📝</div>
+          <div class="info">
+            <div class="name">Custom Forms</div>
+            <div class="desc">Any website form</div>
+          </div>
+          <span class="status-badge connected">Active</span>
+        </div>
+
+        <div class="webhook-box" style="margin-top:12px;">
+          <div style="font-size:11px;color:var(--text-dim);margin-bottom:6px;">Form Webhook URL:</div>
+          <div class="webhook-url" id="webhookUrl">https://maikr.pro/api/speed-to-lead/webhook/form</div>
+          <button class="copy-btn" onclick="copyWebhook()">Copy URL</button>
+        </div>
+      </div>
+
+      <!-- Recent Outreach Log -->
+      <div class="outreach-log">
+        <h3>📨 Recent Outreach</h3>
+        <div id="outreachLog">
+          <div style="text-align:center;padding:20px;color:var(--text-dim);font-size:13px;">No outreach yet</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /container -->
+</main>
+
+<!-- Lead Detail Modal -->
+<div class="modal-overlay" id="leadModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modalTitle">Lead Details</h3>
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-footer">
+      <button class="modal-action danger" id="modalDeleteBtn">🗑 Delete</button>
+      <div style="display:flex;gap:8px;">
+        <button class="modal-action secondary" onclick="closeModal()">Close</button>
+        <button class="modal-action" id="modalRetryBtn">🔄 Retry Outreach</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const API = '/api/speed-to-lead';
+let currentAgentId = null;
+let currentFeedFilter = 'all';
+let allEvents = [];
+let currentEvent = null;
+let eventTimer = null;
+let configCache = {};
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function getAgentId() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('agent') || localStorage.getItem('maikr_active_agent') || 'default';
+}
+
+function timeAgo(dateStr) {
+  if (!dateStr) return '-';
+  const s = Math.floor((Date.now() - new Date(dateStr)) / 1000);
+  if (s < 60) return s + 's ago';
+  if (s < 3600) return Math.floor(s/60) + 'm ago';
+  if (s < 86400) return Math.floor(s/3600) + 'h ago';
+  return Math.floor(s/86400) + 'd ago';
+}
+
+function sourceIcon(src) {
+  if (src === 'google_ads') return '🔍';
+  if (src === 'meta_leads') return '📘';
+  if (src === 'form') return '📝';
+  return '🌐';
+}
+
+function sourceClass(src) {
+  if (src === 'google_ads') return 'source-google';
+  if (src === 'meta_leads') return 'source-meta';
+  if (src === 'form') return 'source-form';
+  return '';
+}
+
+function statusClass(s) {
+  return s || 'new';
+}
+
+function secDisplay(sec) {
+  if (!sec) return '-';
+  if (sec < 60) return sec + 's';
+  if (sec < 3600) return Math.round(sec/60) + 'm';
+  return Math.round(sec/3600, 1) + 'h';
+}
+
+// ── Render Lead Card ────────────────────────────────────────────
+
+function renderLeadCard(ev) {
+  const fields = [];
+  if (ev.lead_email) fields.push(`✉️ ${ev.lead_email}`);
+  if (ev.lead_phone) fields.push(`📱 ${ev.lead_phone}`);
+  if (ev.lead_company) fields.push(`🏢 ${ev.lead_company}`);
+
+  const pills = (ev.outreach_summary || []).map(o =>
+    `<span class="opill opill-${o.channel}-${o.status}">${o.channel === 'sms' ? '📱 SMS' : '✉️ Email'}: ${o.status}</span>`
+  ).join('');
+
+  return `
+    <div class="lead-card ${statusClass(ev.status)}" onclick="openEventModal('${ev.id}')">
+      <div class="lead-top">
+        <div>
+          <span class="lead-source ${sourceClass(ev.source)}">${sourceIcon(ev.source)} ${ev.source || 'api'} ${ev.campaign_name ? ' · ' + ev.campaign_name : ''}</span>
+          <div class="lead-name">${ev.lead_name || ev.lead_email || ev.lead_phone || 'Unknown Lead'}</div>
+        </div>
+        <span class="lead-time">${timeAgo(ev.created_at)}</span>
+      </div>
+      <div class="lead-fields">${fields.map(f => `<span class="lead-field">${f}</span>`).join('')}</div>
+      ${pills ? `<div class="outreach-pills">${pills}</div>` : ''}
+    </div>`;
+}
+
+// ── Render Feed ─────────────────────────────────────────────────
+
+function renderFeed(events) {
+  const list = document.getElementById('leadList');
+  const filtered = currentFeedFilter === 'all' ? events : events.filter(e => e.status === currentFeedFilter);
+  
+  if (filtered.length === 0) {
+    list.innerHTML = `<div class="empty-feed"><div class="icon">⚡</div><h3>No leads yet</h3><p>Leads will appear here the moment they come in from your ads or forms.<br>Enable integrations on the right to get started.</p></div>`;
+    return;
+  }
+  list.innerHTML = filtered.map(renderLeadCard).join('');
+}
+
+// ── Render Stats ────────────────────────────────────────────────
+
+function renderStats(stats) {
+  document.querySelector('#stat-total .value').textContent = stats.today_count || 0;
+  document.querySelector('#stat-pending .value').textContent = stats.new_count || 0;
+  document.querySelector('#stat-avg .value').textContent = secDisplay(stats.avg_response_seconds);
+  
+  const total = stats.total_leads || 0;
+  const contacted = stats.contacted || 0;
+  const rate = total > 0 ? Math.round(contacted / total * 100) + '%' : '-%';
+  document.querySelector('#stat-rate .value').textContent = rate;
+
+  const sources = stats.source_breakdown || [];
+  const srcText = sources.map(s => `${s.source}: ${s.count}`).join(' · ');
+  document.getElementById('stat-sources').textContent = srcText || 'No sources yet';
+
+  // Live badge
+  const isEnabled = configCache.enabled;
+  document.getElementById('liveBadge').innerHTML = isEnabled
+    ? `<span class="badge-live"><span class="live-dot active"></span> LIVE — Listening for leads</span>`
+    : `<span class="badge-live" style="background:var(--surface2);color:var(--text-dim);border-color:var(--border);"><span class="live-dot inactive"></span> Offline</span>`;
+}
+
+// ── Load Data ───────────────────────────────────────────────────
+
+async function loadData() {
+  currentAgentId = getAgentId();
+
+  try {
+    const [eventsRes, statsRes, configRes] = await Promise.all([
+      fetch(`${API}/${currentAgentId}?limit=100`),
+      fetch(`${API}/stats/${currentAgentId}`),
+      fetch(`${API}/config/${currentAgentId}`)
+    ]);
+
+    const eventsData = await eventsRes.json();
+    const statsData = await statsRes.json();
+    const configData = await configRes.json();
+
+    allEvents = eventsData.events || [];
+    renderFeed(allEvents);
+    if (statsData.stats) renderStats(statsData.stats);
+    if (configData.config) {
+      configCache = configData.config;
+      updateConfigUI(configCache);
+    }
+
+  } catch (err) {
+    console.error('Load error:', err);
+    document.getElementById('leadList').innerHTML = `<div class="empty-feed"><div class="icon">⚠️</div><h3>Failed to load</h3><p>Please refresh the page.</p></div>`;
+  }
+}
+
+// ── Config UI ───────────────────────────────────────────────────
+
+function updateConfigUI(config) {
+  document.getElementById('toggleEnabled').className = 'config-toggle' + (config.enabled ? ' on' : '');
+  document.getElementById('toggleSMS').className = 'config-toggle' + (config.auto_sms ? ' on' : '');
+  document.getElementById('toggleEmail').className = 'config-toggle' + (config.auto_email ? ' on' : '');
+  document.getElementById('toggleBooking').className = 'config-toggle' + (config.booking_enabled ? ' on' : '');
+  document.getElementById('quietHoursDisplay').textContent = 
+    `${String(config.quiet_hours_start).padStart(2,'0')}:00 – ${String(config.quiet_hours_end).padStart(2,'0')}:00`;
+  
+  renderStats({ ...(window._lastStats || {}), today_count: window._lastStats?.today_count, new_count: allEvents.filter(e=>e.status==='new').length });
+}
+
+function toggleConfig(key) {
+  configCache[key] = configCache[key] ? 0 : 1;
+  updateConfigUI(configCache);
+}
+
+async function saveConfig() {
+  try {
+    const res = await fetch(`${API}/config/${currentAgentId}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(configCache)
+    });
+    const data = await res.json();
+    if (data.success) showToast('✅ Configuration saved!');
+    else showToast('❌ Save failed');
+  } catch (e) {
+    showToast('❌ Network error');
+  }
+}
+
+// ── Feed Filter ─────────────────────────────────────────────────
+
+function setFeedFilter(filter) {
+  currentFeedFilter = filter;
+  document.querySelectorAll('.feed-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.filter === filter);
+  });
+  renderFeed(allEvents);
+}
+
+// ── Modal ───────────────────────────────────────────────────────
+
+async function openEventModal(eventId) {
+  const ev = allEvents.find(e => e.id === eventId);
+  if (!ev) return;
+  currentEvent = ev;
+
+  // Fetch full detail
+  try {
+    const res = await fetch(`${API}/event/${eventId}`);
+    const data = await res.json();
+    if (data.event) currentEvent = { ...currentEvent, ...data.event, outreach_log: data.outreach_log };
+  } catch (e) {}
+
+  document.getElementById('modalTitle').textContent = currentEvent.lead_name || 'Lead Detail';
+  
+  const fields = [
+    ['Name', currentEvent.lead_name],
+    ['Email', currentEvent.lead_email],
+    ['Phone', currentEvent.lead_phone],
+    ['Company', currentEvent.lead_company],
+    ['Source', currentEvent.source],
+    ['Campaign', currentEvent.campaign_name || '-'],
+  ];
+
+  const outreachHtml = (currentEvent.outreach_log || []).map(oh => `
+    <div class="oh-item">
+      <span class="oh-channel ${oh.channel === 'sms' ? 'olog-sms' : 'olog-email'}">${oh.channel}</span>
+      <span class="oh-body">${(oh.body || '').substring(0, 200)}${(oh.body || '').length > 200 ? '...' : ''}</span>
+      <span class="oh-status" style="color:${oh.status==='sent'?'var(--green)':'var(--red)'}">${oh.status}</span>
+      <span class="oh-time">${oh.sent_at ? timeAgo(oh.sent_at) : ''}</span>
+    </div>
+  `).join('');
+
+  const formData = (() => { try { return JSON.parse(currentEvent.form_data || '{}'); } catch(e) { return {}; } })();
+  const formEntries = Object.entries(formData).filter(([k,v]) => v && typeof v !== 'string' || (typeof v === 'string' && v.length > 0 && v.length < 100));
+
+  document.getElementById('modalBody').innerHTML = `
+    <div class="detail-grid">
+      ${fields.map(([k,v]) => `<div class="detail-field"><label>${k}</label><div class="value">${v ? (k==='Email'&&v?`<a href="mailto:${v}">${v}</a>`:v) : '-'}</div></div>`).join('')}
+    </div>
+    ${formEntries.length > 0 ? `
+      <div class="detail-field" style="margin-bottom:16px;">
+        <label>Form Data</label>
+        <div style="background:var(--surface2);border-radius:8px;padding:12px;font-size:13px;">
+          ${formEntries.map(([k,v]) => `<div style="display:flex;gap:8px;margin-bottom:4px;"><span style="color:var(--text-dim);min-width:120px;">${k}</span><span>${typeof v === 'object' ? JSON.stringify(v) : v}</span></div>`).join('')}
+        </div>
+      </div>
+    ` : ''}
+    <div class="detail-field">
+      <label>Status</label>
+      <select class="status-select" id="modalStatusSelect" style="width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:8px;font-size:13px;">
+        <option value="new" ${currentEvent.status==='new'?'selected':''}>🟡 New</option>
+        <option value="contacted" ${currentEvent.status==='contacted'?'selected':''}>🔵 Contacted</option>
+        <option value="responded" ${currentEvent.status==='responded'?'selected':''}>💬 Responded</option>
+        <option value="booked" ${currentEvent.status==='booked'?'selected':''}>📅 Booked</option>
+        <option value="converted" ${currentEvent.status==='converted'?'selected':''}>✅ Converted</option>
+        <option value="rejected" ${currentEvent.status==='rejected'?'selected':''}>🔴 Rejected</option>
+        <option value="spam" ${currentEvent.status==='spam'?'selected':''}>🚫 Spam</option>
+      </select>
+    </div>
+    <div class="detail-field" style="margin-top:12px;">
+      <label>Notes</label>
+      <textarea class="notes-textarea" id="modalNotes" style="width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:10px;border-radius:8px;font-size:13px;min-height:80px;">${currentEvent.notes || ''}</textarea>
+    </div>
+    <div class="outreach-history">
+      <h4>Outreach History</h4>
+      ${outreachHtml || '<div style="color:var(--text-dim);font-size:13px;">No outreach sent yet</div>'}
+    </div>
+  `;
+
+  document.getElementById('modalDeleteBtn').onclick = () => { deleteEvent(eventId); closeModal(); };
+  document.getElementById('modalRetryBtn').onclick = async () => {
+    try {
+      await fetch(`${API}/retry/${eventId}`, { method: 'POST' });
+      showToast('🔄 Outreach retried!');
+    } catch(e) { showToast('Retry failed'); }
+  };
+  document.getElementById('leadModal').classList.add('open');
+
+  // Save status/notes on change
+  document.getElementById('modalStatusSelect').addEventListener('change', async (e) => {
+    await fetch(`${API}/status/${eventId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: e.target.value, notes: document.getElementById('modalNotes').value })
+    });
+    ev.status = e.target.value;
+    renderFeed(allEvents);
+  });
+}
+
+function closeModal() {
+  document.getElementById('leadModal').classList.remove('open');
+  currentEvent = null;
+}
+
+document.getElementById('leadModal').addEventListener('click', (e) => {
+  if (e.target.id === 'leadModal') closeModal();
+});
+
+async function deleteEvent(eventId) {
+  if (!confirm('Delete this lead event?')) return;
+  try {
+    await fetch(`${API}/event/${eventId}`, { method: 'DELETE' });
+    allEvents = allEvents.filter(e => e.id !== eventId);
+    renderFeed(allEvents);
+    showToast('Lead deleted');
+  } catch(e) { showToast('Delete failed'); }
+}
+
+// ── Copy Webhook ────────────────────────────────────────────────
+
+function copyWebhook() {
+  const url = document.getElementById('webhookUrl').textContent;
+  navigator.clipboard.writeText(url).then(() => showToast('Webhook URL copied!'));
+}
+
+// ── Auto-refresh ────────────────────────────────────────────────
+
+function startEventPolling() {
+  if (eventTimer) clearInterval(eventTimer);
+  eventTimer = setInterval(async () => {
+    if (!currentAgentId) return;
+    try {
+      const res = await fetch(`${API}/${currentAgentId}?limit=100`);
+      const data = await res.json();
+      const newEvents = data.events || [];
+      
+      // Check if anything changed
+      if (newEvents.length !== allEvents.length || 
+          (newEvents[0] && allEvents[0] && newEvents[0].id !== allEvents[0].id)) {
+        allEvents = newEvents;
+        renderFeed(allEvents);
+      }
+    } catch(e) {}
+  }, 5000); // Poll every 5s
+}
+
+// ── Init ────────────────────────────────────────────────────────
+
+loadData();
+startEventPolling();
+
+</script>
+</main></body>
+</html>
