@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bill — AI Quote Agent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/maikr-v3.css">
+  <style>
+    :root { --bill-primary: #00C0FF; --bill-glow: rgba(0,192,255,0.15); }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; margin: 0; }
+    .bill-layout { display: flex; min-height: 100vh; }
+    /* Sidebar */
+    .bill-sidebar { width: 260px; background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; position: fixed; top: 0; bottom: 0; left: 0; z-index: 10; }
+    .bill-sidebar-header { padding: 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; }
+    .bill-logo { width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg,#0040A0,#00C0FF); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 800; color: #fff; font-family: 'Orbitron',sans-serif; }
+    .bill-sidebar-title { font-family: 'Orbitron',sans-serif; font-size: 0.85rem; font-weight: 700; color: var(--text); }
+    .bill-sidebar-sub { font-size: 0.7rem; color: var(--text-muted); }
+    .bill-nav { flex: 1; padding: 12px; }
+    .bill-nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; color: var(--text-dim); transition: all 0.15s; margin-bottom: 2px; }
+    .bill-nav-item:hover { background: rgba(255,255,255,0.04); color: var(--text); }
+    .bill-nav-item.active { background: rgba(0,192,255,0.08); color: var(--bill-primary); }
+    .bill-nav-icon { font-size: 1rem; width: 22px; text-align: center; }
+    .bill-sidebar-footer { padding: 16px; border-top: 1px solid var(--border); font-size: 0.72rem; color: var(--text-muted); }
+    /* Main */
+    .bill-main { flex: 1; margin-left: 260px; display: flex; flex-direction: column; min-height: 100vh; }
+    .bill-topbar { padding: 14px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: var(--surface); position: sticky; top: 0; z-index: 5; }
+    .bill-topbar h2 { font-size: 1rem; margin: 0; display: flex; align-items: center; gap: 8px; }
+    .bill-content { flex: 1; padding: 24px; max-width: 900px; margin: 0 auto; width: 100%; }
+    /* Page sections */
+    .bill-page { display: none; }
+    .bill-page.active { display: block; }
+    /* Chat page */
+    .bill-chat-wrap { display: flex; flex-direction: column; height: calc(100vh - 120px); }
+    .bill-chat-msgs { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+    .bill-msg { max-width: 80%; padding: 12px 16px; border-radius: 12px; font-size: 0.9rem; line-height: 1.55; animation: msgIn 0.25s ease; }
+    .bill-msg.bill { background: var(--surface2); align-self: flex-start; border-bottom-left-radius: 4px; }
+    .bill-msg.customer { background: linear-gradient(135deg,#0040A0,#0060D0); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+    .bill-msg.system { background: rgba(0,192,255,0.06); color: var(--bill-primary); align-self: center; font-size: 0.75rem; padding: 4px 14px; border-radius: 20px; }
+    @keyframes msgIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+    .bill-typing { display: flex; gap: 4px; padding: 8px 0; }
+    .bill-typing span { width: 6px; height: 6px; border-radius: 50%; background: var(--text-muted); animation: blink 1.2s infinite; }
+    .bill-typing span:nth-child(2) { animation-delay: 0.2s; }
+    .bill-typing span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes blink { 0%,80%,100% { opacity:0.2; } 40% { opacity:1; } }
+    .bill-input-area { padding: 16px 20px; border-top: 1px solid var(--border); display: flex; gap: 10px; background: var(--surface); }
+    .bill-input-area textarea { flex: 1; min-height: 44px; max-height: 120px; resize: none; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px; color: var(--text); font-size: 0.9rem; font-family: 'Inter',sans-serif; outline: none; }
+    .bill-input-area textarea:focus { border-color: var(--bill-primary); }
+    .bill-input-area button { padding: 10px 20px; border-radius: 10px; border: none; background: linear-gradient(135deg,#0040A0,#00C0FF); color: #fff; font-weight: 600; cursor: pointer; font-size: 0.85rem; white-space: nowrap; transition: opacity 0.15s; }
+    .bill-input-area button:hover { opacity: 0.9; }
+    .bill-input-area button:disabled { opacity: 0.4; cursor: not-allowed; }
+    /* Variable form */
+    .bill-var-form { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-top: 16px; }
+    .bill-var-form h3 { font-size: 1rem; margin: 0 0 16px; }
+    .bill-var-row { margin-bottom: 14px; }
+    .bill-var-row label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-dim); margin-bottom: 4px; }
+    .bill-var-row .hint { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 6px; }
+    .bill-var-row input, .bill-var-row select { width: 100%; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface2); color: var(--text); font-size: 0.88rem; outline: none; }
+    .bill-var-row input:focus, .bill-var-row select:focus { border-color: var(--bill-primary); }
+    /* Quote result */
+    .bill-quote-result { background: linear-gradient(135deg,rgba(0,64,160,0.12),rgba(0,192,255,0.06)); border: 1px solid rgba(0,192,255,0.2); border-radius: 14px; padding: 24px; margin-top: 16px; animation: msgIn 0.4s ease; }
+    .bill-quote-result h3 { font-size: 1.1rem; margin: 0 0 4px; color: var(--bill-primary); }
+    .bill-quote-total { font-family: 'Orbitron',sans-serif; font-size: 2rem; font-weight: 700; color: #fff; margin: 8px 0; }
+    .bill-quote-breakdown { margin-top: 12px; }
+    .bill-quote-line { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.85rem; }
+    .bill-quote-line:last-child { border-bottom: none; }
+    .bill-quote-line .label { color: var(--text-dim); }
+    .bill-quote-line .amount { font-family: 'JetBrains Mono',monospace; color: var(--text); }
+    .bill-quote-actions { display: flex; gap: 10px; margin-top: 16px; }
+    .bill-btn { padding: 8px 18px; border-radius: 8px; border: none; font-weight: 600; font-size: 0.82rem; cursor: pointer; transition: opacity 0.15s; }
+    .bill-btn.primary { background: linear-gradient(135deg,#0040A0,#00C0FF); color: #fff; }
+    .bill-btn.secondary { background: rgba(255,255,255,0.06); color: var(--text-dim); border: 1px solid var(--border); }
+    .bill-btn:hover { opacity: 0.85; }
+    /* Config page */
+    .bill-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+    .bill-card h3 { font-size: 0.95rem; margin: 0 0 12px; }
+    .bill-form-row { margin-bottom: 14px; }
+    .bill-form-row label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--text-dim); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .bill-form-row input, .bill-form-row select, .bill-form-row textarea { width: 100%; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface2); color: var(--text); font-size: 0.88rem; outline: none; font-family: 'Inter',sans-serif; }
+    .bill-form-row input:focus, .bill-form-row select:focus { border-color: var(--bill-primary); }
+    /* History */
+    .bill-quote-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; transition: border-color 0.15s; }
+    .bill-quote-card:hover { border-color: rgba(0,192,255,0.2); }
+    .bill-quote-info { flex: 1; }
+    .bill-quote-cust { font-weight: 600; font-size: 0.9rem; }
+    .bill-quote-meta { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+    .bill-quote-amt { font-family: 'Orbitron',sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--bill-primary); margin-right: 12px; }
+    .bill-status-badge { padding: 3px 10px; border-radius: 20px; font-size: 0.68rem; font-weight: 600; text-transform: uppercase; }
+    .bill-status-draft { background: rgba(255,180,0,0.1); color: #FFB400; }
+    .bill-status-sent { background: rgba(0,192,255,0.1); color: #00C0FF; }
+    .bill-status-accepted { background: rgba(0,200,100,0.1); color: #00C864; }
+    /* Responsive */
+    @media(max-width:768px) {
+      .bill-sidebar { display: none; }
+      .bill-main { margin-left: 0; }
+      .bill-msg { max-width: 90%; }
+    }
+    /* Badge in chat */
+    .bill-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 20px; background: rgba(0,192,255,0.08); font-size: 0.72rem; color: var(--bill-primary); font-weight: 600; margin-bottom: 8px; }
+    .bill-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #00C864; }
+  </style>
+</head>
+<body>
+
+<div class="bill-layout">
+  <!-- Sidebar -->
+  <div class="bill-sidebar">
+    <div class="bill-sidebar-header">
+      <div class="bill-logo">B</div>
+      <div>
+        <div class="bill-sidebar-title">Bill</div>
+        <div class="bill-sidebar-sub">AI Quote Agent</div>
+      </div>
+    </div>
+    <div class="bill-nav">
+      <div class="bill-nav-item active" onclick="billSwitchPage('chat')" id="nav-chat">
+        <span class="bill-nav-icon">💬</span> Get a Quote
+      </div>
+      <div class="bill-nav-item" onclick="billSwitchPage('config')" id="nav-config">
+        <span class="bill-nav-icon">⚙️</span> Configuration
+      </div>
+      <div class="bill-nav-item" onclick="billSwitchPage('history')" id="nav-history">
+        <span class="bill-nav-icon">📋</span> Quote History
+      </div>
+    </div>
+    <div class="bill-sidebar-footer">
+      Powered by M.ai.K.R · <span id="billIndustryLabel">General Service</span>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="bill-main">
+    <div class="bill-topbar">
+      <h2 id="billPageTitle">💬 Get a Quote</h2>
+      <div class="bill-badge"><span class="dot"></span> Bill is online</div>
+    </div>
+
+    <div class="bill-content">
+      <!-- Chat Page -->
+      <div class="bill-page active" id="page-chat">
+        <div class="bill-chat-wrap">
+          <div class="bill-chat-msgs" id="billChatMsgs">
+            <div class="bill-msg system">👋 Welcome! I'm Bill. I help <span id="bizName">the business</span> provide quick, accurate quotes. Tell me about your project!</div>
+          </div>
+          <div class="bill-input-area">
+            <textarea id="billInput" placeholder="Tell me what you need..." rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();billSendMsg();}"></textarea>
+            <button onclick="billSendMsg()">Send</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Config Page -->
+      <div class="bill-page" id="page-config">
+        <div class="bill-card">
+          <h3>🏢 Business Profile</h3>
+          <div class="bill-form-row">
+            <label>Business Name</label>
+            <input id="cfgBizName" placeholder="e.g. Green Valley Lawn Care">
+          </div>
+          <div class="bill-form-row">
+            <label>Industry</label>
+            <select id="cfgIndustry" onchange="billLoadIndustryDefaults()">
+              <option value="general">General Service</option>
+              <option value="lawn_care">Lawn Care</option>
+              <option value="roofing">Roofing</option>
+              <option value="cleaning">Cleaning Service</option>
+              <option value="hvac">HVAC</option>
+            </select>
+          </div>
+          <div class="bill-form-row">
+            <label>Pricing Model</label>
+            <select id="cfgModel">
+              <option value="variable">Variable (based on inputs)</option>
+              <option value="flat">Flat Rate + Options</option>
+              <option value="tiered">Tiered Pricing</option>
+            </select>
+          </div>
+          <button class="bill-btn primary" onclick="billSaveConfig()">Save Configuration</button>
+        </div>
+
+        <div class="bill-card">
+          <h3>🧮 Quote Variables & Rates</h3>
+          <p style="font-size:0.8rem;color:var(--text-muted);margin:0 0 16px;">Configure the variables Bill asks customers about and the base rates used in calculations.</p>
+          <div id="cfgVarsContainer"></div>
+          <button class="bill-btn secondary" onclick="billAddCustomVariable()" style="margin-top:8px;">+ Add Custom Variable</button>
+        </div>
+
+        <div class="bill-card">
+          <h3>🤖 Bill's Personality</h3>
+          <div class="bill-form-row">
+            <label>How Bill talks to customers</label>
+            <textarea id="cfgPersonality" rows="3" placeholder="e.g. Friendly and professional. Always confirms details before quoting. Asks clarifying questions."></textarea>
+          </div>
+          <button class="bill-btn primary" onclick="billSaveConfig()">Save Personality</button>
+        </div>
+      </div>
+
+      <!-- History Page -->
+      <div class="bill-page" id="page-history">
+        <div id="billHistoryList">
+          <div style="text-align:center;padding:40px;color:var(--text-muted);font-size:0.85rem;">Loading quotes...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── State ──────────────────────────────────────────────────────────────────────
+const BILL_API = '/api/quotes';
+const AGENT_ID = new URLSearchParams(location.search).get('agent') || localStorage.getItem('bill_agent_id') || '';
+let billState = { page: 'chat', msgs: [], quoted: false, vars: {}, config: null };
+
+// ── Navigation ────────────────────────────────────────────────────────────────
+function billSwitchPage(page) {
+  document.querySelectorAll('.bill-page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.bill-nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.getElementById('nav-' + page).classList.add('active');
+  const titles = { chat: '💬 Get a Quote', config: '⚙️ Configuration', history: '📋 Quote History' };
+  document.getElementById('billPageTitle').textContent = titles[page];
+  billState.page = page;
+  if (page === 'config') billLoadConfig();
+  if (page === 'history') billLoadHistory();
+}
+
+// ── Chat ───────────────────────────────────────────────────────────────────────
+const WELCOME_MSGS = [
+  "Hi there! I'm Bill — I help provide quick, accurate quotes. What can I help you with today?",
+  "Hello! I'm here to help us give you a fast, fair quote. What kind of work do you need done?",
+  "Hey! I'm Bill, the quoting assistant. Tell me about your project and I'll pull up a quote for you."
+];
+
+function billInitChat() {
+  const welcome = localStorage.getItem('bill_agent_id') ? WELCOME_MSGS[Math.floor(Math.random()*WELCOME_MSGS.length)] : WELCOME_MSGS[0];
+  billAddMsg('bill', welcome);
+  // Show variable quick-form based on config
+  billShowVarForm();
+}
+
+function billAddMsg(role, text) {
+  const container = document.getElementById('billChatMsgs');
+  if (role === 'typing') {
+    const d = document.createElement('div');
+    d.className = 'bill-msg bill';
+    d.id = 'billTyping';
+    d.innerHTML = '<div class="bill-typing"><span></span><span></span><span></span></div>';
+    container.appendChild(d);
+    container.scrollTop = container.scrollHeight;
+    return;
+  }
+  const existing = document.getElementById('billTyping');
+  if (existing) existing.remove();
+  const d = document.createElement('div');
+  d.className = 'bill-msg ' + role;
+  d.textContent = text;
+  container.appendChild(d);
+  container.scrollTop = container.scrollHeight;
+  billState.msgs.push({ role, text, ts: Date.now() });
+}
+
+function billSendMsg() {
+  const input = document.getElementById('billInput');
+  const text = input.value.trim();
+  if (!text) return;
+  billAddMsg('customer', text);
+  input.value = '';
+  // Quick quote trigger
+  billProcessCustomerMsg(text);
+}
+
+// ── Variable Form in Chat ─────────────────────────────────────────────────────
+function billShowVarForm() {
+  const container = document.getElementById('billChatMsgs');
+  const vars = billState.config?.variables || DEFAULT_VARS[billState.config?.industry || 'general'] || [];
+  if (!vars.length) return;
+
+  const d = document.createElement('div');
+  d.className = 'bill-msg bill';
+  d.id = 'billVarForm';
+
+  let html = '<div style="font-weight:600;margin-bottom:10px;">📋 Quick Quote Form — fill in what you know:</div>';
+  html += '<div style="display:grid;gap:10px;">';
+  vars.forEach(v => {
+    if (v.type === 'boolean') {
+      html += `<label style="display:flex;align-items:center;gap:8px;font-size:0.82rem;cursor:pointer;">
+        <input type="checkbox" id="qv_${v.id}"> ${v.label}
+      </label>`;
+    } else if (v.type === 'select') {
+      html += `<div><div style="font-size:0.78rem;color:var(--text-dim);margin-bottom:3px;">${v.label}${v.hint ? ' <span style="color:var(' + '--text-muted)">' + v.hint + '</span>' : ''}</div>
+      <select id="qv_${v.id}" style="width:100%;padding:6px 10px;border-radius:6px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-size:0.82rem;">`;
+      (v.options || []).forEach(o => html += `<option value="${o}">${o}</option>`);
+      html += '</select></div>';
+    } else {
+      html += `<div><div style="font-size:0.78rem;color:var(--text-dim);margin-bottom:3px;">${v.label}${v.hint ? ' <span style="color:var(--text-muted);font-size:0.7rem;">' + v.hint + '</span>' : ''}</div>
+      <input type="${v.type === 'number' ? 'number' : 'text'}" id="qv_${v.id}" placeholder="${v.hint || ''}" style="width:100%;padding:6px 10px;border-radius:6px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-size:0.82rem;"></div>`;
+    }
+  });
+  html += '</div>';
+  html += `<button onclick="billSubmitVarForm()" style="margin-top:12px;width:100%;padding:8px;border-radius:8px;border:none;background:linear-gradient(135deg,#0040A0,#00C0FF);color:#fff;font-weight:600;cursor:pointer;font-size:0.82rem;">✨ Calculate Quote</button>`;
+
+  d.innerHTML = html;
+  container.appendChild(d);
+  container.scrollTop = container.scrollHeight;
+}
+
+function billSubmitVarForm() {
+  const form = document.getElementById('billVarForm');
+  if (form) form.remove();
+  // Gather valrs
+  const vars = {};
+  document.querySelectorAll('[id^="qv_"]').forEach(el => {
+    const id = el.id.replace('qv_', '');
+    if (el.type === 'checkbox') vars[id] = el.checked;
+    else vars[id] = el.value;
+  });
+  billAddMsg('customer', 'Here are my details. Can you give me a quote?');
+  billProcessCustomerMsg('', vars);
+}
+
+// ── Quote Logic ───────────────────────────────────────────────────────────────
+function billProcessCustomerMsg(text, explicitVars) {
+  billAddMsg('typing');
+
+  // Build variables from explicit form or parse from text
+  let vars = explicitVars || {};
+  if (!explicitVars && text) {
+    // Try to extract numbers from text
+    const numMatch = text.match(/(\d+)\s*(sq\s*ft|square\s*feet|ft²)/i);
+    if (numMatch) vars.sq_ft = parseInt(numMatch[1]);
+    const heightMatch = text.match(/(\d+)\s*(inch|in|")/i);
+    if (heightMatch) vars.grass_height = parseInt(heightMatch[1]);
+  }
+
+  // Check if we have enough to quote
+  const config = billState.config;
+  const industry = config?.industry || 'general';
+  const required = (config?.variables || DEFAULT_VARS[industry] || []).filter(v => v.required);
+  const have = required.every(v => vars[v.id] !== undefined && vars[v.id] !== '' && vars[v.id] !== '0');
+
+  setTimeout(() => {
+    if (have || Object.keys(vars).length > 2) {
+      billFetchQuote(vars);
+    } else {
+      const ask = billNextQuestion(required, vars);
+      billAddMsg('bill', ask);
+      setTimeout(billShowVarForm, 400);
+    }
+  }, 800 + Math.random() * 600);
+}
+
+function billNextQuestion(required, have) {
+  const missing = required.filter(v => !have[v.id] || have[v.id] === '' || have[v.id] === '0');
+  if (missing.length === 0) return "Great, I have everything I need! Let me calculate that for you...";
+  const v = missing[0];
+  return `To give you an accurate quote, could you tell me: ${v.label.toLowerCase()}?${v.hint ? ' (' + v.hint + ')' : ''}`;
+}
+
+function billFetchQuote(vars) {
+  fetch(BILL_API + '/public/calculate', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ agentId: AGENT_ID, variables: vars, customerName: 'Chat Customer' })
+  })
+  .then(r => r.json())
+  .then(data => {
+    billAddMsg('typing');
+    setTimeout(() => {
+      const q = data.quote;
+      billDisplayQuote(q, vars);
+      billState.quoted = true;
+    }, 500);
+  })
+  .catch(() => billAddMsg('bill', `Let me do those numbers for you...`));
+}
+
+function billDisplayQuote(quote, vars) {
+  const container = document.getElementById('billChatMsgs');
+  const d = document.createElement('div');
+  d.className = 'bill-msg bill';
+
+  let lines = `Here's your quote breakdown:\n\n`;
+  quote.breakdown.forEach(b => {
+    lines += `• ${b.label}: $${b.amount.toFixed(2)}\n`;
+  });
+  lines += `\nEstimated total: $${quote.total.toFixed(2)}`;
+  lines += `\n\nThis is an estimate based on the details provided. The business owner will confirm the final price before any work begins.`;
+
+  billAddMsg('bill', lines);
+
+  // Show the quote result card
+  setTimeout(billShowQuoteCard(quote), 300);
+}
+
+function billShowQuoteCard(quote) {
+  const container = document.getElementById('billChatMsgs');
+  const d = document.createElement('div');
+  d.className = 'bill-msg bill';
+
+  let html = `<div class="bill-quote-result">
+    <h3>📋 Your Quote</h3>
+    <div class="bill-quote-total">$${quote.total.toFixed(2)}</div>
+    <div class="bill-quote-breakdown">`;
+  quote.breakdown.forEach(b => {
+    html += `<div class="bill-quote-line"><span class="label">${b.label}</span><span class="amount">$${parseFloat(b.amount).toFixed(2)}</span></div>`;
+  });
+  html += `</div>
+    <div class="bill-quote-actions">
+      <button class="bill-btn primary" onclick="alert('Quote sent! The business owner will follow up shortly.')">✓ Accept Estimate</button>
+      <button class="bill-btn secondary" onclick="alert('Request sent! Feel free to ask any questions.')">💬 Ask a Question</button>
+    </div>
+  </div>`;
+
+  d.innerHTML = html;
+  container.appendChild(d);
+  container.scrollTop = container.scrollHeight;
+}
+
+// ── Configuration ──────────────────────────────────────────────────────────────
+const DEFAULT_VARS = {
+  lawn_care: [
+    { id: 'sq_ft', label: 'Square Footage', type: 'number', required: true, hint: 'Total lawn area' },
+    { id: 'grass_height', label: 'Grass Height (inches)', type: 'number', required: true, hint: 'How tall is the grass?' },
+    { id: 'obstacles', label: 'Obstacles', type: 'number', default: 0, hint: 'Trees, garden beds, etc.' },
+    { id: 'trimming', label: 'Edge Trimming?', type: 'boolean', default: false },
+    { id: 'debris', label: 'Debris Cleanup?', type: 'boolean', default: false },
+    { id: 'fertilize', label: 'Fertilizer Treatment?', type: 'boolean', default: false },
+  ],
+  roofing: [
+    { id: 'sq_ft', label: 'Square Footage', type: 'number', required: true },
+    { id: 'stories', label: 'Stories', type: 'select', options: ['1','2','3+'], default: '1', required: true },
+    { id: 'roof_pitch', label: 'Roof Pitch', type: 'select', options: ['low','medium','steep'], default: 'medium' },
+    { id: 'material', label: 'Material', type: 'select', options: ['asphalt','metal','tile','slate','cedar'], default: 'asphalt', required: true },
+    { id: 'tear_off', label: 'Tear-off Old Roof?', type: 'boolean', default: true },
+  ],
+  cleaning: [
+    { id: 'sq_ft', label: 'Square Footage', type: 'number', required: true },
+    { id: 'rooms', label: 'Rooms', type: 'number', required: true },
+    { id: 'bathrooms', label: 'Bathrooms', type: 'number', default: 1, required: true },
+    { id: 'cleaning_type', label: 'Cleaning Type', type: 'select', options: ['standard','deep','move_out','post_construction'], default: 'standard', required: true },
+    { id: 'has_pets', label: 'Has Pets?', type: 'boolean', default: false },
+  ],
+  hvac: [
+    { id: 'system_type', label: 'System Type', type: 'select', options: ['ac_only','furnace_only','full_split','heat_pump','mini_split'], default: 'full_split', required: true },
+    { id: 'tonnage', label: 'Tonnage', type: 'select', options: ['1.5','2','2.5','3','3.5','4','5'], default: '3', required: true },
+    { id: 'seer', label: 'SEER Rating', type: 'select', options: ['13','14','15','16','18','20','22+'], default: '14' },
+    { id: 'ductwork', label: 'Ductwork Needed?', type: 'boolean', default: false },
+  ],
+  general: [
+    { id: 'hours_estimated', label: 'Estimated Hours', type: 'number', required: true },
+    { id: 'materials_cost', label: 'Materials Cost ($)', type: 'number', default: 0 },
+    { id: 'urgency', label: 'Urgency', type: 'select', options: ['standard','rush','emergency'], default: 'standard', required: true },
+  ],
+};
+
+function billLoadConfig() {
+  if (!AGENT_ID) {
+    billRenderConfigForm(null);
+    return;
+  }
+  fetch(BILL_API + '/config/' + AGENT_ID)
+    .then(r => r.json())
+    .then(data => {
+      billState.config = data.config;
+      billRenderConfigForm(data.config);
+    })
+    .catch(() => billRenderConfigForm(null));
+}
+
+function billRenderConfigForm(config) {
+  const industry = config?.industry || 'general';
+  document.getElementById('cfgIndustry').value = industry;
+  document.getElementById('cfgBizName').value = config?.business_name || '';
+  document.getElementById('cfgModel').value = config?.pricing_model || 'variable';
+  document.getElementById('cfgPersonality').value = config?.ai_personality || '';
+  document.getElementById('billIndustryLabel').textContent = industry.replace('_',' ');
+  document.getElementById('bizName').textContent = config?.business_name || 'the business';
+
+  const vars = config?.variables ? (typeof config.variables === 'string' ? JSON.parse(config.variables) : config.variables) : DEFAULT_VARS[industry] || [];
+  billState.config = { ...config, industry, variables: vars };
+  billRenderVars(vars);
+}
+
+function billRenderVars(vars) {
+  const c = document.getElementById('cfgVarsContainer');
+  if (!vars || !vars.length) { c.innerHTML = '<p style="color:var(--text-muted);font-size:0.8rem;">No variables configured.</p>'; return; }
+  let html = '';
+  vars.forEach((v, i) => {
+    html += `<div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;padding:8px;background:var(--surface2);border-radius:8px;">
+      <div style="flex:1;">
+        <div style="font-size:0.75rem;font-weight:600;">${v.label}</div>
+        <div style="font-size:0.68rem;color:var(--text-muted);">${v.type}${v.required ? ' · required' : ''}</div>
+      </div>
+      <select onchange="billUpdateVar(${i},'type',this.value)" style="padding:4px 8px;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:0.72rem;">
+        <option value="number" ${v.type==='number'?'selected':''}>Number</option>
+        <option value="text" ${v.type==='text'?'selected':''}>Text</option>
+        <option value="boolean" ${v.type==='boolean'?'selected':''}>Yes/No</option>
+        <option value="select" ${v.type==='select'?'selected':''}>Dropdown</option>
+      </select>
+      <label style="display:flex;align-items:center;gap:4px;font-size:0.7rem;cursor:pointer;">
+        <input type="checkbox" ${v.required?'checked':''} onchange="billUpdateVar(${i},'required',this.checked)"> Req
+      </label>
+      <button onclick="billRemoveVar(${i})" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:0.9rem;padding:4px;">✕</button>
+    </div>`;
+  });
+  c.innerHTML = html;
+}
+
+function billUpdateVar(index, field, value) {
+  const vars = billState.config.variables || [];
+  if (vars[index]) { vars[index][field] = value; }
+}
+
+function billRemoveVar(index) {
+  billState.config.variables.splice(index, 1);
+  billRenderVars(billState.config.variables);
+}
+
+function billAddCustomVariable() {
+  const label = prompt('Variable name (e.g. Driveway Length):');
+  if (!label) return;
+  const id = label.toLowerCase().replace(/[^a-z0-9]/g, '_');
+  billState.config.variables = billState.config.variables || [];
+  billState.config.variables.push({ id, label, type: 'number', required: false, hint: '' });
+  billRenderVars(billState.config.variables);
+}
+
+function billLoadIndustryDefaults() {
+  const ind = document.getElementById('cfgIndustry').value;
+  billState.config.industry = ind;
+  billState.config.variables = JSON.parse(JSON.stringify(DEFAULT_VARS[ind] || []));
+  billRenderVars(billState.config.variables);
+  document.getElementById('billIndustryLabel').textContent = ind.replace('_',' ');
+}
+
+function billSaveConfig() {
+  if (!AGENT_ID) { alert('Agent ID required. Please set up through your M.ai.K.R dashboard first.'); return; }
+  const body = {
+    industry: document.getElementById('cfgIndustry').value,
+    business_name: document.getElementById('cfgBizName').value,
+    pricing_model: document.getElementById('cfgModel').value,
+    ai_personality: document.getElementById('cfgPersonality').value,
+    variables: billState.config.variables || [],
+  };
+  fetch(BILL_API + '/config/' + AGENT_ID, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (data.success) { alert('✅ Configuration saved! Bill is ready to quote.'); }
+    else { alert('Error: ' + (data.error || 'Unknown')); }
+  })
+  .catch(e => alert('Save failed: ' + e.message));
+}
+
+// ── History ───────────────────────────────────────────────────────────────────
+function billLoadHistory() {
+  if (!AGENT_ID) { document.getElementById('billHistoryList').innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-muted);">Set up agent via M.ai.K.R dashboard first.</div>'; return; }
+  fetch(BILL_API + '/' + AGENT_ID)
+    .then(r => r.json())
+    .then(data => {
+      const quotes = data.quotes || [];
+      const c = document.getElementById('billHistoryList');
+      if (!quotes.length) { c.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-muted);font-size:0.85rem;">No quotes yet. Share your quote form with customers to get started!</div>'; return; }
+      let html = '';
+      quotes.forEach(q => {
+        const v = q.variables ? (typeof q.variables === 'string' ? JSON.parse(q.variables) : q.variables) : {};
+        html += `<div class="bill-quote-card">
+          <div class="bill-quote-info">
+            <div class="bill-quote-cust">${q.customer_name || 'Anonymous'}</div>
+            <div class="bill-quote-meta">${q.customer_email || ''} · ${new Date(q.created_at).toLocaleDateString()}</div>
+          </div>
+          <div class="bill-quote-amt">$${parseFloat(q.computed_price||0).toFixed(2)}</div>
+          <span class="bill-status-badge bill-status-${q.status || 'draft'}">${q.status || 'draft'}</span>
+        </div>`;
+      });
+      c.innerHTML = html;
+    })
+    .catch(() => { document.getElementById('billHistoryList').innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-muted);">Failed to load quotes.</div>'; });
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  billInitChat();
+  if (AGENT_ID) {
+    fetch(BILL_API + '/config/' + AGENT_ID).then(r=>r.json()).then(data => {
+      billState.config = data.config;
+    }).catch(()=>{});
+  } else {
+    // Demo mode: use lawn_care defaults
+    billState.config = { industry: 'lawn_care', variables: DEFAULT_VARS.lawn_care, business_name: 'Demo Business' };
+    document.getElementById('bizName').textContent = 'Demo Business';
+  }
+});
+
+</script>
+</body>
+</html>

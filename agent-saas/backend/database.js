@@ -436,6 +436,35 @@ db.serialize(() => {
   )`);
   db.run(`CREATE INDEX IF NOT EXISTS idx_agent_widgets ON agent_widgets(agent_id, widget_type)`);
 
+  // ── Quote Agent Tables ────────────────────────────────────────────────────
+  db.run(`CREATE TABLE IF NOT EXISTS quote_configs (
+    id TEXT PRIMARY KEY,
+    agent_id TEXT NOT NULL,
+    business_name TEXT,
+    industry TEXT DEFAULT 'general',
+    variables TEXT DEFAULT '[]',
+    base_price REAL DEFAULT 0,
+    pricing_model TEXT DEFAULT 'variable',
+    ai_personality TEXT DEFAULT '',
+    updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (agent_id) REFERENCES agents(id)
+  )`);
+  db.run(`CREATE TABLE IF NOT EXISTS quotes (
+    id TEXT PRIMARY KEY,
+    agent_id TEXT,
+    customer_name TEXT,
+    customer_email TEXT,
+    customer_phone TEXT,
+    variables TEXT DEFAULT '{}',
+    computed_price REAL DEFAULT 0,
+    price_breakdown TEXT DEFAULT '[]',
+    status TEXT DEFAULT 'draft',
+    sent_at TEXT,
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (agent_id) REFERENCES agents(id)
+  )`);
+  db.run(`CREATE INDEX IF NOT EXISTS idx_quotes_agent ON quotes(agent_id, created_at DESC)`);
+
   // Create indexes for common queries
   db.run(`CREATE INDEX IF NOT EXISTS idx_conversations_agent ON conversations(agent_id, created_at DESC)`);
   db.run(`CREATE INDEX IF NOT EXISTS idx_conversations_created_at ON conversations(created_at)`);

@@ -424,4 +424,48 @@ router.delete('/:agentId/:quoteId', requireAuth, async (req, res) => {
   }
 });
 
+// POST /api/quotes/public/calculate — Public quote calculation (no auth required for customers)
+router.post('/public/calculate', async (req, res) => {
+  try {
+    const { agentId, variables, customerName, customerEmail, customerPhone } = req.body;
+
+    const config = await new Promise((resolve) => {
+      db.get('SELECT * FROM quote_configs WHERE agent_id = ?', [agentId], (err, row) => resolve(row));
+    });
+
+    const industry = config?.industry || req.body.industry || 'general';
+    const result = calculateQuote(variables || {}, config || { industry });
+
+    const quoteId = uuidv4();
+    await new Promise((resolve, reject) => {
+      db.run(
+        `INSERT INTO quotes (id, customer_name, customer_email, customer_phone, variables, computed_price, price_breakdown, status)
+         VALUES (?, ?, ?, ?, ?, ?, ?, 'draft')`,
+        [quoteId, customerName || null, customerEmail || null, customerPhone || null,
+         JSON.stringify(variables || {}), result.total, JSON.stringify(result.breakdown)],
+        (err) => err ? reject(err) : resolve()
+      );
+    });
+
+    res.json({ success: true, quoteId, quote: result });
+  } catch (err) {
+    console.error('Public quote calculation error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// GET /api/quotes/public/config/:agentId — Public config (for customer-facing quote forms)
+router.get('/public/config/:agentId', async (req, res) => {
+  try {
+    const { agentId } = req.params;
+    const config = await new Promise((resolve) => {
+      db.get('SELECT id, agent_id, business_name, industry, variables, base_price, pricing_model, ai_personality FROM quote_configs WHERE agent_id = ?', [agentId], (err, row) => resolve(row));
+    });
+    res.json({ success: true, config });
+  } catch (err) {
+    console.error('Public config error:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
 module.exports = router;
