@@ -1,14 +1,43 @@
 const express = require('express');
+const rateLimit = require('express-rate-limit');
 const router = express.Router();
 const { getSecret } = require('../bootstrap');
 
+// Rate limit: 10 submissions per 15 minutes per IP
+const feedbackLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Too many submissions. Please try again in 15 minutes.' },
+});
+
 // POST /api/feedback — receive feedback form and email it
-router.post('/', async (req, res) => {
+router.post('/', feedbackLimiter, async (req, res) => {
   try {
     const { type, name, email, rating, feedback, bug } = req.body;
 
+    // Enforce JSON Content-Type
+    if (!req.is('application/json')) {
+      return res.status(415).json({ error: 'Content-Type must be application/json' });
+    }
+
     if (!type || !feedback) {
       return res.status(400).json({ error: 'Type and feedback are required' });
+    }
+
+    // Minimum content length check — reject junk
+    if (feedback.trim().length < 5) {
+      return res.status(400).json({ error: 'Feedback must be at least 5 characters' });
+    }
+    if (feedback.trim().length > 10000) {
+      return res.status(400).json({ error: 'Feedback must be under 10,000 characters' });
+    }
+
+    // Sanitize type — only allow known values
+    const allowedTypes = ['general', 'feature', 'bug', 'ux', 'performance', 'other'];
+    if (!allowedTypes.includes(type)) {
+      return res.status(400).json({ error: 'Invalid feedback type' });
     }
 
     // Build email subject

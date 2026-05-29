@@ -6,6 +6,38 @@
   <title>Feedback — M.ai.K.R</title>
   <link rel="stylesheet" href="/css/dark-premium.css">
   <style>
+    .feedback-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      background: #1A1A2E;
+      border-bottom: 1px solid #2D2D44;
+      margin-bottom: 1.5rem;
+    }
+    .feedback-nav .nav-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.15rem;
+      color: #C0A060;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+    .feedback-nav .nav-logo:hover {
+      color: #e2e8f0;
+    }
+    .feedback-nav .nav-home {
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 0.4rem 0.85rem;
+      border: 1px solid #2D2D44;
+      border-radius: 8px;
+      transition: all 0.15s;
+    }
+    .feedback-nav .nav-home:hover {
+      color: #e2e8f0;
+      border-color: #3b82f6;
+    }
     .feedback-container {
       max-width: 720px;
       margin: 0 auto;
@@ -13,7 +45,7 @@
     }
     .feedback-header {
       text-align: center;
-      margin-bottom: 2.5rem;
+      margin-bottom: 0.5rem;
     }
     .feedback-header h1 {
       font-family: 'Orbitron', sans-serif;
@@ -24,6 +56,15 @@
     .feedback-header p {
       color: #94a3b8;
       font-size: 0.95rem;
+    }
+    .bug-hint {
+      text-align: center;
+      font-size: 0.82rem;
+      color: #64748b;
+      margin-bottom: 2rem;
+    }
+    .bug-hint strong {
+      color: #94a3b8;
     }
     .form-section {
       background: #1A1A2E;
@@ -226,11 +267,17 @@
   </style>
 </head>
 <body>
+  <nav class="feedback-nav">
+    <a href="/" class="nav-logo">M.ai.K.R</a>
+    <a href="/" class="nav-home">← Back to Home</a>
+  </nav>
+
   <div class="feedback-container">
     <div class="feedback-header">
       <h1>💬 Feedback</h1>
       <p>Help us improve M.ai.K.R — share your thoughts, report bugs, or suggest features.</p>
     </div>
+    <div class="bug-hint">🐛 Found a bug? Select <strong>"Bug Report"</strong> below for structured reporting.</div>
 
     <div id="alert" class="alert"></div>
 
@@ -408,6 +455,10 @@
       }
       if (!document.getElementById('feedbackText').value.trim()) {
         showAlert('Please enter your feedback', 'error');
+        return;
+      }
+      if (document.getElementById('feedbackText').value.trim().length < 5) {
+        showAlert('Feedback must be at least 5 characters', 'error');
         return;
       }
       if (feedbackType.value === 'bug' && !document.getElementById('bugTitle').value.trim()) {

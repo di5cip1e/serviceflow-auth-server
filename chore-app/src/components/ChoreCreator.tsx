@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import {
   DndContext,
   closestCenter,
@@ -18,9 +18,18 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import type { PresetChore } from "@/data/presetChores";
 
 interface ChoreCreatorProps {
   onClose: () => void;
+  onSaved: () => void;
+  editChore?: {
+    id: number;
+    name: string;
+    description: string;
+    difficulty_rating: number;
+    steps: { id: number; text: string; sequence_order: number }[];
+  } | null;
 }
 
 interface StepItem {
@@ -86,7 +95,9 @@ function SortableStep({
   );
 }
 
-export default function ChoreCreator({ onClose }: ChoreCreatorProps) {
+export default function ChoreCreator({ onClose, onSaved, editChore }: ChoreCreatorProps) {
+  const isEditing = !!editChore && editChore.id > 0;
+
   const [step, setStep] = useState(1);
   const [choreName, setChoreName] = useState("");
   const [description, setDescription] = useState("");
@@ -97,6 +108,30 @@ export default function ChoreCreator({ onClose }: ChoreCreatorProps) {
   const [difficulty, setDifficulty] = useState<number | null>(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // If editing, pre-fill the form
+  useEffect(() => {
+    if (editChore) {
+      setChoreName(editChore.name);
+      setDescription(editChore.description);
+      setDifficulty(editChore.difficulty_rating);
+      setOrderedSteps(
+        editChore.steps.map((s) => ({
+          id: `existing-${s.id}`,
+          text: s.text,
+        }))
+      );
+      // Skip to step 2 (organize) since we already have everything
+      setStep(2);
+    }
+  }, [editChore]);
+
+  // If a preset was loaded into parent, it comes through editChore-like flow
+  // but we use a separate prop for clarity
+  useEffect(() => {
+    // This handles the preset case — parent sets editChore with preset data
+    // but without an id field, so we know it's a preset import
+  }, []);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
@@ -114,7 +149,7 @@ export default function ChoreCreator({ onClose }: ChoreCreatorProps) {
       const res = await fetch("/api/generate-steps", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ description }),
+        body: JSON.stringify({ choreName, description }),
       });
       const data = await res.json();
       if (res.ok && data.steps) {
@@ -212,17 +247,30 @@ export default function ChoreCreator({ onClose }: ChoreCreatorProps) {
     setSaving(true);
     setError(null);
     try {
-      const res = await fetch("/api/chores", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: choreName.trim(),
-          description: description.trim(),
-          difficulty_rating: difficulty || 5,
-          steps: orderedSteps.map((s) => s.text),
-        }),
-      });
+      const payload = {
+        name: choreName.trim(),
+        description: description.trim(),
+        difficulty_rating: difficulty || 5,
+        steps: orderedSteps.map((s) => s.text),
+      };
+
+      let res: Response;
+      if (isEditing && editChore) {
+        res = await fetch(`/api/chores/${editChore.id}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+      } else {
+        res = await fetch("/api/chores", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+      }
+
       if (res.ok) {
+        onSaved();
         onClose();
       } else {
         const data = await res.json();
@@ -235,12 +283,14 @@ export default function ChoreCreator({ onClose }: ChoreCreatorProps) {
     }
   };
 
+  const title = isEditing ? "Edit Chore" : "Create New Chore";
+
   return (
     <div className="fixed inset-0 bg-black/70 flex items-start justify-center z-50 overflow-y-auto py-8 px-4">
       <div className="bg-[#1e293b] rounded-2xl w-full max-w-4xl border border-gray-700 shadow-2xl">
         {/* Header */}
         <div className="flex items-center justify-between p-5 border-b border-gray-700">
-          <h2 className="text-xl font-bold text-gray-200">Create New Chore</h2>
+          <h2 className="text-xl font-bold text-gray-200">{title}</h2>
           <button
             onClick={onClose}
             className="text-gray-500 hover:text-gray-300 text-2xl leading-none cursor-pointer"
@@ -356,39 +406,41 @@ export default function ChoreCreator({ onClose }: ChoreCreatorProps) {
         {step === 2 && (
           <div className="p-5">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Left: AI-Generated Steps */}
-              <div>
-                <h3 className="text-sm font-medium text-gray-400 mb-3 flex items-center gap-2">
-                  <span>🤖</span> AI-Generated Steps
-                  <span className="text-xs text-gray-600">
-                    (click to add)
-                  </span>
-                </h3>
-                <div className="space-y-2 max-h-[400px] overflow-y-auto pr-1">
-                  {aiSteps.map((s) => {
-                    const isAdded = orderedSteps.some(
-                      (os) => os.id === s.id
-                    );
-                    return (
-                      <button
-                        key={s.id}
-                        onClick={() => !isAdded && addToOrder(s)}
-                        disabled={isAdded}
-                        className={`w-full text-left bg-[#0f172a] border rounded-lg p-3 text-sm transition-colors cursor-pointer ${
-                          isAdded
-                            ? "border-green-600/30 text-green-400/50 cursor-default"
-                            : "border-gray-600 text-gray-300 hover:border-blue-500 hover:bg-[#1e293b]"
-                        }`}
-                      >
-                        {isAdded ? "✓ Added" : s.text}
-                      </button>
-                    );
-                  })}
+              {/* Left: AI-Generated Steps (only show if not editing) */}
+              {!isEditing && aiSteps.length > 0 && (
+                <div>
+                  <h3 className="text-sm font-medium text-gray-400 mb-3 flex items-center gap-2">
+                    <span>🤖</span> AI-Generated Steps
+                    <span className="text-xs text-gray-600">
+                      (click to add)
+                    </span>
+                  </h3>
+                  <div className="space-y-2 max-h-[400px] overflow-y-auto pr-1">
+                    {aiSteps.map((s) => {
+                      const isAdded = orderedSteps.some(
+                        (os) => os.id === s.id
+                      );
+                      return (
+                        <button
+                          key={s.id}
+                          onClick={() => !isAdded && addToOrder(s)}
+                          disabled={isAdded}
+                          className={`w-full text-left bg-[#0f172a] border rounded-lg p-3 text-sm transition-colors cursor-pointer ${
+                            isAdded
+                              ? "border-green-600/30 text-green-400/50 cursor-default"
+                              : "border-gray-600 text-gray-300 hover:border-blue-500 hover:bg-[#1e293b]"
+                          }`}
+                        >
+                          {isAdded ? "✓ Added" : s.text}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
+              )}
 
-              {/* Right: Ordered Steps Drop Zone */}
-              <div>
+              {/* Right: Ordered Steps */}
+              <div className={isEditing ? "md:col-span-2" : ""}>
                 <h3 className="text-sm font-medium text-gray-400 mb-3 flex items-center gap-2">
                   <span>📋</span> Your Workflow
                   <span className="text-xs text-gray-600">
@@ -397,8 +449,9 @@ export default function ChoreCreator({ onClose }: ChoreCreatorProps) {
                 </h3>
                 {orderedSteps.length === 0 ? (
                   <div className="border-2 border-dashed border-gray-700 rounded-xl p-8 text-center text-gray-600">
-                    Click steps from the left to add them here, then drag to
-                    reorder
+                    {isEditing
+                      ? "No steps yet. Add steps below."
+                      : "Click steps from the left to add them here, then drag to reorder"}
                   </div>
                 ) : (
                   <DndContext
@@ -423,16 +476,37 @@ export default function ChoreCreator({ onClose }: ChoreCreatorProps) {
                     </SortableContext>
                   </DndContext>
                 )}
+
+                {/* Add custom step */}
+                <div className="mt-3">
+                  <button
+                    onClick={() => {
+                      const text = prompt("Enter a new step:");
+                      if (text && text.trim()) {
+                        setOrderedSteps((prev) => [
+                          ...prev,
+                          { id: `custom-${Date.now()}`, text: text.trim() },
+                        ]);
+                      }
+                    }}
+                    className="w-full border border-dashed border-gray-600 rounded-lg p-2 text-sm text-gray-500 hover:border-gray-500 hover:text-gray-400 transition-colors cursor-pointer"
+                  >
+                    + Add Custom Step
+                  </button>
+                </div>
               </div>
             </div>
 
             <div className="flex justify-between pt-4 mt-4 border-t border-gray-700">
-              <button
-                onClick={() => setStep(1)}
-                className="text-gray-400 hover:text-gray-200 px-4 py-2 rounded-lg transition-colors cursor-pointer"
-              >
-                ← Back
-              </button>
+              {!isEditing && (
+                <button
+                  onClick={() => setStep(1)}
+                  className="text-gray-400 hover:text-gray-200 px-4 py-2 rounded-lg transition-colors cursor-pointer"
+                >
+                  ← Back
+                </button>
+              )}
+              {isEditing && <div />}
               <button
                 onClick={rateDifficulty}
                 disabled={ratingDifficulty || orderedSteps.length === 0}
@@ -545,7 +619,7 @@ export default function ChoreCreator({ onClose }: ChoreCreatorProps) {
                     Saving...
                   </>
                 ) : (
-                  <>✅ Save Chore</>
+                  <>✅ {isEditing ? "Update Chore" : "Save Chore"}</>
                 )}
               </button>
             </div>

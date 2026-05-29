@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Speed to Lead Agent — M.ai.K.R</title>
+  <link rel="stylesheet" href="/css/dark-premium.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { background: #0A0A0F; color: #e2e8f0; font-family: 'Inter', sans-serif; margin: 0; }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem; border-bottom: 1px solid #2D2D44; background: #1A1A2E; position: sticky; top: 0; z-index: 100; }
+    .nav .logo { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; color: #C0A060; text-decoration: none; letter-spacing: 1px; }
+    .nav .back { color: #94a3b8; text-decoration: none; font-size: 0.85rem; padding: 0.4rem 0.85rem; border: 1px solid #2D2D44; border-radius: 8px; transition: all 0.15s; }
+    .nav .back:hover { color: #e2e8f0; border-color: #C0A060; }
+
+    .hero { text-align: center; padding: 3rem 1rem 2rem; background: linear-gradient(180deg, rgba(192,160,96,0.08) 0%, transparent 100%); }
+    .hero .badge { display: inline-block; background: #C0A060; color: #000; font-size: 0.7rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; }
+    .hero h1 { font-family: 'Orbitron', sans-serif; font-size: 2rem; color: #e2e8f0; margin: 0 0 0.5rem; }
+    .hero h1 span { color: #C0A060; }
+    .hero p { color: #94a3b8; font-size: 1rem; max-width: 600px; margin: 0 auto; }
+
+    .container { max-width: 800px; margin: 0 auto; padding: 0 1rem 3rem; }
+
+    .pricing-card { background: linear-gradient(135deg, rgba(192,160,96,0.08) 0%, #1A1A2E 100%); border: 2px solid rgba(192,160,96,0.4); border-radius: 20px; padding: 2.5rem; text-align: center; margin-bottom: 2rem; position: relative; }
+    .pricing-card .badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #C0A060; color: #000; font-size: 0.7rem; font-weight: 700; padding: 4px 16px; border-radius: 20px; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
+    .pricing-card .plan-name { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: #C0A060; margin: 0.5rem 0; }
+    .pricing-card .price { font-size: 3rem; font-weight: 900; color: #e2e8f0; }
+    .pricing-card .price span { font-size: 1rem; color: #94a3b8; font-weight: 400; }
+    .pricing-card .period { font-size: 0.85rem; color: #94a3b8; margin-bottom: 1.5rem; }
+    .pricing-card .features { text-align: left; max-width: 400px; margin: 0 auto 2rem; padding: 0; list-style: none; }
+    .pricing-card .features li { padding: 0.5rem 0; font-size: 0.9rem; color: #cbd5e1; border-bottom: 1px solid rgba(45,45,68,0.5); }
+    .pricing-card .features li:last-child { border-bottom: none; }
+
+    .form-section { background: #1A1A2E; border: 1px solid #2D2D44; border-radius: 16px; padding: 1.75rem; margin-bottom: 1.25rem; }
+    .form-section h2 { font-size: 1rem; font-weight: 600; color: #e2e8f0; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .form-group { margin-bottom: 1rem; }
+    .form-group:last-child { margin-bottom: 0; }
+    .form-group label { display: block; font-size: 0.85rem; color: #94a3b8; margin-bottom: 0.4rem; font-weight: 500; }
+    .form-group label .required { color: #ef4444; margin-left: 2px; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; background: #0A0A0F; border: 1px solid #2D2D44; border-radius: 10px; padding: 0.7rem 1rem; color: #e2e8f0; font-size: 0.9rem; font-family: inherit; transition: border-color 0.2s, box-shadow 0.2s; box-sizing: border-box; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: #C0A060; box-shadow: 0 0 0 3px rgba(192,160,96,0.15); }
+    .form-group select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+    .form-group select option { background: #0A0A0F; color: #e2e8f0; }
+
+    .submit-btn { width: 100%; background: linear-gradient(135deg, #C0A060, #a08040); color: #000; border: none; border-radius: 12px; padding: 1rem; font-size: 1.05rem; font-weight: 700; cursor: pointer; transition: opacity 0.2s, transform 0.1s; margin-top: 0.5rem; font-family: 'Orbitron', sans-serif; letter-spacing: 1px; }
+    .submit-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+    .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .submit-btn .spinner { display: inline-block; width: 18px; height: 18px; border: 2px solid rgba(0,0,0,0.3); border-top-color: #000; border-radius: 50%; animation: spin 0.6s linear infinite; vertical-align: middle; margin-right: 0.5rem; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .alert { padding: 0.85rem 1rem; border-radius: 10px; font-size: 0.9rem; margin-bottom: 1rem; display: none; }
+    .alert.success { display: block; background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); color: #22c55e; }
+    .alert.error { display: block; background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: #ef4444; }
+
+    .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
+    .stat-box { background: #1A1A2E; border: 1px solid #2D2D44; border-radius: 12px; padding: 1.25rem; text-align: center; }
+    .stat-box .value { font-size: 1.75rem; font-weight: 900; color: #C0A060; }
+    .stat-box .label { font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 0.25rem; }
+
+    .trust-row { display: flex; justify-content: center; gap: 2rem; margin-top: 1.5rem; flex-wrap: wrap; }
+    .trust-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: #64748b; }
+    .trust-item .icon { color: #C0A060; }
+
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 1.5rem; }
+      .pricing-card { padding: 1.5rem; }
+      .pricing-card .price { font-size: 2.5rem; }
+      .stats-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="/" class="logo">M.ai.K.R</a>
+    <a href="/" class="back">← Back to Home</a>
+  </nav>
+
+  <div class="hero">
+    <div class="badge">⚡ Speed to Lead Agent</div>
+    <h1>Hot Leads Go Cold in <span>47 Hours</span>.<br>Yours Won't.</h1>
+    <p>AI-powered instant outreach the moment a lead comes in — from Google Ads, Meta, or any form. SMS + Email in under 3 seconds.</p>
+  </div>
+
+  <div class="container">
+    <div class="stats-row">
+      <div class="stat-box">
+        <div class="value">&lt;3s</div>
+        <div class="label">Response Time</div>
+      </div>
+      <div class="stat-box">
+        <div class="value">94%</div>
+        <div class="label">Answer Rate (SMS)</div>
+      </div>
+      <div class="stat-box">
+        <div class="value">3.2x</div>
+        <div class="label">More Bookings</div>
+      </div>
+    </div>
+
+    <div id="alert" class="alert"></div>
+
+    <div class="pricing-card">
+      <div class="badge">⚡ Speed to Lead — $399/mo</div>
+      <div class="plan-name">Speed to Lead Agent</div>
+      <div class="price">$399 <span>/mo</span></div>
+      <div class="period">100K tokens · 1K outcome credits · SMS + Email · Booking</div>
+      <ul class="features">
+        <li>⚡ &lt;3 second response time — instant AI outreach</li>
+        <li>🔍 Google Ads Lead Form integration</li>
+        <li>📘 Meta Lead Ads (Facebook + Instagram) webhook</li>
+        <li>📝 Any website form — drop in our webhook URL</li>
+        <li>📨 AI-generated personalized SMS + Email</li>
+        <li>📅 Built-in booking flow — qualifies + books appointments</li>
+        <li>📊 Live lead feed + outreach analytics dashboard</li>
+        <li>🔇 Quiet hours + daily outreach caps</li>
+      </ul>
+    </div>
+
+    <form id="purchaseForm" novalidate>
+      <div class="form-section">
+        <h2>🏢 Business Info</h2>
+        <div class="form-group">
+          <label>Business Name <span class="required">*</span></label>
+          <input type="text" id="businessName" placeholder="e.g., ABC Plumbing" required>
+        </div>
+        <div class="form-group">
+          <label>Industry <span class="required">*</span></label>
+          <select id="industry" required>
+            <option value="">Select industry...</option>
+            <option value="home-services">Home Services (Plumbing, HVAC, Electrical)</option>
+            <option value="healthcare">Healthcare & Wellness</option>
+            <option value="legal">Legal Services</option>
+            <option value="real-estate">Real Estate</option>
+            <option value="auto">Automotive</option>
+            <option value="dental">Dental</option>
+            <option value="roofing">Roofing & Construction</option>
+            <option value="cleaning">Cleaning Services</option>
+            <option value="ecommerce">E-Commerce</option>
+            <option value="saas">SaaS / Technology</option>
+            <option value="education">Education & Training</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Website URL</label>
+          <input type="url" id="websiteUrl" placeholder="https://yourbusiness.com">
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h2>🤖 Agent Config</h2>
+        <div class="form-group">
+          <label>Agent Name <span class="required">*</span></label>
+          <input type="text" id="agentName" placeholder="e.g., LeadBot, Sarah, Assistant" required>
+        </div>
+        <div class="form-group">
+          <label>Agent Tone <span class="required">*</span></label>
+          <select id="tone" required>
+            <option value="">Select tone...</option>
+            <option value="professional">Professional & Friendly</option>
+            <option value="casual">Casual & Conversational</option>
+            <option value="formal">Formal & Corporate</option>
+            <option value="warm">Warm & Empathetic</option>
+            <option value="direct">Direct & To-the-Point</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Target Audience</label>
+          <input type="text" id="targetAudience" placeholder="e.g., Homeowners in Dallas, TX">
+        </div>
+        <div class="form-group">
+          <label>Use Cases / Services</label>
+          <textarea id="useCases" placeholder="e.g., Emergency plumbing, drain cleaning, water heater installation" rows="3"></textarea>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <h2>📱 Contact Channels</h2>
+        <div class="form-group">
+          <label>Your Email <span class="required">*</span></label>
+          <input type="email" id="email" placeholder="you@yourbusiness.com" required>
+        </div>
+        <div class="form-group">
+          <label>Phone Number (for SMS outreach replies)</label>
+          <input type="tel" id="phone" placeholder="+1 (555) 123-4567">
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">
+        ⚡ Deploy My Speed to Lead Agent — $399/mo
+      </button>
+    </form>
+
+    <div class="trust-row">
+      <div class="trust-item"><span class="icon">🔒</span> Secure Stripe checkout</div>
+      <div class="trust-item"><span class="icon">✅</span> Cancel anytime</div>
+      <div class="trust-item"><span class="icon">⚡</span> Live in under 60 seconds</div>
+    </div>
+  </div>
+
+  <script src="https://js.stripe.com/v3/"></script>
+  <script>
+    const form = document.getElementById('purchaseForm');
+    const alert = document.getElementById('alert');
+    const submitBtn = document.getElementById('submitBtn');
+
+    function showAlert(msg, type) {
+      alert.textContent = msg;
+      alert.className = 'alert ' + type;
+      alert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Validate required fields
+      const required = ['businessName', 'industry', 'agentName', 'tone', 'email'];
+      for (const field of required) {
+        if (!document.getElementById(field).value.trim()) {
+          showAlert('Please fill in all required fields', 'error');
+          return;
+        }
+      }
+
+      const email = document.getElementById('email').value.trim();
+      if (!email.includes('@')) {
+        showAlert('Please enter a valid email address', 'error');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="spinner"></span> Creating your checkout...';
+
+      try {
+        const res = await fetch('/create-checkout-session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            plan: 'speedToLead',
+            skillLevel: 'speedToLead',
+            agentName: document.getElementById('agentName').value.trim(),
+            businessName: document.getElementById('businessName').value.trim(),
+            industry: document.getElementById('industry').value,
+            tone: document.getElementById('tone').value,
+            targetAudience: document.getElementById('targetAudience').value.trim(),
+            useCases: document.getElementById('useCases').value.trim(),
+            websiteUrl: document.getElementById('websiteUrl').value.trim(),
+            email: email,
+            phone: document.getElementById('phone').value.trim(),
+            dataAgreement: true,
+            modelTier: 'standard'
+          }),
+        });
+
+        const data = await res.json();
+
+        if (data.success && data.url) {
+          // Redirect to Stripe Checkout
+          window.location.href = data.url;
+        } else {
+          showAlert(data.error || 'Failed to create checkout. Please try again.', 'error');
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '⚡ Deploy My Speed to Lead Agent — $399/mo';
+        }
+      } catch (err) {
+        showAlert('Network error. Please try again.', 'error');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '⚡ Deploy My Speed to Lead Agent — $399/mo';
+      }
+    });
+  </script>
+</body>
+</html>

@@ -526,8 +526,8 @@ All 4 features built and deployed in ~30 min (21:30-22:00 UTC). Backend restart 
 - Fixed webhook retry cron noise: disabled delivery, now runs silently with alerts only on actual failures
 - Trimmed HEARTBEAT.md: removed stale Morning Meeting, Avant Garde phases
 
-*Last consolidated: 2026-05-27 04:00 UTC*
-*Previous: 2026-05-26 04:00 UTC*
+*Last consolidated: 2026-05-28 04:00 UTC*
+*Previous: 2026-05-27 04:00 UTC*
 
 ## May 26, 2026 — Disk Cleanup + Gemini Key Migration
 
@@ -551,3 +551,25 @@ All 4 features built and deployed in ~30 min (21:30-22:00 UTC). Backend restart 
 - Memory search: ONLINE
 - Workspace: 2.9GB (clean)
 - Model: openrouter/owl-alpha (default)
+
+## May 27-28, 2026 — Pending Tasks from Derek
+
+### feedback.html (May 27 02:44 UTC)
+- Derek requested a feedback form page for maikr.pro
+- Auto-emails to Derek on submission
+- Includes a "bugs" section for users to report issues
+- **Status: NOT YET BUILT** — assistant turn failure on May 27
+
+### Speed-to-Lead Agent (May 27 19:06 UTC)
+- New agent type for maikr.pro
+- Digests ad data + form submissions in real-time
+- Contacts potential customer immediately (no human delay)
+- Purpose: prevent lost business from slow lead response
+- **Status: NOT YET STARTED** — assistant turn failure on May 27
+
+### System Health (May 28)
+- Uptime: 41+ days
+- Load: 0.15 (healthy)
+- Disk: 71% (68G/96G)
+- Memory: 2.8% used (2.2G/7.8G)
+- All systems operational

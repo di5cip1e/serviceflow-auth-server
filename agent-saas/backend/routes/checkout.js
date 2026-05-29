@@ -37,7 +37,8 @@ router.post('/', async (req, res) => {
       targetAudience,
       tone,
       agentName,
-      businessName
+      businessName,
+      skillLevel: tier
     };
     if (req.session && req.session.userId) {
       stripeMetadata.user_id = req.session.userId;

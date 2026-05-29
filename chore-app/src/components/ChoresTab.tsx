@@ -17,7 +17,12 @@ interface Chore {
   _count?: { assignments: number };
 }
 
-export default function ChoresTab() {
+interface ChoresTabProps {
+  onEditChore: (chore: Chore) => void;
+  onChoresChanged?: () => void;
+}
+
+export default function ChoresTab({ onEditChore, onChoresChanged }: ChoresTabProps) {
   const [chores, setChores] = useState<Chore[]>([]);
   const [loading, setLoading] = useState(true);
   const [expandedId, setExpandedId] = useState<number | null>(null);
@@ -41,8 +46,22 @@ export default function ChoresTab() {
     fetchChores();
   }, []);
 
+  // Refresh when parent signals changes
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!loading) fetchChores();
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [loading]);
+
+  useEffect(() => {
+    if (onChoresChanged) {
+      fetchChores();
+    }
+  }, [onChoresChanged]);
+
   const deleteChore = async (id: number) => {
-    if (!confirm("Delete this chore?")) return;
+    if (!confirm("Delete this chore? This will also remove all assignments.")) return;
     setDeleting(id);
     try {
       const res = await fetch(`/api/chores/${id}`, { method: "DELETE" });
@@ -68,6 +87,25 @@ export default function ChoresTab() {
     return "Hard";
   };
 
+  const categoryEmoji = (name: string) => {
+    const n = name.toLowerCase();
+    if (n.includes("kitchen") || n.includes("dish") || n.includes("oven") || n.includes("fridge") || n.includes("counter") || n.includes("stove") || n.includes("pantry") || n.includes("trash") || n.includes("meal")) return "🍳";
+    if (n.includes("bathroom") || n.includes("toilet") || n.includes("shower") || n.includes("tub") || n.includes("sink") || n.includes("mirror") || n.includes("towel")) return "🚿";
+    if (n.includes("bed") || n.includes("sheet") || n.includes("closet") || n.includes("pillow")) return "🛏️";
+    if (n.includes("laundry") || n.includes("fold") || n.includes("wash") || n.includes("dry")) return "👕";
+    if (n.includes("vacuum") || n.includes("mop") || n.includes("sweep") || n.includes("dust") || n.includes("floor")) return "🧹";
+    if (n.includes("dog") || n.includes("cat") || n.includes("pet") || n.includes("litter") || n.includes("groom") || n.includes("walk")) return "🐾";
+    if (n.includes("garden") || n.includes("lawn") || n.includes("mow") || n.includes("weed") || n.includes("rake") || n.includes("leaf") || n.includes("gutter")) return "🌱";
+    if (n.includes("car") || n.includes("garage")) return "🚗";
+    if (n.includes("window") || n.includes("light") || n.includes("fan") || n.includes("fixture")) return "💡";
+    if (n.includes("organiz") || n.includes("declutter") || n.includes("pantry") || n.includes("junk") || n.includes("mail") || n.includes("office") || n.includes("desk")) return "📋";
+    if (n.includes("winter") || n.includes("spring") || n.includes("holiday") || n.includes("decorat") || n.includes("basement") || n.includes("rug") || n.includes("bedding") || n.includes("linen")) return "🏠";
+    if (n.includes("grocery") || n.includes("shop")) return "🛒";
+    if (n.includes("living") || n.includes("couch") || n.includes("sofa") || n.includes("entry") || n.includes("porch") || n.includes("dining")) return "🛋️";
+    if (n.includes("plan") || n.includes("schedule")) return "📅";
+    return "🧹";
+  };
+
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
@@ -78,13 +116,15 @@ export default function ChoresTab() {
 
   return (
     <div>
-      <h2 className="text-lg font-semibold text-gray-200 mb-6">
-        Chores ({chores.length})
-      </h2>
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-lg font-semibold text-gray-200">
+          Chores ({chores.length})
+        </h2>
+      </div>
 
       {chores.length === 0 ? (
         <div className="text-center py-12 text-gray-500">
-          No chores yet. Click &quot;+ New Chore&quot; to create one!
+          No chores yet. Click &quot;+ New Chore&quot; to create one, or browse presets below!
         </div>
       ) : (
         <div className="space-y-3">
@@ -101,7 +141,7 @@ export default function ChoresTab() {
                 }
               >
                 <div className="flex items-center gap-3 flex-1 min-w-0">
-                  <span className="text-xl">🧹</span>
+                  <span className="text-xl">{categoryEmoji(chore.name)}</span>
                   <div className="min-w-0">
                     <h3 className="font-semibold text-gray-200 truncate">
                       {chore.name}
@@ -147,6 +187,9 @@ export default function ChoresTab() {
               {/* Expanded Steps */}
               {expandedId === chore.id && (
                 <div className="border-t border-gray-700 p-4 bg-[#0f172a]/50">
+                  {chore.description && (
+                    <p className="text-sm text-gray-400 mb-3">{chore.description}</p>
+                  )}
                   <h4 className="text-sm font-medium text-gray-400 mb-3">
                     Steps:
                   </h4>
@@ -165,7 +208,16 @@ export default function ChoresTab() {
                     <p className="text-gray-500 text-sm">No steps defined.</p>
                   )}
 
-                  <div className="mt-4 pt-3 border-t border-gray-700 flex justify-end">
+                  <div className="mt-4 pt-3 border-t border-gray-700 flex justify-between">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onEditChore(chore);
+                      }}
+                      className="text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors cursor-pointer"
+                    >
+                      ✏️ Edit
+                    </button>
                     <button
                       onClick={(e) => {
                         e.stopPropagation();

@@ -635,7 +635,7 @@ router.post('/config/:agentId', requireAuth, async (req, res) => {
       sms_template, email_subject, email_template,
       booking_enabled, quiet_hours_start, quiet_hours_end,
       max_outreach_per_day, meta_form_id, meta_page_id,
-      google_ads_customer_id
+      google_ads_customer_id, meta_access_token
     } = req.body;
 
     await new Promise((resolve, reject) => {
@@ -645,8 +645,8 @@ router.post('/config/:agentId', requireAuth, async (req, res) => {
            sms_template, email_subject, email_template,
            booking_enabled, quiet_hours_start, quiet_hours_end,
            max_outreach_per_day, meta_form_id, meta_page_id,
-           google_ads_customer_id, updated_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
+           google_ads_customer_id, meta_access_token, updated_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
         ON CONFLICT(agent_id) DO UPDATE SET
           enabled = excluded.enabled,
           auto_sms = excluded.auto_sms,
@@ -662,6 +662,7 @@ router.post('/config/:agentId', requireAuth, async (req, res) => {
           meta_form_id = excluded.meta_form_id,
           meta_page_id = excluded.meta_page_id,
           google_ads_customer_id = excluded.google_ads_customer_id,
+          meta_access_token = excluded.meta_access_token,
           updated_at = datetime('now')
       `, [
         agentId, enabled ? 1 : 0, auto_sms ? 1 : 0, auto_email ? 1 : 0,
@@ -669,7 +670,7 @@ router.post('/config/:agentId', requireAuth, async (req, res) => {
         email_template || '', booking_enabled ? 1 : 0,
         quiet_hours_start || 22, quiet_hours_end || 8,
         max_outreach_per_day || 100, meta_form_id || null, meta_page_id || null,
-        google_ads_customer_id || null
+        google_ads_customer_id || null, meta_access_token || null
       ], (err) => err ? reject(err) : resolve());
     });
 
@@ -777,8 +778,19 @@ router.delete('/event/:eventId', requireAuth, async (req, res) => {
     const agent = await verifyAgentAccess(event.agent_id, req.session.userId);
     if (!agent) return res.status(403).json({ error: 'Access denied' });
 
-    db.run(`DELETE FROM outreach_log WHERE event_id = ?`, [eventId]);
-    db.run(`DELETE FROM speed_to_lead_events WHERE id = ?`, [eventId]);
+    // Wrap in transaction to prevent orphaned outreach_log records
+    await new Promise((resolve, reject) => {
+      db.run('BEGIN TRANSACTION', (err) => {
+        if (err) return reject(err);
+        db.run(`DELETE FROM outreach_log WHERE event_id = ?`, [eventId], (err) => {
+          if (err) { db.run('ROLLBACK'); return reject(err); }
+          db.run(`DELETE FROM speed_to_lead_events WHERE id = ?`, [eventId], (err) => {
+            if (err) { db.run('ROLLBACK'); return reject(err); }
+            db.run('COMMIT', (err) => err ? reject(err) : resolve());
+          });
+        });
+      });
+    });
 
     res.json({ success: true });
   } catch (err) {

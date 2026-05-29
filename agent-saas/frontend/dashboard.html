@@ -2243,7 +2243,22 @@ function showToast(msg, type = '') {
 // BOOT
 // ═══════════════════════════════════════════════════════════
 
-document.addEventListener('DOMContentLoaded', initApp);
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    await initApp();
+  } catch (err) {
+    console.error('Dashboard init failed:', err);
+    // Show dashboard anyway — don't leave user on blank spinner
+    const app = document.getElementById('app') || document.body;
+    if (app) app.style.display = '';
+    const loading = document.getElementById('initialLoader');
+    if (loading) loading.style.display = 'none';
+    // Show error toast
+    if (typeof showToast === 'function') {
+      showToast('Dashboard loaded with errors. Some data may be missing.', 'error');
+    }
+  }
+});
 </script>
 
 </body>
