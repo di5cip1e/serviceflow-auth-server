@@ -166,6 +166,7 @@
               <option value="roofing">Roofing</option>
               <option value="cleaning">Cleaning Service</option>
               <option value="hvac">HVAC</option>
+              <option value="electrical">Electrical</option>
             </select>
           </div>
           <div class="quote-form-row">
@@ -451,6 +452,26 @@ const DEFAULT_VARS = {
     { id: 'hours_estimated', label: 'Estimated Hours', type: 'number', required: true },
     { id: 'materials_cost', label: 'Materials Cost ($)', type: 'number', default: 0 },
     { id: 'urgency', label: 'Urgency', type: 'select', options: ['standard','rush','emergency'], default: 'standard', required: true },
+  ],
+  electrical: [
+    { id: 'sq_ft', label: 'Home Square Footage', type: 'number', required: true, hint: 'Total finished + unfinished sq ft' },
+    { id: 'stories', label: 'Number of Stories', type: 'select', options: ['1','2','3+'], default: '1', required: true },
+    { id: 'panel_size', label: 'Panel Size (amps)', type: 'select', options: ['100','150','200','400'], default: '200', required: true },
+    { id: 'has_basement', label: 'Has Basement?', type: 'boolean', default: false },
+    { id: 'basement_finished', label: 'Basement Finished?', type: 'boolean', default: false },
+    { id: 'has_garage', label: 'Has Garage?', type: 'boolean', default: false },
+    { id: 'has_ev_charger', label: 'EV Charger?', type: 'boolean', default: false },
+    { id: 'has_ceiling_fans', label: 'Ceiling Fans?', type: 'boolean', default: false },
+    { id: 'num_fans', label: 'Number of Fans', type: 'number', default: 0 },
+    { id: 'num_outlets', label: 'Extra Outlets', type: 'number', default: 0 },
+    { id: 'num_switches', label: 'Extra Switches/Dimmers', type: 'number', default: 0 },
+    { id: 'has_smoke_detectors', label: 'Hardwired Smoke/CO?', type: 'boolean', default: false },
+    { id: 'num_smoke', label: 'Smoke/CO Detectors', type: 'number', default: 0 },
+    { id: 'has_generator', label: 'Generator Transfer Switch?', type: 'boolean', default: false },
+    { id: 'has_hot_tub', label: 'Hot Tub/Spa?', type: 'boolean', default: false },
+    { id: 'has_solar', label: 'Solar Integration?', type: 'boolean', default: false },
+    { id: 'old_wiring_type', label: 'Existing Wiring', type: 'select', options: ['knob_and_tube','aluminum','old_copper','new_romex','unknown'], default: 'unknown' },
+    { id: 'rewire_percentage', label: '% to Rewire', type: 'select', options: ['full','half','partial_kitchen_bath','just_one_room'], default: 'full', required: true },
   ],
 };
 

@@ -108,6 +108,33 @@ const INDUSTRY_PRESETS = {
     baseRate: 75,
     pricingDescription: 'Base rate: $75/hr + materials. Urgency multipliers apply.',
   },
+  electrical: {
+    name: 'Electrical',
+    variables: [
+      { id: 'sq_ft', label: 'Home Square Footage', type: 'number', required: true, hint: 'Total finished + unfinished sq ft' },
+      { id: 'rooms', label: 'Number of Rooms', type: 'number', required: true, hint: 'Bedrooms, living rooms, kitchen, etc.' },
+      { id: 'stories', label: 'Number of Stories', type: 'select', options: ['1', '2', '3+'], default: '1', required: true },
+      { id: 'panel_size', label: 'Electrical Panel Size (amps)', type: 'select', options: ['100', '150', '200', '400'], default: '200', required: true },
+      { id: 'wiring_type', label: 'Wiring Type Needed', type: 'select', options: ['standard_copper', 'romex_nm', 'armored_cable', 'conduit'], default: 'standard_copper' },
+      { id: 'has_basement', label: 'Has Basement?', type: 'boolean', default: false },
+      { id: 'basement_finished', label: 'Basement Finished?', type: 'boolean', default: false },
+      { id: 'has_garage', label: 'Has Garage?', type: 'boolean', default: false },
+      { id: 'has_ev_charger', label: 'EV Charger Installation?', type: 'boolean', default: false },
+      { id: 'has_ceiling_fans', label: 'Ceiling Fan(s)?', type: 'boolean', default: false },
+      { id: 'num_fans', label: 'Number of Ceiling Fans', type: 'number', default: 0 },
+      { id: 'num_outlets', label: 'Extra Outlets Needed', type: 'number', default: 0, hint: 'Additional outlets beyond standard' },
+      { id: 'num_switches', label: 'Extra Switches/Dimmers', type: 'number', default: 0 },
+      { id: 'has_smoke_detectors', label: 'Hardwired Smoke/CO Detectors?', type: 'boolean', default: false },
+      { id: 'num_smoke', label: 'Number of Smoke/CO Detectors', type: 'number', default: 0 },
+      { id: 'has_generator', label: 'Generator Transfer Switch?', type: 'boolean', default: false },
+      { id: 'has_hot_tub', label: 'Hot Tub / Spa Wiring?', type: 'boolean', default: false },
+      { id: 'has_solar', label: 'Solar Panel Integration?', type: 'boolean', default: false },
+      { id: 'old_wiring_type', label: 'Existing Wiring Type', type: 'select', options: ['knob_and_tube', 'aluminum', 'old_copper', 'new_romex', 'unknown'], default: 'unknown' },
+      { id: 'rewire_percentage', label: '% of Home to Rewire', type: 'select', options: ['full', 'half', 'partial_kitchen_bath', 'just_one_room'], default: 'full' },
+    ],
+    baseRate: 3.50,
+    pricingDescription: 'Base: $3.50/sq ft for full rewire. Panel, wiring type, and specialty add-ons applied. Knob-and-tube removal carries premium.',
+  },
 };
 
 
@@ -230,6 +257,131 @@ function calculateQuote(variables, config) {
       if (seerAdjust > 0) breakdown.push({ label: `SEER ${seer} Upgrade`, amount: seerAdjust });
       if (ducts) breakdown.push({ label: 'Ductwork Installation', amount: 2500 });
       if (zones > 1) breakdown.push({ label: `Zones (${zones})`, amount: (zones - 1) * 800 });
+      break;
+    }
+
+    case 'electrical': {
+      const sqFt = parseFloat(vars.sq_ft) || 0;
+      const rooms = parseInt(vars.rooms) || 0;
+      const stories = parseInt(vars.stories) || 1;
+      const panelSize = parseInt(vars.panel_size) || 200;
+      const wiringType = vars.wiring_type || 'standard_copper';
+      const hasBasement = vars.has_basement === 'true' || vars.has_basement === true;
+      const basementFinished = vars.basement_finished === 'true' || vars.basement_finished === true;
+      const hasGarage = vars.has_garage === 'true' || vars.has_garage === true;
+      const hasEV = vars.has_ev_charger === 'true' || vars.has_ev_charger === true;
+      const hasFans = vars.has_ceiling_fans === 'true' || vars.has_ceiling_fans === true;
+      const numFans = parseInt(vars.num_fans) || 0;
+      const numOutlets = parseInt(vars.num_outlets) || 0;
+      const numSwitches = parseInt(vars.num_switches) || 0;
+      const hasSmoke = vars.has_smoke_detectors === 'true' || vars.has_smoke_detectors === true;
+      const numSmoke = parseInt(vars.num_smoke) || 0;
+      const hasGenerator = vars.has_generator === 'true' || vars.has_generator === true;
+      const hasHotTub = vars.has_hot_tub === 'true' || vars.has_hot_tub === true;
+      const hasSolar = vars.has_solar === 'true' || vars.has_solar === true;
+      const oldWiring = vars.old_wiring_type || 'unknown';
+      const rewirePct = vars.rewire_percentage || 'full';
+
+      // Base rate per sq ft by rewire scope
+      const scopeMult = { full: 1, half: 0.55, partial_kitchen_bath: 0.3, just_one_room: 0.15 };
+      const scope = scopeMult[rewirePct] || 1;
+      const base = sqFt * (baseRate || 3.50) * scope;
+      breakdown.push({ label: `Rewire (${rewirePct === 'full' ? 'Full Home' : rewirePct.replace(/_/g, ' ')})`, amount: round(base) });
+
+      // Stories multiplier (more stories = more vertical cable runs = more labor)
+      const storyMult = stories > 1 ? 1 + (stories - 1) * 0.15 : 1;
+      if (storyMult > 1) {
+        breakdown.push({ label: `${stories}-Story Premium`, amount: round(base * (storyMult - 1)) });
+      }
+
+      // Panel upgrade
+      const panelBase = { 100: 1500, 150: 2000, 200: 2500, 400: 4000 };
+      const panelCost = panelBase[panelSize] || 2500;
+      breakdown.push({ label: `${panelSize}A Panel`, amount: panelCost });
+
+      // Wiring type premium
+      const wireMult = { standard_copper: 1, romex_nm: 1.05, armored_cable: 1.25, conduit: 1.5 };
+      const wm = wireMult[wiringType] || 1;
+      if (wm > 1) {
+        breakdown.push({ label: `Wiring (${wiringType.replace(/_/g, ' ')})`, amount: round(base * (wm - 1)) });
+      }
+
+      // Basement (access difficulty)
+      if (hasBasement) {
+        const basementCost = basementFinished ? 800 : 400;
+        breakdown.push({ label: `Basement (${basementFinished ? 'finished' : 'unfinished'})`, amount: basementCost });
+      }
+
+      // Garage
+      if (hasGarage) {
+        breakdown.push({ label: 'Garage Wiring', amount: 600 });
+      }
+
+      // EV charger
+      if (hasEV) {
+        breakdown.push({ label: 'EV Charger Circuit (240V)', amount: 1200 });
+      }
+
+      // Ceiling fans
+      if (hasFans && numFans > 0) {
+        breakdown.push({ label: `Ceiling Fan Wiring (${numFans})`, amount: numFans * 350 });
+      }
+
+      // Extra outlets
+      if (numOutlets > 0) {
+        breakdown.push({ label: `Extra Outlets (${numOutlets})`, amount: numOutlets * 150 });
+      }
+
+      // Extra switches/dimmers
+      if (numSwitches > 0) {
+        breakdown.push({ label: `Switches/Dimmers (${numSwitches})`, amount: numSwitches * 120 });
+      }
+
+      // Smoke/CO detectors
+      if (hasSmoke && numSmoke > 0) {
+        breakdown.push({ label: `Hardwired Smoke/CO (${numSmoke})`, amount: numSmoke * 175 });
+      }
+
+      // Generator transfer switch
+      if (hasGenerator) {
+        breakdown.push({ label: 'Generator Transfer Switch', amount: 1500 });
+      }
+
+      // Hot tub
+      if (hasHotTub) {
+        breakdown.push({ label: 'Hot Tub / Spa Circuit', amount: 1800 });
+      }
+
+      // Solar integration
+      if (hasSolar) {
+        breakdown.push({ label: 'Solar Panel Integration', amount: 2000 });
+      }
+
+      // Old wiring removal premium
+      const oldWirePremium = {
+        knob_and_tube: 0.2,
+        aluminum: 0.1,
+        old_copper: 0.05,
+        new_romex: 0,
+        unknown: 0.08
+      };
+      const owp = oldWirePremium[oldWiring] || 0;
+      if (owp > 0) {
+        breakdown.push({ label: `Old Wiring Removal (${oldWiring.replace(/_/g, ' ')})`, amount: round(base * owp) });
+      }
+
+      total = (base * storyMult * wm) + panelCost
+        + (hasBasement ? (basementFinished ? 800 : 400) : 0)
+        + (hasGarage ? 600 : 0)
+        + (hasEV ? 1200 : 0)
+        + (hasFans ? numFans * 350 : 0)
+        + (numOutlets * 150)
+        + (numSwitches * 120)
+        + (hasSmoke ? numSmoke * 175 : 0)
+        + (hasGenerator ? 1500 : 0)
+        + (hasHotTub ? 1800 : 0)
+        + (hasSolar ? 2000 : 0)
+        + (base * owp);
       break;
     }
 
