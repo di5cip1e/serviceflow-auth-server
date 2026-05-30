@@ -42,3 +42,25 @@ export async function POST(request: Request) {
     );
   }
 }
+
+export async function PUT(request: Request) {
+  try {
+    const { id, role } = await request.json();
+    if (!id) {
+      return NextResponse.json({ error: "ID is required" }, { status: 400 });
+    }
+    const updateData: Record<string, unknown> = {};
+    if (role !== undefined) updateData.role = role;
+    const doer = await prisma.doer.update({
+      where: { id: parseInt(id) },
+      data: updateData,
+    });
+    return NextResponse.json(doer);
+  } catch (error) {
+    console.error("PUT /api/doers error:", error);
+    return NextResponse.json(
+      { error: "Failed to update doer" },
+      { status: 500 }
+    );
+  }
+}

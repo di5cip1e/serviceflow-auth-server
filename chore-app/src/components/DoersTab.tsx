@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 interface Doer {
   id: number;
   name: string;
+  role: string;
   completions: number;
   refusals: number;
   _count?: { assignments: number };
@@ -107,9 +108,32 @@ export default function DoersTab() {
                 <div className="w-10 h-10 rounded-full bg-blue-600/20 text-blue-400 flex items-center justify-center text-lg font-bold">
                   {doer.name.charAt(0).toUpperCase()}
                 </div>
-                <h3 className="text-lg font-semibold text-gray-200">
-                  {doer.name}
-                </h3>
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-lg font-semibold text-gray-200">
+                    {doer.name}
+                  </h3>
+                  <span className={`text-xs px-2 py-0.5 rounded-full ${doer.role === "admin" ? "bg-yellow-400/10 text-yellow-400" : "bg-gray-400/10 text-gray-400"}`}>
+                    {doer.role === "admin" ? "👑 Admin" : "👤 Resident"}
+                  </span>
+                </div>
+                <button
+                  onClick={async () => {
+                    const newRole = doer.role === "admin" ? "resident" : "admin";
+                    try {
+                      const res = await fetch("/api/doers", {
+                        method: "PUT",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ id: doer.id, role: newRole }),
+                      });
+                      if (res.ok) fetchDoers();
+                    } catch (err) {
+                      console.error("Failed to update role:", err);
+                    }
+                  }}
+                  className="text-xs bg-[#0f172a] hover:bg-[#334155] text-gray-400 hover:text-gray-200 px-2 py-1 rounded-lg transition-colors cursor-pointer"
+                >
+                  {doer.role === "admin" ? "Demote" : "Make Admin"}
+                </button>
               </div>
 
               <div className="grid grid-cols-3 gap-3 text-center">

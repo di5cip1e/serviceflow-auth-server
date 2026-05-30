@@ -5,6 +5,7 @@ import DoersTab from "@/components/DoersTab";
 import ChoresTab from "@/components/ChoresTab";
 import ChoreCreator from "@/components/ChoreCreator";
 import PresetPicker from "@/components/PresetPicker";
+import CalendarTab from "@/components/CalendarTab";
 import type { PresetChore } from "@/data/presetChores";
 
 type Tab = "doers" | "chores" | "calendar";
@@ -127,11 +128,7 @@ export default function Home() {
               onChoresChanged={handleChoresChanged}
             />
           )}
-          {activeTab === "calendar" && (
-            <div className="text-center py-12 text-gray-500">
-              📅 Calendar view coming soon!
-            </div>
-          )}
+          {activeTab === "calendar" && <CalendarTab />}
         </div>
       </main>
 
