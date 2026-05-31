@@ -13,8 +13,8 @@
 
 ## Critical Runtime Info
 - **Model:** openrouter/owl-alpha (free, 1M+ context, set 2026-05-13)
-- **Current time:** Thursday May 21, 2026 18:41 UTC
-- **Context:** ~50k tokens — healthy
+- **Current time:** Saturday May 30, 2026 04:00 UTC
+- **Context:** Fresh session — healthy
 - **MEMORY.md target:** Keep under 50KB
 - **Heartbeat:** every 2 hours
 - **PM2:** maikr-backend + ollama-router running, systemd-enabled for reboot persistence
@@ -115,8 +115,17 @@
 - forgeai.sbs: 301 (normal)
 - Nightly optimization: 0 proposals, system healthy
 
-*Last consolidated: 2026-05-25 04:19 UTC*
-*Previous: 2026-05-21 04:12 UTC*
+*Last consolidated: 2026-05-30 04:00 UTC*
+*Previous: 2026-05-25 04:19 UTC*
+
+## May 26-30, 2026 Updates
+- May 26: Gemini key migration — old key expired, memory search broke, new key stored in secrets.json. Fixed TWO gateway processes fighting on port 18789 (kill old → restart once). Memory search back online.
+- May 26: Disk cleanup (Option 4+) — 6.7GB → 2.9GB (57% leaner). Deleted Pulse, Shadow Council, stale frontend/backend. Kept agent-saas/, ironveil/, kingdom-cards/, avant-garde/.
+- May 26: Set up nginx reverse proxy for gateway.maikr.pro. Webhook retry cron silenced.
+- May 27: Derek requested feedback.html (auto-email form + bugs section) and "Speed-to-Lead Agent" for maikr.pro. Both hit assistant turn failures — NOT YET BUILT.
+- May 28: Dashboard spinner bug fixed (missing try/catch in initApp). Competitive analysis delivered by V (STLA-COMPETITIVE-ANALYSIS.md — 8 competitors, positioning: "AI agent that calls/texts leads within 30 seconds").
+- May 28-30: Quiet period. Heartbeats checking ClawHub (5 skills, no changes), self-improving (no changes), proactivity (no triggers). No human messages.
+- **Pending Derek requests:** feedback.html + Speed-to-Lead Agent still open.
 
 ## May 21, 2026 — Major Feature Sprint (9 tasks, 1.5 hours)
 
