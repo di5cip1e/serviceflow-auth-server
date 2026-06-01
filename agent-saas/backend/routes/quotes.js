@@ -54,6 +54,14 @@ const INDUSTRY_PRESETS = {
       { id: 'fertilize', label: 'Fertilizer Treatment?', type: 'boolean', default: false },
     ],
     baseRate: 0.025, // per sq ft
+    pricingRules: [
+      'Base rate: $0.025/sq ft for standard mowing',
+      'Grass height multiplier: >2\" = 10%, >4\" = 25%, >6\" = 50%',
+      'Obstacles: $2 each (trees, garden beds, playsets)',
+      'Edge trimming: $15 flat add-on',
+      'Debris/leaf cleanup: $20 flat add-on',
+      'Fertilizer treatment: $0.005 per sq ft',
+    ],
     pricingDescription: 'Base rate: $0.025/sq ft. Grass height multiplier, obstacle surcharges, and add-ons applied.',
   },
   roofing: {
@@ -68,6 +76,15 @@ const INDUSTRY_PRESETS = {
       { id: 'chimneys', label: 'Number of Chimneys', type: 'number', default: 0 },
     ],
     baseRate: 4.50,
+    pricingRules: [
+      'Base rate: $4.50/sq ft (asphalt shingle, single story, low pitch)',
+      'Material multiplier: asphalt=1x, metal=1.8x, tile=2.5x, slate=3.5x, cedar=2.2x',
+      'Pitch multiplier: low=1x, medium=1.15x, steep=1.4x',
+      'Stories: +10% per additional story',
+      'Tear-off old roof: +$1.50/sq ft',
+      'Skylight flashing: $300 each',
+      'Chimney flashing: $200 each',
+    ],
     pricingDescription: 'Base rate: $4.50/sq ft. Material, pitch, and complexity multipliers applied.',
   },
   cleaning: {
@@ -81,6 +98,13 @@ const INDUSTRY_PRESETS = {
       { id: 'frequency', label: 'Frequency', type: 'select', options: ['one_time', 'weekly', 'biweekly', 'monthly'], default: 'one_time' },
     ],
     baseRate: 0.12,
+    pricingRules: [
+      'Base rate: $0.12 per sq ft for standard cleaning',
+      'Cleaning type: standard=1x, deep=1.5x, move-out=1.75x, post-construction=2.5x',
+      'Bathrooms: +$15 each',
+      'Pets: +$25 surcharge',
+      'Frequency discount: weekly=10% off, biweekly=5% off',
+    ],
     pricingDescription: 'Base rate: $0.12/sq ft. Room/bathroom counts, cleaning type, and frequency adjust pricing.',
   },
   hvac: {
@@ -94,6 +118,13 @@ const INDUSTRY_PRESETS = {
       { id: 'zones', label: 'Number of Zones', type: 'number', default: 1 },
     ],
     baseRate: 0,
+    pricingRules: [
+      'Base system cost: AC-only=$3,500, furnace=$3,000, full-split=$5,500, heat-pump=$6,500, mini-split=$4,500',
+      'Tonnage adjustment: +$800 per ton above 2 tons',
+      'SEER upgrade: +$200 per SEER rating above 14',
+      'Ductwork: +$2,500 if needed',
+      'Zones: +$800 per additional zone',
+    ],
     pricingDescription: 'Pricing based on system type + tonnage + SEER. Complex formula with multipliers.',
   },
   general: {
@@ -106,6 +137,11 @@ const INDUSTRY_PRESETS = {
       { id: 'has_special_requirements', label: 'Special Requirements?', type: 'boolean', default: false },
     ],
     baseRate: 75,
+    pricingRules: [
+      'Base labor rate: $75/hour',
+      'Materials: cost + 15% markup',
+      'Urgency: standard=1x, rush=+25%, emergency=+100%',
+    ],
     pricingDescription: 'Base rate: $75/hr + materials. Urgency multipliers apply.',
   },
   electrical: {
@@ -133,6 +169,24 @@ const INDUSTRY_PRESETS = {
       { id: 'rewire_percentage', label: '% of Home to Rewire', type: 'select', options: ['full', 'half', 'partial_kitchen_bath', 'just_one_room'], default: 'full' },
     ],
     baseRate: 3.50,
+    pricingRules: [
+      'Base rate: $3.50/sq ft for full rewire (standard copper/Romex)',
+      'Scope: full=100%, half=55%, kitchen+bath only=30%, single room=15%',
+      'Stories: +15% per additional story',
+      'Panel: 100A=$1,500, 150A=$2,000, 200A=$2,500, 400A=$4,000',
+      'Wiring type: Romex=+5%, armored cable=+25%, conduit=+50%',
+      'Basement: unfinished=$400, finished=$800',
+      'Garage: $600',
+      'EV charger circuit: $1,200',
+      'Ceiling fan wiring: $350 each',
+      'Extra outlets: $150 each',
+      'Switches/dimmers: $120 each',
+      'Hardwired smoke/CO: $175 each',
+      'Generator transfer switch: $1,500',
+      'Hot tub circuit: $1,800',
+      'Solar panel integration: $2,000',
+      'Old wiring removal: knob-and-tube=+20%, aluminum=+10%, old copper=+5%',
+    ],
     pricingDescription: 'Base: $3.50/sq ft for full rewire. Panel, wiring type, and specialty add-ons applied. Knob-and-tube removal carries premium.',
   },
 };
@@ -576,28 +630,168 @@ router.delete('/:agentId/:quoteId', requireAuth, async (req, res) => {
   }
 });
 
+// POST /api/quotes/chat — AI-powered quote conversation (for embedded agent)
+// Uses OpenRouter to have a natural conversation with the customer,
+// extracts variables, and computes quotes on-the-fly.
+const axios = require('axios');
+
+router.post('/chat', async (req, res) => {
+  try {
+    const { agentId, message, conversationHistory } = req.body;
+
+    // Load agent config
+    const config = await new Promise((resolve) => {
+      if (!agentId || agentId === '00000000-0000-0000-0000-000000000000') {
+        return resolve({ industry: 'general', variables: [], business_name: 'the business', ai_personality: '' });
+      }
+      db.get('SELECT * FROM quote_configs WHERE agent_id = ?', [agentId], (err, row) => resolve(row || { industry: 'general', variables: [], business_name: 'the business', ai_personality: '' }));
+    });
+
+    const industry = config.industry || 'general';
+    const vars = config.variables ? (typeof config.variables === 'string' ? JSON.parse(config.variables) : config.variables) : [];
+    const personality = config.ai_personality || 'Be friendly, professional, and helpful. Ask one question at a time.';
+    const bizName = config.business_name || 'the business';
+    const preset = INDUSTRY_PRESETS[industry] || INDUSTRY_PRESETS.general;
+
+    // Build system prompt
+    let systemPrompt = `You are a quoting agent for ${bizName}. ${personality}\n\n`;
+    systemPrompt += `Industry: ${industry}\n`;
+    if (preset) {
+      systemPrompt += `Pricing info: ${preset.pricingDescription}\n`;
+      if (preset.pricingRules) {
+        systemPrompt += `Pricing rules:\n${preset.pricingRules.map(r => '- ' + r).join('\n')}\n`;
+      }
+    }
+    if (vars.length) {
+      systemPrompt += `\nVariables to collect:\n${vars.map(v => `- ${v.label} (${v.type}${v.required ? ', required' : ''})${v.hint ? ': ' + v.hint : ''}`).join('\n')}\n`;
+    }
+    systemPrompt += `\nYour job: Have a natural conversation to understand the customer's needs. `;
+    systemPrompt += `Ask clarifying questions. When you have enough information, end your message with [QUOTE:variables_json] `;
+    systemPrompt += `where variables_json is a JSON object of the variables collected (e.g. [QUOTE:{"sq_ft": 5000, "grass_height": 6}]). `;
+    systemPrompt += `Always be helpful and transparent about pricing.`;
+
+    // Build messages array
+    const messages = [
+      { role: 'system', content: systemPrompt },
+      ...(conversationHistory || []).slice(-10).map(m => (
+        { role: (m.role === 'quote' || m.role === 'agent') ? 'assistant' : 'user', content: m.text }
+      )),
+      { role: 'user', content: message }
+    ];
+
+    const response = await axios.post('https://openrouter.ai/api/v1/chat/completions', {
+      model: 'openai/gpt-5-mini',
+      messages,
+      max_tokens: 800,
+      temperature: 0.7,
+    }, {
+      headers: {
+        'Authorization': 'Bearer ' + (process.env.OPENROUTER_API_KEY || ''),
+        'Content-Type': 'application/json',
+      },
+      timeout: 30000,
+    });
+
+    let reply = response?.data?.choices?.[0]?.message?.content || 'I apologize, I had trouble processing that. Could you tell me more about what you need?';
+
+    // Check for [QUOTE:...] embedded in response
+    let quoteResult = null;
+    const quoteMatch = reply.match(/\[QUOTE:(\{[\s\S]*?\})/);
+    if (quoteMatch) {
+      try {
+        const extractedVars = JSON.parse(quoteMatch[1]);
+        const configForCalc = {
+          industry,
+          base_rate: config.base_price || preset?.baseRate || 75,
+          variables: JSON.stringify(vars),
+        };
+        quoteResult = calculateQuote(extractedVars, configForCalc);
+        // Remove the [QUOTE:...] tag from display
+        reply = reply.replace(/\[QUOTE:\{[\s\S]*?\}/, '').trim();
+        // Append breakdown
+        if (quoteResult.breakdown && quoteResult.breakdown.length) {
+          const lines = quoteResult.breakdown.map(b => `• ${b.label}: $${Number(b.amount).toFixed(2)}`).join('\n');
+          reply += `\n\n📋 **Quote Estimate: $${quoteResult.total.toFixed(2)}**\n${lines}\n\n_This is an estimate. The business owner will confirm the final price._`;
+        } else {
+          reply += `\n\n📋 **Estimated Total: $${quoteResult.total.toFixed(2)}**\n_Estimate based on provided information._`;
+        }
+      } catch (e) {
+        console.error('[Quote Chat] Parse error:', e.message);
+      }
+    }
+
+    res.json({ success: true, reply, quote: quoteResult });
+  } catch (err) {
+    console.error('[Quote Chat] Error:', err.message);
+    res.json({ success: true, reply: 'I apologize, I\'m having trouble right now. Please try again in a moment.', quote: null });
+  }
+});
+
 // POST /api/quotes/public/calculate — Public quote calculation (no auth required for customers)
 router.post('/public/calculate', async (req, res) => {
   try {
     const { agentId, variables, customerName, customerEmail, customerPhone } = req.body;
 
-    const config = await new Promise((resolve) => {
+    const config = agentId ? await new Promise((resolve) => {
       db.get('SELECT * FROM quote_configs WHERE agent_id = ?', [agentId], (err, row) => resolve(row));
-    });
+    }) : null;
 
     const industry = config?.industry || req.body.industry || 'general';
     const result = calculateQuote(variables || {}, config || { industry });
 
+    // Save quote (agent_id optional for public/demo quotes)
     const quoteId = uuidv4();
-    await new Promise((resolve, reject) => {
-      db.run(
-        `INSERT INTO quotes (id, customer_name, customer_email, customer_phone, variables, computed_price, price_breakdown, status)
-         VALUES (?, ?, ?, ?, ?, ?, ?, 'draft')`,
-        [quoteId, customerName || null, customerEmail || null, customerPhone || null,
-         JSON.stringify(variables || {}), result.total, JSON.stringify(result.breakdown)],
-        (err) => err ? reject(err) : resolve()
-      );
+    const defaultAgentId = agentId || '00000000-0000-0000-0000-000000000000';
+
+    // Ensure a placeholder agent exists for unauthenticated quotes
+    await new Promise((resolve) => {
+      db.get('SELECT id FROM agents WHERE id = ?', [defaultAgentId], (err, row) => {
+        if (!row) {
+          // Use first available agent as fallback
+          db.get('SELECT id FROM agents LIMIT 1', [], (e2, first) => {
+            resolve(first ? first.id : null);
+          });
+        } else {
+          resolve(defaultAgentId);
+        }
+      });
+    }).then(async (fallbackAgentId) => {
+      if (fallbackAgentId) {
+        await new Promise((resolve, reject) => {
+          db.run(
+            `INSERT OR IGNORE INTO quotes (id, agent_id, customer_name, customer_email, customer_phone, variables, computed_price, price_breakdown, status)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'draft')`,
+            [quoteId, fallbackAgentId, customerName || null, customerEmail || null, customerPhone || null,
+             JSON.stringify(variables || {}), result.total, JSON.stringify(result.breakdown)],
+            (err) => err ? reject(err) : resolve()
+          );
+        });
+      }
     });
+
+    // Send email notification if we have the agent's config
+    if (config && customerEmail) {
+      const emailService = require('../services/emailService');
+      const businessName = config.business_name || 'the business';
+      const breakdownText = result.breakdown.map(b => `  ${b.label}: $${Number(b.amount).toFixed(2)}`).join('\n');
+      const emailBody = `New quote request from ${customerName || 'a customer'} (${customerEmail}):\n\n` +
+        `Industry: ${industry}\n` +
+        `Quote Total: $${result.total.toFixed(2)}\n\n` +
+        `Breakdown:\n${breakdownText}\n\n` +
+        `Details: ${JSON.stringify(variables, null, 2)}\n` +
+        `— Sent by M.ai.K.R Quotes`;
+      try {
+        // Fire and forget — don't block response
+        const agentOwner = await new Promise((resolve) => {
+          db.get('SELECT c.email FROM customers c JOIN agents a ON a.customer_id = c.id WHERE a.id = ?',
+            [agentId], (err, row) => resolve(row));
+        });
+        if (agentOwner?.email) {
+          emailService.sendEmail(agentOwner.email, `[M.ai.K.R] New Quote Request — $${result.total.toFixed(2)}`, emailBody)
+            .catch(err => console.error('[Quote] Email notify error:', err.message));
+        }
+      } catch (e) { /* email is best-effort */ }
+    }
 
     res.json({ success: true, quoteId, quote: result });
   } catch (err) {

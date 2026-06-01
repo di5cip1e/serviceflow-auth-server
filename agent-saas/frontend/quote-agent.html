@@ -141,7 +141,7 @@
       <div class="quote-page active" id="page-chat">
         <div class="quote-chat-wrap">
           <div class="quote-chat-msgs" id="quoteChatMsgs">
-            <div class="quote-msg system">👋 Welcome! I'm the the quotes agent. I help <span id="bizName">the business</span> provide quick, accurate quotes. Tell me about your project!</div>
+            <div class="quote-msg system">👋 Welcome! I'm the AI quotes agent. I help <span id="bizName">the business</span> provide quick, accurate quotes. Tell me about your project!</div>
           </div>
           <div class="quote-input-area">
             <textarea id="quoteInput" placeholder="Tell me what you need..." rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();quoteSendMsg();}"></textarea>
@@ -228,9 +228,9 @@ function quoteSwitchPage(page) {
 
 // ── Chat ───────────────────────────────────────────────────────────────────────
 const WELCOME_MSGS = [
-  "Hi there! I'm the the quotes agent — I help provide quick, accurate quotes. What can I help you with today?",
-  "Hello! I'm here to help us give you a fast, fair quote. What kind of work do you need done?",
-  "Hey! I'm the the quotes agent, the quoting assistant. Tell me about your project and I'll pull up a quote for you."
+  "Hi there! I'm the AI quotes agent — I help provide quick, accurate quotes. What can I help you with today?",
+  "Hello! I'm here to help give you a fast, fair quote. What kind of work do you need done?",
+  "Hey! I'm the AI quotes agent, the quoting assistant. Tell me about your project and I'll pull up a quote for you."
 ];
 
 function quoteInitChat() {
@@ -267,8 +267,7 @@ function quoteSendMsg() {
   if (!text) return;
   quoteAddMsg('customer', text);
   input.value = '';
-  // Quick quote trigger
-  quoteProcessCustomerMsg(text);
+  quoteProcessCustomerMsgAI(text);
 }
 
 // ── Variable Form in Chat ─────────────────────────────────────────────────────
@@ -320,42 +319,44 @@ function quoteSubmitVarForm() {
   quoteProcessCustomerMsg('', vars);
 }
 
-// ── Quote Logic ───────────────────────────────────────────────────────────────
-function quoteProcessCustomerMsg(text, explicitVars) {
+// ── AI Chat Logic ───────────────────────────────────────────────────────────
+function quoteProcessCustomerMsgAI(text) {
   quoteAddMsg('typing');
 
-  // Build variables from explicit form or parse from text
-  let vars = explicitVars || {};
-  if (!explicitVars && text) {
-    // Try to extract numbers from text
-    const numMatch = text.match(/(\d+)\s*(sq\s*ft|square\s*feet|ft²)/i);
-    if (numMatch) vars.sq_ft = parseInt(numMatch[1]);
-    const heightMatch = text.match(/(\d+)\s*(inch|in|")/i);
-    if (heightMatch) vars.grass_height = parseInt(heightMatch[1]);
-  }
+  // Build conversation history for context
+  const history = quoteState.msgs
+    .filter(m => m.role === 'customer' || m.role === 'quote')
+    .map(m => ({ role: m.role === 'customer' ? 'customer' : 'quote', text: m.text }));
 
-  // Check if we have enough to quote
-  const config = quoteState.config;
-  const industry = config?.industry || 'general';
-  const required = (config?.variables || DEFAULT_VARS[industry] || []).filter(v => v.required);
-  const have = required.every(v => vars[v.id] !== undefined && vars[v.id] !== '' && vars[v.id] !== '0');
+  fetch(QUOTE_API + '/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ agentId: AGENT_ID, message: text, conversationHistory: history })
+  })
+  .then(r => r.json())
+  .then(data => {
+    const reply = data.reply || 'I apologize, I had trouble processing that. Could you tell me more?';
+    quoteAddMsg('quote', reply);
 
-  setTimeout(() => {
-    if (have || Object.keys(vars).length > 2) {
-      quoteFetchQuote(vars);
-    } else {
-      const ask = quoteNextQuestion(required, vars);
-      quoteAddMsg('quote', ask);
-      setTimeout(quoteShowVarForm, 400);
+    // If AI returned a quote, show the card
+    if (data.quote && data.quote.total > 0) {
+      setTimeout(() => quoteShowQuoteCard(data.quote), 400);
+      quoteState.quoted = true;
     }
-  }, 800 + Math.random() * 600);
+  })
+  .catch(err => {
+    console.error('Quote chat error:', err);
+    quoteAddMsg('quote', 'I\'m having trouble connecting right now. Please try again in a moment.');
+  });
 }
 
-function quoteNextQuestion(required, have) {
-  const missing = required.filter(v => !have[v.id] || have[v.id] === '' || have[v.id] === '0');
-  if (missing.length === 0) return "Great, I have everything I need! Let me calculate that for you...";
-  const v = missing[0];
-  return `To give you an accurate quote, could you tell me: ${v.label.toLowerCase()}?${v.hint ? ' (' + v.hint + ')' : ''}`;
+// Keep old function for variable form submissions (direct calculation)
+function quoteProcessCustomerMsg(text, explicitVars) {
+  quoteAddMsg('typing');
+  let vars = explicitVars || {};
+  setTimeout(() => {
+    quoteFetchQuote(vars);
+  }, 600);
 }
 
 function quoteFetchQuote(vars) {
@@ -373,7 +374,7 @@ function quoteFetchQuote(vars) {
       quoteState.quoted = true;
     }, 500);
   })
-  .catch(() => quoteAddMsg('quote', `Let me do those numbers for you...`));
+  .catch(() => quoteAddMsg('quote', 'Let me do those numbers for you...'));
 }
 
 function quoteDisplayQuote(quote, vars) {
