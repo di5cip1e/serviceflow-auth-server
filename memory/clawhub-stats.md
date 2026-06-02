@@ -3,20 +3,22 @@
 ## Summary
 
 All 5 published skills at v1.0.0, last updated 2026-05-11:
-- client-outreach-automator — 342 downloads, 0 stars, 0 comments
-- business-doc-generator — 308 downloads, 0 stars, 0 comments
-- meeting-intelligence — 326 downloads, 0 stars, 0 comments
-- n8n-workflow-builder — 464 downloads, 0 stars, 0 comments
-- director-content-repurposer — 297 downloads, 0 stars, 0 comments
+- client-outreach-automator — 353 downloads, 0 stars, 0 comments
+- business-doc-generator — 315 downloads, 0 stars, 0 comments
+- meeting-intelligence — 334 downloads, 0 stars, 0 comments
+- n8n-workflow-builder — 471 downloads, 0 stars, 0 comments
+- director-content-repurposer — 303 downloads, 0 stars, 0 comments
 
-**Total downloads: 1,753** | Stars: 0 | Comments: 0
+**Total downloads: 1,776** | Stars: 0 | Comments: 0
 
-Trend: resumed growth overnight. +16 between 22:08 (1,737) and 01:08 (1,753). No stars or reviews yet.
+Trend: steady growth. +15 between 19:08 (1,761) and 20:38 (1,776). No stars or reviews yet.
 
 ## Log (recent first)
 
 | Date (UTC) | Notes |
 |---|---|
+| 2026-06-01 20:38 | All 5 reachable, v1.0.0 unchanged. +15 downloads: n8n +3 (471), outreach +5 (353), biz-doc +2 (315), meeting +3 (334), content-repurposer +2 (303). No stars/reviews. Total 1,776. |
+| 2026-06-01 05:38 | All 5 reachable. +4 downloads: outreach +5 (347), biz-doc +4 (312), meeting +4 (330), content-repurposer +4 (301). n8n unchanged (467). No stars/reviews. Total 1,757. |
 | 2026-06-01 01:08 | All 5 reachable. +16 downloads: n8n +3 (467), outreach +4 (346), biz-doc +3 (311), meeting +3 (329), content-repurposer +3 (300). No stars/reviews. Total 1,753. |
 | 2026-05-31 22:08 | All 5 reachable, unchanged. Total 1,737 downloads. No stars/reviews. |
 | 2026-05-31 20:38 | All 5 reachable, unchanged. Total 1,737 downloads. No stars/reviews. |
@@ -45,4 +47,22 @@ Trend: resumed growth overnight. +16 between 22:08 (1,737) and 01:08 (1,753). No
 | 2026-05-29 19:08 | Partial outage — 3 of 5 unreachable. 2 OK, no changes. |
 | 2026-05-29 11:38 | First logged check. All 5 at v1.0.0. |
 
-*Last checked: 2026-05-31 22:08 UTC*
+| 2026-06-01 04:08 | All 5 reachable, v1.0.0 unchanged. No new stars/reviews visible. |
+| 2026-06-01 08:38 | All 5 reachable. +4 downloads: n8n +1 (468), outreach +1 (348), biz-doc +1 (313), meeting +1 (331), content-repurposer +0 (301). No stars/reviews. Total 1,761. |
+| 2026-06-01 07:08 | All 5 reachable, v1.0.0 unchanged. No stars/reviews visible via CLI. |
+
+| 2026-06-01 10:08 | All 5 reachable, v1.0.0 unchanged. No new downloads (total still 1,761). No stars/reviews. |
+| 2026-06-01 11:38 | All 5 reachable, v1.0.0 unchanged. No new downloads (total still 1,761). No stars/reviews. |
+
+| 2026-06-01 14:38 | All 5 reachable, v1.0.0 unchanged. No new downloads (total still 1,761). No stars/reviews. |
+| 2026-06-01 17:38 | All 5 reachable, v1.0.0 unchanged. No new downloads (total still 1,761). No stars/reviews. |
+| 2026-06-01 19:08 | All 5 reachable, v1.0.0 unchanged. No new downloads (total still 1,761). No stars/reviews. |
+
+| 2026-06-01 22:08 | All 5 reachable, v1.0.0 unchanged. No new downloads (total still 1,776). No stars/reviews. |
+| 2026-06-01 23:38 | All 5 reachable, v1.0.0 unchanged. No new downloads (total still 1,776). No stars/reviews. |
+
+| 2026-06-02 01:08 | All 5 reachable, v1.0.0 unchanged. No new downloads (total still 1,776). No stars/reviews. |
+
+| 2026-06-02 02:38 | All 5 reachable, v1.0.0 unchanged. No new downloads (total still 1,776). No stars/reviews. |
+
+*Last checked: 2026-06-02 02:38 UTC*
