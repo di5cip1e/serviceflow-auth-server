@@ -28,7 +28,7 @@ Only do conservative organization:
 - refresh `index.md` if counts or file references drift
 - compact oversized files by merging duplicates or summarizing repetitive entries
 - move clearly misplaced notes to the right namespace only when the target is unambiguous
-- preserve confirmed rules and explicit corrections exactly
+- preserve confirmed rules and corrections exactly
 - update `last_reviewed_change_at` only after the review finishes cleanly
 
 ## Safety Rules

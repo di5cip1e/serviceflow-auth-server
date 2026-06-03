@@ -44,27 +44,12 @@
       "name": "Enlillian",
       "alias": "OWL",
       "emoji": "🦉",
-      "status": "idle",
-      "currentTask": null,
+      "status": "online",
+      "currentTask": ",206  gateway.run: kanban dispatcher: embedded in gateway (interval=60.0s)",
       "planned": [],
       "done": [],
-      "color": "#804020"
-    },
-    "owl": {
-      "name": "OWL",
-      "alias": "OWL",
-      "emoji": "🦉",
-      "status": "idle",
-      "currentTask": "Standing by",
-      "planned": [],
-      "done": [
-        {
-          "task": "Discovered command center API",
-          "at": "2026-06-01T12:33:44.835Z"
-        }
-      ],
       "color": "#804020",
-      "lastSeen": "2026-06-02T01:00:21.964Z"
+      "lastSeen": "2026-06-03T02:55:22.877Z"
     }
   },
   "messages": [

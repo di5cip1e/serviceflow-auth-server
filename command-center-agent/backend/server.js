@@ -33,7 +33,11 @@ function loadState() {
   try {
     const s = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'));
     const d = defaultState();
-    return { ...d, ...s, agents: { ...d.agents, ...(s.agents||{}) }, projects: s.projects||{}, files: s.files||{}, tasks: s.tasks||{}, goals: s.goals||{}, warMaps: s.warMaps||{} };
+    // Only keep known agents from saved state (prevents phantom entries like "owl")
+    const validKeys = Object.keys(d.agents);
+    const savedAgents = {};
+    for (const k of validKeys) { if (s.agents && s.agents[k]) savedAgents[k] = s.agents[k]; }
+    return { ...d, ...s, agents: { ...d.agents, ...savedAgents }, projects: s.projects||{}, files: s.files||{}, tasks: s.tasks||{}, goals: s.goals||{}, warMaps: s.warMaps||{} };
   } catch { return defaultState(); }
 }
 
@@ -52,7 +56,9 @@ app.get('/api/state', (req, res) => res.json(state));
 app.post('/api/agents/:agentId/status', (req, res) => {
   const { agentId } = req.params;
   const b = req.body;
-  if (!state.agents[agentId]) return res.status(404).json({ error: 'Unknown agent' });
+  // Reject unknown agent IDs to prevent phantom entries (e.g. "owl" vs "enlillian")
+  const validAgents = Object.keys(defaultState().agents);
+  if (!validAgents.includes(agentId)) return res.status(404).json({ error: `Unknown agent "${agentId}". Valid: ${validAgents.join(', ')}` });
   const a = state.agents[agentId];
   if (b.status) a.status = b.status;
   if (b.currentTask !== undefined) a.currentTask = b.currentTask;
