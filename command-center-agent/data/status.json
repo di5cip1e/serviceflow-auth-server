@@ -44,12 +44,12 @@
       "name": "Enlillian",
       "alias": "OWL",
       "emoji": "🦉",
-      "status": "online",
-      "currentTask": ",206  gateway.run: kanban dispatcher: embedded in gateway (interval=60.0s)",
+      "status": "idle",
+      "currentTask": "Standing by",
       "planned": [],
       "done": [],
       "color": "#804020",
-      "lastSeen": "2026-06-03T02:55:22.877Z"
+      "lastSeen": "2026-06-04T03:00:11.440Z"
     }
   },
   "messages": [
