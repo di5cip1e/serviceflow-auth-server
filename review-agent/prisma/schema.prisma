@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Account {
+  id                   String   @id @default(cuid())
+  email                String   @unique
+  name                 String?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  googleToken          String?
+  stripeCustomerId     String?
+  stripeSubscriptionId String?
+  plan                 String   @default("free")
+  reviews              Review[]
+  settings             Setting?
+}
+
+model Setting {
+  id              String  @id @default(cuid())
+  accountId       String  @unique
+  tone            String  @default("professional")
+  replySignature  String?
+  account         Account @relation(fields: [accountId], references: [id], onDelete: Cascade)
+}
+
+model Review {
+  id            String   @id @default(cuid())
+  accountId     String
+  externalId    String   @unique
+  platform      String
+  authorName    String
+  rating        Int
+  text          String
+  responseText  String?
+  responseSent  Boolean  @default(false)
+  respondedAt   DateTime?
+  createdAt     DateTime @default(now())
+  fetchedAt     DateTime @default(now())
+  account       Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+
+  @@index([accountId])
+  @@index([platform])
+}

@@ -115,8 +115,8 @@
 - forgeai.sbs: 301 (normal)
 - Nightly optimization: 0 proposals, system healthy
 
-*Last consolidated: 2026-06-03 04:00 UTC*
-*Previous: 2026-05-31 04:00 UTC*
+*Last consolidated: 2026-06-06 04:00 UTC*
+*Previous: 2026-06-03 04:00 UTC*
 
 ## May 31, 2026 — Quiet Sunday
 - No human messages
@@ -124,13 +124,21 @@
 - 2 pending items still open (feedback.html, Speed-to-Lead Agent)
 - All 5 ClawHub skills unchanged at v1.0.0
 
-## June 1-2, 2026 — Quiet Period
-- No human messages either day
-- All systems operational
-- ClawHub growth: 1,737→1,784 (+47 downloads in 2 days). Steady but slow.
+## June 1-5, 2026 — Quiet Period + Derek Contact
+- June 1-4: No human messages. All systems operational.
+- ClawHub growth: 1,737→1,784 (+47 downloads in 2 days, June 1-2). Steady but slow.
 - Self-improving: no file changes
 - Proactivity: no triggers
 - Pending items unchanged (feedback.html, Speed-to-Lead Agent, git push fc62070, first customer)
+
+### June 5: Derek Messages + Turn Failures
+- Derek sent 3 Telegram messages (19:04, 20:06, 22:15 UTC)
+- All 3 had `[assistant turn failed before producing content]`
+- Messages were: status check, "Greetings", "Repair your heartbeat"
+- Root cause: thinking mode incompatibility — owl-alpha rejected "high" thinking level
+- Reasoning toggle enabled during session may have caused cascading failures
+- Heartbeat cron system itself remained healthy throughout
+- **Lesson:** Avoid enabling reasoning/thinking on owl-alpha — it doesn't support "high" level
 
 ## May 26-30, 2026 Updates
 - May 26: Gemini key migration — old key expired, memory search broke, new key stored in secrets.json. Fixed TWO gateway processes fighting on port 18789 (kill old → restart once). Memory search back online.
