@@ -7,7 +7,7 @@ export default function LandingPage() {
         <span className="text-xl font-bold text-gray-900">Review Agent</span>
         <div className="space-x-4">
           <Link href="/login" className="text-gray-600 hover:text-gray-900">Sign in</Link>
-          <Link href="/login" className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium">Get Started</Link>
+          <Link href="/login" className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium">Start Free Trial</Link>
         </div>
       </nav>
 
@@ -24,10 +24,10 @@ export default function LandingPage() {
           </p>
           <div className="flex justify-center gap-4">
             <Link href="/login" className="px-8 py-3 bg-blue-600 text-white rounded-lg text-lg font-medium hover:bg-blue-700 transition-colors">
-              Start Free
+              Start 7-Day Free Trial
             </Link>
           </div>
-          <p className="mt-4 text-sm text-gray-500">No credit card required</p>
+          <p className="mt-4 text-sm text-gray-500">No credit card required • Cancel anytime</p>
         </div>
 
         <div className="mt-24 grid md:grid-cols-3 gap-8">
@@ -50,34 +50,22 @@ export default function LandingPage() {
 
         <div className="mt-24 text-center">
           <h2 className="text-3xl font-bold mb-4">Simple pricing</h2>
-          <p className="text-gray-500 mb-8">Start free, upgrade when you need more.</p>
-          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-            <div className="bg-white border-2 rounded-xl p-8">
-              <h3 className="text-lg font-semibold mb-2">Free</h3>
-              <div className="text-4xl font-bold mb-4">$0<span className="text-lg text-gray-400">/mo</span></div>
-              <ul className="text-left space-y-2 mb-6 text-sm text-gray-600">
-                <li>✓ Up to 10 reviews/month</li>
-                <li>✓ AI response generation</li>
-                <li>✓ Google Business integration</li>
-              </ul>
-              <Link href="/login" className="block w-full py-2 border-2 border-gray-200 rounded-lg text-center font-medium hover:border-gray-300">
-                Get Started
-              </Link>
-            </div>
-            <div className="bg-white border-2 border-blue-600 rounded-xl p-8 relative">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-xs font-medium px-3 py-1 rounded-full">Popular</div>
-              <h3 className="text-lg font-semibold mb-2">Pro</h3>
-              <div className="text-4xl font-bold mb-4">$49<span className="text-lg text-gray-400">/mo</span></div>
-              <ul className="text-left space-y-2 mb-6 text-sm text-gray-600">
-                <li>✓ Unlimited reviews</li>
-                <li>✓ AI response generation</li>
-                <li>✓ Google Business integration</li>
-                <li>✓ Priority support</li>
-              </ul>
-              <Link href="/login" className="block w-full py-2 bg-blue-600 text-white rounded-lg text-center font-medium hover:bg-blue-700">
-                Start Free Trial
-              </Link>
-            </div>
+          <p className="text-gray-500 mb-8">Try free for 7 days. Then $49/month.</p>
+          <div className="inline-block bg-white border-2 border-blue-600 rounded-xl p-8 max-w-md">
+            <div className="text-sm font-medium text-blue-600 mb-2">7-day free trial</div>
+            <div className="text-5xl font-bold mb-2">$49<span className="text-xl text-gray-400">/mo</span></div>
+            <ul className="text-left space-y-2 mb-6 text-sm text-gray-600">
+              <li>✓ Unlimited review monitoring</li>
+              <li>✓ AI response generation</li>
+              <li>✓ Google Business integration</li>
+              <li>✓ Multiple tone options</li>
+              <li>✓ Auto-fetch every 15 minutes</li>
+              <li>✓ Priority support</li>
+            </ul>
+            <Link href="/login" className="block w-full py-3 bg-blue-600 text-white rounded-lg text-center font-medium hover:bg-blue-700">
+              Start Free Trial
+            </Link>
+            <p className="mt-3 text-xs text-gray-400">No credit card to start</p>
           </div>
         </div>
       </main>

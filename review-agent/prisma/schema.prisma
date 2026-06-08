@@ -13,10 +13,11 @@ model Account {
   name                 String?
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt
+  trialEndsAt          DateTime?
   googleToken          String?
   stripeCustomerId     String?
   stripeSubscriptionId String?
-  plan                 String   @default("free")
+  plan                 String   @default("trial")
   reviews              Review[]
   settings             Setting?
 }

@@ -85,21 +85,26 @@
   }).catch(function() {});
 
   function loadDashboard() {
-    Promise.all([
-      fetch('/api/my-agents', { credentials: 'include' }).then(function(r) { return r.json(); }),
-      fetch('/api/analytics', { credentials: 'include' }).then(function(r) { return r.json(); })
-    ]).then(function(results) {
-      var agents = results[0].agents || results[0] || [];
-      var stats = results[1] || {};
-      
-      // Stats
+    fetch('/api/my-agents', { credentials: 'include' }).then(function(r) { return r.json(); }).then(function(agents) {
       var agentList = Array.isArray(agents) ? agents : [];
       document.getElementById('statAgents').textContent = agentList.length;
-      document.getElementById('statTokens').textContent = formatNum(stats.totalTokens || 0);
-      document.getElementById('statCredits').textContent = formatNum(stats.creditsRemaining || 0);
-      document.getElementById('statUptime').textContent = (stats.avgResponseMs ? stats.avgResponseMs + 'ms' : '—');
 
-      // Swarm SVG
+      if (agentList.length > 0) {
+        fetch('/api/analytics/' + agentList[0].id, { credentials: 'include' }).then(function(r) { return r.json(); }).then(function(stats) {
+          var data = stats.analytics || stats || {};
+          document.getElementById('statTokens').textContent = formatNum(data.totalTokens || 0);
+          document.getElementById('statCredits').textContent = formatNum(data.creditsRemaining || 0);
+        }).catch(function() {
+          document.getElementById('statTokens').textContent = '0';
+          document.getElementById('statCredits').textContent = '0';
+        });
+      } else {
+        document.getElementById('statTokens').textContent = '0';
+        document.getElementById('statCredits').textContent = '0';
+      }
+
+      // Load optimization proposals
+      fetch('/api/optimization/pending', { credentials: 'include' }).then(function(r) { return r.json(); }).then(function(props) {
       drawSwarmMap(agentList);
 
       // Activity

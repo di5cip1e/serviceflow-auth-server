@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
-import { google } from "googleapis"
 
 export async function POST(req: NextRequest) {
   const session = await getServerSession(authOptions)
@@ -26,24 +25,22 @@ export async function POST(req: NextRequest) {
   if (review.platform === "google" && review.account.googleToken) {
     try {
       const tokenData = JSON.parse(review.account.googleToken)
-      const oauth2Client = new google.auth.OAuth2(
-        process.env.GOOGLE_CLIENT_ID,
-        process.env.GOOGLE_CLIENT_SECRET
+      const accessToken = tokenData.access_token
+
+      // Use raw REST call to avoid TypeScript type issues with googleapis
+      await fetch(
+        `https://mybusinessbusinessinformation.googleapis.com/v1/${review.externalId}:reply`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ comment: response }),
+        }
       )
-      oauth2Client.setCredentials(tokenData)
-
-      const mybusiness = google.mybusinessbusinessinformation({
-        version: "v1",
-        auth: oauth2Client,
-      })
-
-      await mybusiness.accounts.locations.reviews.updateReply({
-        name: review.externalId,
-        requestBody: { comment: response },
-      })
     } catch (err) {
       console.error("Google reply error:", err)
-      // Still save locally even if Google API fails
     }
   }
 

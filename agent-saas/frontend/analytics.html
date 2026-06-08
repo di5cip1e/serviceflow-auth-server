@@ -312,10 +312,9 @@
 
   // ── Load Analytics ──
   function loadAnalytics() {
+    if (!selectedAgent) return;
     const params = new URLSearchParams({ period: currentPeriod });
-    if (selectedAgent) params.set('agentId', selectedAgent);
-
-    fetch(`/api/analytics?${params}`, { credentials: 'include' })
+    fetch(`/api/analytics/${selectedAgent}?${params}`, { credentials: 'include' })
       .then(r => r.json())
       .then(data => {
         updateStats(data);

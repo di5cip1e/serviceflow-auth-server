@@ -127,11 +127,11 @@
     var sendBtn = document.getElementById('sendBtn');
     sendBtn.disabled = true;
 
-    fetch('/api/chat/' + currentAgent, {
+    fetch('/api/chat', {
       method: 'POST',
       headers: {'Content-Type':'application/json'},
       credentials: 'include',
-      body: JSON.stringify({message: msg})
+      body: JSON.stringify({agentId: currentAgent, message: msg})
     }).then(function(r){return r.json();}).then(function(d){
       var typing = document.getElementById('typingMsg');
       if (typing) typing.outerHTML = '<div class="chat-msg agent">' + escapeHtml(d.reply || d.message || d.response || '(no response)') + '</div>';

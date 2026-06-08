@@ -9,6 +9,7 @@ interface Review {
   responseText: string | null
   responseSent: boolean
   createdAt: string
+  trialExpired?: boolean
 }
 
 export default function ReviewList({ reviews }: { reviews: Review[] }) {

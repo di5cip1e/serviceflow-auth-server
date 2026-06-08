@@ -3,11 +3,12 @@ const router = express.Router();
 const db = require('../database');
 const { updateAgentSystemPrompt, updateAgentAppearance } = require('../services/provisioning');
 const { requireAuth } = require('../middleware/auth');
+const { getSecret } = require('../bootstrap');
 
 // GET /api/config — Public config (Stripe PK, auth status)
 router.get('/config', (req, res) => {
   res.json({
-    stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY || '',
+    stripePublishableKey: getSecret('STRIPE_PUBLISHABLE_KEY') || '',
     isLoggedIn: !!(req.session && req.session.userId)
   });
 });

@@ -19,16 +19,11 @@ export function getOAuthClient() {
 }
 
 export async function fetchGoogleReviews(accessToken: string, locationName: string) {
-  oauth2Client.setCredentials({ access_token: accessToken })
-  const mybusiness = google.mybusinessbusinessinformation({
-    version: "v1",
-    auth: oauth2Client,
+  // Use raw REST to avoid TypeScript type issues with googleapis
+  const url = `https://mybusinessbusinessinformation.googleapis.com/v1/${locationName}/reviews?pageSize=50`
+  const response = await fetch(url, {
+    headers: { Authorization: `Bearer ${accessToken}` },
   })
-
-  const response = await mybusiness.accounts.locations.reviews.list({
-    parent: locationName,
-    pageSize: 50,
-  })
-
-  return response.data.reviews || []
+  const data = await response.json()
+  return data.reviews || []
 }

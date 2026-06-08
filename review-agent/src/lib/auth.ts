@@ -23,4 +23,18 @@ export const authOptions: NextAuthOptions = {
   },
   session: { strategy: "jwt" },
   secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    async signIn({ user }) {
+      // Set 7-day trial on first sign-in
+      if (user.email) {
+        await prisma.account.update({
+          where: { email: user.email },
+          data: {
+            trialEndsAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+          },
+        })
+      }
+      return true
+    },
+  },
 }
