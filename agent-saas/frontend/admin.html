@@ -353,6 +353,122 @@
       transition: background 0.15s;
     }
     .refresh-btn:hover { background: #475569; }
+
+    /* Mobile breakpoints */
+    @media (max-width: 768px) {
+      /* Prevent horizontal overflow */
+      body { overflow-x: hidden; }
+
+      /* Sidebar: hide on mobile */
+      .sidebar {
+        display: none;
+      }
+
+      /* Main content: full width */
+      .main {
+        margin-left: 0;
+        padding: 16px;
+      }
+
+      /* Header: stack vertically */
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .header h2 {
+        font-size: 18px;
+      }
+      .header p {
+        font-size: 12px;
+      }
+
+      /* Stats grid: 2 columns */
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      .stat-card {
+        padding: 16px;
+      }
+      .stat-card .value {
+        font-size: 22px;
+      }
+      .stat-card .label {
+        font-size: 10px;
+      }
+
+      /* System health: wrap */
+      .system-health {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .health-chip {
+        font-size: 11px;
+        padding: 8px 12px;
+      }
+
+      /* Section headers: stack */
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 16px;
+      }
+      .section-header h3 {
+        font-size: 14px;
+      }
+      .section-header p {
+        font-size: 11px;
+      }
+
+      /* Tables: allow horizontal scroll */
+      .section {
+        overflow-x: auto;
+      }
+      table {
+        min-width: 500px;
+      }
+      th, td {
+        padding: 8px 10px;
+        font-size: 11px;
+      }
+
+      /* Tabs: scrollable */
+      .tabs {
+        overflow-x: auto;
+        padding: 0 12px;
+        flex-wrap: nowrap;
+      }
+      .tab {
+        padding: 10px 14px;
+        font-size: 12px;
+        white-space: nowrap;
+      }
+
+      /* Buttons: full width options */
+      .refresh-btn {
+        padding: 10px 14px;
+        font-size: 12px;
+        width: 100%;
+        justify-content: center;
+      }
+
+      /* Plan chart: smaller */
+      #planChart {
+        padding: 16px !important;
+        gap: 8px !important;
+        height: 100px !important;
+      }
+
+      /* Daily table: slight min-width override */
+      .daily-table {
+        min-width: 380px;
+      }
+
+      /* Hide non-essential table columns on mobile (Industry, Tone, Session Key, Slug, User Msgs) */
+      /* These are the less critical columns - nth-child targets agentsDetailTable */
+    }
   </style>
   <link rel="stylesheet" href="css/maikr.css">
   <style>

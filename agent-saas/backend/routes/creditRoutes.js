@@ -1,47 +1,49 @@
 // routing/creditRoutes.js
 const router = require('express').Router();
 const creditManager = require('../services/creditManager');
+const { requireApiAuth } = require('../middleware/auth');
 
-// Middleware: require auth (same pattern as admin routes)
-const authRequired = (req, res, next) => {
-  const token = req.headers['x-api-key'] || req.headers['authorization']?.replace('Bearer ', '');
-  if (!token) return res.status(401).json({ error: 'API key required' });
-  next();
-};
+// Middleware: require valid API key (validates against DB, not just presence)
+const authRequired = requireApiAuth;
 
 /**
  * GET /api/credits/status/:agentId
  * Returns current credit balance and usage for an agent
  */
 router.get('/status/:agentId', authRequired, (req, res) => {
-  creditManager.getCreditStatus(req.params.agentId, (err, status) => {
-    if (err) return res.status(404).json({ error: err.message });
-    res.json({
-      agentId: req.params.agentId,
-      plan: status.planName,
-      baseTokens: {
-        total: status.baseTokens,
-        used: status.baseTokensUsed,
-        available: status.baseTokensAvailable,
-        percentUsed: Math.round((status.baseTokensUsed / status.baseTokens) * 100),
-      },
-      outcomeCredits: {
-        total: status.outcomeCredits,
-        used: status.outcomeCreditsUsed,
-        available: status.outcomeCreditsAvailable,
-        percentUsed: Math.round((status.outcomeCreditsUsed / status.outcomeCredits) * 100),
-      },
-      rates: {
-        lead_qualified: '2 credits',
-        appointment_booked: '3 credits',
-        support_ticket_resolved: '1 credit',
-        document_generated: '1 credit',
-        escalation_resolved: '1 credit',
-        rag_query: '0.25 credits',
-        mcp_tool_call: '0.5 credits',
-      },
+  try {
+    creditManager.getCreditStatus(req.params.agentId, (err, status) => {
+      if (err) return res.status(404).json({ error: err.message });
+      res.json({
+        agentId: req.params.agentId,
+        plan: status.planName,
+        baseTokens: {
+          total: status.baseTokens,
+          used: status.baseTokensUsed,
+          available: status.baseTokensAvailable,
+          percentUsed: Math.round((status.baseTokensUsed / status.baseTokens) * 100),
+        },
+        outcomeCredits: {
+          total: status.outcomeCredits,
+          used: status.outcomeCreditsUsed,
+          available: status.outcomeCreditsAvailable,
+          percentUsed: Math.round((status.outcomeCreditsUsed / status.outcomeCredits) * 100),
+        },
+        rates: {
+          lead_qualified: '2 credits',
+          appointment_booked: '3 credits',
+          support_ticket_resolved: '1 credit',
+          document_generated: '1 credit',
+          escalation_resolved: '1 credit',
+          rag_query: '0.25 credits',
+          mcp_tool_call: '0.5 credits',
+        },
+      });
     });
-  });
+  } catch (err) {
+    console.error('[credits/status]', err.message);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
 
 /**
@@ -49,11 +51,16 @@ router.get('/status/:agentId', authRequired, (req, res) => {
  * Returns credit transaction history (last 50)
  */
 router.get('/transactions/:agentId', authRequired, (req, res) => {
-  const limit = parseInt(req.query.limit) || 50;
-  creditManager.getTransactionHistory(req.params.agentId, limit, (err, rows) => {
-    if (err) return res.status(500).json({ error: err.message });
-    res.json({ agentId: req.params.agentId, transactions: rows, count: rows.length });
-  });
+  try {
+    const limit = parseInt(req.query.limit) || 50;
+    creditManager.getTransactionHistory(req.params.agentId, limit, (err, rows) => {
+      if (err) return res.status(500).json({ error: err.message });
+      res.json({ agentId: req.params.agentId, transactions: rows, count: rows.length });
+    });
+  } catch (err) {
+    console.error('[credits/transactions]', err.message);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
 
 /**
@@ -62,17 +69,22 @@ router.get('/transactions/:agentId', authRequired, (req, res) => {
  * Body: { agentId, outcomeType, referenceId? }
  */
 router.post('/deduct-outcome', authRequired, (req, res) => {
-  const { agentId, outcomeType, referenceId } = req.body;
-  if (!agentId || !outcomeType) {
-    return res.status(400).json({ error: 'agentId and outcomeType required' });
+  try {
+    const { agentId, outcomeType, referenceId } = req.body;
+    if (!agentId || !outcomeType) {
+      return res.status(400).json({ error: 'agentId and outcomeType required' });
+    }
+    creditManager.deductOutcomeCredit(agentId, outcomeType, referenceId);
+    res.json({ success: true, deducted: outcomeType });
+  } catch (err) {
+    console.error('[credits/deduct-outcome]', err.message);
+    res.status(500).json({ error: 'Internal server error' });
   }
-  creditManager.deductOutcomeCredit(agentId, outcomeType, referenceId);
-  res.json({ success: true, deducted: outcomeType });
 });
 
 /**
  * GET /api/credits/packs
- * Available credit pack offerings
+ * Available credit pack offerings (public — no auth needed)
  */
 router.get('/packs', (req, res) => {
   res.json({

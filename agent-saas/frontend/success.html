@@ -17,6 +17,68 @@
     .agent-box input { width: 100%; padding: var(--s2) var(--s3); background: transparent; border: none; color: var(--plasma); font-family: var(--font-mono); font-size: 0.8rem; cursor: text; }
     .btn-row { display: flex; gap: var(--s3); justify-content: center; flex-wrap: wrap; margin-top: var(--s6); }
     .hidden-section { display: none; }
+
+    /* ── Mobile breakpoint (≤768px) ── */
+    @media (max-width: 768px) {
+      body { overflow-x: hidden; }
+
+      .success-wrapper {
+        padding: var(--s3);
+        align-items: flex-start;
+      }
+
+      .success-card {
+        max-width: 100%;
+        width: 100%;
+        padding: var(--s5);
+      }
+
+      .checkmark {
+        width: 56px;
+        height: 56px;
+        font-size: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.4rem !important;
+      }
+
+      h3 {
+        font-size: 1.1rem !important;
+      }
+
+      .agent-box {
+        padding: var(--s3);
+        margin: var(--s4) 0;
+      }
+
+      .agent-box input {
+        font-size: 0.7rem;
+      }
+
+      .btn-row {
+        flex-direction: column;
+        gap: var(--s2);
+      }
+
+      .btn-row .btn,
+      .btn {
+        width: 100% !important;
+      }
+
+      .navbar-links {
+        display: none;
+      }
+
+      #guestSection .card,
+      #loggedInSection .card {
+        padding: var(--s4) !important;
+      }
+
+      form .form-group input {
+        font-size: 16px; /* prevent iOS zoom */
+      }
+    }
   </style>
 </head>
 <body>

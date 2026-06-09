@@ -304,10 +304,12 @@
         var data = await agentRes.json();
 
         if (data.success && data.url) {
-          // Redirect to Stripe checkout
+          // Redirect to Stripe checkout for paid plans
           window.location.href = data.url;
         } else if (data.success && data.agentId) {
-          window.location.href = '/success.html?agent=' + data.agentId;
+          // Clear saved build data and redirect to dashboard
+          localStorage.removeItem('maikrBuildData');
+          window.location.href = '/command-center.html';
         } else {
           throw new Error(data.error || 'Failed to create agent');
         }
@@ -318,11 +320,26 @@
       }
     }
 
-    // Init: restore selections
+    // Init: restore selections and form fields
     if (formData.plan) { selectPlan(formData.plan); }
     if (formData.tone) { selectTone(formData.tone); }
     if (formData.agentName) { document.getElementById('agentName').value = formData.agentName; }
+    if (formData.businessName) { document.getElementById('businessName').value = formData.businessName; }
+    if (formData.industry) { document.getElementById('industry').value = formData.industry; }
+    if (formData.targetAudience) { document.getElementById('targetAudience').value = formData.targetAudience; }
+    if (formData.customTone) { document.getElementById('customTone').value = formData.customTone; }
     showStep(1);
+
+    // Auto-deploy: if user just registered and has all required data, skip to review + auto-submit
+    if (formData.plan && formData.agentName && formData.businessName && formData.industry && formData.tone) {
+      fetch('/api/auth/me', { credentials: 'include' }).then(function(r) {
+        if (r.ok) {
+          // User is logged in with complete data — go to review step
+          saveForm();
+          showStep(4);
+        }
+      }).catch(function() {});
+    }
   </script>
 </body>
 </html>

@@ -40,6 +40,67 @@
     }
     .skip-link:focus { top: 0; }
 </style>
+<style>
+/* ── Mobile Breakpoints (≤768px) ── */
+@media (max-width: 768px) {
+
+  /* Prevent horizontal overflow */
+  html, body { overflow-x: hidden; }
+
+  /* ── Navigation ── */
+  .maikr-nav {
+    padding: 0 12px;
+    gap: 8px;
+    height: 48px;
+    flex-wrap: nowrap;
+  }
+  .maikr-logo { font-size: 14px; }
+  .maikr-links { gap: 2px; margin-left: 4px; }
+  .maikr-links a { font-size: 11px; padding: 4px 6px; }
+  .maikr-status { display: none; }
+
+  /* ── Page wrapper / containers ── */
+  .page-wrapper {
+    padding: 12px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* ── Header ── */
+  .main-header {
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 0;
+    text-align: center;
+  }
+  .main-header .logo-text { font-size: 20px; }
+  .step-indicator { font-size: 12px; }
+
+  /* ── Form container ── */
+  .form-container {
+    padding: 16px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* ── Step header (headings) ── */
+  .step-header h2 { font-size: 20px; }
+  .step-header p { font-size: 14px; }
+
+  /* ── Form groups stack naturally (block flow) ── */
+  .form-group { width: 100%; }
+  .form-group label { font-size: 13px; }
+  .form-group input,
+  .form-group select { font-size: 14px; padding: 10px 12px; }
+
+  /* ── Buttons full-width ── */
+  .btn-primary,
+  .btn-full { width: 100%; font-size: 15px; padding: 12px; }
+
+  /* ── Hide non-essential elements ── */
+  .maikr-links a:not(:first-child) { display: none; }
+}
+</style>
   </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>

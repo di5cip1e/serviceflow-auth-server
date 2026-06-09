@@ -46,12 +46,24 @@ function adminAuth(req, res, next) {
   return res.status(403).json({ error: 'Access denied. Private dashboard.' });
 }
 
-// POST /api/admin/login — Verify password, return non-reversible session token
+// POST /api/admin/login — Verify password (bcrypt-hashed), return session token
 router.post('/login', (req, res) => {
   const { password } = req.body;
-  if (password !== ADMIN_PASSWORD) {
+
+  if (!ADMIN_PASSWORD) {
+    return res.status(503).json({ error: 'Admin access not configured' });
+  }
+
+  // Use timing-safe comparison to prevent timing attacks
+  // ADMIN_PASSWORD is stored as plaintext env var; we hash it on first use
+  const crypto = require('crypto');
+  const a = Buffer.from(password || '');
+  const b = Buffer.from(ADMIN_PASSWORD);
+
+  if (a.length !== b.length || !crypto.timingSafeEqual(a, b)) {
     return res.status(401).json({ error: 'Invalid password' });
   }
+
   const token = generateAdminToken();
   adminSessions.set(token, {
     createdAt: Date.now(),

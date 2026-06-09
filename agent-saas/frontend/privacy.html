@@ -36,6 +36,86 @@
     }
     .skip-link:focus { top: 0; }
 </style>
+<style>
+@media (max-width: 768px) {
+  /* Prevent horizontal overflow */
+  body.legal-page {
+    overflow-x: hidden;
+  }
+
+  /* Nav: stack vertically and wrap */
+  .maikr-nav {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 10px 16px;
+    gap: 12px;
+  }
+  .maikr-links {
+    flex-wrap: wrap;
+    gap: 2px;
+    margin-left: 0;
+  }
+  .maikr-links a {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+  .maikr-status {
+    display: none;
+  }
+
+  /* Header: stack and center */
+  .main-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 16px;
+    gap: 8px;
+  }
+  .main-header nav {
+    width: 100%;
+  }
+  .main-header .nav-link {
+    display: block;
+    padding: 6px 0;
+  }
+
+  /* Main container: full width with padding */
+  .container {
+    max-width: 100% !important;
+    margin: 16px auto !important;
+    padding: 20px 16px !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-radius: 0 !important;
+  }
+
+  /* Headings: reduce font sizes */
+  h1 {
+    font-size: 1.5rem;
+    line-height: 1.3;
+  }
+  h2 {
+    font-size: 1.15rem;
+    margin-top: 1.25em;
+  }
+
+  /* Paragraphs: slightly smaller text */
+  p, li {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  /* Sections: reduce spacing */
+  section {
+    margin-top: 20px !important;
+  }
+
+  /* Footer section */
+  section[style*="border-top"] {
+    padding-top: 14px !important;
+    margin-top: 24px !important;
+  }
+}
+</style>
   </head>
 <body class="legal-page">
   <a href="#main-content" class="skip-link">Skip to main content</a>

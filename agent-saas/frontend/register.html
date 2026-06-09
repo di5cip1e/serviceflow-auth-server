@@ -14,6 +14,16 @@
     .auth-card .subtitle { color: var(--text-dim); font-size: 0.9rem; margin-bottom: var(--s8); }
     .auth-footer { text-align: center; margin-top: var(--s6); font-size: 0.85rem; color: var(--text-dim); }
     .auth-footer a { color: var(--amber); font-weight: 600; }
+
+    @media (max-width: 768px) {
+      .auth-page { padding: var(--s6) var(--s4); }
+      .auth-card { max-width: 100%; padding: var(--s6); }
+      .auth-card h1 { font-size: 1.25rem; }
+      .auth-card .subtitle { font-size: 0.85rem; margin-bottom: var(--s6); }
+      .auth-footer { font-size: 0.8rem; }
+      .navbar-links { gap: var(--s2); }
+      .navbar-links a { font-size: 0.85rem; }
+    }
   </style>
 </head>
 <body>

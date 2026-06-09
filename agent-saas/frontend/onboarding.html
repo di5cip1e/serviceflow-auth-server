@@ -37,6 +37,56 @@
     }
     .skip-link:focus { top: 0; }
 </style>
+  <style>
+    /* ============================================================
+       Mobile Breakpoints — Onboarding Page
+       ============================================================ */
+    @media(max-width:768px) {
+      /* Prevent horizontal overflow */
+      body { overflow-x: hidden; }
+
+      /* Containers: full-width with padding */
+      .step-progress { gap: 0; }
+      .form-container { padding: 24px 15px; }
+
+      /* Step Progress: compact dots */
+      .progress-label { display: none; }
+
+      /* Headers */
+      .step-header h2 { font-size: 1.3rem; }
+      .step-header p { font-size: 0.85rem; }
+
+      /* Sidebar links hidden */
+      .maikr-links { display: none; }
+
+      /* Button group: full width & stacked */
+      .btn-group { flex-direction: column; }
+      .btn-primary, .btn-secondary { width: 100%; }
+
+      /* Form elements */
+      .btn-create { width: 100%; }
+
+      /* Checkbox group: single column */
+      .checkbox-group { display: flex; flex-direction: column; gap: 12px; }
+
+      /* Plan cards: stack into one column */
+      .plan-cards { display: grid; grid-template-columns: 1fr; gap: 16px; }
+
+      /* Tier options: stack vertically */
+      .tier-options { display: flex; flex-direction: column; gap: 12px; }
+
+      /* Hide non-essential elements */
+      .brand-link { display: none; }
+      .brand-logo { display: none; }
+
+      /* Status indicator */
+      .maikr-status { white-space: nowrap; font-size: 0.7rem; }
+      .maikr-status .dot { width: 6px; height: 6px; }
+
+      /* Hero section if present */
+      .hero { padding: 20px 10px; }
+    }
+  </style>
   </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>

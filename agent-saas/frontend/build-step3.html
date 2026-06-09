@@ -40,6 +40,71 @@
     }
     .skip-link:focus { top: 0; }
 </style>
+<style>
+/* ── Mobile Breakpoints (≤768px) ── */
+@media (max-width: 768px) {
+
+  /* Prevent horizontal overflow */
+  html, body { overflow-x: hidden; }
+
+  /* ── Navigation ── */
+  .maikr-nav {
+    padding: 0 12px;
+    gap: 8px;
+    height: 48px;
+    flex-wrap: nowrap;
+  }
+  .maikr-logo { font-size: 14px; }
+  .maikr-links { gap: 2px; margin-left: 4px; }
+  .maikr-links a { font-size: 11px; padding: 4px 6px; }
+  .maikr-status { display: none; }
+
+  /* ── Page wrapper / containers ── */
+  .page-wrapper {
+    padding: 12px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* ── Header ── */
+  .main-header {
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 0;
+    text-align: center;
+  }
+  .main-header .logo-text { font-size: 18px; }
+  .step-indicator { font-size: 11px; }
+
+  /* ── Form container ── */
+  .form-container {
+    padding: 16px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* ── Step header (headings) ── */
+  .step-header h2 { font-size: 20px; }
+  .step-header p { font-size: 14px; }
+
+  /* ── Checkbox group ── */
+  .checkbox-group { gap: 12px; }
+  .checkbox-label { font-size: 13px; }
+
+  /* ── Buttons full-width ── */
+  .btn-group { flex-direction: column; gap: 10px; }
+  .btn-group .btn-primary,
+  .btn-group .btn-secondary,
+  .btn-primary,
+  .btn-secondary { width: 100%; text-align: center; }
+
+  /* ── Form inputs ── */
+  .form-group input { font-size: 14px; padding: 10px 12px; }
+
+  /* ── Hide non-essential elements ── */
+  .maikr-links { display: none; }
+}
+</style>
   </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>

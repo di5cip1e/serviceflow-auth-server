@@ -8,23 +8,97 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/maikr-v3.css">
+  <style>
+    /* ── Create Agent Inline Form ── */
+    .create-agent-wrap { max-width: 520px; margin: 0 auto; padding: var(--s10) var(--s4); }
+    .create-agent-wrap h2 { font-size: 1.4rem; margin-bottom: var(--s2); }
+    .create-agent-wrap .subtitle { color: var(--text-dim); font-size: 0.9rem; margin-bottom: var(--s8); }
+    .create-agent-wrap .form-group { margin-bottom: var(--s5); }
+    .create-agent-wrap label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--text-dim); margin-bottom: var(--s2); text-transform: uppercase; letter-spacing: 0.5px; }
+    .create-agent-wrap input, .create-agent-wrap select {
+      width: 100%; padding: 12px 14px; background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r2); color: var(--text); font-size: 0.95rem; font-family: var(--font-main);
+      transition: border-color var(--t-fast); outline: none;
+    }
+    .create-agent-wrap input:focus, .create-agent-wrap select:focus { border-color: var(--amber); }
+    .create-agent-wrap .plan-selector { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s3); margin-bottom: var(--s6); }
+    .create-agent-wrap .plan-option {
+      padding: var(--s4); border: 2px solid var(--border); border-radius: var(--r2); text-align: center;
+      cursor: pointer; transition: all var(--t-fast);
+    }
+    .create-agent-wrap .plan-option:hover { border-color: var(--amber); }
+    .create-agent-wrap .plan-option.selected { border-color: var(--amber); background: var(--amber-dim); }
+    .create-agent-wrap .plan-option .plan-name { font-weight: 700; font-size: 0.85rem; margin-bottom: 2px; }
+    .create-agent-wrap .plan-option .plan-price { font-size: 0.75rem; color: var(--text-muted); }
+    .create-agent-wrap .btn-create {
+      width: 100%; padding: 14px; font-size: 1rem; font-weight: 700; margin-top: var(--s4);
+    }
+    .create-agent-wrap .form-error { color: var(--error); font-size: 0.8rem; margin-top: var(--s1); display: none; }
+    .create-agent-wrap .form-error.show { display: block; }
+
+    /* ── Chat Area ── */
+    .chat-wrap { display: flex; flex-direction: column; height: calc(100vh - 56px); }
+    .chat-header {
+      display: flex; align-items: center; gap: 12px; padding: var(--s4) var(--s6);
+      border-bottom: 1px solid var(--border); background: var(--surface); flex-shrink: 0;
+    }
+    .chat-header .agent-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--amber), var(--orange));
+      display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: var(--void);
+    }
+    .chat-header .agent-info h3 { font-size: 0.95rem; font-weight: 600; }
+    .chat-header .agent-info .agent-status { font-size: 0.75rem; color: var(--success); display: flex; align-items: center; gap: 4px; }
+    .chat-header .agent-status .dot { width: 6px; height: 6px; background: var(--success); border-radius: 50%; }
+    .chat-messages { flex: 1; overflow-y: auto; padding: var(--s6); display: flex; flex-direction: column; gap: var(--s4); }
+    .chat-msg { max-width: 75%; padding: 12px 16px; border-radius: var(--r3); font-size: 0.9rem; line-height: 1.5; }
+    .chat-msg.bot { align-self: flex-start; background: var(--surface); border: 1px solid var(--border); }
+    .chat-msg.user { align-self: flex-end; background: var(--amber-dim); border: 1px solid var(--amber); }
+    .chat-msg .msg-sender { font-size: 0.7rem; font-weight: 600; color: var(--amber); margin-bottom: 4px; }
+    .chat-input-area { padding: var(--s4) var(--s6); border-top: 1px solid var(--border); background: var(--surface); flex-shrink: 0; }
+    .chat-input-area form { display: flex; gap: var(--s3); }
+    .chat-input-area input {
+      flex: 1; padding: 12px 16px; background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--r3); color: var(--text); font-size: 0.9rem; outline: none;
+    }
+    .chat-input-area input:focus { border-color: var(--amber); }
+    .chat-input-area button { padding: 12px 20px; white-space: nowrap; }
+    .chat-typing { font-size: 0.8rem; color: var(--text-muted); padding: 0 var(--s6) var(--s3); font-style: italic; }
+
+    /* ── Dashboard with agents ── */
+    .agent-selector { display: flex; gap: var(--s3); margin-bottom: var(--s6); flex-wrap: wrap; }
+    .agent-chip {
+      padding: 8px 16px; border-radius: 20px; border: 1px solid var(--border); cursor: pointer;
+      font-size: 0.85rem; font-weight: 500; transition: all var(--t-fast);
+    }
+    .agent-chip:hover { border-color: var(--amber); }
+    .agent-chip.active { border-color: var(--amber); background: var(--amber-dim); color: var(--amber); }
+    .add-agent-chip { border-style: dashed; color: var(--text-muted); }
+    .add-agent-chip:hover { color: var(--amber); border-color: var(--amber); }
+
+    /* ── Loading state ── */
+    .loading-overlay { display: flex; align-items: center; justify-content: center; padding: var(--s12); }
+    .spinner { width: 32px; height: 32px; border: 3px solid var(--border); border-top-color: var(--amber); border-radius: 50%; animation: spin 0.8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media(max-width:768px) {
+      .create-agent-wrap { padding: var(--s6) var(--s4); }
+      .create-agent-wrap .plan-selector { grid-template-columns: 1fr; }
+      .chat-msg { max-width: 90%; }
+      .agent-selector { gap: var(--s2); }
+    }
+  </style>
 </head>
 <body>
 <div class="app-layout">
   <aside class="app-sidebar">
     <a href="/command-center.html" class="app-sidebar-logo">M<span>.ai</span><span>.K.R</span></a>
-    <nav class="app-sidebar-nav">
-      <a href="/command-center.html" class="active"><span class="nav-icon">⌂</span> Command Center</a>
-      <a href="/chat.html"><span class="nav-icon">💬</span> Chat</a>
-      <a href="/swarm.html"><span class="nav-icon">🔄</span> Swarm</a>
-      <a href="/observe.html"><span class="nav-icon">👁</span> Observe</a>
-      <a href="/optimization.html"><span class="nav-icon">⚡</span> Optimize</a>
-      <a href="/channels.html"><span class="nav-icon">📡</span> Channels</a>
-      <a href="/mcp.html"><span class="nav-icon">🔧</span> MCP</a>
-      <a href="/analytics.html"><span class="nav-icon">📊</span> Analytics</a>
-      <a href="/agent-studio.html"><span class="nav-icon">🎨</span> Studio</a>
-      <a href="/feedback.html"><span class="nav-icon">💬</span> Feedback</a>
-      <a href="/settings.html"><span class="nav-icon">⚙</span> Settings</a>
+    <nav class="app-sidebar-nav" id="sidebarNav">
+      <a href="#" class="active" data-view="home"><span class="nav-icon">⌂</span> Home</a>
+      <a href="#" data-view="agents"><span class="nav-icon">🤖</span> My Agents</a>
+      <a href="#" data-view="analytics"><span class="nav-icon">📊</span> Analytics</a>
+      <a href="#" data-view="channels"><span class="nav-icon">📡</span> Channels</a>
+      <a href="#" data-view="settings"><span class="nav-icon">⚙</span> Settings</a>
     </nav>
     <div class="app-sidebar-footer">
       <div class="user-info"><div class="avatar" id="sidebarAvatar">U</div><div><div style="font-size:0.85rem;color:var(--text)" id="sidebarName">User</div><div style="font-size:0.72rem;color:var(--text-muted)" id="sidebarEmail"></div></div></div>
@@ -32,136 +106,248 @@
     </div>
   </aside>
 
-  <main class="app-main">
-    <div id="loadingState">
-      <div class="skeleton skeleton-heading"></div>
-      <div class="stat-grid"><div class="stat-card card"><div class="skeleton skeleton-heading"></div><div class="skeleton skeleton-text"></div></div><div class="stat-card card"><div class="skeleton skeleton-heading"></div><div class="skeleton skeleton-text"></div></div><div class="stat-card card"><div class="skeleton skeleton-heading"></div><div class="skeleton skeleton-text"></div></div><div class="stat-card card"><div class="skeleton skeleton-heading"></div><div class="skeleton skeleton-text"></div></div></div>
-    </div>
-
-    <div id="mainContent" class="hidden">
-      <h1 class="animate-in" style="margin-bottom:var(--s1)">Command Center <span class="g-amber">M.ai.K.R</span></h1>
-      <p style="color:var(--text-dim);margin-bottom:var(--s8);font-size:0.9rem" class="animate-in stagger-1">Your AI workforce at a glance.</p>
-
-      <div class="stat-grid animate-in stagger-1">
-        <div class="stat-card card"><div class="stat-label">Active Agents</div><div class="stat-value" id="statAgents">0</div><div class="stat-change up" id="statAgentsTrend">—</div></div>
-        <div class="stat-card card"><div class="stat-label">Tokens Used Today</div><div class="stat-value" id="statTokens">0</div><div class="stat-change" id="statTokensTrend">—</div></div>
-        <div class="stat-card card"><div class="stat-label">Credits Remaining</div><div class="stat-value" id="statCredits">0</div><div class="stat-change" id="statCreditsTrend">—</div></div>
-        <div class="stat-card card"><div class="stat-label">Avg Response Time</div><div class="stat-value" id="statUptime">—</div><div class="stat-change" id="statUptimeTrend">—</div></div>
-      </div>
-
-      <h3 class="animate-in stagger-2" style="margin-bottom:var(--s4)">Your Agent Swarm</h3>
-      <div class="card animate-in stagger-2" style="padding:var(--s6);margin-bottom:var(--s6);overflow:hidden">
-        <div id="swarmMap" style="min-height:200px;position:relative">
-          <svg width="100%" height="200" id="swarmSvg" style="display:block"></svg>
-        </div>
-      </div>
-
-      <div class="grid-2 animate-in stagger-3">
-        <div class="card" style="padding:var(--s6)">
-          <div class="card-header"><h3>Recent Activity</h3></div>
-          <div id="activityFeed"><p style="color:var(--text-dim);font-size:0.85rem">No recent activity.</p></div>
-        </div>
-        <div class="card" style="padding:var(--s6)">
-          <div class="card-header"><h3>Approvals Needed</h3><span class="card-action" id="approvalCount">0 pending</span></div>
-          <div id="approvalsList"><p style="color:var(--text-dim);font-size:0.85rem">No pending approvals.</p></div>
-        </div>
-      </div>
-    </div>
+  <main class="app-main" id="mainArea">
+    <!-- Content loaded dynamically -->
+    <div class="loading-overlay" id="pageLoader"><div class="spinner"></div></div>
   </main>
 </div>
 
 <script>
-  // Auth check
+  var currentUser = null;
+  var agents = [];
+  var activeAgentId = null;
+
+  // ── Auth & Init ──
   fetch('/api/auth/me', { credentials: 'include' }).then(function(r) {
     if (r.status === 401) { window.location.href = '/login.html'; return Promise.reject(); }
     return r.json();
   }).then(function(data) {
-    if (data && data.user) {
-      document.getElementById('sidebarName').textContent = data.user.name || 'User';
-      document.getElementById('sidebarEmail').textContent = data.user.email || '';
-      document.getElementById('sidebarAvatar').textContent = (data.user.name || 'U').charAt(0).toUpperCase();
-    }
-    loadDashboard();
+    currentUser = data.user;
+    document.getElementById('sidebarName').textContent = currentUser.name || 'User';
+    document.getElementById('sidebarEmail').textContent = currentUser.email || '';
+    document.getElementById('sidebarAvatar').textContent = (currentUser.name || 'U').charAt(0).toUpperCase();
+    loadAgents();
   }).catch(function() {});
 
-  function loadDashboard() {
-    fetch('/api/my-agents', { credentials: 'include' }).then(function(r) { return r.json(); }).then(function(agents) {
-      var agentList = Array.isArray(agents) ? agents : [];
-      document.getElementById('statAgents').textContent = agentList.length;
-
-      if (agentList.length > 0) {
-        fetch('/api/analytics/' + agentList[0].id, { credentials: 'include' }).then(function(r) { return r.json(); }).then(function(stats) {
-          var data = stats.analytics || stats || {};
-          document.getElementById('statTokens').textContent = formatNum(data.totalTokens || 0);
-          document.getElementById('statCredits').textContent = formatNum(data.creditsRemaining || 0);
-        }).catch(function() {
-          document.getElementById('statTokens').textContent = '0';
-          document.getElementById('statCredits').textContent = '0';
-        });
+  function loadAgents() {
+    fetch('/api/my-agents', { credentials: 'include' }).then(function(r) { return r.json(); }).then(function(data) {
+      agents = Array.isArray(data) ? data : [];
+      if (agents.length === 0) {
+        showCreateAgent();
       } else {
-        document.getElementById('statTokens').textContent = '0';
-        document.getElementById('statCredits').textContent = '0';
+        activeAgentId = agents[0].id;
+        showChat(activeAgentId);
       }
-
-      // Load optimization proposals
-      fetch('/api/optimization/pending', { credentials: 'include' }).then(function(r) { return r.json(); }).then(function(props) {
-      drawSwarmMap(agentList);
-
-      // Activity
-      var activity = Array.isArray(stats.recentActivity) ? stats.recentActivity : [];
-      var feed = document.getElementById('activityFeed');
-      if (activity.length) {
-        feed.innerHTML = activity.slice(0, 8).map(function(a) {
-          return '<div style="padding:var(--s2) 0;border-bottom:1px solid var(--border);font-size:0.82rem">' +
-            '<span style="color:var(--amber)">' + (a.agent || 'Agent') + '</span> ' +
-            '<span style="color:var(--text-dim)">' + (a.action || 'interaction') + '</span>' +
-            '<span style="color:var(--text-muted);float:right;font-size:0.72rem">' + timeAgo(a.timestamp) + '</span></div>';
-        }).join('');
-      }
-
-      // Approvals
-      fetch('/api/optimization/pending', { credentials: 'include' }).then(function(r) { return r.json(); }).then(function(props) {
-        var list = Array.isArray(props) ? props : (props.proposals || []);
-        document.getElementById('approvalCount').textContent = list.length + ' pending';
-        var html = '';
-        if (list.length) {
-          html = list.slice(0,5).map(function(p) {
-            return '<div style="padding:var(--s3);margin-bottom:var(--s2);background:var(--bg);border-radius:var(--r2);font-size:0.82rem">' +
-              '<span style="color:var(--text)">' + (p.title || p.rewrite || 'Proposal') + '</span>' +
-              '<span style="color:var(--amber);float:right">' + (p.confidence ? Math.round(p.confidence*100) + '%' : '—') + '</span></div>';
-          }).join('');
-        }
-        document.getElementById('approvalsList').innerHTML = html || '<p style="color:var(--text-dim);font-size:0.85rem">No pending approvals.</p>';
-      }).catch(function() {});
-
-      document.getElementById('loadingState').classList.add('hidden');
-      document.getElementById('mainContent').classList.remove('hidden');
+    }).catch(function() {
+      showCreateAgent();
     });
   }
 
-  function drawSwarmMap(agents) {
-    var svg = document.getElementById('swarmSvg');
-    var w = svg.parentElement.clientWidth || 600;
-    svg.setAttribute('width', w);
-    svg.setAttribute('viewBox', '0 0 ' + w + ' 200');
-    var html = '';
-    var nodes = agents.length || 1;
-    for (var i = 0; i < nodes; i++) {
-      var x = 40 + (i % 5) * (w / 5);
-      var y = 50 + Math.floor(i / 5) * 80;
-      html += '<circle cx="' + x + '" cy="' + y + '" r="12" fill="var(--amber)" opacity="0.8"><animate attributeName="r" values="12;16;12" dur="3s" repeatCount="indefinite"/></circle>';
-      html += '<text x="' + x + '" y="' + (y+30) + '" text-anchor="middle" fill="var(--text-dim)" font-size="11">' + (agents[i] ? (agents[i].agent_name || agents[i].name || 'Agent') : 'Agent '+(i+1)) + '</text>';
-      if (i < nodes - 1) {
-        var nx = 40 + ((i+1) % 5) * (w / 5);
-        var ny = 50 + Math.floor((i+1) / 5) * 80;
-        html += '<line x1="' + x + '" y1="' + y + '" x2="' + nx + '" y2="' + ny + '" stroke="var(--border)" stroke-width="1" stroke-dasharray="4,4"/>';
-      }
-    }
-    svg.innerHTML = html;
+  // ── View: Create Agent (inline) ──
+  function showCreateAgent() {
+    var main = document.getElementById('mainArea');
+    main.innerHTML = '' +
+      '<div class="create-agent-wrap">' +
+        '<h2>🤖 Create Your First AI Agent</h2>' +
+        '<p class="subtitle">Your agent will be ready to chat in seconds. No credit card required.</p>' +
+        '<form id="createAgentForm" novalidate>' +
+          '<div class="form-group">' +
+            '<label>Agent Name *</label>' +
+            '<input type="text" id="caName" placeholder="e.g., Sarah, Atlas, Support Bot" required>' +
+            '<div class="form-error" id="caNameError">Please name your agent.</div>' +
+          '</div>' +
+          '<div class="form-group">' +
+            '<label>Business Name *</label>' +
+            '<input type="text" id="caBusiness" placeholder="Your business or brand" required>' +
+            '<div class="form-error" id="caBusinessError">Please enter your business name.</div>' +
+          '</div>' +
+          '<div class="form-group">' +
+            '<label>Industry *</label>' +
+            '<select id="caIndustry" required>' +
+              '<option value="">Select industry…</option>' +
+              '<option>Technology</option><option>Healthcare</option><option>Finance</option>' +
+              '<option>E-Commerce</option><option>Real Estate</option><option>Education</option>' +
+              '<option>Legal</option><option>Home Services</option><option>Hospitality</option>' +
+              '<option>Marketing</option><option>Other</option>' +
+            '</select>' +
+            '<div class="form-error" id="caIndustryError">Please select an industry.</div>' +
+          '</div>' +
+          '<div class="form-group">' +
+            '<label>Plan</label>' +
+            '<div class="plan-selector">' +
+              '<div class="plan-option selected" data-plan="free" onclick="selectPlan(this)">' +
+                '<div class="plan-name">Starter</div><div class="plan-price">Free</div>' +
+              '</div>' +
+              '<div class="plan-option" data-plan="value" onclick="selectPlan(this)">' +
+                '<div class="plan-name">Value</div><div class="plan-price">$44/mo</div>' +
+              '</div>' +
+              '<div class="plan-option" data-plan="growth" onclick="selectPlan(this)">' +
+                '<div class="plan-name">Growth</div><div class="plan-price">$99/mo</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="form-group">' +
+            '<label>Target Audience (optional)</label>' +
+            '<input type="text" id="caAudience" placeholder="e.g., Small business owners, homeowners">' +
+          '</div>' +
+          '<button type="submit" class="btn btn-amber btn-create" id="caBtn">Create Agent</button>' +
+          '<div class="form-error" id="caGeneralError" style="text-align:center;margin-top:var(--s3)"></div>' +
+        '</form>' +
+      '</div>';
+
+    document.getElementById('createAgentForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var name = document.getElementById('caName').value.trim();
+      var business = document.getElementById('caBusiness').value.trim();
+      var industry = document.getElementById('caIndustry').value;
+      var audience = document.getElementById('caAudience').value.trim();
+      var plan = document.querySelector('.plan-option.selected') ? document.querySelector('.plan-option.selected').dataset.plan : 'free';
+
+      var valid = true;
+      document.querySelectorAll('.form-error').forEach(function(el) { el.classList.remove('show'); });
+      if (!name) { document.getElementById('caNameError').classList.add('show'); valid = false; }
+      if (!business) { document.getElementById('caBusinessError').classList.add('show'); valid = false; }
+      if (!industry) { document.getElementById('caIndustryError').classList.add('show'); valid = false; }
+      if (!valid) return;
+
+      var btn = document.getElementById('caBtn');
+      btn.disabled = true;
+      btn.textContent = 'Creating…';
+
+      fetch('/api/create-agent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({
+          agentName: name, businessName: business, industry: industry,
+          targetAudience: audience, plan: plan, tone: 'friendly'
+        })
+      }).then(function(r) { return r.json(); }).then(function(data) {
+        if (data.success && data.agentId) {
+          activeAgentId = data.agentId;
+          agents.push({ id: data.agentId, agent_name: data.agentName || name, business_name: business });
+          showChat(data.agentId);
+        } else {
+          throw new Error(data.error || 'Failed to create agent');
+        }
+      }).catch(function(err) {
+        document.getElementById('caGeneralError').textContent = err.message;
+        document.getElementById('caGeneralError').classList.add('show');
+        btn.disabled = false;
+        btn.textContent = 'Create Agent';
+      });
+    });
   }
 
-  function formatNum(n) { if (n == null) return '0'; n = Number(n); return n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(1)+'K' : n.toString(); }
-  function timeAgo(iso) { if (!iso) return '—'; var s = Math.floor((Date.now() - new Date(iso).getTime())/1000); return s<60 ? 'just now' : s<3600 ? Math.floor(s/60)+'m ago' : s<86400 ? Math.floor(s/3600)+'h ago' : Math.floor(s/86400)+'d ago'; }
+  function selectPlan(el) {
+    document.querySelectorAll('.plan-option').forEach(function(o) { o.classList.remove('selected'); });
+    el.classList.add('selected');
+  }
+
+  // ── View: Chat with Agent ──
+  function showChat(agentId) {
+    var agent = agents.find(function(a) { return a.id === agentId; });
+    if (!agent) return;
+
+    var main = document.getElementById('mainArea');
+    main.innerHTML = '' +
+      '<div class="chat-wrap">' +
+        '<div class="chat-header">' +
+          '<div class="agent-avatar">' + (agent.agent_name || 'A').charAt(0).toUpperCase() + '</div>' +
+          '<div class="agent-info">' +
+            '<h3>' + escHtml(agent.agent_name || 'Agent') + '</h3>' +
+            '<div class="agent-status"><span class="dot"></span> Online</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="chat-messages" id="chatMessages"></div>' +
+        '<div class="chat-typing" id="chatTyping" style="display:none">Agent is typing…</div>' +
+        '<div class="chat-input-area">' +
+          '<form id="chatForm">' +
+            '<input type="text" id="chatInput" placeholder="Type a message…" autocomplete="off">' +
+            '<button type="submit" class="btn btn-amber">Send</button>' +
+          '</form>' +
+        '</div>' +
+      '</div>';
+
+    // Load conversation history
+    fetch('/api/agent-memory?agentId=' + agentId, { credentials: 'include' }).then(function(r) { return r.json(); }).then(function(data) {
+      var msgs = document.getElementById('chatMessages');
+      if (data.conversations && data.conversations.length > 0) {
+        data.conversations.forEach(function(c) {
+          appendMessage(c.role === 'user' ? 'user' : 'bot', c.content, agent.agent_name);
+        });
+      } else {
+        // First conversation — agent greets the user
+        var greeting = "Hi! I'm " + (agent.agent_name || 'your AI agent') + ". I'm here to help" +
+          (agent.business_name ? " " + agent.business_name : "") + ". What can I do for you today?";
+        appendMessage('bot', greeting, agent.agent_name);
+        // Save greeting to history
+        fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({ agentId: agentId, message: '__greeting__' })
+        }).catch(function() {});
+      }
+      scrollToBottom();
+    }).catch(function() {
+      // No history yet — show greeting
+      var greeting = "Hi! I'm " + (agent.agent_name || 'your AI agent') + ". How can I help you today?";
+      appendMessage('bot', greeting, agent.agent_name);
+      scrollToBottom();
+    });
+
+    // Chat form
+    document.getElementById('chatForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var input = document.getElementById('chatInput');
+      var text = input.value.trim();
+      if (!text) return;
+      input.value = '';
+      appendMessage('user', text, currentUser ? currentUser.name : 'You');
+      scrollToBottom();
+
+      var typing = document.getElementById('chatTyping');
+      typing.style.display = 'block';
+
+      fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ agentId: agentId, message: text })
+      }).then(function(r) { return r.json(); }).then(function(data) {
+        typing.style.display = 'none';
+        if (data.response) {
+          appendMessage('bot', data.response, agent.agent_name);
+          scrollToBottom();
+        }
+      }).catch(function() {
+        typing.style.display = 'none';
+        appendMessage('bot', "Sorry, I'm having trouble connecting. Please try again.", agent.agent_name);
+      });
+    });
+  }
+
+  function appendMessage(role, text, senderName) {
+    var msgs = document.getElementById('chatMessages');
+    if (!msgs) return;
+    var div = document.createElement('div');
+    div.className = 'chat-msg ' + (role === 'user' ? 'user' : 'bot');
+    var label = role === 'bot' ? senderName : 'You';
+    div.innerHTML = '<div class="msg-sender">' + escHtml(label) + '</div>' + escHtml(text);
+    msgs.appendChild(div);
+  }
+
+  function scrollToBottom() {
+    var msgs = document.getElementById('chatMessages');
+    if (msgs) msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  function escHtml(s) {
+    var d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
 </script>
 </body>
 </html>

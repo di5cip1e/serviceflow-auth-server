@@ -258,37 +258,21 @@ This link will expire in 1 hour. If you didn't request a password reset, please 
 }
 
 // ============================================================
-// EMAIL SENDING (Console log for now - integrate SendGrid/SMTP later)
+// EMAIL SENDING — delegates to alerter.js (Resend/Mailgun/SMTP)
 // ============================================================
 
+const alerter = require('./alerter');
+
 /**
- * Send email - currently logs to console
- * @param {string} to - Recipient email address
- * @param {string} subject - Email subject
- * @param {string} html - HTML content
- * @param {string} text - Plain text content
- * @returns {Promise<{success: boolean, messageId?: string, error?: string}>}
+ * Send email via configured provider (Resend → Mailgun → SMTP)
+ * Falls back to console log if no provider configured (dry run)
  */
 async function sendEmail(to, subject, html, text) {
-  // TODO: Integrate SendGrid, AWS SES, or SMTP
-  console.log('='.repeat(60));
-  console.log('📧 EMAIL SENT');
-  console.log('='.repeat(60));
-  console.log(`To: ${to}`);
-  console.log(`Subject: ${subject}`);
-  console.log('-'.repeat(60));
-  console.log('HTML Preview (first 500 chars):');
-  console.log(html.substring(0, 500) + '...');
-  console.log('-'.repeat(60));
-  console.log('Text Preview (first 500 chars):');
-  console.log(text.substring(0, 500) + '...');
-  console.log('='.repeat(60));
-  
-  // Simulate sending - replace with actual email service integration
-  return {
-    success: true,
-    messageId: `msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-  };
+  const result = await alerter.sendEmail(to, subject, text, html);
+  if (result.dryRun) {
+    console.log('[emails.js] Dry run — no email provider configured. Logged only.');
+  }
+  return result;
 }
 
 /**

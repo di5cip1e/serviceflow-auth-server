@@ -188,19 +188,57 @@ app.get('/success.html', (req, res) => {
 });
 
 // Routes — webhook already mounted above (before express.json) for signature verification
-// Rate limiter for checkout (prevent abuse)
 const rateLimit = require('express-rate-limit');
+
+// Checkout rate limiter
 const checkoutLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 10,
   message: { error: 'Too many checkout attempts. Please try again later.' }
 });
+
+// Chat rate limiter — 60 requests per 15 min per IP (prevents OpenRouter credit burn)
+const chatLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 60,
+  message: { error: 'Too many chat requests. Please slow down.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+// Analytics rate limiter — 30 requests per 15 min per IP
+const analyticsLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 30,
+  message: { error: 'Too many analytics requests. Please slow down.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+// Leads rate limiter — 100 requests per 15 min per IP
+const leadsLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: { error: 'Too many lead requests. Please slow down.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+// Documents/RAG rate limiter — 30 requests per 15 min per IP
+const documentsLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 30,
+  message: { error: 'Too many document requests. Please slow down.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
 app.use('/create-checkout-session', checkoutLimiter, checkoutRoutes);
-app.use('/api/chat', swarmRoutes);  // Swarm chat (mounted first to handle /api/chat/swarm)
-app.use('/api/chat', chatRoutes);  // Single-agent chat fallback
-app.use('/api/swarm', swarmRoutes);  // Also mount at /api/swarm for direct access
+app.use('/api/chat', chatLimiter, swarmRoutes);  // Swarm chat (mounted first to handle /api/chat/swarm)
+app.use('/api/chat', chatLimiter, chatRoutes);    // Single-agent chat fallback
+app.use('/api/swarm', chatLimiter, swarmRoutes);  // Also mount at /api/swarm for direct access
 app.use('/api', agentRoutes);
-app.use('/api/documents', documentsRoutes);
+app.use('/api/documents', documentsLimiter, documentsRoutes);
 app.use('/api/mcp', mcpRoutes);    // MCP server management (before swarm catch-all)
 app.use('/api', channelRoutes);     // webhook handlers for Twilio, Slack, etc.
 app.use('/api/admin', adminRoutes);
@@ -223,7 +261,7 @@ app.use('/api/quotes', quotesRoutes);
 
 // Lead Generation routes (Phase 9)
 const leadsRoutes = require('./routes/leads');
-app.use('/api/leads', leadsRoutes);
+app.use('/api/leads', leadsLimiter, leadsRoutes);
 
 // Onboarding Wizard routes
 const onboardingRoutes = require('./routes/onboarding');
@@ -231,7 +269,7 @@ app.use('/api/onboarding', onboardingRoutes);
 
 // Analytics routes
 const analyticsRoutes = require('./routes/analytics');
-app.use('/api/analytics', analyticsRoutes);
+app.use('/api/analytics', analyticsLimiter, analyticsRoutes);
 const blueprintsRoutes = require('./routes/blueprints');
 app.use('/api/blueprints', blueprintsRoutes);
 

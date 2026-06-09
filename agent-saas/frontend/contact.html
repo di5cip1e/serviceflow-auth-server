@@ -9,6 +9,46 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/maikr-v3.css">
+  <style>
+    /* Page-specific mobile breakpoints */
+    @media(max-width:768px){
+      /* Main container: full-width with comfortable padding */
+      body > div[style*="max-width:640px"]{
+        max-width:100%!important;
+        padding:var(--s4) var(--s4) var(--s8)!important;
+      }
+
+      /* Page header: smaller heading */
+      .page-header h1{font-size:1.75rem!important}
+      .page-header p{font-size:0.9rem!important}
+      .page-header{margin-bottom:var(--s6)!important}
+
+      /* Cards: reduce padding */
+      .card{padding:var(--s4)!important}
+
+      /* Grid-2 contact info cards: stack vertically (reinforce shared rule) */
+      .grid-2{grid-template-columns:1fr!important;gap:var(--s4)!important}
+
+      /* Form inputs: slightly larger touch targets */
+      input[type="text"],input[type="email"],textarea,select{
+        padding:12px 14px!important;
+        font-size:16px!important; /* prevent iOS zoom */
+      }
+
+      /* Buttons: ensure full-width */
+      .btn-lg,.btn-xl{width:100%!important}
+
+      /* Contact info emoji icons: smaller */
+      .grid-2 .card > div[style*="font-size:2rem"]{font-size:1.5rem!important}
+
+      /* Footer: reduce top padding */
+      .footer{padding:var(--s8) var(--s4) var(--s6)!important}
+
+      /* Prevent horizontal overflow */
+      body{overflow-x:hidden}
+      img,svg,video,iframe{max-width:100%!important}
+    }
+  </style>
 </head>
 <body>
   <nav class="navbar">
