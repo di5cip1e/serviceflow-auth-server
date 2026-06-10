@@ -73,9 +73,6 @@
   </div>
 
   <script>
-    var params = new URLSearchParams(window.location.search);
-    var redirectTo = params.get('redirect') || '/command-center.html';
-
     document.getElementById('registerForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       var name = document.getElementById('name').value.trim();
@@ -108,13 +105,7 @@
         });
         var data = await res.json();
         if (res.ok) {
-          // Check for saved build data
-          var buildData = localStorage.getItem('maikrBuildData');
-          if (buildData) {
-            window.location.href = '/build';
-          } else {
-            window.location.href = redirectTo;
-          }
+          window.location.href = '/command-center.html';
         } else {
           document.getElementById('registerError').textContent = data.error || 'Registration failed.';
           document.getElementById('registerError').classList.remove('hidden');

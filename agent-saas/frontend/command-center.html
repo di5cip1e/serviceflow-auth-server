@@ -66,15 +66,32 @@
     .chat-typing { font-size: 0.8rem; color: var(--text-muted); padding: 0 var(--s6) var(--s3); font-style: italic; }
 
     /* ── Dashboard with agents ── */
-    .agent-selector { display: flex; gap: var(--s3); margin-bottom: var(--s6); flex-wrap: wrap; }
-    .agent-chip {
-      padding: 8px 16px; border-radius: 20px; border: 1px solid var(--border); cursor: pointer;
-      font-size: 0.85rem; font-weight: 500; transition: all var(--t-fast);
+    .dashboard-wrap { max-width: 900px; margin: 0 auto; padding: var(--s8) var(--s6); }
+    .dashboard-wrap .welcome { font-size: 1.3rem; font-weight: 700; margin-bottom: var(--s1); }
+    .dashboard-wrap .welcome span { color: var(--amber); }
+    .dashboard-wrap .dash-subtitle { color: var(--text-dim); font-size: 0.88rem; margin-bottom: var(--s8); }
+    .agent-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--s4); margin-bottom: var(--s8); }
+    .agent-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--r3);
+      padding: var(--s5); cursor: pointer; transition: all var(--t-fast);
     }
-    .agent-chip:hover { border-color: var(--amber); }
-    .agent-chip.active { border-color: var(--amber); background: var(--amber-dim); color: var(--amber); }
-    .add-agent-chip { border-style: dashed; color: var(--text-muted); }
-    .add-agent-chip:hover { color: var(--amber); border-color: var(--amber); }
+    .agent-card:hover { border-color: var(--amber); transform: translateY(-2px); }
+    .agent-card .card-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--amber), var(--orange));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 700; color: var(--void); margin-bottom: var(--s3);
+    }
+    .agent-card .card-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 2px; }
+    .agent-card .card-business { font-size: 0.8rem; color: var(--text-dim); }
+    .agent-card .card-status { display: flex; align-items: center; gap: 5px; margin-top: var(--s3); font-size: 0.75rem; color: var(--success); }
+    .agent-card .card-status .dot { width: 6px; height: 6px; background: var(--success); border-radius: 50%; }
+    .dash-create-btn {
+      display: inline-flex; align-items: center; gap: 6px; padding: 12px 24px;
+      border: 1px dashed var(--amber); border-radius: var(--r2); color: var(--amber);
+      font-weight: 600; font-size: 0.9rem; text-decoration: none; transition: all var(--t-fast);
+    }
+    .dash-create-btn:hover { background: var(--amber-dim); }
 
     /* ── Loading state ── */
     .loading-overlay { display: flex; align-items: center; justify-content: center; padding: var(--s12); }
@@ -135,8 +152,7 @@
       if (agents.length === 0) {
         showCreateAgent();
       } else {
-        activeAgentId = agents[0].id;
-        showChat(activeAgentId);
+        showDashboard();
       }
     }).catch(function() {
       showCreateAgent();
@@ -224,9 +240,7 @@
         })
       }).then(function(r) { return r.json(); }).then(function(data) {
         if (data.success && data.agentId) {
-          activeAgentId = data.agentId;
-          agents.push({ id: data.agentId, agent_name: data.agentName || name, business_name: business });
-          showChat(data.agentId);
+          loadAgents();
         } else {
           throw new Error(data.error || 'Failed to create agent');
         }
@@ -242,6 +256,32 @@
   function selectPlan(el) {
     document.querySelectorAll('.plan-option').forEach(function(o) { o.classList.remove('selected'); });
     el.classList.add('selected');
+  }
+
+  // ── View: Dashboard ──
+  function showDashboard() {
+    var main = document.getElementById('mainArea');
+    var userName = currentUser ? currentUser.name.split(' ')[0] : 'there';
+
+    var cards = '';
+    agents.forEach(function(a) {
+      var initial = (a.agent_name || 'A').charAt(0).toUpperCase();
+      cards += '' +
+        '<div class="agent-card" onclick="showChat(\'' + a.id + '\')">' +
+          '<div class="card-avatar">' + initial + '</div>' +
+          '<div class="card-name">' + escHtml(a.agent_name || 'Agent') + '</div>' +
+          '<div class="card-business">' + escHtml(a.business_name || '') + '</div>' +
+          '<div class="card-status"><span class="dot"></span> Active</div>' +
+        '</div>';
+    });
+
+    main.innerHTML = '' +
+      '<div class="dashboard-wrap">' +
+        '<div class="welcome">Hey <span>' + escHtml(userName) + '</span>, your agents</div>' +
+        '<p class="dash-subtitle">Select an agent to chat, or create a new one.</p>' +
+        '<div class="agent-grid">' + cards + '</div>' +
+        '<a href="/build" class="dash-create-btn">+ Create New Agent</a>' +
+      '</div>';
   }
 
   // ── View: Chat with Agent ──
