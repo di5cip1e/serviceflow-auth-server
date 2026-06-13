@@ -3,13 +3,13 @@
 ## Summary
 
 All 5 published skills at v1.0.0, last updated 2026-05-11:
-- n8n-workflow-builder — 531 downloads
-- client-outreach-automator — 410 downloads
-- meeting-intelligence — 393 downloads
-- business-doc-generator — 366 downloads
-- director-content-repurposer — 351 downloads
+- n8n-workflow-builder — 544 downloads
+- client-outreach-automator — 425 downloads
+- meeting-intelligence — 404 downloads
+- business-doc-generator — 378 downloads
+- director-content-repurposer — 358 downloads
 
-**Total downloads: 2,093** | Stars: 0 | Comments: 0
+**Total downloads: 2,125** | Stars: 0 | Comments: 0
 
 Trend: steady growth. No stars or reviews yet.
 
@@ -45,4 +45,13 @@ Trend: steady growth. No stars or reviews yet.
 | 2026-06-11 14:38 | All 5 reachable, v1.0.0 unchanged. No new downloads since 05:38 (total 2,051). No stars or reviews. |
 | 2026-06-11 20:38 | All 5 reachable, v1.0.0 unchanged. +42 downloads since 14:38 (total 2,093). No stars or reviews. |
 | 2026-06-11 22:08 | All 5 reachable, v1.0.0 unchanged. No new downloads since 20:38 (total 2,093). No stars or reviews. |
-Last checked: 2026-06-11 22:08 UTC
+| 2026-06-12 05:38 | All 5 reachable, v1.0.0 unchanged. No new stats since 22:08. |
+| 2026-06-12 08:38 | All 5 reachable, v1.0.0 unchanged. +11 downloads since 05:38 (total 2,104). No stars or reviews. |
+| 2026-06-12 10:08 | All 5 reachable, v1.0.0 unchanged. No new downloads since 08:38 (total 2,104). No stars or reviews. |
+| 2026-06-12 11:38 | All 5 reachable, v1.0.0 unchanged. No new stats since 10:08. |
+| 2026-06-12 16:08 | All 5 reachable, v1.0.0 unchanged. +15 downloads since 13:08 (total 2,109). No stars or reviews. |
+| 2026-06-12 17:38 | All 5 reachable, v1.0.0 unchanged. +0 downloads since 16:08 (total 2,109). No stars or reviews. |
+| 2026-06-12 19:08 | All 5 reachable, v1.0.0 unchanged. +1 download since 17:38 (total 2,110). No stars or reviews. |
+| 2026-06-12 20:38 | All 5 reachable, v1.0.0 unchanged. +15 downloads since 19:08 (total 2,125). No stars or reviews. |
+| 2026-06-12 23:38 | All 5 reachable, v1.0.0 unchanged. No new downloads since 22:08 (total 2,125). No stars or reviews. |
+Last checked: 2026-06-12 23:38 UTC
