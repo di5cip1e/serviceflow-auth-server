@@ -3,13 +3,13 @@
 ## Summary
 
 All 5 published skills at v1.0.0, last updated 2026-05-11:
-- n8n-workflow-builder — 544 downloads
-- client-outreach-automator — 425 downloads
-- meeting-intelligence — 404 downloads
-- business-doc-generator — 378 downloads
-- director-content-repurposer — 358 downloads
+- n8n-workflow-builder — 552 downloads
+- client-outreach-automator — 433 downloads
+- meeting-intelligence — 412 downloads
+- business-doc-generator — 383 downloads
+- director-content-repurposer — 364 downloads
 
-**Total downloads: 2,125** | Stars: 0 | Comments: 0
+**Total downloads: 2,144** | Stars: 0 | Comments: 0
 
 Trend: steady growth. No stars or reviews yet.
 
@@ -54,4 +54,12 @@ Trend: steady growth. No stars or reviews yet.
 | 2026-06-12 19:08 | All 5 reachable, v1.0.0 unchanged. +1 download since 17:38 (total 2,110). No stars or reviews. |
 | 2026-06-12 20:38 | All 5 reachable, v1.0.0 unchanged. +15 downloads since 19:08 (total 2,125). No stars or reviews. |
 | 2026-06-12 23:38 | All 5 reachable, v1.0.0 unchanged. No new downloads since 22:08 (total 2,125). No stars or reviews. |
-Last checked: 2026-06-12 23:38 UTC
+| 2026-06-13 05:38 | All 5 reachable, v1.0.0 unchanged. No new downloads since 23:38 (total 2,125). No stars or reviews. |
+| 2026-06-13 07:08 | All 5 reachable, v1.0.0 unchanged. No new downloads since 05:38 (total 2,125). No stars or reviews. |
+| 2026-06-13 10:08 | All 5 reachable, v1.0.0 unchanged. +17 downloads since 07:08 (total 2,142). No stars or reviews. |
+| 2026-06-13 13:08 | All 5 reachable, v1.0.0 unchanged. +2 downloads since 10:08 (total 2,144). No stars or reviews. |
+| 2026-06-13 14:38 | All 5 reachable, v1.0.0 unchanged. No new downloads since 13:08 (total 2,144). No stars or reviews. |
+| 2026-06-13 19:08 | All 5 reachable, v1.0.0 unchanged. +2 downloads since 14:38 (total 2,146). No stars or reviews. |
+| 2026-06-13 22:09 | All 5 reachable, v1.0.0 unchanged. Download counts unavailable via CLI (inspect doesn't expose stats). No self-improving changes. Nothing requires attention. |
+Last checked: 2026-06-14 02:39 UTC
+| 2026-06-14 02:39 | All 5 reachable, v1.0.0 unchanged. No new stats. No self-improving changes. Nothing requires attention. |
